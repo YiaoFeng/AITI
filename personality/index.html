@@ -84,7 +84,9 @@
     background: var(--bg); border-radius: 20px; width: 100%; max-width: 400px;
     max-height: 90vh; overflow-y: auto; padding: 26px 20px 24px; text-align: center; position: relative;
   }
-  .modal .close { position: absolute; top: 10px; right: 16px; font-size: 30px; line-height: 1; color: var(--gray); cursor: pointer; background: none; border: none; }
+  /* 必须用直接子选择器：关系网里的 .rk.near 曾用 .close 类名，被这条规则
+     命中后绝对定位到右上角，盖住关闭按钮 —— 就是「弹窗右上角乱码」的成因 */
+  .modal > .close { position: absolute; top: 10px; right: 16px; font-size: 30px; line-height: 1; color: var(--gray); cursor: pointer; background: none; border: none; }
   .modal img { width: 130px; height: 130px; border-radius: 18px; object-fit: cover; }
   .modal .mn { font-size: 30px; font-weight: 900; color: var(--accent); margin-top: 12px; letter-spacing: 2px; }
   .modal .md { font-size: 14px; color: var(--gray); margin-top: 4px; }
@@ -148,10 +150,10 @@
   .rel-block .rt { font-size: 14px; color: var(--gray); font-weight: 700; letter-spacing: 2px; margin-bottom: 12px; text-align: center; }
   .rel-row { display: flex; align-items: flex-start; gap: 10px; padding: 9px 0; border-bottom: 1px dashed var(--viewbg); }
   .rel-row:last-child { border-bottom: none; }
-  .rel-row .rk { flex-shrink: 0; font-size: 13px; font-weight: 700; padding: 3px 10px; border-radius: 100px; min-width: 66px; text-align: center; }
+  .rel-row .rk { flex-shrink: 0; white-space: nowrap; font-size: 13px; font-weight: 700; padding: 3px 10px; border-radius: 100px; min-width: 66px; text-align: center; }
   .rk.good { background: #EAF2EC; color: var(--good); }
   .rk.bad { background: #F7E9E4; color: var(--bad); }
-  .rk.close { background: #F8F0DD; color: var(--gold); }
+  .rk.near { background: #F8F0DD; color: var(--gold); }
   .rel-row .rv { font-size: 15px; line-height: 1.5; color: var(--dark); }
 
   .jobs { margin-top: 18px; width: 100%; text-align: center; background: var(--card); border-radius: 14px; padding: 16px 18px; font-size: 15px; line-height: 1.6; }
@@ -826,7 +828,7 @@ function openRole(i){
     + '<div class="jobs">'+R.j+'</div>'
     + '</div>';
   document.body.appendChild(mask);
-  mask.querySelector(".close").addEventListener("click", ()=>mask.remove());
+  mask.querySelector(".modal > .close").addEventListener("click", ()=>mask.remove());
   mask.addEventListener("click", e => { if(e.target === mask) mask.remove(); });
 }
 
@@ -945,7 +947,7 @@ function relHTML(R){
     '<div class="rel-row"><span class="rk '+cls+'">'+label+'</span><span class="rv">'+v+'</span></div>';
   return '<div class="rt">你的关系网</div>'
     + row("good","适合合作", names(R.rel.good))
-    + row("close","亲密度高", names(R.rel.close))
+    + row("near","亲密度高", names(R.rel.close))
     + row("bad","不太合拍", names(R.rel.bad));
 }
 
@@ -986,7 +988,9 @@ async function submitCode(){
  *  雷达图（SVG）
  * ============================================================ */
 function radarSVG(dims, labels){
-  const size = 300, cx = 150, cy = 150, R = 96, n = 6;
+  // viewBox 留足左右留白：标签画在 R+26 处，之前 300 的画布装不下
+  // 「执行力 85」「洞察力 75」这种 5-6 字标签，左右两侧会被裁成半个字
+  const size = 360, cx = 180, cy = 180, R = 96, n = 6;
   const pt = (i, r) => {
     const a = -Math.PI/2 + i*(2*Math.PI/n);
     return [cx + r*Math.cos(a), cy + r*Math.sin(a)];
@@ -1016,7 +1020,7 @@ function radarSVG(dims, labels){
     const anchor = Math.abs(x-cx) < 4 ? "middle" : (x < cx ? "end" : "start");
     g += '<text x="'+x+'" y="'+(y+5)+'" text-anchor="'+anchor+'" font-size="12" font-weight="700" fill="#383931">'+labels[i]+' '+dims[i]+'</text>';
   }
-  return '<svg class="radar-svg" viewBox="0 0 '+size+' '+size+'" width="280" height="280">'+g+'</svg>';
+  return '<svg class="radar-svg" viewBox="0 0 '+size+' '+size+'" width="290" height="290">'+g+'</svg>';
 }
 
 /* ============================================================
@@ -1025,7 +1029,32 @@ function radarSVG(dims, labels){
  * ============================================================ */
 function renderShareCard(R, isFull, cb){
   const W = 750;
-  const H = isFull ? 1760 : 1334;
+
+  /* 纵向布局：自上而下推游标，画布高度由内容算出来。
+     高度以前写死 1334 / 1760，结果判词压住雷达图顶标签、第三个特质压住
+     「关系网」标题、完整版的 AI 用法框被底部横幅切掉一半。 */
+  const RADAR_R = 148;
+  let y = 472;                                        // 判词框底（框顶 340 + 高 132）
+  y += 12 + RADAR_R + 26 + 5;
+  const RADAR_CY = y;                                 // 雷达圆心
+  y += RADAR_R + 26 + 5 + 12;
+  y += 56; const TRAITS_Y = y;                        // 「你的三个特质」
+  y += 30; const CHIP_Y   = y;
+  y += R.t.length * 68;
+  y += 34; const REL_T_Y  = y;                        // 「关系网」
+  y += 28; const REL_BOX  = y;
+  y += 168;
+  let NEAR_T_Y = 0, NEAR_BOX = 0, AI_T_Y = 0, AI_BOX = 0;
+  if (isFull){
+    y += 40; NEAR_T_Y = y;
+    y += 34; NEAR_BOX = y;
+    y += 60 + R.nr.length * 76;
+    y += 44; AI_T_Y = y;
+    y += 34; AI_BOX = y;
+    y += 60 + R.ai.length * 72;
+  }
+  const H = Math.round(y + 32 + 108);                 // 底部留白 + 横幅
+
   const c = document.createElement("canvas");
   c.width = W; c.height = H;
   const x = c.getContext("2d");
@@ -1044,22 +1073,22 @@ function renderShareCard(R, isFull, cb){
   x.fillText(isFull ? "完整版报告 · 30 题" : "免费版结果 · 12 题", W/2, 158);
 
   x.fillStyle = "#944735"; x.font = "900 78px "+F;
-  x.fillText(R.n, W/2, 246);
+  x.fillText(R.n, W/2, 238);
   x.fillStyle = "#8A837B"; x.font = "500 30px "+F;
-  x.fillText(R.d, W/2, 294);
+  x.fillText(R.d, W/2, 300);
 
   x.fillStyle = "#F5F0E6";
-  roundRect(x, 52, 328, W-104, 132, 20); x.fill();
-  x.fillStyle = "#944735"; x.fillRect(52, 328, 6, 132);
+  roundRect(x, 52, 340, W-104, 132, 20); x.fill();
+  x.fillStyle = "#944735"; x.fillRect(52, 340, 6, 132);
   x.fillStyle = "#383931"; x.font = "700 26px "+F;
-  wrapCenter(x, R.v, W/2, 394, W-200, 42, 2);
+  wrapCenter(x, R.v, W/2, 406, W-200, 42, 2);
 
-  drawRadarCanvas(x, R.dim, DIMS, W/2, 596, 148);
+  drawRadarCanvas(x, R.dim, DIMS, W/2, RADAR_CY, RADAR_R);
 
   x.fillStyle = "#8A837B"; x.font = "700 24px "+F;
   x.textAlign = "center";
-  x.fillText("你的三个特质", W/2, 800);
-  let ty = 830;
+  x.fillText("你的三个特质", W/2, TRAITS_Y);
+  let ty = CHIP_Y;
   R.t.forEach(t => {
     x.font = "500 24px "+F;
     const cw = x.measureText(t).width + 64;
@@ -1072,11 +1101,9 @@ function renderShareCard(R, isFull, cb){
   });
 
   // 关系网
-  ty += 8;
   x.fillStyle = "#8A837B"; x.font = "700 24px "+F;
-  x.fillText("关系网", W/2, ty);
-  ty += 28;
-  const boxTop = ty;
+  x.fillText("关系网", W/2, REL_T_Y);
+  const boxTop = REL_BOX;
   x.fillStyle = "#FFFFFF";
   roundRect(x, 52, boxTop, W-104, 168, 20); x.fill();
   const relLines = [
@@ -1099,11 +1126,10 @@ function renderShareCard(R, isFull, cb){
 
   // 完整版追加：相近人格 + 两条 AI 用法
   if (isFull){
-    let fy = boxTop + 200;
+    const fy = NEAR_BOX;
     x.textAlign = "center";
     x.fillStyle = "#8A837B"; x.font = "700 24px "+F;
-    x.fillText("你和这几个角色最像", W/2, fy);
-    fy += 34;
+    x.fillText("你和这几个角色最像", W/2, NEAR_T_Y);
     x.fillStyle = "#FFFFFF";
     roundRect(x, 52, fy, W-104, 60 + R.nr.length*76, 20); x.fill();
     let ny = fy + 44;
@@ -1123,11 +1149,10 @@ function renderShareCard(R, isFull, cb){
       ny += 76;
     });
 
-    let ay = fy + 60 + R.nr.length*76 + 34;
+    const ay = AI_BOX;
     x.textAlign = "center";
     x.fillStyle = "#8A837B"; x.font = "700 24px "+F;
-    x.fillText("你这种性格该怎么用 AI", W/2, ay);
-    ay += 34;
+    x.fillText("你这种性格该怎么用 AI", W/2, AI_T_Y);
     x.fillStyle = "#FFFFFF";
     roundRect(x, 52, ay, W-104, 60 + R.ai.length*72, 20); x.fill();
     let iy = ay + 44;
