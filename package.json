@@ -1,0 +1,9 @@
+{
+  "name": "ai-model-test",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AI 大模型选型测试 —— 纯静态站点，无第三方依赖",
+  "scripts": {
+    "build": "node build-static.js"
+  }
+}

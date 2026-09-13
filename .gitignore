@@ -1,0 +1,5 @@
+# 构建产物，由 build-static.js 生成，不入库
+dist/
+node_modules/
+*.log
+.DS_Store
