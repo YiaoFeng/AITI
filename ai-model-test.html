@@ -50,6 +50,11 @@
   .hero h1{font-size:31px;line-height:1.3;font-weight:800;letter-spacing:-.5px}
   .hero h1 em{font-style:normal;color:var(--accent)}
   .hero p{color:var(--gray);margin-top:12px;font-size:15px}
+  .hero .upd{margin-top:11px;font-size:13px;color:var(--gray);display:flex;
+       align-items:center;justify-content:center;gap:7px}
+  .hero .upd i{width:6px;height:6px;border-radius:50%;background:#3FA96A;
+       box-shadow:0 0 0 3px rgba(63,169,106,.16)}
+  .hero .upd b{color:#2E2C25;font-weight:700;font-size:13.5px}
   .pick{display:flex;gap:10px;margin-top:6px}
   .pick div{flex:1;background:var(--card);border-radius:14px;padding:14px;text-align:center;box-shadow:var(--shadow)}
   .pick b{display:block;font-size:23px;font-weight:800;color:var(--accent)}
@@ -107,6 +112,7 @@
   .rtop{text-align:center;padding:34px 0 20px}
   .rtop .kicker{font-size:13px;font-weight:700;color:var(--gray);letter-spacing:1px}
   .rtop h2{font-size:27px;font-weight:800;margin-top:8px;letter-spacing:-.5px}
+  .rtop .stamp{margin-top:10px;font-size:12.5px;color:var(--gray)}
   .champ{text-align:center;padding:26px 20px}
   .champ .rank{font-size:12px;font-weight:800;color:var(--accent);letter-spacing:2px}
   .champ .name{font-size:32px;font-weight:800;margin:8px 0 6px;letter-spacing:-.6px}
@@ -187,6 +193,7 @@
       <span class="kicker">29 款主流大模型实测数据</span>
       <h1>别问哪个 AI <em>最强</em><br>问你该用<em>哪一个</em></h1>
       <p>回答几个问题，从模型库里算出和你需求最匹配的那一款</p>
+      <p class="upd"><i></i>数据更新于 <b id="data-date">—</b> 08:00</p>
     </div>
     <div class="pick">
       <div><b>29</b><span>款模型</span></div>
@@ -253,11 +260,12 @@
     <div class="rtop">
       <div class="kicker" id="r-kicker">你的 AI 选型报告</div>
       <h2 id="r-title">最匹配你的模型</h2>
+      <div class="stamp" id="r-stamp"></div>
     </div>
     <div id="r-body"></div>
     <div class="foot">
       AI 大模型排行榜 · 数据每日更新<br>
-      <b id="r-stamp"></b>
+      <b id="r-modelmeta"></b>
     </div>
   </section>
 </div>
@@ -451,7 +459,10 @@ function finish(){
 
   $('#r-kicker').textContent = light ? '免费版 · 初步结果' : '完整版 · 选型报告';
   $('#r-title').textContent = light ? '最匹配你的模型' : '为你算出的选型方案';
-  $('#r-stamp').textContent = S.modelMeta.generated_at ? `${S.modelMeta.generated_at} 模型库 · 共 ${S.models.length} 款` : '';
+  // 这次测试的完成时间，报告顶部和存下来的图片共用同一个，不留两套时间
+  S.finishedAt = new Date();
+  $('#r-stamp').textContent = '测试完成于 ' + stampText(S.finishedAt);
+  $('#r-modelmeta').textContent = S.modelMeta.generated_at ? `${S.modelMeta.generated_at} 模型库 · 共 ${S.models.length} 款` : '';
 
   let h = '';
 
@@ -593,6 +604,22 @@ function finish(){
   }
 }
 
+/* ── 时间戳 ── */
+/* 首页那句「数据更新于」：以早上 8:00 为分界——还没到今天 8 点，就还算昨天的数据。
+   纯本地计算，不发请求、不查接口，零成本。 */
+function dataDate(){
+  const now = new Date();
+  const d = new Date(now.getTime());
+  if(now.getHours() < 8) d.setDate(d.getDate() - 1);
+  return `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日`;
+}
+/* 报告和存图共用的完成时间：2026年9月13日 21:45 */
+function stampText(d){
+  if(!d) return '';
+  const p = n => String(n).padStart(2,'0');
+  return `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日 ${p(d.getHours())}:${p(d.getMinutes())}`;
+}
+
 /* ── 推荐理由 ── */
 function why(m, w){
   const need = Object.entries(w).filter(([k,v])=>v>0).sort((a,b)=>b[1]-a[1]).slice(0,3);
@@ -705,7 +732,7 @@ function saveCard(top, all, w, need){
   x.fillStyle=GRAY; x.font=`700 26px ${YY}`;
   x.fillText('AI 大模型选型报告', P, 68);
   x.fillStyle=ACC; x.font=`800 26px ${YY}`;
-  x.textAlign='right'; x.fillText(new Date().toLocaleDateString('zh-CN'), W-P, 68); x.textAlign='left';
+  x.textAlign='right'; x.fillText(stampText(S.finishedAt), W-P, 68); x.textAlign='left';
 
   // 冠军卡
   const cardY=120, cardH=520;   // 520 才装得下「模型名 + 匹配度 + 理由框」，380 时理由框会压住匹配度
@@ -791,6 +818,7 @@ function roundRect(x,a,b,w,h,r){
 $('#modal').onclick = e=>{ if(e.target.id==='modal') $('#modal').classList.remove('on'); };
 
 /* ── 启动 ── */
+$('#data-date').textContent = dataDate();
 boot().then(()=>{
   if(!S.models.length){
     document.querySelectorAll('#go-light,#go-full').forEach(b=>{
