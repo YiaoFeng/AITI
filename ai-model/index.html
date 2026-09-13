@@ -163,6 +163,9 @@
   .lockwrap .mask b{font-size:17px;font-weight:800;margin-bottom:6px}
   .lockwrap .mask p{font-size:13.5px;color:var(--gray);margin-bottom:16px;max-width:340px}
   .lockwrap .mask .btn{max-width:300px}
+  .lockwrap .mask .buy{font-size:12.5px;color:var(--gray);line-height:1.75;margin-top:15px;
+                       max-width:320px;border-top:1px solid var(--line);padding-top:13px}
+  .lockwrap .mask .buy em{font-style:normal;color:var(--accent);font-weight:700}
   .foot{text-align:center;color:var(--gray);font-size:12.5px;padding:22px 0 0;line-height:1.8}
   .foot b{color:var(--accent)}
   .toast{
@@ -512,6 +515,8 @@ function finish(){
         <b>还差 18 道题，解锁完整报告</b>
         <p>完整版会给出 Top3 对比、三档位建议、月成本测算和升降档路线，报告能存成图片随时回看</p>
         <button class="btn" id="unlock">输入验证码 · 继续答 18 题</button>
+        <div class="buy">还没有验证码？回小红书搜「<em>AI 大模型选型测试</em>」，<br>
+          买 30 题那档，码填进上面就能接着答，前面 12 题不用重做</div>
       </div></div>`;
   } else {
     const second = all[1], third = all[2];
