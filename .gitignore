@@ -1,5 +1,5 @@
-# 构建产物，由 build-static.js 生成，不入库
-dist/
+# 构建产物，由 build-static.js 生成，不入库（目录名必须与平台一致：build/）
+build/
 node_modules/
 *.log
 .DS_Store
