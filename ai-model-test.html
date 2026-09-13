@@ -1,1536 +1,789 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>AI大模型适配测试 | 27题精准匹配你的最优模型</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%236c5ce7'/%3E%3Ccircle cx='8.5' cy='12' r='2' fill='white'/%3E%3Ccircle cx='15.5' cy='12' r='2' fill='white'/%3E%3C/svg%3E">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+<title>AI 大模型选型测试 · 找到最适合你的那一款</title>
+<meta name="description" content="12 道题免费测，30 道题出完整报告：从 29 款主流大模型里算出最匹配你需求的那一款。">
+<link rel="icon" href="data:,">
+<script>
+  // 分享卡片/生成图用不到，但手机端需要它阻止 favicon 404
+</script>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-:root{
-  --bg:#0a0e27;--bg2:#121636;--card:#1a1f3a;--card2:#222848;
-  --primary:#6c5ce7;--primary2:#a29bfe;--accent:#00d4ff;--accent2:#0abde3;
-  --green:#00b894;--green2:#55efc4;--orange:#fdcb6e;--red:#e17055;
-  --text:#e8ecf1;--text2:#a0a8c0;--text3:#6c7293;--border:#2d3252;
-  --radius:16px;--shadow:0 8px 32px rgba(0,0,0,.3);
-}
-html{font-size:16px}
-body{
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
-  background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh;
-  overflow-x:hidden;
-}
-/* 全局背景效果 */
-body::before{
-  content:'';position:fixed;top:0;left:0;width:100%;height:100%;
-  background:radial-gradient(ellipse at top,rgba(108,92,231,.15) 0%,transparent 50%),
-             radial-gradient(ellipse at bottom,rgba(0,212,255,.1) 0%,transparent 50%);
-  z-index:-1;pointer-events:none;
-}
-.container{max-width:680px;margin:0 auto;padding:20px 16px 60px;min-height:100vh}
+  :root{
+    --bg:#F5F3EC; --card:#FFFFFF; --ink:#2E2C25; --gray:#8A8378; --line:#E8E4DA;
+    --accent:#944735; --accent-soft:#C4694F; --viewbg:#F1EDE3;
+    --ok:#3D7A52; --lock:#B9B3A6;
+    --shadow:0 8px 26px rgba(46,44,37,.07);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  body{
+    background:var(--bg); color:var(--ink); min-height:100vh;
+    font:16px/1.65 "Microsoft YaHei","PingFang SC","Helvetica Neue",system-ui,sans-serif;
+  }
+  #app{max-width:680px;margin:0 auto;padding:0 22px 60px}
+  .screen{display:none;animation:fade .28s ease}
+  .screen.on{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
-/* ========== 兑换码门页 ========== */
-.gate-page{text-align:center;padding:50px 0}
-.gate-page .gate-icon{
-  width:70px;height:70px;margin:0 auto 18px;border-radius:18px;
-  background:linear-gradient(135deg,#fdcb6e,#e17055);
-  display:flex;align-items:center;justify-content:center;
-}
-.gate-page .gate-icon svg{width:36px;height:36px;fill:#fff}
-.gate-page h1{
-  font-size:26px;font-weight:700;margin-bottom:10px;
-  background:linear-gradient(135deg,var(--primary2) 0%,var(--accent) 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-}
-.gate-page .gate-sub{color:var(--text2);font-size:14px;margin-bottom:24px}
-.code-input-row{display:flex;gap:8px;margin-bottom:12px}
-.code-input{
-  flex:1;padding:14px;border-radius:10px;border:2px solid var(--border);
-  background:var(--bg2);color:var(--text);font-size:16px;font-family:monospace;
-  letter-spacing:1px;text-align:center;text-transform:uppercase;
-}
-.code-input:focus{outline:none;border-color:var(--primary)}
-.gate-error{
-  display:none;padding:10px 14px;border-radius:8px;font-size:13px;margin-bottom:12px;
-  background:rgba(225,112,85,.12);color:var(--red);border:1px solid rgba(225,112,85,.25);
-}
-.gate-error.show{display:block}
-.gate-tip{
-  font-size:12px;color:var(--text3);margin-top:16px;line-height:1.6;
-  padding:12px;background:rgba(108,92,231,.06);border-radius:8px;
-}
-/* 已用完提示横幅 */
-.used-banner{
-  padding:12px 16px;border-radius:10px;font-size:13px;margin-bottom:14px;
-  background:rgba(253,203,110,.1);color:var(--orange);border:1px solid rgba(253,203,110,.25);
-  text-align:center;
-}
+  /* ---------- 通用 ---------- */
+  .btn{
+    display:block;width:100%;border:0;border-radius:14px;padding:17px 20px;
+    font:700 17px/1.2 inherit;color:#fff;background:var(--accent);cursor:pointer;
+    transition:.18s; text-align:center;
+  }
+  .btn:hover{background:#7E3A2B}
+  .btn:active{transform:scale(.985)}
+  .btn.ghost{background:transparent;color:var(--accent);border:2px solid var(--accent);padding:15px 20px}
+  .btn.ghost:hover{background:#F7EDE9}
+  .btn.small{padding:12px 16px;font-size:15px;border-radius:11px}
+  .card{background:var(--card);border-radius:18px;padding:22px;box-shadow:var(--shadow);margin-bottom:16px}
+  .muted{color:var(--gray);font-size:14px}
+  .tag{display:inline-block;padding:3px 11px;border-radius:99px;font-size:12px;font-weight:700;
+       background:var(--viewbg);color:var(--gray)}
+  .tag.cn{background:#F6E9E5;color:var(--accent)}
 
-/* ========== 启动页 ========== */
-.start-page{text-align:center;padding:40px 0}
-.logo-area{margin-bottom:30px}
-.logo-icon{
-  width:80px;height:80px;margin:0 auto 16px;border-radius:20px;
-  background:linear-gradient(135deg,var(--primary) 0%,var(--accent) 100%);
-  display:flex;align-items:center;justify-content:center;font-size:36px;
-  box-shadow:0 8px 24px rgba(108,92,231,.4);
-}
-.start-page h1{
-  font-size:28px;font-weight:700;margin-bottom:10px;
-  background:linear-gradient(135deg,var(--primary2) 0%,var(--accent) 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-}
-.start-page .subtitle{color:var(--text2);font-size:15px;margin-bottom:8px}
-.start-page .tagline{
-  display:inline-block;padding:4px 14px;border-radius:20px;font-size:12px;
-  background:rgba(108,92,231,.15);color:var(--primary2);margin:4px;
-}
-.feature-grid{
-  display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:30px 0;
-}
-.feature-card{
-  background:var(--card);border:1px solid var(--border);border-radius:12px;
-  padding:16px;text-align:left;
-}
-.feature-card .icon{font-size:24px;margin-bottom:8px}
-.feature-card .title{font-size:14px;font-weight:600;margin-bottom:4px}
-.feature-card .desc{font-size:12px;color:var(--text2)}
-.current-model-section{
-  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
-  padding:20px;margin:20px 0;text-align:left;
-}
-.current-model-section h3{font-size:15px;margin-bottom:6px;display:flex;align-items:center;gap:6px}
-.current-model-section .hint{font-size:12px;color:var(--text3);margin-bottom:12px}
-.model-select{
-  width:100%;padding:12px 14px;border-radius:10px;border:1px solid var(--border);
-  background:var(--bg2);color:var(--text);font-size:14px;appearance:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23a0a8c0' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-  background-repeat:no-repeat;background-position:right 14px center;cursor:pointer;
-}
-.model-input{
-  width:100%;padding:12px 14px;border-radius:10px;border:1px solid var(--border);
-  background:var(--bg2);color:var(--text);font-size:14px;margin-top:8px;display:none;
-}
-.model-input.active{display:block}
-.btn-primary{
-  display:block;width:100%;padding:16px;border:none;border-radius:12px;
-  background:linear-gradient(135deg,var(--primary) 0%,var(--accent) 100%);
-  color:#fff;font-size:16px;font-weight:600;cursor:pointer;
-  box-shadow:0 4px 16px rgba(108,92,231,.3);transition:transform .2s,box-shadow .2s;
-}
-.btn-primary:active{transform:scale(.98)}
-.btn-primary:disabled{opacity:.5;cursor:not-allowed}
-.disclaimer-mini{
-  font-size:11px;color:var(--text3);text-align:left;margin-top:16px;
-  padding:12px;background:rgba(225,112,85,.05);border:1px solid rgba(225,112,85,.15);
-  border-radius:8px;line-height:1.5;
-}
+  /* ---------- 首页 ---------- */
+  .hero{padding:54px 0 26px;text-align:center}
+  .hero .kicker{display:inline-block;padding:5px 14px;border-radius:99px;background:#F6E9E5;
+       color:var(--accent);font-size:13px;font-weight:700;margin-bottom:16px}
+  .hero h1{font-size:31px;line-height:1.3;font-weight:800;letter-spacing:-.5px}
+  .hero h1 em{font-style:normal;color:var(--accent)}
+  .hero p{color:var(--gray);margin-top:12px;font-size:15px}
+  .pick{display:flex;gap:10px;margin-top:6px}
+  .pick div{flex:1;background:var(--card);border-radius:14px;padding:14px;text-align:center;box-shadow:var(--shadow)}
+  .pick b{display:block;font-size:23px;font-weight:800;color:var(--accent)}
+  .pick span{font-size:12px;color:var(--gray)}
+  .how{background:var(--viewbg);border-radius:16px;padding:18px 20px;margin-top:18px}
+  .how h3{font-size:15px;font-weight:800;margin-bottom:10px}
+  .how li{list-style:none;font-size:14px;color:#5C574C;padding-left:22px;position:relative;margin-bottom:7px}
+  .how li:before{content:"›";position:absolute;left:6px;color:var(--accent);font-weight:800;font-size:17px;top:-2px}
 
-/* ========== 答题页 ========== */
-.quiz-page{display:none}
-.quiz-header{
-  display:flex;justify-content:space-between;align-items:center;
-  margin-bottom:16px;font-size:13px;color:var(--text2);
-}
-.progress-bar{
-  width:100%;height:6px;background:var(--card);border-radius:3px;overflow:hidden;margin-bottom:30px;
-}
-.progress-fill{
-  height:100%;background:linear-gradient(90deg,var(--primary) 0%,var(--accent) 100%);
-  border-radius:3px;transition:width .3s ease;width:0;
-}
-.question-card{
-  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
-  padding:28px 24px;margin-bottom:20px;animation:fadeIn .4s ease;
-}
-@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-.question-tag{
-  display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;
-  background:rgba(0,212,255,.1);color:var(--accent);margin-bottom:14px;
-}
-.question-text{font-size:18px;font-weight:500;line-height:1.6;margin-bottom:24px}
-.options{display:flex;flex-direction:column;gap:10px}
-.option-btn{
-  padding:16px 18px;border:2px solid var(--border);border-radius:12px;
-  background:var(--bg2);color:var(--text);font-size:15px;cursor:pointer;
-  text-align:left;transition:all .2s;display:flex;align-items:center;gap:12px;
-}
-.option-btn .opt-icon{
-  width:28px;height:28px;border-radius:50%;display:flex;align-items:center;
-  justify-content:center;font-size:14px;flex-shrink:0;border:2px solid var(--border);
-}
-.option-btn.selected{border-color:var(--primary);background:rgba(108,92,231,.1)}
-.option-btn.selected .opt-icon{background:var(--primary);border-color:var(--primary);color:#fff}
-.option-btn:active{transform:scale(.98)}
-.quiz-nav{display:flex;gap:10px}
-.btn-secondary{
-  padding:14px 24px;border:1px solid var(--border);border-radius:10px;
-  background:var(--card);color:var(--text2);font-size:14px;cursor:pointer;flex:1;
-}
-.btn-secondary:disabled{opacity:.3;cursor:not-allowed}
+  /* ---------- 验证码 ---------- */
+  .code-box{padding-top:44px}
+  .code-box h2{font-size:24px;font-weight:800;margin-bottom:8px}
+  .code-wrap{
+    display:flex;align-items:center;background:var(--card);border:2px solid var(--line);
+    border-radius:14px;padding:0 18px;margin:18px 0 12px;transition:.15s;
+  }
+  .code-wrap:focus-within{border-color:var(--accent)}
+  .code-wrap .pfx{font:700 20px ui-monospace,Consolas,monospace;color:var(--gray);
+                  letter-spacing:2px;user-select:none}
+  .code-wrap input{
+    flex:1;min-width:0;border:0;outline:0;background:transparent;padding:18px 0;
+    font:700 20px ui-monospace,Consolas,monospace;letter-spacing:2px;
+    text-transform:uppercase;color:var(--ink);
+  }
+  .hint{font-size:13px;color:var(--gray);text-align:center;margin-bottom:18px}
+  .hint.err{color:#B4372A;font-weight:700}
+  .hint.ok{color:var(--ok);font-weight:700}
+  .back{background:0;border:0;color:var(--gray);font:600 14px inherit;cursor:pointer;padding:6px 0}
+  .back:hover{color:var(--accent)}
 
-/* ========== 计算页 ========== */
-.loading-page{display:none;text-align:center;padding:60px 0}
-.loading-spinner{
-  width:60px;height:60px;margin:0 auto 24px;border-radius:50%;
-  border:3px solid var(--card);border-top-color:var(--primary);
-  border-right-color:var(--accent);animation:spin 1s linear infinite;
-}
-@keyframes spin{to{transform:rotate(360deg)}}
-.loading-page h2{font-size:20px;margin-bottom:8px}
-.loading-page p{color:var(--text2);font-size:14px}
-.loading-dots{margin-top:16px}
-.loading-dots span{
-  display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--accent);
-  margin:0 3px;animation:bounce 1.4s ease infinite;
-}
-.loading-dots span:nth-child(2){animation-delay:.2s}
-.loading-dots span:nth-child(3){animation-delay:.4s}
-@keyframes bounce{0%,80%,100%{transform:scale(.5);opacity:.5}40%{transform:scale(1);opacity:1}}
+  /* ---------- 答题 ---------- */
+  .qbar{position:sticky;top:0;background:var(--bg);padding:16px 0 12px;z-index:5}
+  .qmeta{display:flex;justify-content:space-between;font-size:13px;color:var(--gray);
+         font-weight:700;margin-bottom:9px}
+  .qprog{height:7px;border-radius:99px;background:#E4DFD4;overflow:hidden}
+  .qprog i{display:block;height:100%;background:var(--accent);border-radius:99px;
+           transition:width .3s ease;width:0}
+  .qtext{font-size:23px;font-weight:800;line-height:1.42;margin:16px 0 4px;letter-spacing:-.2px}
+  .qsub{font-size:13px;color:var(--gray);margin-bottom:20px}
+  .opt{
+    display:flex;align-items:center;gap:13px;width:100%;text-align:left;background:var(--card);
+    border:2px solid transparent;border-radius:14px;padding:17px 18px;margin-bottom:11px;
+    font:16px/1.5 inherit;color:var(--ink);cursor:pointer;box-shadow:var(--shadow);transition:.15s;
+  }
+  .opt:hover{border-color:#E2D3CD}
+  .opt .k{
+    flex:0 0 27px;height:27px;border-radius:50%;background:var(--viewbg);color:var(--gray);
+    font:800 14px/27px inherit;text-align:center;transition:.15s
+  }
+  .opt.pick{border-color:var(--accent);background:#FDF7F5}
+  .opt.pick .k{background:var(--accent);color:#fff}
+  .qnav{display:flex;gap:10px;margin-top:6px}
 
-/* ========== 结果页 ========== */
-.result-page{display:none}
-.result-header{text-align:center;margin-bottom:24px}
-.result-header .test-id{
-  display:inline-block;padding:4px 14px;border-radius:12px;font-size:12px;
-  background:rgba(0,184,148,.1);color:var(--green2);margin-bottom:12px;font-family:monospace;
-}
-.result-header h2{font-size:24px;font-weight:700;margin-bottom:6px}
-.result-header p{color:var(--text2);font-size:14px}
-
-/* 雷达图 */
-.radar-section{
-  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
-  padding:20px;margin-bottom:20px;text-align:center;
-}
-.radar-section h3{font-size:15px;margin-bottom:12px;text-align:left}
-.radar-canvas-wrap{display:flex;justify-content:center}
-#radarCanvas{max-width:100%}
-
-/* 推荐模型卡片 */
-.recommend-section{margin-bottom:20px}
-.recommend-section h3{
-  font-size:16px;font-weight:600;margin-bottom:14px;display:flex;align-items:center;gap:6px;
-}
-.model-card{
-  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
-  padding:20px;margin-bottom:14px;position:relative;overflow:hidden;
-}
-.model-card.rank-1{border-color:var(--orange);box-shadow:0 0 20px rgba(253,203,110,.15)}
-.model-card.rank-2{border-color:var(--text2)}
-.model-card.rank-3{border-color:var(--text3)}
-.rank-badge{
-  position:absolute;top:0;right:0;padding:4px 14px;border-radius:0 0 0 12px;
-  font-size:12px;font-weight:600;color:#fff;
-}
-.rank-1 .rank-badge{background:linear-gradient(135deg,#fdcb6e,#e17055)}
-.rank-2 .rank-badge{background:linear-gradient(135deg,#a0a8c0,#6c7293)}
-.rank-3 .rank-badge{background:linear-gradient(135deg,#cd9b6a,#8a6d42)}
-.model-name{font-size:18px;font-weight:700;margin-bottom:4px;padding-right:80px}
-.model-vendor{font-size:12px;color:var(--text3);margin-bottom:12px}
-.match-score{
-  display:inline-block;padding:3px 10px;border-radius:8px;font-size:13px;font-weight:600;
-  background:rgba(0,184,148,.1);color:var(--green2);margin-bottom:14px;
-}
-.model-detail{font-size:13px}
-.model-detail .detail-row{margin-bottom:10px}
-.model-detail .detail-label{
-  font-size:12px;font-weight:600;margin-bottom:4px;display:flex;align-items:center;gap:4px;
-}
-.model-detail .strengths{color:var(--green2)}
-.model-detail .weaknesses{color:var(--orange)}
-.model-detail .detail-list{list-style:none;padding-left:18px}
-.model-detail .detail-list li{position:relative;margin-bottom:2px;line-height:1.5}
-.model-detail .strengths .detail-list li::before{
-  content:'✓';position:absolute;left:-16px;color:var(--green);
-}
-.model-detail .weaknesses .detail-list li::before{
-  content:'⚠';position:absolute;left:-16px;color:var(--orange);
-}
-.model-bestfor{
-  font-size:12px;color:var(--text2);padding:8px 12px;background:var(--bg2);
-  border-radius:8px;margin-top:8px;
-}
-.model-bestfor strong{color:var(--accent)}
-
-/* 当前模型对比 */
-.compare-section{
-  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
-  padding:20px;margin-bottom:20px;
-}
-.compare-section h3{font-size:16px;font-weight:600;margin-bottom:14px}
-.compare-status{
-  padding:12px 16px;border-radius:10px;font-size:14px;margin-bottom:14px;
-  display:flex;align-items:center;gap:8px;
-}
-.compare-status.good{background:rgba(0,184,148,.1);color:var(--green2);border:1px solid rgba(0,184,148,.2)}
-.compare-status.medium{background:rgba(253,203,110,.1);color:var(--orange);border:1px solid rgba(253,203,110,.2)}
-.compare-status.bad{background:rgba(225,112,85,.1);color:var(--red);border:1px solid rgba(225,112,85,.2)}
-.compare-match-bar{
-  width:100%;height:10px;background:var(--bg2);border-radius:5px;overflow:hidden;margin:10px 0;
-}
-.compare-match-fill{height:100%;border-radius:5px;transition:width 1s ease}
-.compare-analysis{font-size:13px;margin-top:12px}
-.compare-analysis p{margin-bottom:8px}
-.compare-analysis .label{font-weight:600;color:var(--text)}
-
-/* 操作按钮 */
-.action-buttons{display:flex;gap:10px;margin-top:20px}
-.btn-action{
-  flex:1;padding:14px;border:none;border-radius:10px;font-size:14px;font-weight:600;
-  cursor:pointer;transition:transform .2s;
-}
-.btn-action:active{transform:scale(.98)}
-.btn-copy{background:var(--primary);color:#fff}
-.btn-restart{background:var(--card2);color:var(--text);border:1px solid var(--border)}
-
-/* 复制成功提示 */
-.toast{
-  position:fixed;bottom:30px;left:50%;transform:translateX(-50%);
-  padding:12px 24px;border-radius:10px;background:var(--green);color:#fff;
-  font-size:14px;font-weight:600;box-shadow:var(--shadow);
-  opacity:0;transition:opacity .3s,transform .3s;z-index:1000;
-}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(-10px)}
-
-/* 底部免责声明 */
-.footer-disclaimer{
-  margin-top:30px;padding:16px;background:var(--card);border:1px solid var(--border);
-  border-radius:12px;font-size:11px;color:var(--text3);line-height:1.6;
-}
-.footer-disclaimer strong{color:var(--text2)}
-
-/* 手机端适配 */
-@media(max-width:480px){
-  .container{padding:16px 12px 50px}
-  .start-page h1{font-size:24px}
-  .question-text{font-size:16px}
-  .question-card{padding:22px 18px}
-  .feature-grid{gap:10px}
-  .feature-card{padding:12px}
-  .model-name{font-size:16px}
-}
+  /* ---------- 结果 ---------- */
+  .rtop{text-align:center;padding:34px 0 20px}
+  .rtop .kicker{font-size:13px;font-weight:700;color:var(--gray);letter-spacing:1px}
+  .rtop h2{font-size:27px;font-weight:800;margin-top:8px;letter-spacing:-.5px}
+  .champ{text-align:center;padding:26px 20px}
+  .champ .rank{font-size:12px;font-weight:800;color:var(--accent);letter-spacing:2px}
+  .champ .name{font-size:32px;font-weight:800;margin:8px 0 6px;letter-spacing:-.6px}
+  .champ .vendor{font-size:13px;color:var(--gray)}
+  .champ .match{font-size:44px;font-weight:800;color:var(--accent);line-height:1;margin:16px 0 2px}
+  .champ .match span{font-size:17px;font-weight:700}
+  .champ .why{margin-top:18px;text-align:left;background:var(--viewbg);border-radius:13px;padding:14px 16px}
+  .champ .why li{list-style:none;font-size:14.5px;color:#524D43;padding-left:20px;position:relative;margin-bottom:6px}
+  .champ .why li:last-child{margin-bottom:0}
+  .champ .why li:before{content:"·";position:absolute;left:7px;color:var(--accent);font-weight:800;font-size:20px;top:-4px}
+  .bars{margin-top:6px}
+  .bar{margin-bottom:11px}
+  .bar .lb{display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px}
+  .bar .lb b{font-weight:700}
+  .bar .lb span{color:var(--gray)}
+  .bar .tr{height:9px;border-radius:99px;background:var(--viewbg);overflow:hidden}
+  .bar .tr i{display:block;height:100%;border-radius:99px;background:var(--accent);width:0;
+             transition:width .5s ease}
+  .sec-t{font-size:17px;font-weight:800;margin-bottom:4px;display:flex;align-items:center;gap:8px}
+  .sec-t .n{width:22px;height:22px;border-radius:50%;background:var(--accent);color:#fff;
+            font:800 12px/22px inherit;text-align:center;flex:0 0 22px}
+  .row2{display:flex;gap:11px;margin-bottom:11px}
+  .alt{flex:1;background:var(--viewbg);border-radius:13px;padding:14px}
+  .alt .nm{font-size:16px;font-weight:800;margin-bottom:4px}
+  .alt .mt{font-size:22px;font-weight:800;color:var(--accent)}
+  .alt .mt span{font-size:12px;color:var(--gray);font-weight:700}
+  .alt .ds{font-size:12.5px;color:var(--gray);margin-top:6px;line-height:1.5}
+  table.cmp{width:100%;border-collapse:collapse;font-size:14px}
+  table.cmp th,table.cmp td{padding:9px 6px;border-bottom:1px solid var(--line);text-align:center}
+  table.cmp th{font-size:12px;color:var(--gray);font-weight:700}
+  table.cmp td:first-child,table.cmp th:first-child{text-align:left;color:var(--gray);font-size:13px}
+  table.cmp td.win{color:var(--accent);font-weight:800}
+  .tier{display:flex;gap:11px;align-items:flex-start;padding:13px 0;border-bottom:1px solid var(--line)}
+  .tier:last-child{border-bottom:0;padding-bottom:0}
+  .tier .ic{flex:0 0 34px;height:34px;border-radius:11px;background:var(--viewbg);
+            font:800 15px/34px inherit;text-align:center}
+  .tier .tx{flex:1}
+  .tier .tx b{font-size:15px}
+  .tier .tx p{font-size:13.5px;color:var(--gray);line-height:1.55;margin-top:2px}
+  .lockwrap{position:relative;border-radius:18px;overflow:hidden;margin-bottom:16px;max-height:540px}
+  .lockwrap .blur{filter:blur(6px);opacity:.5;pointer-events:none;user-select:none}
+  .lockwrap .mask{
+    position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    background:linear-gradient(180deg,rgba(245,243,236,.35),rgba(245,243,236,.94) 55%);
+    text-align:center;padding:24px
+  }
+  .lockwrap .mask .lk{font-size:30px;margin-bottom:8px}
+  .lockwrap .mask b{font-size:17px;font-weight:800;margin-bottom:6px}
+  .lockwrap .mask p{font-size:13.5px;color:var(--gray);margin-bottom:16px;max-width:340px}
+  .lockwrap .mask .btn{max-width:300px}
+  .foot{text-align:center;color:var(--gray);font-size:12.5px;padding:22px 0 0;line-height:1.8}
+  .foot b{color:var(--accent)}
+  .toast{
+    position:fixed;left:50%;bottom:34px;transform:translateX(-50%) translateY(20px);
+    background:rgba(46,44,37,.94);color:#fff;padding:12px 22px;border-radius:12px;font-size:14px;
+    opacity:0;pointer-events:none;transition:.25s;z-index:99;max-width:86vw;text-align:center
+  }
+  .toast.on{opacity:1;transform:translateX(-50%)}
+  .modal{position:fixed;inset:0;background:rgba(30,28,24,.82);display:none;
+         align-items:center;justify-content:center;padding:18px;z-index:100}
+  .modal.on{display:flex}
+  .modal .inner{background:var(--card);border-radius:18px;padding:18px;max-width:430px;width:100%;
+                max-height:92vh;overflow:auto;text-align:center}
+  .modal img{width:100%;border-radius:12px;display:block}
+  .modal p{font-size:13.5px;color:var(--gray);margin:13px 0 4px}
+  .spin{display:inline-block;width:15px;height:15px;border:2px solid rgba(255,255,255,.4);
+        border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite;vertical-align:-2px;margin-right:7px}
+  @keyframes sp{to{transform:rotate(360deg)}}
+  .err{color:#B4372A}
 </style>
 </head>
 <body>
-<div class="container">
+<div id="app">
 
-<!-- ========== 兑换码门页 ========== -->
-<div class="gate-page" id="gatePage">
-  <div class="gate-icon">
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 1a5 5 0 0 1 5 5v3h1a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2h1V6a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v3h6V6a3 3 0 0 0-3-3zm0 9a2 2 0 0 0-1 3.73V18a1 1 0 0 0 2 0v-2.27A2 2 0 0 0 12 12z"/></svg>
-  </div>
-  <h1>兑换码验证</h1>
-  <p class="gate-sub">本测试为付费虚拟商品，请输入购买后获得的兑换码</p>
-  <div class="gate-error" id="gateError">兑换码无效，请检查后重新输入（注意区分大小写无关，但需完整输入）</div>
-  <div class="code-input-row">
-    <input type="text" class="code-input" id="codeInput" placeholder="AIM-XXXXX-XXXXX" maxlength="15" autocomplete="off">
-    <button class="btn-primary" id="activateBtn" style="flex:0 0 110px">验证解锁</button>
-  </div>
-  <div class="gate-tip">
-    📌 每个兑换码<strong style="color:var(--text2)">仅限完成1次完整测试</strong>；测试完成后报告将<strong style="color:var(--text2)">永久保存在本设备</strong>，随时打开本链接即可回看，但同一兑换码无法再次测试。<br>
-    🔒 在输入框中输入你的兑换码，点击"验证解锁"即可开始。
-  </div>
-</div>
-
-<!-- ========== 启动页 ========== -->
-<div class="start-page" id="startPage" style="display:none">
-<div class="logo-area">
-      <div class="logo-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:42px;height:42px;fill:#fff"><path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1.27A7 7 0 0 1 14 21v-1.27a2 2 0 1 1-4 0V21a7 7 0 0 1-6.73-2H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2zM7.5 13A2.5 2.5 0 0 0 5 15.5 2.5 2.5 0 0 0 7.5 18a2.5 2.5 0 0 0 2.5-2.5A2.5 2.5 0 0 0 7.5 13zm9 0a2.5 2.5 0 0 0-2.5 2.5 2.5 2.5 0 0 0 2.5 2.5 2.5 2.5 0 0 0 2.5-2.5 2.5 2.5 0 0 0-2.5-2.5z"/></svg></div>
-    <h1>AI大模型适配测试</h1>
-    <p class="subtitle">27题精准匹配 · 29款模型三档全覆盖 · 个性化推荐报告</p>
-    <div style="margin-top:10px">
-      <span class="tagline">12维深度测评</span>
-      <span class="tagline">Top 3精准推荐</span>
-      <span class="tagline">对比诊断</span>
+  <!-- ══════════ 首页 ══════════ -->
+  <section class="screen on" id="s-home">
+    <div class="hero">
+      <span class="kicker">29 款主流大模型实测数据</span>
+      <h1>别问哪个 AI <em>最强</em><br>问你该用<em>哪一个</em></h1>
+      <p>回答几个问题，从模型库里算出和你需求最匹配的那一款</p>
     </div>
-  </div>
-
-  <div class="feature-grid">
-    <div class="feature-card">
-      <div class="icon">🎯</div>
-      <div class="title">精准匹配</div>
-      <div class="desc">基于27道场景化问题，从12个维度构建你的需求画像</div>
+    <div class="pick">
+      <div><b>29</b><span>款模型</span></div>
+      <div><b>10</b><span>个维度</span></div>
+      <div><b>12/30</b><span>题两档</span></div>
     </div>
-    <div class="feature-card">
-      <div class="icon">📊</div>
-      <div class="title">详细报告</div>
-      <div class="desc">推荐3个最适合的模型，含优势劣势深度分析</div>
+    <div style="margin-top:20px">
+      <button class="btn" id="go-light">免费测 · 12 题</button>
+      <div style="height:11px"></div>
+      <button class="btn ghost" id="go-full">我有验证码 · 完整版 30 题</button>
     </div>
-    <div class="feature-card">
-      <div class="icon">🔄</div>
-      <div class="title">对比诊断</div>
-      <div class="desc">分析你当前使用的模型是否匹配你的真实需求</div>
+    <div class="how">
+      <h3>两档有什么区别</h3>
+      <ul>
+        <li><b>12 题（免费）</b>：算出最匹配你的 1 款模型 + 匹配理由</li>
+        <li><b>30 题（完整版）</b>：多 18 道细分题，出 Top3 对比、档位建议、月成本测算、升降档方案，报告可存成图片</li>
+        <li>两档共用同一套模型库，题目不重复，先测 12 题也能补完剩下 18 题</li>
+      </ul>
     </div>
-    <div class="feature-card">
-      <div class="icon">📋</div>
-      <div class="title">一键分享</div>
-      <div class="desc">生成专属测试编号，复制结果方便分享</div>
+    <div class="foot">
+      数据来自每日更新的 AI 大模型排行榜<br>
+      测完你会知道：该用哪个、为什么是它、大概要花多少钱
     </div>
-  </div>
+  </section>
 
-  <div class="current-model-section">
-    <h3>📌 你目前正在使用哪个AI大模型？（可选）</h3>
-    <p class="hint">填写后，测试结束将额外生成当前模型与推荐模型的对比分析报告</p>
-    <select class="model-select" id="currentModelSelect">
-      <option value="">— 暂未使用 / 跳过 —</option>
-      <option value="claude-fable-5">Claude Fable 5 (Anthropic·旗舰)</option>
-      <option value="claude-opus-5">Claude Opus 5 (Anthropic·标准)</option>
-      <option value="claude-mythos">Claude Mythos Pre. (Anthropic·预览)</option>
-      <option value="gpt-5.6-sol">GPT-5.6 Sol (OpenAI·旗舰)</option>
-      <option value="gpt-5.6-terra">GPT-5.6 Terra (OpenAI·标准)</option>
-      <option value="gpt-5.6-luna">GPT-5.6 Luna (OpenAI·快速)</option>
-      <option value="gemini-3.1-pro">Gemini 3.1 Pro (Google·旗舰)</option>
-      <option value="gemini-3.7-flash">Gemini 3.7 Flash (Google·快速)</option>
-      <option value="grok-4.6">Grok 4.6 (xAI)</option>
-      <option value="glm-5.3-max">GLM-5.3 Max (智谱·旗舰)</option>
-      <option value="glm-5.3">GLM-5.3 (智谱·标准)</option>
-      <option value="glm-5.3-flash">GLM-5.3 Flash (智谱·快速)</option>
-      <option value="deepseek-v4-pro">DeepSeek V4 Pro (深度求索·旗舰)</option>
-      <option value="deepseek-v4-flash">DeepSeek V4 Flash (深度求索·快速)</option>
-      <option value="hunyuan-hy4">腾讯混元 HY4 (腾讯·新旗舰)</option>
-      <option value="hunyuan-hy3">腾讯混元 HY3 (腾讯·标准)</option>
-      <option value="minimax-h3">MiniMax H3 (MiniMax·多模态旗舰)</option>
-      <option value="minimax-m3">MiniMax M3 (MiniMax·标准)</option>
-      <option value="minimax-m2.7">MiniMax M2.7 (MiniMax·快速)</option>
-      <option value="qwen3.8-max">Qwen3.8 Max (阿里·旗舰)</option>
-      <option value="qwen3.7-max">Qwen3.7 Max (阿里·标准)</option>
-      <option value="qwen3.7-turbo">Qwen3.7 Turbo (阿里·快速)</option>
-      <option value="doubao-seed-2.1">豆包 Seed 2.1 Pro (字节·旗舰)</option>
-      <option value="doubao-seed-2.1-std">豆包 Seed 2.1 (字节·标准)</option>
-      <option value="doubao-seed-2.0-lite">豆包 Seed 2.0 Lite (字节·快速)</option>
-      <option value="kimi-k3">Kimi K3 (月之暗面)</option>
-      <option value="ernie-5.1">文心 ERNIE-5.1 (百度)</option>
-      <option value="muse-spark">Muse Spark 1.2 (Muse)</option>
-      <option value="mimo-v2.5">MiMo-V2.5 (小米)</option>
-      <option value="other">其他（手动输入）</option>
-    </select>
-    <input type="text" class="model-input" id="currentModelInput" placeholder="请输入你正在使用的模型名称" maxlength="30">
-  </div>
+  <!-- ══════════ 验证码 ══════════ -->
+  <section class="screen" id="s-code">
+    <div class="code-box">
+      <button class="back" id="code-back">‹ 返回</button>
+      <h2>输入验证码</h2>
+      <p class="muted">验证码是 AIM-XXXXX-XXXXX 格式，一个码只能解锁一次</p>
+      <div class="code-wrap">
+        <span class="pfx">AIM-</span>
+        <input id="code-input" maxlength="20" autocomplete="off" autocapitalize="characters"
+               spellcheck="false" placeholder="XXXXX-XXXXX" inputmode="text">
+      </div>
+      <p class="hint" id="code-hint">输入后立即开始完整版测试</p>
+      <button class="btn" id="code-go">开始完整版测试</button>
+      <div style="height:11px"></div>
+      <button class="btn ghost small" id="code-light">先做免费的 12 题</button>
+    </div>
+  </section>
 
-  <button class="btn-primary" id="startBtn">开始测试 →</button>
+  <!-- ══════════ 答题 ══════════ -->
+  <section class="screen" id="s-quiz">
+    <div class="qbar">
+      <div class="qmeta">
+        <span id="q-count">第 1 / 12 题</span>
+        <span id="q-tier">免费版</span>
+      </div>
+      <div class="qprog"><i id="q-prog"></i></div>
+    </div>
+    <div class="qtext" id="q-text"></div>
+    <div class="qsub" id="q-sub">选一个最接近你情况的</div>
+    <div id="q-opts"></div>
+    <div class="qnav">
+      <button class="btn ghost small" id="q-prev" style="flex:0 0 108px">上一题</button>
+      <button class="btn small" id="q-next" disabled style="flex:1">下一题</button>
+    </div>
+  </section>
 
-  <div class="disclaimer-mini">
-    ⚠️ <strong>免责声明：</strong>本测试结果基于用户主观回答推算，仅供参考，不构成任何投资或购买建议。测试中提到的AI模型名称均为各厂商产品名称，本测试不使用任何品牌Logo、商标或专利设计。本测试独立运营，与任何AI模型厂商无关联。
-  </div>
+  <!-- ══════════ 结果 ══════════ -->
+  <section class="screen" id="s-result">
+    <div class="rtop">
+      <div class="kicker" id="r-kicker">你的 AI 选型报告</div>
+      <h2 id="r-title">最匹配你的模型</h2>
+    </div>
+    <div id="r-body"></div>
+    <div class="foot">
+      AI 大模型排行榜 · 数据每日更新<br>
+      <b id="r-stamp"></b>
+    </div>
+  </section>
 </div>
 
-<!-- ========== 答题页 ========== -->
-<div class="quiz-page" id="quizPage">
-  <div class="quiz-header">
-    <span id="quizProgress">第 1 / 27 题</span>
-    <span id="quizPercent">0%</span>
-  </div>
-  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-  <div id="questionContainer"></div>
-  <div class="quiz-nav">
-    <button class="btn-secondary" id="prevBtn" disabled>← 上一题</button>
-    <button class="btn-secondary" id="nextBtn" disabled>下一题 →</button>
-  </div>
-</div>
+<div class="toast" id="toast"></div>
+<div class="modal" id="modal"><div class="inner" id="modal-inner"></div></div>
 
-<!-- ========== 计算页 ========== -->
-<div class="loading-page" id="loadingPage">
-  <div class="loading-spinner"></div>
-  <h2>正在分析你的需求画像</h2>
-  <p>基于12个维度构建个性化匹配模型</p>
-  <div class="loading-dots"><span></span><span></span><span></span></div>
-</div>
-
-<!-- ========== 结果页 ========== -->
-<div class="result-page" id="resultPage">
-  <div class="result-header">
-    <div class="test-id" id="testId">测试编号：AI-TEST-000000-0000</div>
-    <h2>你的AI大模型适配报告</h2>
-    <p>基于你的27个回答，以下是最适合你的Top 3 AI大模型</p>
-  </div>
-  <div class="radar-section">
-    <h3>📈 你的需求维度画像</h3>
-    <div class="radar-canvas-wrap"><canvas id="radarCanvas" width="320" height="320"></canvas></div>
-  </div>
-  <div class="recommend-section" id="recommendSection">
-    <h3>🎯 推荐模型 Top 3</h3>
-    <div id="modelCards"></div>
-  </div>
-  <div id="compareSection"></div>
-  <div class="action-buttons">
-    <button class="btn-action btn-copy" id="copyBtn">📋 复制结果</button>
-    <button class="btn-action btn-restart" id="restartBtn">🔄 重新测试</button>
-  </div>
-  <div class="footer-disclaimer">
-    <strong>⚠️ 法律免责声明</strong><br>
-    1. 本测试结果基于用户主观回答推算，仅供参考，不构成任何投资、消费或购买建议。<br>
-    2. 测试中提到的AI模型名称均为各厂商的产品名称，本测试不使用任何品牌的Logo、商标、专利设计或受版权保护的UI界面。<br>
-    3. 本测试独立运营，与OpenAI、Anthropic、Google、DeepSeek、阿里、百度等任何AI模型厂商无关联、无合作、无代言关系。<br>
-    4. 模型评分基于2026年9月公开评测数据整理，实际体验可能因模型版本更新而变化。<br>
-    5. 测试结果不保证绝对准确性，用户应在实际使用后自行验证并做出决策。<br>
-    6. 本测试为虚拟数字内容，测试结果仅供个人参考使用。
-  </div>
-</div>
-
-</div>
-
-<div class="toast" id="toast">已复制到剪贴板</div>
-
+<!-- 后端地址单独放这里，隧道地址变了只改这个文件，不用动 index.html -->
+<script src="config.js"></script>
 <script>
-// ========== 兑换码访问控制（服务端校验）==========
-// 验证与销毁均由服务端API完成，页面源码不含任何码数据
-
-// 本机状态存储
-const STORE = {
-  get activated(){ try{ return localStorage.getItem('ait_gate'); }catch(e){ return null; } },
-  set activated(v){ try{ localStorage.setItem('ait_gate', v); }catch(e){} },
-  get used(){ try{ return localStorage.getItem('ait_used'); }catch(e){ return null; } },
-  set used(v){ try{ localStorage.setItem('ait_used', v); }catch(e){} },
-  get savedResult(){ try{ return localStorage.getItem('ait_result'); }catch(e){ return null; } },
-  set savedResult(v){ try{ localStorage.setItem('ait_result', v); }catch(e){} },
-  get code(){ try{ return localStorage.getItem('ait_code'); }catch(e){ return null; } },
-  set code(v){ try{ localStorage.setItem('ait_code', v); }catch(e){} },
-  get token(){ try{ return localStorage.getItem('ait_token'); }catch(e){ return null; } },
-  set token(v){ try{ localStorage.setItem('ait_token', v); }catch(e){} },
-  get consumedAck(){ try{ return localStorage.getItem('ait_ack'); }catch(e){ return null; } },
-  set consumedAck(v){ try{ localStorage.setItem('ait_ack', v); }catch(e){} },
-  get remaining(){ try{ const v = localStorage.getItem('ait_remaining'); return v === null ? null : v; }catch(e){ return null; } },
-  set remaining(v){ try{ localStorage.setItem('ait_remaining', v); }catch(e){} },
-  clearAll(){ try{
-    localStorage.removeItem('ait_gate'); localStorage.removeItem('ait_used');
-    localStorage.removeItem('ait_result'); localStorage.removeItem('ait_code');
-    localStorage.removeItem('ait_token'); localStorage.removeItem('ait_ack');
-    localStorage.removeItem('ait_remaining');
-  }catch(e){} }
+/* ═══════════════════════════════════════════════════════
+   配置：后端地址（Cloudflare 隧道 / 将来的域名）
+   留空则完整版无法验证，免费版不受影响
+   ═══════════════════════════════════════════════════════ */
+const API_PROD = window.QUIZ_API || '';   // 由 config.js 提供（隧道地址变了只改那个文件）
+const IS_LOCAL = ['127.0.0.1','localhost',''].includes(location.hostname)
+              || location.protocol === 'file:';
+const CONFIG = {
+  apiBase: IS_LOCAL ? 'http://127.0.0.1:8932' : API_PROD,
+  lightCount: 12
 };
 
-// 调用服务端完成兑换码消耗（测完记录次数）
-async function consumeCode(){
-  if(!STORE.code || !STORE.token) return;
-  if(STORE.consumedAck === '1') return;
-  try{
-    const r = await fetch('/api/consume', {
-      method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({ code: STORE.code, token: STORE.token, testId: window.testId || null })
-    });
-    const d = await r.json();
-    if(d.status === 'ok' || d.status === 'already'){
-      STORE.consumedAck = '1';
-      if(typeof d.remaining !== 'undefined') STORE.remaining = String(d.remaining);
-    }
-  }catch(e){ /* 网络异常时下次打开页面会重试 */ }
+const DIM_CN = {
+  reasoning:"推理能力", coding:"编程开发", chinese:"中文能力", multimodal:"多模态",
+  longtext:"长文本", cost:"成本控制", speed:"响应速度", privacy:"数据安全",
+  ecosystem:"生态易用", creative:"创意写作"
+};
+
+/* ── 状态 ── */
+const S = {
+  tier:'light',      // light | full
+  idx:0,
+  answers:{},        // qid -> 选项下标
+  questions:[],
+  models:[],
+  code:''
+};
+
+/* ── 小工具 ── */
+const $ = s => document.querySelector(s);
+const esc = s => String(s||'').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function show(id){
+  document.querySelectorAll('.screen').forEach(e=>e.classList.toggle('on', e.id===id));
+  window.scrollTo({top:0,behavior:'instant'});
+}
+let toastT;
+function toast(msg){
+  const t=$('#toast'); t.textContent=msg; t.classList.add('on');
+  clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove('on'), 2400);
+}
+function grade(v){
+  if(v>=92) return '第一梯队';
+  if(v>=85) return '表现优秀';
+  if(v>=75) return '够用且稳';
+  if(v>=65) return '中规中矩';
+  return '不是强项';
 }
 
-// ========== 模型特征数据库（29款 · 每系列覆盖旗舰/标准/快速）==========
-const modelDatabase = [
-  {
-    id:"claude-fable-5",name:"Claude Fable 5",vendor:"Anthropic（美国）",
-    scores:{reasoning:5.0,coding:5.0,chinese:4.2,multimodal:4.3,longtext:5.0,cost:1.5,creative:4.8,ecosystem:4.5,privacy:4.0,apiprice:1.0,speed:3.0,scene:4.5,budget:1.5},
-    strengths:["当前公开可用能力最强的模型之一","编程和推理双满分，软件工程基准第一","100万token上下文 + 32K大输出，一轮完成长文档","知识工作和视觉研究领域卓越"],
-    weaknesses:["价格顶级，是最贵的模型之一","国内访问受限，需要代理","中文能力不算突出","响应速度中等"],
-    bestFor:"顶级软件开发、高难度智力工作、超长文档分析"
-  },
-  {
-    id:"claude-opus-5",name:"Claude Opus 5",vendor:"Anthropic（美国）",
-    scores:{reasoning:4.8,coding:5.0,chinese:4.0,multimodal:4.0,longtext:5.0,cost:2.5,creative:4.7,ecosystem:4.8,privacy:4.0,apiprice:2.0,speed:3.5,scene:4.5,budget:2.5},
-    strengths:["编程能力顶尖，多数编码Agent的默认标配","100万token超长上下文，整个代码库塞进一次请求","推理能力极强，复杂逻辑分析出色","安全对齐做得好，输出可靠"],
-    weaknesses:["API价格昂贵，成本较高","最大输出8K，长文档需多轮续写","中文能力一般，古文/方言支持弱","国内访问需要网络代理"],
-    bestFor:"专业开发者、科研人员、高质量内容创作者"
-  },
-  {
-    id:"claude-mythos",name:"Claude Mythos Pre.",vendor:"Anthropic（美国）",
-    scores:{reasoning:5.0,coding:4.9,chinese:4.2,multimodal:4.2,longtext:5.0,cost:1.0,creative:5.0,ecosystem:4.0,privacy:4.0,apiprice:0.5,speed:2.5,scene:4.5,budget:1.0},
-    strengths:["Anthropic内部最强智力模型","创意写作达到顶级水平","超长上下文处理能力极强","适合最难的知识工作和编程"],
-    weaknesses:["价格极其昂贵，仅限高端场景","获取门槛高，并非完全公开","国内访问严重受限","速度较慢，不适合高频调用"],
-    bestFor:"极限智力挑战、顶级创意写作、企业级高端研发"
-  },
-  {
-    id:"gpt-5.6-sol",name:"GPT-5.6 Sol",vendor:"OpenAI（美国）",
-    scores:{reasoning:4.9,coding:4.7,chinese:4.3,multimodal:4.8,longtext:5.0,cost:2.0,creative:4.6,ecosystem:5.0,privacy:3.5,apiprice:1.8,speed:4.0,scene:4.7,budget:2.0},
-    strengths:["5.6家族旗舰，综合能力最强","100万token上下文 + 128K最大输出","API生态和第三方工具支持最广泛","金融医疗法律等高敏感领域错误率低"],
-    weaknesses:["付费门槛较高，超272K长上下文单独计费","国内访问需要代理","中文能力不如国产模型","高级推理功能需付费"],
-    bestFor:"通用复杂推理、生态插件开发、多模态应用开发"
-  },
-  {
-    id:"gpt-5.6-terra",name:"GPT-5.6 Terra",vendor:"OpenAI（美国）",
-    scores:{reasoning:4.6,coding:4.5,chinese:4.2,multimodal:4.5,longtext:5.0,cost:3.5,creative:4.5,ecosystem:4.9,privacy:3.5,apiprice:3.4,speed:4.2,scene:4.5,budget:3.5},
-    strengths:["5.6家族日常主力档，性价比之选","与Sol同骨架：1M上下文 + 128K输出 + 视觉工具调用","生态工具全兼容，迁移零成本","质量损失小，适合绝大多数任务"],
-    weaknesses:["深度推理不及Sol旗舰档","国内访问需要代理","中文能力不如国产模型","长上下文计费规则复杂"],
-    bestFor:"日常主力开发、平衡质量与成本的团队"
-  },
-  {
-    id:"gpt-5.6-luna",name:"GPT-5.6 Luna",vendor:"OpenAI（美国）",
-    scores:{reasoning:4.0,coding:3.9,chinese:3.9,multimodal:4.2,longtext:4.5,cost:4.6,creative:3.9,ecosystem:4.6,privacy:3.5,apiprice:4.6,speed:4.7,scene:4.0,budget:4.6},
-    strengths:["5.6家族大批量低价位，吞吐首选","响应速度快，延迟低","继承家族多模态与工具调用能力","生态完全兼容，切换零成本"],
-    weaknesses:["推理能力为家族最弱档","复杂任务建议升档到Terra/Sol","国内访问需要代理","中文能力一般"],
-    bestFor:"大批量调用、分类摘要抽取、高频对话场景"
-  },
-  {
-    id:"gemini-3.1-pro",name:"Gemini 3.1 Pro",vendor:"Google（美国）",
-    scores:{reasoning:4.5,coding:4.3,chinese:3.8,multimodal:5.0,longtext:5.0,cost:3.0,creative:4.2,ecosystem:4.5,privacy:3.5,apiprice:3.0,speed:4.0,scene:4.2,budget:3.0},
-    strengths:["多模态能力全球最强，图像视频音频全面领先","支持200万字超长上下文","Google生态整合好","科学推理和数学能力强"],
-    weaknesses:["中文效果和稳定性不如国产","国内访问受限","价格中等偏上","编程能力不如Claude/DeepSeek"],
-    bestFor:"多模态图文视频分析、科学研究、超长文档处理"
-  },
-  {
-    id:"gemini-3.7-flash",name:"Gemini 3.7 Flash",vendor:"Google（美国）",
-    scores:{reasoning:4.0,coding:4.2,chinese:3.8,multimodal:4.8,longtext:4.5,cost:4.5,creative:3.8,ecosystem:4.0,privacy:3.5,apiprice:4.5,speed:5.0,scene:4.0,budget:4.5},
-    strengths:["最新一代Flash，速度极快延迟低","100万token上下文 + 64K输出","多模态能力强，低价档性价比高","从3.6 Flash迁移只需改一个参数"],
-    weaknesses:["中文能力一般","复杂推理不如Pro","国内访问受限","生态不如GPT"],
-    bestFor:"快速多模态处理、工程化应用、预算敏感的多模态场景"
-  },
-  {
-    id:"grok-4.6",name:"Grok 4.6",vendor:"xAI（美国）",
-    scores:{reasoning:4.5,coding:4.4,chinese:3.5,multimodal:4.0,longtext:4.4,cost:3.0,creative:4.5,ecosystem:3.5,privacy:3.0,apiprice:3.6,speed:4.3,scene:3.8,budget:3.0},
-    strengths:["500K上下文 + 128K最大输出，中间档主力","对话风格自然，避免机械感","与X平台深度整合，实时信息强","创意写作有特色"],
-    weaknesses:["中文能力较弱","国内访问严重受限","生态不如GPT/Claude","隐私合规存疑"],
-    bestFor:"社交媒体内容创作、X平台用户、追求自然对话风格"
-  },
-  {
-    id:"glm-5.3-max",name:"GLM-5.3 Max",vendor:"智谱AI（中国）",
-    scores:{reasoning:4.7,coding:4.8,chinese:4.7,multimodal:4.4,longtext:4.6,cost:3.8,creative:4.5,ecosystem:4.2,privacy:5.0,apiprice:3.8,speed:4.2,scene:4.4,budget:3.8},
-    strengths:["智谱旗舰档，推理编程双强","中文能力优秀，公文写作见长","开源支持私有部署，清华系技术底子","国产芯片算力支持，供应链自主"],
-    weaknesses:["多模态不如Gemini国际旗舰","国际生态弱于GPT/Claude","创意写作不如Kimi","新发布稳定性待长期验证"],
-    bestFor:"企业级开发、私有化部署、中文专业场景"
-  },
-  {
-    id:"glm-5.3",name:"GLM-5.3",vendor:"智谱AI（中国）",
-    scores:{reasoning:4.4,coding:4.7,chinese:4.6,multimodal:4.2,longtext:4.5,cost:4.5,creative:4.3,ecosystem:4.0,privacy:5.0,apiprice:4.5,speed:4.5,scene:4.2,budget:4.5},
-    strengths:["编程能力国产最强之一","开源生态完善，支持私有部署","中文能力优秀","性价比极高","国内合规，清华系背景"],
-    weaknesses:["多模态能力一般","国际生态不如GPT","创意写作不如Kimi","长文本不如Kimi"],
-    bestFor:"编程开发、私有化部署、追求性价比的开发者"
-  },
-  {
-    id:"glm-5.3-flash",name:"GLM-5.3 Flash",vendor:"智谱AI（中国）",
-    scores:{reasoning:4.4,coding:4.3,chinese:4.6,multimodal:4.7,longtext:4.4,cost:5.0,creative:4.3,ecosystem:4.2,privacy:5.0,apiprice:5.0,speed:4.7,scene:4.2,budget:5.0},
-    strengths:["GLM-5系列首个原生多模态模型，AA指数57分进入全球前沿区间","价格屠夫：定价直接对标DeepSeek并下探","320B总参仅18B激活，推理效率高","国产芯片算力支持，开源可私有部署"],
-    weaknesses:["复杂推理不如Max旗舰档","编程弱于DeepSeek V4 Pro","生态工具不如国际大厂","深度任务与旗舰有差距"],
-    bestFor:"多模态轻量场景、极致性价比追求者、国内合规批量调用"
-  },
-  {
-    id:"deepseek-v4-pro",name:"DeepSeek V4 Pro",vendor:"深度求索（中国）",
-    scores:{reasoning:4.8,coding:4.8,chinese:4.5,multimodal:3.8,longtext:4.5,cost:4.0,creative:4.3,ecosystem:4.0,privacy:5.0,apiprice:4.5,speed:4.0,scene:4.3,budget:4.0},
-    strengths:["推理能力逼近Claude和GPT旗舰","编程能力极强，软件工程基准行业顶尖","MIT协议开源，支持私有部署","100万token上下文"],
-    weaknesses:["多模态能力较弱","生态工具不如GPT丰富","国际知名度在提升中","长文本不如Kimi/Gemini"],
-    bestFor:"算法推理、批量数据处理、代码开发、追求性价比的专业用户"
-  },
-  {
-    id:"deepseek-v4-flash",name:"DeepSeek V4 Flash",vendor:"深度求索（中国）",
-    scores:{reasoning:4.3,coding:4.3,chinese:4.3,multimodal:3.5,longtext:4.0,cost:5.0,creative:4.0,ecosystem:3.8,privacy:5.0,apiprice:5.0,speed:5.0,scene:4.0,budget:5.0},
-    strengths:["低价走量档现任者，全市场最低价之一","100万token上下文 + 工具调用 + 流式输出","MIT协议开源，分类摘要抽取先用它试","峰谷分时计费，批量成本更低"],
-    weaknesses:["复杂推理不如Pro版本","多模态能力弱","世界知识储备略逊","高难度任务有差距"],
-    bestFor:"大批量轻量调用、快速响应场景、预算敏感用户"
-  },
-  {
-    id:"hunyuan-hy4",name:"腾讯混元 HY4",vendor:"腾讯（中国）",
-    scores:{reasoning:4.8,coding:4.7,chinese:4.7,multimodal:4.5,longtext:5.0,cost:4.2,creative:4.4,ecosystem:4.3,privacy:5.0,apiprice:4.3,speed:4.3,scene:4.5,budget:4.2},
-    strengths:["8月28日最新发布，开源模型第一梯队","770B总参/49B激活，上下文突破100万token","代码、办公、科学等真实生产力任务卓越","输入仅6元/百万token，旗舰级性价比"],
-    weaknesses:["preview预览版，稳定性待验证","多模态不如Gemini","国际知名度低","生态工具建设中"],
-    bestFor:"长文档生产力任务、最新旗舰尝鲜、腾讯生态用户"
-  },
-  {
-    id:"hunyuan-hy3",name:"腾讯混元 HY3",vendor:"腾讯（中国）",
-    scores:{reasoning:4.1,coding:3.9,chinese:4.5,multimodal:4.2,longtext:4.0,cost:4.2,creative:4.0,ecosystem:4.0,privacy:5.0,apiprice:4.2,speed:4.5,scene:4.0,budget:4.2},
-    strengths:["成熟稳定一代，9月底前多平台限免体验","腾讯生态深度整合（微信/QQ/企业微信）","中文能力不错","国内合规，企业级支持"],
-    weaknesses:["编程能力一般","推理能力中等","长文本能力一般","已被HY4全面超越"],
-    bestFor:"腾讯生态企业应用、微信场景集成、限免尝鲜用户"
-  },
-  {
-    id:"minimax-h3",name:"MiniMax H3",vendor:"MiniMax（中国）",
-    scores:{reasoning:4.3,coding:3.9,chinese:4.6,multimodal:5.0,longtext:4.5,cost:4.0,creative:4.7,ecosystem:3.8,privacy:5.0,apiprice:4.2,speed:4.4,scene:4.2,budget:4.2},
-    strengths:["多模态能力国产最强，视频生成行业领先","开源下载量超2400万次，社区火爆","B端收入激增，商业落地成熟","配套Design工作台：视频从构思到成片"],
-    weaknesses:["文本推理能力一般","编程能力弱","生态不如头部","长文本一般"],
-    bestFor:"视频内容创作、多模态应用、商业内容生产"
-  },
-  {
-    id:"minimax-m3",name:"MiniMax M3",vendor:"MiniMax（中国）",
-    scores:{reasoning:4.0,coding:3.8,chinese:4.4,multimodal:4.3,longtext:4.5,cost:4.3,creative:4.5,ecosystem:3.5,privacy:5.0,apiprice:4.3,speed:4.5,scene:4.0,budget:4.3},
-    strengths:["语音和多模态能力见长","支持100万token超长上下文","中文写作有优势","性价比不错","国内合规"],
-    weaknesses:["编程能力一般","整体生态和社区不如头部","推理能力中等","知名度较低"],
-    bestFor:"语音交互、中文写作、长文本处理、多模态应用"
-  },
-  {
-    id:"minimax-m2.7",name:"MiniMax M2.7",vendor:"MiniMax（中国）",
-    scores:{reasoning:3.8,coding:3.6,chinese:4.3,multimodal:4.2,longtext:4.2,cost:4.6,creative:4.3,ecosystem:3.5,privacy:5.0,apiprice:4.6,speed:4.7,scene:3.8,budget:4.6},
-    strengths:["成熟稳定，久经验证的一代","价格低，适合大批量调用","响应速度快","国内合规，API稳定"],
-    weaknesses:["能力已被M3/H3超越","推理编程一般","生态弱","知名度低"],
-    bestFor:"大批量轻量任务、语音合成场景、预算敏感用户"
-  },
-  {
-    id:"qwen3.8-max",name:"Qwen3.8 Max",vendor:"阿里巴巴（中国）",
-    scores:{reasoning:4.7,coding:4.6,chinese:4.8,multimodal:4.3,longtext:4.5,cost:4.0,creative:4.5,ecosystem:4.5,privacy:5.0,apiprice:4.0,speed:4.5,scene:4.5,budget:4.0},
-    strengths:["2.4万亿参数旗舰，国产综合能力第一档","中文能力国产顶级","自主编程与百万级上下文理解","承诺开源权重，可私有部署","阿里云基础设施稳定"],
-    weaknesses:["多模态能力不如Gemini","国际知名度不如GPT/Claude","超长上下文不如Kimi","社区生态仍在建设"],
-    bestFor:"中文场景开发、企业级应用、需要国内合规的用户"
-  },
-  {
-    id:"qwen3.7-max",name:"Qwen3.7 Max",vendor:"阿里巴巴（中国）",
-    scores:{reasoning:4.5,coding:4.4,chinese:4.8,multimodal:4.2,longtext:4.4,cost:4.3,creative:4.4,ecosystem:4.5,privacy:5.0,apiprice:4.3,speed:4.4,scene:4.3,budget:4.3},
-    strengths:["上代旗舰，久经生产环境验证","中文能力与3.8持平","价格比3.8 Max更实惠","开源生态完善，私有部署案例多"],
-    weaknesses:["推理编程已被3.8 Max超越","多模态一般","长文本不如Kimi","国际影响力有限"],
-    bestFor:"求稳的企业用户、成熟私有化部署、性价比导向开发"
-  },
-  {
-    id:"qwen3.7-turbo",name:"Qwen3.7 Turbo",vendor:"阿里巴巴（中国）",
-    scores:{reasoning:3.9,coding:3.8,chinese:4.5,multimodal:3.8,longtext:4.0,cost:4.8,creative:3.9,ecosystem:4.3,privacy:5.0,apiprice:4.8,speed:4.8,scene:3.9,budget:4.8},
-    strengths:["价格极低，大批量调用首选","响应速度极快，高并发稳定","中文能力不错的快速档","阿里云基础设施背书"],
-    weaknesses:["复杂任务能力有限","多模态弱","长文本一般","不适合深度推理"],
-    bestFor:"高频轻量调用、客服机器人、预算敏感的批量任务"
-  },
-  {
-    id:"doubao-seed-2.1",name:"豆包 Seed 2.1 Pro",vendor:"字节跳动（中国）",
-    scores:{reasoning:4.0,coding:3.8,chinese:4.5,multimodal:4.5,longtext:4.2,cost:4.8,creative:4.2,ecosystem:4.2,privacy:5.0,apiprice:4.8,speed:5.0,scene:4.3,budget:4.8},
-    strengths:["极致性价比，价格非常低","响应速度极快","多模态能力不错，视频解析突出","256K长上下文","抖音/飞书生态整合"],
-    weaknesses:["复杂推理和编程能力一般","生态不如GPT/Claude","深度任务有差距","长文本不及百万级选手"],
-    bestFor:"大批量轻度使用、日常办公、字节生态用户"
-  },
-  {
-    id:"doubao-seed-2.1-std",name:"豆包 Seed 2.1",vendor:"字节跳动（中国）",
-    scores:{reasoning:4.2,coding:4.0,chinese:4.6,multimodal:4.4,longtext:4.2,cost:4.7,creative:4.3,ecosystem:4.3,privacy:5.0,apiprice:4.7,speed:4.8,scene:4.2,budget:4.7},
-    strengths:["均衡标准档，日常任务全覆盖","中文体验好，对话自然","价格低速度快","火山引擎托管，接入简单"],
-    weaknesses:["深度推理不如旗舰档","编程能力一般","多模态不如Pro版","不适合专业开发"],
-    bestFor:"日常办公、内容创作辅助、轻量业务集成"
-  },
-  {
-    id:"doubao-seed-2.0-lite",name:"豆包 Seed 2.0 Lite",vendor:"字节跳动（中国）",
-    scores:{reasoning:3.7,coding:3.5,chinese:4.4,multimodal:4.0,longtext:3.8,cost:5.0,creative:3.8,ecosystem:4.0,privacy:5.0,apiprice:5.0,speed:5.0,scene:3.7,budget:5.0},
-    strengths:["全市场最低价档之一","速度极快，高并发承载强","轻量任务完全够用","火山引擎托管稳定"],
-    weaknesses:["能力天花板低","复杂任务差距明显","长文本弱","多模态仅基础"],
-    bestFor:"超大批量调用、实时客服、成本极限敏感场景"
-  },
-  {
-    id:"kimi-k3",name:"Kimi K3",vendor:"月之暗面（中国）",
-    scores:{reasoning:4.5,coding:4.4,chinese:4.9,multimodal:4.0,longtext:5.0,cost:4.2,creative:4.7,ecosystem:4.0,privacy:5.0,apiprice:4.2,speed:4.0,scene:4.3,budget:4.2},
-    strengths:["中文理解和对话自然度国产第一","支持200万字超长上下文，行业领先","中文写作和文案创作出色","已开源，性价比高","国内合规"],
-    weaknesses:["多模态能力相对一般","编程能力不如Claude/DeepSeek","生态工具不如GPT丰富","国际知名度低"],
-    bestFor:"中文内容创作、超长文档处理、中文对话场景"
-  },
-  {
-    id:"ernie-5.1",name:"文心 ERNIE-5.1",vendor:"百度（中国）",
-    scores:{reasoning:4.2,coding:4.0,chinese:4.7,multimodal:4.3,longtext:4.0,cost:4.0,creative:4.3,ecosystem:4.5,privacy:5.0,apiprice:4.0,speed:4.5,scene:4.2,budget:4.0},
-    strengths:["中文理解能力强","百度搜索生态整合","多模态能力不错","国内合规，企业级支持","API稳定"],
-    weaknesses:["编程能力一般","推理能力不如头部","长文本能力一般","国际知名度低"],
-    bestFor:"中文搜索增强场景、企业级应用、百度生态用户"
-  },
-  {
-    id:"muse-spark",name:"Muse Spark 1.2",vendor:"Muse（中国）",
-    scores:{reasoning:3.8,coding:3.5,chinese:4.2,multimodal:4.0,longtext:3.8,cost:4.5,creative:4.6,ecosystem:3.0,privacy:4.5,apiprice:4.5,speed:4.5,scene:3.8,budget:4.5},
-    strengths:["创意写作能力突出","性价比高","中文体验不错","响应速度快"],
-    weaknesses:["编程能力弱","推理能力一般","生态不完善","长文本能力弱","知名度低"],
-    bestFor:"创意写作、营销文案、预算敏感的内容创作"
-  },
-  {
-    id:"mimo-v2.5",name:"MiMo-V2.5",vendor:"小米（中国）",
-    scores:{reasoning:3.9,coding:3.8,chinese:4.3,multimodal:4.0,longtext:4.0,cost:4.3,creative:4.0,ecosystem:3.5,privacy:5.0,apiprice:4.3,speed:4.5,scene:4.0,budget:4.3},
-    strengths:["小米生态整合（手机/IoT）","中文能力不错","国内合规","性价比不错","端侧部署能力"],
-    weaknesses:["编程能力一般","推理能力中等","生态不如头部","创意写作一般"],
-    bestFor:"小米生态用户、IoT场景、端侧AI部署"
-  }
-];
-
-// ========== 27道测评题目 ==========
-const questions = [
-  // 推理/计算能力（3题）
-  {id:1,text:"你经常需要处理需要多步逻辑推演的任务，比如数学证明、科研数据分析或复杂的因果推理。",dims:[{name:"reasoning",weight:1.0}]},
-  // 中文理解能力（2题）
-  {id:2,text:"你的工作高度依赖中文语境，包括古文理解、中文文案润色、中文对话的自然流畅度。",dims:[{name:"chinese",weight:1.0}]},
-  // 编程开发能力（3题）
-  {id:3,text:"你需要AI帮你写代码、调试程序、做代码审查，或构建AI Agent自动化工作流。",dims:[{name:"coding",weight:1.0}]},
-  // 性价比（3题）
-  {id:4,text:"你希望通过API接入大模型，且每月调用预算控制在较低水平，越便宜越好。",dims:[{name:"cost",weight:1.0},{name:"apiprice",weight:0.8}]},
-  // 多模态能力（2题）
-  {id:5,text:"你需要AI能理解和分析图片、视频、音频等多模态内容，而不只是处理纯文本。",dims:[{name:"multimodal",weight:1.0}]},
-  // 长文本处理（2题）
-  {id:6,text:"你经常需要让AI阅读和处理超长文档（如整本书、长篇报告、大量代码文件），对上下文长度有很高要求。",dims:[{name:"longtext",weight:1.0}]},
-  // 创意写作（2题）
-  {id:7,text:"你需要AI帮你写营销文案、故事剧本、自媒体内容等创意性文字，对文笔和创意有较高要求。",dims:[{name:"creative",weight:1.0}]},
-  // 生态易用性（2题）
-  {id:8,text:"你希望AI有丰富的插件生态、第三方工具集成和成熟的开发者社区，方便扩展功能。",dims:[{name:"ecosystem",weight:1.0}]},
-  // 隐私合规（2题）
-  {id:9,text:"你对数据隐私和合规性有严格要求，需要模型支持私有化部署或满足国内数据安全法规。",dims:[{name:"privacy",weight:1.0}]},
-  // 响应速度（2题）
-  {id:10,text:"你对AI的响应速度有很高要求，需要快速生成、高并发处理，不能接受长时间等待。",dims:[{name:"speed",weight:1.0}]},
-  // 预算偏好（2题）
-  {id:11,text:"你希望优先使用免费或低成本的大模型，不太愿意为高级功能支付较高费用。",dims:[{name:"budget",weight:1.0},{name:"cost",weight:0.6}]},
-  // 推理能力2
-  {id:12,text:"你的业务涉及复杂的数学建模、统计分析或科学计算，需要AI有极强的数理推理能力。",dims:[{name:"reasoning",weight:1.0}]},
-  // 编程能力2
-  {id:13,text:"你是一名专业程序员或算法工程师，需要AI在复杂代码架构设计、算法实现方面提供专业级帮助。",dims:[{name:"coding",weight:1.0}]},
-  // 中文能力2
-  {id:14,text:"你的内容主要面向中文读者，需要AI对中文文化、成语典故、网络用语有深刻理解。",dims:[{name:"chinese",weight:1.0}]},
-  // 多模态2
-  {id:15,text:"你需要AI能生成图片、分析视频内容、处理语音转文字等多模态任务，这是你的核心需求之一。",dims:[{name:"multimodal",weight:1.0}]},
-  // 长文本2
-  {id:16,text:"你需要一次性输入大量信息（如几十万字的资料）让AI综合分析提炼，上下文窗口太小会影响你的工作效率。",dims:[{name:"longtext",weight:1.0}]},
-  // 创意写作2
-  {id:17,text:"你做自媒体、内容创作或品牌营销，需要AI能输出有创意、有温度、有个性化风格的文字内容。",dims:[{name:"creative",weight:1.0}]},
-  // 生态2
-  {id:18,text:"你希望AI能直接集成到你现有的工作流中（如办公软件、设计工具、项目管理工具），减少切换成本。",dims:[{name:"ecosystem",weight:1.0},{name:"scene",weight:0.5}]},
-  // 隐私2
-  {id:19,text:"你的工作内容涉及企业机密或敏感信息，不能将数据传输到境外服务器，需要确保数据完全留在国内。",dims:[{name:"privacy",weight:1.0}]},
-  // 速度2
-  {id:20,text:"你的应用场景是实时对话或高频调用（如客服机器人、实时翻译），对延迟极其敏感。",dims:[{name:"speed",weight:1.0}]},
-  // 性价比2
-  {id:21,text:"你是个人用户或小团队，对API调用成本非常敏感，希望用最低的成本获得最好的效果。",dims:[{name:"cost",weight:1.0},{name:"apiprice",weight:0.8}]},
-  // 预算2
-  {id:22,text:"你愿意为最顶级的AI能力支付溢价，只要效果好，价格不是主要考虑因素。",dims:[{name:"budget",weight:-1.0}]},
-  // 使用场景
-  {id:23,text:"你的主要使用场景是专业开发和技术工作，而不是日常聊天或简单问答。",dims:[{name:"scene",weight:1.0}]},
-  // 推理3
-  {id:24,text:"你需要AI能处理需要深度思考的问题，比如法律分析、医学诊断、金融建模等专业领域的复杂判断。",dims:[{name:"reasoning",weight:1.0}]},
-  // 编程3
-  {id:25,text:"你希望AI不仅能写代码，还能理解整个项目架构、做代码重构、写测试用例，像一个真正的开发搭档。",dims:[{name:"coding",weight:1.0}]},
-  // 性价比3
-  {id:26,text:"你需要大批量调用AI（如每天处理数千条请求），单次调用的微小价差累积起来也是大成本。",dims:[{name:"cost",weight:1.0},{name:"apiprice",weight:1.0}]},
-  // 使用场景2
-  {id:27,text:"你的使用场景更多是日常办公、学习辅助、信息查询等通用场景，而非深度专业技术工作。",dims:[{name:"scene",weight:-0.8}]}
-];
-
-// 维度中文名
-const dimNames = {
-  reasoning:"推理能力",coding:"编程能力",chinese:"中文能力",multimodal:"多模态",
-  longtext:"长文本",cost:"性价比",creative:"创意写作",ecosystem:"生态易用",
-  privacy:"隐私合规",apiprice:"API成本",speed:"响应速度",scene:"专业场景",budget:"预算友好"
-};
-
-// 维度图标
-const dimIcons = {
-  reasoning:"🧠",coding:"💻",chinese:"🀄",multimodal:"🎬",
-  longtext:"📚",cost:"💰",creative:"✍️",ecosystem:"🔌",
-  privacy:"🔒",apiprice:"💵",speed:"⚡",scene:"🎯",budget:"🏷️"
-};
-
-// ========== 状态变量 ==========
-let currentQ = 0;
-let answers = new Array(27).fill(null); // 1=是, -1=否, 0=不关注
-let currentModel = "";
-let currentModelName = "";
-
-// ========== 访问控制：页面加载时路由 ==========
-function gateRoute(){
-  if(STORE.used === '1' && STORE.savedResult){
-    // 已完成测试 → 直接回看保存的报告
-    restoreSavedResult();
-    return;
-  }
-  if(STORE.activated){
-    // 已激活未测试 → 进入启动页
-    document.getElementById('gatePage').style.display = 'none';
-    document.getElementById('startPage').style.display = 'block';
-    return;
-  }
-  // 未激活 → 显示兑换码门
-  document.getElementById('gatePage').style.display = 'block';
+/* ── 数据加载 ── */
+async function boot(){
+  const [q, m] = await Promise.all([
+    fetch('data/questions.json').then(r=>r.json()),
+    fetch('data/models.json').then(r=>r.json()).catch(()=>({models:[]}))
+  ]);
+  S.questions = q.questions;
+  S.models = m.models || [];
+  S.modelMeta = { generated_at:m.generated_at, derived:m._derived };
 }
 
-// 兑换码验证按钮（服务端校验，全局一次性）
-document.getElementById('activateBtn').addEventListener('click', async function(){
-  const input = document.getElementById('codeInput');
-  const err = document.getElementById('gateError');
-  const code = input.value;
-  if(!code.trim()){
-    err.textContent = '请输入兑换码';
-    err.classList.add('show');
-    return;
-  }
-  const btn = this;
-  btn.disabled = true; btn.textContent = '验证中...';
-  err.classList.remove('show');
+/* ── 推荐算法 ──
+   权重 = Σ 选中选项的维度权重（负权重表示「我越不在意这个维度」）
+   匹配度 = Σ(权重 × 模型该维度分) ÷ Σ|权重|   —— 加权平均，0-100 直接读作契合度 */
+function weights(){
+  const w = {};
+  S.questions.forEach(q=>{
+    const i = S.answers[q.id];
+    if(i===undefined) return;
+    const opt = q.options[i];
+    if(!opt) return;
+    for(const k in opt.w) w[k] = (w[k]||0) + opt.w[k];
+  });
+  return w;
+}
+function rankAll(w, override){
+  const ww = Object.assign({}, w, override||{});
+  let tot = 0; for(const k in ww) tot += Math.abs(ww[k]);
+  if(!tot) tot = 1;
+  return S.models.map(m=>{
+    let raw = 0;
+    for(const k in ww) raw += ww[k] * (m.score[k]||0);
+    return Object.assign({}, m, {match: raw/tot});
+  }).sort((a,b)=>b.match-a.match);
+}
+
+/* ── 流程 ── */
+$('#go-light').onclick = ()=>{ S.tier='light'; S.idx=0; S.answers={}; S.resume=false; renderQ(); show('s-quiz'); };
+$('#go-full').onclick  = ()=>{ S.code=''; S.resume=false; show('s-code'); };   // 从首页进来=全新开始
+$('#code-back').onclick= ()=> show('s-home');
+$('#code-light').onclick=()=>{ S.tier='light'; S.idx=0; S.answers={}; S.resume=false; renderQ(); show('s-quiz'); };
+
+/* 输入框里只放 10 位内容，AIM- 前缀固定显示。
+   粘贴完整码时自动剥掉前缀（真码字符集不含 I，所以开头的 AIM 一定是前缀）。 */
+function readCodeInput(){
+  let v = $('#code-input').value.toUpperCase().replace(/[^A-Z0-9]/g,'');
+  if(v.startsWith('AIM') && v.length > 10) v = v.slice(3);
+  return v.slice(0,10);
+}
+$('#code-input').addEventListener('input', e=>{
+  const v = readCodeInput();
+  e.target.value = v.length > 5 ? v.slice(0,5)+'-'+v.slice(5) : v;
+  $('#code-hint').className = 'hint';
+  $('#code-hint').textContent = '输入后立即开始完整版测试';
+});
+$('#code-input').addEventListener('keydown', e=>{ if(e.key==='Enter') $('#code-go').click(); });
+
+$('#code-go').onclick = async ()=>{
+  const raw = readCodeInput();
+  const hint = $('#code-hint');
+  if(raw.length !== 10){ hint.className='hint err'; hint.textContent='验证码是 10 位字符（不含前面的 AIM-）'; return; }
+  const code = 'AIM-' + raw.slice(0,5) + '-' + raw.slice(5);
+  if(!CONFIG.apiBase){ hint.className='hint err'; hint.textContent='后端地址还没配置，暂时无法验证'; return; }
+
+  const btn = $('#code-go'); const old = btn.innerHTML;
+  btn.disabled = true; btn.innerHTML = '<span class="spin"></span>验证中';
   try{
-    const r = await fetch('/api/activate', {
+    const r = await fetch(CONFIG.apiBase.replace(/\/$/,'') + '/api/verify', {
       method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({ code: code })
-    });
-    const d = await r.json();
-    if(d.status === 'ok'){
-      STORE.activated = '1';
-      STORE.code = code.trim().toUpperCase();
-      STORE.token = d.token;
-      STORE.consumedAck = null;
-      STORE.remaining = null;
-      document.getElementById('gatePage').style.display = 'none';
-      document.getElementById('startPage').style.display = 'block';
-      if(d.secondAttempt){
-        showToast('⚠️ 这是额外赠送的第2次测试，也是最后一次机会，请认真完成！');
-      } else {
-        showToast('✅ 兑换成功，开始你的测试吧！');
-      }
-    } else if(d.status === 'used'){
-      err.textContent = '该兑换码已被使用（一码仅限完成一次测试）。如你确认自己尚未用过，请联系卖家核实。';
-      err.classList.add('show');
-      input.value = ''; input.focus();
-    } else if(d.status === 'rate_limited'){
-      err.textContent = '尝试过于频繁，请1分钟后再试。';
-      err.classList.add('show');
-    } else {
-      err.textContent = '兑换码无效，请核对后重试。如确认无误仍失败，请联系卖家。';
-      err.classList.add('show');
-      input.value = ''; input.focus();
-    }
+      body: JSON.stringify({code})
+    }).then(r=>r.json());
+    if(!r.ok){ hint.className='hint err'; hint.textContent = r.msg || '验证失败'; return; }
+    hint.className='hint ok'; hint.textContent='验证通过，开始完整版测试';
+    S.code = code; S.tier = 'full';
+    // 从结果页解锁进来的：保留已答的前 12 题，从第 13 题接着答；
+    // 从首页直接输码的：从头开始。
+    if(S.resume){ S.resume = false; } else { S.idx = 0; S.answers = {}; }
+    setTimeout(()=>{ renderQ(); show('s-quiz'); }, 420);
   }catch(e){
-    err.textContent = '服务暂时不可用，请稍后重试。请务必通过购买时收到的测试链接访问。';
-    err.classList.add('show');
+    hint.className='hint err'; hint.textContent = '连不上服务器，检查网络后重试';
+  }finally{
+    btn.disabled = false; btn.innerHTML = old;
   }
-  btn.disabled = false; btn.textContent = '验证解锁';
-});
+};
 
-// 回车触发验证
-document.getElementById('codeInput').addEventListener('keydown', function(e){
-  if(e.key === 'Enter') document.getElementById('activateBtn').click();
-});
+/* ── 答题 ── */
+function renderQ(){
+  const total = S.tier==='full' ? S.questions.length : CONFIG.lightCount;
+  const q = S.questions[S.idx];
 
-// 从本机存储恢复已保存的报告
-function restoreSavedResult(){
-  try{
-    const saved = JSON.parse(STORE.savedResult);
-    document.getElementById('gatePage').style.display = 'none';
-    document.getElementById('startPage').style.display = 'none';
-    document.getElementById('resultPage').style.display = 'block';
-    document.getElementById('testId').textContent = '测试编号：' + saved.testId;
-    window.testId = saved.testId;
-    // 按id从数据库还原模型对象
-    const result = {
-      top3: saved.top3.map(t => ({
-        model: modelDatabase.find(m => m.id === t.modelId),
-        matchPercent: t.matchPercent
-      })),
-      userProfile: saved.userProfile,
-      compareData: saved.compareData ? {
-        model: modelDatabase.find(m => m.id === saved.compareData.modelId),
-        matchPercent: saved.compareData.matchPercent,
-        rank: saved.compareData.rank,
-        userProfile: saved.userProfile,
-        isCustom: false
-      } : null
+  $('#q-count').textContent = `第 ${S.idx+1} / ${total} 题`;
+  $('#q-tier').textContent = S.tier==='full' ? '完整版' : '免费版';
+  $('#q-prog').style.width = ((S.idx)/total*100) + '%';
+  $('#q-text').textContent = q.text;
+  $('#q-sub').textContent = '选一个最接近你情况的';
+
+  $('#q-opts').innerHTML = q.options.map((o,i)=>
+    `<button class="opt${S.answers[q.id]===i?' pick':''}" data-i="${i}">
+       <span class="k">${'ABCD'[i]}</span><span>${esc(o.t)}</span></button>`).join('');
+
+  document.querySelectorAll('.opt').forEach(b=>{
+    b.onclick = ()=>{
+      S.answers[q.id] = +b.dataset.i;
+      document.querySelectorAll('.opt').forEach(x=>x.classList.toggle('pick', x===b));
+      $('#q-next').disabled = false;
+      setTimeout(next, 260);
     };
-    if(saved.compareData && saved.compareData.isCustom){
-      result.compareData = {
-        modelName: saved.compareData.modelName,
-        userProfile: saved.userProfile,
-        isCustom: true
-      };
-    }
-    window.result = result;
-    drawRadar(result.userProfile);
-    const cardsContainer = document.getElementById('modelCards');
-    cardsContainer.innerHTML = result.top3.map((item, idx) => {
-      const rank = idx + 1;
-      const m = item.model;
-      return `
-      <div class="model-card rank-${rank}">
-        <div class="rank-badge">第${rank}名</div>
-        <div class="model-name">${m.name}</div>
-        <div class="model-vendor">${m.vendor}</div>
-        <div class="match-score">匹配度 ${item.matchPercent}%</div>
-        <div class="model-detail">
-          <div class="detail-row">
-            <div class="detail-label strengths">✅ 优势</div>
-            <ul class="detail-list">${m.strengths.map(s => `<li>${s}</li>`).join('')}</ul>
-          </div>
-          <div class="detail-row">
-            <div class="detail-label weaknesses">⚠️ 劣势</div>
-            <ul class="detail-list">${m.weaknesses.map(w => `<li>${w}</li>`).join('')}</ul>
-          </div>
-        </div>
-        <div class="model-bestfor">🎯 <strong>最适合：</strong>${m.bestFor}</div>
-      </div>`;
-    }).join('');
-    if(result.compareData) renderCompare(result.compareData, result.top3);
-    window.resultText = saved.resultText;
-    // 回看模式：显示已用完横幅 + 隐藏重新测试
-    addUsedBanner();
-    // 若上次销毁确认未成功（断网等），后台补一次
-    consumeCode();
-  }catch(e){
-    // 数据损坏则重置到兑换码门
-    STORE.clearAll();
-    document.getElementById('gatePage').style.display = 'block';
-  }
+  });
+
+  $('#q-prev').style.visibility = S.idx===0 ? 'hidden' : 'visible';
+  $('#q-next').disabled = S.answers[q.id]===undefined;
+  $('#q-next').textContent = (S.idx+1>=total) ? '看结果' : '下一题';
 }
-
-function addUsedBanner(){
-  if(document.getElementById('usedBanner')) return;
-  const banner = document.createElement('div');
-  banner.className = 'used-banner';
-  banner.id = 'usedBanner';
-  const restart = document.getElementById('restartBtn');
-  const hasRemaining = STORE.remaining !== null && parseInt(STORE.remaining) > 0;
-  if(hasRemaining){
-    banner.innerHTML = '🎁 <strong>额外赠送1次测试机会</strong>（同一个兑换码）。这是最后一次了，请准备好后开始。当前报告建议先复制保存。';
-    restart.textContent = '🎁 再测最后一次';
-  } else {
-    banner.innerHTML = '📌 本次兑换码的2次测试机会已全部用完。报告已保存在本设备，可随时回看或复制保存；如需再次测试请购买新的兑换码。';
-    restart.textContent = '🔑 输入新兑换码再测';
-  }
-  const header = document.querySelector('.result-header');
-  header.appendChild(banner);
+function next(){
+  const total = S.tier==='full' ? S.questions.length : CONFIG.lightCount;
+  if(S.answers[S.questions[S.idx].id]===undefined){ toast('先选一个答案'); return; }
+  if(S.idx+1 >= total) return finish();
+  S.idx++; renderQ();
 }
+$('#q-next').onclick = next;
+$('#q-prev').onclick = ()=>{ if(S.idx>0){ S.idx--; renderQ(); } };
 
-// ========== 启动页逻辑 ==========
-document.getElementById('currentModelSelect').addEventListener('change', function(){
-  const input = document.getElementById('currentModelInput');
-  if(this.value === 'other'){
-    input.classList.add('active');
-    input.focus();
-  } else {
-    input.classList.remove('active');
-    input.value = '';
-  }
-});
+/* ── 出结果 ── */
+function finish(){
+  const w = weights();
+  const all = rankAll(w);
+  const top = all[0];
+  const light = S.tier !== 'full';
 
-document.getElementById('startBtn').addEventListener('click', function(){
-  const select = document.getElementById('currentModelSelect');
-  const input = document.getElementById('currentModelInput');
-  if(select.value === 'other'){
-    currentModel = input.value.trim() || '其他';
-    currentModelName = input.value.trim() || '其他模型';
-  } else if(select.value){
-    currentModel = select.value;
-    const opt = select.options[select.selectedIndex];
-    currentModelName = opt.text;
-  }
-  document.getElementById('startPage').style.display = 'none';
-  document.getElementById('quizPage').style.display = 'block';
-  renderQuestion();
-});
+  // 需求画像（正权重降序）
+  const need = Object.entries(w).filter(([k,v])=>v>0).sort((a,b)=>b[1]-a[1]);
+  const maxNeed = need.length ? need[0][1] : 1;
 
-// ========== 答题页逻辑 ==========
-function renderQuestion(){
-  const q = questions[currentQ];
-  const container = document.getElementById('questionContainer');
-  container.innerHTML = `
-    <div class="question-card">
-      <span class="question-tag">第 ${currentQ + 1} 题</span>
-      <div class="question-text">${q.text}</div>
-      <div class="options">
-        <div class="option-btn ${answers[currentQ]===1?'selected':''}" data-val="1">
-          <div class="opt-icon">✓</div>
-          <span>是，我需要</span>
-        </div>
-        <div class="option-btn ${answers[currentQ]===-1?'selected':''}" data-val="-1">
-          <div class="opt-icon">✕</div>
-          <span>否，不需要</span>
-        </div>
-        <div class="option-btn ${answers[currentQ]===0?'selected':''}" data-val="0">
-          <div class="opt-icon">—</div>
-          <span>不关注 / 无所谓</span>
-        </div>
+  $('#r-kicker').textContent = light ? '免费版 · 初步结果' : '完整版 · 选型报告';
+  $('#r-title').textContent = light ? '最匹配你的模型' : '为你算出的选型方案';
+  $('#r-stamp').textContent = S.modelMeta.generated_at ? `${S.modelMeta.generated_at} 模型库 · 共 ${S.models.length} 款` : '';
+
+  let h = '';
+
+  /* 冠军卡 */
+  h += `<div class="card champ">
+    <div class="rank">${light?'TOP 1':'最推荐'}</div>
+    <div class="name">${esc(top.name)}</div>
+    <div class="vendor">${esc(top.vendor)}模型 · 实力分 ${top.power}</div>
+    <div class="match">${top.match.toFixed(1)}<span>% 匹配</span></div>
+    <ul class="why">${why(top, w).map(t=>`<li>${esc(t)}</li>`).join('')}</ul>
+  </div>`;
+
+  /* 需求画像 */
+  h += `<div class="card"><div class="sec-t"><span class="n">1</span>你的需求优先级</div>
+    <div class="muted" style="margin-bottom:14px">越靠上，说明你越在意</div><div class="bars">`;
+  need.slice(0, light?6:10).forEach(([k,v])=>{
+    h += `<div class="bar"><div class="lb"><b>${DIM_CN[k]||k}</b><span>${(v).toFixed(1)}</span></div>
+      <div class="tr"><i style="width:${Math.max(6, v/maxNeed*100)}%"></i></div></div>`;
+  });
+  h += `</div>`;
+  if(light) h += `<div class="muted" style="margin-top:12px">完整版会展开全部 10 个维度的优先级</div>`;
+  h += `</div>`;
+
+  /* 完整版独有：Top3 对比 + 档位 + 成本 + 升降档 */
+  if(light){
+    h += `<div class="lockwrap"><div class="blur">
+      <div class="card"><div class="sec-t"><span class="n">2</span>备选方案对比</div>
+      <div class="row2"><div class="alt"><div class="nm">备选一</div>
+        <div class="mt">— —<span>%</span></div><div class="ds">第二名综合表现</div></div>
+      <div class="alt"><div class="nm">备选二</div><div class="mt">— —<span>%</span></div>
+        <div class="ds">第三名综合表现</div></div></div></div>
+      <div class="card"><div class="sec-t"><span class="n">3</span>档位建议与月成本</div>
+      <div class="tier"><div class="ic">旗</div><div class="tx"><b>旗舰档</b>
+        <p>能力优先，不看价格时的最优解</p></div></div>
+      <div class="tier"><div class="ic">主</div><div class="tx"><b>主力档</b>
+        <p>能力与成本平衡，大多数人的选择</p></div></div>
+      <div class="tier"><div class="ic">省</div><div class="tx"><b>性价比档</b>
+        <p>成本压到最低，效果够用</p></div></div></div>
+      <div class="card"><div class="sec-t"><span class="n">4</span>升档 / 降档方案</div>
+      <div class="tier"><div class="ic">↑</div><div class="tx"><b>预算宽松时</b>
+        <p>换到哪一款、能多拿到什么</p></div></div>
+      <div class="tier"><div class="ic">↓</div><div class="tx"><b>预算收紧时</b>
+        <p>换到哪一款、会牺牲什么</p></div></div></div>
       </div>
-    </div>
-  `;
-  // 绑定选项事件
-  container.querySelectorAll('.option-btn').forEach(btn => {
-    btn.addEventListener('click', function(){
-      const val = parseInt(this.dataset.val);
-      answers[currentQ] = val;
-      container.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
-      this.classList.add('selected');
-      document.getElementById('nextBtn').disabled = false;
-      // 自动进入下一题（最后一题除外）
-      if(currentQ < 26){
-        setTimeout(() => { currentQ++; renderQuestion(); updateProgress(); }, 300);
-      } else {
-        // 最后一题，延迟后自动提交
-        setTimeout(() => {
-          showLoading();
-        }, 500);
-      }
+      <div class="mask">
+        <div class="lk">🔒</div>
+        <b>还差 18 道题，解锁完整报告</b>
+        <p>完整版会给出 Top3 对比、三档位建议、月成本测算和升降档路线，报告能存成图片随时回看</p>
+        <button class="btn" id="unlock">输入验证码 · 继续答 18 题</button>
+      </div></div>`;
+  } else {
+    const second = all[1], third = all[2];
+    h += `<div class="card"><div class="sec-t"><span class="n">2</span>备选方案</div>
+      <div class="muted" style="margin-bottom:13px">如果首选不合适，这两款更偏向别的方向</div>
+      <div class="row2">
+        ${[second,third].map((m,i)=>m?`<div class="alt"><div class="nm">${esc(m.name)}</div>
+          <div class="mt">${m.match.toFixed(1)}<span>% 匹配</span></div>
+          <div class="ds">${esc(contrast(top,m))}</div></div>`:'').join('')}
+      </div></div>`;
+
+    /* 关键维度对比表 */
+    const keys = need.slice(0,5).map(x=>x[0]);
+    h += `<div class="card"><div class="sec-t"><span class="n">3</span>关键维度横向对比</div>
+      <table class="cmp"><thead><tr><th>维度</th><th>${esc(shortName(top.name))}</th>
+      <th>${esc(shortName(second.name))}</th><th>${esc(shortName(third.name))}</th></tr></thead><tbody>`;
+    keys.forEach(k=>{
+      const vals = [top,second,third].map(m=>m.score[k]||0);
+      const best = Math.max(...vals);
+      h += `<tr><td>${DIM_CN[k]||k}</td>` + vals.map(v=>
+        `<td class="${v===best?'win':''}">${v}</td>`).join('') + `</tr>`;
     });
-  });
-  updateProgress();
-}
+    h += `</tbody></table></div>`;
 
-function updateProgress(){
-  const answered = answers.filter(a => a !== null).length;
-  const pct = Math.round((answered / 27) * 100);
-  document.getElementById('quizProgress').textContent = `第 ${currentQ + 1} / 27 题`;
-  document.getElementById('quizPercent').textContent = `${pct}%`;
-  document.getElementById('progressFill').style.width = `${((currentQ + 1) / 27) * 100}%`;
-  document.getElementById('prevBtn').disabled = currentQ === 0;
-  document.getElementById('nextBtn').disabled = answers[currentQ] === null;
-  if(currentQ === 26 && answers[26] !== null){
-    document.getElementById('nextBtn').textContent = '查看结果 →';
-  } else {
-    document.getElementById('nextBtn').textContent = '下一题 →';
-  }
-}
-
-document.getElementById('prevBtn').addEventListener('click', function(){
-  if(currentQ > 0){ currentQ--; renderQuestion(); }
-});
-
-document.getElementById('nextBtn').addEventListener('click', function(){
-  if(currentQ < 26){
-    currentQ++;
-    renderQuestion();
-  } else {
-    // 提交，进入计算
-    showLoading();
-  }
-});
-
-// ========== 计算与结果逻辑 ==========
-function showLoading(){
-  document.getElementById('quizPage').style.display = 'none';
-  document.getElementById('loadingPage').style.display = 'block';
-  setTimeout(() => {
-    const result = calculateResult();
-    showResult(result);
-  }, 2000);
-}
-
-function calculateResult(){
-  // 1. 计算用户需求画像向量
-  const userProfile = {};
-  questions.forEach((q, i) => {
-    const answer = answers[i];
-    if(answer === null) return;
-    q.dims.forEach(d => {
-      userProfile[d.name] = (userProfile[d.name] || 0) + answer * d.weight;
+    /* 档位建议 */
+    h += `<div class="card"><div class="sec-t"><span class="n">4</span>三个档位怎么选</div>
+      <div class="muted" style="margin-bottom:8px">同一份需求，按预算给出三种答案</div>`;
+    const baseRank = rankAll(w, {});
+    const usedTier = [];
+    TIERS.forEach(t=>{
+      const pool = t.filter ? baseRank.filter(t.filter) : baseRank;
+      const pick = pool.find(m=>!usedTier.includes(m.name)) || pool[0] || baseRank[0];
+      usedTier.push(pick.name);
+      h += `<div class="tier"><div class="ic">${t.ic}</div><div class="tx">
+        <b>${t.name} · ${esc(pick.name)}${pick.name===top.name?'（就是上面这款）':''}</b>
+        <p>${esc(t.desc(pick))}</p></div></div>`;
     });
-  });
+    h += `</div>`;
 
-  // 2. 归一化用户画像（转为0-1权重）
-  const dimKeys = Object.keys(userProfile);
-  const maxVal = Math.max(...dimKeys.map(k => Math.abs(userProfile[k])), 1);
-  dimKeys.forEach(k => {
-    userProfile[k] = userProfile[k] / maxVal; // -1 到 1
-  });
+    /* 月成本 */
+    h += `<div class="card"><div class="sec-t"><span class="n">5</span>月成本怎么算</div>
+      <div id="cost-body">${costBlock(top, w)}</div></div>`;
 
-  // 3. 计算每个模型的匹配分
-  const modelScores = modelDatabase.map(model => {
-    let matchScore = 0;
-    let totalWeight = 0;
-    dimKeys.forEach(dim => {
-      const userWeight = userProfile[dim]; // -1 到 1
-      const modelScore = model.scores[dim] || 3.0; // 0-5
-      // 用户正向需求 × 模型得分；用户反向需求 × (5-模型得分)
-      if(userWeight > 0){
-        matchScore += userWeight * modelScore;
-        totalWeight += userWeight * 5;
-      } else if(userWeight < 0){
-        matchScore += (-userWeight) * (5 - modelScore);
-        totalWeight += (-userWeight) * 5;
-      }
-    });
-    const matchPercent = totalWeight > 0 ? Math.round((matchScore / totalWeight) * 100) : 50;
-    return { model, matchScore, matchPercent };
-  });
+    /* 升降档 */
+    const richer = rankAll(w, {cost:-3})[0];
+    const cheaper = rankAll(w, {cost:6})[0];
+    const upIsTop = richer.name === top.name;
+    const downIsTop = cheaper.name === top.name;
+    h += `<div class="card"><div class="sec-t"><span class="n">6</span>升档 / 降档路线</div>
+      <div class="tier"><div class="ic">↑</div><div class="tx"><b>${
+        upIsTop ? '已经在能力最强档，不用再升' : '预算宽松了，换 ' + esc(richer.name)}</b>
+        <p>${esc(upIsTop ? '你现在的选择就是不计成本时的最优解。'
+                         : upgradeText(top, richer))}</p></div></div>
+      <div class="tier"><div class="ic">↓</div><div class="tx"><b>${
+        downIsTop ? '已经在最省档，降不下去了' : '预算收紧了，换 ' + esc(cheaper.name)}</b>
+        <p>${esc(downIsTop ? '这款本身就是同档里最省的选择。'
+                           : downgradeText(top, cheaper))}</p></div></div></div>`;
 
-  // 4. 排序取Top 3
-  modelScores.sort((a, b) => b.matchScore - a.matchScore);
-  const top3 = modelScores.slice(0, 3);
-
-  // 5. 如果有当前使用模型，计算对比
-  let compareData = null;
-  if(currentModel){
-    const currentModelData = modelDatabase.find(m => m.id === currentModel);
-    if(currentModelData){
-      const currentMatch = modelScores.find(m => m.model.id === currentModel);
-      compareData = {
-        model: currentModelData,
-        matchPercent: currentMatch ? currentMatch.matchPercent : 50,
-        userProfile: userProfile,
-        rank: modelScores.findIndex(m => m.model.id === currentModel) + 1
-      };
-    } else {
-      // 手动输入的模型，只做定性分析
-      compareData = {
-        model: null,
-        modelName: currentModelName,
-        userProfile: userProfile,
-        isCustom: true
-      };
-    }
+    h += `<button class="btn" id="save-card">保存报告图片</button>
+      <div class="muted" style="text-align:center;margin-top:10px">保存后可以随时翻出来对比</div>`;
   }
 
-  return { top3, userProfile, compareData };
-}
+  $('#r-body').innerHTML = h;
+  show('s-result');
 
-function showResult(result){
-  document.getElementById('loadingPage').style.display = 'none';
-  document.getElementById('resultPage').style.display = 'block';
-  window.scrollTo(0, 0);
-
-  // 生成测试编号
-  const now = new Date();
-  const dateStr = now.getFullYear().toString() + String(now.getMonth()+1).padStart(2,'0') + String(now.getDate()).padStart(2,'0');
-  const randomStr = Math.floor(1000 + Math.random() * 9000);
-  const testId = `AI-TEST-${dateStr}-${randomStr}`;
-  document.getElementById('testId').textContent = `测试编号：${testId}`;
-  window.testId = testId;
-  window.result = result;
-
-  // 绘制雷达图
-  drawRadar(result.userProfile);
-
-  // 渲染推荐模型卡片
-  const cardsContainer = document.getElementById('modelCards');
-  cardsContainer.innerHTML = result.top3.map((item, idx) => {
-    const rank = idx + 1;
-    const m = item.model;
-    return `
-      <div class="model-card rank-${rank}">
-        <div class="rank-badge">第${rank}名</div>
-        <div class="model-name">${m.name}</div>
-        <div class="model-vendor">${m.vendor}</div>
-        <div class="match-score">匹配度 ${item.matchPercent}%</div>
-        <div class="model-detail">
-          <div class="detail-row">
-            <div class="detail-label strengths">✅ 优势</div>
-            <ul class="detail-list">${m.strengths.map(s => `<li>${s}</li>`).join('')}</ul>
-          </div>
-          <div class="detail-row">
-            <div class="detail-label weaknesses">⚠️ 劣势</div>
-            <ul class="detail-list">${m.weaknesses.map(w => `<li>${w}</li>`).join('')}</ul>
-          </div>
-        </div>
-        <div class="model-bestfor">🎯 <strong>最适合：</strong>${m.bestFor}</div>
-      </div>
-    `;
-  }).join('');
-
-  // 渲染对比分析
-  if(result.compareData){
-    renderCompare(result.compareData, result.top3);
-  }
-
-  // 存储结果文本用于复制
-  window.resultText = generateResultText(testId, result);
-
-  // ===== 付费控制：保存报告到本机 + 标记测试资格已使用（锁定）=====
-  const saved = {
-    testId: testId,
-    top3: result.top3.map(t => ({ modelId: t.model.id, matchPercent: t.matchPercent })),
-    userProfile: result.userProfile,
-    compareData: result.compareData ? {
-      modelId: result.compareData.model ? result.compareData.model.id : null,
-      matchPercent: result.compareData.matchPercent,
-      rank: result.compareData.rank,
-      isCustom: !!result.compareData.isCustom,
-      modelName: result.compareData.modelName || null
-    } : null,
-    resultText: window.resultText,
-    savedAt: now.toISOString()
-  };
-  STORE.savedResult = JSON.stringify(saved);
-  STORE.used = '1';
-  addUsedBanner();
-  // 服务端销毁兑换码（一码限一次完整测试；失败会自动重试）
-  consumeCode();
-}
-
-function renderCompare(cd, top3){
-  const section = document.getElementById('compareSection');
-  if(cd.isCustom){
-    // 手动输入的模型
-    section.innerHTML = `
-      <div class="compare-section">
-        <h3>🔄 当前使用模型分析：${cd.modelName}</h3>
-        <div class="compare-status medium">📋 该模型不在我们的特征库中，以下基于你的需求画像做定性分析</div>
-        <div class="compare-analysis">
-          <p><span class="label">📌 你的核心需求维度：</span></p>
-          ${getTopDims(cd.userProfile)}
-          <p style="margin-top:12px"><span class="label">💡 建议：</span>由于你当前使用的"${cd.modelName}"不在我们的测评模型库中，建议你对照上方推荐的Top 3模型，在以下维度做对比验证：</p>
-          <ul style="padding-left:20px;font-size:13px;line-height:1.8">
-            <li>推理能力 — 能否处理你的复杂逻辑任务</li>
-            <li>编程/专业能力 — 是否满足你的技术需求</li>
-            <li>中文能力 — 中文输出质量是否达标</li>
-            <li>性价比 — API成本是否在预算内</li>
-            <li>隐私合规 — 是否满足数据安全要求</li>
-          </ul>
-          <p style="margin-top:8px">如果当前模型在多个维度表现不佳，建议尝试排名第一的 <strong style="color:var(--accent)">${top3[0].model.name}</strong>。</p>
-        </div>
-      </div>
-    `;
-    return;
-  }
-
-  const m = cd.model;
-  const pct = cd.matchPercent;
-  let statusClass, statusIcon, statusText, advice;
-  if(pct >= 80){
-    statusClass = 'good'; statusIcon = '✅';
-    statusText = `当前使用的 ${m.name} 与你的需求匹配度高达 ${pct}%，整体适合你的使用场景`;
-    advice = `你的当前模型基本满足需求。但可以关注排名靠前的推荐模型作为补充，在特定场景下可能有更好表现。`;
-  } else if(pct >= 60){
-    statusClass = 'medium'; statusIcon = '⚠️';
-    statusText = `当前使用的 ${m.name} 与你的需求匹配度为 ${pct}%，存在一定短板`;
-    advice = `你的当前模型在某些维度有不足。建议结合推荐模型互补使用，或考虑切换到排名第一的 ${top3[0].model.name}。`;
+  if(light){
+    $('#unlock').onclick = ()=>{ S.code=''; S.resume=true; show('s-code'); };
+    // 已答过前 12 题，解锁后从第 13 题接着答
+    S.idx = CONFIG.lightCount;
   } else {
-    statusClass = 'bad'; statusIcon = '❌';
-    statusText = `当前使用的 ${m.name} 与你的需求匹配度仅 ${pct}%，可能不太适合你的核心需求`;
-    advice = `你的当前模型与你的实际需求有较大偏差，强烈建议尝试排名第一的 ${top3[0].model.name}，它在你的核心需求维度上表现更优。`;
+    $('#save-card').onclick = ()=> saveCard(top, all, w, need);
+    report(top, w);
   }
-
-  // 分析当前模型在用户重视维度的表现
-  const topDims = Object.entries(cd.userProfile)
-    .filter(([k,v]) => v > 0.1)
-    .sort((a,b) => b[1] - a[1])
-    .slice(0, 5);
-
-  const strengthsOnDemand = topDims.filter(([k,v]) => m.scores[k] >= 4.0);
-  const weaknessesOnDemand = topDims.filter(([k,v]) => m.scores[k] < 4.0);
-
-  let matchColor = pct >= 80 ? 'var(--green)' : pct >= 60 ? 'var(--orange)' : 'var(--red)';
-
-  section.innerHTML = `
-    <div class="compare-section">
-      <h3>🔄 当前使用模型对比分析</h3>
-      <div class="compare-status ${statusClass}">
-        <span style="font-size:18px">${statusIcon}</span>
-        <span>${statusText}</span>
-      </div>
-      <div style="margin:14px 0">
-        <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px">
-          <span><strong>${m.name}</strong> 需求匹配度</span>
-          <span style="color:${matchColor};font-weight:600">${pct}%</span>
-        </div>
-        <div class="compare-match-bar">
-          <div class="compare-match-fill" style="width:${pct}%;background:${matchColor}"></div>
-        </div>
-        <div style="font-size:12px;color:var(--text3);margin-top:4px">在20个模型中排名第 ${cd.rank} 位</div>
-      </div>
-      <div class="compare-analysis">
-        ${strengthsOnDemand.length > 0 ? `
-          <p><span class="label" style="color:var(--green2)">✅ 满足你需求的优势：</span></p>
-          <ul style="padding-left:20px;margin-bottom:10px;font-size:13px;line-height:1.8">
-            ${strengthsOnDemand.map(([k,v]) => `<li>${dimIcons[k]} ${dimNames[k]}（得分 ${m.scores[k]}/5）— 较好满足你的需求</li>`).join('')}
-          </ul>
-        ` : ''}
-        ${weaknessesOnDemand.length > 0 ? `
-          <p><span class="label" style="color:var(--orange)">⚠️ 存在风险的劣势：</span></p>
-          <ul style="padding-left:20px;margin-bottom:10px;font-size:13px;line-height:1.8">
-            ${weaknessesOnDemand.map(([k,v]) => `<li>${dimIcons[k]} ${dimNames[k]}（得分 ${m.scores[k]}/5）— 你重视此维度但该模型表现不足，存在风险</li>`).join('')}
-          </ul>
-        ` : ''}
-        <p style="margin-top:12px;padding:10px;background:var(--bg2);border-radius:8px"><span class="label">💡 建议：</span>${advice}</p>
-      </div>
-    </div>
-  `;
 }
 
-function getTopDims(userProfile){
-  const topDims = Object.entries(userProfile)
-    .filter(([k,v]) => v > 0.1)
-    .sort((a,b) => b[1] - a[1])
-    .slice(0, 5);
-  if(topDims.length === 0) return '<p>未检测到明显的正向需求倾向</p>';
-  return `
-    <ul style="padding-left:20px;font-size:13px;line-height:1.8">
-      ${topDims.map(([k,v]) => `<li>${dimIcons[k]} ${dimNames[k]} — 重要度 ${Math.round(v*100)}%</li>`).join('')}
-    </ul>
-  `;
+/* ── 推荐理由 ── */
+function why(m, w){
+  const need = Object.entries(w).filter(([k,v])=>v>0).sort((a,b)=>b[1]-a[1]).slice(0,3);
+  const out = need.map(([k])=>
+    `${DIM_CN[k]} ${m.score[k]} 分，${grade(m.score[k])}`);
+  const costW = w.cost||0;
+  if(costW > 0.6) out.push(`成本分 ${m.score.cost}，${m.score.cost>=90?'用起来不心疼':'价格属于中上'}`);
+  else if(costW < 0) out.push(`不把价格当第一考虑，所以优先推能力更强的`);
+  else out.push(`综合实力 ${m.power} 分，在 ${S.models.length} 款模型里排第 ${S.models.filter(x=>x.power>m.power).length+1}`);
+  return out;
+}
+function contrast(a,b){
+  const dif = Object.keys(DIM_CN).map(k=>({k, d:(b.score[k]||0)-(a.score[k]||0)}))
+    .sort((x,y)=>y.d-x.d)[0];
+  if(!dif || dif.d<=0) return '各项都略低于首选，没有单项反超';
+  return `${DIM_CN[dif.k]}更突出（${b.score[dif.k]} 分，比首选高 ${dif.d}）`;
+}
+// 表格列名：去掉厂商前缀和日期后缀，「Qwen3.8-Max-0902」→「Qwen3.8-Max」
+function shortName(n){
+  const s = String(n).replace(/^[^ ]+ /,'').replace(/-\d{4}$/,'');
+  return s.length > 14 ? s.slice(0,13) + '…' : s;
 }
 
-// ========== 雷达图绘制 ==========
-function drawRadar(userProfile){
-  const canvas = document.getElementById('radarCanvas');
-  const ctx = canvas.getContext('2d');
-  const cx = canvas.width / 2;
-  const cy = canvas.height / 2;
-  const radius = 120;
+/* ── 档位 ── */
+/* 档位按「成本分」分层，而不是改权重——改权重时能力强的模型会三档通吃，
+   三个档位给出同一个答案，报告就没有信息量了。 */
+const TIERS = [
+  { ic:'旗', name:'旗舰档', filter:null,
+    desc: p=>`不看价格，${p.name} 是你需求下能力最强的一档。` },
+  { ic:'主', name:'主力档', filter: m=>m.score.cost>=70,
+    desc: p=>`${p.name} 匹配度 ${p.match.toFixed(1)}%，价格也压得住，适合当日常主力。` },
+  { ic:'省', name:'省钱档', filter: m=>m.score.cost>=90,
+    desc: p=>`${p.name} 成本分 ${p.score.cost}，能力不退太多，能省的地方都省了。` }
+];
+function upgradeText(from, to){
+  const gain = Object.keys(DIM_CN).map(k=>({k, d:(to.score[k]||0)-(from.score[k]||0)}))
+    .sort((a,b)=>b.d-a.d)[0];
+  return `多花预算能换来 ${DIM_CN[gain.k]} 提升（${from.score[gain.k]} → ${to.score[gain.k]}）。`;
+}
+function downgradeText(from, to){
+  const lose = Object.keys(DIM_CN).map(k=>({k, d:(from.score[k]||0)-(to.score[k]||0)}))
+    .sort((a,b)=>b.d-a.d)[0];
+  return `省钱要接受 ${DIM_CN[lose.k]} 从 ${from.score[lose.k]} 降到 ${to.score[lose.k]}。`;
+}
 
-  // 取12个维度（去掉scene和budget因为它们是辅助维度）
-  const radarDims = ['reasoning','coding','chinese','multimodal','longtext','cost','creative','ecosystem','privacy','apiprice','speed','budget'];
-  const n = radarDims.length;
-  const angleStep = (Math.PI * 2) / n;
+/* ── 月成本估算 ── */
+function costBlock(top, w){
+  const costW = w.cost || 0;
+  const heavy = (w.speed||0) + (w.coding||0) + (w.ecosystem||0);
+  let scale = '每天几十次调用';
+  if(costW >= 2.5 || heavy >= 4) scale = '每天几百次以上调用';
+  else if(costW >= 1) scale = '每天百次左右调用';
+  const tierTxt = costW >= 2.5 ? '成本敏感型' : (costW <= 0 ? '效果优先型' : '均衡型');
 
-  // 获取用户需求值（-1到1转为0到1）
-  const values = radarDims.map(d => {
-    const v = userProfile[d] || 0;
-    return (v + 1) / 2; // 0到1
+  const cheap = rankAll(w, {cost:6})[0];
+  const lose = Object.keys(DIM_CN).map(k=>({k, d:(top.score[k]||0)-(cheap.score[k]||0)}))
+    .sort((a,b)=>b.d-a.d)[0];
+
+  let h = `<div class="muted" style="margin-bottom:12px">按「${scale}」估算，你是 <b>${tierTxt}</b>。</div>
+    <div style="display:flex;gap:11px">
+      <div class="alt" style="flex:1"><div class="ds">推荐这款</div>
+        <div class="mt" style="font-size:19px">${costBand(top.score.cost)}</div>
+        <div class="ds">成本分 ${top.score.cost} / 100</div></div>
+      <div class="alt" style="flex:1"><div class="ds">省钱档那款</div>
+        <div class="mt" style="font-size:19px">${costBand(cheap.score.cost)}</div>
+        <div class="ds">成本分 ${cheap.score.cost} / 100</div></div>
+    </div>`;
+  if(cheap.name !== top.name && lose && lose.d > 0){
+    h += `<div class="muted" style="margin-top:12px;font-size:13px">
+      省下的钱换的是能力：换成 ${esc(cheap.name)}，${DIM_CN[lose.k]} 会从 ${top.score[lose.k]} 降到 ${cheap.score[lose.k]}。</div>`;
+  }
+  h += `<div class="muted" style="margin-top:8px;font-size:12.5px">
+    按相对成本指数换算的区间，实际账单取决于你的真实调用量。</div>`;
+  return h;
+}
+function costBand(c){
+  if(c>=92) return '¥50 以内 / 月';
+  if(c>=85) return '¥50 – 200 / 月';
+  if(c>=70) return '¥200 – 600 / 月';
+  if(c>=55) return '¥600 – 1500 / 月';
+  return '¥1500 以上 / 月';
+}
+
+/* ── 上报（完整版带码，免费版匿名） ── */
+function report(top, w){
+  if(!CONFIG.apiBase) return;
+  fetch(CONFIG.apiBase.replace(/\/$/,'') + '/api/result', {
+    method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({
+      tier:S.tier, code:S.tier==='full'?S.code:null,
+      answers:S.answers,
+      result:{ recommend:[{name:top.name, match:+top.match.toFixed(1)}], weights:w }
+    })
+  }).catch(()=>{});
+}
+
+/* ── 保存报告图片 ── */
+function saveCard(top, all, w, need){
+  const W=1080, H=1640, c=document.createElement('canvas');
+  c.width=W; c.height=H;
+  const x = c.getContext('2d');
+  const YY = '"Microsoft YaHei","PingFang SC",sans-serif';
+  const INK='#2E2C25', GRAY='#8A8378', ACC='#944735', BG='#F5F3EC', VB='#F1EDE3';
+
+  x.fillStyle=BG; x.fillRect(0,0,W,H);
+  const P=72;
+  x.textBaseline='top';
+
+  // 头部
+  x.fillStyle=GRAY; x.font=`700 26px ${YY}`;
+  x.fillText('AI 大模型选型报告', P, 68);
+  x.fillStyle=ACC; x.font=`800 26px ${YY}`;
+  x.textAlign='right'; x.fillText(new Date().toLocaleDateString('zh-CN'), W-P, 68); x.textAlign='left';
+
+  // 冠军卡
+  const cardY=120, cardH=520;   // 520 才装得下「模型名 + 匹配度 + 理由框」，380 时理由框会压住匹配度
+  x.fillStyle='#fff'; roundRect(x,P,cardY,W-P*2,cardH,28); x.fill();
+  x.fillStyle=ACC; x.font=`800 24px ${YY}`;
+  x.fillText('最推荐', P+46, cardY+42);
+  x.fillStyle=INK; x.font=`800 62px ${YY}`;
+  x.fillText(top.name, P+46, cardY+88);
+  x.fillStyle=GRAY; x.font=`400 28px ${YY}`;
+  x.fillText(`${top.vendor}模型 · 实力分 ${top.power}`, P+46, cardY+168);
+  x.fillStyle=ACC; x.font=`800 96px ${YY}`;
+  x.fillText(top.match.toFixed(1), P+46, cardY+216);
+  const mw = x.measureText(top.match.toFixed(1)).width;
+  x.fillStyle=GRAY; x.font=`700 30px ${YY}`;
+  x.fillText('% 匹配', P+46+mw+14, cardY+278);
+  // 理由
+  x.fillStyle=VB; roundRect(x,P+34,cardY+cardH-136,W-P*2-68,110,18); x.fill();
+  x.fillStyle='#524D43'; x.font=`400 26px ${YY}`;
+  why(top,w).slice(0,3).forEach((t,i)=>{
+    x.fillText('· ' + t, P+62, cardY+cardH-118+i*34);
   });
 
-  // 清空画布
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  // 绘制背景网格
-  for(let level = 1; level <= 4; level++){
-    ctx.beginPath();
-    for(let i = 0; i <= n; i++){
-      const angle = i * angleStep - Math.PI / 2;
-      const r = (radius * level) / 4;
-      const x = cx + Math.cos(angle) * r;
-      const y = cy + Math.sin(angle) * r;
-      if(i === 0) ctx.moveTo(x, y);
-      else ctx.lineTo(x, y);
-    }
-    ctx.strokeStyle = 'rgba(108,92,231,0.15)';
-    ctx.lineWidth = 1;
-    ctx.stroke();
-  }
-
-  // 绘制轴线
-  for(let i = 0; i < n; i++){
-    const angle = i * angleStep - Math.PI / 2;
-    const x = cx + Math.cos(angle) * radius;
-    const y = cy + Math.sin(angle) * radius;
-    ctx.beginPath();
-    ctx.moveTo(cx, cy);
-    ctx.lineTo(x, y);
-    ctx.strokeStyle = 'rgba(108,92,231,0.15)';
-    ctx.lineWidth = 1;
-    ctx.stroke();
-  }
-
-  // 绘制数据区域
-  ctx.beginPath();
-  for(let i = 0; i <= n; i++){
-    const angle = i * angleStep - Math.PI / 2;
-    const r = radius * values[i % n];
-    const x = cx + Math.cos(angle) * r;
-    const y = cy + Math.sin(angle) * r;
-    if(i === 0) ctx.moveTo(x, y);
-    else ctx.lineTo(x, y);
-  }
-  ctx.fillStyle = 'rgba(0,212,255,0.15)';
-  ctx.fill();
-  ctx.strokeStyle = 'rgba(0,212,255,0.8)';
-  ctx.lineWidth = 2;
-  ctx.stroke();
-
-  // 绘制数据点
-  for(let i = 0; i < n; i++){
-    const angle = i * angleStep - Math.PI / 2;
-    const r = radius * values[i];
-    const x = cx + Math.cos(angle) * r;
-    const y = cy + Math.sin(angle) * r;
-    ctx.beginPath();
-    ctx.arc(x, y, 3, 0, Math.PI * 2);
-    ctx.fillStyle = '#00d4ff';
-    ctx.fill();
-  }
-
-  // 绘制标签
-  ctx.font = '11px sans-serif';
-  ctx.fillStyle = '#a0a8c0';
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-  for(let i = 0; i < n; i++){
-    const angle = i * angleStep - Math.PI / 2;
-    const labelR = radius + 20;
-    const x = cx + Math.cos(angle) * labelR;
-    const y = cy + Math.sin(angle) * labelR;
-    ctx.fillText(dimNames[radarDims[i]], x, y);
-  }
-}
-
-// ========== 结果文本生成（用于复制分享） ==========
-function generateResultText(testId, result){
-  let text = `🤖 AI大模型适配测试报告\n`;
-  text += `━━━━━━━━━━━━━━━━━━\n`;
-  text += `📋 测试编号：${testId}\n`;
-  text += `🕐 测试时间：${new Date().toLocaleString('zh-CN')}\n\n`;
-  text += `🎯 推荐模型 Top 3：\n\n`;
-  result.top3.forEach((item, idx) => {
-    const m = item.model;
-    text += `【第${idx+1}名】${m.name}（${m.vendor}）\n`;
-    text += `匹配度：${item.matchPercent}%\n`;
-    text += `✅ 优势：${m.strengths.join('；')}\n`;
-    text += `⚠️ 劣势：${m.weaknesses.join('；')}\n`;
-    text += `🎯 适合：${m.bestFor}\n\n`;
+  // 需求条
+  let y = cardY+cardH+46;
+  x.fillStyle=INK; x.font=`800 34px ${YY}`;
+  x.fillText('你的需求优先级', P, y); y+=58;
+  const mx = need.length?need[0][1]:1;
+  need.slice(0,6).forEach(([k,v])=>{
+    x.fillStyle=INK; x.font=`700 26px ${YY}`;
+    x.fillText(DIM_CN[k]||k, P, y);
+    x.fillStyle=GRAY; x.font=`400 24px ${YY}`;
+    x.textAlign='right'; x.fillText(v.toFixed(1), W-P, y); x.textAlign='left';
+    y+=38;
+    x.fillStyle=VB; roundRect(x,P,y,W-P*2,14,7); x.fill();
+    x.fillStyle=ACC; roundRect(x,P,y,(W-P*2)*Math.max(.06,v/mx),14,7); x.fill();
+    y+=46;
   });
-  if(result.compareData && !result.compareData.isCustom){
-    const cd = result.compareData;
-    text += `🔄 当前使用模型对比：\n`;
-    text += `当前模型：${cd.model.name}（匹配度${cd.matchPercent}%，排名第${cd.rank}）\n\n`;
-  }
-  text += `━━━━━━━━━━━━━━━━━━\n`;
-  text += `⚠️ 免责声明：本测试结果仅供参考，不构成购买建议。测试独立运营，与任何AI厂商无关联。\n`;
-  text += `🔗 来测测你的AI大模型适配度！`;
-  return text;
-}
 
-// ========== 复制与重新测试 ==========
-document.getElementById('copyBtn').addEventListener('click', function(){
-  const text = window.resultText;
-  if(navigator.clipboard){
-    navigator.clipboard.writeText(text).then(() => {
-      showToast('✅ 结果已复制，快去发小红书吧！');
-    }).catch(() => {
-      fallbackCopy(text);
+  // 备选
+  x.fillStyle=INK; x.font=`800 34px ${YY}`;
+  x.fillText('备选方案', P, y+16); y+=72;
+  const others = all.slice(1,3);
+  const cw = (W-P*2-24)/2;
+  others.forEach((m,i)=>{
+    const cx = P + i*(cw+24);
+    x.fillStyle=VB; roundRect(x,cx,y,cw,150,20); x.fill();
+    x.fillStyle=INK; x.font=`800 30px ${YY}`;
+    x.fillText(cardName(m.name), cx+26, y+26);
+    x.fillStyle=ACC; x.font=`800 40px ${YY}`;
+    x.fillText(m.match.toFixed(1)+'%', cx+26, y+70);
+    x.fillStyle=GRAY; x.font=`400 22px ${YY}`;
+    x.fillText('匹配度', cx+26, y+118);
+  });
+
+  // 页脚
+  x.fillStyle=GRAY; x.font=`400 24px ${YY}`;
+  x.textAlign='center';
+  x.fillText('AI 大模型排行榜 · 数据每日更新', W/2, H-104);
+  x.fillStyle=ACC; x.font=`700 26px ${YY}`;
+  x.fillText('从 29 款模型里算出最适合你的那一款', W/2, H-66);
+  x.textAlign='left';
+
+  const url = c.toDataURL('image/png');
+  const mi = $('#modal-inner');
+  mi.innerHTML = `<img src="${url}" alt="选型报告">
+    <p>长按图片保存到相册<br>电脑上可以点下面的按钮下载</p>
+    <a class="btn small" style="text-decoration:none;display:block" download="AI选型报告.png" href="${url}">下载图片</a>
+    <div style="height:10px"></div>
+    <button class="btn ghost small" id="modal-close">关闭</button>`;
+  $('#modal').classList.add('on');
+  $('#modal-close').onclick = ()=> $('#modal').classList.remove('on');
+}
+// 卡片里空间够，只去掉中文厂商前缀，英文名保留完整
+function cardName(n){
+  const s = String(n);
+  return /^[一-龥]/.test(s) ? s.replace(/^[^ ]+ /,'') : s;
+}
+function roundRect(x,a,b,w,h,r){
+  x.beginPath();
+  x.moveTo(a+r,b); x.arcTo(a+w,b,a+w,b+h,r); x.arcTo(a+w,b+h,a,b+h,r);
+  x.arcTo(a,b+h,a,b,r); x.arcTo(a,b,a+w,b,r); x.closePath();
+}
+$('#modal').onclick = e=>{ if(e.target.id==='modal') $('#modal').classList.remove('on'); };
+
+/* ── 启动 ── */
+boot().then(()=>{
+  if(!S.models.length){
+    document.querySelectorAll('#go-light,#go-full').forEach(b=>{
+      b.disabled = true; b.textContent = '模型数据加载失败，刷新重试';
     });
-  } else {
-    fallbackCopy(text);
   }
+}).catch(e=>{
+  console.error(e);
+  toast('数据加载失败，检查网络后刷新');
 });
-
-function fallbackCopy(text){
-  const textarea = document.createElement('textarea');
-  textarea.value = text;
-  textarea.style.position = 'fixed';
-  textarea.style.opacity = '0';
-  document.body.appendChild(textarea);
-  textarea.select();
-  try {
-    document.execCommand('copy');
-    showToast('✅ 结果已复制，快去发小红书吧！');
-  } catch(e) {
-    showToast('❌ 复制失败，请手动截图保存');
-  }
-  document.body.removeChild(textarea);
-}
-
-function showToast(msg){
-  const toast = document.getElementById('toast');
-  toast.textContent = msg;
-  toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 2500);
-}
-
-document.getElementById('restartBtn').addEventListener('click', function(){
-  // 判断是否还有同码重测机会
-  const hasRemaining = STORE.remaining !== null && parseInt(STORE.remaining) > 0;
-  if(STORE.used === '1'){
-    if(hasRemaining){
-      // 同一个兑换码还有1次机会（第2次=赠送的最后一次）
-      if(confirm('🎁 你还有1次额外赠送的测试机会（同一个兑换码）。\n\n⚠️ 这是最后一次了，请准备好后开始。\n\n点击确定用同一个兑换码再测一次？')){
-        STORE.clearAll(); // 清除本机状态（报告已建议买家提前复制保存）
-        currentQ = 0;
-        answers = new Array(27).fill(null);
-        currentModel = "";
-        currentModelName = "";
-        document.getElementById('currentModelSelect').value = "";
-        document.getElementById('currentModelInput').value = "";
-        document.getElementById('currentModelInput').classList.remove('active');
-        document.getElementById('resultPage').style.display = 'none';
-        document.getElementById('gatePage').style.display = 'block';
-        document.getElementById('codeInput').value = '';
-        document.getElementById('codeInput').focus();
-        window.scrollTo(0, 0);
-      }
-    } else {
-      // 两次都用完了，需要新兑换码
-      if(confirm('本次兑换码的2次测试机会已全部用完。\n\n如需再次测试，请输入新的兑换码（可向卖家购买），现在去输入吗？')){
-        STORE.clearAll();
-        currentQ = 0;
-        answers = new Array(27).fill(null);
-        currentModel = "";
-        currentModelName = "";
-        document.getElementById('currentModelSelect').value = "";
-        document.getElementById('currentModelInput').value = "";
-        document.getElementById('currentModelInput').classList.remove('active');
-        document.getElementById('resultPage').style.display = 'none';
-        document.getElementById('gatePage').style.display = 'block';
-        document.getElementById('codeInput').value = '';
-        document.getElementById('codeInput').focus();
-        window.scrollTo(0, 0);
-      }
-    }
-    return;
-  }
-  // 激活未用完的异常兜底
-  currentQ = 0;
-  answers = new Array(27).fill(null);
-  currentModel = "";
-  currentModelName = "";
-  document.getElementById('currentModelSelect').value = "";
-  document.getElementById('currentModelInput').value = "";
-  document.getElementById('currentModelInput').classList.remove('active');
-  document.getElementById('resultPage').style.display = 'none';
-  document.getElementById('startPage').style.display = 'block';
-  window.scrollTo(0, 0);
-});
-
-// ========== 页面加载：访问控制路由 ==========
-gateRoute();
 </script>
 </body>
 </html>
