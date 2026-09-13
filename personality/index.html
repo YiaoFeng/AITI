@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>AI 职业人格测试</title>
+<style>
+  :root {
+    --bg: #F8F9F1;
+    --card: #FFFFFF;
+    --dark: #383931;
+    --accent: #944735;
+    --gold: #C8912A;
+    --gray: #8A837B;
+    --viewbg: #F5F0E6;
+    --good: #4C7A5A;
+    --bad: #B0503C;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { width: 100%; }
+  body {
+    background: var(--bg);
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "SimHei", sans-serif;
+    color: var(--dark);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  .wrap {
+    width: 100%;
+    max-width: 480px;
+    padding: 28px 20px 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .hidden { display: none !important; }
+  .center { width: 100%; display: flex; flex-direction: column; align-items: center; text-align: center; }
+
+  /* 回到全部测试 */
+  .back {
+    align-self: flex-start; font-size: 13px; color: var(--gray); text-decoration: none;
+    padding: 6px 14px; background: var(--viewbg); border-radius: 100px; margin-bottom: 18px;
+  }
+
+  .brand { display: inline-block; background: var(--accent); color: #fff; font-size: 13px; font-weight: 700; padding: 6px 16px; border-radius: 100px; letter-spacing: 2px; }
+  h1 { font-size: 30px; font-weight: 900; line-height: 1.3; margin-top: 18px; letter-spacing: 1px; }
+  h1 .hl { color: var(--accent); }
+  .sub { font-size: 15px; color: var(--gray); margin-top: 12px; line-height: 1.6; }
+  .meta { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; justify-content: center; }
+  .meta span { background: var(--viewbg); color: var(--dark); font-size: 13px; padding: 7px 14px; border-radius: 100px; }
+  .meta span.free { background: #EAF2EC; color: var(--good); font-weight: 700; }
+
+  .btn {
+    display: block; width: 100%; text-align: center; background: var(--accent); color: #fff;
+    font-size: 17px; font-weight: 700; padding: 16px; border-radius: 16px; border: none;
+    cursor: pointer; letter-spacing: 2px; margin-top: 24px; font-family: inherit;
+  }
+  .btn:active { opacity: .85; }
+  .btn.ghost { background: transparent; color: var(--gray); font-size: 14px; margin-top: 8px; letter-spacing: 1px; }
+  .btn.lock { background: var(--gold); }
+  .btn:disabled { opacity: .4; }
+
+  /* 图鉴 */
+  .gal-title { font-size: 14px; color: var(--gray); font-weight: 700; letter-spacing: 2px; margin-top: 30px; }
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 16px; width: 100%; }
+  .role-card {
+    background: var(--card); border-radius: 16px; padding: 12px 10px 14px;
+    display: flex; flex-direction: column; align-items: center; cursor: pointer;
+    box-shadow: 0 6px 18px rgba(56,57,49,0.05); transition: transform .15s;
+  }
+  .role-card:active { transform: scale(.96); }
+  .role-card img { width: 100%; aspect-ratio: 1; border-radius: 12px; object-fit: cover; background: var(--viewbg); }
+  .role-card .nm { font-size: 17px; font-weight: 900; margin-top: 10px; letter-spacing: 1px; }
+  .role-card .dm { font-size: 12px; color: var(--gray); margin-top: 4px; letter-spacing: .5px; text-align: center; line-height: 1.4; }
+
+  /* 弹窗 */
+  .modal-mask {
+    position: fixed; inset: 0; background: rgba(56,57,49,0.55); z-index: 50;
+    display: flex; align-items: center; justify-content: center; padding: 20px;
+  }
+  .modal {
+    background: var(--bg); border-radius: 20px; width: 100%; max-width: 400px;
+    max-height: 90vh; overflow-y: auto; padding: 26px 20px 24px; text-align: center; position: relative;
+  }
+  .modal .close { position: absolute; top: 10px; right: 16px; font-size: 30px; line-height: 1; color: var(--gray); cursor: pointer; background: none; border: none; }
+  .modal img { width: 130px; height: 130px; border-radius: 18px; object-fit: cover; }
+  .modal .mn { font-size: 30px; font-weight: 900; color: var(--accent); margin-top: 12px; letter-spacing: 2px; }
+  .modal .md { font-size: 14px; color: var(--gray); margin-top: 4px; }
+  .modal .mv { margin-top: 14px; font-size: 15px; font-weight: 700; line-height: 1.6; color: var(--dark); background: var(--viewbg); border-radius: 12px; padding: 14px 16px; }
+
+  /* 验证码弹层 */
+  .codemask .box { width: 100%; }
+  .codemask .bt { font-size: 20px; font-weight: 900; letter-spacing: 1px; }
+  .codemask .bs { font-size: 13px; color: var(--gray); margin-top: 8px; line-height: 1.6; }
+  .code-input {
+    margin-top: 18px; width: 100%; text-align: center;
+    font-size: 20px; font-weight: 900; letter-spacing: 3px; color: var(--accent);
+    padding: 15px 10px; border: 2px solid var(--viewbg); border-radius: 14px;
+    background: var(--bg); outline: none; text-transform: uppercase; font-family: inherit;
+  }
+  .code-input:focus { border-color: var(--accent); }
+  .code-err { margin-top: 10px; font-size: 13px; color: var(--bad); font-weight: 700; min-height: 18px; }
+  .code-ok { margin-top: 10px; font-size: 13px; color: var(--good); font-weight: 700; min-height: 18px; }
+
+  /* 进度 */
+  .progress { width: 100%; display: flex; align-items: center; gap: 12px; margin-bottom: 22px; }
+  .progress .bar { flex: 1; height: 6px; background: var(--viewbg); border-radius: 3px; overflow: hidden; }
+  .progress .fill { height: 100%; background: var(--accent); border-radius: 3px; transition: width .3s; }
+  .progress .num { font-size: 13px; color: var(--gray); font-weight: 700; white-space: nowrap; }
+
+  /* 题目 */
+  .quiz { width: 100%; }
+  .quiz .q { font-size: 22px; font-weight: 900; line-height: 1.45; letter-spacing: .5px; margin-bottom: 22px; text-align: center; }
+  .opt {
+    display: block; width: 100%; text-align: center; background: var(--card); border: 2px solid transparent;
+    border-radius: 14px; padding: 16px 18px; font-size: 16px; color: var(--dark); cursor: pointer;
+    margin-bottom: 12px; line-height: 1.5; transition: all .15s; font-family: inherit;
+  }
+  .opt:active { transform: scale(.98); }
+  .opt .k { color: var(--accent); font-weight: 900; margin-right: 10px; }
+  .opt.sel { border-color: var(--accent); background: #FBF1EC; }
+  .nav { width: 100%; display: flex; gap: 12px; margin-top: 20px; }
+  .nav .btn { margin-top: 0; flex: 1; }
+  .nav .prev { background: var(--viewbg); color: var(--dark); }
+
+  /* 结果页 */
+  .result { text-align: center; width: 100%; }
+  .result .tag { font-size: 14px; color: var(--accent); font-weight: 700; letter-spacing: 3px; }
+  .result .rname { font-size: 42px; font-weight: 900; color: var(--accent); margin-top: 10px; letter-spacing: 2px; }
+  .result .rdom { font-size: 15px; color: var(--gray); margin-top: 6px; letter-spacing: 1px; }
+  .result .verdict {
+    width: 100%; margin-top: 20px; background: var(--viewbg); border-left: 4px solid var(--accent);
+    border-radius: 12px; padding: 18px 20px; font-size: 17px; font-weight: 700; line-height: 1.6; text-align: center;
+  }
+
+  .radar-block { width: 100%; margin-top: 22px; }
+  .radar-block .rt { font-size: 14px; color: var(--gray); font-weight: 700; letter-spacing: 2px; margin-bottom: 8px; }
+  .radar-wrap { background: var(--card); border-radius: 18px; padding: 12px 8px; display: flex; justify-content: center; }
+  .radar-svg { display: block; }
+
+  .traits { text-align: center; margin-top: 20px; width: 100%; }
+  .traits .t { font-size: 14px; color: var(--gray); font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; }
+  .traits .chip { display: inline-block; background: var(--card); border: 1px solid var(--viewbg); border-radius: 100px; padding: 8px 16px; font-size: 14px; margin: 0 6px 8px; }
+
+  .rel-block { width: 100%; margin-top: 20px; text-align: left; background: var(--card); border-radius: 16px; padding: 18px 18px; }
+  .rel-block .rt { font-size: 14px; color: var(--gray); font-weight: 700; letter-spacing: 2px; margin-bottom: 12px; text-align: center; }
+  .rel-row { display: flex; align-items: flex-start; gap: 10px; padding: 9px 0; border-bottom: 1px dashed var(--viewbg); }
+  .rel-row:last-child { border-bottom: none; }
+  .rel-row .rk { flex-shrink: 0; font-size: 13px; font-weight: 700; padding: 3px 10px; border-radius: 100px; min-width: 66px; text-align: center; }
+  .rk.good { background: #EAF2EC; color: var(--good); }
+  .rk.bad { background: #F7E9E4; color: var(--bad); }
+  .rk.close { background: #F8F0DD; color: var(--gold); }
+  .rel-row .rv { font-size: 15px; line-height: 1.5; color: var(--dark); }
+
+  .jobs { margin-top: 18px; width: 100%; text-align: center; background: var(--card); border-radius: 14px; padding: 16px 18px; font-size: 15px; line-height: 1.6; }
+  .jobs b { color: var(--accent); }
+
+  /* 锁定区 */
+  .locked { width: 100%; margin-top: 24px; background: var(--card); border-radius: 18px; padding: 24px 20px; border: 2px dashed #E4D9CB; }
+  .locked .lk { font-size: 30px; }
+  .locked .lt { font-size: 19px; font-weight: 900; margin-top: 10px; letter-spacing: 1px; }
+  .locked .ls { font-size: 14px; color: var(--gray); margin-top: 8px; line-height: 1.7; }
+  .locked ul { text-align: left; margin: 16px 0 0; padding: 0; list-style: none; }
+  .locked li { font-size: 14px; line-height: 1.6; padding: 7px 0 7px 24px; position: relative; color: var(--dark); }
+  .locked li::before { content: "·"; position: absolute; left: 8px; color: var(--accent); font-weight: 900; font-size: 20px; line-height: 1.2; }
+
+  /* 完整版模块 */
+  .sec { width: 100%; margin-top: 20px; text-align: left; background: var(--card); border-radius: 16px; padding: 18px 18px; }
+  .sec .st { font-size: 14px; color: var(--gray); font-weight: 700; letter-spacing: 2px; margin-bottom: 14px; text-align: center; }
+  .near-row { padding: 11px 0; border-bottom: 1px dashed var(--viewbg); }
+  .near-row:last-child { border-bottom: none; }
+  .near-row .nn { font-size: 16px; font-weight: 900; color: var(--accent); }
+  .near-row .nd { font-size: 14px; color: var(--dark); line-height: 1.6; margin-top: 5px; }
+  .li-row { display: flex; gap: 10px; padding: 9px 0; font-size: 15px; line-height: 1.6; }
+  .li-row .n { flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: #fff; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+  .li-row.warn .n { background: var(--bad); }
+  .li-row .tx b { color: var(--accent); }
+
+  .save-area { width: 100%; margin-top: 24px; }
+  .share-card { width: 100%; border-radius: 18px; overflow: hidden; box-shadow: 0 10px 30px rgba(56,57,49,0.08); }
+  .share-card img { width: 100%; display: block; }
+  .save-tip { font-size: 12px; color: var(--gray); margin-top: 10px; line-height: 1.5; }
+  .dl { display: inline-block; margin-top: 12px; font-size: 14px; color: var(--accent); font-weight: 700; text-decoration: none; border-bottom: 1px solid var(--accent); }
+
+  .foot-note { margin-top: 26px; font-size: 13px; color: var(--gray); line-height: 1.8; text-align: center; }
+  .foot-note b { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back" href="../index.html">‹ 全部测试</a>
+
+  <!-- ============ 首页 ============ -->
+  <div id="welcome" class="center">
+    <div class="brand">AI 职业人格测试</div>
+    <h1>16 个 AI 职业人格<br>你是<span class="hl">哪一个</span>？</h1>
+    <div class="sub">先看看下面这 16 个角色，猜猜你会是哪个，再往下开始测。</div>
+    <div class="meta">
+      <span class="free">12 题免费</span>
+      <span>3 分钟出结果</span>
+      <span>30 题完整版</span>
+    </div>
+    <button class="btn" onclick="startQuiz('light')">开始测试（12 题免费）▸</button>
+    <button class="btn ghost" onclick="openCode()">我有验证码 · 直接测完整版 30 题</button>
+
+    <div class="gal-title">先认识这 16 个角色</div>
+    <div class="grid" id="ggrid"></div>
+  </div>
+
+  <!-- ============ 答题页 ============ -->
+  <div id="quizpage" class="quiz hidden">
+    <div class="progress">
+      <div class="bar"><div class="fill" id="fill"></div></div>
+      <div class="num" id="pnum">1/12</div>
+    </div>
+    <div class="q" id="qtext"></div>
+    <div id="opts"></div>
+    <div class="nav">
+      <button class="btn prev" id="prevbtn" onclick="prevQ()">‹ 上一题</button>
+      <button class="btn" id="nextbtn" onclick="nextQ()">下一题 ›</button>
+    </div>
+  </div>
+
+  <!-- ============ 结果页 ============ -->
+  <div id="result" class="result hidden">
+    <div class="tag" id="rtag">AI 预言 · 你的职业角色</div>
+    <div class="rname" id="rname"></div>
+    <div class="rdom" id="rdom"></div>
+    <div class="verdict" id="rverdict"></div>
+
+    <div class="radar-block">
+      <div class="rt">你的能力图谱</div>
+      <div class="radar-wrap" id="radar"></div>
+    </div>
+
+    <div class="traits">
+      <div class="t">你的三个特质</div>
+      <div id="rtraits"></div>
+    </div>
+
+    <div class="rel-block" id="rrel"></div>
+
+    <div class="jobs" id="rjobs"></div>
+
+    <!-- 免费版：锁定区 -->
+    <div class="locked hidden" id="locked">
+      <div class="lk">🔒</div>
+      <div class="lt">完整版还有 5 块内容</div>
+      <div class="ls">12 题只够看出方向。再答 18 题，完整版会把下面这些一起给你。</div>
+      <ul>
+        <li>跟另外 3 个相近人格的对照，看清楚你像谁、不像谁</li>
+        <li>这种性格最拖后腿的两个地方，以及怎么补</li>
+        <li>你这条路的职业路径，从起步到成熟分三步</li>
+        <li>你这种性格该怎么用 AI，具体到每一句怎么问</li>
+        <li>一份可以存下来的完整报告图</li>
+      </ul>
+      <button class="btn lock" onclick="openCode()">输入验证码 · 继续答 18 题</button>
+      <button class="btn ghost" onclick="window.scrollTo({top:0,behavior:'smooth'})">先不测，回到顶部</button>
+    </div>
+
+    <!-- 完整版：额外模块 -->
+    <div class="hidden" id="fullmod">
+      <div class="sec" id="rnear"></div>
+      <div class="sec" id="rweak"></div>
+      <div class="sec" id="rpath"></div>
+      <div class="sec" id="raiuse"></div>
+    </div>
+
+    <div class="save-area">
+      <div class="share-card" id="sharecard"></div>
+      <div class="save-tip" id="savetip">长按上方卡片保存，也可以分享给朋友看看他是哪个角色</div>
+    </div>
+
+    <div class="foot-note">
+      <b>AI榜老冯</b> · 每天中午一篇 AI 大事 + 纯实力榜<br>
+      你会是哪个角色？
+    </div>
+  </div>
+
+</div>
+
+<!-- ============ 验证码弹层 ============ -->
+<div id="codemask" class="modal-mask codemask hidden">
+  <div class="modal">
+    <button class="close" onclick="closeCode()">×</button>
+    <div class="box">
+      <div class="bt">输入验证码<br>解锁完整版 30 题</div>
+      <div class="bs">一个验证码只能用一次。<br>已经答过的题不用重做，直接从第 13 题接着答。</div>
+      <input id="codein" class="code-input" placeholder="PER-XXXXX-XXXXX" maxlength="20" autocomplete="off" spellcheck="false">
+      <div class="code-err" id="codeerr"></div>
+      <div class="code-ok" id="codeok"></div>
+      <button class="btn" id="codebtn" onclick="submitCode()">解锁 · 继续测</button>
+    </div>
+  </div>
+</div>
+
+<script src="../config.js"></script>
+<script>
+/* ============================================================
+ *  AI 职业人格测试 —— 双档版
+ *  免费 12 题：给最匹配的角色 + 匹配度 + 三个特质 + 关系网
+ *  完整 30 题：多给相近人格对照 / 短板 / 职业路径 / AI 用法 / 完整报告图
+ *
+ *  数据层在下面，题目和角色都写在这儿；判分在 judge() 里。
+ *  后端只做两件事：核销验证码、存结果（见 ai-quiz/server/app.py）。
+ * ============================================================ */
+
+/* ---------- 16 个职业角色 ----------
+   dim 顺序：[创造力, 执行力, 理性, 共情, 领导力, 洞察力]
+   rel: good=适合合作  bad=不太合拍  close=亲密度高（下标）
+   nr=相近人格对照  wk=短板与破解  ph=职业路径三步  ai=这种性格怎么用 AI
+*/
+const DIMS = ["创造力","执行力","理性","共情","领导力","洞察力"];
+
+const ROLES = [
+  { n:"掌局者", d:"AI 产品经理", v:"你天生是那个「拍板的人」",
+    dim:[75,85,80,60,90,75], rel:{ good:[4,6], bad:[11], close:[7] },
+    t:["定方向，敢拍板","把技术翻译成产品","看全局，抠需求"],
+    j:"适合走 <b>AI 产品经理</b>、战略、项目负责人这条路。",
+    nr:[["军师","都在「想得远」这一侧。区别是军师给你方案，你给的是决断。"],
+        ["拓荒者","都敢往前冲。区别是你更在意把人带齐，它更在意先跑起来。"]],
+    wk:[["拍板快，也容易听不进反对意见","每周专门留一次「只听不改」的会，让人把话说完。"],
+        ["陷在协调里，自己那摊活被拖","每天锁死两小时不接任何消息，先干自己的。"]],
+    ph:[["先在一件事上做到能独立交付，别急着带人"],
+        ["再练把判断拆成别人能执行的步骤"],
+        ["最后练的是选人，不是做事"]],
+    ai:[["让 AI 先把方案铺开，你负责砍到只剩一条"],
+        ["用它模拟反方意见，专门找你没想到的风险"],
+        ["把会议记录丢给它，让它提炼待办和责任人"]] },
+
+  { n:"咒语师", d:"Prompt 工程师", v:"你天生会「念咒」，能把 AI 榨到极限",
+    dim:[85,60,70,50,40,80], rel:{ good:[4,13], bad:[12], close:[6] },
+    t:["精准提问","榨出模型极限","玩转各种提示词"],
+    j:"适合走 <b>Prompt 工程师</b>、AI 应用、提示词专家这条路。",
+    nr:[["探界者","都爱钻。区别是探界者钻原理，你钻的是「怎么把它问出来」。"],
+        ["炼金术士","都抠极限。区别是它改模型，你改输入。"]],
+    wk:[["调优没有终点，收益早就平了还在磨","给每次调优设个上限次数，到点就收。"],
+        ["手艺绑在某个模型上，换个模型就失效","定期把同一套题拿去别的模型上跑一遍。"]],
+    ph:[["先把手感变成能复用的模板，别每次重写"],
+        ["再练评估：怎么判断一次改动是真的变好了"],
+        ["最后做的是把方法教出去，而不是自己一直调"]],
+    ai:[["把好用的提示词存成模板库，按场景分好类"],
+        ["让 AI 解释它为什么这么答，反向优化你的问法"],
+        ["同一个问题换三种问法对比，摸清模型的边界在哪"]] },
+
+  { n:"造梦师", d:"AI 视觉设计", v:"你脑子里住着画面，AI 只是你的画笔",
+    dim:[95,70,55,65,45,60], rel:{ good:[3,10], bad:[5], close:[3] },
+    t:["审美在线","把想象变成图","细节控"],
+    j:"适合走 <b>AI 视觉设计</b>、插画、UI 这条路。",
+    nr:[["编年史家","都有表达欲。区别是你用画面说，它用文字说。"],
+        ["造物主","都爱造东西。区别是你在屏幕里造，它在现实里造。"]],
+    wk:[["在细节上耗太久，整体进度被拖","先出粗稿定方向，方向对了再抠细节。"],
+        ["审美依赖个人感觉，难跟别人对齐","攒一套参考图，当团队共同语言。"]],
+    ph:[["先做到能交付完整的稿，而不是好看的局部"],
+        ["再练把感觉说清楚：为什么这样好看"],
+        ["最后带一套视觉标准，而不是做单张图"]],
+    ai:[["把参考图丢给它，让它先出十个方向给你挑"],
+        ["用它做批量变体，你只精修最好的那个"],
+        ["让它把设计稿写成文字说明，方便跟非设计的人沟通"]] },
+
+  { n:"编年史家", d:"内容创作者", v:"你是那个「讲故事的人」，AI 是你的笔",
+    dim:[85,75,60,75,50,70], rel:{ good:[2,10], bad:[11], close:[2] },
+    t:["表达欲强","捕捉热点","批量产出内容"],
+    j:"适合走 <b>内容创作</b>、自媒体、编导这条路。",
+    nr:[["传火者","都靠表达吃饭。区别是你讲事，它教人。"],
+        ["造梦师","都有表达欲。区别是你用文字说，它用画面说。"]],
+    wk:[["追热点追到没时间沉淀，内容越来越薄","每周留一天不追热点，只写自己想写的。"],
+        ["产量高但复用少，每条都从零开始","攒素材库和结构模板。"]],
+    ph:[["先练到能稳定产出，不断更"],
+        ["再找一个只有你能写的角度"],
+        ["最后做的是选题判断，不是写"]],
+    ai:[["把长材料喂给它，先出三个版本的提纲给你挑"],
+        ["用它把一篇内容改写成不同平台的口吻"],
+        ["让它挑你稿子里最弱的那一段，专攻那里"]] },
+
+  { n:"炼金术士", d:"算法工程师", v:"你喜欢「造大脑」，把算力变成智能",
+    dim:[70,80,95,40,45,75], rel:{ good:[5,1], bad:[12], close:[13] },
+    t:["数学好","抠性能","把算力变智能"],
+    j:"适合走 <b>算法工程师</b>、深度学习、模型训练这条路。",
+    nr:[["探界者","都钻得深。区别是它问「为什么」，你问「怎么更快」。"],
+        ["掘金者","都跟数据打交道。区别是你造工具，它用工具。"]],
+    wk:[["容易为了性能而性能，忘了这事值不值得做","动手优化前先算一遍收益。"],
+        ["习惯自己扛，不擅长把活分出去","把重复的部分写成工具，交给别人用。"]],
+    ph:[["先把一个模块做到能上生产"],
+        ["再练判断哪里值得优化、哪里别碰"],
+        ["最后做的是选方向，不是调参"]],
+    ai:[["让它帮你把论文里的公式翻译成能跑的实现"],
+        ["用它做对照实验，一次跑完几组参数"],
+        ["把报错丢给它，让它先列几个最可能的原因"]] },
+
+  { n:"掘金者", d:"数据科学家", v:"你能从数据里挖到别人看不见的东西",
+    dim:[60,75,90,45,50,85], rel:{ good:[4,9], bad:[2], close:[9] },
+    t:["看数据","找规律","用证据说话"],
+    j:"适合走 <b>数据科学</b>、商业分析、增长分析这条路。",
+    nr:[["军师","都靠判断吃饭。区别是你从数据里找，它从经验里找。"],
+        ["炼金术士","都跟数据打交道。区别是你用工具，它造工具。"]],
+    wk:[["容易停在分析上，不往前推一步做成决定","每份分析末尾必须写一条建议。"],
+        ["数据说话惯了，容易忽略数据没覆盖的部分","定期找人聊，听数字以外的东西。"]],
+    ph:[["先学会把数据讲成人话"],
+        ["再练从数据里提出对的问题"],
+        ["最后做的是帮别人改决策，不是出报表"]],
+    ai:[["让它先跑基础统计，你专注在解读上"],
+        ["用它检查你的结论有没有幸存者偏差"],
+        ["把业务问题翻译成它听得懂的查询条件"]] },
+
+  { n:"造舟人", d:"AI 应用开发", v:"你是「落地的人」，想法到你手里就能跑起来",
+    dim:[70,90,75,50,55,60], rel:{ good:[0,1], bad:[7], close:[14] },
+    t:["写代码","搭产品","把想法做出来"],
+    j:"适合走 <b>AI 应用开发</b>、全栈、独立开发者这条路。",
+    nr:[["独行侠","都能一个人做完。区别是你更愿意接别人的需求。"],
+        ["造物主","都爱做东西。区别是你在软件里做，它在硬件里做。"]],
+    wk:[["上手太快，架构没想清楚就开始写","动手前先画一遍数据怎么流。"],
+        ["什么都想自己做，容易卡在细节上","能用现成的就不自己造。"]],
+    ph:[["先做到能独立上线一个完整的东西"],
+        ["再练判断什么该自己做、什么该用现成的"],
+        ["最后做的是把产品想对，不是把代码写完"]],
+    ai:[["让它先设计接口和数据结构，你在上面改"],
+        ["用它写测试用例，专挑你没想到的边界"],
+        ["把整段报错贴给它，让它指出是哪一环断了"]] },
+
+  { n:"拓荒者", d:"AI 创业者", v:"你敢走没人走过的路，而且真的走得下去",
+    dim:[85,80,65,60,85,70], rel:{ good:[0,12], bad:[11], close:[0] },
+    t:["嗅觉敏锐","敢冒险","整合资源"],
+    j:"适合走 <b>AI 创业</b>、项目操盘、新业务这条路。",
+    nr:[["掌局者","都敢拍板。区别是你先冲，它先对齐人。"],
+        ["增长法师","都盯着做大。区别是你从零起步，它在存量里做增长。"]],
+    wk:[["冲得快，容易在没验证的事上投入太多","每个想法先用最小成本试一次。"],
+        ["换方向太频繁，团队跟不上","定了的事至少给一个完整周期。"]],
+    ph:[["先做成一件事，哪怕很小"],
+        ["再练止损：知道什么时候该放弃"],
+        ["最后做的是选对战场，不是打得猛"]],
+    ai:[["让它把一个想法拆成本周就能验证的最小版本"],
+        ["用它模拟最难搞的那类用户，提前找问题"],
+        ["把竞品资料丢给它，列没被满足的需求"]] },
+
+  { n:"传火者", d:"AI 讲师 / 布道", v:"你是「教会别人的人」，火从你这儿传下去",
+    dim:[70,65,60,90,70,65], rel:{ good:[3,10], bad:[4], close:[3] },
+    t:["会讲","爱分享","把复杂讲简单"],
+    j:"适合走 <b>AI 讲师</b>、知识博主、培训这条路。",
+    nr:[["编年史家","都靠表达吃饭。区别是你教人，它讲事。"],
+        ["军师","都在给别人东西。区别是你给方法，它给方案。"]],
+    wk:[["讲得太多，自己能做的时间被挤掉","每周留一段完全不输出的时间。"],
+        ["为了让人听懂，容易把东西讲浅","每节课留一个「往下钻」的口子。"]],
+    ph:[["先把一个知识点讲到别人能上手"],
+        ["再练成体系，把点连成线"],
+        ["最后做的是选教什么，不是怎么教"]],
+    ai:[["让它先出一份常见误解清单，你照着讲更有针对性"],
+        ["用它把同一个概念生成三档难度的解释"],
+        ["把你的课录下来喂给它，找出你讲得含糊的地方"]] },
+
+  { n:"军师", d:"AI 咨询顾问", v:"你天生给老板出主意，而且他真的会听",
+    dim:[70,70,85,55,60,90], rel:{ good:[0,5], bad:[7], close:[5] },
+    t:["想得深","看得远","给方案"],
+    j:"适合走 <b>AI 咨询</b>、战略顾问、解决方案这条路。",
+    nr:[["掌局者","都想得远。区别是你给方案，它做决断。"],
+        ["掘金者","都靠判断吃饭。区别是你从经验里找，它从数据里找。"]],
+    wk:[["方案给得多，落地得少","每份方案附一条「明天就能做的第一步」。"],
+        ["习惯站在旁边看，离一线越来越远","定期亲手做一遍，别只看。"]],
+    ph:[["先在一个行业里做出可验证的结果"],
+        ["再练把经验变成可复制的方法"],
+        ["最后做的是选客户，不是做方案"]],
+    ai:[["让它扮演客户，提前把你问倒一遍"],
+        ["用它把方案整理成对方能看懂的版本"],
+        ["把行业资料丢给它，列你没想到的变量"]] },
+
+  { n:"增长法师", d:"运营增长", v:"你会「点石成金」，把流量变成真东西",
+    dim:[80,85,65,70,65,75], rel:{ good:[3,12], bad:[11], close:[2] },
+    t:["搞流量","懂用户","会转化"],
+    j:"适合走 <b>运营增长</b>、投放、用户增长这条路。",
+    nr:[["拓荒者","都盯着做大。区别是你在存量里做增长，它从零起步。"],
+        ["说客","都懂人性。区别是你靠数据驱动，它靠话术驱动。"]],
+    wk:[["盯着数字，容易把人当成流量","定期看真实的用户反馈，别只看报表。"],
+        ["被短期指标牵着走，损害长期","给每个动作标一个长期代价。"]],
+    ph:[["先跑通一个渠道"],
+        ["再练判断哪些动作是真有效的"],
+        ["最后做的是选增长模型，不是做活动"]],
+    ai:[["让它一次生成十几个标题，你挑最像人写的"],
+        ["用它分析用户评论，找反复出现的抱怨"],
+        ["把活动方案丢给它，让它提前挑漏洞"]] },
+
+  { n:"守夜人", d:"AI 合规 / 伦理", v:"你是「踩刹车的人」，有些事必须有人拦一下",
+    dim:[45,80,90,50,40,70], rel:{ good:[9,5], bad:[7,12], close:[13] },
+    t:["谨慎","守底线","想后果"],
+    j:"适合走 <b>AI 合规</b>、风控、伦理治理这条路。",
+    nr:[["军师","都在想后果。区别是它想怎么做成，你想怎么不出事。"],
+        ["掘金者","都讲证据。区别是你看风险，它看机会。"]],
+    wk:[["刹车踩太多，容易错过窗口","给每个风险标上概率和代价，别一刀切。"],
+        ["只说不做，容易被当成阻力","每提一条风险，附一条替代方案。"]],
+    ph:[["先把一个领域的合规底线摸清楚"],
+        ["再练在不违规的前提下把事做成"],
+        ["最后做的是把底线变成流程，不是靠人盯"]],
+    ai:[["让它把条款逐条比对，找出差异在哪"],
+        ["用它模拟一次事故复盘，看流程哪里会断"],
+        ["把新规丢给它，列出对现有流程的影响"]] },
+
+  { n:"说客", d:"销售 / BD", v:"你能把东西卖出去，而且对方觉得占了便宜",
+    dim:[60,75,60,85,65,70], rel:{ good:[7,10], bad:[11], close:[7] },
+    t:["会说话","懂人性","促成交易"],
+    j:"适合走 <b>销售 / BD</b>、商务拓展这条路。",
+    nr:[["增长法师","都懂人性。区别是你靠话术，它靠数据。"],
+        ["掌局者","都能推动事。区别是你推动人，它推动局。"]],
+    wk:[["太会说话，容易被当成不真诚","该说「这个不适合你」的时候要说。"],
+        ["成交导向太强，交付跟不上","卖之前先想清楚交付怎么做。"]],
+    ph:[["先做到能稳定成交"],
+        ["再练判断谁是你的客户、谁不是"],
+        ["最后做的是选赛道，不是练话术"]],
+    ai:[["让它把你的产品价值翻译成对方听得懂的痛点"],
+        ["用它分析客户资料，找出最该提的那一个点"],
+        ["把对方的拒绝理由丢给它，给三种应对"]] },
+
+  { n:"探界者", d:"AI 研究员", v:"你想知道「边界在哪」，而且真的会去撞",
+    dim:[80,60,90,45,35,95], rel:{ good:[4,9], bad:[12], close:[11] },
+    t:["好奇心重","钻得深","爱读论文"],
+    j:"适合走 <b>AI 研究员</b>、科研、前沿探索这条路。",
+    nr:[["炼金术士","都钻得深。区别是你问「为什么」，它问「怎么更快」。"],
+        ["咒语师","都爱钻。区别是你钻原理，它钻怎么问出来。"]],
+    wk:[["钻得太深，容易和实际需求脱节","定期看别人在拿你的东西干什么。"],
+        ["想得久出手慢，好想法被别人先做出来","想清楚七成就先放出去。"]],
+    ph:[["先在一个问题上做出别人做不出的结果"],
+        ["再练把研究翻译成别人能用的话"],
+        ["最后做的是选问题，不是解问题"]],
+    ai:[["让它把一篇论文的核心贡献三句话讲完"],
+        ["用它复现实验，先跑通再抠细节"],
+        ["把两个方向的论文丢给它，找交叉点"]] },
+
+  { n:"独行侠", d:"独立开发 / 数字游民", v:"你一个人就是一支队伍",
+    dim:[75,85,75,45,40,70], rel:{ good:[6,15], bad:[0], close:[15] },
+    t:["全能","自律","爱自由"],
+    j:"适合走 <b>独立开发</b>、自由职业、数字游民这条路。",
+    nr:[["造舟人","都能一个人做完。区别是你更在意自由，它更愿意接需求。"],
+        ["造物主","都能亲手做出东西。区别是你在软件里，它在硬件里。"]],
+    wk:[["什么都自己扛，做不大","找出最拖你后腿的一件事，外包出去。"],
+        ["不喜欢被管，也容易没人给你反馈","找三五个同行，定期互相看看。"]],
+    ph:[["先做到一个人能养活自己"],
+        ["再练判断什么值得长期投入"],
+        ["最后做的是选做什么，不是做得多快"]],
+    ai:[["让它当你的第二个脑子，帮你把方案再挑一遍"],
+        ["用它补你不擅长的部分：文案、设计、报税"],
+        ["把重复流程写成脚本，能自动的都自动"]] },
+
+  { n:"造物主", d:"AI 硬件 / 机器人", v:"你想让 AI 活起来，从屏幕里走出来",
+    dim:[85,80,70,50,60,65], rel:{ good:[14,4], bad:[11], close:[14] },
+    t:["动手强","爱造物","虚实结合"],
+    j:"适合走 <b>AI 硬件</b>、机器人、具身智能这条路。",
+    nr:[["造舟人","都爱做东西。区别是你在硬件里做，它在软件里做。"],
+        ["炼金术士","都抠底层。区别是你动手做，它动手算。"]],
+    wk:[["一头扎进实现，忽略了这东西有没有人要","做之前先问三个人要不要。"],
+        ["硬件周期长，热情容易被拖没","切成小目标，每个阶段都有能跑起来的成果。"]],
+    ph:[["先做出一个能动的原型"],
+        ["再练把原型变成能小批量做出来的东西"],
+        ["最后做的是选场景，不是调参数"]],
+    ai:[["让它帮你把电路和结构的方案先过一遍"],
+        ["用它写驱动和测试脚本，省下大量调试时间"],
+        ["把故障现象描述给它，让它列可能的原因"]] }
+];
+
+/* ---------- 30 道题 ----------
+   前 12 题 = 免费版；13-30 = 完整版追加。
+   o[].r 指向 ROLES 下标。每个人格在选项里出现的次数经过配平，
+   判定时再按出现次数归一化（见 judge），不会偏向任何一个人格。
+*/
+const QUIZ = [
+  // ── 免费版 12 题 ──
+  { q:"周末你最想做什么？", o:[
+    { t:"研究一个新 AI 工具怎么玩", r:1 },
+    { t:"做点好看的设计 / 图", r:2 },
+    { t:"写篇东西或拍条视频", r:3 },
+    { t:"捣鼓机器人、焊点硬件", r:15 } ] },
+  { q:"遇到一个棘手难题，你第一反应是？", o:[
+    { t:"先定目标，拉人一起干", r:0 },
+    { t:"翻数据，先找规律", r:5 },
+    { t:"拆成小步骤，写代码解", r:6 },
+    { t:"先评估风险，别踩坑", r:11 } ] },
+  { q:"别人最常夸你哪点？", o:[
+    { t:"会说话，能把事谈成", r:12 },
+    { t:"讲得清楚，一听就懂", r:8 },
+    { t:"敢想敢干，有冲劲", r:7 },
+    { t:"一个人就能扛起一摊事", r:14 } ] },
+  { q:"面对一堆信息和数据，你会？", o:[
+    { t:"提炼成一条关键结论", r:9 },
+    { t:"找增长点和转化机会", r:10 },
+    { t:"追问底层原理，挖到底", r:13 },
+    { t:"搭模型，把它算明白", r:4 } ] },
+  { q:"你更享受哪个瞬间？", o:[
+    { t:"产品上线，真的有人用", r:6 },
+    { t:"定下方向，带着团队冲", r:0 },
+    { t:"一句提示词调出惊艳结果", r:1 },
+    { t:"一个算法跑通，性能翻倍", r:4 } ] },
+  { q:"你骨子里更偏向？", o:[
+    { t:"做出让人眼前一亮的东西", r:2 },
+    { t:"讲一个好故事，被人记住", r:3 },
+    { t:"教会别人，带起一群人", r:8 },
+    { t:"造一波流量，把事搞大", r:10 } ] },
+  { q:"做决定时你更靠？", o:[
+    { t:"数据说话，不靠感觉", r:5 },
+    { t:"全局推演，看长期", r:9 },
+    { t:"追根问底，找到真相", r:13 },
+    { t:"守住底线，想清后果", r:11 } ] },
+  { q:"你更向往哪种生活？", o:[
+    { t:"从零干成一件事", r:7 },
+    { t:"一个人自由，边旅行边干", r:14 },
+    { t:"造出实体的东西", r:15 },
+    { t:"拿下大单，享受谈判", r:12 } ] },
+  { q:"技术这条路上你更像？", o:[
+    { t:"调教 AI，榨出极限", r:1 },
+    { t:"造模型，抠性能", r:4 },
+    { t:"写应用，落地成产品", r:6 },
+    { t:"做硬件，让 AI 有身体", r:15 } ] },
+  { q:"你对「钱」的理解是？", o:[
+    { t:"方向对了，钱自然来", r:0 },
+    { t:"帮别人赚到钱，我也赚", r:9 },
+    { t:"会卖才值钱", r:12 },
+    { t:"流量就是钱", r:10 } ] },
+  { q:"你最愿意花时间在？", o:[
+    { t:"打磨一个好看的视觉", r:2 },
+    { t:"写一篇有传播力的内容", r:3 },
+    { t:"备一堂课，讲给更多人", r:8 },
+    { t:"读论文，追前沿", r:13 } ] },
+  { q:"遇到不确定性，你更倾向？", o:[
+    { t:"用数据判断，减少赌博", r:5 },
+    { t:"求稳，先别踩雷", r:11 },
+    { t:"靠自己，把不确定性扛下来", r:14 },
+    { t:"赌一把，机会不等人", r:7 } ] },
+
+  // ── 完整版追加 18 题 ──
+  { q:"一个项目从零开始，你最想接手哪一块？", o:[
+    { t:"定方向、拆目标、带人往前推", r:0 },
+    { t:"把界面做得让人一眼就看懂", r:2 },
+    { t:"把底层跑通，性能拉满", r:4 },
+    { t:"从数据里找出机会在哪", r:5 } ] },
+  { q:"你想学一个新东西，通常怎么开始？", o:[
+    { t:"直接上手做个东西，边做边补", r:6 },
+    { t:"找最权威的资料，把原理啃透", r:13 },
+    { t:"找人聊，听别人怎么踩过坑", r:9 },
+    { t:"拆成小步骤，写下来一步步练", r:14 } ] },
+  { q:"团队里起了分歧，你通常怎么做？", o:[
+    { t:"换几种说法反复试，找到能通的那种", r:1 },
+    { t:"摆数据，让事实说话", r:5 },
+    { t:"先想最坏的结果，别踩线", r:11 },
+    { t:"私下分别聊，找到都能接受的点", r:12 } ] },
+  { q:"你做的东西被人当面挑毛病，第一反应是？", o:[
+    { t:"追问具体是哪里不行", r:9 },
+    { t:"记下来，这正好是能写出来的素材", r:3 },
+    { t:"先不动，想清楚改动的代价", r:11 },
+    { t:"顺手就改了，改完再看效果", r:6 } ] },
+  { q:"平时你靠什么找到新东西？", o:[
+    { t:"刷资讯和社区，看大家在聊什么", r:3 },
+    { t:"追论文和一手发布，越原始越好", r:13 },
+    { t:"靠同行朋友互相丢链接", r:12 },
+    { t:"自己动手拆开试，试出来才算数", r:15 } ] },
+  { q:"你平时怎么用 AI？", o:[
+    { t:"让它替我把重复的活干掉", r:6 },
+    { t:"反复调提示词，榨出最好的结果", r:1 },
+    { t:"当资料库，问它原理和细节", r:4 },
+    { t:"当搭子，跟它一起把方案想清楚", r:9 } ] },
+  { q:"你更喜欢什么样的做事节奏？", o:[
+    { t:"一口气冲完，快比完美重要", r:7 },
+    { t:"稳一点，每一步都确认没问题", r:11 },
+    { t:"按自己的节奏来，别被打断", r:14 },
+    { t:"边做边看反馈，随时调", r:10 } ] },
+  { q:"什么最容易让你兴奋？", o:[
+    { t:"一个没人做过的东西", r:7 },
+    { t:"一条谁都没注意到的瓶颈", r:4 },
+    { t:"一个东西被我做得比原来好看", r:2 },
+    { t:"有人因为我的东西学会了", r:8 } ] },
+  { q:"面对一条你觉得不合理的规则，你会？", o:[
+    { t:"先守着，想清楚它为什么存在", r:11 },
+    { t:"绕过去，达成目的就行", r:7 },
+    { t:"换个写法，找规则没说死的口子", r:1 },
+    { t:"讲给别人听，让更多人不踩坑", r:8 } ] },
+  { q:"你更擅长哪种沟通？", o:[
+    { t:"对着很多人讲，把复杂的事讲明白", r:8 },
+    { t:"一对一，把对方说通", r:12 },
+    { t:"写下来，白纸黑字最清楚", r:3 },
+    { t:"画出来，一张图胜过千言", r:2 } ] },
+  { q:"你更在意哪个？", o:[
+    { t:"这件事能不能做大", r:7 },
+    { t:"这件事做得够不够漂亮", r:2 },
+    { t:"这件事能不能一直做下去", r:14 },
+    { t:"这件事的做法够不够巧", r:1 } ] },
+  { q:"一堆重复的活摆在你面前，你会？", o:[
+    { t:"写个脚本自动跑掉", r:6 },
+    { t:"先想清楚有没有必要做", r:9 },
+    { t:"拆开看里面有没有可优化的地方", r:4 },
+    { t:"做套模板，以后照着套", r:10 } ] },
+  { q:"判断一件事靠不靠谱，你主要看？", o:[
+    { t:"有没有数据支撑", r:5 },
+    { t:"逻辑上通不通", r:13 },
+    { t:"有没有人真的愿意花钱", r:12 },
+    { t:"做不做得出来", r:15 } ] },
+  { q:"你更喜欢哪种美？", o:[
+    { t:"简单干净，一眼看懂", r:2 },
+    { t:"精密复杂，每个细节都有理由", r:4 },
+    { t:"有温度，能打动人", r:3 },
+    { t:"会动的、能转起来的机械感", r:15 } ] },
+  { q:"压力最大的时候，你会？", o:[
+    { t:"闷头干，用结果说话", r:14 },
+    { t:"把问题摊开，找人对齐", r:0 },
+    { t:"先冷静，把风险一条条列出来", r:11 },
+    { t:"找人聊聊，把情绪消化掉", r:12 } ] },
+  { q:"什么最让你有成就感？", o:[
+    { t:"我的东西真的帮别人赚到钱了", r:10 },
+    { t:"帮别人把一团乱麻理出头绪", r:9 },
+    { t:"我带出来的人成长起来了", r:8 },
+    { t:"从一堆数据里挖出真正的答案", r:5 } ] },
+  { q:"十年后，你希望自己是？", o:[
+    { t:"做出一个真的能跑起来的东西", r:15 },
+    { t:"在一个领域里钻到最深处", r:13 },
+    { t:"手里有一摊能自己转起来的事", r:10 },
+    { t:"带一支队伍做成一件大事", r:0 } ] },
+  { q:"如果只能选一个人合作，你选？", o:[
+    { t:"能一直往深处钻的人", r:13 },
+    { t:"能把方向定下来的人", r:0 },
+    { t:"一个人能顶一摊的人", r:14 },
+    { t:"想到就能做出来的人", r:6 } ] }
+];
+
+const LIGHT_N = 12;   // 免费版题数
+const FULL_N = 30;    // 完整版题数
+const KEYS = ["A","B","C","D"];
+
+/* ============================================================
+ *  后端对接 —— 只改这一块
+ *  后端地址由根目录 config.js 提供（隧道地址变了只改那个文件）
+ * ============================================================ */
+const API_BASE = ((window.QUIZ_API || '') + '').replace(/\/$/, '');
+
+const API = {
+  /** 校验验证码：由后端原子核销，一个码只能用一次 */
+  async verifyCode(code) {
+    if (!API_BASE) return { ok:false, msg:"后端地址没配置，请联系我" };
+    try {
+      const r = await fetch(API_BASE + '/api/verify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code: code })
+      });
+      const j = await r.json();
+      return { ok: !!j.ok, msg: j.msg || '' };
+    } catch (e) {
+      return { ok:false, msg:"连不上服务器，检查网络后重试" };
+    }
+  },
+
+  /** 存结果，用于回查和统计。失败不打扰用户 */
+  async saveResult(payload) {
+    if (!API_BASE) return;
+    try {
+      await fetch(API_BASE + '/api/result', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+    } catch (e) {}
+  }
+};
+
+/* ============================================================
+ *  状态与流程
+ * ============================================================ */
+const S = {
+  answers: new Array(FULL_N).fill(-1),
+  cur: 0,
+  tier: 'light',      // light=免费 12 题；full=完整 30 题
+  upto: LIGHT_N,      // 这一档一共答多少题
+  liteRole: '',       // 12 题时的结果，用于在完整版里提示「前后是否一致」
+  code: ''
+};
+
+function $(id){ return document.getElementById(id); }
+function show(id){
+  ["welcome","quizpage","result"].forEach(x => $(x).classList.add("hidden"));
+  $(id).classList.remove("hidden");
+  window.scrollTo(0,0);
+}
+
+/* ---------- 判定 ----------
+   归一化：按「该人格在已答题里出现几次」折算命中率。
+   30 题时各人格出现 7-8 次不相等，直接比命中数会偏向出现多的那个；
+   折算成比例后完全公平。12 题时各人格都是 3 次，折算前后一致。 */
+function judge(upto){
+  const appear = new Array(ROLES.length).fill(0);
+  const hit = new Array(ROLES.length).fill(0);
+  for (let i = 0; i < upto; i++){
+    const a = S.answers[i];
+    QUIZ[i].o.forEach((o, idx) => {
+      appear[o.r]++;
+      if (a === idx) hit[o.r]++;
+    });
+  }
+  const rate = i => appear[i] ? hit[i] / appear[i] : 0;
+  let best = 0;
+  for (let i = 1; i < ROLES.length; i++){
+    if (hit[i] > hit[best] || (hit[i] === hit[best] && rate(i) > rate(best))) best = i;
+  }
+  return { best, hit, appear, rate: rate(best) };
+}
+
+/* ---------- 首页图鉴 ---------- */
+function renderGallery(){
+  $("ggrid").innerHTML = ROLES.map((R,i) =>
+    '<div class="role-card" onclick="openRole('+i+')">'
+    + '<img src="img/role_'+i+'.png" alt="'+R.n+'" loading="lazy" onerror="this.style.visibility=\'hidden\'">'
+    + '<div class="nm">'+R.n+'</div>'
+    + '<div class="dm">'+R.d+'</div>'
+    + '</div>'
+  ).join("");
+}
+
+function openRole(i){
+  const R = ROLES[i];
+  const mask = document.createElement("div");
+  mask.className = "modal-mask";
+  mask.innerHTML = '<div class="modal">'
+    + '<button class="close">×</button>'
+    + '<img src="img/role_'+i+'.png" alt="'+R.n+'" onerror="this.style.visibility=\'hidden\'">'
+    + '<div class="mn">'+R.n+'</div>'
+    + '<div class="md">'+R.d+'</div>'
+    + '<div class="mv">'+R.v+'</div>'
+    + '<div class="radar-block"><div class="rt">能力图谱</div><div class="radar-wrap">'+radarSVG(R.dim, DIMS)+'</div></div>'
+    + '<div class="traits"><div class="t">三个特质</div><div>'+R.t.map(x=>'<span class="chip">'+x+'</span>').join("")+'</div></div>'
+    + '<div class="rel-block">'+relHTML(R)+'</div>'
+    + '<div class="jobs">'+R.j+'</div>'
+    + '</div>';
+  document.body.appendChild(mask);
+  mask.querySelector(".close").addEventListener("click", ()=>mask.remove());
+  mask.addEventListener("click", e => { if(e.target === mask) mask.remove(); });
+}
+
+/* ---------- 答题 ---------- */
+function startQuiz(tier){
+  S.tier = tier;
+  S.upto = (tier === 'full') ? FULL_N : LIGHT_N;
+  S.cur = 0;
+  S.answers = new Array(FULL_N).fill(-1);
+  show("quizpage");
+  renderQ();
+}
+
+/** 从第 12 题之后接着答（解锁后走这条，前面 12 题不重做） */
+function resumeFull(){
+  S.tier = 'full';
+  S.upto = FULL_N;
+  S.cur = LIGHT_N;
+  show("quizpage");
+  renderQ();
+}
+
+function renderQ(){
+  const q = QUIZ[S.cur];
+  $("qtext").textContent = (S.cur+1) + ". " + q.q;
+  $("pnum").textContent = (S.cur+1) + "/" + S.upto;
+  $("fill").style.width = (S.cur / S.upto * 100) + "%";
+  $("opts").innerHTML = q.o.map((o,i)=>{
+    const sel = S.answers[S.cur] === i ? " sel" : "";
+    return '<button class="opt'+sel+'" onclick="pick('+i+')"><span class="k">'+KEYS[i]+'</span>'+o.t+'</button>';
+  }).join("");
+  $("prevbtn").classList.toggle("hidden", S.cur === 0);
+  $("nextbtn").textContent = S.cur === S.upto-1 ? "看结果 ▸" : "下一题 ›";
+  $("nextbtn").disabled = S.answers[S.cur] === -1;
+}
+
+function pick(i){ S.answers[S.cur] = i; renderQ(); }
+function prevQ(){ if(S.cur > 0){ S.cur--; renderQ(); } }
+function nextQ(){
+  if(S.answers[S.cur] === -1) return;
+  if(S.cur >= S.upto-1){ showResult(); return; }
+  S.cur++;
+  renderQ();
+}
+
+/* ---------- 结果页 ---------- */
+function showResult(){
+  const j = judge(S.upto);
+  const R = ROLES[j.best];
+  const isFull = S.tier === 'full';
+
+  // 12 题时记一下当时判的是谁，完整版里对比用
+  if(!isFull) S.liteRole = R.n;
+
+  $("rtag").textContent = isFull ? 'AI 预言 · 完整版 30 题' : 'AI 预言 · 免费版 12 题';
+  $("rname").textContent = R.n;
+  $("rdom").textContent = R.d;
+
+  // 完整版里如果 12 题和 30 题判得不一样，明说，别让人以为是测错了
+  let vd = R.v;
+  if(isFull && S.liteRole && S.liteRole !== R.n){
+    vd += '（前 12 题先判成了「' + S.liteRole + '」，多答 18 题之后才看清是现在这个）';
+  }
+  $("rverdict").textContent = vd;
+
+  $("rtraits").innerHTML = R.t.map(x=>'<span class="chip">'+x+'</span>').join("");
+  $("rjobs").innerHTML = R.j;
+  $("radar").innerHTML = radarSVG(R.dim, DIMS);
+  $("rrel").innerHTML = relHTML(R);
+
+  // 免费版出锁定区，完整版出追加模块
+  $("locked").classList.toggle("hidden", isFull);
+  $("fullmod").classList.toggle("hidden", !isFull);
+  if(isFull) renderFull(R);
+
+  // 匹配度：按归一化命中率给个百分比
+  const pct = Math.round(j.rate * 100);
+  $("savetip").textContent = isFull
+    ? '长按上方卡片保存这份完整报告 · 匹配度 ' + pct + '%'
+    : '长按上方卡片保存 · 想要完整版（相近人格 / 短板 / 路径 / AI 用法），往下看';
+
+  renderShareCard(R, isFull, (dataUrl)=>{
+    $("sharecard").innerHTML = '<img src="'+dataUrl+'" alt="AI 职业人格报告">'
+      + '<div style="text-align:center"><a class="dl" download="AI职业人格报告.png" href="'+dataUrl+'">下载图片</a></div>';
+  });
+
+  API.saveResult({
+    tier: S.tier,
+    product: 'personality',
+    code: S.code || null,
+    answers: S.answers.slice(0, S.upto),
+    result: { role: R.n, domain: R.d, hit: j.hit, rate: j.rate }
+  });
+
+  show("result");
+}
+
+/* ---------- 完整版追加模块 ---------- */
+function renderFull(R){
+  $("rnear").innerHTML = '<div class="st">你和这几个角色最像</div>'
+    + R.nr.map(([n,d]) => '<div class="near-row"><div class="nn">'+n+'</div><div class="nd">'+d+'</div></div>').join("");
+
+  $("rweak").innerHTML = '<div class="st">最拖你后腿的两个地方</div>'
+    + R.wk.map(([a,b]) => '<div class="li-row warn"><span class="n">!</span><span class="tx"><b>'+a+'</b><br>'+b+'</span></div>').join("");
+
+  $("rpath").innerHTML = '<div class="st">你这条路的三个阶段</div>'
+    + R.ph.map(([t],i) => '<div class="li-row"><span class="n">'+(i+1)+'</span><span class="tx">'+t+'</span></div>').join("");
+
+  $("raiuse").innerHTML = '<div class="st">你这种性格该怎么用 AI</div>'
+    + R.ai.map(([t]) => '<div class="li-row"><span class="n">·</span><span class="tx">'+t+'</span></div>').join("");
+}
+
+function relHTML(R){
+  const names = rel => rel.map(i=>ROLES[i].n).join("、");
+  const row = (cls, label, v) =>
+    '<div class="rel-row"><span class="rk '+cls+'">'+label+'</span><span class="rv">'+v+'</span></div>';
+  return '<div class="rt">你的关系网</div>'
+    + row("good","适合合作", names(R.rel.good))
+    + row("close","亲密度高", names(R.rel.close))
+    + row("bad","不太合拍", names(R.rel.bad));
+}
+
+/* ---------- 验证码 ---------- */
+function openCode(){
+  $("codemask").classList.remove("hidden");
+  $("codeerr").textContent = "";
+  $("codeok").textContent = "";
+  setTimeout(()=>$("codein").focus(), 100);
+}
+function closeCode(){ $("codemask").classList.add("hidden"); }
+
+async function submitCode(){
+  let raw = $("codein").value.trim().toUpperCase().replace(/\s+/g, "");
+  const err = $("codeerr"), ok = $("codeok");
+  err.textContent = ""; ok.textContent = "";
+  if(!raw){ err.textContent = "请输入验证码"; return; }
+  // 整串粘贴、或只打后半段 XXXXX-XXXXX 都收：没有前缀就按本页的 PER 补上
+  if(!/^[A-Z]{3}-/.test(raw)) raw = "PER-" + raw;
+
+  const btn = $("codebtn");
+  btn.disabled = true; btn.textContent = "校验中…";
+  const res = await API.verifyCode(raw);
+  btn.disabled = false; btn.textContent = "解锁 · 继续测";
+
+  if(!res.ok){ err.textContent = res.msg; return; }
+  S.code = raw;
+  ok.textContent = "验证通过，正在进入完整版…";
+  setTimeout(()=>{
+    closeCode();
+    // 已经答到中途解锁的，从第 13 题接着答；还没开始答的，从第 1 题开始
+    if(S.answers.slice(0, LIGHT_N).every(a => a === -1)) startQuiz('full');
+    else resumeFull();
+  }, 500);
+}
+
+/* ============================================================
+ *  雷达图（SVG）
+ * ============================================================ */
+function radarSVG(dims, labels){
+  const size = 300, cx = 150, cy = 150, R = 96, n = 6;
+  const pt = (i, r) => {
+    const a = -Math.PI/2 + i*(2*Math.PI/n);
+    return [cx + r*Math.cos(a), cy + r*Math.sin(a)];
+  };
+  const ring = (lv) => {
+    const pts = [];
+    for(let i=0;i<n;i++){ const [x,y]=pt(i, R*lv/100); pts.push(x+","+y); }
+    return pts.join(" ");
+  };
+  let g = "";
+  [25,50,75,100].forEach(lv => {
+    g += '<polygon points="'+ring(lv)+'" fill="none" stroke="#E7E1D4" stroke-width="1"/>';
+  });
+  for(let i=0;i<n;i++){
+    const [x,y]=pt(i,R);
+    g += '<line x1="'+cx+'" y1="'+cy+'" x2="'+x+'" y2="'+y+'" stroke="#E7E1D4" stroke-width="1"/>';
+  }
+  const dataPts = [];
+  for(let i=0;i<n;i++){ const [x,y]=pt(i, R*dims[i]/100); dataPts.push(x+","+y); }
+  g += '<polygon points="'+dataPts.join(" ")+'" fill="rgba(148,71,53,0.22)" stroke="#944735" stroke-width="2.5"/>';
+  for(let i=0;i<n;i++){
+    const [x,y]=pt(i, R*dims[i]/100);
+    g += '<circle cx="'+x+'" cy="'+y+'" r="3.5" fill="#944735"/>';
+  }
+  for(let i=0;i<n;i++){
+    const [x,y]=pt(i, R+26);
+    const anchor = Math.abs(x-cx) < 4 ? "middle" : (x < cx ? "end" : "start");
+    g += '<text x="'+x+'" y="'+(y+5)+'" text-anchor="'+anchor+'" font-size="12" font-weight="700" fill="#383931">'+labels[i]+' '+dims[i]+'</text>';
+  }
+  return '<svg class="radar-svg" viewBox="0 0 '+size+' '+size+'" width="280" height="280">'+g+'</svg>';
+}
+
+/* ============================================================
+ *  报告卡（Canvas，可长按保存 / 下载）
+ *  免费版 750×1334，完整版 750×1760（多画相近人格和 AI 用法）
+ * ============================================================ */
+function renderShareCard(R, isFull, cb){
+  const W = 750;
+  const H = isFull ? 1760 : 1334;
+  const c = document.createElement("canvas");
+  c.width = W; c.height = H;
+  const x = c.getContext("2d");
+  const F = "'PingFang SC','Microsoft YaHei',sans-serif";
+  x.textBaseline = "middle";
+
+  x.fillStyle = "#F8F9F1"; x.fillRect(0,0,W,H);
+
+  x.fillStyle = "#944735";
+  roundRect(x, 52, 52, 246, 54, 27); x.fill();
+  x.fillStyle = "#fff"; x.font = "700 26px "+F;
+  x.textAlign = "center";
+  x.fillText("AI 职业人格测试", 52+123, 52+28);
+
+  x.fillStyle = "#383931"; x.font = "900 42px "+F;
+  x.fillText(isFull ? "完整版报告 · 30 题" : "免费版结果 · 12 题", W/2, 158);
+
+  x.fillStyle = "#944735"; x.font = "900 78px "+F;
+  x.fillText(R.n, W/2, 246);
+  x.fillStyle = "#8A837B"; x.font = "500 30px "+F;
+  x.fillText(R.d, W/2, 294);
+
+  x.fillStyle = "#F5F0E6";
+  roundRect(x, 52, 328, W-104, 132, 20); x.fill();
+  x.fillStyle = "#944735"; x.fillRect(52, 328, 6, 132);
+  x.fillStyle = "#383931"; x.font = "700 26px "+F;
+  wrapCenter(x, R.v, W/2, 394, W-200, 42, 2);
+
+  drawRadarCanvas(x, R.dim, DIMS, W/2, 596, 148);
+
+  x.fillStyle = "#8A837B"; x.font = "700 24px "+F;
+  x.textAlign = "center";
+  x.fillText("你的三个特质", W/2, 800);
+  let ty = 830;
+  R.t.forEach(t => {
+    x.font = "500 24px "+F;
+    const cw = x.measureText(t).width + 64;
+    const cx0 = (W - cw)/2;
+    x.fillStyle = "#FFFFFF"; x.strokeStyle = "#E7E1D4"; x.lineWidth = 2;
+    roundRect(x, cx0, ty, cw, 52, 26); x.fill(); x.stroke();
+    x.fillStyle = "#383931";
+    x.fillText(t, W/2, ty+27);
+    ty += 68;
+  });
+
+  // 关系网
+  ty += 8;
+  x.fillStyle = "#8A837B"; x.font = "700 24px "+F;
+  x.fillText("关系网", W/2, ty);
+  ty += 28;
+  const boxTop = ty;
+  x.fillStyle = "#FFFFFF";
+  roundRect(x, 52, boxTop, W-104, 168, 20); x.fill();
+  const relLines = [
+    ["适合合作", R.rel.good.map(i=>ROLES[i].n).join("、"), "#4C7A5A"],
+    ["亲密度高", R.rel.close.map(i=>ROLES[i].n).join("、"), "#C8912A"],
+    ["不太合拍", R.rel.bad.map(i=>ROLES[i].n).join("、"), "#B0503C"]
+  ];
+  let ly = boxTop + 36;
+  relLines.forEach(([k,v,color]) => {
+    x.textAlign = "left";
+    x.fillStyle = color; x.font = "700 24px "+F;
+    x.fillText(k, 84, ly);
+    x.fillStyle = "#383931"; x.font = "500 24px "+F;
+    let vv = v, maxV = W - 84 - 120 - 52;
+    while(vv.length && x.measureText(vv).width > maxV) vv = vv.slice(0,-1);
+    if(vv !== v) vv += "…";
+    x.fillText(vv, 84+120, ly);
+    ly += 50;
+  });
+
+  // 完整版追加：相近人格 + 两条 AI 用法
+  if (isFull){
+    let fy = boxTop + 200;
+    x.textAlign = "center";
+    x.fillStyle = "#8A837B"; x.font = "700 24px "+F;
+    x.fillText("你和这几个角色最像", W/2, fy);
+    fy += 34;
+    x.fillStyle = "#FFFFFF";
+    roundRect(x, 52, fy, W-104, 60 + R.nr.length*76, 20); x.fill();
+    let ny = fy + 44;
+    R.nr.forEach(([n,d]) => {
+      x.textAlign = "left";
+      x.fillStyle = "#944735"; x.font = "900 26px "+F;
+      x.fillText(n, 84, ny);
+      x.fillStyle = "#383931"; x.font = "500 22px "+F;
+      let vv = d, maxV = W - 84 - 52;
+      const lines = [];
+      let line = "";
+      for (const ch of vv){
+        if (x.measureText(line+ch).width > maxV){ lines.push(line); line = ch; } else line += ch;
+      }
+      lines.push(line);
+      lines.slice(0,2).forEach((l,i)=>x.fillText(l, 84, ny + 30 + i*28));
+      ny += 76;
+    });
+
+    let ay = fy + 60 + R.nr.length*76 + 34;
+    x.textAlign = "center";
+    x.fillStyle = "#8A837B"; x.font = "700 24px "+F;
+    x.fillText("你这种性格该怎么用 AI", W/2, ay);
+    ay += 34;
+    x.fillStyle = "#FFFFFF";
+    roundRect(x, 52, ay, W-104, 60 + R.ai.length*72, 20); x.fill();
+    let iy = ay + 44;
+    R.ai.forEach(([t]) => {
+      x.textAlign = "left";
+      x.fillStyle = "#944735"; x.font = "900 26px "+F;
+      x.fillText("·", 84, iy);
+      x.fillStyle = "#383931"; x.font = "500 22px "+F;
+      let line = "", lines = [];
+      for (const ch of t){
+        if (x.measureText(line+ch).width > W - 84 - 52 - 24){ lines.push(line); line = ch; } else line += ch;
+      }
+      lines.push(line);
+      lines.slice(0,2).forEach((l,i)=>x.fillText(l, 84+24, iy + 26 + i*28));
+      iy += 72;
+    });
+  }
+
+  // 底部
+  x.textAlign = "center";
+  x.fillStyle = "#944735";
+  x.fillRect(0, H-108, W, 108);
+  x.fillStyle = "#fff"; x.font = "700 30px "+F;
+  x.fillText("AI榜老冯 · 每天中午一篇 AI 大事 + 纯实力榜", W/2, H-54);
+
+  cb(c.toDataURL("image/png"));
+}
+
+function drawRadarCanvas(x, dims, labels, cx, cy, R){
+  const n = 6;
+  const pt = (i, r) => {
+    const a = -Math.PI/2 + i*(2*Math.PI/n);
+    return [cx + r*Math.cos(a), cy + r*Math.sin(a)];
+  };
+  x.strokeStyle = "#E7E1D4"; x.lineWidth = 1.5;
+  [25,50,75,100].forEach(lv=>{
+    x.beginPath();
+    for(let i=0;i<n;i++){ const [px,py]=pt(i,R*lv/100); i===0?x.moveTo(px,py):x.lineTo(px,py); }
+    x.closePath(); x.stroke();
+  });
+  for(let i=0;i<n;i++){
+    const [px,py]=pt(i,R);
+    x.beginPath(); x.moveTo(cx,cy); x.lineTo(px,py); x.stroke();
+  }
+  x.beginPath();
+  for(let i=0;i<n;i++){ const [px,py]=pt(i,R*dims[i]/100); i===0?x.moveTo(px,py):x.lineTo(px,py); }
+  x.closePath();
+  x.fillStyle = "rgba(148,71,53,0.22)"; x.fill();
+  x.strokeStyle = "#944735"; x.lineWidth = 3; x.stroke();
+  for(let i=0;i<n;i++){ const [px,py]=pt(i,R*dims[i]/100); x.beginPath(); x.arc(px,py,5,0,Math.PI*2); x.fillStyle="#944735"; x.fill(); }
+  x.fillStyle = "#383931"; x.font = "700 20px 'PingFang SC','Microsoft YaHei',sans-serif";
+  x.textAlign = "center"; x.textBaseline = "middle";
+  for(let i=0;i<n;i++){
+    const [px,py]=pt(i, R+40);
+    x.fillText(labels[i]+" "+dims[i], px, py);
+  }
+}
+
+function roundRect(x, a, b, w, h, r){
+  x.beginPath();
+  x.moveTo(a+r,b); x.arcTo(a+w,b,a+w,b+h,r); x.arcTo(a+w,b+h,a,b+h,r);
+  x.arcTo(a,b+h,a,b,r); x.arcTo(a,b,a+w,b,r); x.closePath();
+}
+function wrapCenter(x, txt, cx, y0, maxW, lineH, maxLines){
+  const chars = txt.split("");
+  let line = "", lines = [];
+  for(const ch of chars){
+    if(x.measureText(line+ch).width > maxW){ lines.push(line); line = ch; }
+    else line += ch;
+  }
+  lines.push(line);
+  if(lines.length > maxLines){ lines = lines.slice(0,maxLines); lines[maxLines-1] += "…"; }
+  const startY = y0 - (lines.length - 1) * lineH / 2;
+  lines.forEach((l,i)=>{ x.fillText(l, cx, startY + i*lineH); });
+}
+
+/* ---------- 启动 ---------- */
+renderGallery();
+// 支持从首页直接带 ?full=1 进来（比如发货时给的直链）
+if (location.search.indexOf("full=1") >= 0) setTimeout(openCode, 300);
+</script>
+</body>
+</html>
