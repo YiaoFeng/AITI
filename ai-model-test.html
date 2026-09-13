@@ -544,12 +544,29 @@ function finish(){
     h += `<div class="card"><div class="sec-t"><span class="n">5</span>月成本怎么算</div>
       <div id="cost-body">${costBlock(top, w)}</div></div>`;
 
+    /* 档位建议：同一款模型内部自己调，比换模型省事得多。
+       接口不用换、输出风格不变，只是把内部思考的深度降一档。
+       没有档位数据的模型（4 款）跳过这一块，编号也不留空。 */
+    let nRoute = 6;
+    if(top.tier){
+      nRoute = 7;
+      const t = top.tier;
+      h += `<div class="card"><div class="sec-t"><span class="n">6</span>这款还能再省一点</div>
+        <div class="muted" style="margin-bottom:12px">不用换模型——${esc(top.name)} 自己就能调，接口和输出风格都不变。</div>
+        <div class="tier knob"><div class="ic">调</div><div class="tx">
+          <b>${esc(t.label)}：${esc(t.how)}</b>
+          <p>${esc(t.advice)}。${esc(t.why)}。</p></div></div>
+        <div class="muted" style="margin-top:10px;font-size:12.5px">
+          具体能省多少要看你的任务长短，拿账单比一比就知道了。</div>
+      </div>`;
+    }
+
     /* 升降档 */
     const richer = rankAll(w, {cost:-3})[0];
     const cheaper = rankAll(w, {cost:6})[0];
     const upIsTop = richer.name === top.name;
     const downIsTop = cheaper.name === top.name;
-    h += `<div class="card"><div class="sec-t"><span class="n">6</span>升档 / 降档路线</div>
+    h += `<div class="card"><div class="sec-t"><span class="n">${nRoute}</span>升档 / 降档路线</div>
       <div class="tier"><div class="ic">↑</div><div class="tx"><b>${
         upIsTop ? '已经在能力最强档，不用再升' : '预算宽松了，换 ' + esc(richer.name)}</b>
         <p>${esc(upIsTop ? '你现在的选择就是不计成本时的最优解。'
