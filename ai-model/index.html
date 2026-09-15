@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
 <title>AI 大模型选型测试 · 找到最适合你的那一款</title>
-<meta name="description" content="12 道题免费测，30 道题出完整报告：从 29 款主流大模型里算出最匹配你需求的那一款。">
+<meta name="description" content="12 道题测出初步结果，30 道题出完整报告：从 29 款主流大模型里算出最匹配你需求的那一款。">
 <link rel="icon" href="data:,">
 <script>
   // 分享卡片/生成图用不到，但手机端需要它阻止 favicon 404
@@ -204,14 +204,14 @@
       <div><b>12/30</b><span>题两档</span></div>
     </div>
     <div style="margin-top:20px">
-      <button class="btn" id="go-light">免费测 · 12 题</button>
+      <button class="btn" id="go-light">测 12 题体验版</button>
       <div style="height:11px"></div>
       <button class="btn ghost" id="go-full">我有验证码 · 完整版 30 题</button>
     </div>
     <div class="how">
       <h3>两档有什么区别</h3>
       <ul>
-        <li><b>12 题（免费）</b>：算出最匹配你的 1 款模型 + 匹配理由</li>
+        <li><b>12 题（体验版）</b>：算出最匹配你的 1 款模型 + 匹配理由</li>
         <li><b>30 题（完整版）</b>：多 18 道细分题，出 Top3 对比、档位建议、月成本测算、升降档方案，报告可存成图片</li>
         <li>两档共用同一套模型库，题目不重复，先测 12 题也能补完剩下 18 题</li>
       </ul>
@@ -236,7 +236,7 @@
       <p class="hint" id="code-hint">输入后立即开始完整版测试</p>
       <button class="btn" id="code-go">开始完整版测试</button>
       <div style="height:11px"></div>
-      <button class="btn ghost small" id="code-light">先做免费的 12 题</button>
+      <button class="btn ghost small" id="code-light">先做 12 题</button>
     </div>
   </section>
 
@@ -245,7 +245,7 @@
     <div class="qbar">
       <div class="qmeta">
         <span id="q-count">第 1 / 12 题</span>
-        <span id="q-tier">免费版</span>
+        <span id="q-tier">12 题版</span>
       </div>
       <div class="qprog"><i id="q-prog"></i></div>
     </div>
@@ -418,7 +418,7 @@ function renderQ(){
   const q = S.questions[S.idx];
 
   $('#q-count').textContent = `第 ${S.idx+1} / ${total} 题`;
-  $('#q-tier').textContent = S.tier==='full' ? '完整版' : '免费版';
+  $('#q-tier').textContent = S.tier==='full' ? '完整版' : '12 题版';
   $('#q-prog').style.width = ((S.idx)/total*100) + '%';
   $('#q-text').textContent = q.text;
   $('#q-sub').textContent = '选一个最接近你情况的';
@@ -460,7 +460,7 @@ function finish(){
   const need = Object.entries(w).filter(([k,v])=>v>0).sort((a,b)=>b[1]-a[1]);
   const maxNeed = need.length ? need[0][1] : 1;
 
-  $('#r-kicker').textContent = light ? '免费版 · 初步结果' : '完整版 · 选型报告';
+  $('#r-kicker').textContent = light ? '12 题版 · 初步结果' : '完整版 · 选型报告';
   $('#r-title').textContent = light ? '最匹配你的模型' : '为你算出的选型方案';
   // 这次测试的完成时间，报告顶部和存下来的图片共用同一个，不留两套时间
   S.finishedAt = new Date();

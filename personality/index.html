@@ -201,11 +201,11 @@
     <h1>16 个 AI 职业人格<br>你是<span class="hl">哪一个</span>？</h1>
     <div class="sub">先看看下面这 16 个角色，猜猜你会是哪个，再往下开始测。</div>
     <div class="meta">
-      <span class="free">12 题免费</span>
+      <span class="free">12 题体验版</span>
       <span>3 分钟出结果</span>
       <span>30 题完整版</span>
     </div>
-    <button class="btn" onclick="startQuiz('light')">开始测试（12 题免费）▸</button>
+    <button class="btn" onclick="startQuiz('light')">开始测试（12 题）▸</button>
     <button class="btn ghost" onclick="openCode()">我有验证码 · 直接测完整版 30 题</button>
 
     <div class="gal-title">先认识这 16 个角色</div>
@@ -883,7 +883,7 @@ function showResult(){
   // 12 题时记一下当时判的是谁，完整版里对比用
   if(!isFull) S.liteRole = R.n;
 
-  $("rtag").textContent = isFull ? 'AI 预言 · 完整版 30 题' : 'AI 预言 · 免费版 12 题';
+  $("rtag").textContent = isFull ? 'AI 预言 · 完整版 30 题' : 'AI 预言 · 12 题版';
   $("rname").textContent = R.n;
   $("rdom").textContent = R.d;
 
@@ -1070,7 +1070,7 @@ function renderShareCard(R, isFull, cb){
   x.fillText("AI 职业人格测试", 52+123, 52+28);
 
   x.fillStyle = "#383931"; x.font = "900 42px "+F;
-  x.fillText(isFull ? "完整版报告 · 30 题" : "免费版结果 · 12 题", W/2, 158);
+  x.fillText(isFull ? "完整版报告 · 30 题" : "12 题版结果", W/2, 158);
 
   x.fillStyle = "#944735"; x.font = "900 78px "+F;
   x.fillText(R.n, W/2, 238);
