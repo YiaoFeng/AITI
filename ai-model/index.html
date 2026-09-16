@@ -204,9 +204,9 @@
       <div><b>12/30</b><span>题两档</span></div>
     </div>
     <div style="margin-top:20px">
-      <button class="btn" id="go-light">测 12 题体验版</button>
+      <button class="btn" id="go-light">输入验证码 · 12 题体验版</button>
       <div style="height:11px"></div>
-      <button class="btn ghost" id="go-full">我有验证码 · 完整版 30 题</button>
+      <button class="btn ghost" id="go-full">输入验证码 · 完整版 30 题</button>
     </div>
     <div class="how">
       <h3>两档有什么区别</h3>
@@ -214,6 +214,7 @@
         <li><b>12 题（体验版）</b>：算出最匹配你的 1 款模型 + 匹配理由</li>
         <li><b>30 题（完整版）</b>：多 18 道细分题，出 Top3 对比、档位建议、月成本测算、升降档方案，报告可存成图片</li>
         <li>两档共用同一套模型库，题目不重复，先测 12 题也能补完剩下 18 题</li>
+        <li>两个档位各需一个验证码，下单后由卖家单独发给你</li>
       </ul>
     </div>
     <div class="foot">
@@ -226,17 +227,15 @@
   <section class="screen" id="s-code">
     <div class="code-box">
       <button class="back" id="code-back">‹ 返回</button>
-      <h2>输入验证码</h2>
+      <h2 id="code-title">输入验证码</h2>
       <p class="muted">验证码是 AIM-XXXXX-XXXXX 格式，一个码只能解锁一次</p>
       <div class="code-wrap">
         <span class="pfx">AIM-</span>
         <input id="code-input" maxlength="20" autocomplete="off" autocapitalize="characters"
                spellcheck="false" placeholder="XXXXX-XXXXX" inputmode="text">
       </div>
-      <p class="hint" id="code-hint">输入后立即开始完整版测试</p>
-      <button class="btn" id="code-go">开始完整版测试</button>
-      <div style="height:11px"></div>
-      <button class="btn ghost small" id="code-light">先做 12 题</button>
+      <p class="hint" id="code-hint">输入后立即开始测试</p>
+      <button class="btn" id="code-go">开始测试</button>
     </div>
   </section>
 
@@ -281,7 +280,7 @@
 <script>
 /* ═══════════════════════════════════════════════════════
    配置：后端地址（Cloudflare 隧道 / 将来的域名）
-   留空则完整版无法验证，免费版不受影响
+   留空则两档都进不去（两个档位都要校验验证码）
    ═══════════════════════════════════════════════════════ */
 const API_PROD = window.QUIZ_API || '';   // 由 config.js 提供（隧道地址变了只改那个文件）
 const IS_LOCAL = ['127.0.0.1','localhost',''].includes(location.hostname)
@@ -299,7 +298,8 @@ const DIM_CN = {
 
 /* ── 状态 ── */
 const S = {
-  tier:'light',      // light | full
+  tier:'light',      // 实际解锁到的档位 light | full
+  need:'light',      // 这次要解锁哪一档，决定验证码怎么校验
   idx:0,
   answers:{},        // qid -> 选项下标
   questions:[],
@@ -364,10 +364,22 @@ function rankAll(w, override){
 }
 
 /* ── 流程 ── */
-$('#go-light').onclick = ()=>{ S.tier='light'; S.idx=0; S.answers={}; S.resume=false; renderQ(); show('s-quiz'); };
-$('#go-full').onclick  = ()=>{ S.code=''; S.resume=false; show('s-code'); };   // 从首页进来=全新开始
+/* 两档都要验证码，区别只在 need —— 拿体验版的码去开完整版会被后端拦下。 */
+$('#go-light').onclick = ()=>{ S.need='light'; S.resume=false; paintCodePage(); show('s-code'); };
+$('#go-full').onclick  = ()=>{ S.need='full';  S.resume=false; paintCodePage(); show('s-code'); };  // 从首页进来=全新开始
 $('#code-back').onclick= ()=> show('s-home');
-$('#code-light').onclick=()=>{ S.tier='light'; S.idx=0; S.answers={}; S.resume=false; renderQ(); show('s-quiz'); };
+
+/* 验证码页的文案跟着 need 走，让买家一眼知道自己在解锁哪一档 */
+function paintCodePage(){
+  const full = S.need === 'full';
+  $('#code-title').textContent = full ? '输入验证码 · 完整版' : '输入验证码 · 体验版';
+  $('#code-go').textContent    = full ? '开始完整版测试' : '开始 12 题体验版';
+  $('#code-hint').className = 'hint';
+  $('#code-hint').textContent = full
+    ? '输入后立即开始完整版 30 题测试'
+    : '输入后立即开始 12 题体验版测试';
+  $('#code-input').value = '';
+}
 
 /* 输入框里只放 10 位内容，AIM- 前缀固定显示。
    粘贴完整码时自动剥掉前缀（真码字符集不含 I，所以开头的 AIM 一定是前缀）。 */
@@ -380,7 +392,8 @@ $('#code-input').addEventListener('input', e=>{
   const v = readCodeInput();
   e.target.value = v.length > 5 ? v.slice(0,5)+'-'+v.slice(5) : v;
   $('#code-hint').className = 'hint';
-  $('#code-hint').textContent = '输入后立即开始完整版测试';
+  $('#code-hint').textContent = S.need === 'full'
+    ? '输入后立即开始完整版 30 题测试' : '输入后立即开始 12 题体验版测试';
 });
 $('#code-input').addEventListener('keydown', e=>{ if(e.key==='Enter') $('#code-go').click(); });
 
@@ -396,13 +409,18 @@ $('#code-go').onclick = async ()=>{
   try{
     const r = await fetch(CONFIG.apiBase.replace(/\/$/,'') + '/api/verify', {
       method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({code})
+      body: JSON.stringify({code, need:S.need})
     }).then(r=>r.json());
     if(!r.ok){ hint.className='hint err'; hint.textContent = r.msg || '验证失败'; return; }
-    hint.className='hint ok'; hint.textContent='验证通过，开始完整版测试';
-    S.code = code; S.tier = 'full';
+    /* 码的档位可能比请求的更高（拿完整版的码来开体验版），以后端返回的 scope 为准 */
+    S.tier = r.scope === 'full' ? 'full' : 'light';
+    S.code = code;
+    const gotFull = S.tier === 'full';
+    hint.className='hint ok';
+    hint.textContent = gotFull ? '验证通过，开始完整版测试' : '验证通过，开始 12 题体验版';
     // 从结果页解锁进来的：保留已答的前 12 题，从第 13 题接着答；
     // 从首页直接输码的：从头开始。
+    // resume 那条路 need 恒为 full，能过的码也必然是 full，不会出现降档。
     if(S.resume){ S.resume = false; } else { S.idx = 0; S.answers = {}; }
     setTimeout(()=>{ renderQ(); show('s-quiz'); }, 420);
   }catch(e){
@@ -600,7 +618,7 @@ function finish(){
   show('s-result');
 
   if(light){
-    $('#unlock').onclick = ()=>{ S.code=''; S.resume=true; show('s-code'); };
+    $('#unlock').onclick = ()=>{ S.code=''; S.resume=true; S.need='full'; paintCodePage(); show('s-code'); };
     // 已答过前 12 题，解锁后从第 13 题接着答
     S.idx = CONFIG.lightCount;
   } else {
@@ -708,13 +726,13 @@ function costBand(c){
   return '¥1500 以上 / 月';
 }
 
-/* ── 上报（完整版带码，免费版匿名） ── */
+/* ── 上报（两档都带码，方便回溯是哪一档卖出去的） ── */
 function report(top, w){
   if(!CONFIG.apiBase) return;
   fetch(CONFIG.apiBase.replace(/\/$/,'') + '/api/result', {
     method:'POST', headers:{'Content-Type':'application/json'},
     body: JSON.stringify({
-      tier:S.tier, code:S.tier==='full'?S.code:null,
+      tier:S.tier, code:S.code || null,
       answers:S.answers,
       result:{ recommend:[{name:top.name, match:+top.match.toFixed(1)}], weights:w }
     })
