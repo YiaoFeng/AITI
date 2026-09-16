@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>AI 职业人格测试</title>
+<link rel="icon" href="data:,">
 <style>
   :root {
     --bg: #F8F9F1;
@@ -205,8 +206,8 @@
       <span>3 分钟出结果</span>
       <span>30 题完整版</span>
     </div>
-    <button class="btn" onclick="startQuiz('light')">开始测试（12 题）▸</button>
-    <button class="btn ghost" onclick="openCode()">我有验证码 · 直接测完整版 30 题</button>
+    <button class="btn" onclick="openCode('light')">输入验证码 · 12 题体验版</button>
+    <button class="btn ghost" onclick="openCode('full')">输入验证码 · 完整版 30 题</button>
 
     <div class="gal-title">先认识这 16 个角色</div>
     <div class="grid" id="ggrid"></div>
@@ -247,7 +248,7 @@
 
     <div class="jobs" id="rjobs"></div>
 
-    <!-- 免费版：锁定区 -->
+    <!-- 体验版：锁定区 -->
     <div class="locked hidden" id="locked">
       <div class="lk">🔒</div>
       <div class="lt">完整版还有 5 块内容</div>
@@ -259,7 +260,7 @@
         <li>你这种性格该怎么用 AI，具体到每一句怎么问</li>
         <li>一份可以存下来的完整报告图</li>
       </ul>
-      <button class="btn lock" onclick="openCode()">输入验证码 · 继续答 18 题</button>
+      <button class="btn lock" onclick="openCode('full')">输入验证码 · 继续答 18 题</button>
       <button class="btn ghost" onclick="window.scrollTo({top:0,behavior:'smooth'})">先不测，回到顶部</button>
     </div>
 
@@ -289,8 +290,8 @@
   <div class="modal">
     <button class="close" onclick="closeCode()">×</button>
     <div class="box">
-      <div class="bt">输入验证码<br>解锁完整版 30 题</div>
-      <div class="bs">一个验证码只能用一次。<br>已经答过的题不用重做，直接从第 13 题接着答。</div>
+      <div class="bt" id="codetitle">输入验证码<br>解锁完整版 30 题</div>
+      <div class="bs" id="codesub">一个验证码只能用一次。<br>已经答过的题不用重做，直接从第 13 题接着答。</div>
       <input id="codein" class="code-input" placeholder="PER-XXXXX-XXXXX" maxlength="20" autocomplete="off" spellcheck="false">
       <div class="code-err" id="codeerr"></div>
       <div class="code-ok" id="codeok"></div>
@@ -303,7 +304,7 @@
 <script>
 /* ============================================================
  *  AI 职业人格测试 —— 双档版
- *  免费 12 题：给最匹配的角色 + 匹配度 + 三个特质 + 关系网
+ *  12 题体验版：给最匹配的角色 + 匹配度 + 三个特质 + 关系网（需验证码）
  *  完整 30 题：多给相近人格对照 / 短板 / 职业路径 / AI 用法 / 完整报告图
  *
  *  数据层在下面，题目和角色都写在这儿；判分在 judge() 里。
@@ -560,12 +561,12 @@ const ROLES = [
 ];
 
 /* ---------- 30 道题 ----------
-   前 12 题 = 免费版；13-30 = 完整版追加。
+   前 12 题 = 体验版；13-30 = 完整版追加。
    o[].r 指向 ROLES 下标。每个人格在选项里出现的次数经过配平，
    判定时再按出现次数归一化（见 judge），不会偏向任何一个人格。
 */
 const QUIZ = [
-  // ── 免费版 12 题 ──
+  // ── 体验版 12 题 ──
   { q:"周末你最想做什么？", o:[
     { t:"研究一个新 AI 工具怎么玩", r:1 },
     { t:"做点好看的设计 / 图", r:2 },
@@ -720,7 +721,7 @@ const QUIZ = [
     { t:"想到就能做出来的人", r:6 } ] }
 ];
 
-const LIGHT_N = 12;   // 免费版题数
+const LIGHT_N = 12;   // 体验版题数
 const FULL_N = 30;    // 完整版题数
 const KEYS = ["A","B","C","D"];
 
@@ -731,17 +732,19 @@ const KEYS = ["A","B","C","D"];
 const API_BASE = ((window.QUIZ_API || '') + '').replace(/\/$/, '');
 
 const API = {
-  /** 校验验证码：由后端原子核销，一个码只能用一次 */
-  async verifyCode(code) {
+  /** 校验验证码：由后端原子核销，一个码只能用一次。
+   *  need 是这一档要解锁到哪（light=12 题体验版 / full=30 题完整版）——
+   *  体验版的码开不了完整版，后端会拦下并返回码的实际档位。 */
+  async verifyCode(code, need) {
     if (!API_BASE) return { ok:false, msg:"后端地址没配置，请联系我" };
     try {
       const r = await fetch(API_BASE + '/api/verify', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ code: code })
+        body: JSON.stringify({ code: code, need: need || 'full' })
       });
       const j = await r.json();
-      return { ok: !!j.ok, msg: j.msg || '' };
+      return { ok: !!j.ok, msg: j.msg || '', scope: j.scope || null };
     } catch (e) {
       return { ok:false, msg:"连不上服务器，检查网络后重试" };
     }
@@ -766,7 +769,8 @@ const API = {
 const S = {
   answers: new Array(FULL_N).fill(-1),
   cur: 0,
-  tier: 'light',      // light=免费 12 题；full=完整 30 题
+  tier: 'light',      // 实际解锁到的档位 light=12 题体验版；full=完整 30 题
+  need: 'full',       // 这次要解锁哪一档，决定验证码怎么校验
   upto: LIGHT_N,      // 这一档一共答多少题
   liteRole: '',       // 12 题时的结果，用于在完整版里提示「前后是否一致」
   code: ''
@@ -899,7 +903,7 @@ function showResult(){
   $("radar").innerHTML = radarSVG(R.dim, DIMS);
   $("rrel").innerHTML = relHTML(R);
 
-  // 免费版出锁定区，完整版出追加模块
+  // 体验版出锁定区，完整版出追加模块
   $("locked").classList.toggle("hidden", isFull);
   $("fullmod").classList.toggle("hidden", !isFull);
   if(isFull) renderFull(R);
@@ -952,10 +956,21 @@ function relHTML(R){
 }
 
 /* ---------- 验证码 ---------- */
-function openCode(){
+function openCode(need){
+  S.need = (need === 'light') ? 'light' : 'full';
+  const full = S.need === 'full';
+  /* 两个档位各用各的码，弹层文案跟着走，别让人以为一个码通吃 */
+  $("codetitle").innerHTML = full ? "输入验证码<br>解锁完整版 30 题"
+                                  : "输入验证码<br>解锁 12 题体验版";
+  $("codesub").innerHTML = full
+    ? "一个验证码只能用一次。<br>已经答过的题不用重做，直接从第 13 题接着答。"
+    : "一个验证码只能用一次。<br>答完 12 题先出方向，想看得更细再解锁完整版。";
+  $("codebtn").textContent = full ? "解锁 · 继续测" : "解锁 · 开始测试";
   $("codemask").classList.remove("hidden");
   $("codeerr").textContent = "";
   $("codeok").textContent = "";
+  // 清空上一次留下的内容：输错码或换档位再点开时，旧内容会和新手打的码拼在一起
+  $("codein").value = "";
   setTimeout(()=>$("codein").focus(), 100);
 }
 function closeCode(){ $("codemask").classList.add("hidden"); }
@@ -969,15 +984,19 @@ async function submitCode(){
   if(!/^[A-Z]{3}-/.test(raw)) raw = "PER-" + raw;
 
   const btn = $("codebtn");
+  const btnLabel = btn.textContent;
   btn.disabled = true; btn.textContent = "校验中…";
-  const res = await API.verifyCode(raw);
-  btn.disabled = false; btn.textContent = "解锁 · 继续测";
+  const res = await API.verifyCode(raw, S.need);
+  btn.disabled = false; btn.textContent = btnLabel;
 
   if(!res.ok){ err.textContent = res.msg; return; }
   S.code = raw;
-  ok.textContent = "验证通过，正在进入完整版…";
+  /* 码的档位可能比请求的更高（拿完整版的码去开 12 题），以后端返回的 scope 为准 */
+  const gotFull = res.scope === 'full';
+  ok.textContent = gotFull ? "验证通过，正在进入完整版…" : "验证通过，正在开始 12 题…";
   setTimeout(()=>{
     closeCode();
+    if(!gotFull){ startQuiz('light'); return; }
     // 已经答到中途解锁的，从第 13 题接着答；还没开始答的，从第 1 题开始
     if(S.answers.slice(0, LIGHT_N).every(a => a === -1)) startQuiz('full');
     else resumeFull();
@@ -1025,7 +1044,7 @@ function radarSVG(dims, labels){
 
 /* ============================================================
  *  报告卡（Canvas，可长按保存 / 下载）
- *  免费版 750×1334，完整版 750×1760（多画相近人格和 AI 用法）
+ *  体验版 750×1334，完整版 750×1760（多画相近人格和 AI 用法）
  * ============================================================ */
 function renderShareCard(R, isFull, cb){
   const W = 750;
@@ -1232,7 +1251,7 @@ function wrapCenter(x, txt, cx, y0, maxW, lineH, maxLines){
 /* ---------- 启动 ---------- */
 renderGallery();
 // 支持从首页直接带 ?full=1 进来（比如发货时给的直链）
-if (location.search.indexOf("full=1") >= 0) setTimeout(openCode, 300);
+if (location.search.indexOf("full=1") >= 0) setTimeout(()=>openCode("full"), 300);
 </script>
 </body>
 </html>
