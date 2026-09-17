@@ -23,17 +23,17 @@
   }
   .wrap{width:100%;max-width:520px}
 
-  /* 票根：上下两条撕口用 mask 打出一排半圆缺口 */
+  /* 票根：上下两条撕口，用桌面色的一排半圆压出缺口。
+     别改回 mask——mask 的透明区是「一格里除内切圆以外的部分」，重复出来
+     是锯齿不是缺口；这里直接画实心圆，圆就是缺口本来的样子。 */
   .ticket{
     background:var(--paper); padding:34px 28px 30px; position:relative;
     box-shadow:0 10px 30px rgba(43,43,38,.12);
   }
   .ticket::before,.ticket::after{
-    content:''; position:absolute; left:0; right:0; height:14px; background:var(--desk);
-    -webkit-mask-image:radial-gradient(circle at 7px 7px, transparent 7px, #000 7px);
-    -webkit-mask-size:14px 14px; -webkit-mask-repeat:repeat-x;
-    mask-image:radial-gradient(circle at 7px 7px, transparent 7px, #000 7px);
-    mask-size:14px 14px; mask-repeat:repeat-x;
+    content:''; position:absolute; left:0; right:0; height:14px;
+    background-image:radial-gradient(circle at 7px 7px, var(--desk) 6.5px, transparent 7px);
+    background-size:14px 14px; background-repeat:repeat-x;
   }
   .ticket::before{top:-7px}
   .ticket::after{bottom:-7px}
@@ -312,10 +312,16 @@ function calc(){
   for (let i = 0; i < N; i++){
     const a = S.answers[i];
     if (a < 0) continue;
+    // 分母是「这一题在该维度上最多能拿几分」= 该维度选项里的最高分值，
+    // 每题每维度只加一次。早先写成每扫到一个选项就 +3，而本题四个选项
+    // 同属一个维度，分母被加了四遍、分数压到四分之一，结果任何作答都
+    // 只能落在 20 出头，五个档位里有四个是永远到不了的。
+    const best = {};
     QUIZ[i].o.forEach((o, idx) => {
-      full[o[2]] += 3;
+      best[o[2]] = Math.max(best[o[2]] || 0, o[1]);
       if (idx === a) raw[o[2]] += o[1];
     });
+    for (const k in best) full[k] += best[k];
   }
   const val = {};
   DIMS.forEach(d => {
