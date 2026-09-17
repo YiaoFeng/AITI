@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>你在感情里缺什么 · AI榜老冯</title>
+<link rel="icon" href="data:,">
+<style>
+  /* 深夜情绪：深蓝渐变底 + 暖橘强调 + 宋体正文。
+     和恋爱脑那套票根风刻意拉开——同一系列的两张脸，不该长得像。 */
+  :root{
+    --bg1:#24304A;
+    --bg2:#131B2A;
+    --bg3:#0B111C;
+    --ink:#EAE5DB;
+    --mid:#9FABBF;
+    --dim:#7E8AA3;
+    --line:#3A465E;
+    --hot:#FF9165;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  body{
+    background:radial-gradient(120% 80% at 78% 4%, var(--bg1) 0%, var(--bg2) 46%, var(--bg3) 100%);
+    background-attachment:fixed;
+    color:var(--ink); min-height:100vh; padding:40px 22px 56px;
+    font-family:"Songti SC","SimSun","STSong",serif;
+    display:flex; justify-content:center;
+  }
+  .wrap{width:100%;max-width:520px}
+  .hidden{display:none !important}
+
+  .back{display:inline-block; font-size:13px; color:var(--dim); text-decoration:none;
+        letter-spacing:2px; margin-bottom:34px}
+  .kicker{font-size:12px; letter-spacing:8px; color:var(--dim)}
+  .title{font-size:34px; line-height:1.35; margin-top:14px; letter-spacing:2px}
+  .hair{height:1px; background:var(--line); margin:28px 0}
+  .lead{font-size:16px; line-height:2; color:var(--mid); margin-top:18px}
+  .pts{list-style:none; margin-top:20px}
+  .pts li{font-size:15px; line-height:1.95; color:var(--mid); padding-left:22px; position:relative;
+          margin-bottom:8px}
+  .pts li::before{content:'—'; position:absolute; left:0; color:var(--dim)}
+  .fine{font-size:12px; line-height:1.9; color:var(--dim); margin-top:22px}
+
+  .btn{
+    display:block; width:100%; margin-top:28px; padding:17px 16px;
+    background:none; border:1px solid var(--hot); color:var(--hot);
+    font-size:16px; letter-spacing:3px; font-family:inherit; cursor:pointer;
+  }
+  .btn:active{background:rgba(255,145,101,.1)}
+  .btn:disabled{opacity:.4}
+  .btn.solid{background:var(--hot); color:var(--bg2); font-weight:700}
+  .btn.ghost{border-color:var(--line); color:var(--mid); padding:14px 16px; font-size:14px}
+
+  /* ---------- 答题 ---------- */
+  .prog{display:flex; align-items:center; gap:14px; margin-bottom:34px}
+  .ptrack{flex:1; height:2px; background:var(--line)}
+  .pfill{height:100%; background:var(--hot); width:0; transition:width .25s}
+  .pnum{font-size:12px; letter-spacing:2px; color:var(--dim)}
+  .q{font-size:20px; line-height:1.75; margin-bottom:30px; letter-spacing:1px}
+  .opt{
+    display:block; width:100%; text-align:left; background:none;
+    border:none; border-bottom:1px solid var(--line); padding:17px 4px;
+    font-family:inherit; font-size:15px; line-height:1.7; color:var(--mid); cursor:pointer;
+    transition:color .15s;
+  }
+  .opt:last-child{border-bottom:none}
+  .opt.sel{color:var(--hot)}
+  .opt.sel::before{content:'· '; color:var(--hot)}
+  .nav{display:flex; gap:12px; margin-top:26px}
+
+  /* ---------- 结果 ---------- */
+  .rlabel{font-size:13px; letter-spacing:6px; color:var(--dim)}
+  .rneed{font-size:52px; line-height:1.3; margin-top:16px; color:var(--hot); letter-spacing:4px}
+  .r2nd{font-size:14px; color:var(--mid); margin-top:14px; letter-spacing:1px}
+  .rverdict{font-size:17px; line-height:2; color:var(--ink); margin-top:26px}
+
+  .bars{margin-top:30px}
+  .bar{display:grid; grid-template-columns:74px 1fr 42px; align-items:center; gap:14px;
+       margin-bottom:16px}
+  .bar span{font-size:14px; color:var(--mid)}
+  .bar b{font-size:14px; text-align:right; color:var(--hot)}
+  .bar.hot span{color:var(--ink)}
+  .track{height:4px; background:#2A3346}
+  .track i{display:block; height:100%; background:linear-gradient(90deg,#8A6A52,#FF9165)}
+
+  .block{margin-top:34px}
+  .bt{font-size:15px; letter-spacing:3px; color:var(--hot); margin-bottom:14px}
+  .bd{font-size:15.5px; line-height:2.05; color:var(--mid)}
+  .bd+.bd{margin-top:12px}
+  .bd em{font-style:normal; color:var(--ink)}
+
+  .shareimg{width:100%; display:block; margin-top:18px}
+  .dl{display:inline-block; margin-top:14px; font-size:13px; color:var(--mid);
+      text-decoration:none; border-bottom:1px solid var(--line); padding-bottom:3px}
+  .footnote{font-size:12px; line-height:2; color:var(--dim); margin-top:34px; text-align:center}
+
+  /* ---------- 验证码弹层 ---------- */
+  .mask{position:fixed; inset:0; background:rgba(6,10,18,.85); display:flex;
+        align-items:center; justify-content:center; padding:20px; z-index:50}
+  .modal{background:#161F30; border:1px solid var(--line); width:100%; max-width:400px;
+         padding:32px 26px 28px; position:relative}
+  .modal .x{position:absolute; top:10px; right:16px; background:none; border:none;
+            font-size:24px; color:var(--dim); cursor:pointer; line-height:1}
+  .mt{font-size:20px; line-height:1.6; letter-spacing:2px}
+  .ms{font-size:13px; line-height:1.9; color:var(--mid); margin-top:12px}
+  .codein{width:100%; margin-top:20px; padding:16px 14px; background:#0F1725;
+          border:1px solid var(--line); color:var(--ink); font-size:16px;
+          font-family:Consolas,"Courier New",monospace; letter-spacing:2px;
+          outline:none; text-transform:uppercase}
+  .codein::placeholder{color:#4C5A73}
+  .codein:focus{border-color:var(--hot)}
+  .cerr{font-size:13px; color:var(--hot); margin-top:12px; min-height:18px}
+  .cok{font-size:13px; color:#8FBF9A; margin-top:12px; min-height:18px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back" href="../index.html">‹ 全部测试</a>
+
+  <!-- ============ 首页 ============ -->
+  <div id="welcome">
+    <div class="kicker">WHAT YOU'RE MISSING</div>
+    <div class="title">你在感情里<br>缺什么</div>
+    <div class="hair"></div>
+    <div class="lead">12 道题，不给你打分，只给你一个排序。<br>
+      看看你一直在找的，到底是哪一样东西。</div>
+    <ul class="pts">
+      <li>六个方向：安全感 / 被看见 / 自由 / 确认感 / 被需要 / 陪伴感</li>
+      <li>凭第一反应选，别想太久，想太久就不是你的答案了</li>
+      <li>出结果后告诉你：这个缺口是怎么来的，以及怎么补</li>
+    </ul>
+    <button class="btn solid" onclick="openCode()">输入验证码 · 开始测</button>
+    <div class="fine">本测试为娱乐向内容，结果不构成任何心理或情感建议。</div>
+  </div>
+
+  <!-- ============ 答题 ============ -->
+  <div id="quizpage" class="hidden">
+    <div class="prog">
+      <div class="ptrack"><div class="pfill" id="pfill"></div></div>
+      <div class="pnum" id="pnum">01 / 12</div>
+    </div>
+    <div class="q" id="qtext"></div>
+    <div id="opts"></div>
+    <div class="nav">
+      <button class="btn ghost" id="prevbtn" onclick="prevQ()">上一题</button>
+      <button class="btn ghost" id="nextbtn" onclick="nextQ()">下一题</button>
+    </div>
+  </div>
+
+  <!-- ============ 结果 ============ -->
+  <div id="result" class="hidden">
+    <div class="kicker">WHAT YOU'RE MISSING</div>
+    <div class="hair"></div>
+    <div class="rlabel">你最缺的是</div>
+    <div class="rneed" id="rneed">被看见</div>
+    <div class="r2nd" id="r2nd"></div>
+    <div class="rverdict" id="rverdict"></div>
+
+    <div class="bars" id="rbars"></div>
+
+    <div class="block">
+      <div class="bt">这个缺口是怎么来的</div>
+      <div class="bd" id="rwhy"></div>
+    </div>
+
+    <div class="block">
+      <div class="bt">它在关系里会怎么表现</div>
+      <div id="rhow"></div>
+    </div>
+
+    <div class="block">
+      <div class="bt">缺口的另一面</div>
+      <div class="bd" id="rgood"></div>
+    </div>
+
+    <div class="block">
+      <div class="bt">可以试试这两件事</div>
+      <div id="rfix"></div>
+    </div>
+
+    <div class="hair"></div>
+    <div class="bt">这张图可以存下来</div>
+    <img class="shareimg" id="shareimg" alt="你在感情里缺什么">
+    <div style="text-align:center"><a class="dl" id="dl" download="你在感情里缺什么.png">下载这张图</a></div>
+
+    <div class="footnote">
+      本测试为娱乐向内容，结果不构成任何心理或情感建议。<br>
+      <b>AI榜老冯</b>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============ 验证码弹层 ============ -->
+<div id="codemask" class="mask hidden">
+  <div class="modal">
+    <button class="x" onclick="closeCode()">×</button>
+    <div class="mt">输入验证码<br>开始测</div>
+    <div class="ms">一个验证码只能用一次。<br>答完 12 题直接出结果。</div>
+    <input id="codein" class="codein" placeholder="QUE-XXXXX-XXXXX" maxlength="20"
+           autocomplete="off" spellcheck="false">
+    <div class="cerr" id="cerr"></div>
+    <div class="cok" id="cok"></div>
+    <button class="btn solid" id="codebtn" onclick="submitCode()">解锁 · 开始测</button>
+  </div>
+</div>
+
+<script src="../config.js"></script>
+<script>
+/* ============================================================
+ *  你在感情里缺什么 —— 12 题单档
+ *  迫选法：每题 4 个选项，各指向一个缺项，选一次 +3 分。
+ *  六个缺项在 12 道题里各出现 8 次，位置也被配平过（见生成脚本）。
+ * ============================================================ */
+const NEEDS = [{"k": "safe", "n": "安全感", "d": "要确定性，最怕「不确定」"}, {"k": "seen", "n": "被看见", "d": "要被理解，被注意到细节"}, {"k": "free", "n": "自由", "d": "要空间，怕被关系绑住"}, {"k": "sure", "n": "确认感", "d": "要明确表态，「我们到底算什么」"}, {"k": "need", "n": "被需要", "d": "要感到自己重要、被依赖"}, {"k": "with", "n": "陪伴感", "d": "要人在场，一起做点什么"}];
+const QUIZ  = [{"q": "忙了一整天，晚上终于拿起手机，你最希望看到他发来什么？", "o": [["知道他今天在哪、在干嘛", "safe"], ["记得你提过的那件小事", "seen"], ["什么都不用发，各自安好", "free"], ["明确说下次什么时候见", "sure"]]}, {"q": "你跟他说了一件让你很在意的事，你希望他怎么回应？", "o": [["认真听完，说出你在意的那个点", "seen"], ["不急着给建议，让你自己说够", "free"], ["直接告诉你他的态度", "sure"], ["说「这事还得是你」", "need"]]}, {"q": "周末两天，你理想中的相处方式是？", "o": [["各干各的，想见再约", "free"], ["提前说好哪天见、干什么", "sure"], ["他有事第一个想到找你商量", "need"], ["一起待着，不用特意做什么", "with"]]}, {"q": "什么最容易让你在关系里不安？", "o": [["一直不说清你们到底算什么", "sure"], ["他的事从来不找你商量", "need"], ["消息发出去半天没回音", "with"], ["不知道他在哪、跟谁在一起", "safe"]]}, {"q": "他做了哪件事，你会觉得这段关系特别值？", "o": [["遇到麻烦第一时间找你", "need"], ["再忙也会留出时间陪你", "with"], ["主动说清行程不让你猜", "safe"], ["记得你说过的每句话", "seen"]]}, {"q": "分开一段时间（出差、回老家），你最怕什么？", "o": [["联系变少，各过各的", "with"], ["不知道他那边发生了什么", "safe"], ["他顾不上听你说自己的事", "seen"], ["被问东问西，没有一点自己的时间", "free"]]}, {"q": "他情绪不好，你最想为他做的是？", "o": [["陪他把事情理清楚，稳住局面", "safe"], ["听他说完，让他知道有人懂", "seen"], ["给他留空间，等他自己缓过来", "free"], ["告诉他不管怎样你都在", "sure"]]}, {"q": "关系里你最不能忍的是？", "o": [["你说的话他从来记不住", "seen"], ["事事都要报备，没有一点自己的时间", "free"], ["提到以后就打太极", "sure"], ["有事从来不找你，自己扛", "need"]]}, {"q": "你希望他怎么看你的独处时间？", "o": [["尊重它，不打扰", "free"], ["知道那只是你的时间，不代表疏远", "sure"], ["需要的时候还会来找你", "need"], ["偶尔也想被拉进他的世界", "with"]]}, {"q": "哪句话最戳你？", "o": [["「我们到底算什么关系？」", "sure"], ["「这事我想听听你的」", "need"], ["「我在楼下，下来吃饭」", "with"], ["「我到家了，跟你说一声」", "safe"]]}, {"q": "你更希望他把你放在哪个位置？", "o": [["遇事的第一个商量对象", "need"], ["日常里的固定搭子", "with"], ["可以放心交代行踪的人", "safe"], ["懂你那些没说出口的人", "seen"]]}, {"q": "如果只能留住一样，你选？", "o": [["他在场，一起过日子", "with"], ["心里有底，不用猜", "safe"], ["被真正理解", "seen"], ["各自独立，谁也不绑住谁", "free"]]}];
+const TEXT  = {"safe": {"verdict": "你要的不是黏在一起，是心里有底——知道他在哪、在干嘛、还回不回来。", "why": "你大概很早就学会了自己扛事，但没人告诉过你「事情会好的」。所以你对「不确定」格外敏感，一点模糊都会被你放大成危险信号。", "how": ["他晚归没消息，你会把过去所有不对劲的细节翻一遍，越翻越像真的。", "你会反复确认同一件事：「你确定吗」「真的吗」，问到自己都不好意思。"], "good": "你是那个能把局面稳住的人。真出了事，第一个冷静下来想办法的，往往是你。", "fix": ["把「你确定吗」换成「我需要知道的是……」，直接说出你要的信息，别让他猜。", "给他一个具体的动作清单：晚归提前说一声、到地方发个消息。确定性是能谈出来的。"]}, "seen": {"verdict": "你要的不是被夸，是被读懂——你说一半，他能接上另一半。", "why": "你习惯先照顾别人的情绪，久了就没人问过你想要什么。你学会把需求藏起来，然后等一个能自己发现的人。", "how": ["你会用「随便」「都行」试探对方，心里其实早有答案。", "他记住了你随口提过的小事，你能高兴一整天；他忘了，你会闷很久但不说。"], "good": "你能注意到别人没说出口的那部分。这一条让你在人群里格外让人放松。", "fix": ["把「都行」换成一个具体的选项，让他有机会记住你真正的偏好。", "被记住的时候直接说「你居然记得」——正反馈会让这件事重复发生。"]}, "free": {"verdict": "你要的不是疏远，是不被绑住——亲密归亲密，你还是你。", "why": "你可能见过被关系吞掉的人，也可能自己被困过一次。从那以后你给自己留了条后路，随时能抽身。", "how": ["他问「在干嘛」问得密了，你会下意识想躲。", "关系越近你越想跑，跑完又回来，来回几次把自己也搞糊涂。"], "good": "你有完整的自我，不会因为一段关系就把生活整个交出去。这是很多人做不到的。", "fix": ["把「别管我」换成「我八点之后是自己的时间」——给边界一个具体形状，比冷处理管用。", "主动告诉他你什么时候会回来，让他知道抽离不等于离开。"]}, "sure": {"verdict": "你要的不是一纸承诺，是一句明确的话——「我们到底算什么」。", "why": "你吃过含糊的亏。那种「不算在一起，也不算分开」的状态，比直接拒绝更耗人。", "how": ["你会反复问「我们是什么关系」，问到对方不耐烦，你自己也烦。", "他带你和朋友吃饭，你会把这件事解读成一种表态，然后开始等下一步。"], "good": "你对自己要什么是清楚的，不含糊、不将就。这让你不容易掉进消耗人的关系。", "fix": ["把「我们算什么」换成「三个月后你希望我们是什么样」——问未来，比逼现在好回答。", "给自己一个时间点：到那天还是没有答案，就按没有答案处理。"]}, "need": {"verdict": "你要的不是被照顾，是被需要——想知道自己在他那里是重要的。", "why": "你可能是那个一直照顾别人的人。久而久之，你开始用「被需要」来确认自己在这段关系里的位置。", "how": ["他遇到麻烦自己解决了没告诉你，你会失落，甚至有点生气。", "你会主动揽下很多事，揽完又觉得累，但不揽又不安心。"], "good": "你是可以被依靠的。你身上有一种「交给他没问题」的稳，这很稀缺。", "fix": ["下次想帮忙之前先问一句「需要我做什么吗」，把主动权还给他，你的价值不会变少。", "试着让他为你做一件小事，然后什么都不回馈地接受。被照顾也是一种能力。"]}, "with": {"verdict": "你要的不是时刻在线，是人在场——一起做点什么都行。", "why": "你可能长期一个人待着，一个人吃饭、一个人解决问题。习惯了，但没真正喜欢过。", "how": ["他忙起来好几天没好好说话，你会觉得关系在变淡，哪怕理智上知道他只是忙。", "你会主动约，约不到几次之后就不约了，改成等。"], "good": "你愿意把时间给别人，这在人人都忙的时代很稀缺。和你在一起的人不会觉得孤单。", "fix": ["把「你什么时候有空」换成「周四晚上我做饭，你来不来」——给具体时间，比问有空没空有效。", "给自己也安排一件一个人做的事，陪伴的需求就不会全压在一个人身上。"]}};
+const N = QUIZ.length;
+
+const API_BASE = ((window.QUIZ_API || '') + '').replace(/\/$/, '');
+const API = {
+  async verifyCode(code, need) {
+    if (!API_BASE) return { ok:false, msg:"后端地址还没配置，请联系我" };
+    try {
+      const r = await fetch(API_BASE + '/api/verify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code: code, need: need || 'light' })
+      });
+      const j = await r.json();
+      return { ok: !!j.ok, msg: j.msg || '', scope: j.scope || null };
+    } catch (e) {
+      return { ok:false, msg:"连不上服务器，检查网络后重试" };
+    }
+  },
+  async saveResult(payload) {
+    if (!API_BASE) return;
+    try {
+      await fetch(API_BASE + '/api/result', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+    } catch (e) {}
+  }
+};
+
+const S = { answers: new Array(N).fill(-1), cur: 0, code: '' };
+
+function $(id){ return document.getElementById(id); }
+function show(id){
+  ["welcome","quizpage","result"].forEach(x => $(x).classList.add("hidden"));
+  $(id).classList.remove("hidden");
+  window.scrollTo(0,0);
+}
+
+/* ---------- 判分 ----------
+   纯计数：每个缺项被选中一次 +3 分。并列时按 NEEDS 的顺序打破，
+   保证同样的答案永远得到同样的结果（不能靠随机决定谁排第一）。 */
+function calc(){
+  const score = {};
+  NEEDS.forEach(n => score[n.k] = 0);
+  for (let i = 0; i < N; i++){
+    const a = S.answers[i];
+    if (a < 0) continue;
+    score[QUIZ[i].o[a][1]] += 3;
+  }
+  const order = NEEDS.slice().sort((a, b) => {
+    if (score[b.k] !== score[a.k]) return score[b.k] - score[a.k];
+    return NEEDS.indexOf(a) - NEEDS.indexOf(b);
+  });
+  return { score: score, order: order };
+}
+
+/* ---------- 答题 ---------- */
+function startQuiz(){
+  S.cur = 0;
+  S.answers = new Array(N).fill(-1);
+  show("quizpage");
+  renderQ();
+}
+
+function renderQ(){
+  const q = QUIZ[S.cur];
+  $("qtext").textContent = q.q;
+  $("pnum").textContent = String(S.cur + 1).padStart(2,'0') + " / " + N;
+  $("pfill").style.width = ((S.cur + 1) / N * 100) + "%";
+  $("opts").innerHTML = q.o.map((o, i) => {
+    const sel = S.answers[S.cur] === i ? " sel" : "";
+    return '<button class="opt' + sel + '" onclick="pick(' + i + ')">' + o[0] + '</button>';
+  }).join("");
+  $("prevbtn").classList.toggle("hidden", S.cur === 0);
+  $("nextbtn").textContent = S.cur === N - 1 ? "看结果" : "下一题";
+  $("nextbtn").disabled = S.answers[S.cur] === -1;
+}
+
+function pick(i){ S.answers[S.cur] = i; renderQ(); }
+function prevQ(){ if (S.cur > 0){ S.cur--; renderQ(); } }
+function nextQ(){
+  if (S.answers[S.cur] === -1) return;
+  if (S.cur >= N - 1){ showResult(); return; }
+  S.cur++;
+  renderQ();
+}
+
+/* ---------- 结果 ---------- */
+function showResult(){
+  const r = calc();
+  const main = r.order[0], second = r.order[1];
+  const T = TEXT[main.k];
+  const top = r.score[main.k] || 1;      // 主缺项为 0 时不能拿它当分母
+
+  $("rneed").textContent = main.n;
+  $("r2nd").textContent = "其次是 " + second.n + " · " + second.d;
+  $("rverdict").textContent = T.verdict;
+
+  // 按分数从高到低排，不按固定顺序——首页承诺的就是「给你一个排序」，
+  // 主缺项在最上面、条最长，从上往下递减，一眼看得出主次。
+  // 条长按「相对主缺项」算，主缺项满格。
+  $("rbars").innerHTML = r.order.map(n => {
+    const pct = Math.round(r.score[n.k] / top * 100);
+    const cls = n.k === main.k ? " hot" : "";
+    return '<div class="bar' + cls + '"><span>' + n.n + '</span>'
+         + '<div class="track"><i style="width:' + pct + '%"></i></div>'
+         + '<b>' + pct + '</b></div>';
+  }).join("");
+
+  $("rwhy").textContent = T.why;
+  $("rhow").innerHTML = T.how.map(t => '<div class="bd">' + t + '</div>').join("");
+  $("rgood").textContent = T.good;
+  $("rfix").innerHTML = T.fix.map((t, i) =>
+    '<div class="bd"><em>' + (i + 1) + '.</em> ' + t + '</div>').join("");
+
+  drawCard(r, main, second);
+
+  API.saveResult({
+    tier: 'light',
+    product: 'love_need',
+    code: S.code || null,
+    answers: S.answers.slice(),
+    result: { main: main.n, second: second.n, score: r.score }
+  });
+
+  show("result");
+}
+
+/* ---------- 分享卡 ----------
+   深色底、橘色重点，跟页面同一套气质。只留最该被看到的三块：
+   主缺项、六项排序、一句判定。
+
+   高度不写死——判定句长短随缺项变，写死高度会让长的那些压到页脚上。
+   先在测量上下文里画一遍拿到结束位置，再按实际高度建画布重画。 */
+const CARD = {
+  INK: "#EAE5DB", MID: "#9FABBF", DIM: "#7E8AA3",
+  LINE: "#3A465E", HOT: "#FF9165",
+  SONG: '"Songti SC","SimSun",serif',
+  SANS: '"Microsoft YaHei","PingFang SC",sans-serif'
+};
+
+/** 画卡片正文，返回内容结束的 y（页脚由 drawCard 按最终高度补） */
+function paintCard(x, W, H, PAD, r, main, second){
+  const INK = CARD.INK, MID = CARD.MID, DIM = CARD.DIM;
+  const LINE = CARD.LINE, HOT = CARD.HOT;
+  const SONG = CARD.SONG, SANS = CARD.SANS;
+
+  const g = x.createLinearGradient(W * 0.78, 0, 0, H);
+  g.addColorStop(0, "#24304A"); g.addColorStop(.46, "#131B2A"); g.addColorStop(1, "#0B111C");
+  x.fillStyle = g; x.fillRect(0, 0, W, H);
+
+  // 避头点：标点不另起一行，否则会出现一整行只有一个「。」的情况
+  const NO_HEAD = "。，、；：？！）」』%";
+  const wrap = (txt, x0, y0, maxW, lh, font, color) => {
+    x.font = font; x.fillStyle = color;
+    let line = "", y = y0;
+    for (const ch of txt){
+      if (ch === "\n"){ x.fillText(line, x0, y); line = ""; y += lh; continue; }
+      const over = x.measureText(line + ch).width > maxW;
+      if (over && !(line && NO_HEAD.includes(ch))){
+        x.fillText(line, x0, y); line = ch; y += lh;
+      } else line += ch;
+    }
+    if (line){ x.fillText(line, x0, y); y += lh; }
+    return y;
+  };
+
+  let y = PAD + 46;
+  x.font = "20px " + SANS; x.fillStyle = DIM;
+  x.fillText("W H A T   Y O U ' R E   M I S S I N G", PAD, y);
+  y += 34;
+  x.strokeStyle = LINE; x.lineWidth = 1;
+  x.beginPath(); x.moveTo(PAD, y); x.lineTo(W - PAD, y); x.stroke();
+  y += 62;
+
+  x.font = "26px " + SONG; x.fillStyle = DIM;
+  x.fillText("你最缺的是", PAD, y);
+  y += 92;
+  x.font = "bold 82px " + SONG; x.fillStyle = HOT;
+  x.fillText(main.n, PAD, y);
+  y += 52;
+  x.font = "24px " + SONG; x.fillStyle = MID;
+  x.fillText("其次是 " + second.n, PAD, y);
+
+  y += 54;
+  x.strokeStyle = LINE; x.beginPath(); x.moveTo(PAD, y); x.lineTo(W - PAD, y); x.stroke();
+  y += 60;
+
+  const topScore = r.score[main.k] || 1;
+  r.order.forEach(n => {
+    x.font = "26px " + SONG;
+    x.fillStyle = (n.k === main.k) ? INK : MID;
+    x.fillText(n.n, PAD, y);
+    const bx = PAD + 150, bw = W - PAD - bx - 70;
+    x.fillStyle = "#2A3346"; x.fillRect(bx, y - 11, bw, 6);
+    const grad = x.createLinearGradient(bx, 0, bx + bw, 0);
+    grad.addColorStop(0, "#8A6A52"); grad.addColorStop(1, HOT);
+    x.fillStyle = grad;
+    x.fillRect(bx, y - 11, bw * r.score[n.k] / topScore, 6);
+    x.font = "24px " + SANS; x.fillStyle = HOT;
+    x.textAlign = "right";
+    x.fillText(String(Math.round(r.score[n.k] / topScore * 100)), W - PAD, y);
+    x.textAlign = "left";
+    y += 50;
+  });
+
+  y += 16;
+  x.strokeStyle = LINE; x.beginPath(); x.moveTo(PAD, y); x.lineTo(W - PAD, y); x.stroke();
+  y += 56;
+  y = wrap(TEXT[main.k].verdict, PAD, y, W - PAD*2, 46, "26px " + SONG, INK);
+
+  return y;
+}
+
+function drawCard(r, main, second){
+  const W = 750, PAD = 54;
+  // 第一遍只测量，结果不输出
+  const probe = document.createElement("canvas").getContext("2d");
+  const endY = paintCard(probe, W, 4000, PAD, r, main, second);
+  const H = Math.ceil(endY + 170);
+
+  const c = document.createElement("canvas");
+  c.width = W; c.height = H;
+  const x = c.getContext("2d");
+  paintCard(x, W, H, PAD, r, main, second);
+
+  x.font = "22px " + CARD.SONG; x.fillStyle = CARD.DIM;
+  x.textAlign = "center";
+  x.fillText("本结果仅供娱乐，不构成任何心理或情感建议", W/2, H - PAD - 56);
+  x.font = "bold 24px " + CARD.SANS; x.fillStyle = CARD.INK;
+  x.fillText("AI榜老冯", W/2, H - PAD - 20);
+  x.textAlign = "left";
+
+  const url = c.toDataURL("image/png");
+  $("shareimg").src = url;
+  $("dl").href = url;
+}
+
+/* ---------- 验证码 ---------- */
+function openCode(){
+  $("codemask").classList.remove("hidden");
+  $("cerr").textContent = "";
+  $("cok").textContent = "";
+  $("codein").value = "";
+  setTimeout(() => $("codein").focus(), 100);
+}
+function closeCode(){ $("codemask").classList.add("hidden"); }
+
+async function submitCode(){
+  let raw = $("codein").value.trim().toUpperCase().replace(/\s+/g, "");
+  const err = $("cerr"), ok = $("cok");
+  err.textContent = ""; ok.textContent = "";
+  if (!raw){ err.textContent = "请输入验证码"; return; }
+  // 整串粘贴、或只打后半段 XXXXX-XXXXX 都收：没有前缀就按本页的 QUE 补上
+  if (!/^[A-Z]{3}-/.test(raw)) raw = "QUE-" + raw;
+
+  const btn = $("codebtn");
+  const label = btn.textContent;
+  btn.disabled = true; btn.textContent = "校验中…";
+  const res = await API.verifyCode(raw, 'light');
+  btn.disabled = false; btn.textContent = label;
+
+  if (!res.ok){ err.textContent = res.msg; return; }
+  S.code = raw;
+  ok.textContent = "验证通过，正在开始…";
+  setTimeout(() => { closeCode(); startQuiz(); }, 500);
+}
+</script>
+</body>
+</html>
