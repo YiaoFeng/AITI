@@ -258,10 +258,9 @@
           <li>一份 30 天自查表，四条每周可以对着看一遍</li>
         </ul>
         <button class="btn" onclick="openCode('full')">输入验证码 · 继续答 18 题</button>
-        <!-- 没买过完整版的人走这条：直接跳店铺商品页。链接空着就整条隐藏，
-             值在 site/shop.js 里填（那个文件不会被 start_all.py 覆盖）。 -->
-        <a class="btn ghost hidden" id="shopbtn" target="_blank" rel="noopener"
-           style="text-align:center; text-decoration:none; box-sizing:border-box">没有码？去店铺买 30 题完整版</a>
+        <!-- 这里只做「完整版是单独一档、在店铺里」的提示，不放按钮也不放链接——
+             页面上任何跳转都会被读成推销，也会踩到站外链接那条线。 -->
+        <div class="lk-note" style="margin:12px 0 0">完整版 30 题在店铺里是单独的一档，没有码的话可以去看看。</div>
       </div>
 
       <!-- 30 题档：多出来的板块 -->
@@ -313,7 +312,6 @@
 </div>
 
 <script src="../config.js"></script>
-<script src="../shop.js"></script>
 <script>
 /* ============================================================
  *  恋爱脑指数 —— 12 题体验版 / 30 题完整版
@@ -587,11 +585,6 @@ function showResult(){
   // 12 题档：锁区列清单；30 题档：换完整版那四块
   $("locked").classList.toggle("hidden", full);
   $("fullmod").classList.toggle("hidden", !full);
-  // 店铺链接填了才显示那个按钮；没填就还是只有「输入验证码」这一条路
-  const shopUrl = (window.SHOP_LINKS || {}).love_index || '';
-  const sbtn = $("shopbtn");
-  if (shopUrl) { sbtn.href = shopUrl; sbtn.classList.remove("hidden"); }
-  else sbtn.classList.add("hidden");
   if (full) renderFull(r);
 
   // 续答上来的人，前后两个分数不一样要认账，不能装作一直是这个数。
