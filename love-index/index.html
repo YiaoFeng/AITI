@@ -127,6 +127,28 @@
   .no{font-family:Consolas,"Courier New",monospace; font-size:11px; letter-spacing:4px;
       color:var(--dim); margin-top:8px}
 
+  /* ---------- 锁定区 / 完整版 ---------- */
+  .locked{background:#F0EDE0; padding:20px 18px; margin-top:18px}
+  .locked .secm{margin-bottom:10px}
+  .lk-note{font-size:13.5px; line-height:1.8; color:var(--mid);margin-bottom:12px}
+  .lk-list{list-style:none}
+  .lk-list li{
+    font-size:14px; line-height:1.75; color:var(--mid); padding-left:18px;
+    position:relative; margin-bottom:9px;
+  }
+  .lk-list li::before{content:'·'; position:absolute; left:4px; color:var(--dim)}
+  .locked .btn{margin-top:16px}
+
+  .typename{font-size:34px; font-weight:900; letter-spacing:4px; margin-bottom:14px}
+  .typepic{font-size:14.5px; line-height:1.9; color:var(--mid)}
+  .selfbox{background:#F0EDE0; padding:16px; font-size:14.5px; line-height:1.85}
+  .selfbox div{display:flex; gap:10px; align-items:flex-start}
+  .selfbox div+div{margin-top:11px}
+  .selfbox i{
+    flex:none; width:15px; height:15px; margin-top:4px; font-style:normal;
+    border:1px solid var(--dim); display:block;
+  }
+
   .shareimg{width:100%; display:block; margin-top:16px; border:1px solid var(--line)}
   .dl{
     display:inline-block; margin-top:12px; font-size:13px; color:var(--mid);
@@ -171,13 +193,15 @@
       <div class="kicker">Love Brain Check / No.00000</div>
       <div class="title">恋爱脑指数<br>体检单</div>
       <div class="dash"></div>
-      <div class="lead">12 道题，算出一个 0–100 的指数。<br>看看你在感情里，还剩下多少自己。</div>
+      <div class="lead">算出你在感情里，还剩下多少自己。<br>两个档位任选，先测 12 题也能接着补完。</div>
       <ul class="pts">
-        <li>五个维度：情绪绑定 / 时间占据 / 自我让渡 / 幻想浓度 / 抽离能力</li>
-        <li>约 2 分钟，凭第一反应选，别想太久</li>
-        <li>出结果后给你两个最上头的场景，和两条清醒处方</li>
+        <li><b>12 题体验版</b>：一个 0–100 的指数、五个维度、两个最上头的场景、两条清醒处方</li>
+        <li><b>30 题完整版</b>：还多出你是哪一种恋爱脑、离上一档差什么、分型处方和一份自查表</li>
+        <li>凭第一反应选，别想太久，想太久就不是你的答案了</li>
       </ul>
-      <button class="btn" onclick="openCode()">输入验证码 · 开始测</button>
+      <button class="btn" onclick="openCode('light')">输入验证码 · 12 题体验版</button>
+      <button class="btn ghost" onclick="openCode('full')">输入验证码 · 完整版 30 题</button>
+      <div class="fine">两档各需一个验证码。已经答过 12 题的，完整版会把前面 12 题一起算进去，<br>不用重做，直接从第 13 题接着答。</div>
       <div class="fine">本测试为娱乐向内容，结果不构成任何心理或情感建议。</div>
     </div>
 
@@ -205,6 +229,7 @@
       <div class="lvl" id="rlvl">重度患者</div>
       <div class="dash"></div>
       <div class="verdict" id="rverdict"></div>
+      <div class="verdict hidden" id="rshift"></div>
 
       <div class="hr"></div>
       <div class="bars" id="rbars"></div>
@@ -219,6 +244,41 @@
 
       <div class="barcode" id="rbarcode"></div>
       <div class="no" id="rno"></div>
+
+      <!-- 12 题档：锁定区。不把完整版内容模糊掉，而是直接列清单——
+           模糊遮罩在票根这种一维排版的页面上会显得像加载失败。 -->
+      <div class="locked hidden" id="locked">
+        <div class="hr"></div>
+        <div class="secm">完整版还有 4 块</div>
+        <div class="lk-note">12 题只够算出分数，不够分清你是哪一种。再答 18 题，会多出：</div>
+        <ul class="lk-list">
+          <li>你是哪一种恋爱脑——5 个型的画像，同一分数也会分成不同类型</li>
+          <li>离上一档还差什么，卡在你五个维度里的哪一条</li>
+          <li>按你的型给的三条处方，比通用那两条更具体</li>
+          <li>一份 30 天自查表，四条每周可以对着看一遍</li>
+        </ul>
+        <button class="btn" onclick="openCode('full')">输入验证码 · 继续答 18 题</button>
+      </div>
+
+      <!-- 30 题档：多出来的板块 -->
+      <div class="hidden" id="fullmod">
+        <div class="hr"></div>
+        <div class="secm">你是哪一种恋爱脑</div>
+        <div class="typename" id="rtypename"></div>
+        <div class="typepic" id="rtypepic"></div>
+
+        <div class="hr"></div>
+        <div class="secm">离上一档还差什么</div>
+        <div class="scene" id="rgap"></div>
+
+        <div class="hr"></div>
+        <div class="secm">按你的型，给三条</div>
+        <div class="rxbox" id="rtypeRx"></div>
+
+        <div class="hr"></div>
+        <div class="secm">30 天自查表</div>
+        <div class="selfbox" id="rself"></div>
+      </div>
 
       <div class="hr"></div>
       <div class="secm">这张单子可以存下来</div>
@@ -238,8 +298,8 @@
 <div id="codemask" class="mask hidden">
   <div class="modal">
     <button class="x" onclick="closeCode()">×</button>
-    <div class="mt">输入验证码<br>开始测恋爱脑指数</div>
-    <div class="ms">一个验证码只能用一次。<br>答完 12 题直接出结果，不用第二轮。</div>
+    <div class="mt" id="codetitle">输入验证码<br>开始测恋爱脑指数</div>
+    <div class="ms" id="codesub">一个验证码只能用一次。<br>答完 12 题直接出结果，不用第二轮。</div>
     <input id="codein" class="codein" placeholder="NAO-XXXXX-XXXXX" maxlength="20"
            autocomplete="off" spellcheck="false">
     <div class="cerr" id="cerr"></div>
@@ -251,21 +311,25 @@
 <script src="../config.js"></script>
 <script>
 /* ============================================================
- *  恋爱脑指数 —— 12 题单档
- *  数据在页面里，判分在 calc() 里。
+ *  恋爱脑指数 —— 12 题体验版 / 30 题完整版
+ *  题库是一个 30 题的长数组，前 12 题就是体验版那一档。
+ *  S.upto 决定这一轮答到第几题，S.answers 一次开满 30 格，
+ *  所以从 12 题升到 30 题时前面的答案原地保留，直接接着答。
  *  后端只做两件事：核销验证码、存结果（见 ai-quiz/server/app.py）。
  * ============================================================ */
 const DIMS  = [{"k": "bind", "n": "情绪绑定", "d": "他的情绪能牵动你多少", "w": 0.25, "rev": false}, {"k": "time", "n": "时间占据", "d": "一天里有多少时刻在想他", "w": 0.2, "rev": false}, {"k": "give", "n": "自我让渡", "d": "为对方改过多少自己的事", "w": 0.2, "rev": false}, {"k": "dream", "n": "幻想浓度", "d": "脑补未来的频率和画质", "w": 0.2, "rev": false}, {"k": "free", "n": "抽离能力", "d": "吵架冷战后能不能自己回血", "w": 0.15, "rev": true}];
-const QUIZ  = [{"q": "他今天回消息的语气淡了一点，你会？", "o": [["反复看那几句话，想找出问题在哪", 2, "bind"], ["该干嘛干嘛，没往心里去", 0, "bind"], ["一整天心里悬着，做什么都不踏实", 3, "bind"], ["过一会儿才反应过来，可能他累了", 1, "bind"]]}, {"q": "他心情不好但没说原因，你？", "o": [["问一句，他不说就算了", 1, "bind"], ["他不说清楚我更难受，一定要问出来", 3, "bind"], ["等他自己说，不追问", 0, "bind"], ["想各种办法逗他、哄他", 2, "bind"]]}, {"q": "他和朋友出去玩没带你，你的第一反应？", "o": [["心里发慌，忍不住问都跟谁、几点回", 3, "bind"], ["有点想一起去，但不至于影响心情", 1, "bind"], ["会一直盯着他发的动态看", 2, "bind"], ["挺好啊，我也正好干自己的事", 0, "bind"]]}, {"q": "一天里，你大概多少次会想到他？", "o": [["偶尔几回，比如吃饭、睡前", 1, "time"], ["一空下来就会想到", 2, "time"], ["忙起来基本不想", 0, "time"], ["几乎一直在背景里转，做什么都带着他", 3, "time"]]}, {"q": "两个人暂时不联系的时间里，你在做什么？", "o": [["总在等消息，做别的事也心不在焉", 2, "time"], ["正常过自己的日子，不怎么察觉", 0, "time"], ["隔一会儿就看一眼手机，收不到就烦躁", 3, "time"], ["该做的照做，闲下来会想一下", 1, "time"]]}, {"q": "他临时改了你们的约定，你会？", "o": [["有点失落，但很快调整过来", 1, "give"], ["立刻改自己的安排去配合他的新时间", 3, "give"], ["正好，我本来也有别的事", 0, "give"], ["嘴上说没事，心里憋着", 2, "give"]]}, {"q": "你想做的事和他想做的事撞了，通常？", "o": [["多数时候我让步", 2, "give"], ["各做各的，互不耽误", 0, "give"], ["商量着来，谁更急就先办谁的", 1, "give"], ["几乎每次都是我调整，早就习惯了", 3, "give"]]}, {"q": "你们刚认识不久，你有没有想过以后？", "o": [["没想过，还早", 0, "dream"], ["认真想过几次，包括一些具体场景", 2, "dream"], ["已经把几年后的画面都排好了", 3, "dream"], ["想过一两次，一闪而过", 1, "dream"]]}, {"q": "他随口说的一句话，你会？", "o": [["当时笑笑，过后不太记得", 1, "dream"], ["听过就忘了", 0, "dream"], ["一句话能琢磨出好几种深意，越想越多", 3, "dream"], ["会反复回味，想想他什么意思", 2, "dream"]]}, {"q": "你会不会在脑子里预演和他的对话？", "o": [["经常，有时候能想很久", 2, "dream"], ["不会", 0, "dream"], ["偶尔，比如要说重要的事之前", 1, "dream"], ["会预演很多遍，包括他的反应和我的应对", 3, "dream"]]}, {"q": "吵架冷战的时候，你通常？", "o": [["难受，但能自己消化，不会耽误正事", 2, "free"], ["整个人被那件事占满，直到说开为止", 0, "free"], ["该睡睡该吃吃，等气消了再说", 3, "free"], ["做不了别的事，一直想着怎么和解", 1, "free"]]}, {"q": "如果这段感情真的结束了，你觉得你？", "o": [["不敢想，感觉整个人会被掏空", 0, "free"], ["会难过，但知道日子还得继续", 3, "free"], ["会很久走不出来", 1, "free"], ["需要一段时间，但有朋友和家人能帮我", 2, "free"]]}];
+const QUIZ  = [{"q": "他今天回消息的语气淡了一点，你会？", "o": [["反复看那几句话，想找出问题在哪", 2, "bind"], ["该干嘛干嘛，没往心里去", 0, "bind"], ["一整天心里悬着，做什么都不踏实", 3, "bind"], ["过一会儿才反应过来，可能他累了", 1, "bind"]]}, {"q": "他心情不好但没说原因，你？", "o": [["问一句，他不说就算了", 1, "bind"], ["他不说清楚我更难受，一定要问出来", 3, "bind"], ["等他自己说，不追问", 0, "bind"], ["想各种办法逗他、哄他", 2, "bind"]]}, {"q": "他和朋友出去玩没带你，你的第一反应？", "o": [["心里发慌，忍不住问都跟谁、几点回", 3, "bind"], ["有点想一起去，但不至于影响心情", 1, "bind"], ["会一直盯着他发的动态看", 2, "bind"], ["挺好啊，我也正好干自己的事", 0, "bind"]]}, {"q": "一天里，你大概多少次会想到他？", "o": [["偶尔几回，比如吃饭、睡前", 1, "time"], ["一空下来就会想到", 2, "time"], ["忙起来基本不想", 0, "time"], ["几乎一直在背景里转，做什么都带着他", 3, "time"]]}, {"q": "两个人暂时不联系的时间里，你在做什么？", "o": [["总在等消息，做别的事也心不在焉", 2, "time"], ["正常过自己的日子，不怎么察觉", 0, "time"], ["隔一会儿就看一眼手机，收不到就烦躁", 3, "time"], ["该做的照做，闲下来会想一下", 1, "time"]]}, {"q": "他临时改了你们的约定，你会？", "o": [["有点失落，但很快调整过来", 1, "give"], ["立刻改自己的安排去配合他的新时间", 3, "give"], ["正好，我本来也有别的事", 0, "give"], ["嘴上说没事，心里憋着", 2, "give"]]}, {"q": "你想做的事和他想做的事撞了，通常？", "o": [["多数时候我让步", 2, "give"], ["各做各的，互不耽误", 0, "give"], ["商量着来，谁更急就先办谁的", 1, "give"], ["几乎每次都是我调整，早就习惯了", 3, "give"]]}, {"q": "你们刚认识不久，你有没有想过以后？", "o": [["没想过，还早", 0, "dream"], ["认真想过几次，包括一些具体场景", 2, "dream"], ["已经把几年后的画面都排好了", 3, "dream"], ["想过一两次，一闪而过", 1, "dream"]]}, {"q": "他随口说的一句话，你会？", "o": [["当时笑笑，过后不太记得", 1, "dream"], ["听过就忘了", 0, "dream"], ["一句话能琢磨出好几种深意，越想越多", 3, "dream"], ["会反复回味，想想他什么意思", 2, "dream"]]}, {"q": "你会不会在脑子里预演和他的对话？", "o": [["经常，有时候能想很久", 2, "dream"], ["不会", 0, "dream"], ["偶尔，比如要说重要的事之前", 1, "dream"], ["会预演很多遍，包括他的反应和我的应对", 3, "dream"]]}, {"q": "吵架冷战的时候，你通常？", "o": [["难受，但能自己消化，不会耽误正事", 2, "free"], ["整个人被那件事占满，直到说开为止", 0, "free"], ["该睡睡该吃吃，等气消了再说", 3, "free"], ["做不了别的事，一直想着怎么和解", 1, "free"]]}, {"q": "如果这段感情真的结束了，你觉得你？", "o": [["不敢想，感觉整个人会被掏空", 0, "free"], ["会难过，但知道日子还得继续", 3, "free"], ["会很久走不出来", 1, "free"], ["需要一段时间，但有朋友和家人能帮我", 2, "free"]]}, {"q": "他半天没回你消息，你会？", "o": [["先干自己的事，闲下来才想起来", 0, "bind"], ["心里有点不踏实，但能忍住不问", 1, "bind"], ["过一会儿就再看一眼手机，看他回没回", 2, "bind"], ["根本做不进别的事，满脑子都是他怎么了", 3, "bind"]]}, {"q": "他发了条你看不太懂的朋友圈，你会？", "o": [["刷过去就算了", 0, "bind"], ["多看两眼，猜一下是什么事", 1, "bind"], ["盯着想半天，还去翻评论找线索", 2, "bind"], ["翻来覆去猜是不是跟我有关，那天都没睡好", 3, "bind"]]}, {"q": "见面的时候他情绪不太对，你？", "o": [["他要是想说自然会说", 0, "bind"], ["关心一下，他不说就不追了", 1, "bind"], ["会一直留意他的表情，自己也跟着不安", 2, "bind"], ["他一天不对劲，你一天都提不起劲", 3, "bind"]]}, {"q": "上班或者上课的时候，你？", "o": [["专心做事，基本不会想到他", 0, "time"], ["偶尔走神，想到一下就回来了", 1, "time"], ["经常手上做着事，脑子里还挂着他", 2, "time"], ["每做完一件事，第一反应都是跟他说一声", 3, "time"]]}, {"q": "你跟朋友在一起的时候会提到他吗？", "o": [["基本不提", 0, "time"], ["聊到了会说两句", 1, "time"], ["经常不知不觉就说到他", 2, "time"], ["朋友都说你一开口就是他", 3, "time"]]}, {"q": "晚上睡前你通常在做什么？", "o": [["到点就睡，不怎么看手机", 0, "time"], ["刷会儿手机就睡了", 1, "time"], ["总要跟他说过晚安才睡得着", 2, "time"], ["他先睡了你还想再聊一会儿", 3, "time"]]}, {"q": "他出差或者回老家几天，你的生活？", "o": [["照样过，该干嘛干嘛", 0, "time"], ["稍微有点空，但还好", 1, "time"], ["总觉得少了点什么，做什么都不太起劲", 2, "time"], ["整个人像被抽走一块，天天数着日子", 3, "time"]]}, {"q": "他爱吃的东西你不爱吃，一起吃饭时？", "o": [["各点各的，谁也不迁就", 0, "give"], ["偶尔顺着他一次", 1, "give"], ["多数时候点他爱吃的", 2, "give"], ["早就不点自己爱吃的了，反正他会安排", 3, "give"]]}, {"q": "你的作息跟他不一样，最后？", "o": [["各睡各的，互不影响", 0, "give"], ["偶尔为了聊天熬一次", 1, "give"], ["经常迁就他的时间", 2, "give"], ["已经跟着他的作息走了，自己的时间表早没了", 3, "give"]]}, {"q": "你原本计划好的周末，他说想见你，你会？", "o": [["说清楚有安排了，约下次", 0, "give"], ["看情况，不太重要的事就改", 1, "give"], ["基本都会改，改完有点可惜但算了", 2, "give"], ["立刻推掉，见面比什么都重要", 3, "give"]]}, {"q": "你的朋友、爱好、想做的事，认识他之后？", "o": [["跟以前一样", 0, "give"], ["稍微少了一些，但不明显", 1, "give"], ["确实推掉过不少", 2, "give"], ["基本都放一边了，时间都给了他", 3, "give"]]}, {"q": "他提到一个你俩都没去过的地方，你会？", "o": [["听着挺有意思，没多想", 0, "dream"], ["会去查一下那地方什么样", 1, "dream"], ["会开始想两个人去会是什么样", 2, "dream"], ["已经在脑子里排好行程了，连住哪都想好了", 3, "dream"]]}, {"q": "你俩聊天里「以后」这个词出现的频率？", "o": [["基本不聊以后", 0, "dream"], ["偶尔提一句", 1, "dream"], ["经常会说到明年、说到以后怎么样", 2, "dream"], ["以后的日子已经被你规划过很多遍了", 3, "dream"]]}, {"q": "他今天有点不一样，你会？", "o": [["该什么样什么样", 0, "dream"], ["多问一句", 1, "dream"], ["会想想是不是自己哪句话说错了", 2, "dream"], ["把最近几天在脑子里过一遍，编出好几种剧情", 3, "dream"]]}, {"q": "他一天没主动找你，你会？", "o": [["什么都做不了，一直在想是不是出问题了", 0, "free"], ["心里不舒服，做什么都有点烦躁", 1, "free"], ["有点在意，但该做什么做什么", 2, "free"], ["正好清静，自己安排自己的", 3, "free"]]}, {"q": "你一个人待着的时候，感觉？", "o": [["一个人待着就难受，必须找点事填满", 0, "free"], ["待久了会有点空", 1, "free"], ["挺好的，偶尔会想找人说话", 2, "free"], ["很自在，本来就喜欢独处", 3, "free"]]}, {"q": "你们闹别扭，他先不理你了，你？", "o": [["等不了十分钟就发消息，一直发到有回应", 0, "free"], ["会忍不住先去找他，哪怕自己没错", 1, "free"], ["该干嘛干嘛，等他先开口", 2, "free"], ["他不理我正好，我也不想说话", 3, "free"]]}, {"q": "如果让你一周完全不联系他，你？", "o": [["做不到，第三天就绷不住了", 0, "free"], ["会难熬，但撑得住", 1, "free"], ["可以，忙起来就顾不上了", 2, "free"], ["完全没问题，各过各的很正常", 3, "free"]]}];
 const LEVELS = [[0, 20, "人间清醒", "清醒", "恋爱是你生活里的一部分，不是全部。你分得清心动和过日子。"], [21, 40, "理智在场", "理智", "你会心动，但脑子一直在线，很少有人能让你失去分寸。"], [41, 60, "半糖主义", "半糖", "一半清醒一半沦陷，在「想他」和「算了吧」之间来回横跳。"], [61, 80, "重度患者", "重度", "消息没回的那三分钟里，你已经把整部剧演完了。"], [81, 100, "恋爱脑天花板", "天花板", "改行程、改计划、改城市——你谈恋爱是把整个人生搬过去。"]];
 const SCENES = {"bind": "他回消息慢了十分钟，你已经把那几句话翻来覆去读了好几遍，想找出是哪一句不对。", "time": "一天里你会想起他很多次——吃饭的时候、走路的时候、忙到一半突然停下来的那一秒。", "give": "你改过自己的行程、习惯、甚至计划来配合他。改的时候，你觉得这没什么。", "dream": "你已经在脑子里把以后的日子过了很多遍，连房子怎么摆、养不养狗都想过了。", "free": "吵完架你很难自己回血。那件事会一直占着，直到两个人和好，你才踏实得下来。"};
 const RX     = {"bind": ["消息发出去之后，先去做一件跟他无关的事。给他回你的时间，也给你自己。", "他的情绪是他的，不用每一条都由你来接住。"], "time": ["每天留一小时不看他手机、不想他的事——就当是给自己上班。", "把「今天想了他几次」记下来，一周后回看，你会吓一跳。"], "give": ["下次他说改时间，你先说自己的安排，别急着配合。", "留一件只属于你的事，不因为任何人取消。"], "dream": ["把「以后」这个词从聊天里去掉，只说这周的事。", "想到未来画面时问自己一句：这是我想要的，还是我以为他想要的？"], "free": ["下次冷战，先哄好自己再谈和解，不用当场把话说开。", "试一次自己出去待一天，不报备细节，看看天会不会塌。"]};
+const TYPES  = {"bind": {"n": "绑定型", "pic": "你对他情绪的敏感度，比对自己还高。他一句话的语气、中间那个停顿，你都能读出三层意思。你不是想控制他，你是控制不了自己不去接收——他的状态就是你的天气，他阴天你就下雨。", "rx": ["他说「没事」的时候，回一句「行，那我不问了，你想说再说」。把追问换成留一扇门。", "发现自己又在读他语气时，先问自己一句：这件事今天影响我吃饭睡觉吗？不影响就先放着。", "把他的聊天框从列表最上面那些位置挪下去。看得见就会点开，点开就会重读。"], "self": ["这周有几次是「他没回我」，又有几次其实是「我在等他回」？", "他情绪不好的时候，我有没有先问过自己现在什么感觉？", "我读出来的那些意思，有几条是他真说过的，有几条是我补的？", "有没有哪一整天，我的心情跟他完全无关？"]}, "time": {"n": "占满型", "pic": "他不是你生活的一部分，他是你生活的背景音。做事的时候他在，发呆的时候他在，连睡着之前最后想到的也是他。你没觉得这有什么问题——因为已经这样很久了，久到想不起来不是这样的日子是什么样。", "rx": ["每天划出一小时，手机放到另一个房间，做一件跟他完全无关的事。", "把「今天想了他几次」用手机计个数，一周后回看，你会吓一跳。", "跟朋友约一次，全程不聊他。聊到了就换话题，看看还能聊什么。"], "self": ["今天有没有哪一段时间，我完全没想起他？", "我最近一次一个人做的事，是什么时候？", "朋友找我，我的第一反应是「他有空吗」还是「我去」？", "我最近有没有一件新的、跟他无关的事可以讲给别人听？"]}, "give": {"n": "让渡型", "pic": "你改过的东西自己都数不清了——吃饭的地方、睡觉的时间、周末的安排、本来想做的事。每一次你都觉得这没什么，改完也没觉得委屈。问题是改得太多以后，你已经想不起来自己原来想吃什么了。", "rx": ["下次他提改时间，先说自己的安排，再说「要不换一天」。顺序别倒过来。", "留一件只属于你的事，写进日程里，不因为任何人取消。", "点一次自己想吃的东西，别先问「你吃什么」。"], "self": ["这一周我迁就了几次？其中有几次是真的心甘情愿？", "有没有一件事，是认识他之后我就没再碰过的？", "上一次我主动提出想法，是什么时候？", "如果他今天问我想干嘛，我答得出来吗？"]}, "dream": {"n": "脑补型", "pic": "你有一个平行世界，那里的一切都已经安排好了。你们去过哪、住哪、养不养狗、老了什么样，你都想过。现实里可能才认识三个月。你不是不理智，你只是太擅长把一点线索补成一整部剧。", "rx": ["把「以后」这个词从聊天里去掉，只说这周和下周的事。", "想到未来画面的时候问自己：这是我想的，还是我以为他想的？", "脑补到停不下来时，把那个画面写下来。写出来就落地了，也就不那么缠人。"], "self": ["今天脑补的那些画面里，有多少是他真的提过的？", "我有没有拿「我们以后」去替一件现在还没说清的事？", "最近一次因为脑补而失望，是因为什么？", "我了解的是他，还是我想象出来的他？"]}, "free": {"n": "断联型", "pic": "你不太能一个人待着。吵架之后那段没有消息的时间，对你来说不是冷静，是煎熬。你会一遍遍看手机，会先低头，哪怕错不在你。你要的不是赢，是赶紧恢复连接。", "rx": ["下次冷战，先给自己两小时——不联系，也不看手机。两小时后再决定说什么。", "试一次自己出去待半天，不报备细节，看看天会不会塌。", "把「必须马上说开」换成「明天再说也一样」。"], "self": ["这次冷战，我撑了多久才先发的消息？", "一个人待着的那段时间，我做了什么？", "我是想解决问题，还是只是想让他回我？", "有没有哪一次，是我等他先开口的？"]}};
 const KEYS = ["A","B","C","D"];
-const N = QUIZ.length;
+const LIGHT_N = 12;   // 体验版题数
+const FULL_N  = 30;   // 完整版题数
 
 const API_BASE = ((window.QUIZ_API || '') + '').replace(/\/$/, '');
 const API = {
-  /** 核销验证码。这档只有 12 题，need 固定 light */
+  /** 核销验证码。need 是这一档要解锁到哪，以返回的 scope 为准 */
   async verifyCode(code, need) {
     if (!API_BASE) return { ok:false, msg:"后端地址还没配置，请联系我" };
     try {
@@ -293,7 +357,51 @@ const API = {
   }
 };
 
-const S = { answers: new Array(N).fill(-1), cur: 0, code: '' };
+const S = {
+  answers: new Array(FULL_N).fill(-1),
+  cur: 0,
+  code: '',
+  tier: 'light',    // 已经解锁到的档位
+  need: 'light',    // 这次要解锁哪一档，决定验证码怎么校验
+  upto: LIGHT_N,    // 这一轮答到第几题
+  liteIndex: null,  // 12 题档判出来的指数，续答后用来对比
+};
+
+/* ---------- 存档 ----------
+   「12 题不用重做」这句承诺，光靠内存里的答案撑不住：买家看完 12 题的结果，
+   切回小红书下单，过一会儿再回来时标签页多半已经被手机回收了，答案就没了。
+   所以每答一题都往 localStorage 存一份，重开页面能接着答。
+   只存在买家自己的浏览器里、不上传；换设备就没有，换设备只能重答。 */
+const SAVE_KEY = 'nao_state';
+// 重开页面直接落到结果页时，这一次不要再往服务端记一条——
+// 同一个买家来回开关几次就会在后台变成好几条测试记录，统计会失真。
+// 只在「恢复出来的这一次」生效，之后接着答完 30 题仍然照常记。
+let skipSave = false;
+function save(){
+  try{
+    localStorage.setItem(SAVE_KEY, JSON.stringify({
+      a: S.answers, tier: S.tier, upto: S.upto, lite: S.liteIndex
+    }));
+  }catch(e){}
+}
+/** 重开页面时接着上次的位置。答完的档位直接出结果页（那里才有「继续答 18 题」） */
+function restore(){
+  let sv = null;
+  try{ sv = JSON.parse(localStorage.getItem(SAVE_KEY) || 'null'); }catch(e){ return false; }
+  if (!sv || !Array.isArray(sv.a) || sv.a.length !== FULL_N) return false;
+  const done = n => sv.a.slice(0, n).every(v => typeof v === 'number' && v >= 0);
+  if (!sv.a.filter(v => v >= 0).length) return false;   // 一题没答，当没测过
+  S.answers = sv.a;
+  S.liteIndex = typeof sv.lite === 'number' ? sv.lite : null;
+  S.tier = sv.tier === 'full' ? 'full' : 'light';
+  S.upto = S.tier === 'full' ? FULL_N : LIGHT_N;
+  if (done(S.upto)){ skipSave = true; showResult(); return true; }
+  const at = S.answers.findIndex(v => v < 0);           // 从没答的那题接着答
+  S.cur = at < 0 ? 0 : at;
+  show("quizpage");
+  renderQ();
+  return true;
+}
 
 function $(id){ return document.getElementById(id); }
 function show(id){
@@ -305,11 +413,15 @@ function show(id){
 /* ---------- 判分 ----------
    每个维度先按它在题目里出现几次归一化到 0–100（五个维度题量不等，
    直接比原始分会让题多的维度占便宜）；抽离能力是反向的，取 100-v。
-   指数是五个维度按权重加权的和，权重加起来是 1。 */
-function calc(){
+   指数是五个维度按权重加权的和，权重加起来是 1。
+
+   upto 传这一轮算到第几题。12 题档传 LIGHT_N 就只算前 12 题——续答到 30 题
+   之后仍然可以再调一次 calc(LIGHT_N) 拿出「只看前 12 题」的分数，
+   结果是拿它跟完整版对比，所以这个参数必须留着，不能改成读 S.upto。 */
+function calc(upto){
   const raw = {}, full = {};
   DIMS.forEach(d => { raw[d.k] = 0; full[d.k] = 0; });
-  for (let i = 0; i < N; i++){
+  for (let i = 0; i < upto; i++){
     const a = S.answers[i];
     if (a < 0) continue;
     // 分母是「这一题在该维度上最多能拿几分」= 该维度选项里的最高分值，
@@ -350,9 +462,27 @@ function levelOf(idx){
 }
 
 /* ---------- 答题 ---------- */
-function startQuiz(){
+/** 从头开始答。tier 决定答到第几题，答案槽一律开满 30 格 */
+function startQuiz(tier){
+  S.tier = tier === 'full' ? 'full' : 'light';
+  S.upto = S.tier === 'full' ? FULL_N : LIGHT_N;
   S.cur = 0;
-  S.answers = new Array(N).fill(-1);
+  S.answers = new Array(FULL_N).fill(-1);
+  S.liteIndex = null;
+  save();
+  show("quizpage");
+  renderQ();
+}
+
+/** 已答过 12 题的买家升档：答案原地不动，游标直接挪到第 13 题。
+    先按前 12 题判一次分存起来，出完整版结果时好跟买家交代
+    「你之前看到的是这个数，多答 18 题之后变成了那个数」。 */
+function resumeFull(){
+  S.tier = 'full';
+  S.upto = FULL_N;
+  S.liteIndex = calc(LIGHT_N).index;
+  S.cur = LIGHT_N;
+  save();
   show("quizpage");
   renderQ();
 }
@@ -360,31 +490,60 @@ function startQuiz(){
 function renderQ(){
   const q = QUIZ[S.cur];
   $("qtext").textContent = q.q;
-  $("pnum").textContent = String(S.cur + 1).padStart(2,'0') + "/" + N;
-  $("pfill").style.width = ((S.cur + 1) / N * 100) + "%";
+  $("pnum").textContent = String(S.cur + 1).padStart(2,'0') + "/" + S.upto;
+  $("pfill").style.width = ((S.cur + 1) / S.upto * 100) + "%";
   $("opts").innerHTML = q.o.map((o, i) => {
     const sel = S.answers[S.cur] === i ? " sel" : "";
     return '<button class="opt' + sel + '" onclick="pick(' + i + ')">'
          + '<span class="k">' + KEYS[i] + '</span><span>' + o[0] + '</span></button>';
   }).join("");
   $("prevbtn").classList.toggle("hidden", S.cur === 0);
-  $("nextbtn").textContent = S.cur === N - 1 ? "看结果" : "下一题 ›";
+  $("nextbtn").textContent = S.cur === S.upto - 1 ? "看结果" : "下一题 ›";
   $("nextbtn").disabled = S.answers[S.cur] === -1;
 }
 
-function pick(i){ S.answers[S.cur] = i; renderQ(); }
+function pick(i){ S.answers[S.cur] = i; save(); renderQ(); }
 function prevQ(){ if (S.cur > 0){ S.cur--; renderQ(); } }
 function nextQ(){
   if (S.answers[S.cur] === -1) return;
-  if (S.cur >= N - 1){ showResult(); return; }
+  if (S.cur >= S.upto - 1){ showResult(); return; }
   S.cur++;
   renderQ();
 }
 
 /* ---------- 结果 ---------- */
+/* 「离上一档差什么」：差几分 + 主要顶着的是哪一维。
+   指数越高越上头，所以「上一档」指更重的那一档。r.top 取的是加权贡献最大的
+   那一条，它既是把人顶上去的那条，也是想往回走最该先动的那条，一句话兼着说。 */
+function gapText(r){
+  const i = LEVELS.findIndex(L => r.index >= L[0] && r.index <= L[1]);
+  const up = i >= 0 ? LEVELS[i + 1] : null;
+  const d = DIMS.find(x => x.k === r.top) || DIMS[0];
+  const v = r.val[d.k] || 0;
+  // 反向维度（抽离能力）分越低越黏，说成「只有 N 分」才读得通
+  const desc = d.rev
+    ? '「' + d.n + '」这一条只有 ' + v + ' 分，五条里它最拖着你'
+    : '「' + d.n + '」这一条 ' + v + ' 分，是五条里最高的一条';
+  if (!up) return '你已经在最重的那一档了，上面没有更高的档。想往回走，先动 ' + desc + '。';
+  return '你现在 ' + r.index + ' 分，再往上 ' + (up[0] - r.index) + ' 分就进「' + up[2]
+       + '」。顶着你的主要是' + desc + '。';
+}
+
+/** 完整版多出来的四块。型按「指数贡献最高的那一维」分 */
+function renderFull(r){
+  const T = TYPES[r.top];
+  if (!T) return;
+  $("rtypename").textContent = T.n;
+  $("rtypepic").textContent = T.pic;
+  $("rgap").textContent = gapText(r);
+  $("rtypeRx").innerHTML = T.rx.map(t => '<div><i>·</i>' + t + '</div>').join("");
+  $("rself").innerHTML = T.self.map(t => '<div><i></i><span>' + t + '</span></div>').join("");
+}
+
 function showResult(){
-  const r = calc();
+  const r = calc(S.upto);
   const L = levelOf(r.index);
+  const full = S.tier === 'full';
 
   $("stamp").textContent = L[3];
   $("rnum").innerHTML = r.index + "<em>分</em>";
@@ -420,16 +579,34 @@ function showResult(){
   $("rbarcode").innerHTML = Array.from({length: 58}, () =>
     '<i style="height:' + (22 + Math.round(rnd() * 30)) + 'px"></i>').join("");
 
-  drawCard(r, L[2], L[3], L[4], order.slice(0, 2));
+  // 12 题档：锁区列清单；30 题档：换完整版那四块
+  $("locked").classList.toggle("hidden", full);
+  $("fullmod").classList.toggle("hidden", !full);
+  if (full) renderFull(r);
 
-  API.saveResult({
-    tier: 'light',
+  // 续答上来的人，前后两个分数不一样要认账，不能装作一直是这个数。
+  // 两档题量和配比不同，差几分是正常的——先解释掉，省得买家以为算错了。
+  const shift = $("rshift");
+  if (full && S.liteIndex !== null && S.liteIndex !== r.index){
+    shift.textContent = '你之前 12 题看到的是 ' + S.liteIndex + ' 分，多答 18 题之后才判成现在这个数。'
+                      + '两档的题不一样多，指数差几分是正常的。';
+    shift.classList.remove("hidden");
+  } else shift.classList.add("hidden");
+
+  drawCard(r, L[2], L[3], L[4], order.slice(0, 2), full ? TYPES[r.top] : null);
+
+  if (skipSave) skipSave = false;
+  else API.saveResult({
+    tier: S.tier,
     product: 'love_index',
     code: S.code || null,
-    answers: S.answers.slice(),
-    result: { index: r.index, level: L[2], dims: r.val, top: r.top }
+    answers: S.answers.slice(0, S.upto),
+    result: { index: r.index, level: L[2], dims: r.val, top: r.top,
+              type: full ? TYPES[r.top].n : null,
+              lite_index: S.liteIndex }
   });
 
+  save();
   show("result");
 }
 
@@ -446,8 +623,9 @@ const CARD = {
   MONO: 'Consolas,"Courier New",monospace'
 };
 
-/** 画卡片正文，返回内容结束的 y（外框和页脚由 drawCard 按最终高度补） */
-function paintCard(x, W, H, PAD, r, lvlName, stamp, verdict, topDims){
+/** 画卡片正文，返回内容结束的 y（外框和页脚由 drawCard 按最终高度补）。
+    type 是完整版的分型（12 题档传 null），有就多画一段。 */
+function paintCard(x, W, H, PAD, r, lvlName, stamp, verdict, topDims, type){
   const INK = CARD.INK, MID = CARD.MID, DIM = CARD.DIM;
   const LINE = CARD.LINE, RED = CARD.RED;
   const YAHEI = CARD.SANS, MONO = CARD.MONO;
@@ -550,20 +728,42 @@ function paintCard(x, W, H, PAD, r, lvlName, stamp, verdict, topDims){
     y += 12;
   });
 
+  // 完整版才有的一段：型名 + 画像 + 分型处方
+  if (type){
+    y += 18;
+    dash(y);
+    y += 50;
+    x.font = "bold 26px " + YAHEI; x.fillStyle = INK;
+    x.fillText("你是哪一种恋爱脑", PAD + 26, y);
+    y += 58;
+    x.font = "bold 42px " + YAHEI; x.fillStyle = INK;
+    x.fillText(type.n, PAD + 26, y);
+    y += 46;
+    y = wrap(type.pic, PAD + 26, y, W - PAD*2 - 52, 42, "24px " + YAHEI, MID);
+    y += 24;
+    x.font = "bold 26px " + YAHEI; x.fillStyle = INK;
+    x.fillText("按你的型，给三条", PAD + 26, y);
+    y += 44;
+    type.rx.forEach(t => {
+      y = wrap("· " + t, PAD + 26, y, W - PAD*2 - 52, 42, "24px " + YAHEI, INK);
+      y += 12;
+    });
+  }
+
   return y;
 }
 
-function drawCard(r, lvlName, stamp, verdict, topDims){
+function drawCard(r, lvlName, stamp, verdict, topDims, type){
   const W = 750, PAD = 52;
   // 第一遍只测量。H 给一个够大的值，反正这一遍的结果不输出。
   const probe = document.createElement("canvas").getContext("2d");
-  const endY = paintCard(probe, W, 4000, PAD, r, lvlName, stamp, verdict, topDims);
+  const endY = paintCard(probe, W, 4000, PAD, r, lvlName, stamp, verdict, topDims, type);
   const H = Math.ceil(endY + 170);      // 给页脚留出两行
 
   const c = document.createElement("canvas");
   c.width = W; c.height = H;
   const x = c.getContext("2d");
-  paintCard(x, W, H, PAD, r, lvlName, stamp, verdict, topDims);
+  paintCard(x, W, H, PAD, r, lvlName, stamp, verdict, topDims, type);
 
   // 外框和页脚要等高度定了才能画
   x.strokeStyle = CARD.LINE; x.lineWidth = 2;
@@ -581,7 +781,17 @@ function drawCard(r, lvlName, stamp, verdict, topDims){
 }
 
 /* ---------- 验证码 ---------- */
-function openCode(){
+/** need 决定这次要解锁到哪一档，弹层文案和提交时的校验都跟着它走 */
+function openCode(need){
+  S.need = need === 'full' ? 'full' : 'light';
+  const full = S.need === 'full';
+  $("codetitle").innerHTML = full
+    ? '输入验证码<br>开始测完整版'
+    : '输入验证码<br>开始测恋爱脑指数';
+  $("codesub").innerHTML = full
+    ? '一个验证码只能用一次。<br>答完 30 题出完整报告；已经答过 12 题的，接着算就行。'
+    : '一个验证码只能用一次。<br>答完 12 题直接出结果，之后还能补完 30 题。';
+  $("codebtn").textContent = full ? '解锁 · 开始完整版' : '解锁 · 开始测';
   $("codemask").classList.remove("hidden");
   $("cerr").textContent = "";
   $("cok").textContent = "";
@@ -601,14 +811,22 @@ async function submitCode(){
   const btn = $("codebtn");
   const label = btn.textContent;
   btn.disabled = true; btn.textContent = "校验中…";
-  const res = await API.verifyCode(raw, 'light');
+  const res = await API.verifyCode(raw, S.need);
   btn.disabled = false; btn.textContent = label;
 
   if (!res.ok){ err.textContent = res.msg; return; }
   S.code = raw;
+  // 以码实际的档位为准，不看请求的那一档：30 题的码测 12 题是允许的，
+  // 反过来会被后端拦下（上面那步就没过）。所以这里是 scope 说了算。
+  const scope = res.scope || S.need;
+  // 前 12 题已经答完的（答完才会看到结果页），升档就接着答，不让人重做
+  const resume = scope === 'full' && S.answers.filter(v => v >= 0).length >= LIGHT_N;
   ok.textContent = "验证通过，正在开始…";
-  setTimeout(() => { closeCode(); startQuiz(); }, 500);
+  setTimeout(() => { closeCode(); resume ? resumeFull() : startQuiz(scope); }, 500);
 }
+
+// 上次没答完就关掉的，重开接着上次的位置；没测过就停在首页
+restore();
 </script>
 </body>
 </html>
