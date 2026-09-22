@@ -1,6 +1,6 @@
 {
  "version": "1.0",
- "generated_at": "2026-09-20",
+ "generated_at": "2026-09-22",
  "source": "data/rankings/benchmarks.json",
  "dims": [
   "reasoning",
@@ -18,7 +18,7 @@
   "privacy": "由 本土化 70% + API稳定性 30% 推算（榜单无独立隐私维度）",
   "creative": "由 中文能力 45% + 实际调用 30% + 趋势热度 25% 推算（榜单无独立创意维度）"
  },
- "count": 69,
+ "count": 72,
  "models": [
   {
    "name": "GPT-6 Astra",
@@ -30,7 +30,7 @@
     "multimodal": 86,
     "longtext": 88,
     "cost": 60,
-    "speed": 71,
+    "speed": 72,
     "privacy": 77,
     "ecosystem": 92,
     "creative": 86
@@ -87,7 +87,7 @@
     "ecosystem": 81,
     "creative": 76
    },
-   "brief": "GPQA 95.3 前三，TB 2.1 89.4",
+   "brief": "GPQA 95.3 前三，DeepSWE 73.7",
    "updated_at": "2026-09-03",
    "tier": {
     "key": "google",
@@ -108,7 +108,7 @@
     "multimodal": 85,
     "longtext": 88,
     "cost": 86,
-    "speed": 94,
+    "speed": 96,
     "privacy": 84,
     "ecosystem": 83,
     "creative": 83
@@ -134,7 +134,7 @@
     "multimodal": 82,
     "longtext": 87,
     "cost": 94,
-    "speed": 80,
+    "speed": 76,
     "privacy": 86,
     "ecosystem": 85,
     "creative": 85
@@ -148,7 +148,7 @@
     "advice": "常规任务关掉，复杂推理再开",
     "why": "开着思考会拉长响应时间，简单任务上不划算"
    },
-   "power": 84
+   "power": 83
   },
   {
    "name": "Claude Fable 5.1",
@@ -160,7 +160,7 @@
     "multimodal": 80,
     "longtext": 94,
     "cost": 60,
-    "speed": 76,
+    "speed": 74,
     "privacy": 73,
     "ecosystem": 89,
     "creative": 82
@@ -186,7 +186,7 @@
     "multimodal": 74,
     "longtext": 87,
     "cost": 74,
-    "speed": 65,
+    "speed": 66,
     "privacy": 87,
     "ecosystem": 84,
     "creative": 85
@@ -217,7 +217,7 @@
     "ecosystem": 85,
     "creative": 87
    },
-   "brief": "DeepSWE 58.7，TB 2.1 83.3",
+   "brief": "DeepSWE 58.7，GPQA 91.7",
    "updated_at": "2026-09-07",
    "tier": {
     "key": "qwen",
@@ -225,6 +225,32 @@
     "how": "深度思考模式可以开关",
     "advice": "客服、摘要这类关掉，解题和写代码再开",
     "why": "开着更准，但更慢更贵，简单任务上纯属浪费"
+   },
+   "power": 83
+  },
+  {
+   "name": "GPT-5.6 Terra",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 84,
+    "coding": 90,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 91,
+    "cost": 71,
+    "speed": 82,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "TB 2.1 88.0，GPQA 92.5",
+   "updated_at": "2026-09-18",
+   "tier": {
+    "key": "openai",
+    "label": "推理档位",
+    "how": "reasoning_effort 有 low / medium / high 三档",
+    "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
+    "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
    },
    "power": 83
   },
@@ -290,39 +316,13 @@
     "multimodal": 77,
     "longtext": 91,
     "cost": 77,
-    "speed": 96,
+    "speed": 98,
     "privacy": 72,
     "ecosystem": 77,
     "creative": 73
    },
    "brief": "DeepSWE 75.4 全场第一，GPQA 93.5",
    "updated_at": "2026-09-03",
-   "power": 82
-  },
-  {
-   "name": "GPT-5.6 Terra",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 84,
-    "coding": 90,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 91,
-    "cost": 71,
-    "speed": 80,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "TB 2.1 88.0，GPQA 92.5",
-   "updated_at": "2026-09-18",
-   "tier": {
-    "key": "openai",
-    "label": "推理档位",
-    "how": "reasoning_effort 有 low / medium / high 三档",
-    "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
-    "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
-   },
    "power": 82
   },
   {
@@ -361,7 +361,7 @@
     "multimodal": 75,
     "longtext": 92,
     "cost": 67,
-    "speed": 72,
+    "speed": 74,
     "privacy": 75,
     "ecosystem": 83,
     "creative": 73
@@ -392,7 +392,7 @@
     "ecosystem": 83,
     "creative": 78
    },
-   "brief": "GPQA 93.5，DeepSWE 67.5",
+   "brief": "GPQA 93.5，TB 2.1 88.3",
    "updated_at": "2026-08-24",
    "tier": {
     "key": "moonshot",
@@ -413,7 +413,7 @@
     "multimodal": 75,
     "longtext": 86,
     "cost": 77,
-    "speed": 74,
+    "speed": 73,
     "privacy": 84,
     "ecosystem": 78,
     "creative": 77
@@ -434,7 +434,7 @@
    "vendor": "海外",
    "score": {
     "reasoning": 82,
-    "coding": 70,
+    "coding": 71,
     "chinese": 80,
     "multimodal": 75,
     "longtext": 87,
@@ -465,12 +465,12 @@
     "multimodal": 75,
     "longtext": 92,
     "cost": 89,
-    "speed": 86,
+    "speed": 88,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "TB 2.1 80.9，GPQA 91.1",
+   "brief": "GPQA 91.1，TB 2.1 80.9",
    "updated_at": "2026-09-18",
    "tier": {
     "key": "openai",
@@ -479,6 +479,44 @@
     "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
     "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
    },
+   "power": 81
+  },
+  {
+   "name": "Step 5 Preview",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 86,
+    "coding": 89,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 85,
+    "cost": 77,
+    "speed": 75,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "GPQA 93.5，DeepSWE 67.7",
+   "updated_at": "2026-09-18",
+   "power": 81
+  },
+  {
+   "name": "小米 MiMo-V2.6-Pro",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 77,
+    "coding": 93,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 85,
+    "cost": 77,
+    "speed": 75,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "TB 2.1 89.9，DeepSWE 71.9",
+   "updated_at": "2026-09-18",
    "power": 81
   },
   {
@@ -631,6 +669,25 @@
    "power": 80
   },
   {
+   "name": "小米 MiMo-V2.6-Flash",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 76,
+    "coding": 90,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 85,
+    "cost": 77,
+    "speed": 75,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "DeepSWE 67.9，TB 2.1 87.6",
+   "updated_at": "2026-09-18",
+   "power": 80
+  },
+  {
    "name": "DeepSeek Pro",
    "vendor": "国产",
    "score": {
@@ -666,7 +723,7 @@
     "multimodal": 75,
     "longtext": 87,
     "cost": 74,
-    "speed": 65,
+    "speed": 66,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -692,7 +749,7 @@
     "multimodal": 72,
     "longtext": 87,
     "cost": 74,
-    "speed": 71,
+    "speed": 75,
     "privacy": 71,
     "ecosystem": 78,
     "creative": 74
@@ -718,7 +775,7 @@
     "multimodal": 85,
     "longtext": 89,
     "cost": 71,
-    "speed": 86,
+    "speed": 87,
     "privacy": 74,
     "ecosystem": 78,
     "creative": 72
@@ -763,7 +820,7 @@
     "multimodal": 74,
     "longtext": 89,
     "cost": 82,
-    "speed": 66,
+    "speed": 68,
     "privacy": 85,
     "ecosystem": 84,
     "creative": 82
@@ -815,7 +872,7 @@
     "multimodal": 75,
     "longtext": 81,
     "cost": 88,
-    "speed": 92,
+    "speed": 95,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -936,7 +993,7 @@
     "multimodal": 68,
     "longtext": 85,
     "cost": 93,
-    "speed": 77,
+    "speed": 80,
     "privacy": 87,
     "ecosystem": 79,
     "creative": 82
@@ -962,7 +1019,7 @@
     "multimodal": 92,
     "longtext": 77,
     "cost": 96,
-    "speed": 61,
+    "speed": 62,
     "privacy": 87,
     "ecosystem": 76,
     "creative": 82
@@ -981,7 +1038,7 @@
     "multimodal": 75,
     "longtext": 83,
     "cost": 78,
-    "speed": 77,
+    "speed": 81,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1000,7 +1057,7 @@
     "multimodal": 75,
     "longtext": 86,
     "cost": 79,
-    "speed": 71,
+    "speed": 70,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1147,7 +1204,7 @@
     "multimodal": 65,
     "longtext": 91,
     "cost": 88,
-    "speed": 84,
+    "speed": 87,
     "privacy": 79,
     "ecosystem": 68,
     "creative": 66
@@ -1242,7 +1299,7 @@
     "multimodal": 75,
     "longtext": 65,
     "cost": 97,
-    "speed": 86,
+    "speed": 87,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1261,7 +1318,7 @@
     "multimodal": 75,
     "longtext": 60,
     "cost": 100,
-    "speed": 95,
+    "speed": 96,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1286,25 +1343,6 @@
     "creative": 78
    },
    "brief": "GPQA 82.9，TB 2.1 40.4",
-   "updated_at": "2026-09-18",
-   "power": 71
-  },
-  {
-   "name": "Ling 3.0 Tiny",
-   "vendor": "国产",
-   "score": {
-    "reasoning": 25,
-    "coding": 64,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 60,
-    "cost": 76,
-    "speed": 92,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "TB 2.1 27.7，GPQA 73.4",
    "updated_at": "2026-09-18",
    "power": 71
   },
@@ -1385,6 +1423,25 @@
    "power": 71
   },
   {
+   "name": "North Mini Code",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 27,
+    "coding": 64,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 60,
+    "cost": 76,
+    "speed": 80,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "GPQA 75.7，TB 2.1 35.6",
+   "updated_at": "2026-09-18",
+   "power": 70
+  },
+  {
    "name": "DiffusionGemma 26B A4B",
    "vendor": "海外",
    "score": {
@@ -1413,7 +1470,7 @@
     "multimodal": 75,
     "longtext": 60,
     "cost": 92,
-    "speed": 75,
+    "speed": 76,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1432,31 +1489,12 @@
     "multimodal": 75,
     "longtext": 60,
     "cost": 100,
-    "speed": 76,
+    "speed": 80,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "TB 2.1 18.4，GPQA 63.1",
-   "updated_at": "2026-09-18",
-   "power": 69
-  },
-  {
-   "name": "North Mini Code",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 27,
-    "coding": 64,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 60,
-    "cost": 76,
-    "speed": 77,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "GPQA 75.7，TB 2.1 35.6",
+   "brief": "GPQA 63.1，TB 2.1 18.4",
    "updated_at": "2026-09-18",
    "power": 69
   },
@@ -1551,9 +1589,135 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "TB 2.1 6.0，GPQA 43.8",
+   "brief": "GPQA 43.8，TB 2.1 6.0",
    "updated_at": "2026-09-18",
    "power": 68
+  },
+  {
+   "name": "Ling 3.0 Tiny",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 25,
+    "coding": 64,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 60,
+    "cost": 76,
+    "speed": 60,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "GPQA 73.4，TB 2.1 27.7",
+   "updated_at": "2026-09-18",
+   "power": 67
   }
- ]
+ ],
+ "specialized": {
+  "_note": "垂直专用模型，无公开基准可比，不排名、只推荐",
+  "groups": [
+   {
+    "key": "speech",
+    "label": "语音对话 / 语音转写",
+    "intro": "通用大模型只能把语音转成文字再去理解，中间隔了一层；实时对话要靠专门的端到端语音模型。",
+    "picks": [
+     {
+      "name": "Gemini 3.8 Live",
+      "vendor": "海外",
+      "why": "端到端实时语音对话，自动切换 97 种语言，Speech Agent Arena 排第二"
+     },
+     {
+      "name": "Gemini 3.8 Live Extended Thinking",
+      "vendor": "海外",
+      "why": "边推理边对话的版本，Artificial Analysis 语音质量指数第一（82.6）"
+     },
+     {
+      "name": "蓝心 RealTime",
+      "vendor": "国产",
+      "why": "vivo 的端到端语音大模型，支持方言口音、中英混说"
+     },
+     {
+      "name": "Qwen-Audio-3.1",
+      "vendor": "国产",
+      "why": "阿里云栖大会发布的音频线模型，中文场景上手成本低"
+     },
+     {
+      "name": "Confucius4-R2T2",
+      "vendor": "国产",
+      "why": "网易有道的真流式语音识别，官方称最低延迟 80 毫秒，适合做实时字幕"
+     },
+     {
+      "name": "Realtime-Venus",
+      "vendor": "国产",
+      "why": "蚂蚁开源的 9B 全双工交互模型，Apache-2.0 权重公开",
+      "caveat": "没有官方 API，要自己部署才能用"
+     }
+    ]
+   },
+   {
+    "key": "image_gen",
+    "label": "生成图片 / 做设计图",
+    "intro": "通用大模型大多能「看懂」图，但画不出来。出图要用专门的生成模型。",
+    "picks": [
+     {
+      "name": "Gemini 3.1 Flash Lite Image",
+      "vendor": "海外",
+      "why": "Nano Banana 2 Lite，主打超低延迟和低成本，批量出图划算"
+     },
+     {
+      "name": "腾讯 Hy Image 3.5",
+      "vendor": "国产",
+      "why": "刚发布的预览版，官方称比上一代提升 30%",
+      "caveat": "成绩来自内部设计师盲测，不是第三方基准"
+     },
+     {
+      "name": "Qwen-Image-3.1",
+      "vendor": "国产",
+      "why": "阿里云栖大会更新的图像生成线，中文提示词理解好"
+     },
+     {
+      "name": "Qwen-Image-2.1",
+      "vendor": "国产",
+      "why": "70 亿参数轻量版，消费级显卡就能跑",
+      "caveat": "适合本地自己跑，云端效果不如大参数版本"
+     }
+    ]
+   },
+   {
+    "key": "video_gen",
+    "label": "生成视频",
+    "intro": "视频生成是独立赛道，通用大模型完全做不了，必须用专门模型。",
+    "picks": [
+     {
+      "name": "Wan3.0",
+      "vendor": "国产",
+      "why": "Artificial Analysis 文生视频与视频编辑两个榜都是第一"
+     }
+    ]
+   },
+   {
+    "key": "vision",
+    "label": "看图 / 读图 / 识别图片内容",
+    "intro": "通用大模型也能看图，但要精细识别图表、界面、文档时，专门模型更稳。",
+    "picks": [
+     {
+      "name": "Qwen3-VL",
+      "vendor": "国产",
+      "why": "阿里新一代视觉语言模型，中文图表和文档识别是强项"
+     },
+     {
+      "name": "Hunmin VLM 397B",
+      "vendor": "海外",
+      "why": "韩国 Xenon 开源，3970 亿参数，能直接操作电脑界面（ScreenSpot-Pro 75.6、OSWorld 70.5）",
+      "caveat": "参数大，自部署成本高"
+     },
+     {
+      "name": "Ling-3.0-flash-VL",
+      "vendor": "国产",
+      "why": "轻量视觉语言模型，速度和成本更友好"
+     }
+    ]
+   }
+  ]
+ }
 }
