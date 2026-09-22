@@ -162,6 +162,21 @@
 
   /* 锁定区 */
   .locked { width: 100%; margin-top: 24px; background: var(--card); border-radius: 18px; padding: 24px 20px; border: 2px dashed #E4D9CB; }
+  /* 锁定块：灰底 + 虚线框，把「后面还锁着东西」画出来。
+     不上 blur——浅色卡片上盖模糊层，买家第一眼会当成页面没加载出来，
+     反而比不提示更糟。虚线框的语义是「这里有个位置，还没填上」。 */
+  .locked .lkbox { text-align: left; background: var(--viewbg); border: 2px dashed #CFC9BB;
+                   border-radius: 16px; padding: 18px 16px 12px; margin-bottom: 18px; }
+  .locked .lkhd { display: flex; align-items: center; gap: 8px; font-size: 17px;
+                  font-weight: 900; letter-spacing: 1px; margin-bottom: 9px; }
+  .locked .lki { font-size: 16px; filter: grayscale(1); opacity: .7; }
+  /* 「可复购、不用重测」这句必须留在锁定区里，不能只出现在验证码弹窗——
+     买家是看完 12 题结果那一刻决定要不要加测的，那一刻没看到就流失了。 */
+  /* 锁定区整体是居中的（.center 容器），这句必须显式左对齐——
+     居中会把三行以上的说明排成阶梯，末行只剩两个字。 */
+  .locked .lkbuy { text-align: left; font-size: 13.5px; color: var(--gray);
+                   line-height: 1.75; margin-top: 14px; }
+  .locked .lkbuy b { color: var(--accent); }
   .locked .lk { font-size: 30px; }
   .locked .lt { font-size: 19px; font-weight: 900; margin-top: 10px; letter-spacing: 1px; }
   .locked .ls { font-size: 14px; color: var(--gray); margin-top: 8px; line-height: 1.7; }
@@ -250,17 +265,21 @@
 
     <!-- 体验版：锁定区 -->
     <div class="locked hidden" id="locked">
-      <div class="lk">🔒</div>
-      <div class="lt">完整版还有 5 块内容</div>
-      <div class="ls">12 题只够看出方向。再答 18 题，完整版会把下面这些一起给你。</div>
-      <ul>
-        <li>跟另外 3 个相近人格的对照，看清楚你像谁、不像谁</li>
-        <li>这种性格最拖后腿的两个地方，以及怎么补</li>
-        <li>你这条路的职业路径，从起步到成熟分三步</li>
-        <li>你这种性格该怎么用 AI，具体到每一句怎么问</li>
-        <li>一份可以存下来的完整报告图</li>
-      </ul>
+      <div class="lkbox">
+        <div class="lkhd"><span class="lki">🔒</span>还锁着 18 道题的内容</div>
+        <div class="ls">12 题只够看出方向。再答 18 题，完整版会把下面这些一起给你。</div>
+        <ul>
+          <li>跟另外 3 个相近人格的对照，看清楚你像谁、不像谁</li>
+          <li>这种性格最拖后腿的两个地方，以及怎么补</li>
+          <li>你这条路的职业路径，从起步到成熟分三步</li>
+          <li>你这种性格该怎么用 AI，具体到每一句怎么问</li>
+          <li>一份可以存下来的完整报告图</li>
+        </ul>
+      </div>
       <button class="btn lock" onclick="openCode('full')">输入验证码 · 继续答 18 题</button>
+      <!-- 复购说明放在锁定区、不放页面跳转：页面上任何链接都会被读成推销，
+           也会踩到站外链接那条线。文案只说「店铺里有另一档」，不指路。 -->
+      <div class="lkbuy">完整版 30 题在店铺里是单独的一档，买回来把码填进去就能接着答——<b>前面 12 题不用重做</b>，直接从第 13 题开始。</div>
       <button class="btn ghost" onclick="window.scrollTo({top:0,behavior:'smooth'})">先不测，回到顶部</button>
     </div>
 

@@ -97,6 +97,18 @@
   .lk-list li{font-size:14.5px; line-height:1.95; color:var(--mid); padding-left:20px;
               position:relative; margin-bottom:10px}
   .lk-list li::before{content:'—'; position:absolute; left:0; color:var(--dim)}
+  /* 锁定块：深色页上不能用浅灰底，改用一层极淡的白罩 + 虚线框。
+     不上 blur——深色页盖模糊层，看着同样像加载失败。 */
+  .locked .lkbox{
+    border:2px dashed var(--line); background:rgba(255,255,255,.035);
+    padding:18px 16px 12px; margin-bottom:18px;
+  }
+  .locked .lkhd{display:flex; align-items:center; gap:8px; font-size:17px;
+                font-weight:900; letter-spacing:1.5px; margin-bottom:12px}
+  .locked .lki{font-style:normal; font-size:15px; filter:grayscale(1); opacity:.6}
+  /* 「可复购、不用重测」必须留在锁定区：买家是看完 12 题那一刻决定加不加测的 */
+  .locked .lkbuy{font-size:14.5px; line-height:2; color:var(--mid)}
+  .locked .lkbuy b{color:var(--ink)}
 
   .combo{font-size:16.5px; line-height:2.1; color:var(--ink); border-left:2px solid var(--hot);
          padding-left:16px}
@@ -204,19 +216,21 @@
     <!-- 12 题档：锁定区。不遮不糊，直接把完整版多给的东西列出来——
          深色页面上盖一层模糊层，看起来像加载失败。 -->
     <div class="locked hidden" id="locked">
-      <div class="bt">完整版还有 4 块</div>
-      <div class="lk-note">12 题只排得出主缺项。排在第二的那一项其实跟第一名挨得很近，
-        谁在前面很看运气——主次两个放在一起，才是你真正的形状。再答 18 题会多出：</div>
-      <ul class="lk-list">
-        <li>主缺项 × 次缺项的组合解读，这个组合只有一种</li>
-        <li>它最常掉进去的三个坑，看的时候多半会点头</li>
-        <li>能照着说的三句话（12 题档只给方向，这里给到句子）</li>
-        <li>什么信号说明这个缺口在变小，以及为什么不是隔壁那一项</li>
-      </ul>
+      <div class="lkbox">
+        <div class="lkhd"><i class="lki">🔒</i>还锁着 18 道题的内容</div>
+        <div class="lk-note">12 题只排得出主缺项。排在第二的那一项其实跟第一名挨得很近，
+          谁在前面很看运气——主次两个放在一起，才是你真正的形状。再答 18 题会多出：</div>
+        <ul class="lk-list">
+          <li>主缺项 × 次缺项的组合解读，这个组合只有一种</li>
+          <li>它最常掉进去的三个坑，看的时候多半会点头</li>
+          <li>能照着说的三句话（12 题档只给方向，这里给到句子）</li>
+          <li>什么信号说明这个缺口在变小，以及为什么不是隔壁那一项</li>
+        </ul>
+      </div>
       <button class="btn solid" onclick="openCode('full')">输入验证码 · 继续答 18 题</button>
       <!-- 只做「完整版是单独一档、在店铺里」的提示，不放按钮也不放链接——
            页面上任何跳转都会被读成推销，也会踩到站外链接那条线。 -->
-      <div class="lk-note" style="margin:12px 0 0">完整版 30 题在店铺里是单独的一档，没有码的话可以去看看。</div>
+      <div class="lkbuy" style="margin-top:14px">完整版 30 题在店铺里是单独的一档，买回来把码填进去就能接着答——<b>前面 12 题不用重做</b>，直接从第 13 题开始。</div>
     </div>
 
     <!-- 30 题档：多出来的板块 -->
