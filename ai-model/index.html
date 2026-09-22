@@ -42,6 +42,18 @@
   .tag{display:inline-block;padding:3px 11px;border-radius:99px;font-size:12px;font-weight:700;
        background:var(--viewbg);color:var(--gray)}
   .tag.cn{background:#F6E9E5;color:var(--accent)}
+  /* 专用模型推荐块：要跟上面那套编号卡片明显区分——它不参与排名、不给分 */
+  .card.spec{border:1.5px solid var(--accent);background:#FFFCF9}
+  .spec-tag{display:inline-block;padding:4px 12px;border-radius:99px;
+    background:var(--accent);color:#fff;font-size:12.5px;font-weight:800;margin-bottom:11px}
+  .spec-h{font-size:19px;font-weight:800;margin-bottom:7px}
+  .spec-p{font-size:14px;line-height:1.65;color:var(--gray);margin-bottom:13px}
+  .spec-note{font-size:12.5px;line-height:1.6;color:var(--gray);margin-top:11px;
+    padding-top:11px;border-top:1px dashed rgba(0,0,0,.1)}
+  /* 冠军卡与专用块之间的衔接句：不写这句，上面推文字模型、下面说它干不了，
+     读起来像自己打自己 */
+  .pickhint{font-size:13.5px;line-height:1.6;color:var(--accent);background:#F6E9E5;
+    border-radius:12px;padding:11px 15px;margin:0 0 14px;text-align:center;font-weight:600}
 
   /* ---------- 首页 ---------- */
   .hero{padding:54px 0 26px;text-align:center}
@@ -304,7 +316,9 @@ const S = {
   answers:{},        // qid -> 选项下标
   questions:[],
   models:[],
-  code:''
+  code:'',
+  pick:null,         // 需求分流题选中的专用方向 vision / image_gen / speech / video_gen
+  specialized:null   // 专用模型推荐池（来自 models.json，无公开基准、不排名）
 };
 
 /* ── 小工具 ── */
@@ -336,6 +350,7 @@ async function boot(){
   S.questions = q.questions;
   S.models = m.models || [];
   S.modelMeta = { generated_at:m.generated_at, derived:m._derived };
+  S.specialized = m.specialized || null;
 }
 
 /* ── 推荐算法 ──
@@ -443,11 +458,14 @@ function renderQ(){
 
   $('#q-opts').innerHTML = q.options.map((o,i)=>
     `<button class="opt${S.answers[q.id]===i?' pick':''}" data-i="${i}">
-       <span class="k">${'ABCD'[i]}</span><span>${esc(o.t)}</span></button>`).join('');
+       <span class="k">${'ABCDEFGH'[i]}</span><span>${esc(o.t)}</span></button>`).join('');
 
   document.querySelectorAll('.opt').forEach(b=>{
     b.onclick = ()=>{
       S.answers[q.id] = +b.dataset.i;
+      // 需求分流题（带 flag 选项的题）：把选中的专用方向带进报告。
+      // 这题没有 flag 选项时清空，避免用户改选之后报告里还留着上一次的方向。
+      if(q.options.some(o=>o.flag)) S.pick = q.options[+b.dataset.i].flag || null;
       document.querySelectorAll('.opt').forEach(x=>x.classList.toggle('pick', x===b));
       $('#q-next').disabled = false;
       setTimeout(next, 260);
@@ -496,6 +514,13 @@ function finish(){
     <ul class="why">${why(top, w).map(t=>`<li>${esc(t)}</li>`).join('')}</ul>
   </div>`;
 
+  /* 选了专用方向的用户，冠军卡后面补一句衔接。不写这句，上面推的是个文字模型、
+     下面说「这类需求通用模型干不好」，读起来像自己拆自己的台。 */
+  const spg = S.pick && S.specialized &&
+              (S.specialized.groups || []).find(x => x.key === S.pick);
+  if (spg) h += `<div class="pickhint">你选的「${esc(spg.label)}」通用模型做不好，
+    往下翻，单独给你列了这几款</div>`;
+
   /* 需求画像 */
   h += `<div class="card"><div class="sec-t"><span class="n">1</span>你的需求优先级</div>
     <div class="muted" style="margin-bottom:14px">越靠上，说明你越在意</div><div class="bars">`;
@@ -509,6 +534,8 @@ function finish(){
 
   /* 完整版独有：Top3 对比 + 档位 + 成本 + 升降档 */
   if(light){
+    /* 12 题版也看得到这块：专用需求跟档位无关，通用池那 72 款答不了就是答不了 */
+    h += specialBlock();
     h += `<div class="lockwrap"><div class="blur">
       <div class="card"><div class="sec-t"><span class="n">2</span>备选方案对比</div>
       <div class="row2"><div class="alt"><div class="nm">备选一</div>
@@ -545,6 +572,10 @@ function finish(){
           <div class="mt">${m.match.toFixed(1)}<span>% 匹配</span></div>
           <div class="ds">${esc(contrast(top,m))}</div></div>`:'').join('')}
       </div></div>`;
+
+    /* 专用需求：通用池答不了的那部分单独说。
+       故意不编进上面那套序号，插在中间也不会打乱后面的 3/4/5/6/7 */
+    h += specialBlock();
 
     /* 关键维度对比表 */
     const keys = need.slice(0,5).map(x=>x[0]);
@@ -625,6 +656,30 @@ function finish(){
     $('#save-card').onclick = ()=> saveCard(top, all, w, need);
     report(top, w);
   }
+}
+
+/* ── 专用模型推荐块 ──
+   为什么单独一块、为什么没有分数：语音、出图、视频、视觉这几类模型在榜单里属
+   specialized 分区，厂商不公布公开基准，没有可比分数，所以不排名也不给分，只按
+   需求方向给推荐清单。通用池那边答不了这类需求——用户答「我要做语音」，从几十款
+   语言模型里挑出来的还是一个文字模型，答非所问。
+   数据来自 models.json 的 specialized（源头 data/rankings/specialized_pool.json）。 */
+function specialBlock(){
+  const box = S.specialized;
+  if(!S.pick || !box || !box.groups) return '';
+  const g = box.groups.find(x=>x.key===S.pick);
+  if(!g || !g.picks || !g.picks.length) return '';
+
+  return `<div class="card spec">
+    <div class="spec-tag">这类需求，通用大模型干不好</div>
+    <div class="spec-h">${esc(g.label)}</div>
+    <div class="spec-p">${esc(g.intro)}</div>
+    ${g.picks.map(p=>`<div class="tier"><div class="ic">专</div><div class="tx">
+      <b>${esc(p.name)} · ${esc(p.vendor)}</b>
+      <p>${esc(p.why)}${p.caveat?'（'+esc(p.caveat)+'）':''}</p></div></div>`).join('')}
+    <div class="spec-note">这几款厂商都没有公布公开基准，分数没法互相比，
+      所以这里只按能力方向推荐、不做排名，也不给分数。</div>
+  </div>`;
 }
 
 /* ── 时间戳 ── */
