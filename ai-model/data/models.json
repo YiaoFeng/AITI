@@ -1,6 +1,6 @@
 {
  "version": "1.0",
- "generated_at": "2026-09-23",
+ "generated_at": "2026-09-24",
  "source": "data/rankings/benchmarks.json",
  "dims": [
   "reasoning",
@@ -30,7 +30,7 @@
     "multimodal": 86,
     "longtext": 88,
     "cost": 60,
-    "speed": 72,
+    "speed": 71,
     "privacy": 77,
     "ecosystem": 92,
     "creative": 86
@@ -108,7 +108,7 @@
     "multimodal": 85,
     "longtext": 88,
     "cost": 86,
-    "speed": 96,
+    "speed": 95,
     "privacy": 84,
     "ecosystem": 83,
     "creative": 83
@@ -134,7 +134,7 @@
     "multimodal": 82,
     "longtext": 87,
     "cost": 94,
-    "speed": 76,
+    "speed": 68,
     "privacy": 86,
     "ecosystem": 85,
     "creative": 85
@@ -229,32 +229,6 @@
    "power": 83
   },
   {
-   "name": "GPT-5.6 Terra",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 84,
-    "coding": 90,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 91,
-    "cost": 71,
-    "speed": 82,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "TB 2.1 88.0，GPQA 92.5",
-   "updated_at": "2026-09-18",
-   "tier": {
-    "key": "openai",
-    "label": "推理档位",
-    "how": "reasoning_effort 有 low / medium / high 三档",
-    "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
-    "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
-   },
-   "power": 83
-  },
-  {
    "name": "Gemini 3.7 Flash",
    "vendor": "海外",
    "score": {
@@ -316,13 +290,39 @@
     "multimodal": 77,
     "longtext": 91,
     "cost": 77,
-    "speed": 98,
+    "speed": 97,
     "privacy": 72,
     "ecosystem": 77,
     "creative": 73
    },
    "brief": "DeepSWE 75.4 全场第一，GPQA 93.5",
    "updated_at": "2026-09-03",
+   "power": 82
+  },
+  {
+   "name": "GPT-5.6 Terra",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 84,
+    "coding": 90,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 91,
+    "cost": 71,
+    "speed": 79,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "TB 2.1 88.0，GPQA 92.5",
+   "updated_at": "2026-09-18",
+   "tier": {
+    "key": "openai",
+    "label": "推理档位",
+    "how": "reasoning_effort 有 low / medium / high 三档",
+    "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
+    "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
+   },
    "power": 82
   },
   {
@@ -361,7 +361,7 @@
     "multimodal": 75,
     "longtext": 92,
     "cost": 67,
-    "speed": 74,
+    "speed": 73,
     "privacy": 75,
     "ecosystem": 83,
     "creative": 73
@@ -465,7 +465,7 @@
     "multimodal": 75,
     "longtext": 92,
     "cost": 89,
-    "speed": 88,
+    "speed": 87,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -723,7 +723,7 @@
     "multimodal": 75,
     "longtext": 87,
     "cost": 74,
-    "speed": 66,
+    "speed": 65,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1019,7 +1019,7 @@
     "multimodal": 92,
     "longtext": 77,
     "cost": 96,
-    "speed": 62,
+    "speed": 65,
     "privacy": 87,
     "ecosystem": 76,
     "creative": 82
@@ -1038,7 +1038,7 @@
     "multimodal": 75,
     "longtext": 83,
     "cost": 78,
-    "speed": 81,
+    "speed": 82,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1102,7 +1102,7 @@
     "multimodal": 75,
     "longtext": 77,
     "cost": 85,
-    "speed": 74,
+    "speed": 73,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1204,7 +1204,7 @@
     "multimodal": 65,
     "longtext": 91,
     "cost": 88,
-    "speed": 87,
+    "speed": 89,
     "privacy": 79,
     "ecosystem": 68,
     "creative": 66
@@ -1355,8 +1355,8 @@
     "chinese": 80,
     "multimodal": 75,
     "longtext": 60,
-    "cost": 100,
-    "speed": 99,
+    "cost": 99,
+    "speed": 98,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1423,25 +1423,6 @@
    "power": 71
   },
   {
-   "name": "North Mini Code",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 27,
-    "coding": 64,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 60,
-    "cost": 76,
-    "speed": 80,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "GPQA 75.7，TB 2.1 35.6",
-   "updated_at": "2026-09-18",
-   "power": 70
-  },
-  {
    "name": "DiffusionGemma 26B A4B",
    "vendor": "海外",
    "score": {
@@ -1461,25 +1442,6 @@
    "power": 69
   },
   {
-   "name": "Granite 4.2 30B",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 25,
-    "coding": 64,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 60,
-    "cost": 92,
-    "speed": 76,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "TB 2.1 26.6，GPQA 64.4",
-   "updated_at": "2026-09-18",
-   "power": 69
-  },
-  {
    "name": "Granite 4.2 8B",
    "vendor": "海外",
    "score": {
@@ -1489,12 +1451,31 @@
     "multimodal": 75,
     "longtext": 60,
     "cost": 100,
-    "speed": 80,
+    "speed": 82,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
    },
    "brief": "GPQA 63.1，TB 2.1 18.4",
+   "updated_at": "2026-09-18",
+   "power": 69
+  },
+  {
+   "name": "North Mini Code",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 27,
+    "coding": 64,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 60,
+    "cost": 76,
+    "speed": 78,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "GPQA 75.7，TB 2.1 35.6",
    "updated_at": "2026-09-18",
    "power": 69
   },
@@ -1533,6 +1514,25 @@
     "creative": 78
    },
    "brief": "GPQA 55.8，TB 2.1 4.5",
+   "updated_at": "2026-09-18",
+   "power": 68
+  },
+  {
+   "name": "Ling 3.0 Tiny",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 25,
+    "coding": 64,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 60,
+    "cost": 76,
+    "speed": 65,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "GPQA 73.4，TB 2.1 27.7",
    "updated_at": "2026-09-18",
    "power": 68
   },
@@ -1594,21 +1594,21 @@
    "power": 68
   },
   {
-   "name": "Ling 3.0 Tiny",
-   "vendor": "国产",
+   "name": "Granite 4.2 30B",
+   "vendor": "海外",
    "score": {
     "reasoning": 25,
     "coding": 64,
     "chinese": 80,
     "multimodal": 75,
     "longtext": 60,
-    "cost": 76,
-    "speed": 60,
+    "cost": 92,
+    "speed": 62,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "GPQA 73.4，TB 2.1 27.7",
+   "brief": "TB 2.1 26.6，GPQA 64.4",
    "updated_at": "2026-09-18",
    "power": 67
   }
