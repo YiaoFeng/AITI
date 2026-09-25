@@ -1,6 +1,6 @@
 {
  "version": "1.0",
- "generated_at": "2026-09-24",
+ "generated_at": "2026-09-25",
  "source": "data/rankings/benchmarks.json",
  "dims": [
   "reasoning",
@@ -18,7 +18,7 @@
   "privacy": "由 本土化 70% + API稳定性 30% 推算（榜单无独立隐私维度）",
   "creative": "由 中文能力 45% + 实际调用 30% + 趋势热度 25% 推算（榜单无独立创意维度）"
  },
- "count": 72,
+ "count": 70,
  "models": [
   {
    "name": "GPT-6 Astra",
@@ -30,7 +30,7 @@
     "multimodal": 86,
     "longtext": 88,
     "cost": 60,
-    "speed": 71,
+    "speed": 70,
     "privacy": 77,
     "ecosystem": 92,
     "creative": 86
@@ -73,32 +73,6 @@
    "power": 86
   },
   {
-   "name": "Gemini 3.8 Flash",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 92,
-    "coding": 96,
-    "chinese": 72,
-    "multimodal": 82,
-    "longtext": 88,
-    "cost": 80,
-    "speed": 100,
-    "privacy": 74,
-    "ecosystem": 81,
-    "creative": 76
-   },
-   "brief": "GPQA 95.3 前三，DeepSWE 73.7",
-   "updated_at": "2026-09-03",
-   "tier": {
-    "key": "google",
-    "label": "思考预算",
-    "how": "thinking budget 可以调，也能设成 0 直接关掉",
-    "advice": "批量跑的小任务关掉，需要多步推理的再开",
-    "why": "思考档位越高延迟越明显，价格随推理 token 一起上涨"
-   },
-   "power": 85
-  },
-  {
    "name": "DeepSeek V4 Vision",
    "vendor": "国产",
    "score": {
@@ -108,7 +82,7 @@
     "multimodal": 85,
     "longtext": 88,
     "cost": 86,
-    "speed": 95,
+    "speed": 94,
     "privacy": 84,
     "ecosystem": 83,
     "creative": 83
@@ -125,30 +99,30 @@
    "power": 84
   },
   {
-   "name": "智谱 GLM-5.3-Flash",
-   "vendor": "国产",
+   "name": "Gemini 3.8 Flash",
+   "vendor": "海外",
    "score": {
-    "reasoning": 80,
-    "coding": 86,
-    "chinese": 84,
+    "reasoning": 92,
+    "coding": 96,
+    "chinese": 72,
     "multimodal": 82,
-    "longtext": 87,
-    "cost": 94,
-    "speed": 68,
-    "privacy": 86,
-    "ecosystem": 85,
-    "creative": 85
+    "longtext": 88,
+    "cost": 80,
+    "speed": 99,
+    "privacy": 74,
+    "ecosystem": 81,
+    "creative": 76
    },
-   "brief": "DeepSWE 63.4，TB 2.1 84.3",
-   "updated_at": "2026-08-26",
+   "brief": "GPQA 95.3 前三，DeepSWE 73.7",
+   "updated_at": "2026-09-03",
    "tier": {
-    "key": "zhipu",
-    "label": "思考开关",
-    "how": "深度思考模式可以开关",
-    "advice": "常规任务关掉，复杂推理再开",
-    "why": "开着思考会拉长响应时间，简单任务上不划算"
+    "key": "google",
+    "label": "思考预算",
+    "how": "thinking budget 可以调，也能设成 0 直接关掉",
+    "advice": "批量跑的小任务关掉，需要多步推理的再开",
+    "why": "思考档位越高延迟越明显，价格随推理 token 一起上涨"
    },
-   "power": 83
+   "power": 84
   },
   {
    "name": "Claude Fable 5.1",
@@ -186,7 +160,7 @@
     "multimodal": 74,
     "longtext": 87,
     "cost": 74,
-    "speed": 66,
+    "speed": 64,
     "privacy": 87,
     "ecosystem": 84,
     "creative": 85
@@ -217,7 +191,7 @@
     "ecosystem": 85,
     "creative": 87
    },
-   "brief": "DeepSWE 58.7，GPQA 91.7",
+   "brief": "GPQA 91.7，DeepSWE 58.7",
    "updated_at": "2026-09-07",
    "tier": {
     "key": "qwen",
@@ -251,6 +225,32 @@
     "how": "thinking budget 可以调，也能设成 0 直接关掉",
     "advice": "批量跑的小任务关掉，需要多步推理的再开",
     "why": "思考档位越高延迟越明显，价格随推理 token 一起上涨"
+   },
+   "power": 82
+  },
+  {
+   "name": "智谱 GLM-5.3-Flash",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 80,
+    "coding": 86,
+    "chinese": 84,
+    "multimodal": 82,
+    "longtext": 87,
+    "cost": 94,
+    "speed": 66,
+    "privacy": 86,
+    "ecosystem": 85,
+    "creative": 85
+   },
+   "brief": "DeepSWE 63.4，TB 2.1 84.3",
+   "updated_at": "2026-08-26",
+   "tier": {
+    "key": "zhipu",
+    "label": "思考开关",
+    "how": "深度思考模式可以开关",
+    "advice": "常规任务关掉，复杂推理再开",
+    "why": "开着思考会拉长响应时间，简单任务上不划算"
    },
    "power": 82
   },
@@ -290,7 +290,7 @@
     "multimodal": 77,
     "longtext": 91,
     "cost": 77,
-    "speed": 97,
+    "speed": 93,
     "privacy": 72,
     "ecosystem": 77,
     "creative": 73
@@ -309,7 +309,7 @@
     "multimodal": 75,
     "longtext": 91,
     "cost": 71,
-    "speed": 79,
+    "speed": 78,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -352,32 +352,6 @@
    "power": 81
   },
   {
-   "name": "GPT-5.6 Sol",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 89,
-    "coding": 96,
-    "chinese": 70,
-    "multimodal": 75,
-    "longtext": 92,
-    "cost": 67,
-    "speed": 73,
-    "privacy": 75,
-    "ecosystem": 83,
-    "creative": 73
-   },
-   "brief": "GPQA 94.1，DeepSWE 73.0",
-   "updated_at": "2026-08-23",
-   "tier": {
-    "key": "openai",
-    "label": "推理档位",
-    "how": "reasoning_effort 有 low / medium / high 三档",
-    "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
-    "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
-   },
-   "power": 81
-  },
-  {
    "name": "Kimi K3",
    "vendor": "国产",
    "score": {
@@ -413,7 +387,7 @@
     "multimodal": 75,
     "longtext": 86,
     "cost": 77,
-    "speed": 73,
+    "speed": 72,
     "privacy": 84,
     "ecosystem": 78,
     "creative": 77
@@ -465,7 +439,7 @@
     "multimodal": 75,
     "longtext": 92,
     "cost": 89,
-    "speed": 87,
+    "speed": 83,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -504,7 +478,7 @@
    "name": "小米 MiMo-V2.6-Pro",
    "vendor": "国产",
    "score": {
-    "reasoning": 77,
+    "reasoning": 76,
     "coding": 93,
     "chinese": 80,
     "multimodal": 75,
@@ -529,7 +503,7 @@
     "multimodal": 75,
     "longtext": 86,
     "cost": 65,
-    "speed": 70,
+    "speed": 69,
     "privacy": 76,
     "ecosystem": 80,
     "creative": 72
@@ -542,6 +516,32 @@
     "how": "能给思考过程设一个 token 上限，也能整个关掉",
     "advice": "闲聊和简单问答关掉思考，写代码、读长文再打开",
     "why": "开着思考回复会明显变慢，token 消耗也跟着翻上去"
+   },
+   "power": 80
+  },
+  {
+   "name": "GPT-5.6 Sol",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 89,
+    "coding": 96,
+    "chinese": 70,
+    "multimodal": 75,
+    "longtext": 92,
+    "cost": 67,
+    "speed": 71,
+    "privacy": 75,
+    "ecosystem": 83,
+    "creative": 73
+   },
+   "brief": "GPQA 94.1，DeepSWE 73.0",
+   "updated_at": "2026-08-23",
+   "tier": {
+    "key": "openai",
+    "label": "推理档位",
+    "how": "reasoning_effort 有 low / medium / high 三档",
+    "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
+    "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
    },
    "power": 80
   },
@@ -598,32 +598,6 @@
    "power": 80
   },
   {
-   "name": "Claude Sonnet 5",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 78,
-    "coding": 76,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 89,
-    "cost": 72,
-    "speed": 78,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "GPQA 91.1，TB 2.1 80.5",
-   "updated_at": "2026-09-18",
-   "tier": {
-    "key": "anthropic",
-    "label": "思考预算",
-    "how": "能给思考过程设一个 token 上限，也能整个关掉",
-    "advice": "闲聊和简单问答关掉思考，写代码、读长文再打开",
-    "why": "开着思考回复会明显变慢，token 消耗也跟着翻上去"
-   },
-   "power": 80
-  },
-  {
    "name": "Grok 4.5",
    "vendor": "海外",
    "score": {
@@ -647,25 +621,6 @@
     "advice": "默认档够用，难题再往上调",
     "why": "推理强度越高，响应越慢、消耗越大"
    },
-   "power": 80
-  },
-  {
-   "name": "Agnes 3.0 Flash",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 82,
-    "coding": 79,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 88,
-    "cost": 100,
-    "speed": 75,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "GPQA 92.4，TB 2.1 82.0",
-   "updated_at": "2026-09-18",
    "power": 80
   },
   {
@@ -697,7 +652,7 @@
     "multimodal": 65,
     "longtext": 87,
     "cost": 78,
-    "speed": 77,
+    "speed": 76,
     "privacy": 84,
     "ecosystem": 77,
     "creative": 76
@@ -714,6 +669,32 @@
    "power": 79
   },
   {
+   "name": "Claude Sonnet 5",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 78,
+    "coding": 76,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 89,
+    "cost": 72,
+    "speed": 75,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "GPQA 91.1，TB 2.1 80.5",
+   "updated_at": "2026-09-18",
+   "tier": {
+    "key": "anthropic",
+    "label": "思考预算",
+    "how": "能给思考过程设一个 token 上限，也能整个关掉",
+    "advice": "闲聊和简单问答关掉思考，写代码、读长文再打开",
+    "why": "开着思考回复会明显变慢，token 消耗也跟着翻上去"
+   },
+   "power": 79
+  },
+  {
    "name": "Qwen3.8 2.4T A95B",
    "vendor": "国产",
    "score": {
@@ -723,7 +704,7 @@
     "multimodal": 75,
     "longtext": 87,
     "cost": 74,
-    "speed": 65,
+    "speed": 64,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -749,7 +730,7 @@
     "multimodal": 72,
     "longtext": 87,
     "cost": 74,
-    "speed": 75,
+    "speed": 72,
     "privacy": 71,
     "ecosystem": 78,
     "creative": 74
@@ -775,7 +756,7 @@
     "multimodal": 85,
     "longtext": 89,
     "cost": 71,
-    "speed": 87,
+    "speed": 86,
     "privacy": 74,
     "ecosystem": 78,
     "creative": 72
@@ -820,7 +801,7 @@
     "multimodal": 74,
     "longtext": 89,
     "cost": 82,
-    "speed": 68,
+    "speed": 67,
     "privacy": 85,
     "ecosystem": 84,
     "creative": 82
@@ -901,23 +882,23 @@
    "power": 78
   },
   {
-   "name": "Agnes 2.5 Pro",
-   "vendor": "海外",
+   "name": "小米 MiMo-V2.5",
+   "vendor": "国产",
    "score": {
-    "reasoning": 74,
-    "coding": 64,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 91,
-    "cost": 97,
-    "speed": 75,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
+    "reasoning": 57,
+    "coding": 63,
+    "chinese": 88,
+    "multimodal": 92,
+    "longtext": 77,
+    "cost": 96,
+    "speed": 67,
+    "privacy": 87,
+    "ecosystem": 76,
+    "creative": 82
    },
-   "brief": "GPQA 90.5，TB 2.1 69.7",
-   "updated_at": "2026-09-18",
-   "power": 78
+   "brief": "TB 2.1 63.7，GPQA 84.9",
+   "updated_at": "2026-08-24",
+   "power": 77
   },
   {
    "name": "Gemini 3.5 Flash-Lite",
@@ -943,6 +924,25 @@
     "advice": "批量跑的小任务关掉，需要多步推理的再开",
     "why": "思考档位越高延迟越明显，价格随推理 token 一起上涨"
    },
+   "power": 77
+  },
+  {
+   "name": "Inkling",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 62,
+    "coding": 64,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 83,
+    "cost": 78,
+    "speed": 90,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "GPQA 87.2，TB 2.1 55.1",
+   "updated_at": "2026-09-18",
    "power": 77
   },
   {
@@ -993,7 +993,7 @@
     "multimodal": 68,
     "longtext": 85,
     "cost": 93,
-    "speed": 80,
+    "speed": 79,
     "privacy": 87,
     "ecosystem": 79,
     "creative": 82
@@ -1010,44 +1010,6 @@
    "power": 76
   },
   {
-   "name": "小米 MiMo-V2.5",
-   "vendor": "国产",
-   "score": {
-    "reasoning": 57,
-    "coding": 63,
-    "chinese": 88,
-    "multimodal": 92,
-    "longtext": 77,
-    "cost": 96,
-    "speed": 65,
-    "privacy": 87,
-    "ecosystem": 76,
-    "creative": 82
-   },
-   "brief": "TB 2.1 63.7，GPQA 84.9",
-   "updated_at": "2026-08-24",
-   "power": 76
-  },
-  {
-   "name": "Inkling",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 62,
-    "coding": 64,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 83,
-    "cost": 78,
-    "speed": 82,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "GPQA 87.2，TB 2.1 55.1",
-   "updated_at": "2026-09-18",
-   "power": 76
-  },
-  {
    "name": "Kimi K2.7 Code",
    "vendor": "国产",
    "score": {
@@ -1057,7 +1019,7 @@
     "multimodal": 75,
     "longtext": 86,
     "cost": 79,
-    "speed": 70,
+    "speed": 71,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1102,7 +1064,7 @@
     "multimodal": 75,
     "longtext": 77,
     "cost": 85,
-    "speed": 73,
+    "speed": 72,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1204,7 +1166,7 @@
     "multimodal": 65,
     "longtext": 91,
     "cost": 88,
-    "speed": 89,
+    "speed": 87,
     "privacy": 79,
     "ecosystem": 68,
     "creative": 66
@@ -1451,7 +1413,7 @@
     "multimodal": 75,
     "longtext": 60,
     "cost": 100,
-    "speed": 82,
+    "speed": 79,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1470,7 +1432,7 @@
     "multimodal": 75,
     "longtext": 60,
     "cost": 76,
-    "speed": 78,
+    "speed": 76,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1514,25 +1476,6 @@
     "creative": 78
    },
    "brief": "GPQA 55.8，TB 2.1 4.5",
-   "updated_at": "2026-09-18",
-   "power": 68
-  },
-  {
-   "name": "Ling 3.0 Tiny",
-   "vendor": "国产",
-   "score": {
-    "reasoning": 25,
-    "coding": 64,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 60,
-    "cost": 76,
-    "speed": 65,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "GPQA 73.4，TB 2.1 27.7",
    "updated_at": "2026-09-18",
    "power": 68
   },
@@ -1603,12 +1546,31 @@
     "multimodal": 75,
     "longtext": 60,
     "cost": 92,
-    "speed": 62,
+    "speed": 60,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
    },
    "brief": "TB 2.1 26.6，GPQA 64.4",
+   "updated_at": "2026-09-18",
+   "power": 67
+  },
+  {
+   "name": "Ling 3.0 Tiny",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 25,
+    "coding": 64,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 60,
+    "cost": 76,
+    "speed": 60,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "GPQA 73.4，TB 2.1 27.7",
    "updated_at": "2026-09-18",
    "power": 67
   }
