@@ -106,6 +106,13 @@
            transition:width .3s ease;width:0}
   .qtext{font-size:23px;font-weight:800;line-height:1.42;margin:16px 0 4px;letter-spacing:-.2px}
   .qsub{font-size:13px;color:var(--gray);margin-bottom:20px}
+  /* 题库里带 hint 的题：题面下面给一段人话解释，把「生态」「按量计费」这类
+     没上下文的词说清楚。没 hint 的题还是那行灰字，不要两边长得一样。
+     类名不能叫 hint —— 上面第 94 行有个同名的（验证码那行的居中提示），
+     会把这个元素一起吃掉，解释的第二行就居中飘着了。 */
+  .qsub.qnote{font-size:14px;line-height:1.62;color:#6E675C;text-align:left;
+              background:#EDE8DB;border-left:3px solid var(--accent);
+              border-radius:0 10px 10px 0;padding:11px 14px;margin:8px 0 18px}
   .opt{
     display:flex;align-items:center;gap:13px;width:100%;text-align:left;background:var(--card);
     border:2px solid transparent;border-radius:14px;padding:17px 18px;margin-bottom:11px;
@@ -305,7 +312,9 @@ const CONFIG = {
 const DIM_CN = {
   reasoning:"推理能力", coding:"编程开发", chinese:"中文能力", multimodal:"多模态",
   longtext:"长文本", cost:"成本控制", speed:"响应速度", privacy:"数据安全",
-  ecosystem:"生态易用", creative:"创意写作"
+  // 「生态」对读者是个没上下文的词，结果页的柱状图和推荐理由里都叫「工具联动」，
+  // 跟题库里第 9 / 27 / 28 题的解释一个口径
+  ecosystem:"工具联动", creative:"创意写作"
 };
 
 /* ── 状态 ── */
@@ -454,7 +463,10 @@ function renderQ(){
   $('#q-tier').textContent = S.tier==='full' ? '完整版' : '12 题版';
   $('#q-prog').style.width = ((S.idx)/total*100) + '%';
   $('#q-text').textContent = q.text;
-  $('#q-sub').textContent = '选一个最接近你情况的';
+  // 题目自带解释就用解释，没有就退回那句默认提示。
+  // 解释写在题库（data/questions.json 的 hint）里，不写在这——改题面的人顺手就改了。
+  $('#q-sub').textContent = q.hint || '选一个最接近你情况的';
+  $('#q-sub').classList.toggle('qnote', !!q.hint);
 
   $('#q-opts').innerHTML = q.options.map((o,i)=>
     `<button class="opt${S.answers[q.id]===i?' pick':''}" data-i="${i}">
@@ -704,7 +716,10 @@ function why(m, w){
   const out = need.map(([k])=>
     `${DIM_CN[k]} ${m.score[k]} 分，${grade(m.score[k])}`);
   const costW = w.cost||0;
-  if(costW > 0.6) out.push(`成本分 ${m.score.cost}，${m.score.cost>=90?'用起来不心疼':'价格属于中上'}`);
+  // 这行的作用是「说明成本权重起作用了」，前面维度那句已经报过成本分了，
+  // 这里只补一句按什么算的——读者看到「价位中上」会以为是月费贵，
+  // 其实是调用量单价（同样的用量，账单差多少）
+  if(costW > 0.6) out.push(`按调用量算${m.score.cost>=90?'，用起来不心疼':'，价位属于中上'}`);
   else if(costW < 0) out.push(`不把价格当第一考虑，所以优先推能力更强的`);
   else out.push(`综合实力 ${m.power} 分，在 ${S.models.length} 款模型里排第 ${S.models.filter(x=>x.power>m.power).length+1}`);
   return out;

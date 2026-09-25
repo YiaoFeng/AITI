@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>班味人格图鉴 · 16 种打工人</title>
+<meta name="description" content="四个维度、16 种班味人格，12 题出结果，30 题出完整报告。">
+<!-- data:, 是空 icon，专门用来消掉浏览器自动发的那个 /favicon.ico 请求——
+     站点里没放这个文件，不发它就是一条 404 打在控制台里，e2e 的「无 JS 报错」会挂 -->
+<link rel="icon" href="data:,">
+<style>
+/* 2026-09-25 换皮：深蓝黑工牌 → 复古考勤票据。
+   变量名沿用不动（--desk 还是「页面底」、--paper 还是「卡面」），只换值——
+   整套 UI 的结构参数（间距、字号、层级）都挂在这些名字上，改名会牵一发动全身。
+   旧值留在注释里，哪天要回退不用翻 git。 */
+:root{
+  --desk:#C9B48C;      /* 牛皮纸底（旧 #141A22） */
+  --strap:#4A3A24;     /* 票据顶栏 / 挂绳（旧 #1D2A3D） */
+  --paper:#F4EAD2;     /* 票据纸（旧 #FBFAF4） */
+  --paper2:#FAF3E0;    /* 表格内衬、选中态（旧 #F1EEE1 / #F6F4EB） */
+  --ink:#3A2A16;       /* 主墨（旧 #16233A） */
+  --mid:#7A6748;       /* 辅助字（旧 #5C6472） */
+  --dim:#9C8862;       /* 弱字、点线（旧 #939CA8） */
+  --line:#B5A47E;      /* 分隔线（旧 #DAD7CA） */
+  --acc:#C2372A;       /* 章红：只在印章、高亮上用（旧 #D8FF3C 荧光黄绿） */
+  --red:#C2372A;
+  /* 批注蓝：这套票据风的第三色，也是「有趣」的来源。
+     只有米白 + 深褐会滑向怀旧悲情，加一层蓝色手写批注/圈注才像同事随手划过的考勤表。
+     调研口径：红色面积控在整页三成以内，别盖满。 */
+  --blue:#1A4FBF;
+  --serif:"STXingkai","STKaiti","SimHei",serif;   /* 大标题：行楷 */
+  --mono:Consolas,"Courier New",monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{
+  background:var(--desk); color:var(--ink); min-height:100vh;
+  /* 牛皮纸的横向细纹：两层 3px 的浅色渐变，比贴纹理图省一次请求 */
+  background-image:repeating-linear-gradient(0deg,
+    rgba(255,255,255,.055) 0 1px, transparent 1px 3px);
+  font-family:-apple-system,"PingFang SC","Microsoft YaHei","SimHei",sans-serif;
+  display:flex; justify-content:center; padding:26px 16px 40px;
+}
+.wrap{width:100%;max-width:520px}
+.hidden{display:none !important}
+.back{
+  display:inline-block; font-size:13px; color:#8A7455; text-decoration:none;
+  letter-spacing:1px; margin-bottom:18px;
+}
+/* 票据纸：上下两排齿孔，像从本子上撕下来的一联。
+   齿孔色用 --desk（页面底色），视觉上就是被咬掉的缺口——
+   卡片本身不透明，所以只能这么伪造，不能用 mask（会把内容一起透掉）。 */
+.card{
+  position:relative; background:var(--paper); padding:30px 26px 28px;
+  box-shadow:0 14px 40px rgba(60,40,20,.30);
+}
+.card::before,.card::after{
+  content:''; position:absolute; left:0; right:0; height:20px;
+  background:radial-gradient(circle at 10px 10px, var(--desk) 9px, transparent 10px);
+  background-size:20px 20px;
+}
+.card::before{top:-10px}
+.card::after{bottom:-10px}
+
+.kicker{
+  font-family:var(--mono); font-size:11.5px;
+  letter-spacing:3px; color:var(--dim); text-transform:uppercase;
+}
+.title{
+  font-family:var(--serif); font-size:40px; font-weight:400; letter-spacing:6px;
+  margin:9px 0 0; line-height:1.25;
+}
+.dash{border-top:2px dashed var(--line); margin:18px 0}
+.hr{border-top:3px double var(--line); margin:20px 0}
+.lead{font-size:15px; line-height:1.85; color:var(--mid); margin-top:14px}
+.pts{list-style:none; margin-top:16px}
+.pts li{font-size:14px; line-height:1.7; color:var(--mid); padding-left:20px; position:relative; margin-bottom:9px}
+.pts li::before{content:'—'; position:absolute; left:0; color:var(--dim)}
+.fine{font-size:12px; line-height:1.7; color:var(--dim); margin-top:16px}
+
+.btn{
+  display:block; width:100%; margin-top:20px; padding:17px 16px; border:none;
+  background:var(--ink); color:var(--paper); font-size:16px; font-weight:700;
+  letter-spacing:2px; font-family:inherit; cursor:pointer;
+}
+.btn:active{opacity:.85}
+.btn:disabled{opacity:.45}
+.btn.ghost{background:none; color:var(--mid); border:2px dashed var(--line); font-weight:400}
+
+/* ---------- 票据头（原工牌） ---------- */
+.badge{position:relative; margin-top:8px}
+.strap{display:none}                 /* 挂绳是工牌的东西，票据上没有 */
+/* 原来这里是 padding-top:0，因为卡片上方 26px 留着放挂绳。
+   挂绳撤掉之后如果还是 0，票头就顶到齿孔上，「BAN-XXXX-XXXX」会被咬掉上半截。 */
+.bcard{padding-top:26px}
+.bhead{
+  background:var(--paper); color:var(--ink); display:flex; align-items:center;
+  justify-content:space-between; gap:12px; padding:0 0 13px;
+  font-size:15px; font-weight:700; letter-spacing:5px;
+  border-bottom:4px double var(--ink);
+}
+.bhead em{font-style:normal; font-family:var(--mono); font-size:12px; color:var(--mid); letter-spacing:2px}
+/* 表头小字：职工考勤记录 ── 内部留存 ── 不许外传 */
+.formno{
+  font-family:var(--mono); font-size:11px; color:var(--mid); letter-spacing:2px;
+  padding:12px 0 0;
+}
+.bbody{display:flex; gap:16px; padding:20px 0 0}
+.bphoto{
+  flex:none; width:96px; height:118px; background:var(--paper2);
+  border:2px dashed var(--line);
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px;
+}
+.bphoto i{font-style:normal; font-size:44px; line-height:1}
+.bphoto span{font-family:var(--mono); font-size:9.5px; color:var(--dim); letter-spacing:2px}
+.binfo{flex:1; min-width:0; display:flex; flex-direction:column; justify-content:center}
+.bname{font-family:var(--serif); font-size:46px; font-weight:400; letter-spacing:5px; line-height:1.1}
+.bjob{
+  font-size:14px; color:var(--ink); margin-top:8px; letter-spacing:2px;
+  border-bottom:2px solid var(--ink); display:inline-block;
+  padding-bottom:4px; align-self:flex-start; max-width:100%;
+}
+.brow{display:flex; gap:8px; font-size:12px; margin-top:12px; align-items:baseline}
+.brow span{flex:none; width:30px; color:var(--dim); letter-spacing:1px}
+.brow b{font-family:var(--mono); font-size:12.5px; letter-spacing:1px; color:var(--ink)}
+.bslogan{
+  margin-top:18px; padding:14px 0 14px 16px; font-size:14.5px; line-height:1.8;
+  color:var(--ink); border-left:7px solid var(--acc);
+}
+.bcode{display:flex; gap:3px; height:44px; align-items:flex-end; margin-top:16px}
+.bcode i{display:block; background:var(--ink); width:4px}
+.bfoot{
+  display:flex; justify-content:space-between; padding:12px 0 0; margin-top:14px;
+  border-top:3px solid var(--ink);
+  font-family:var(--mono); font-size:10.5px; letter-spacing:2px; color:var(--mid);
+}
+/* 红色圆章：斜盖在票据右上，像人事部随手按的。
+   用 --acc 的章红，透明度压到 .8，不然会盖过底下的字。 */
+.stamp{
+  position:absolute; right:-8px; top:152px; width:94px; height:94px;
+  border:4px solid var(--acc); border-radius:50%; color:var(--acc);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  font-size:19px; font-weight:900; letter-spacing:2px; line-height:1.15;
+  transform:rotate(-14deg); opacity:.8; pointer-events:none; text-align:center;
+}
+.stamp i{font-style:normal; font-size:9.5px; letter-spacing:1px; margin-top:3px}
+
+/* ---------- 考勤卡 ---------- */
+.att{margin-top:24px; background:var(--paper2); border:2px solid var(--ink); padding:18px 20px 16px}
+.athead{
+  display:flex; justify-content:space-between; align-items:baseline;
+  font-size:14px; font-weight:900; letter-spacing:5px; padding-bottom:10px;
+  border-bottom:3px dashed var(--line);
+}
+.athead em{font-style:normal; font-family:var(--mono); font-size:11px; color:var(--dim); letter-spacing:1px}
+.atrow{
+  display:flex; justify-content:space-between; align-items:baseline; gap:12px;
+  font-size:14px; padding:11px 0; border-bottom:2px dotted var(--line);
+}
+.atrow span{color:var(--mid); letter-spacing:1px}
+.atrow b{font-family:var(--mono); font-size:15px; letter-spacing:1px}
+.atrow b em{font-style:normal; font-size:11px; color:var(--dim); margin-left:2px}
+
+/* 两极刻度条：一根细轨 + 一个空心圆滑块，越靠左越是 a 极。
+   票据风里滑块做成「圈」而不是「块」——实心块在浅底上太重，像涂改过。 */
+.ax{display:flex; align-items:center; gap:12px; padding:14px 0; border-bottom:2px dotted var(--line)}
+.ax .an{flex:none; width:44px; font-size:12.5px; color:var(--dim); letter-spacing:1px}
+.ax .an.r{text-align:right}
+.ax .an.on{color:var(--ink); font-weight:900}
+.ax .atk{flex:1; height:3px; background:var(--line); position:relative}
+.ax .atk::before{
+  content:''; position:absolute; left:50%; top:-5px; width:1px; height:13px; background:var(--dim);
+}
+.ax .atk i{
+  position:absolute; top:-11px; width:24px; height:24px; margin-left:-12px;
+  border-radius:50%; background:var(--paper2); border:4px solid var(--ink);
+}
+.ax .atk i.b{border-color:var(--acc)}
+.axname{font-size:12px; color:var(--dim); letter-spacing:1px; margin:16px 0 2px}
+
+/* ---------- 答题 ---------- */
+/* 进度做成票据上的一道红条：比深褐细线显眼，又不占多少红色面积 */
+.prog{display:flex; align-items:center; gap:12px; margin-bottom:24px}
+.ptrack{flex:1; height:12px; background:var(--paper2); border:2px solid var(--ink); overflow:hidden}
+.pfill{height:100%; background:var(--acc); width:0; transition:width .2s}
+.pnum{font-family:var(--mono); font-size:13px; color:var(--dim); letter-spacing:1px}
+.q{font-size:19px; font-weight:700; line-height:1.6; margin-bottom:22px; letter-spacing:.5px}
+/* 选项做成待填的虚线格；选中那一格像被红笔划了一道 */
+.opt{
+  display:flex; align-items:flex-start; gap:12px; width:100%; text-align:left;
+  background:var(--paper2); border:2px dotted var(--line); padding:15px 16px; margin-bottom:11px;
+  font-family:inherit; font-size:14.5px; line-height:1.65; color:var(--ink); cursor:pointer;
+}
+.opt .k{
+  flex:none; width:22px; height:22px; display:flex; align-items:center; justify-content:center;
+  border:2px solid var(--line); font-family:var(--mono); font-size:12px; color:var(--dim);
+}
+.opt.sel{border:2px solid var(--ink); border-left:8px solid var(--acc); background:var(--paper)}
+.opt.sel .k{background:var(--acc); color:var(--paper); border-color:var(--acc)}
+.nav{display:flex; gap:10px; margin-top:20px}
+.nav .btn{margin-top:0}
+
+/* ---------- 结果 ---------- */
+.secm{font-size:14px; font-weight:900; letter-spacing:3px; margin-bottom:14px;
+  border-bottom:2px solid var(--ink); padding-bottom:8px}
+.typepic{font-size:14.5px; line-height:1.9; color:var(--mid)}
+.rxbox{background:var(--paper2); padding:16px; font-size:14.5px; line-height:1.85}
+.rxbox div+div{margin-top:10px}
+.rxbox i{font-style:normal; color:var(--dim); margin-right:6px}
+.selfbox{background:var(--paper2); padding:16px; font-size:14.5px; line-height:1.85}
+.selfbox div{display:flex; gap:10px; align-items:flex-start}
+.selfbox div+div{margin-top:11px}
+.selfbox i{flex:none; width:15px; height:15px; margin-top:4px; font-style:normal; border:1px solid var(--dim); display:block}
+.shareimg{width:100%; display:block; margin-top:16px; border:2px solid var(--ink)}
+.dl{display:inline-block; margin-top:12px; font-size:13px; color:var(--mid); text-decoration:none; border-bottom:1px solid var(--line); padding-bottom:2px}
+.footnote{font-size:12px; line-height:1.9; color:#8A7455; margin-top:22px; text-align:center}
+
+/* ---------- 锁定区 ---------- */
+.locked{background:var(--paper2); padding:20px 18px; margin-top:18px}
+.locked .secm{margin-bottom:10px}
+.lk-note{font-size:13.5px; line-height:1.8; color:var(--mid); margin-bottom:12px}
+.lk-list{list-style:none}
+.lk-list li{font-size:14px; line-height:1.75; color:var(--mid); padding-left:18px; position:relative; margin-bottom:9px}
+.lk-list li::before{content:'·'; position:absolute; left:4px; color:var(--dim)}
+.lkbox{border:2px dashed var(--acc); background:var(--paper2); padding:16px 16px 12px; margin-bottom:16px}
+.lkhd{display:flex; align-items:center; gap:8px; font-size:16px; font-weight:900; letter-spacing:1px; margin-bottom:10px}
+.lkhd i{font-style:normal; font-size:15px; filter:grayscale(1); opacity:.6}
+.lkbuy{font-size:13.5px; line-height:1.8; color:var(--mid)}
+.lkbuy b{color:var(--ink)}
+.locked > .btn{margin-top:16px}
+
+/* ---------- 验证码弹层 ---------- */
+.mask{position:fixed; inset:0; background:rgba(58,42,22,.75); display:flex; align-items:center; justify-content:center; padding:20px; z-index:50}
+.modal{background:var(--paper); width:100%; max-width:400px; padding:30px 26px 26px; position:relative}
+.modal .x{position:absolute; top:10px; right:14px; background:none; border:none; font-size:24px; color:var(--dim); cursor:pointer; line-height:1}
+.mt{font-size:19px; font-weight:900; line-height:1.5; letter-spacing:1px}
+.ms{font-size:13px; line-height:1.75; color:var(--mid); margin-top:10px}
+.codein{
+  width:100%; margin-top:18px; padding:15px 14px; border:1px solid var(--line);
+  background:var(--paper2); font-family:Consolas,"Courier New",monospace; font-size:16px;
+  letter-spacing:2px; color:var(--ink); outline:none; text-transform:uppercase;
+}
+.codein:focus{border-color:var(--ink)}
+.cerr{font-size:13px; color:var(--red); margin-top:10px; min-height:18px}
+.cok{font-size:13px; color:#3F6B4A; margin-top:10px; min-height:18px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="../index.html">‹ 全部测试</a>
+
+  <!-- ============ 首页 ============ -->
+  <div id="welcome" class="card">
+    <div class="kicker">职工考勤单 / No.00000</div>
+    <div class="title">班味人格图鉴</div>
+    <div class="dash"></div>
+    <div class="lead">四个维度、16 种班味人格。<br>测完给你一张考勤单和这个月的考勤卡。</div>
+    <ul class="pts">
+      <li><b>12 题体验版</b>：直接出考勤单、考勤卡和四维刻度</li>
+      <li><b>30 题完整版</b>：还多出你的四维是怎么组合出来的、分型建议和一份自查表</li>
+      <li>凭第一反应选，别想太久——想太久就不是你的答案了</li>
+    </ul>
+    <button class="btn" onclick="openCode('light')">输入验证码 · 12 题体验版</button>
+    <button class="btn ghost" onclick="openCode('full')">输入验证码 · 完整版 30 题</button>
+    <div class="fine">两档各需一个验证码。已经答过 12 题的，完整版会把前面 12 题一起算进去，<br>不用重做，直接从第 13 题接着答。</div>
+    <div class="fine">本测试为娱乐向内容，不构成任何职场建议。</div>
+  </div>
+
+  <!-- ============ 答题 ============ -->
+  <div id="quizpage" class="card hidden">
+    <div class="prog">
+      <div class="ptrack"><div class="pfill" id="pfill"></div></div>
+      <div class="pnum" id="pnum">01/12</div>
+    </div>
+    <div class="q" id="qtext"></div>
+    <div id="opts"></div>
+    <div class="nav">
+      <button class="btn ghost" id="prevbtn" onclick="prevQ()">‹ 上一题</button>
+      <button class="btn" id="nextbtn" onclick="nextQ()">下一题 ›</button>
+    </div>
+  </div>
+
+  <!-- ============ 结果 ============ -->
+  <div id="result" class="hidden">
+    <div class="kicker">职工考勤记录 / 内部留存</div>
+    <div class="dash"></div>
+
+    <!-- 考勤票据（原工牌） -->
+    <div class="badge">
+      <div class="card bcard">
+        <div class="bhead">
+          <span>班味无限公司</span><em id="bcode2">BAN-0000-0000</em>
+        </div>
+        <div class="formno">职工考勤记录 ── 内部留存 ── 不许外传</div>
+        <div class="stamp">本月已阅<i>人事部 · 代章</i></div>
+        <div class="bbody">
+          <div class="bphoto"><i id="bface">🪫</i><span>PHOTO</span></div>
+          <div class="binfo">
+            <div class="bname" id="bname">打卡机</div>
+            <div class="bjob" id="bjob">按时到岗荣誉员工</div>
+            <div class="brow"><span>工号</span><b id="bno">BAN-EHMD-0922</b></div>
+            <div class="brow"><span>部门</span><b id="bdept">续航焦虑科</b></div>
+          </div>
+        </div>
+        <div class="bslogan" id="bslogan"></div>
+        <div class="bcode" id="bbarcode"></div>
+        <div class="bfoot"><span id="bdate">2026.09.22 签发</span><span>有效期 至离职</span></div>
+      </div>
+    </div>
+
+    <!-- 考勤卡 -->
+    <div class="att">
+      <div class="athead"><span id="attitle">2026 年 9 月 · 考勤卡</span><em id="atno">NO.000000</em></div>
+      <div id="atrows"></div>
+      <div class="axname">四个维度 · 你站在哪一边</div>
+      <div id="rbars"></div>
+    </div>
+
+    <!-- 12 题档：锁定区 -->
+    <div class="locked hidden" id="locked">
+      <div class="lkbox">
+        <div class="lkhd"><i>🔒</i>还锁着 18 道题的内容</div>
+        <div class="lk-note">12 题够出一张考勤单，不够说清你为什么是这一型。再答 18 题，会多出：</div>
+        <ul class="lk-list">
+          <li>你的四维组合是怎么推出来的——同一张单子，成因不一样</li>
+          <li>按你的型给的三条，比通用建议具体</li>
+          <li>一份 30 天自查表，四条每周可以对着看一遍</li>
+          <li>考勤卡补上「工位必备」那一行</li>
+        </ul>
+      </div>
+      <button class="btn" onclick="openCode('full')">输入验证码 · 继续答 18 题</button>
+      <div class="lkbuy" style="margin-top:12px">完整版 30 题在店铺里是单独的一档，买回来把码填进去就能接着答——<b>前面 12 题不用重做</b>，直接从第 13 题开始。</div>
+    </div>
+
+    <!-- 30 题档：多出来的板块 -->
+    <div class="hidden" id="fullmod">
+      <div class="hr"></div>
+      <div class="secm">你是哪一种，怎么来的</div>
+      <div class="typepic" id="rtypepic"></div>
+      <div class="hr"></div>
+      <div class="secm">按你的型，给三条</div>
+      <div class="rxbox" id="rtypeRx"></div>
+      <div class="hr"></div>
+      <div class="secm">30 天自查表</div>
+      <div class="selfbox" id="rself"></div>
+    </div>
+
+    <div class="hr"></div>
+    <div class="secm" style="color:#8A7455">这张考勤单可以存下来</div>
+    <img class="shareimg" id="shareimg" alt="班味考勤单">
+    <div style="text-align:center"><a class="dl" id="dl" download="班味考勤单.png">下载这张图</a></div>
+
+    <div class="footnote">
+      本测试为娱乐向内容，不构成任何职场建议。<br>
+      <b>AI榜老冯</b>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 验证码弹层 ============ -->
+<div id="codemask" class="mask hidden">
+  <div class="modal">
+    <button class="x" onclick="closeCode()">×</button>
+    <div class="mt" id="codetitle">输入验证码<br>开始测班味人格</div>
+    <div class="ms" id="codesub">一个验证码只能用一次。<br>答完 12 题直接出结果，不用第二轮。</div>
+    <input id="codein" class="codein" placeholder="BAN-XXXXX-XXXXX" maxlength="20"
+           autocomplete="off" spellcheck="false">
+    <div class="cerr" id="cerr"></div>
+    <div class="cok" id="cok"></div>
+    <button class="btn" id="codebtn" onclick="submitCode()">解锁 · 开始测</button>
+  </div>
+</div>
+
+<script src="../config.js"></script>
+<script>
+/* ============================================================
+ *  班味人格图鉴 —— 12 题体验版 / 30 题完整版
+ *
+ *  判分跟另外几套不一样：不是算指数，是分型。
+ *  四个维度各是一根二元轴，选项直接标了属于哪一极（QUIZ[i].o[ai] = [文本, 维度, 极]），
+ *  一维里数票，票多的那极就是你的字母，四个字母拼成 16 型之一。
+ *  一维的题数是奇数（体验版 3、完整版 7），所以不会出现平票。
+ *  彩蛋题的维度是 'egg'，不参与分型，只喂考勤卡的最后一行。
+ *
+ *  题库是 30 题的长数组，前 12 题就是体验版那一档；S.answers 一次开满 30 格，
+ *  所以从 12 题升到 30 题时前面的答案原地保留，直接接着答。
+ *  后端只做两件事：核销验证码、存结果（见 ai-quiz/server/app.py）。
+ * ============================================================ */
+const DIMS   = [{"k": "e", "n": "电量", "a": "耗电", "b": "发电", "d": "上班是把你榨干，还是让你来劲"}, {"k": "v", "n": "情绪出口", "a": "憋着", "b": "直给", "d": "有情绪是咽下去，还是当场说出来"}, {"k": "s", "n": "摸鱼方式", "a": "明摸", "b": "暗摸", "d": "摸得光明正大，还是摸得神不知鬼不觉"}, {"k": "b", "n": "下班边界", "a": "能断", "b": "断不净", "d": "走出公司门就是走出来，还是走不出来"}];
+const QUIZ   = [{"q": "周一早上闹钟响的那一刻，你脑子里第一句话是？", "o": [["又要开始熬了，还有五天", "e", "a"], ["今天有几个活要推，先过一遍", "e", "b"], ["再睡五分钟，五分钟后再说", "e", "a"], ["起来吧，反正躺着也睡不着", "e", "b"]]}, {"q": "会上你的方案被否了，你会？", "o": [["当场接着问，那按什么改", "v", "b"], ["不说什么，回去自己消化", "v", "a"], ["脸上没事，心里记着", "v", "a"], ["直接说不认同，把理由摆出来", "v", "b"]]}, {"q": "在工位上刷手机的时候，你是？", "o": [["屏幕斜一点，耳朵听着脚步声", "s", "b"], ["光明正大，屏幕朝外", "s", "a"], ["被看见就被看见，无所谓", "s", "a"], ["一有人过来，窗口已经切好了", "s", "b"]]}, {"q": "关上电脑走出公司那一刻，你的脑子在？", "o": [["今天的事就到这了", "b", "a"], ["还在想明天那个会要怎么说", "b", "b"], ["只想赶紧走，别的都不想", "b", "a"], ["会不自觉把今天的活再捋一遍", "b", "b"]]}, {"q": "一天里你什么时候最有劲？", "o": [["上午十点，刚把活理清楚那会儿", "e", "b"], ["下班走出楼门那一刻", "e", "a"], ["快到点的那一个小时", "e", "a"], ["把一件难事啃下来的时候", "e", "b"]]}, {"q": "同事把他的锅甩给了你，你？", "o": [["忍了，回去在心里演一百遍", "v", "a"], ["当场面无表情把事实摆出来", "v", "b"], ["记下来，以后防着点这个人", "v", "a"], ["直接说这块不是我负责的", "v", "b"]]}, {"q": "一天里你摸鱼的时间，大概是什么形态？", "o": [["断断续续，都是几十秒的空", "s", "b"], ["上午下午各一大段，加起来不少", "s", "a"], ["摸得比较集中，摸完再一口气干", "s", "a"], ["一直在摸，但活也没落下", "s", "b"]]}, {"q": "晚上十点，工作群弹了条消息，你？", "o": [["明天再说，关机", "b", "a"], ["先点开看一眼，怕耽误事", "b", "b"], ["静音，不看", "b", "a"], ["忍不住点开，还回了一句", "b", "b"]]}, {"q": "领导临时又加了一件事，你的第一反应？", "o": [["心里一沉，又是这样", "e", "a"], ["先估这件事要多久，能不能插进来", "e", "b"], ["完了，今天又要加班", "e", "a"], ["得把手上那件往后挪一挪", "e", "b"]]}, {"q": "憋了一肚子话的时候，你会跟谁说？", "o": [["谁都不说，自己扛过去", "v", "a"], ["找个人当场全部倒出来", "v", "b"], ["只在心里过一遍就算了", "v", "a"], ["下班路上给朋友打电话讲一路", "v", "b"]]}, {"q": "领导突然从你背后走过来，你的反应是？", "o": [["抬头打个招呼，我该干嘛干嘛", "s", "a"], ["手比脑子快，窗口早就切好了", "s", "b"], ["无所谓，我不虚", "s", "a"], ["假装正在看一份文档", "s", "b"]]}, {"q": "休一天假，你最想干的是什么？", "o": [["什么都不干，彻底断开", "b", "a"], ["把积压的私事办一办，顺便想想工作", "b", "b"], ["睡到自然醒，手机扔远点", "b", "a"], ["出门走走，回来还是会瞄一眼电脑", "b", "b"]]}, {"q": "连上六天班之后，你的感觉是？", "o": [["被抽空了，得整整睡一天", "e", "a"], ["有点累，睡一觉就回来了", "e", "b"], ["一想到下周还有五天就发怵", "e", "a"], ["会想想这周做成了哪几件事", "e", "b"]]}, {"q": "群里有人发了条阴阳怪气的消息，你？", "o": [["看一眼，不接这个话", "v", "a"], ["直接回一句过去", "v", "b"], ["截图发给朋友私下吐槽", "v", "a"], ["在群里把话说明白", "v", "b"]]}, {"q": "摸鱼的时候你一般在干什么？", "o": [["刷视频、看剧，明着来", "s", "a"], ["看别的页面，聊天窗口开小窗", "s", "b"], ["直接跟旁边同事聊起来", "s", "a"], ["戴着耳机，装作在听东西", "s", "b"]]}, {"q": "周末的你在干什么？", "o": [["尽量不碰工作的事", "b", "a"], ["脑子里时不时会冒出工作", "b", "b"], ["手机扔一边，群消息不看", "b", "a"], ["还是会翻一眼群，怕漏了什么", "b", "b"]]}, {"q": "周五下午的你，状态是？", "o": [["已经没电了，靠熬到点", "e", "a"], ["反而最好，趁没人打扰赶进度", "e", "b"], ["摸到下班，今天不干正事", "e", "a"], ["把下周要做的先列出来", "e", "b"]]}, {"q": "你被安排了一个明显不合理的活，你？", "o": [["接了，回去再骂", "v", "a"], ["先问清楚为什么是这个安排", "v", "b"], ["心里翻白眼，嘴上说好", "v", "a"], ["说清楚我手上还有什么，排不开", "v", "b"]]}, {"q": "你更怕哪种情况？", "o": [["活干不完，堆到自己身上", "s", "a"], ["被人看出来一直在摸", "s", "b"], ["被临时安排新的活", "s", "a"], ["摸鱼被截图留证", "s", "b"]]}, {"q": "你平时怎么入睡？", "o": [["沾枕头就着，不太费劲", "b", "a"], ["躺下了还在复盘白天说过的话", "b", "b"], ["累了自然就睡", "b", "a"], ["经常要翻一会儿手机才睡得着", "b", "b"]]}, {"q": "你在工位上最常出现的状态是？", "o": [["盯着屏幕发呆，脑子不太转", "e", "a"], ["同时开着好几件事在推", "e", "b"], ["靠刷手机把时间熬过去", "e", "a"], ["沉浸进去，一抬头两小时过去了", "e", "b"]]}, {"q": "你的情绪，一般什么时候会被同事发现？", "o": [["基本发现不了", "v", "a"], ["当时就能看得出来", "v", "b"], ["等我真发作那天才知道", "v", "a"], ["我从来不藏，高兴不高兴都写脸上", "v", "b"]]}, {"q": "你觉得摸鱼这件事？", "o": [["该摸就摸，钱又没多给", "s", "a"], ["摸是技术活，得摸得专业", "s", "b"], ["摸归摸，活照样交上去", "s", "a"], ["摸得让人看不出来才叫本事", "s", "b"]]}, {"q": "你会梦到工作吗？", "o": [["基本不会", "b", "a"], ["偶尔会，醒来还挺累", "b", "b"], ["从来没有过", "b", "a"], ["加班多的那阵子会", "b", "b"]]}, {"q": "别人夸你「今天状态不错」，你心里想的是？", "o": [["装的，其实快撑不住了", "e", "a"], ["确实，今天挺顺", "e", "b"], ["那是因为你没看见我昨天", "e", "a"], ["当然，活都理清楚了", "e", "b"]]}, {"q": "一天下来，最让你难受的时刻是？", "o": [["有句话没说出口，回家还在想", "v", "a"], ["想说的都说了，没什么难受的", "v", "b"], ["忍了一整天气", "v", "a"], ["当场怼回去之后，有点后悔", "v", "b"]]}, {"q": "如果给自己的一天起个标题，你选哪个？", "o": [["《今天也是混过去的一天》", "s", "a"], ["《看着很忙，其实一直在摸》", "s", "b"], ["《摸鱼摸到下班》", "s", "a"], ["《表面上我一整天都在忙》", "s", "b"]]}, {"q": "第二天要交的东西，头天晚上你会？", "o": [["交了就不管了，睡我的", "b", "a"], ["睡前再打开看一遍有没有漏洞", "b", "b"], ["定个闹钟第二天早上再说", "b", "a"], ["反复想还有哪里没考虑到", "b", "b"]]}, {"q": "你工位上最不能少的一样东西是？", "o": [["咖啡或者茶", "egg", null], ["耳机", "egg", null], ["一件外套，空调太冷", "egg", null], ["抽屉里的零食", "egg", null]]}, {"q": "你手机的常年状态是？", "o": [["静音，随缘看", "egg", null], ["消息基本秒回", "egg", null], ["免打扰一直开着", "egg", null], ["通知全关，主动去翻", "egg", null]]}];
+const TYPES  = {"EHMD": {"n": "打卡机", "job": "按时到岗荣誉员工", "one": "电量靠打卡续，情绪靠忍，摸鱼摸得光明正大，下班铃一响人就没了", "pic": "你上班最大的成就感来自「今天没迟到」。活干得不算差，但也不会多干一分——到点就走，走出楼门那一刻比发工资还轻松。情绪上你基本不炸，因为懒得炸。", "why": "耗电 + 憋着 + 明摸 + 能断，这个组合的底色是「把上班当上班」。你不指望它给你意义，所以也不容易被它伤到。代价是每天的电都靠闹钟和咖啡硬撑。", "rx": ["你不是不努力，是把力气全用在「准时」上了。想让一天没那么难熬，试试在上午电最多的时候先啃最难的那件，别留到下午硬撑。", "憋着的那口气不会自己消失，它会变成回家路上的沉默。找个固定的人，一周倒一次。", "明摸不丢人，但摸完记得把手上的活收干净——你是靠「没出过事」换来的自由。"], "self": ["我这周有几天是掐着点进的门", "我有没有一次把想说的话咽了回去", "我的摸鱼是补了电，还是只是躲了事", "我下班以后真的想起过工作吗"]}, "EHMN": {"n": "人形立牌", "job": "部门稳定器", "one": "人坐在工位上，心已经下班了；活照做，话不说，晚上还在想白天的事", "pic": "你是那种「看着一直在，其实一直在耗」的人。会上不表态，散会后自己消化；人走了，事情还在脑子里转。同事觉得你稳，其实你只是不说。", "why": "耗电 + 憋着 + 明摸 + 断不净，最累的一种组合——上班在耗，下班还在续。你把自己放在一个「不出错就行」的位置上，然后为此付了双份的时间。", "rx": ["你最大的浪费不是摸鱼，是下班后还在免费上班。给自己定一条硬线：几点之后不碰工作相关的念头。", "憋着的话攒久了会变成对自己的攻击。挑一个最信得过的人，把最近最堵的那件事说完整一次。", "明摸说明你不怕被看见，那不如把这股坦荡用在「拒绝」上——比摸一天鱼有用。"], "self": ["我这周下班后想到工作想了几次", "有没有一件事我其实想说但没说", "我坐在工位上的时候，有多少时间是真空的", "我上周拒绝过任何一件事吗"]}, "EHAD": {"n": "装忙者", "job": "资深人间蒸发专员", "one": "表面最忙，实则在演；鼠标一直响，人其实早走了；下班就断得干干净净", "pic": "你是摸鱼界的表演艺术家。键盘声、窗口切换、起身接水时那道皱眉，全是道具。活会在死线前交上去，质量也不差——你只是拒绝用满八小时去换一份工资。", "why": "耗电 + 憋着 + 暗摸 + 能断。你不吵不闹，也不真拼，靠一手「看起来在忙」把日子过下去。情绪不外放，所以基本没有内耗——这也是你能一直演下去的原因。", "rx": ["演一天的累，不比干一天轻。省下来的力气，可以拿一点去做真能带走的事。", "你不爱说，但暗摸有个副作用：功劳也容易被人顺手拿走。该出声的时候出声。", "你边界感很好，别把这份能力只用来对付上班——它对别的事同样有用。"], "self": ["今天我演了几个小时", "有没有一件我做完了但没人知道的事", "我摸的时候是真的在休息吗", "我下班后有没有立刻松下来"]}, "EHAN": {"n": "深夜回放机", "job": "下班后加班专员", "one": "白天靠熬，晚上靠想；话咽着，鱼摸得悄无声息，人回了家心还在工位", "pic": "你是那种在工位上看不出问题的人——安静、不惹事、活也交。真正的班是在晚上上的：躺下之后，白天说过的每句话都要重播一遍。", "why": "耗电 + 憋着 + 暗摸 + 断不净，四种消耗叠在一起。白天的电本来就不够，晚上还要被自己的脑子再收一次。", "rx": ["你晚上的复盘不产生任何价值，只产生困。睡前把明天要做的三件事写下来，写完就允许自己停。", "憋着的情绪会在夜里放大三倍。白天挑一件最堵的说出口，晚上就少想三件。", "暗摸是为了自保，但你连摸的时候都在警戒，等于没休息。找一段真没人看得见的时间，彻底停一次。"], "self": ["这周有几天是躺下后半小时才睡着的", "白天有没有一句话我憋回去了", "我摸鱼的时候真的放松了吗", "我有没有在脑子里反复重演过一段对话"]}, "EBMD": {"n": "办公室鞭炮", "job": "部门情绪出口", "one": "电量被榨干，但情绪当场就炸；摸鱼摸得震天响，下班走人干净利落", "pic": "你的情绪是不隔夜的——当场说，说完就过。工位上嗓门最大的通常是你，吐槽最狠的也是你。奇怪的是大家还挺喜欢你，因为你说出了他们不敢说的。", "why": "耗电 + 直给 + 明摸 + 能断。你把上班当成一场公开的消耗战：累了就说，烦了就骂，走了就断。你不内耗，代价是很容易被记上一笔。", "rx": ["直给是你的信用，但对着领导直给和对着同事直给，成本完全不一样。开口前先看一眼对象。", "你炸完就过，别人不一定。事后补一句「刚才急了」，比什么公关都管用。", "你的能量是反应型的——有人点火你才亮。试着主动挑一件事推动，别人会重新认识你。"], "self": ["这周我炸了几次", "有没有一次炸错了对象", "我说过的话有没有伤到人", "除了吐槽，我推动过什么"]}, "EBMN": {"n": "怨气发电厂", "job": "免费情绪劳动标兵", "one": "电早就没了，全靠怨气撑着；什么都往外说，摸得明目张胆，回家了还在生气", "pic": "你的日常是「一边骂一边干」。嘴巴不饶人，活一件没落下。下班了人走了，气还带着——晚上刷着手机，脑子里还在跟白天那个人对线。", "why": "耗电 + 直给 + 明摸 + 断不净。情绪出口是通的，但入口一直开着——你骂完并没有真的放下，因为你连下班都没真的离开。", "rx": ["骂出来不等于处理完。真正让你下不了班的是没解决的事，不是没骂够的话。", "你的怨气是有能量的，别全喂给吐槽群。挑一件最让你烦的，去把它改掉一点。", "给自己定一个下班仪式：换衣服、出门走十五分钟、听一首固定的歌——身体先离开，脑子会跟上。"], "self": ["这周我抱怨了几次同一件事", "有没有一件我骂了很久但没动手的", "我下班后的两小时在干什么", "我有没有一次真正放下了某件事"]}, "EBAD": {"n": "闷烧锅", "job": "沉默的高压锅", "one": "电量见底，话全咽着，摸鱼摸得悄无声息，但下班铃一响立刻走人", "pic": "你平时不说话，说了就是最后通牒。摸鱼摸得极其隐蔽，没人知道你什么时候走的。平日里最安静的那个，突然有一天在群里发了很长一段。", "why": "耗电 + 憋着 + 暗摸 + 能断。你把情绪压进一个密闭容器，靠「到点就走」这个阀门泄压。这个结构能撑很久，但一旦撑不住，爆发是断崖式的。", "rx": ["你的问题不是脾气差，是攒太久。把「说」的频率调高一点，别等到必须说的时候。", "你不吵不闹，所以别人会默认你没意见——沉默在职场不叫修养，叫默认同意。", "你能断得很干净，这是天赋。但别把「下班能断」也用在人际上，会显得冷。"], "self": ["这周我有没有把不满压下去", "我上一次说出真实想法是什么时候", "我摸鱼的时候是在躲，还是在歇", "有没有人以为我「没意见」"]}, "EBAN": {"n": "回锅气", "job": "翻旧账冠军", "one": "耗电、直给、暗摸、断不净——当场就说了，但说完了还在想", "pic": "你是情绪最外放的那一档，可你也是回家后最放不下的那一个。白天该说的都说了，晚上还在想「那句话是不是说重了」「他那个表情什么意思」。", "why": "直给 + 断不净是最折磨人的组合：出口通畅，回不了家。你以为说清楚就能过去，结果只是在夜里多了一堆可以复盘的材料。", "rx": ["你说得没错，错的是说完了还反复读。给别人留一点当场没反应过来的时间。", "睡前给自己三分钟：把今天最想不通的那件事写一句，写完关掉。", "你的情绪很真，别浪费在猜别人的表情上。"], "self": ["这周我说完话之后后悔过几次", "有没有一件事我其实不用道歉", "我晚上在想的是事实还是猜测", "我有没有为别人的沉默编过故事"]}, "SHMD": {"n": "永动机", "job": "热爱工作的稀有物种", "one": "上班越干越来劲，情绪收着，摸得光明正大，下班说走就走", "pic": "真有人是越上班越有劲的，就是你。难的事让你兴奋，进度推动让你满足。你不装忙，摸鱼也摸得理直气壮——因为你确实把活干完了。", "why": "发电 + 憋着 + 明摸 + 能断。你的能量来自「把事做成」，所以消耗对你来说是投资。唯一的隐患是情绪出口关着——再能发电的人也会憋出问题。", "rx": ["你能自发电，不代表不需要休息。燃尽的人从前都很有劲。", "你不太说情绪，别人会以为你什么都扛得住。说一次「我今天很累」。", "别用自己的标准量别人，「这有什么难的」这句话会伤人。"], "self": ["我这周有没有真的休息过", "我有没有说过一次「我撑不住」", "我对别人用过「这不难吧」吗", "我热爱的是这件事本身，还是被需要的感觉"]}, "SHMN": {"n": "精神股东", "job": "公司的事就是我的事", "one": "越干越有劲，话憋在心里，摸鱼摸得隐蔽，下班了还惦记着", "pic": "你是那种半夜还在想方案的人。公司的目标变成了你的目标，别人的活你也替人着急。嘴上不说，心里装着整个部门。", "why": "发电 + 憋着 + 暗摸 + 断不净。你是最容易被消耗的那类人，因为你投入得太真了。副作用是：你很在意，但不表达，于是委屈也都是自己的。", "rx": ["你在意的东西，公司不一定在意。给自己留一个和工作无关的目标。", "你不说的那些委屈，最后都会变成疲惫。至少对一个人讲清楚。", "你不是股东，别用股东的心态熬。该谈的待遇要谈。"], "self": ["我这周为工作的事失眠过吗", "我有没有替别人的事着急", "我付出的和拿到的是不是匹配", "我除了工作还有什么"]}, "SHAD": {"n": "扫地僧", "job": "深藏功与名", "one": "电量自足，话不多，摸鱼摸得没人发现，下班立刻切换成另一个人", "pic": "白天你已经把活轻松干完，剩下的时间在干自己的事。别人以为你在忙，其实你在学别的、做别的、想别的。走出公司门，你就是另一个人。", "why": "发电 + 憋着 + 暗摸 + 能断，四种里三种都不外露，你把自己藏得很深。这是最舒服的一种班味，也最容易让能力被低估。", "rx": ["你不需要争，但需要露一次。关键成果让它被看见一次，抵得上十次埋头。", "你在准备的东西，早晚要派上用场——别让它一直是「准备」。", "藏得太好，会有人真的以为你只是运气好。"], "self": ["我这周在工位上做的事里，有多少是自己的", "有没有一件成果别人不知道是我做的", "我准备的东西推进到哪了", "我有没有被低估过"]}, "SHAN": {"n": "备忘录精", "job": "什么都记着的人", "one": "状态好、不声张、偷偷摸，下班了还在记着明天的会", "pic": "你的手机备忘录里全是工作。你状态不错，活干得漂亮，但从不当众邀功。别人下班就断，你下班只是换了个地方继续想着。", "why": "发电 + 憋着 + 暗摸 + 断不净。你的能量是真的，但你的边界是假的。你能撑很久，因为你能自发电；你会累得很突然，因为你从来没真的停过。", "rx": ["你把所有事都记在备忘录里，也把所有事都记在心里。删掉一半，天不会塌。", "你的付出需要被人知道，这不是邀功。", "试着有一天完全不看工作消息——你会发现大部分事都能等到明天。"], "self": ["我的备忘录里有多少是工作的", "今天有没有一件事我做了但没人知道", "我最后一次完全不看工作消息是什么时候", "我睡前的最后一件事是不是工作"]}, "SBMD": {"n": "会议室喇叭", "job": "气氛组组长", "one": "电量足，情绪外放，摸鱼摸得理直气壮，下班绝对不回头", "pic": "会上你一开口，整个会就活了。你不怕说错，也不怕得罪人。摸鱼连遮都不遮，反正活都干完了，走的时候也走得最干脆。", "why": "发电 + 直给 + 明摸 + 能断，四种全是外放型，你是办公室里最不内耗的人。别人觉得你过得太爽，也确实——你从不把上班看得太重。", "rx": ["你的强项是把气氛带起来，弱点是把重要的话也说成了玩笑。关键场合降一档音量。", "你说话直，会有人的方案因此下不来台。指出问题的时候，顺手给个台阶。", "你不缺能量，缺的是把能量用在一件事上的耐心。挑一件，跟到底。"], "self": ["我这周在会上说的话有多少是必要的", "有没有人因为我的话难堪", "我最近有跟到底过一件事吗", "我说的话有多少变成了行动"]}, "SBMN": {"n": "卷王监工", "job": "别人的进度条", "one": "越干越有劲，什么都当面说，摸鱼摸得偷偷的，下班了还在群里回消息", "pic": "你对进度有执念，不只是自己的。看到别人拖着你会难受，甚至会替人把活干了。嘴上直，容易得罪人；心里软，谁出事你都上。", "why": "发电 + 直给 + 暗摸 + 断不净。能量最足，也最放不下——你把整个团队的责任背在了自己身上，然后发现没人要求你这么做。", "rx": ["你不是负责人，别用负责人的心态过日子。别人的活做不完，天不会塌。", "你催人的时候说的是事实，听起来像指责。加一句「需要我帮什么」，效果完全不一样。", "暗摸说明你也知道需要休息，那就把它变成正大光明的休息。准时走一次。"], "self": ["这周我替别人做了多少事", "我催人的时候有没有考虑对方的处境", "我有没有准时下班过一次", "我给自己的活留够时间了吗"]}, "SBAD": {"n": "闷声卷王", "job": "不动声色的那个", "one": "能量最足、话最少、摸鱼无人察觉、下班立刻断电", "pic": "你不说自己在拼，但你的产出会说话。别人看到结果的时候，你已经做完了。摸鱼也是真摸，只是没人知道。到了下班时间，你消失得比谁都快。", "why": "发电 + 憋着 + 暗摸 + 能断，最强的一种组合，安静且高效。风险只有一个：你太习惯一个人扛，别人插不进来，也就帮不上你。", "rx": ["你不需要解释自己，但团队需要知道你做了什么。适当同步不是邀功，是协作。", "你一个人能做完的事，两个人做能省一半时间——试着开口要人。", "你的沉默会被误读成傲慢，偶尔说句话，成本很低。"], "self": ["这周我有没有主动同步过进度", "有没有该要资源而没要的时候", "我拒绝过别人的帮忙吗", "我是不是习惯了一个人扛"]}, "SBAN": {"n": "自我考核员", "job": "自己的 KPI 自己定", "one": "状态最好，什么都直说，摸得隐蔽，下班了还在想今天做得够不够", "pic": "你对自己有一套比公司更严的标准。你不等别人考核，自己先给自己打分。做得好也不放松，做不好会难受很久。别人看你很拼，只有你知道那是停不下来。", "why": "发电 + 直给 + 暗摸 + 断不净，四维全开，效率最高也最累。你的动力不来自公司，来自那个一直给自己打分的人——而那个人从来不给你满分。", "rx": ["你的标准是你自己定的，也可以由你自己调。把「今天做得够不够」换成「今天做完了什么」。", "你不说的话没人知道，说了反而轻松——直给是你的天赋，别只用在事情上。", "你现在做的每件事，有没有一件是为了自己？没有的话，加一件。"], "self": ["这周我给自己打了几分", "有没有一天我觉得自己「够了」", "我做的哪件事是纯粹为自己", "我有没有在没人要求的情况下加班"]}};
+const LETTERS = [{"k": "e", "a": "E", "b": "S"}, {"k": "v", "a": "H", "b": "B"}, {"k": "s", "a": "M", "b": "A"}, {"k": "b", "a": "D", "b": "N"}];
+const EGG    = {"咖啡或者茶": "第三杯咖啡", "耳机": "常年挂着的耳机", "一件外套，空调太冷": "椅背上的外套", "抽屉里的零食": "抽屉里的零食", "静音，随缘看": "静音的手机", "消息基本秒回": "秒回的手", "免打扰一直开着": "免打扰开关", "通知全关，主动去翻": "关掉的通知"};      // 彩蛋选项 → 考勤卡上「工位必备」那一行的短标签
+const KEYS = ["A","B","C","D"];
+const LIGHT_N = 12;   // 体验版题数
+const FULL_N  = 30;   // 完整版题数
+
+// 照片位那张脸：按「电量极 + 情绪极」四种组合给，键就是两个极点字母的连写
+// （aa 耗电+憋着、ab 耗电+直给、ba 发电+憋着、bb 发电+直给）。
+// 工牌照片是给人看的，一个 emoji 比一串字母直观。
+const FACE = {"aa":"🪫","ab":"🫠","ba":"🧊","bb":"⚡"};
+
+const API_BASE = ((window.QUIZ_API || '') + '').replace(/\/$/, '');
+const API = {
+  async verifyCode(code, need) {
+    if (!API_BASE) return { ok:false, msg:"后端地址还没配置，请联系我" };
+    try {
+      const r = await fetch(API_BASE + '/api/verify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code: code, need: need || 'light' })
+      });
+      const j = await r.json();
+      return { ok: !!j.ok, msg: j.msg || '', scope: j.scope || null };
+    } catch (e) {
+      return { ok:false, msg:"连不上服务器，检查网络后重试" };
+    }
+  },
+  async saveResult(payload) {
+    if (!API_BASE) return;
+    try {
+      await fetch(API_BASE + '/api/result', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+    } catch (e) {}
+  }
+};
+
+const S = {
+  answers: new Array(FULL_N).fill(-1),
+  cur: 0,
+  code: '',
+  tier: 'light',
+  need: 'light',
+  upto: LIGHT_N,
+};
+
+/* ---------- 存档 ----------
+   跟其余几套同样的道理：买家看完 12 题的结果、切回店铺下单、过一会儿再回来时，
+   标签页多半已经被手机回收了。每答一题就往 localStorage 存一份，重开能接着答。
+   只存在买家自己的浏览器里、不上传；换设备就没有。 */
+const SAVE_KEY = 'ban_state';
+// 重开页面直接落到结果页时，这一次不要再往服务端记一条——来回开关几次就会
+// 在后台变成好几条记录，统计失真。只在「恢复出来的这一次」生效。
+let skipSave = false;
+function save(){
+  try{
+    localStorage.setItem(SAVE_KEY, JSON.stringify({
+      a: S.answers, tier: S.tier, upto: S.upto
+    }));
+  }catch(e){}
+}
+function restore(){
+  let sv = null;
+  try{ sv = JSON.parse(localStorage.getItem(SAVE_KEY) || 'null'); }catch(e){ return false; }
+  if (!sv || !Array.isArray(sv.a) || sv.a.length !== FULL_N) return false;
+  if (!sv.a.filter(v => v >= 0).length) return false;   // 一题没答，当没测过
+  S.answers = sv.a;
+  S.tier = sv.tier === 'full' ? 'full' : 'light';
+  S.upto = S.tier === 'full' ? FULL_N : LIGHT_N;
+  const done = n => sv.a.slice(0, n).every(v => typeof v === 'number' && v >= 0);
+  if (done(S.upto)){ skipSave = true; showResult(); return true; }
+  const at = S.answers.findIndex(v => v < 0);
+  S.cur = at < 0 ? 0 : at;
+  show("quizpage");
+  renderQ();
+  return true;
+}
+
+function $(id){ return document.getElementById(id); }
+function show(id){
+  ["welcome","quizpage","result"].forEach(x => $(x).classList.add("hidden"));
+  $(id).classList.remove("hidden");
+  window.scrollTo(0,0);
+}
+
+/* ---------- 判分 ---------- */
+function tally(upto){
+  const t = {};
+  DIMS.forEach(d => t[d.k] = {a:0, b:0});
+  for (let i = 0; i < upto; i++){
+    const ai = S.answers[i];
+    if (ai < 0) continue;
+    const o = QUIZ[i].o[ai];
+    if (!o || !t[o[1]]) continue;     // 彩蛋题（维度 'egg'）不进任何一维
+    t[o[1]][o[2]]++;
+  }
+  return t;
+}
+function pctOf(t, k){
+  const s = t[k].a + t[k].b;
+  return s ? Math.round(t[k].a / s * 100) : 0;
+}
+/** 出一份完整判分结果。upto 传第几题就只算到第几题——
+    12 题档和 30 题档共用这一个函数，区别只是 upto。 */
+function judge(upto){
+  const t = tally(upto);
+  const poles = {};
+  DIMS.forEach(d => poles[d.k] = t[d.k].a > t[d.k].b ? 'a' : 'b');
+  // 注意是 l[poles[l.k]]：poles 里存的是 'a'/'b' 这一极，还得换成这一极的字母。
+  // 早先写成 poles[l.k] 直接拼，拼出来是 'aaab' 这种，查不到型就静默回落到第一型，
+  // 页面上会显示一个跟作答完全无关的人格——而且不报错。
+  const code = LETTERS.map(l => l[poles[l.k]]).join('');
+  // 彩蛋题的答案单独收一份：它不进任何维度，只决定考勤卡最后一行「工位必备」。
+  // 体验版答不到第 29、30 题，所以这里是 null，那一行就整行不渲染——
+  // 不编一个值填上，那行会变成假数据。
+  let egg = null;
+  for (let i = 0; i < upto; i++){
+    const ai = S.answers[i];
+    if (ai < 0) continue;
+    const o = QUIZ[i].o[ai];
+    // 两道彩蛋题取**先**答的那道的答案：第 29 题问的是「工位上最不能少的」，
+    // 才是这行「工位必备」要的东西；第 30 题问手机状态，是给别的行留的余量。
+    // 不加这个判断的话后者会把前者顶掉，考勤卡上会印成「静音的手机」。
+    if (o && o[1] === 'egg' && egg === null) egg = EGG[o[0]] || o[0];
+  }
+  return { t: t, poles: poles, code: code, egg: egg,
+           T: TYPES[code] || TYPES[Object.keys(TYPES)[0]] };
+}
+
+/* 考勤卡。数字全部由答案推出来，不是随机数——同一个人重测，工牌和考勤卡
+   必须一模一样，否则买家会觉得瞎编。 */
+function attendance(r){
+  const ea = pctOf(r.t, 'e') / 100;    // 耗电占比：越高越像被榨干
+  const va = pctOf(r.t, 'v') / 100;    // 憋着占比
+  const ba = pctOf(r.t, 'b') / 100;    // 能断占比：越高越断得干净
+  const rows = [
+    ['本月出勤', '22', '天'],
+    ['迟到', String(1 + Math.round(ea * 5)), '次'],
+    ['准点下班', String(22 - Math.round((1 - ba) * 9)), '天'],
+    ['在岗摸鱼', String(7 + Math.round(ea * 7)), '小时'],
+    ['加班', String(4 + Math.round((1 - ba) * 22) + Math.round(ea * 6)), '小时'],
+    ['咽回去的话', String(1 + Math.round(va * 22)), '句'],
+    ['下班后回消息', String(2 + Math.round((1 - ba) * 40)), '条'],
+  ];
+  // 「工位必备」靠彩蛋题，而彩蛋题在第 29、30 题——体验版没答过，judge 给的
+  // egg 就是 null，这里整行不渲染。
+  return { rows: rows, must: r.egg };
+}
+
+/* ---------- 答题 ---------- */
+function startQuiz(tier){
+  S.tier = tier === 'full' ? 'full' : 'light';
+  S.upto = S.tier === 'full' ? FULL_N : LIGHT_N;
+  S.cur = 0;
+  S.answers = new Array(FULL_N).fill(-1);
+  save();
+  show("quizpage");
+  renderQ();
+}
+/** 已答过 12 题的买家升档：答案原地不动，游标直接挪到第 13 题 */
+function resumeFull(){
+  S.tier = 'full';
+  S.upto = FULL_N;
+  S.cur = LIGHT_N;
+  save();
+  show("quizpage");
+  renderQ();
+}
+function renderQ(){
+  const q = QUIZ[S.cur];
+  $("qtext").textContent = q.q;
+  $("pnum").textContent = String(S.cur + 1).padStart(2,'0') + "/" + S.upto;
+  $("pfill").style.width = ((S.cur + 1) / S.upto * 100) + "%";
+  $("opts").innerHTML = q.o.map((o, i) => {
+    const sel = S.answers[S.cur] === i ? " sel" : "";
+    return '<button class="opt' + sel + '" onclick="pick(' + i + ')">'
+         + '<span class="k">' + KEYS[i] + '</span><span>' + o[0] + '</span></button>';
+  }).join("");
+  $("prevbtn").classList.toggle("hidden", S.cur === 0);
+  $("nextbtn").textContent = S.cur === S.upto - 1 ? "看结果" : "下一题 ›";
+  $("nextbtn").disabled = S.answers[S.cur] === -1;
+}
+function pick(i){ S.answers[S.cur] = i; save(); renderQ(); }
+function prevQ(){ if (S.cur > 0){ S.cur--; renderQ(); } }
+function nextQ(){
+  if (S.answers[S.cur] === -1) return;
+  if (S.cur >= S.upto - 1){ showResult(); return; }
+  S.cur++;
+  renderQ();
+}
+
+/* ---------- 结果 ---------- */
+function showResult(){
+  const r = judge(S.upto);
+  const full = S.tier === 'full';
+  const T = r.T;
+  const d = new Date();
+  const ds = d.getFullYear() + "." + String(d.getMonth()+1).padStart(2,'0')
+           + "." + String(d.getDate()).padStart(2,'0');
+  const mmdd = String(d.getMonth()+1).padStart(2,'0') + String(d.getDate()).padStart(2,'0');
+
+  // 工牌
+  $("bname").textContent = T.n;
+  $("bjob").textContent = T.job;
+  $("bface").textContent = FACE[r.poles.e + r.poles.v] || "🧑💼";
+  $("bno").textContent = "BAN-" + r.code + "-" + mmdd;
+  $("bcode2").textContent = "BAN-" + r.code + "-" + mmdd;
+  $("bdept").textContent = r.poles.e === 'a' ? '续航焦虑科' : '自发电动科';
+  $("bslogan").textContent = T.one;
+  $("bdate").textContent = ds + " 签发";
+
+  // 条码：用型代码当种子，同一型每次画出来一模一样
+  let seed = 7;
+  for (const ch of r.code) seed = seed * 31 + ch.charCodeAt(0);
+  const rnd = () => { seed = (seed * 1103515245 + 12345) % 2147483648; return seed / 2147483648; };
+  $("bbarcode").innerHTML = Array.from({length: 46}, () =>
+    '<i style="height:' + (16 + Math.round(rnd() * 26)) + 'px"></i>').join("");
+
+  // 考勤卡
+  const att = attendance(r);
+  $("attitle").textContent = d.getFullYear() + " 年 " + (d.getMonth()+1) + " 月 · 考勤卡";
+  $("atno").textContent = "NO." + mmdd + "-" + r.code;
+  let rows = att.rows.map(x =>
+    '<div class="atrow"><span>' + x[0] + '</span><b>' + x[1] + '<em>' + x[2] + '</em></b></div>').join("");
+  if (att.must) rows += '<div class="atrow"><span>工位必备</span><b style="font-family:inherit;font-size:14px">' + att.must + '</b></div>';
+  $("atrows").innerHTML = rows;
+
+  // 四维刻度：左边 a 极、右边 b 极，圆点落在 a 极占比上
+  $("rbars").innerHTML = DIMS.map(dm => {
+    const p = pctOf(r.t, dm.k);
+    const aOn = r.poles[dm.k] === 'a';
+    return '<div class="ax">'
+      + '<span class="an' + (aOn ? ' on' : '') + '">' + dm.a + '</span>'
+      // p 是 **a 极的占比**，而 a 极的文字摆在左边，所以滑块要用 100-p：
+      // p=100（全选 a 极）时滑块该停在最左。写成 left:p% 的话，越偏 a 滑块越靠右，
+      // 跟旁边高亮的那一侧正好相反——2026-09-25 换皮时才发现，之前一直反着显示。
+      + '<div class="atk"><i class="' + (aOn ? '' : 'b') + '" style="left:' + (100 - p) + '%"></i></div>'
+      + '<span class="an r' + (aOn ? '' : ' on') + '">' + dm.b + '</span>'
+      + '</div>';
+  }).join("");
+
+  // 30 题档才有的三块
+  $("locked").classList.toggle("hidden", full);
+  $("fullmod").classList.toggle("hidden", !full);
+  if (full){
+    $("rtypepic").textContent = T.pic + "\n\n" + T.why;
+    $("rtypeRx").innerHTML = T.rx.map(t => '<div><i>·</i>' + t + '</div>').join("");
+    $("rself").innerHTML = T.self.map(t => '<div><i></i><span>' + t + '</span></div>').join("");
+  }
+
+  drawCard(r, T, att, full);
+
+  if (skipSave) skipSave = false;
+  else API.saveResult({
+    tier: S.tier,
+    product: 'banwei',
+    code: S.code || null,
+    answers: S.answers.slice(0, S.upto),
+    result: { type_code: r.code, type_name: T.n, job: T.job,
+              poles: r.poles, dims: {e: pctOf(r.t,'e'), v: pctOf(r.t,'v'),
+                                     s: pctOf(r.t,'s'), b: pctOf(r.t,'b')} }
+  });
+
+  save();
+  show("result");
+}
+
+/* ---------- 分享卡 ----------
+   用 canvas 画一张考勤单：牛皮纸底 + 票据纸卡面（上下咬一排半圆齿孔）+ 考勤卡几行，
+   标题走行楷。手机上长按保存，比截屏干净。高度不写死——判词和考勤行数都跟着结果变，
+   写死高度长结果会压到页脚上。做法是先在一个测量用的上下文里画一遍，拿到内容结束的 y，
+   再按实际高度建画布重画一次。 */
+/* 导出图用的调色板。跟 CSS 的 :root 是两套（canvas 读不到 CSS 变量），
+   改配色**两处都要改**，不然页面上换了皮、下载下来的图还是旧配色。
+   三份色板要同步：本文件的 :root、这里的 CARD、出图脚本的 :root。 */
+const CARD = {
+  INK: "#3A2A16", MID: "#7A6748", DIM: "#9C8862",
+  LINE: "#B5A47E", PAPER: "#F4EAD2", PAPER2: "#FAF3E0",
+  KRAFT: "#C9B48C", STRAP: "#4A3A24", ACC: "#C2372A", BLUE: "#1A4FBF",
+  SERIF: '"STXingkai","STKaiti","SimHei",serif',
+  SANS: '-apple-system,"PingFang SC","Microsoft YaHei",sans-serif',
+  MONO: 'Consolas,"Courier New",monospace'
+};
+function paintCard(x, W, H, PAD, r, T, att, full){
+  const INK = CARD.INK, MID = CARD.MID, DIM = CARD.DIM;
+  const LINE = CARD.LINE, PAPER = CARD.PAPER, PAPER2 = CARD.PAPER2, ACC = CARD.ACC;
+  const KRAFT = CARD.KRAFT;
+  const SANS = CARD.SANS, MONO = CARD.MONO, SERIF = CARD.SERIF;
+
+  // 牛皮纸底 + 横向细纹。canvas 没有 repeating-linear-gradient，只能一条条画。
+  x.fillStyle = KRAFT; x.fillRect(0, 0, W, H);
+  x.strokeStyle = "rgba(255,255,255,.09)"; x.lineWidth = 1;
+  for (let gy = 3; gy < H; gy += 4){
+    x.beginPath(); x.moveTo(0, gy); x.lineTo(W, gy); x.stroke();
+  }
+
+  const cx = PAD, cw = W - PAD * 2;
+  const L = cx + 24, R = cx + cw - 24, IW = cw - 48;   // 票面左右内边距
+
+  // 换行：不让标点掉到下一行开头（避头点），否则会出现一整行只有一个「。」
+  const NO_HEAD = "。，、；：？！）」』%";
+  const wrap = (txt, x0, y0, maxW, lh, font, color) => {
+    x.font = font; x.fillStyle = color;
+    let line = "", y = y0;
+    for (const ch of txt){
+      if (ch === "\n"){ x.fillText(line, x0, y); line = ""; y += lh; continue; }
+      const over = x.measureText(line + ch).width > maxW;
+      if (over && !(line && NO_HEAD.includes(ch))){
+        x.fillText(line, x0, y); line = ch; y += lh;
+      } else line += ch;
+    }
+    if (line){ x.fillText(line, x0, y); y += lh; }
+    return y;
+  };
+  /** 按跟 wrap 完全一样的规则数行数。票面底色要先铺，就得先知道占几行。 */
+  const countLines = (c, txt, maxW, font) => {
+    c.font = font;
+    let n = 1, line = "";
+    for (const ch of txt){
+      if (ch === "\n"){ n++; line = ""; continue; }
+      if (c.measureText(line + ch).width > maxW){ n++; line = ch; } else line += ch;
+    }
+    return n;
+  };
+
+  let y = PAD + 30;
+
+  // 票面底色必须**先**铺：canvas 没有图层，后画的盖住先画的。而票面高度得先算出来
+  // （「一句话」占几行是随型变的），所以先把各段高度定死，绘制时按同一组常量推进。
+  // 早先写成画完内容再补一层底色，结果整块正文被盖掉，导出的图上只剩一张白板——
+  // 页面里看着完全正常，只有下载下来的图是空的。
+  const oneLines = countLines(x, T.one, IW, "22px " + SANS);
+  const nRows = att.rows.length + (att.must ? 1 : 0);
+  const H_HEAD = 104, H_PHOTO = 176, H_ONE = oneLines * 40 + 34;
+  const H_CODE = 92, H_ATT = 76 + nRows * 40, H_DIM = 20 + 4 * 46 + 12, H_FOOT = 60;
+  const CARD_H = H_HEAD + H_PHOTO + H_ONE + H_CODE + H_ATT + H_DIM + H_FOOT;
+  x.fillStyle = PAPER; x.fillRect(cx, y, cw, CARD_H);
+  const top = y;
+
+  // ---- 票头 ----
+  x.font = "bold 21px " + SANS; x.fillStyle = INK;
+  x.fillText("班味无限公司", L, y + 38);
+  x.font = "16px " + MONO; x.fillStyle = MID; x.textAlign = "right";
+  x.fillText("BAN-" + r.code, R, y + 38);
+  x.textAlign = "left";
+  x.strokeStyle = INK;
+  x.lineWidth = 4; x.beginPath(); x.moveTo(L, y + 54); x.lineTo(R, y + 54); x.stroke();
+  x.lineWidth = 1.5; x.beginPath(); x.moveTo(L, y + 61); x.lineTo(R, y + 61); x.stroke();
+  x.font = "13px " + MONO; x.fillStyle = MID;
+  x.fillText("职工考勤记录 ── 内部留存 ── 不许外传", L, y + 86);
+  y += H_HEAD;
+
+  // ---- 照片位 + 姓名 ----
+  x.fillStyle = PAPER2; x.fillRect(L, y + 2, 100, 122);
+  x.setLineDash([5, 4]); x.strokeStyle = LINE; x.lineWidth = 2;
+  x.strokeRect(L, y + 2, 100, 122);
+  x.setLineDash([]);
+  x.font = "44px " + SANS; x.fillStyle = INK;
+  x.textAlign = "center";
+  x.fillText(FACE[r.poles.e + r.poles.v] || "🧑‍💼", L + 50, y + 76);
+  x.font = "11px " + MONO; x.fillStyle = DIM;
+  x.fillText("PHOTO", L + 50, y + 108);
+  x.textAlign = "left";
+
+  x.font = "50px " + SERIF; x.fillStyle = INK;
+  x.fillText(T.n, L + 126, y + 60);
+  x.font = "bold 20px " + SANS; x.fillStyle = INK;
+  x.fillText(T.job, L + 126, y + 98);
+  const jw = x.measureText(T.job).width;             // 职位下的那根横线，跟字一样长
+  x.strokeStyle = INK; x.lineWidth = 2;
+  x.beginPath(); x.moveTo(L + 126, y + 108); x.lineTo(L + 126 + jw + 4, y + 108); x.stroke();
+  x.font = "14px " + MONO; x.fillStyle = MID;
+  x.fillText(r.code + " · " + (r.poles.e === 'a' ? '续航焦虑科' : '自发电动科'), L + 126, y + 140);
+  y += H_PHOTO;
+
+  // ---- 一句话：左侧一道章红竖条 ----
+  x.fillStyle = ACC; x.fillRect(L, y + 2, 7, oneLines * 40 - 8);
+  y = wrap(T.one, L + 20, y + 26, IW - 128, 40, "22px " + SANS, INK) + 8;
+
+  // ---- 红色圆章：斜盖在票面上，像人事部随手按的。
+  //      压 opacity 而不是浅红，才有「印油不够」的旧章感。 ----
+  const stampX = R - 44, stampY = y - 26;
+  x.save();
+  x.globalAlpha = .72;
+  x.translate(stampX, stampY); x.rotate(-14 * Math.PI / 180);
+  x.strokeStyle = ACC; x.lineWidth = 3.5;
+  x.beginPath(); x.arc(0, 0, 46, 0, Math.PI * 2); x.stroke();
+  x.fillStyle = ACC; x.textAlign = "center";
+  x.font = "bold 19px " + SANS;
+  x.fillText("本月已阅", 0, 2);
+  x.font = "10px " + SANS;
+  x.fillText("人事部 · 代章", 0, 22);
+  x.restore();
+  x.textAlign = "left";
+
+  // ---- 卡面条码：用型代码当种子，同一型每次画出来一模一样 ----
+  let seed = 7;
+  for (const ch of r.code) seed = seed * 31 + ch.charCodeAt(0);
+  const rnd = () => { seed = (seed * 1103515245 + 12345) % 2147483648; return seed / 2147483648; };
+  const base = y + H_CODE - 26;
+  x.fillStyle = INK;
+  for (let i = 0; i < 46; i++){
+    const bh = 16 + Math.round(rnd() * 26);
+    x.fillRect(L + i * 11, base - bh, 3 + Math.round(rnd() * 3), bh);
+  }
+  y += H_CODE;
+
+  // ---- 考勤卡 ----
+  const ay = y;
+  x.font = "bold 19px " + SANS; x.fillStyle = INK;
+  x.fillText("本 月 考 勤", L, ay + 24);
+  x.setLineDash([6, 5]); x.strokeStyle = LINE; x.lineWidth = 2;
+  x.beginPath(); x.moveTo(L, ay + 40); x.lineTo(R, ay + 40); x.stroke();
+  x.setLineDash([]);
+  let ry = ay + 76;
+  const rows = att.rows.concat(att.must ? [['工位必备', att.must, '']] : []);
+  rows.forEach(rw => {
+    x.font = "20px " + SANS; x.fillStyle = MID;
+    x.fillText(rw[0], L, ry);
+    x.font = "bold 21px " + MONO; x.fillStyle = INK;
+    x.textAlign = "right";
+    x.fillText(rw[1] + (rw[2] ? " " + rw[2] : ""), R, ry);
+    x.textAlign = "left";
+    x.setLineDash([3, 4]); x.strokeStyle = LINE; x.lineWidth = 1.5;
+    x.beginPath(); x.moveTo(L, ry + 12); x.lineTo(R, ry + 12); x.stroke();
+    x.setLineDash([]);
+    ry += 40;
+  });
+  y = ay + H_ATT;
+
+  // ---- 四维刻度：一根细轨 + 一个空心圆滑块。实心方块在浅底上太重，像涂改过。 ----
+  y += 20;
+  DIMS.forEach(dm => {
+    const p = pctOf(r.t, dm.k);
+    const aOn = r.poles[dm.k] === 'a';
+    x.font = (aOn ? "bold " : "") + "19px " + SANS;
+    x.fillStyle = aOn ? INK : DIM;
+    x.fillText(dm.a, L, y);
+    x.textAlign = "right";
+    x.font = (aOn ? "" : "bold ") + "19px " + SANS;
+    x.fillStyle = aOn ? DIM : INK;
+    x.fillText(dm.b, R, y);
+    x.textAlign = "left";
+    const bx = L + 120, bwid = IW - 240;
+    x.fillStyle = LINE; x.fillRect(bx, y - 4, bwid, 3);
+    // 跟页面版同一处口径：p 是 a 极占比，a 极文字在左，所以滑块位置要用 100-p。
+    const sx = bx + bwid * (100 - p) / 100;
+    x.beginPath(); x.arc(sx, y - 2, 11, 0, Math.PI * 2);
+    x.fillStyle = PAPER2; x.fill();
+    x.strokeStyle = aOn ? INK : ACC; x.lineWidth = 4; x.stroke();
+    y += 46;
+  });
+  y += 12;
+
+  // ---- 票尾 ----
+  x.strokeStyle = INK; x.lineWidth = 3;
+  x.beginPath(); x.moveTo(L, y); x.lineTo(R, y); x.stroke();
+  x.font = "15px " + MONO; x.fillStyle = MID;
+  x.fillText("12 道题 · 三分钟", L, y + 30);
+  x.textAlign = "right";
+  x.fillText("班味人格图鉴", R, y + 30);
+  x.textAlign = "left";
+
+  return top + CARD_H;
+}
+
+function drawCard(r, T, att, full){
+  const W = 750, PAD = 40;
+  const probe = document.createElement("canvas").getContext("2d");
+  const endY = paintCard(probe, W, 4000, PAD, r, T, att, full);
+  const H = Math.ceil(endY + 150);
+
+  const c = document.createElement("canvas");
+  c.width = W; c.height = H;
+  const x = c.getContext("2d");
+  paintCard(x, W, H, PAD, r, T, att, full);
+
+  x.font = "20px " + CARD.SANS;
+  x.fillStyle = CARD.MID;      // 牛皮纸底上，深褐比原来的灰更容易读
+  x.textAlign = "center";
+  x.fillText("本测试仅供娱乐，不构成任何职场建议", W/2, H - PAD - 46);
+  x.font = "bold 24px " + CARD.SANS; x.fillStyle = CARD.INK;
+  x.fillText("AI榜老冯", W/2, H - PAD - 12);
+  x.textAlign = "left";
+
+  const url = c.toDataURL("image/png");
+  $("shareimg").src = url;
+  $("dl").href = url;
+}
+
+/* ---------- 验证码 ---------- */
+function openCode(need){
+  S.need = need === 'full' ? 'full' : 'light';
+  const full = S.need === 'full';
+  $("codetitle").innerHTML = full
+    ? '输入验证码<br>开始测完整版'
+    : '输入验证码<br>开始测班味人格';
+  $("codesub").innerHTML = full
+    ? '一个验证码只能用一次。<br>答完 30 题出完整报告；已经答过 12 题的，接着算就行。'
+    : '一个验证码只能用一次。<br>答完 12 题直接出结果，之后还能补完 30 题。';
+  $("codebtn").textContent = full ? '解锁 · 开始完整版' : '解锁 · 开始测';
+  $("codemask").classList.remove("hidden");
+  $("cerr").textContent = "";
+  $("cok").textContent = "";
+  $("codein").value = "";
+  setTimeout(() => $("codein").focus(), 100);
+}
+function closeCode(){ $("codemask").classList.add("hidden"); }
+
+async function submitCode(){
+  let raw = $("codein").value.trim().toUpperCase().replace(/\s+/g, "");
+  const err = $("cerr"), ok = $("cok");
+  err.textContent = ""; ok.textContent = "";
+  if (!raw){ err.textContent = "请输入验证码"; return; }
+  // 整串粘贴、或只打后半段 XXXXX-XXXXX 都收：没有前缀就按本页的 BAN 补上
+  if (!/^[A-Z]{3}-/.test(raw)) raw = "BAN-" + raw;
+
+  const btn = $("codebtn");
+  const label = btn.textContent;
+  btn.disabled = true; btn.textContent = "校验中…";
+  const res = await API.verifyCode(raw, S.need);
+  btn.disabled = false; btn.textContent = label;
+
+  if (!res.ok){ err.textContent = res.msg; return; }
+  S.code = raw;
+  // 以码实际的档位为准，不看请求的那一档：30 题的码测 12 题是允许的，
+  // 反过来会被后端拦下。所以这里是 scope 说了算。
+  const scope = res.scope || S.need;
+  // 前 12 题已经答完的（答完才会看到结果页），升档就接着答，不让人重做
+  const resume = scope === 'full' && S.answers.filter(v => v >= 0).length >= LIGHT_N;
+  ok.textContent = "验证通过，正在开始…";
+  setTimeout(() => { closeCode(); resume ? resumeFull() : startQuiz(scope); }, 500);
+}
+
+restore();
+</script>
+</body>
+</html>
