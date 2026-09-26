@@ -25,7 +25,7 @@
    "vendor": "海外",
    "score": {
     "reasoning": 92,
-    "coding": 97,
+    "coding": 96,
     "chinese": 76,
     "multimodal": 86,
     "longtext": 88,
@@ -51,7 +51,7 @@
    "vendor": "国产",
    "score": {
     "reasoning": 73,
-    "coding": 89,
+    "coding": 91,
     "chinese": 82,
     "multimodal": 85,
     "longtext": 92,
@@ -102,7 +102,7 @@
    "name": "DeepSeek V4 Vision",
    "vendor": "国产",
    "score": {
-    "reasoning": 70,
+    "reasoning": 71,
     "coding": 80,
     "chinese": 81,
     "multimodal": 85,
@@ -129,7 +129,7 @@
    "vendor": "海外",
    "score": {
     "reasoning": 88,
-    "coding": 95,
+    "coding": 94,
     "chinese": 73,
     "multimodal": 80,
     "longtext": 94,
@@ -177,32 +177,6 @@
    "power": 83
   },
   {
-   "name": "Qwen3.8-Flash-Next",
-   "vendor": "国产",
-   "score": {
-    "reasoning": 75,
-    "coding": 83,
-    "chinese": 88,
-    "multimodal": 80,
-    "longtext": 86,
-    "cost": 94,
-    "speed": 71,
-    "privacy": 89,
-    "ecosystem": 85,
-    "creative": 87
-   },
-   "brief": "TB4.0 45.4，DeepSWE 58.7",
-   "updated_at": "2026-09-07",
-   "tier": {
-    "key": "qwen",
-    "label": "思考开关",
-    "how": "深度思考模式可以开关",
-    "advice": "客服、摘要这类关掉，解题和写代码再开",
-    "why": "开着更准，但更慢更贵，简单任务上纯属浪费"
-   },
-   "power": 83
-  },
-  {
    "name": "智谱 GLM-5.3-Flash",
    "vendor": "国产",
    "score": {
@@ -233,7 +207,7 @@
    "vendor": "国产",
    "score": {
     "reasoning": 79,
-    "coding": 90,
+    "coding": 89,
     "chinese": 88,
     "multimodal": 74,
     "longtext": 87,
@@ -245,6 +219,32 @@
    },
    "brief": "DeepSWE 69.3，HLE 43.1",
    "updated_at": "2026-09-02",
+   "tier": {
+    "key": "qwen",
+    "label": "思考开关",
+    "how": "深度思考模式可以开关",
+    "advice": "客服、摘要这类关掉，解题和写代码再开",
+    "why": "开着更准，但更慢更贵，简单任务上纯属浪费"
+   },
+   "power": 82
+  },
+  {
+   "name": "Qwen3.8-Flash-Next",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 75,
+    "coding": 81,
+    "chinese": 88,
+    "multimodal": 80,
+    "longtext": 86,
+    "cost": 94,
+    "speed": 71,
+    "privacy": 89,
+    "ecosystem": 85,
+    "creative": 87
+   },
+   "brief": "TB4.0 45.4，DeepSWE 58.7",
+   "updated_at": "2026-09-07",
    "tier": {
     "key": "qwen",
     "label": "思考开关",
@@ -304,7 +304,7 @@
    "vendor": "海外",
    "score": {
     "reasoning": 77,
-    "coding": 92,
+    "coding": 91,
     "chinese": 80,
     "multimodal": 75,
     "longtext": 92,
@@ -330,7 +330,7 @@
    "vendor": "海外",
    "score": {
     "reasoning": 81,
-    "coding": 94,
+    "coding": 95,
     "chinese": 72,
     "multimodal": 78,
     "longtext": 90,
@@ -356,7 +356,7 @@
    "vendor": "国产",
    "score": {
     "reasoning": 79,
-    "coding": 94,
+    "coding": 93,
     "chinese": 78,
     "multimodal": 72,
     "longtext": 98,
@@ -382,7 +382,7 @@
    "vendor": "国产",
    "score": {
     "reasoning": 77,
-    "coding": 89,
+    "coding": 91,
     "chinese": 83,
     "multimodal": 75,
     "longtext": 86,
@@ -460,7 +460,7 @@
    "vendor": "国产",
    "score": {
     "reasoning": 74,
-    "coding": 86,
+    "coding": 85,
     "chinese": 86,
     "multimodal": 72,
     "longtext": 90,
@@ -486,7 +486,7 @@
    "vendor": "海外",
    "score": {
     "reasoning": 80,
-    "coding": 94,
+    "coding": 95,
     "chinese": 71,
     "multimodal": 77,
     "longtext": 91,
@@ -557,7 +557,7 @@
    "vendor": "国产",
    "score": {
     "reasoning": 81,
-    "coding": 91,
+    "coding": 94,
     "chinese": 80,
     "multimodal": 75,
     "longtext": 95,
@@ -601,7 +601,7 @@
    "name": "Claude Opus 5",
    "vendor": "海外",
    "score": {
-    "reasoning": 84,
+    "reasoning": 85,
     "coding": 96,
     "chinese": 78,
     "multimodal": 75,
@@ -654,7 +654,7 @@
    "vendor": "国产",
    "score": {
     "reasoning": 78,
-    "coding": 86,
+    "coding": 83,
     "chinese": 88,
     "multimodal": 72,
     "longtext": 84,
@@ -789,7 +789,7 @@
    "vendor": "海外",
    "score": {
     "reasoning": 77,
-    "coding": 91,
+    "coding": 92,
     "chinese": 80,
     "multimodal": 75,
     "longtext": 82,
@@ -1054,7 +1054,7 @@
    "vendor": "海外",
    "score": {
     "reasoning": 80,
-    "coding": 87,
+    "coding": 88,
     "chinese": 70,
     "multimodal": 72,
     "longtext": 87,
@@ -1140,32 +1140,6 @@
    "power": 77
   },
   {
-   "name": "Qwen3.7 Plus",
-   "vendor": "国产",
-   "score": {
-    "reasoning": 68,
-    "coding": 74,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 77,
-    "cost": 85,
-    "speed": 74,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "TB4.0 17.5，HLE 35.6",
-   "updated_at": "2026-09-18",
-   "tier": {
-    "key": "qwen",
-    "label": "思考开关",
-    "how": "深度思考模式可以开关",
-    "advice": "客服、摘要这类关掉，解题和写代码再开",
-    "why": "开着更准，但更慢更贵，简单任务上纯属浪费"
-   },
-   "power": 77
-  },
-  {
    "name": "K2 Horizon 375B A23B",
    "vendor": "海外",
    "score": {
@@ -1223,6 +1197,32 @@
    "power": 77
   },
   {
+   "name": "Qwen3.7 Plus",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 67,
+    "coding": 74,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 77,
+    "cost": 85,
+    "speed": 74,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "TB4.0 17.5，HLE 35.6",
+   "updated_at": "2026-09-18",
+   "tier": {
+    "key": "qwen",
+    "label": "思考开关",
+    "how": "深度思考模式可以开关",
+    "advice": "客服、摘要这类关掉，解题和写代码再开",
+    "why": "开着更准，但更慢更贵，简单任务上纯属浪费"
+   },
+   "power": 76
+  },
+  {
    "name": "Solar Open2 250B",
    "vendor": "海外",
    "score": {
@@ -1245,7 +1245,7 @@
    "name": "Motif 3",
    "vendor": "海外",
    "score": {
-    "reasoning": 62,
+    "reasoning": 63,
     "coding": 68,
     "chinese": 80,
     "multimodal": 75,
@@ -1278,25 +1278,6 @@
    "brief": "TB4.0 16.1，HLE 29.6",
    "updated_at": "2026-09-18",
    "power": 75
-  },
-  {
-   "name": "MiniMax M3",
-   "vendor": "国产",
-   "score": {
-    "reasoning": 69,
-    "coding": 73,
-    "chinese": 72,
-    "multimodal": 65,
-    "longtext": 91,
-    "cost": 88,
-    "speed": 79,
-    "privacy": 79,
-    "ecosystem": 68,
-    "creative": 66
-   },
-   "brief": "HLE 39.0，DeepSWE 47.1",
-   "updated_at": "2026-08-24",
-   "power": 74
   },
   {
    "name": "LongCat-2.0",
@@ -1335,6 +1316,25 @@
    "brief": "TB4.0 32.0，HLE 23.4",
    "updated_at": "2026-09-18",
    "power": 74
+  },
+  {
+   "name": "MiniMax M3",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 68,
+    "coding": 73,
+    "chinese": 72,
+    "multimodal": 65,
+    "longtext": 91,
+    "cost": 88,
+    "speed": 79,
+    "privacy": 79,
+    "ecosystem": 68,
+    "creative": 66
+   },
+   "brief": "HLE 39.0，DeepSWE 47.1",
+   "updated_at": "2026-08-24",
+   "power": 73
   },
   {
    "name": "K-EXAONE 2.0 0803",
@@ -1492,7 +1492,7 @@
    "name": "Granite 4.2 8B",
    "vendor": "海外",
    "score": {
-    "reasoning": 41,
+    "reasoning": 40,
     "coding": 54,
     "chinese": 80,
     "multimodal": 75,
@@ -1587,7 +1587,7 @@
    "name": "K2 Horizon 0.9B",
    "vendor": "海外",
    "score": {
-    "reasoning": 39,
+    "reasoning": 38,
     "coding": 24,
     "chinese": 80,
     "multimodal": 75,
