@@ -205,15 +205,14 @@
       <div class="kicker">Love Brain Check / No.00000</div>
       <div class="title">恋爱脑指数<br>体检单</div>
       <div class="dash"></div>
-      <div class="lead">算出你在感情里，还剩下多少自己。<br>两个档位任选，先测 12 题也能接着补完。</div>
+      <div class="lead">算出你在感情里，还剩下多少自己。<br>30 道题，出一份完整报告。</div>
       <ul class="pts">
-        <li><b>12 题体验版</b>：一个 0–100 的指数、五个维度、两个最上头的场景、两条清醒处方</li>
-        <li><b>30 题完整版</b>：还多出你是哪一种恋爱脑、离上一档差什么、分型处方和一份自查表</li>
+        <li>一个 0–100 的指数、五个维度、两个最上头的场景、两条清醒处方</li>
+        <li>还多出你是哪一种恋爱脑、离上一档差什么、分型处方和一份自查表</li>
         <li>凭第一反应选，别想太久，想太久就不是你的答案了</li>
       </ul>
-      <button class="btn" onclick="openCode('light')">输入验证码 · 12 题体验版</button>
-      <button class="btn ghost" onclick="openCode('full')">输入验证码 · 完整版 30 题</button>
-      <div class="fine">两档各需一个验证码。已经答过 12 题的，完整版会把前面 12 题一起算进去，<br>不用重做，直接从第 13 题接着答。</div>
+      <button class="btn" onclick="openCode('full')">输入验证码 · 完整版 30 题</button>
+      <div class="fine">一个验证码解锁一次，下单后由卖家单独发给你。</div>
       <div class="fine">本测试为娱乐向内容，结果不构成任何心理或情感建议。</div>
     </div>
 
@@ -378,9 +377,9 @@ const S = {
   answers: new Array(FULL_N).fill(-1),
   cur: 0,
   code: '',
-  tier: 'light',    // 已经解锁到的档位
-  need: 'light',    // 这次要解锁哪一档，决定验证码怎么校验
-  upto: LIGHT_N,    // 这一轮答到第几题
+  tier: 'full',     // 已经解锁到的档位（只剩完整版一档）
+  need: 'full',     // 这次要解锁哪一档，决定验证码怎么校验
+  upto: FULL_N,     // 这一轮答到第几题
   liteIndex: null,  // 12 题档判出来的指数，续答后用来对比
 };
 
@@ -798,17 +797,12 @@ function drawCard(r, lvlName, stamp, verdict, topDims, type){
 }
 
 /* ---------- 验证码 ---------- */
-/** need 决定这次要解锁到哪一档，弹层文案和提交时的校验都跟着它走 */
+/** 只做完整版 30 题一档 */
 function openCode(need){
-  S.need = need === 'full' ? 'full' : 'light';
-  const full = S.need === 'full';
-  $("codetitle").innerHTML = full
-    ? '输入验证码<br>开始测完整版'
-    : '输入验证码<br>开始测恋爱脑指数';
-  $("codesub").innerHTML = full
-    ? '一个验证码只能用一次。<br>答完 30 题出完整报告；已经答过 12 题的，接着算就行。'
-    : '一个验证码只能用一次。<br>答完 12 题直接出结果，之后还能补完 30 题。';
-  $("codebtn").textContent = full ? '解锁 · 开始完整版' : '解锁 · 开始测';
+  S.need = 'full';
+  $("codetitle").innerHTML = '输入验证码<br>开始测完整版';
+  $("codesub").innerHTML = '一个验证码只能用一次。<br>答完 30 题出完整报告，报告可以直接存成图片。';
+  $("codebtn").textContent = '解锁 · 开始完整版';
   $("codemask").classList.remove("hidden");
   $("cerr").textContent = "";
   $("cok").textContent = "";
