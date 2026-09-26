@@ -24,8 +24,8 @@
    "name": "GPT-6 Astra",
    "vendor": "海外",
    "score": {
-    "reasoning": 90,
-    "coding": 95,
+    "reasoning": 92,
+    "coding": 97,
     "chinese": 76,
     "multimodal": 86,
     "longtext": 88,
@@ -51,7 +51,7 @@
    "vendor": "国产",
    "score": {
     "reasoning": 73,
-    "coding": 90,
+    "coding": 89,
     "chinese": 82,
     "multimodal": 85,
     "longtext": 92,
@@ -102,7 +102,7 @@
    "name": "DeepSeek V4 Vision",
    "vendor": "国产",
    "score": {
-    "reasoning": 70,
+    "reasoning": 71,
     "coding": 80,
     "chinese": 81,
     "multimodal": 85,
@@ -128,8 +128,8 @@
    "name": "Claude Fable 5.1",
    "vendor": "海外",
    "score": {
-    "reasoning": 87,
-    "coding": 96,
+    "reasoning": 88,
+    "coding": 95,
     "chinese": 73,
     "multimodal": 80,
     "longtext": 94,
@@ -154,7 +154,7 @@
    "name": "Gemini 3.8 Flash",
    "vendor": "海外",
    "score": {
-    "reasoning": 80,
+    "reasoning": 81,
     "coding": 93,
     "chinese": 72,
     "multimodal": 82,
@@ -173,6 +173,32 @@
     "how": "thinking budget 可以调，也能设成 0 直接关掉",
     "advice": "批量跑的小任务关掉，需要多步推理的再开",
     "why": "思考档位越高延迟越明显，价格随推理 token 一起上涨"
+   },
+   "power": 83
+  },
+  {
+   "name": "Qwen3.8-Flash-Next",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 75,
+    "coding": 83,
+    "chinese": 88,
+    "multimodal": 80,
+    "longtext": 86,
+    "cost": 94,
+    "speed": 71,
+    "privacy": 89,
+    "ecosystem": 85,
+    "creative": 87
+   },
+   "brief": "TB4.0 45.4，DeepSWE 58.7",
+   "updated_at": "2026-09-07",
+   "tier": {
+    "key": "qwen",
+    "label": "思考开关",
+    "how": "深度思考模式可以开关",
+    "advice": "客服、摘要这类关掉，解题和写代码再开",
+    "why": "开着更准，但更慢更贵，简单任务上纯属浪费"
    },
    "power": 83
   },
@@ -207,7 +233,7 @@
    "vendor": "国产",
    "score": {
     "reasoning": 79,
-    "coding": 89,
+    "coding": 90,
     "chinese": 88,
     "multimodal": 74,
     "longtext": 87,
@@ -229,37 +255,11 @@
    "power": 82
   },
   {
-   "name": "Qwen3.8-Flash-Next",
-   "vendor": "国产",
-   "score": {
-    "reasoning": 75,
-    "coding": 81,
-    "chinese": 88,
-    "multimodal": 80,
-    "longtext": 86,
-    "cost": 94,
-    "speed": 71,
-    "privacy": 89,
-    "ecosystem": 85,
-    "creative": 87
-   },
-   "brief": "TB4.0 45.4，DeepSWE 58.7",
-   "updated_at": "2026-09-07",
-   "tier": {
-    "key": "qwen",
-    "label": "思考开关",
-    "how": "深度思考模式可以开关",
-    "advice": "客服、摘要这类关掉，解题和写代码再开",
-    "why": "开着更准，但更慢更贵，简单任务上纯属浪费"
-   },
-   "power": 82
-  },
-  {
    "name": "Gemini 3.6 Flash",
    "vendor": "海外",
    "score": {
     "reasoning": 73,
-    "coding": 85,
+    "coding": 87,
     "chinese": 80,
     "multimodal": 75,
     "longtext": 87,
@@ -284,7 +284,7 @@
    "name": "Step 5 Preview",
    "vendor": "国产",
    "score": {
-    "reasoning": 76,
+    "reasoning": 77,
     "coding": 91,
     "chinese": 80,
     "multimodal": 75,
@@ -303,8 +303,8 @@
    "name": "GPT-6 Sol",
    "vendor": "海外",
    "score": {
-    "reasoning": 77,
-    "coding": 91,
+    "reasoning": 82,
+    "coding": 92,
     "chinese": 80,
     "multimodal": 75,
     "longtext": 92,
@@ -330,7 +330,7 @@
    "vendor": "海外",
    "score": {
     "reasoning": 81,
-    "coding": 96,
+    "coding": 94,
     "chinese": 72,
     "multimodal": 78,
     "longtext": 90,
@@ -356,7 +356,7 @@
    "vendor": "国产",
    "score": {
     "reasoning": 79,
-    "coding": 93,
+    "coding": 94,
     "chinese": 78,
     "multimodal": 72,
     "longtext": 98,
@@ -381,8 +381,8 @@
    "name": "GLM-5.3",
    "vendor": "国产",
    "score": {
-    "reasoning": 76,
-    "coding": 91,
+    "reasoning": 77,
+    "coding": 89,
     "chinese": 83,
     "multimodal": 75,
     "longtext": 86,
@@ -407,7 +407,7 @@
    "name": "Gemini 3.7 Flash",
    "vendor": "海外",
    "score": {
-    "reasoning": 76,
+    "reasoning": 78,
     "coding": 88,
     "chinese": 67,
     "multimodal": 88,
@@ -434,7 +434,7 @@
    "vendor": "国产",
    "score": {
     "reasoning": 74,
-    "coding": 85,
+    "coding": 86,
     "chinese": 86,
     "multimodal": 72,
     "longtext": 90,
@@ -456,11 +456,30 @@
    "power": 81
   },
   {
+   "name": "Muse Spark 1.3",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 80,
+    "coding": 94,
+    "chinese": 71,
+    "multimodal": 77,
+    "longtext": 91,
+    "cost": 77,
+    "speed": 90,
+    "privacy": 72,
+    "ecosystem": 77,
+    "creative": 73
+   },
+   "brief": "DeepSWE 75.4 全场第一，HLE 48.7",
+   "updated_at": "2026-09-03",
+   "power": 81
+  },
+  {
    "name": "GPT-5.6 Luna",
    "vendor": "海外",
    "score": {
     "reasoning": 71,
-    "coding": 85,
+    "coding": 88,
     "chinese": 80,
     "multimodal": 75,
     "longtext": 92,
@@ -486,7 +505,7 @@
    "vendor": "海外",
    "score": {
     "reasoning": 76,
-    "coding": 87,
+    "coding": 89,
     "chinese": 80,
     "multimodal": 75,
     "longtext": 91,
@@ -512,7 +531,7 @@
    "vendor": "国产",
    "score": {
     "reasoning": 81,
-    "coding": 95,
+    "coding": 91,
     "chinese": 80,
     "multimodal": 75,
     "longtext": 95,
@@ -530,8 +549,8 @@
    "name": "GPT-6 Luna",
    "vendor": "海外",
    "score": {
-    "reasoning": 70,
-    "coding": 87,
+    "reasoning": 71,
+    "coding": 88,
     "chinese": 80,
     "multimodal": 75,
     "longtext": 91,
@@ -551,6 +570,32 @@
     "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
    },
    "power": 81
+  },
+  {
+   "name": "Claude Opus 5",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 84,
+    "coding": 96,
+    "chinese": 78,
+    "multimodal": 75,
+    "longtext": 86,
+    "cost": 65,
+    "speed": 69,
+    "privacy": 76,
+    "ecosystem": 80,
+    "creative": 72
+   },
+   "brief": "DeepSWE 74.0，HLE 54.9",
+   "updated_at": "2026-09-01",
+   "tier": {
+    "key": "anthropic",
+    "label": "思考预算",
+    "how": "能给思考过程设一个 token 上限，也能整个关掉",
+    "advice": "闲聊和简单问答关掉思考，写代码、读长文再打开",
+    "why": "开着思考回复会明显变慢，token 消耗也跟着翻上去"
+   },
+   "power": 80
   },
   {
    "name": "GPT-5.6 Sol",
@@ -579,11 +624,37 @@
    "power": 80
   },
   {
+   "name": "Qwen3.8 Max",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 78,
+    "coding": 86,
+    "chinese": 88,
+    "multimodal": 72,
+    "longtext": 84,
+    "cost": 74,
+    "speed": 66,
+    "privacy": 86,
+    "ecosystem": 80,
+    "creative": 79
+   },
+   "brief": "HLE 43.0，TB4.0 24.75",
+   "updated_at": "2026-08-24",
+   "tier": {
+    "key": "qwen",
+    "label": "思考开关",
+    "how": "深度思考模式可以开关",
+    "advice": "客服、摘要这类关掉，解题和写代码再开",
+    "why": "开着更准，但更慢更贵，简单任务上纯属浪费"
+   },
+   "power": 80
+  },
+  {
    "name": "Gemini 3.1 Pro",
    "vendor": "海外",
    "score": {
-    "reasoning": 73,
-    "coding": 93,
+    "reasoning": 75,
+    "coding": 94,
     "chinese": 70,
     "multimodal": 85,
     "longtext": 89,
@@ -605,30 +676,11 @@
    "power": 80
   },
   {
-   "name": "Muse Spark 1.3",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 79,
-    "coding": 94,
-    "chinese": 71,
-    "multimodal": 77,
-    "longtext": 91,
-    "cost": 77,
-    "speed": 90,
-    "privacy": 72,
-    "ecosystem": 77,
-    "creative": 73
-   },
-   "brief": "DeepSWE 75.4 全场第一，HLE 48.7",
-   "updated_at": "2026-09-03",
-   "power": 80
-  },
-  {
    "name": "Claude Sonnet 5",
    "vendor": "海外",
    "score": {
-    "reasoning": 72,
-    "coding": 86,
+    "reasoning": 73,
+    "coding": 88,
     "chinese": 80,
     "multimodal": 75,
     "longtext": 89,
@@ -654,7 +706,7 @@
    "vendor": "海外",
    "score": {
     "reasoning": 75,
-    "coding": 87,
+    "coding": 89,
     "chinese": 80,
     "multimodal": 75,
     "longtext": 86,
@@ -679,7 +731,7 @@
    "name": "Inkling Small",
    "vendor": "海外",
    "score": {
-    "reasoning": 65,
+    "reasoning": 66,
     "coding": 79,
     "chinese": 80,
     "multimodal": 75,
@@ -698,8 +750,8 @@
    "name": "Muse Spark 1.1",
    "vendor": "海外",
    "score": {
-    "reasoning": 71,
-    "coding": 93,
+    "reasoning": 72,
+    "coding": 94,
     "chinese": 80,
     "multimodal": 75,
     "longtext": 84,
@@ -717,7 +769,7 @@
    "name": "小米 MiMo-V2.6-Flash",
    "vendor": "国产",
    "score": {
-    "reasoning": 71,
+    "reasoning": 72,
     "coding": 90,
     "chinese": 80,
     "multimodal": 75,
@@ -737,7 +789,7 @@
    "vendor": "海外",
    "score": {
     "reasoning": 77,
-    "coding": 92,
+    "coding": 91,
     "chinese": 80,
     "multimodal": 75,
     "longtext": 82,
@@ -757,58 +809,6 @@
     "why": "推理强度越高，响应越慢、消耗越大"
    },
    "power": 80
-  },
-  {
-   "name": "Claude Opus 5",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 84,
-    "coding": 95,
-    "chinese": 78,
-    "multimodal": 75,
-    "longtext": 86,
-    "cost": 65,
-    "speed": 69,
-    "privacy": 76,
-    "ecosystem": 80,
-    "creative": 72
-   },
-   "brief": "DeepSWE 74.0，HLE 54.9",
-   "updated_at": "2026-09-01",
-   "tier": {
-    "key": "anthropic",
-    "label": "思考预算",
-    "how": "能给思考过程设一个 token 上限，也能整个关掉",
-    "advice": "闲聊和简单问答关掉思考，写代码、读长文再打开",
-    "why": "开着思考回复会明显变慢，token 消耗也跟着翻上去"
-   },
-   "power": 79
-  },
-  {
-   "name": "Qwen3.8 Max",
-   "vendor": "国产",
-   "score": {
-    "reasoning": 78,
-    "coding": 82,
-    "chinese": 88,
-    "multimodal": 72,
-    "longtext": 84,
-    "cost": 74,
-    "speed": 66,
-    "privacy": 86,
-    "ecosystem": 80,
-    "creative": 79
-   },
-   "brief": "HLE 43.0，TB4.0 24.75",
-   "updated_at": "2026-08-24",
-   "tier": {
-    "key": "qwen",
-    "label": "思考开关",
-    "how": "深度思考模式可以开关",
-    "advice": "客服、摘要这类关掉，解题和写代码再开",
-    "why": "开着更准，但更慢更贵，简单任务上纯属浪费"
-   },
-   "power": 79
   },
   {
    "name": "DeepSeek Flash",
@@ -859,8 +859,8 @@
    "name": "Qwen3.8 2.4T A95B",
    "vendor": "国产",
    "score": {
-    "reasoning": 78,
-    "coding": 86,
+    "reasoning": 79,
+    "coding": 88,
     "chinese": 80,
     "multimodal": 75,
     "longtext": 87,
@@ -911,8 +911,8 @@
    "name": "Muse Spark 1.2",
    "vendor": "海外",
    "score": {
-    "reasoning": 72,
-    "coding": 85,
+    "reasoning": 73,
+    "coding": 84,
     "chinese": 70,
     "multimodal": 75,
     "longtext": 85,
@@ -931,7 +931,7 @@
    "vendor": "国产",
    "score": {
     "reasoning": 69,
-    "coding": 70,
+    "coding": 69,
     "chinese": 82,
     "multimodal": 74,
     "longtext": 89,
@@ -979,10 +979,36 @@
    "power": 78
   },
   {
+   "name": "Kimi K2.7 Code",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 66,
+    "coding": 76,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 86,
+    "cost": 79,
+    "speed": 74,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "TB4.0 20.2，HLE 35.0",
+   "updated_at": "2026-09-18",
+   "tier": {
+    "key": "moonshot",
+    "label": "思考开关",
+    "how": "可以切换思考模式",
+    "advice": "读文档、做摘要关掉，需要推理再开",
+    "why": "思考模式更慢更贵，长文本场景未必用得上"
+   },
+   "power": 78
+  },
+  {
    "name": "Ling 3.0 Flash",
    "vendor": "国产",
    "score": {
-    "reasoning": 57,
+    "reasoning": 58,
     "coding": 68,
     "chinese": 80,
     "multimodal": 75,
@@ -1001,8 +1027,8 @@
    "name": "Grok 4.6",
    "vendor": "海外",
    "score": {
-    "reasoning": 78,
-    "coding": 88,
+    "reasoning": 80,
+    "coding": 87,
     "chinese": 70,
     "multimodal": 72,
     "longtext": 87,
@@ -1027,8 +1053,8 @@
    "name": "腾讯混元 HY3",
    "vendor": "国产",
    "score": {
-    "reasoning": 64,
-    "coding": 61,
+    "reasoning": 66,
+    "coding": 59,
     "chinese": 84,
     "multimodal": 68,
     "longtext": 85,
@@ -1050,10 +1076,29 @@
    "power": 77
   },
   {
+   "name": "小米 MiMo-V2.5",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 55,
+    "coding": 70,
+    "chinese": 88,
+    "multimodal": 92,
+    "longtext": 77,
+    "cost": 96,
+    "speed": 65,
+    "privacy": 87,
+    "ecosystem": 76,
+    "creative": 82
+   },
+   "brief": "DeepSWE 43.9，HLE 27.2",
+   "updated_at": "2026-08-24",
+   "power": 77
+  },
+  {
    "name": "Gemini 3.5 Flash-Lite",
    "vendor": "海外",
    "score": {
-    "reasoning": 50,
+    "reasoning": 52,
     "coding": 67,
     "chinese": 80,
     "multimodal": 75,
@@ -1076,36 +1121,10 @@
    "power": 77
   },
   {
-   "name": "Kimi K2.7 Code",
-   "vendor": "国产",
-   "score": {
-    "reasoning": 63,
-    "coding": 76,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 86,
-    "cost": 79,
-    "speed": 74,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "TB4.0 20.2，HLE 35.0",
-   "updated_at": "2026-09-18",
-   "tier": {
-    "key": "moonshot",
-    "label": "思考开关",
-    "how": "可以切换思考模式",
-    "advice": "读文档、做摘要关掉，需要推理再开",
-    "why": "思考模式更慢更贵，长文本场景未必用得上"
-   },
-   "power": 77
-  },
-  {
    "name": "Muse Glimmer",
    "vendor": "海外",
    "score": {
-    "reasoning": 53,
+    "reasoning": 54,
     "coding": 72,
     "chinese": 80,
     "multimodal": 75,
@@ -1143,7 +1162,7 @@
    "name": "Apodex 1.1",
    "vendor": "海外",
    "score": {
-    "reasoning": 61,
+    "reasoning": 62,
     "coding": 73,
     "chinese": 80,
     "multimodal": 75,
@@ -1162,7 +1181,7 @@
    "name": "Nex-N2-Pro",
    "vendor": "国产",
    "score": {
-    "reasoning": 62,
+    "reasoning": 64,
     "coding": 70,
     "chinese": 80,
     "multimodal": 75,
@@ -1178,29 +1197,10 @@
    "power": 77
   },
   {
-   "name": "小米 MiMo-V2.5",
-   "vendor": "国产",
-   "score": {
-    "reasoning": 52,
-    "coding": 69,
-    "chinese": 88,
-    "multimodal": 92,
-    "longtext": 77,
-    "cost": 96,
-    "speed": 65,
-    "privacy": 87,
-    "ecosystem": 76,
-    "creative": 82
-   },
-   "brief": "DeepSWE 43.9，HLE 27.2",
-   "updated_at": "2026-08-24",
-   "power": 76
-  },
-  {
    "name": "Qwen3.7 Plus",
    "vendor": "国产",
    "score": {
-    "reasoning": 63,
+    "reasoning": 66,
     "coding": 74,
     "chinese": 80,
     "multimodal": 75,
@@ -1226,8 +1226,8 @@
    "name": "Solar Open2 250B",
    "vendor": "海外",
    "score": {
-    "reasoning": 57,
-    "coding": 77,
+    "reasoning": 59,
+    "coding": 76,
     "chinese": 80,
     "multimodal": 75,
     "longtext": 76,
@@ -1264,8 +1264,8 @@
    "name": "A.X-K2",
    "vendor": "海外",
    "score": {
-    "reasoning": 56,
-    "coding": 66,
+    "reasoning": 58,
+    "coding": 67,
     "chinese": 80,
     "multimodal": 75,
     "longtext": 73,
@@ -1302,7 +1302,7 @@
    "name": "MiniMax M3",
    "vendor": "国产",
    "score": {
-    "reasoning": 64,
+    "reasoning": 66,
     "coding": 73,
     "chinese": 72,
     "multimodal": 65,
@@ -1321,8 +1321,8 @@
    "name": "LongCat-2.0",
    "vendor": "国产",
    "score": {
-    "reasoning": 60,
-    "coding": 59,
+    "reasoning": 63,
+    "coding": 60,
     "chinese": 80,
     "multimodal": 75,
     "longtext": 67,
@@ -1340,7 +1340,7 @@
    "name": "K-EXAONE 2.0 0803",
    "vendor": "海外",
    "score": {
-    "reasoning": 48,
+    "reasoning": 50,
     "coding": 68,
     "chinese": 80,
     "multimodal": 75,
@@ -1359,8 +1359,8 @@
    "name": "Nemotron 3.5 Lightning",
    "vendor": "海外",
    "score": {
-    "reasoning": 37,
-    "coding": 53,
+    "reasoning": 39,
+    "coding": 54,
     "chinese": 80,
     "multimodal": 75,
     "longtext": 60,
@@ -1378,8 +1378,8 @@
    "name": "G9v3-39A5B",
    "vendor": "国产",
    "score": {
-    "reasoning": 48,
-    "coding": 60,
+    "reasoning": 49,
+    "coding": 61,
     "chinese": 80,
     "multimodal": 75,
     "longtext": 67,
@@ -1394,11 +1394,30 @@
    "power": 72
   },
   {
+   "name": "North Mini Code",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 38,
+    "coding": 64,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 60,
+    "cost": 76,
+    "speed": 77,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "DeepSWE 38.8，TB4.0 6.4",
+   "updated_at": "2026-09-18",
+   "power": 71
+  },
+  {
    "name": "K2 Horizon 7B",
    "vendor": "海外",
    "score": {
-    "reasoning": 46,
-    "coding": 46,
+    "reasoning": 45,
+    "coding": 48,
     "chinese": 80,
     "multimodal": 75,
     "longtext": 73,
@@ -1416,8 +1435,8 @@
    "name": "Granite 4.2 30B",
    "vendor": "海外",
    "score": {
-    "reasoning": 39,
-    "coding": 61,
+    "reasoning": 40,
+    "coding": 62,
     "chinese": 80,
     "multimodal": 75,
     "longtext": 60,
@@ -1435,8 +1454,8 @@
    "name": "Granite 4.2 3B",
    "vendor": "海外",
    "score": {
-    "reasoning": 35,
-    "coding": 43,
+    "reasoning": 36,
+    "coding": 45,
     "chinese": 80,
     "multimodal": 75,
     "longtext": 60,
@@ -1451,30 +1470,11 @@
    "power": 70
   },
   {
-   "name": "North Mini Code",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 37,
-    "coding": 63,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 60,
-    "cost": 76,
-    "speed": 77,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "TB4.0 6.4，DeepSWE 38.8",
-   "updated_at": "2026-09-18",
-   "power": 70
-  },
-  {
    "name": "Celeris-1",
    "vendor": "海外",
    "score": {
-    "reasoning": 34,
-    "coding": 37,
+    "reasoning": 36,
+    "coding": 40,
     "chinese": 80,
     "multimodal": 75,
     "longtext": 60,
@@ -1492,8 +1492,8 @@
    "name": "Granite 4.2 8B",
    "vendor": "海外",
    "score": {
-    "reasoning": 37,
-    "coding": 52,
+    "reasoning": 38,
+    "coding": 54,
     "chinese": 80,
     "multimodal": 75,
     "longtext": 60,
@@ -1512,7 +1512,7 @@
    "vendor": "国产",
    "score": {
     "reasoning": 40,
-    "coding": 44,
+    "coding": 46,
     "chinese": 80,
     "multimodal": 75,
     "longtext": 60,
@@ -1524,14 +1524,14 @@
    },
    "brief": "TB4.0 20.8，DeepSWE 26.3",
    "updated_at": "2026-09-18",
-   "power": 68
+   "power": 69
   },
   {
    "name": "K2 Horizon 3.7B",
    "vendor": "海外",
    "score": {
     "reasoning": 42,
-    "coding": 38,
+    "coding": 40,
     "chinese": 80,
     "multimodal": 75,
     "longtext": 63,
@@ -1546,11 +1546,30 @@
    "power": 68
   },
   {
+   "name": "Ling 3.0 Tiny",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 40,
+    "coding": 43,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 60,
+    "cost": 76,
+    "speed": 60,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "TB4.0 20.8，HLE 9.3",
+   "updated_at": "2026-09-18",
+   "power": 67
+  },
+  {
    "name": "LFM2.5-2.6B",
    "vendor": "海外",
    "score": {
-    "reasoning": 35,
-    "coding": 26,
+    "reasoning": 36,
+    "coding": 30,
     "chinese": 80,
     "multimodal": 75,
     "longtext": 60,
@@ -1565,30 +1584,11 @@
    "power": 66
   },
   {
-   "name": "Ling 3.0 Tiny",
-   "vendor": "国产",
-   "score": {
-    "reasoning": 40,
-    "coding": 41,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 60,
-    "cost": 76,
-    "speed": 60,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "TB4.0 20.8，HLE 9.3",
-   "updated_at": "2026-09-18",
-   "power": 66
-  },
-  {
    "name": "K2 Horizon 0.9B",
    "vendor": "海外",
    "score": {
-    "reasoning": 34,
-    "coding": 21,
+    "reasoning": 36,
+    "coding": 24,
     "chinese": 80,
     "multimodal": 75,
     "longtext": 60,
@@ -1600,7 +1600,7 @@
    },
    "brief": "TB4.0 4.9，HLE 5.4",
    "updated_at": "2026-09-18",
-   "power": 65
+   "power": 66
   }
  ],
  "specialized": {
