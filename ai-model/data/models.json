@@ -21,6 +21,32 @@
  "count": 70,
  "models": [
   {
+   "name": "GPT-6 Astra",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 90,
+    "coding": 96,
+    "chinese": 76,
+    "multimodal": 84,
+    "longtext": 88,
+    "cost": 60,
+    "speed": 72,
+    "privacy": 77,
+    "ecosystem": 92,
+    "creative": 86
+   },
+   "brief": "TB4.0 57.07 前三，DeepSWE 74.1 前三",
+   "updated_at": "2026-09-04",
+   "tier": {
+    "key": "openai",
+    "label": "推理档位",
+    "how": "reasoning_effort 有 low / medium / high 三档",
+    "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
+    "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
+   },
+   "power": 85
+  },
+  {
    "name": "Qwen3.8-Max-0902",
    "vendor": "国产",
    "score": {
@@ -43,32 +69,6 @@
     "how": "深度思考模式可以开关",
     "advice": "客服、摘要这类关掉，解题和写代码再开",
     "why": "开着更准，但更慢更贵，简单任务上纯属浪费"
-   },
-   "power": 84
-  },
-  {
-   "name": "GPT-6 Astra",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 90,
-    "coding": 96,
-    "chinese": 76,
-    "multimodal": 84,
-    "longtext": 88,
-    "cost": 60,
-    "speed": 71,
-    "privacy": 77,
-    "ecosystem": 92,
-    "creative": 86
-   },
-   "brief": "TB4.0 57.07 前三，DeepSWE 74.1 前三",
-   "updated_at": "2026-09-04",
-   "tier": {
-    "key": "openai",
-    "label": "推理档位",
-    "how": "reasoning_effort 有 low / medium / high 三档",
-    "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
-    "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
    },
    "power": 84
   },
@@ -108,7 +108,7 @@
     "multimodal": 85,
     "longtext": 88,
     "cost": 86,
-    "speed": 95,
+    "speed": 96,
     "privacy": 84,
     "ecosystem": 83,
     "creative": 83
@@ -134,7 +134,7 @@
     "multimodal": 81,
     "longtext": 88,
     "cost": 80,
-    "speed": 99,
+    "speed": 100,
     "privacy": 74,
     "ecosystem": 81,
     "creative": 76
@@ -160,7 +160,7 @@
     "multimodal": 80,
     "longtext": 86,
     "cost": 94,
-    "speed": 71,
+    "speed": 70,
     "privacy": 89,
     "ecosystem": 85,
     "creative": 87
@@ -212,7 +212,7 @@
     "multimodal": 80,
     "longtext": 98,
     "cost": 69,
-    "speed": 64,
+    "speed": 62,
     "privacy": 82,
     "ecosystem": 83,
     "creative": 79
@@ -361,7 +361,7 @@
     "multimodal": 75,
     "longtext": 86,
     "cost": 77,
-    "speed": 76,
+    "speed": 77,
     "privacy": 84,
     "ecosystem": 78,
     "creative": 77
@@ -484,7 +484,7 @@
     "multimodal": 75,
     "longtext": 90,
     "cost": 71,
-    "speed": 79,
+    "speed": 80,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -510,7 +510,7 @@
     "multimodal": 75,
     "longtext": 95,
     "cost": 87,
-    "speed": 64,
+    "speed": 65,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -529,7 +529,7 @@
     "multimodal": 75,
     "longtext": 91,
     "cost": 95,
-    "speed": 85,
+    "speed": 88,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -633,7 +633,7 @@
     "multimodal": 77,
     "longtext": 87,
     "cost": 94,
-    "speed": 67,
+    "speed": 71,
     "privacy": 86,
     "ecosystem": 85,
     "creative": 81
@@ -740,25 +740,6 @@
    "power": 80
   },
   {
-   "name": "小米 MiMo-V2.6-Flash",
-   "vendor": "国产",
-   "score": {
-    "reasoning": 71,
-    "coding": 90,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 85,
-    "cost": 77,
-    "speed": 75,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "DeepSWE 67.9，TB4.0 21.21",
-   "updated_at": "2026-09-18",
-   "power": 80
-  },
-  {
    "name": "Grok 4.7",
    "vendor": "海外",
    "score": {
@@ -768,7 +749,7 @@
     "multimodal": 75,
     "longtext": 82,
     "cost": 74,
-    "speed": 73,
+    "speed": 75,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -846,7 +827,7 @@
     "multimodal": 75,
     "longtext": 83,
     "cost": 78,
-    "speed": 92,
+    "speed": 93,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -891,7 +872,7 @@
     "multimodal": 65,
     "longtext": 87,
     "cost": 78,
-    "speed": 78,
+    "speed": 79,
     "privacy": 84,
     "ecosystem": 77,
     "creative": 76
@@ -979,6 +960,32 @@
    "power": 78
   },
   {
+   "name": "Kimi K2.7 Code",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 63,
+    "coding": 76,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 86,
+    "cost": 79,
+    "speed": 77,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "TB4.0 20.2，HLE 35.0",
+   "updated_at": "2026-09-18",
+   "tier": {
+    "key": "moonshot",
+    "label": "思考开关",
+    "how": "可以切换思考模式",
+    "advice": "读文档、做摘要关掉，需要推理再开",
+    "why": "思考模式更慢更贵，长文本场景未必用得上"
+   },
+   "power": 78
+  },
+  {
    "name": "Ling 3.0 Flash",
    "vendor": "国产",
    "score": {
@@ -994,6 +1001,25 @@
     "creative": 78
    },
    "brief": "TB4.0 27.2，HLE 23.7",
+   "updated_at": "2026-09-18",
+   "power": 78
+  },
+  {
+   "name": "小米 MiMo-V2.6-Flash",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 71,
+    "coding": 86,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 79,
+    "cost": 96,
+    "speed": 69,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "DeepSWE 67.9，TB4.0 21.21",
    "updated_at": "2026-09-18",
    "power": 78
   },
@@ -1024,32 +1050,6 @@
    "power": 77
   },
   {
-   "name": "Kimi K2.7 Code",
-   "vendor": "国产",
-   "score": {
-    "reasoning": 63,
-    "coding": 76,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 86,
-    "cost": 79,
-    "speed": 74,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "TB4.0 20.2，HLE 35.0",
-   "updated_at": "2026-09-18",
-   "tier": {
-    "key": "moonshot",
-    "label": "思考开关",
-    "how": "可以切换思考模式",
-    "advice": "读文档、做摘要关掉，需要推理再开",
-    "why": "思考模式更慢更贵，长文本场景未必用得上"
-   },
-   "power": 77
-  },
-  {
    "name": "Muse Glimmer",
    "vendor": "海外",
    "score": {
@@ -1059,7 +1059,7 @@
     "multimodal": 75,
     "longtext": 91,
     "cost": 87,
-    "speed": 82,
+    "speed": 83,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1135,7 +1135,7 @@
     "multimodal": 58,
     "longtext": 87,
     "cost": 74,
-    "speed": 76,
+    "speed": 77,
     "privacy": 71,
     "ecosystem": 78,
     "creative": 74
@@ -1161,7 +1161,7 @@
     "multimodal": 75,
     "longtext": 77,
     "cost": 85,
-    "speed": 74,
+    "speed": 75,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1256,7 +1256,7 @@
     "ecosystem": 76,
     "creative": 82
    },
-   "brief": "DeepSWE 43.9，HLE 27.2",
+   "brief": "DeepSWE 43.9，TB4.0 8.7",
    "updated_at": "2026-08-24",
    "power": 74
   },
@@ -1308,7 +1308,7 @@
     "multimodal": 60,
     "longtext": 91,
     "cost": 88,
-    "speed": 79,
+    "speed": 83,
     "privacy": 79,
     "ecosystem": 68,
     "creative": 67
@@ -1389,9 +1389,28 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "TB4.0 22.1，HLE 17.5",
+   "brief": "TB4.0 22.1，DeepSWE 36.8",
    "updated_at": "2026-09-18",
    "power": 72
+  },
+  {
+   "name": "North Mini Code",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 37,
+    "coding": 64,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 60,
+    "cost": 76,
+    "speed": 78,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "TB4.0 6.4，DeepSWE 38.8",
+   "updated_at": "2026-09-18",
+   "power": 71
   },
   {
    "name": "K2 Horizon 7B",
@@ -1422,7 +1441,7 @@
     "multimodal": 75,
     "longtext": 60,
     "cost": 92,
-    "speed": 75,
+    "speed": 76,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1441,31 +1460,12 @@
     "multimodal": 75,
     "longtext": 60,
     "cost": 100,
-    "speed": 94,
+    "speed": 95,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
    },
    "brief": "TB4.0 5.6，DeepSWE 25.3",
-   "updated_at": "2026-09-18",
-   "power": 70
-  },
-  {
-   "name": "North Mini Code",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 37,
-    "coding": 64,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 60,
-    "cost": 76,
-    "speed": 77,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "TB4.0 6.4，DeepSWE 38.8",
    "updated_at": "2026-09-18",
    "power": 70
   },
@@ -1498,7 +1498,7 @@
     "multimodal": 75,
     "longtext": 60,
     "cost": 100,
-    "speed": 76,
+    "speed": 78,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1555,7 +1555,7 @@
     "multimodal": 75,
     "longtext": 60,
     "cost": 76,
-    "speed": 60,
+    "speed": 62,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
