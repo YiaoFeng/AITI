@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
 <title>AI 大模型选型测试 · 找到最适合你的那一款</title>
-<meta name="description" content="30 道题，从 29 款主流大模型里算出最匹配你需求的那一款：附 Top3 对比、档位建议、月成本测算。">
+<meta name="description" content="30 道题，从 29 款主流大模型里算出最匹配你需求的那一款：附能力雷达图、档位建议、月成本测算。">
 <link rel="icon" href="data:,">
 <script>
   // 分享卡片/生成图用不到，但手机端需要它阻止 favicon 404
@@ -75,6 +75,66 @@
   .how h3{font-size:15px;font-weight:800;margin-bottom:10px}
   .how li{list-style:none;font-size:14px;color:#5C574C;padding-left:22px;position:relative;margin-bottom:7px}
   .how li:before{content:"›";position:absolute;left:6px;color:var(--accent);font-weight:800;font-size:17px;top:-2px}
+
+  /* ---------- 首页 · 你现在用哪款 ---------- */
+  /* 读者手上已经有哪款模型，是这份报告唯一能比出「值不值得换」的锚点。
+     做成选填：库里没有的款不能把人拦在门外；但选了报告里才给对比图——
+     这也是「填了有额外收获」的正反馈，比必填的转化好。 */
+  .use-h{font-size:15px;font-weight:800}
+  .use-h span{font-weight:400;font-size:12.5px;color:var(--gray);display:block;margin-top:3px}
+  /* 报告会怎么用这两个槽：写在填之前，读者才知道备用填了会发生什么。
+     少了这块，读者会以为备用也进对比图，或者干脆不知道该不该填。 */
+  .use-how{background:var(--viewbg);border-radius:11px;padding:11px 13px;margin-top:12px}
+  .use-how p{font-size:12px;color:#5C574C;line-height:1.65;margin:0}
+  .use-how p + p{margin-top:5px}
+  .use-how b{font-weight:800;color:var(--ink)}
+  /* 两个槽各占一行，标签固定宽——「主力」「备用」两个字左右对齐，
+     读者扫一眼就知道哪个空着 */
+  .use-sel{margin-top:12px}
+  .use-slot{display:flex;align-items:center;gap:9px;min-height:30px}
+  .use-slot + .use-slot{margin-top:7px}
+  .use-slot > .sl{flex:0 0 30px;font-size:12.5px;font-weight:800;color:var(--ink)}
+  .use-slot.hint > .sl{color:var(--gray)}
+  .use-slot .ph{font-size:12.5px;color:var(--gray)}
+  .use-slot .swap{background:0;border:0;color:var(--accent);font:600 12px inherit;
+                  cursor:pointer;padding:2px 0;flex:0 0 auto}
+  .tag.sel{background:#F6E9E5;color:var(--accent);padding:5px 10px;
+           display:inline-flex;align-items:center;gap:8px;font-size:13px;min-width:0}
+  .tag.sel b{cursor:pointer;font-size:15px;line-height:1;opacity:.6;padding:0 3px;font-weight:700}
+  .tag.sel b:hover{opacity:1}
+  .fchips{display:flex;gap:7px;overflow-x:auto;padding:13px 0 1px;
+          scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .fchips::-webkit-scrollbar{display:none}
+  .chip{flex:0 0 auto;border:1.5px solid var(--line);background:var(--card);
+        border-radius:99px;padding:7px 13px;font:600 13px inherit;color:#5C574C;
+        cursor:pointer;transition:.15s;white-space:nowrap}
+  .chip:hover{border-color:#E2D3CD}
+  .chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+  .use-toggle{background:0;border:0;color:var(--accent);font:600 13px inherit;
+              cursor:pointer;padding:12px 0 0;display:block;text-align:left}
+  .use-panel{display:none;margin-top:12px;border-top:1px solid var(--line);padding-top:13px}
+  .use-panel.open{display:block}
+  .srch{width:100%;border:1.5px solid var(--line);border-radius:11px;padding:11px 14px;
+        font:15px inherit;color:var(--ink);background:var(--card);outline:0}
+  .srch:focus{border-color:var(--accent)}
+  .use-list{max-height:280px;overflow:auto;margin-top:10px}
+  /* 家族小标题吸顶：70 款滚起来之后还能知道自己在看哪一族 */
+  .use-fam{font-size:12px;font-weight:800;color:var(--gray);letter-spacing:.5px;
+           padding:11px 2px 6px;position:sticky;top:0;background:var(--card)}
+  .use-row{display:flex;align-items:center;gap:10px;width:100%;text-align:left;
+           background:0;border:0;border-bottom:1px solid var(--line);padding:11px 2px;
+           font:14px inherit;color:var(--ink);cursor:pointer}
+  .use-row:hover{background:#FBF8F3}
+  .use-row .k{flex:0 0 21px;height:21px;border-radius:50%;background:var(--viewbg);
+              color:var(--gray);font:800 11px/21px inherit;text-align:center}
+  .use-row.on .k{background:var(--accent);color:#fff}
+  /* 备用那行的圈得比主力浅一档：两个都涂满时读者扫一眼分不出哪个是天天在用的 */
+  .use-row.on.backup .k{background:#C9C2B6}
+  .use-row .nm{flex:1;min-width:0;font-weight:600;overflow:hidden;
+               text-overflow:ellipsis;white-space:nowrap}
+  .use-row .pw{font-size:12px;color:var(--gray);flex:0 0 auto}
+  .use-none{font-size:12.5px;color:var(--gray);margin-top:13px;line-height:1.65}
+  .use-none .srch{margin-top:8px;font-size:14px;padding:9px 12px}
 
   /* ---------- 验证码 ---------- */
   .code-box{padding-top:44px}
@@ -159,11 +219,37 @@
   .alt .mt{font-size:22px;font-weight:800;color:var(--accent)}
   .alt .mt span{font-size:12px;color:var(--gray);font-weight:700}
   .alt .ds{font-size:12.5px;color:var(--gray);margin-top:6px;line-height:1.5}
-  table.cmp{width:100%;border-collapse:collapse;font-size:14px}
-  table.cmp th,table.cmp td{padding:9px 6px;border-bottom:1px solid var(--line);text-align:center}
-  table.cmp th{font-size:12px;color:var(--gray);font-weight:700}
-  table.cmp td:first-child,table.cmp th:first-child{text-align:left;color:var(--gray);font-size:13px}
-  table.cmp td.win{color:var(--accent);font-weight:800}
+  /* ---------- 结果 · 首选 vs 你的主力（雷达） ---------- */
+  .cmp-legend{display:flex;flex-wrap:wrap;gap:7px 16px;margin:2px 0 10px}
+  .cmp-legend .lg{display:flex;align-items:center;gap:6px;font-size:12.5px;min-width:0}
+  .cmp-legend .lg i{flex:0 0 9px;height:9px;border-radius:3px}
+  /* 图例本来就 flex-wrap 逐项换行，没有必须截断的理由。截了之后
+     「Qwen3.8-Flash-Next」和「Qwen3.8-Flash-N」看不出是两款。 */
+  .cmp-legend .lg b{font-weight:600}
+  .cmp-legend .lg em{font-style:normal;color:var(--gray);font-size:11.5px;flex:0 0 auto}
+  .cmp-legend .lg-note{flex:1 0 100%;font-size:11.5px;color:var(--gray);margin-top:3px}
+  /* 半径 92 + 标签 105 是照卡片内宽 ~330 量的：左右两侧的标签锚在 105 处，
+     再宽就会顶出卡片。改 viewBox 要连着 R_RADAR / R_LABEL 一起改。 */
+  .rd-wrap{display:flex;justify-content:center}
+  .rd-wrap svg{width:100%;max-width:330px;height:auto;overflow:visible}
+  .rd-lb{font-size:11.5px}
+  .rd-tick{font-size:10px;fill:#B6B0A4}
+  .rd-note{font-size:11.5px;color:var(--gray);line-height:1.6;margin-top:8px}
+  /* 两个框上下排、各占满卡片宽。并排时每个只剩 ~130px，装不下
+     「Claude Fable 5.1」这种名字——截成「Claud…」等于把要比的两款名字
+     都藏起来，比溢出更糟。上下排之后名字和大分数同一行左右对读。 */
+  .selfcmp .row2{flex-direction:column;gap:9px}
+  .selfcmp .alt{display:grid;grid-template-columns:1fr auto;column-gap:10px;
+                row-gap:1px;align-items:baseline;padding:12px 14px}
+  .selfcmp .alt .nm{font-size:15px;margin:0;min-width:0}
+  .selfcmp .alt .mt{font-size:25px;text-align:right}
+  .selfcmp .alt.self .mt{color:var(--gray)}
+  .selfcmp .alt .ds{grid-column:1/-1;margin-top:4px}
+  .selfcmp .verdict{font-size:14.5px;line-height:1.72;margin-top:14px}
+  .selfcmp .li{font-size:13px;color:var(--gray);line-height:1.7;padding-left:15px;
+               position:relative;margin-top:5px}
+  .selfcmp .li:before{content:"·";position:absolute;left:4px;color:var(--accent);font-weight:800}
+  .selfcmp ul{list-style:none;margin:0;padding:0}
   .tier{display:flex;gap:11px;align-items:flex-start;padding:13px 0;border-bottom:1px solid var(--line)}
   .tier:last-child{border-bottom:0;padding-bottom:0}
   .tier .ic{flex:0 0 34px;height:34px;border-radius:11px;background:var(--viewbg);
@@ -212,24 +298,48 @@
   <!-- ══════════ 首页 ══════════ -->
   <section class="screen on" id="s-home">
     <div class="hero">
-      <span class="kicker">29 款主流大模型实测数据</span>
+      <span class="kicker"><span id="cnt-kicker">—</span> 款主流大模型实测数据</span>
       <h1>别问哪个 AI <em>最强</em><br>问你该用<em>哪一个</em></h1>
       <p>回答几个问题，从模型库里算出和你需求最匹配的那一款</p>
       <p class="upd"><i></i>数据更新于 <b id="data-date">—</b> 08:00</p>
     </div>
     <div class="pick">
-      <div><b>29</b><span>款模型</span></div>
+      <div><b id="cnt-models">—</b><span>款模型</span></div>
       <div><b>10</b><span>个维度</span></div>
       <div><b>30</b><span>道题</span></div>
     </div>
+
+    <!-- 你现在用哪款：选填，两个槽（主力 / 备用）。只有主力和推荐款进雷达图 -->
+    <div class="card" id="use-card" style="margin-top:18px">
+      <div class="use-h">你现在用哪款？
+        <span>选填 · 填两款：主力 + 备用</span></div>
+      <!-- 填之前先把「这两个槽最后会变成什么」说清楚，否则读者会以为备用也进对比图 -->
+      <div class="use-how">
+        <p><b>主力</b>是你天天在用的那款。报告里它会和跟你需求最匹配的那一款画进同一张能力雷达图，
+          告诉你换过去能多拿什么、代价是什么、月成本差多少。</p>
+        <p><b>备用</b>只是留个参照，报告里报一个匹配度，不进雷达图。</p>
+        <p><b>都不填</b>也没关系，报告照常出，只是没有这一块。</p>
+      </div>
+      <div class="use-sel" id="use-sel"></div>
+      <div class="fchips" id="use-chips"></div>
+      <button class="use-toggle" id="use-toggle">找不到？展开全部 <b id="use-total">—</b> 款 ›</button>
+      <div class="use-panel" id="use-panel">
+        <input class="srch" id="use-q" placeholder="搜名字，比如 Qwen / GPT / 混元" autocomplete="off">
+        <div class="use-list" id="use-list"></div>
+        <div class="use-none">列表里没有？直接写下来，我们按需求量补进榜单：
+          <input class="srch" id="use-other" placeholder="比如：豆包 / 文心一言" autocomplete="off">
+        </div>
+      </div>
+    </div>
+
     <div style="margin-top:20px">
       <button class="btn" id="go-full">输入验证码 · 完整版 30 题</button>
     </div>
     <div class="how">
       <h3>测完能拿到什么</h3>
       <ul>
-        <li>30 道题，从 29 款主流模型里算出最匹配你的那一款</li>
-        <li>Top3 对比、档位建议、月成本测算、升降档方案，报告可存成图片</li>
+        <li>30 道题，从 <span id="cnt-how">—</span> 款主流模型里算出最匹配你的那一款</li>
+        <li>填了主力就多一张能力雷达图，另外还有档位建议、月成本测算、升降档方案，报告可存成图片</li>
         <li>题目基于真实的实测数据，一个验证码解锁一次，下单后由卖家单独发给你</li>
       </ul>
     </div>
@@ -324,8 +434,16 @@ const S = {
   models:[],
   code:'',
   pick:null,         // 需求分流题选中的专用方向 vision / image_gen / speech / video_gen
-  specialized:null   // 专用模型推荐池（来自 models.json，无公开基准、不排名）
+  specialized:null,  // 专用模型推荐池（来自 models.json，无公开基准、不排名）
+  /* 读者在用的模型，库里精确 name。**位置即角色：self[0]=主力，self[1]=备用。**
+     只有主力进雷达图和结论，备用只在结论里报一个匹配度——「值不值得换」这个问题
+     只对天天在用的那款成立，多填一款只会让读者自己判断哪根条是自己的。 */
+  self:[],
+  selfOther:[]       // 库里没有、读者手写的名字。只用于说明+上报，不参与算分
 };
+/* 主力 + 备用。不变式：self[1] 存在 ⇒ self[0] 存在（取消主力时备用自动顶上），
+   否则会出现「有备用没主力」这种没法渲染的状态 */
+const SELF_MAX = 2;
 
 /* ── 小工具 ── */
 const $ = s => document.querySelector(s);
@@ -359,6 +477,179 @@ async function boot(){
   S.specialized = m.specialized || null;
 }
 
+/* ══════════ 首页 · 你现在用哪款 ══════════
+   读者手上有哪款，是这份报告唯一能回答「换过去值不值」的锚点。
+   数据全从 models.json 现有字段派生，不新增字段——那个文件每天由 gen_models.py
+   重新生成，加了字段第二天忘了同步就静默失效。 */
+
+/* 家族：用来做常用 chips 和列表分组。按顺序匹配，先命中的胜出。 */
+const FAMILIES = [
+  ['GPT',        /^gpt/i],
+  ['Claude',     /^claude/i],
+  ['Gemini',     /^gemini/i],
+  ['Qwen',       /^qwen/i],
+  ['DeepSeek',   /^deepseek/i],
+  ['GLM',        /glm|智谱/i],
+  ['Kimi',       /^kimi/i],
+  ['Grok',       /^grok/i],
+  ['混元',       /混元|hunyuan/i],
+  ['小米',       /小米|^mimo/i],
+  ['MiniMax',    /^minimax/i],
+  ['Muse',       /^muse/i],
+  ['K2 Horizon', /^k2\s*horizon/i]
+];
+function useFamily(name){
+  for(const f of FAMILIES) if(f[1].test(name)) return f[0];
+  return '其他';
+}
+/* 搜索归一化：空格、连字符、点、下划线全去掉。读者打 qwen3.8max 也能命中
+   Qwen3.8-Max-0902——没人会照着我们库里的写法打名字。 */
+function useNorm(s){ return String(s || '').toLowerCase().replace(/[\s\-_.]/g,''); }
+/* 中文俗称 → 库里写法，否则读者搜「通义」「智谱」一条都搜不出来 */
+const USE_ALIAS = { 'chatgpt':'gpt','克劳德':'claude','通义':'qwen','千问':'qwen',
+  '智谱':'glm','谷歌':'gemini','深度求索':'deepseek','月之暗面':'kimi' };
+
+const ROLE_CN = ['主力','备用'];
+/* 两个槽各占一行，槽位下标就是角色——不另存一份 role 字段，
+   否则数组顺序和角色标记迟早会对不上，而那种错在界面上看不出来。 */
+function renderUseSel(){
+  const box = $('#use-sel');
+  /* 名字一律写全名。这里是读者确认「我选的是哪一款」的地方，
+     截成「Qwen3.8-Flash-N…」等于没确认——槽位本来就一行一个，多占一点地方没关系 */
+  box.innerHTML = ROLE_CN.map((role,i)=>{
+    const n = S.self[i];
+    if(!n) return `<div class="use-slot hint"><span class="sl">${role}</span>
+      <span class="ph">${i === 0 ? '点下面挑一款' : '可以不填'}</span></div>`;
+    const swap = i === 1
+      ? `<button class="swap" data-swap="1" title="和主力对调">↑ 换到主力</button>` : '';
+    return `<div class="use-slot"><span class="sl">${role}</span>
+      <span class="tag sel" data-name="${esc(n)}" data-role="${role}">
+        ${esc(n)}<b title="取消">×</b></span>${swap}</div>`;
+  }).join('');
+  box.querySelectorAll('.tag.sel b').forEach(b=>{
+    b.onclick = ()=> useToggle(b.parentNode.dataset.name);
+  });
+  const sw = box.querySelector('[data-swap]');
+  if(sw) sw.onclick = swapRoles;
+}
+/* 读者常常先把次要的那款点进去（手上先想到哪款就点哪款），所以备用槽要给一个
+   换到主力的口子。没有它只能取消了重选，而取消的瞬间备用会顶上主力，越弄越乱。 */
+function swapRoles(){
+  if(S.self.length < 2) return;
+  const a = S.self[0];
+  S.self[0] = S.self[1];
+  S.self[1] = a;
+  renderUseSel(); renderUseChips(); renderUseList(); syncGoFull();
+}
+function renderUseChips(){
+  /* 每族取实力分最高的一款当代表，取前 10 族。70 款全铺出来没人看得下去，
+     但代表款必须由数据算出来——写死一份清单，明天新模型上线就漏了。 */
+  const best = {};
+  S.models.forEach(m=>{
+    const f = useFamily(m.name);
+    if(!best[f] || (m.power||0) > (best[f].power||0)) best[f] = m;
+  });
+  const list = FAMILIES.map(f=>best[f[0]]).filter(Boolean).slice(0,10);
+  // chips 是横向滚动条，不受卡片宽度限制，直接写全名——省得读者对着
+  // 「4.5」「K3」猜是哪家的哪一款
+  $('#use-chips').innerHTML = list.map(m=>
+    `<button class="chip${S.self.includes(m.name)?' on':''}" data-name="${esc(m.name)}">${esc(m.name)}</button>`
+  ).join('');
+  $('#use-chips').querySelectorAll('.chip').forEach(c=>{
+    c.onclick = ()=> useToggle(c.dataset.name);
+  });
+}
+function renderUseList(){
+  const raw = ($('#use-q').value || '').trim();
+  const q = USE_ALIAS[useNorm(raw)] || useNorm(raw);
+  const box = $('#use-list');
+  /* 排序必须按族排、族内再按实力分——如果全局按实力分排，同一族的款会散落在
+     列表各处，族标题就会重复出现几十次，看着像坏了。 */
+  const rank = {};
+  FAMILIES.forEach((f,i)=> rank[f[0]] = i);
+  const rows = S.models.filter(m=>{
+    if(!q) return true;
+    return useNorm(m.name).includes(q) || useNorm(useFamily(m.name)).includes(q)
+        || useNorm(m.vendor).includes(q);
+  }).sort((a,b)=>{
+    const ra = rank[useFamily(a.name)] ?? 99, rb = rank[useFamily(b.name)] ?? 99;
+    return ra - rb || (b.power||0) - (a.power||0);
+  });
+  if(!rows.length){ box.innerHTML = `<div class="use-fam">没搜到，换个写法试试</div>`; return; }
+  let h = '', fam = '';
+  rows.forEach(m=>{
+    const f = useFamily(m.name);
+    if(f !== fam){ fam = f; h += `<div class="use-fam">${esc(f)}</div>`; }
+    /* 圈里写「主」/「备」而不是打勾：列表展开时读者要能一眼看出哪款占的是哪个槽，
+       一个 ✓ 说明不了它在报告里会被怎么用。 */
+    const at = S.self.indexOf(m.name);
+    h += `<button class="use-row${at>=0?' on':''}${at===1?' backup':''}" data-name="${esc(m.name)}">
+      <span class="k">${at<0?'':ROLE_CN[at]}</span><span class="nm">${esc(m.name)}</span>
+      <span class="pw">${esc(m.vendor)} · ${m.power}</span></button>`;
+  });
+  box.innerHTML = h;
+  box.querySelectorAll('.use-row').forEach(r=>{
+    r.onclick = ()=> useToggle(r.dataset.name);
+  });
+}
+function useToggle(name){
+  const i = S.self.indexOf(name);
+  if(i >= 0){
+    /* 取消主力时备用自动顶到 [0]——不变式「有备用必有主力」靠 splice 的挪位天然成立，
+       不用额外补一句。补了反而会多出一段只在某一头才走到的分支。 */
+    S.self.splice(i,1);
+  } else {
+    if(S.self.length >= SELF_MAX){
+      toast('填两个就够了：主力是你天天用的那款，备用只是留个参照');
+      return;
+    }
+    S.self.push(name);
+  }
+  renderUseSel(); renderUseChips(); renderUseList(); syncGoFull();
+}
+function syncGoFull(){
+  const go = $('#go-full');
+  if(!go) return;
+  if(!go.dataset.base) go.dataset.base = go.textContent;   // 原文案留底，取消勾选要能还原
+  const n = S.self.length;
+  go.textContent = !n ? go.dataset.base
+    : n === 1 ? `${go.dataset.base}（已填主力）`
+    : `${go.dataset.base}（已填主力 + 备用）`;
+}
+function initUse(){
+  /* 页面文案里原来硬编码「29 款」，而库里是 70 款。模型每天都在增删，
+     写死的数字只会一天比一天假——全部从 S.models.length 派生。 */
+  const n = S.models.length;
+  $('#use-total').textContent = n;
+  const cm = $('#cnt-models');
+  if(cm) cm.textContent = n;
+  const ck = $('#cnt-kicker'), ch = $('#cnt-how');
+  if(ck) ck.textContent = n;
+  if(ch) ch.textContent = n;
+  const md = document.querySelector('meta[name=description]');
+  if(md) md.content = md.content.replace(/\d+ 款/, `${n} 款`);
+  renderUseSel(); renderUseChips(); renderUseList();
+  /* 展开态只留「收起列表 ›」——「收起列表 70 款 ›」读着别扭，那个 70 款
+     是给没展开的人看的（告诉他列表里有全部 70 款，不是只有上面那 10 个 chips）。 */
+  $('#use-toggle').onclick = ()=>{
+    const p = $('#use-panel'), b = $('#use-toggle');
+    p.classList.toggle('open');
+    b.innerHTML = p.classList.contains('open')
+      ? '收起列表 ›'
+      : `找不到？展开全部 <b id="use-total">${S.models.length}</b> 款 ›`;
+  };
+  $('#use-q').oninput = renderUseList;
+  /* 库里没有的款：只收名字，报告里明说「比不了」，同时当作需求信号上报。
+     绝不拿别的模型的分数冒充——那是砸这产品唯一的卖点。 */
+  $('#use-other').onchange = e=>{
+    const v = e.target.value.trim().slice(0,20);
+    if(!v) return;
+    if(!S.selfOther.includes(v) && S.selfOther.length < SELF_MAX) S.selfOther.push(v);
+    e.target.value = '';
+    toast(`记下了：${v}。它还没有公开实测分，报告里会单独说一句`);
+  };
+}
+
 /* ── 推荐算法 ──
    权重 = Σ 选中选项的维度权重（负权重表示「我越不在意这个维度」）
    匹配度 = Σ(权重 × 模型该维度分) ÷ Σ|权重|   —— 加权平均，0-100 直接读作契合度 */
@@ -373,15 +664,17 @@ function weights(){
   });
   return w;
 }
+function matchScore(m, ww){
+  let raw = 0, tot = 0;
+  for(const k in ww){ raw += ww[k] * (m.score[k]||0); tot += Math.abs(ww[k]); }
+  return tot ? raw/tot : 0;
+}
+/* 单独抽出来是因为「你现在用的那款」也要用同一把尺子算分。在别处再写一遍
+   加权平均，两边的 match 迟早会算出不同的数——而报告里这两个数是并排比的。 */
 function rankAll(w, override){
   const ww = Object.assign({}, w, override||{});
-  let tot = 0; for(const k in ww) tot += Math.abs(ww[k]);
-  if(!tot) tot = 1;
-  return S.models.map(m=>{
-    let raw = 0;
-    for(const k in ww) raw += ww[k] * (m.score[k]||0);
-    return Object.assign({}, m, {match: raw/tot});
-  }).sort((a,b)=>b.match-a.match);
+  return S.models.map(m=>Object.assign({}, m, {match: matchScore(m, ww)}))
+                 .sort((a,b)=>b.match-a.match);
 }
 
 /* ── 流程 ── */
@@ -487,6 +780,217 @@ function next(){
 $('#q-next').onclick = next;
 $('#q-prev').onclick = ()=>{ if(S.idx>0){ S.idx--; renderQ(); } };
 
+/* ══════════ 你现在用的，值不值得换 ══════════
+   这是整份报告里唯一带参照系的一句话：前面所有结论都在说「哪款适合你」，
+   只有这里回答「那我手上这款呢」。读者选的款必须用读者自己的权重、
+   同一把尺子算分——拿全库排名去比一个按你需求算出来的分，就是偷换概念。 */
+/* 顺序 = 读者指定的顺序（[0] 主力、[1] 备用）。
+   **这里不许按 match 排序。** 主力是读者指定的那款，不是「在用的里面分最高的那款」——
+   一旦排序，读者填的主力比分低时报告就会拿备用去对比，而两款本来就都在「你在用」里，
+   界面上完全看不出错。 */
+function selfModels(w){
+  const ww = Object.assign({}, w);
+  return S.self.map(n=>S.models.find(m=>m.name===n)).filter(Boolean)
+               .map(m=>Object.assign({}, m, {match: matchScore(m, ww)}));
+}
+const selfMain   = w => selfModels(w)[0] || null;
+const selfBackup = w => selfModels(w)[1] || null;
+/* 差不到 5 分的不写进「涨了 / 掉了」——这个量级读者感觉不出来，
+   硬写成优劣势只是给对比图凑噪声 */
+const SELF_MIN_DELTA = 5;
+
+function selfDeltas(top, me, need){
+  const out = {gain:[], lose:[]};
+  need.slice(0,3).forEach(([k])=>{
+    const from = me.score[k]||0, to = top.score[k]||0;
+    if(to - from >= SELF_MIN_DELTA) out.gain.push({k, from, to});
+    else if(from - to >= SELF_MIN_DELTA) out.lose.push({k, from, to});
+  });
+  return out;
+}
+const dimBrief = (m, need) =>
+  need.slice(0,2).map(([k])=>`${DIM_CN[k]||k} ${m.score[k]||0}`).join(' · ');
+
+/* 结论分三支，但「总分接近」还要再看一眼维度：加权平均打平、单项却差十几分
+   是完全可能的（两款各强一半）。那种情况下还说「没有换的必要」就不对了——
+   读者最在意的那一维差 12 分，是能天天感觉到的。
+   返回分段而不是 HTML 字符串：手机端要加粗、存图里只能画纯文字，
+   分段落两边各取所需，措辞只此一份，不会改了一边忘了另一边。 */
+function selfVerdict(top, me, gap, gain, lose){
+  const M = m => m.match.toFixed(1);
+  if(me.name === top.name) return [
+    {t:'你的主力 '}, {t:me.name, b:1},
+    {t:` 就是这次算出来的首选（${M(me)}%）。不用换，你已经在对的那一款上了。`}];
+  /* 报了差值就得接一句判断，不能停在「差 1.9 个点」让读者自己猜。
+     差得出来但没有任何一维拉开（①② 都不成立）时，得说清是「整体略好」还是「不值当」。 */
+  if(gap >= 1.5){
+    const head = [
+      {t:'你的主力 '}, {t:me.name, b:1}, {t:` 匹配度 ${M(me)}%，首选 `},
+      {t:top.name, b:1}, {t:` 是 ${M(top)}%，差 `}, {t:`${gap.toFixed(1)} 个点`, b:1}, {t:'。'}];
+    if(gain.length || lose.length) return head;
+    /* selfDeltas 只看读者最在意的前三维，所以「没有涨跌」的准确说法是
+       「没有哪一维差出 5 分以上」，不能说成「差在你不关心的维度上」 */
+    return head.concat(gap < 5
+      ? [{t:'你最在意的那几维都没有单项差出 5 分以上，'},
+         {t:'为这几个点换过去不划算', b:1}, {t:'，先用着。'}]
+      : [{t:'每一项都略好一点、没有哪一维特别突出，'},
+         {t:'值不值看你多在意整体体验', b:1}, {t:'，往下看具体差在哪一维再定。'}]);
+  }
+  if(gain.length || lose.length) return [
+    {t:'你的主力 '}, {t:me.name, b:1}, {t:' 和首选 '}, {t:top.name, b:1},
+    {t:` 总分几乎打平（${M(me)}% vs ${M(top)}%），但两款强的地方不一样。总分上换不换都说得过去，`},
+    {t:'看下面雷达图鼓出来的那几维', b:1}, {t:'，按你最在意的那项定。'}];
+  return [
+    {t:'你的主力 '}, {t:me.name, b:1}, {t:` 匹配度 ${M(me)}%，首选 `}, {t:top.name, b:1},
+    {t:` 是 ${M(top)}%，只差 ${gap.toFixed(1)} 个点。你最在意的几维也拉不开差距，`},
+    {t:'没有换的必要', b:1}, {t:'。'}];
+}
+const segsText = segs => segs.map(s=>s.t).join('');
+
+function selfBlockHTML(top, w, need){
+  const list = selfModels(w);
+  if(!list.length) return '';
+  const me = list[0];                                  // 恒为「主力」，selfModels 不排序
+  const backup = list[1] || null;
+  const gap = top.match - me.match;                    // top 是全库最高分，gap 恒 ≥ 0
+  const {gain, lose} = selfDeltas(top, me, need);
+  const v = selfVerdict(top, me, gap, gain, lose)
+    .map(s => s.b ? `<b>${esc(s.t)}</b>` : esc(s.t)).join('');
+
+  const band = m => costBand(m.score.cost||0);
+  const li = [];
+  if(gain.length)
+    li.push('换过去能多拿：' + gain.map(g=>`${DIM_CN[g.k]||g.k} ${g.from} → ${g.to}`).join('、'));
+  if(lose.length)
+    li.push('代价是：' + lose.map(g=>`${DIM_CN[g.k]||g.k} ${g.from} → ${g.to}`).join('、'));
+  li.push(band(me) === band(top)
+    ? `月成本基本不变（${band(top)}）`
+    : `月成本从 ${band(me)} 变成 ${band(top)}`);
+  /* 库里没有的款：直说比不了。拿别的模型的分数冒充当读者的模型，
+     是砸这产品唯一的卖点——所有分数都得能指到一份实测数据上。 */
+  /* 备用只在结论里报一个匹配度，不进上面的雷达——读者填备用是为了有个参照，
+     不是为了多一条要比的线。 */
+  if(backup)
+    li.push(`你还填了备用 ${esc(backup.name)}：匹配度 ${backup.match.toFixed(1)}%`);
+  if(S.selfOther.length)
+    li.push(`你写的「${S.selfOther.join('、')}」还没有公开实测分，没法逐维比，我们按需求量补进榜单`);
+
+  return `<div class="card selfcmp" id="r-self">
+    <div class="sec-t">你的主力，值不值得换</div>
+    <div class="muted" style="margin-bottom:13px">同一套权重、同一把尺子算出来的匹配度，可以直接比</div>
+    <div class="row2">
+      <div class="alt self"><div class="nm">主力 · ${esc(me.name)}</div>
+        <div class="mt">${me.match.toFixed(1)}<span>% 匹配</span></div>
+        <div class="ds">${esc(dimBrief(me, need))}</div></div>
+      <div class="alt"><div class="nm">推荐 · ${esc(top.name)}</div>
+        <div class="mt">${top.match.toFixed(1)}<span>% 匹配</span></div>
+        <div class="ds">${esc(dimBrief(top, need))}</div></div>
+    </div>
+    <div class="verdict">${v}</div>
+    <ul>${li.map(t=>`<li class="li">${esc(t)}</li>`).join('')}</ul>
+  </div>`;
+}
+
+/* ══════════ 首选 vs 你的主力 · 能力雷达 ══════════
+   为什么是雷达不是横条：横条逐维报数，读者要自己把几条竖着对读、在脑子里拼形状；
+   「换过去值不值」问的其实是形状像不像——你最在意的那几维上，两个多边形哪边鼓出来，
+   一眼就看见了。 */
+const CMP_REC  = '#944735';   // 推荐给你的：暖色
+const CMP_GRAY = '#8A8378';   // 主力：灰阶，与推荐彻底分开
+
+/* 只收两款：首选 + 主力。备选二三名和备用都不进图——图上多一根条，读者就要多配一次对，
+   而这张图只回答一个问题：「我手上这款换成首选，能力形状会变成什么样」。
+   主力本身就是首选时只留一个多边形（同一款画两遍会被当成两款模型）。 */
+function cmpModels(top, main){
+  const out = [{name:top.name, score:top.score, kind:'rec', color:CMP_REC, tag:'首选'}];
+  if(!main || !main.name) return out;
+  if(main.name === top.name){ out[0].imself = true; return out; }
+  out.push({name:main.name, score:main.score, kind:'self', tag:'你的主力', color:CMP_GRAY});
+  return out;
+}
+/* 数字统一四舍五入到整数：图上比的是长度，小数位只会让读者以为精度很高 */
+function cmpSeries(models, dimKeys){
+  return dimKeys.map(k=>({
+    k, cn: DIM_CN[k] || k,
+    rows: models.map(m=>({name:m.name, kind:m.kind, imself:!!m.imself,
+                          color:m.color, score:Math.round(m.score[k]||0)}))
+  }));
+}
+
+/* ══════════ 首选 vs 主力 · 能力雷达 ══════════
+   几何只算一份，DOM（SVG）和 canvas 各自按自己的半径画。两边各算一遍迟早有一边算歪，
+   而错的那边在测试里看不出来——图能画出来、断言也全绿，只是形状不对。
+   角度从正上方开始、顺时针铺开，两处必须同序同名。 */
+function radarGeom(dimKeys){
+  const n = dimKeys.length;
+  return dimKeys.map((k,i)=>{
+    const a = -Math.PI/2 + i*2*Math.PI/n;
+    return {k, cn: DIM_CN[k] || k, cos:Math.cos(a), sin:Math.sin(a)};
+  });
+}
+/* 半径比例 = 分数 / 100，外圈恒为满分 100 —— 绝对刻度，不按实际分数区间缩放。
+   缩放会把 4 分的差距画成天壤之别，也和本文件里「条长 = 分数 × 轨道宽」那条口径打架。
+   分差小的时候两个多边形就是几乎重合，这本身就是结论。 */
+const radarPt = (g, score, R) => `${(g.cos*R*score/100).toFixed(1)},${(g.sin*R*score/100).toFixed(1)}`;
+
+/* 差异轴：|首选 − 主力| ≥ 5 的维度，标签染成占优那一方的颜色。
+   不标的话，读者得自己在两条几乎重合的边上量距离——而这几个轴正是结论里
+   「换过去能多拿 / 代价是」列的那几个，两边对得上才不会各说各话。 */
+function radarAxes(models, series){
+  return series.map(g=>{
+    const rec = g.rows.find(r=>r.kind==='rec'), slf = g.rows.find(r=>r.kind==='self');
+    const d = (rec && slf) ? rec.score - slf.score : 0;
+    return {axis:g, d, hi: Math.abs(d) >= SELF_MIN_DELTA ? (d > 0 ? 'rec' : 'self') : null};
+  });
+}
+const R_RADAR = 92, R_LABEL = 105;   // 圆心到外圈 / 圆心到轴标签
+
+function cmpBlockHTML(top, w, need){
+  const main = selfMain(w);
+  if(!main) return '';
+  const models = cmpModels(top, main);
+  const series = cmpSeries(models, need.map(x=>x[0]));
+  const axes = radarAxes(models, series);
+  const legend = models.map(m=>`<span class="lg"><i style="background:${m.color}"></i>
+    <b>${esc(m.name)}</b>
+    <em>${esc(m.imself ? m.tag + ' · 你正在用' : m.tag)}</em></span>`).join('')
+    /* 重合款的标记必须解释。多一个记号又不说是什么，读者只会当成画错了 */
+    + (models.some(m=>m.imself)
+        ? `<span class="lg-note">你填的主力就是这次的首选，所以只有一个形状</span>` : '');
+
+  let grid = '', spokes = '', labels = '', polys = '';
+  /* 网格：50 / 75 / 100 三圈，刻度标在正上方那条轴的右侧 */
+  [50,75,100].forEach(v=>{
+    grid += `<circle r="${(R_RADAR*v/100).toFixed(1)}" fill="none"
+      stroke="${v===100?'#DED8CB':'#EAE5D9'}" stroke-width="1"/>`;
+    grid += `<text x="5" y="${(-R_RADAR*v/100 + 4).toFixed(1)}" class="rd-tick">${v}</text>`;
+  });
+  const geom = radarGeom(need.map(x=>x[0]));
+  geom.forEach((g,i)=>{
+    spokes += `<line x1="0" y1="0" x2="${(g.cos*R_RADAR).toFixed(1)}"
+      y2="${(g.sin*R_RADAR).toFixed(1)}" stroke="#EAE5D9" stroke-width="1"/>`;
+    const hi = axes[i].hi;
+    const anchor = Math.abs(g.cos) < .35 ? 'middle' : (g.cos > 0 ? 'start' : 'end');
+    labels += `<text x="${(g.cos*R_LABEL).toFixed(1)}" y="${(g.sin*R_LABEL+4).toFixed(1)}"
+      text-anchor="${anchor}" class="rd-lb"
+      style="fill:${hi === 'rec' ? CMP_REC : (hi === 'self' ? '#57534B' : GRAY)};
+             font-weight:${hi ? 800 : 600}">${esc(g.cn)}</text>`;
+  });
+  models.forEach(m=>{
+    polys += `<polygon points="${series.map((g,i)=>
+      radarPt(geom[i], g.rows.find(r=>r.name===m.name).score, R_RADAR)).join(' ')}"
+      fill="${m.color}" fill-opacity=".16" stroke="${m.color}"
+      stroke-width="2" stroke-linejoin="round"/>`;
+  });
+  return `<div class="cmp-legend" id="cmp-legend">${legend}</div>
+    <div class="rd-wrap"><svg id="cmp-chart" viewBox="-165 -165 330 330"
+      role="img" aria-label="首选和你的主力的能力雷达图">
+      ${grid}${spokes}${polys}${labels}
+    </svg></div>
+    <div class="rd-note">外圈是满分 100，两个形状都是按同一把尺子画的；轴名加粗的那几维，
+      两款差 5 分以上</div>`;
+}
+
 /* ── 出结果 ── */
 function finish(){
   const w = weights();
@@ -523,6 +1027,10 @@ function finish(){
   if (spg) h += `<div class="pickhint">你选的「${esc(spg.label)}」通用模型做不好，
     往下翻，单独给你列了这几款</div>`;
 
+  /* 读者勾了自己在用的款，就在冠军卡下面直接回答「换不换」。
+     一个都没勾就整块不渲染——空壳比没有更糟。 */
+  if(!light) h += selfBlockHTML(top, w, need);
+
   /* 需求画像 */
   h += `<div class="card"><div class="sec-t"><span class="n">1</span>你的需求优先级</div>
     <div class="muted" style="margin-bottom:14px">越靠上，说明你越在意</div><div class="bars">`;
@@ -534,7 +1042,7 @@ function finish(){
   if(light) h += `<div class="muted" style="margin-top:12px">完整版会展开全部 10 个维度的优先级</div>`;
   h += `</div>`;
 
-  /* 完整版独有：Top3 对比 + 档位 + 成本 + 升降档 */
+  /* 完整版独有：首选 vs 主力雷达 + 档位 + 成本 + 升降档 */
   if(light){
     /* 12 题版也看得到这块：专用需求跟档位无关，通用池那 72 款答不了就是答不了 */
     h += specialBlock();
@@ -560,7 +1068,7 @@ function finish(){
       <div class="mask">
         <div class="lk">🔒</div>
         <b>还差 18 道题，解锁完整报告</b>
-        <p>完整版会给出 Top3 对比、三档位建议、月成本测算和升降档路线，报告能存成图片随时回看</p>
+        <p>完整版会给出首选 vs 你的主力能力雷达图、三档位建议、月成本测算和升降档路线，报告能存成图片随时回看</p>
         <button class="btn" id="unlock">输入验证码 · 继续答 18 题</button>
         <div class="buy">还没有验证码？回小红书搜「<em>AI 大模型选型测试</em>」，<br>
           买 30 题那档，码填进上面就能接着答，前面 12 题不用重做</div>
@@ -579,18 +1087,15 @@ function finish(){
        故意不编进上面那套序号，插在中间也不会打乱后面的 3/4/5/6/7 */
     h += specialBlock();
 
-    /* 关键维度对比表 */
-    const keys = need.slice(0,5).map(x=>x[0]);
-    h += `<div class="card"><div class="sec-t"><span class="n">3</span>关键维度横向对比</div>
-      <table class="cmp"><thead><tr><th>维度</th><th>${esc(shortName(top.name))}</th>
-      <th>${esc(shortName(second.name))}</th><th>${esc(shortName(third.name))}</th></tr></thead><tbody>`;
-    keys.forEach(k=>{
-      const vals = [top,second,third].map(m=>m.score[k]||0);
-      const best = Math.max(...vals);
-      h += `<tr><td>${DIM_CN[k]||k}</td>` + vals.map(v=>
-        `<td class="${v===best?'win':''}">${v}</td>`).join('') + `</tr>`;
-    });
-    h += `</tbody></table></div>`;
+    /* 能力雷达：只有填了主力才出。没填就整块不渲染，不留空壳标题——
+       「你的主力」都没填，图上画什么都是编的。
+       原来这里还有一张 Top3 三列表格，已撤：同一份数据在雷达上已经能读形状，
+       三列数字只会把「我手上这款换成首选会怎样」这个唯一的问题冲淡。 */
+    const cmpB = cmpBlockHTML(top, w, need);
+    if(cmpB){
+      h += `<div class="card"><div class="sec-t"><span class="n">3</span>首选 vs 你的主力</div>
+        ${cmpB}</div>`;
+    }
 
     /* 档位建议 */
     h += `<div class="card"><div class="sec-t"><span class="n">4</span>三个档位怎么选</div>
@@ -720,12 +1225,6 @@ function contrast(a,b){
   if(!dif || dif.d<=0) return '各项都略低于首选，没有单项反超';
   return `${DIM_CN[dif.k]}更突出（${b.score[dif.k]} 分，比首选高 ${dif.d}）`;
 }
-// 表格列名：去掉厂商前缀和日期后缀，「Qwen3.8-Max-0902」→「Qwen3.8-Max」
-function shortName(n){
-  const s = String(n).replace(/^[^ ]+ /,'').replace(/-\d{4}$/,'');
-  return s.length > 14 ? s.slice(0,13) + '…' : s;
-}
-
 /* ── 档位 ── */
 /* 档位按「成本分」分层，而不是改权重——改权重时能力强的模型会三档通吃，
    三个档位给出同一个答案，报告就没有信息量了。 */
@@ -794,21 +1293,203 @@ function report(top, w){
     body: JSON.stringify({
       tier:S.tier, code:S.code || null,
       answers:S.answers,
-      result:{ recommend:[{name:top.name, match:+top.match.toFixed(1)}], weights:w }
+      result:{
+        recommend:[{name:top.name, match:+top.match.toFixed(1)}], weights:w,
+        /* 读者手上在用什么，是这份数据里最值钱的一条需求信号。
+           role 要带上：光看数组下标得先知道「0 是主力」这个约定才读得懂，
+           而这份数据是几个月后回头翻的，约定早忘了。旧记录没这字段，兼容。 */
+        self: selfModels(w).map((m,i)=>({name:m.name, match:+m.match.toFixed(1),
+                                         role: i === 0 ? '主力' : '备用'})),
+        self_other: S.selfOther
+      }
     })
   }).catch(()=>{});
 }
 
 /* ── 保存报告图片 ── */
+const YY = '"Microsoft YaHei","PingFang SC",sans-serif';
+const INK='#2E2C25', GRAY='#8A8378', ACC='#944735', BG='#F5F3EC', VB='#F1EDE3';
+const CVP = 72;                       // 画布左右留白
+const CVW = 1080 - CVP * 2;           // 可用宽度 936
+/* 中文没有词边界，按空格断行会把一整句甩到下一行。逐字累加、超宽就换行，
+   遇到空格和「、」优先在那里断——不然一行结尾会挂个孤零零的标点。 */
+function wrapText(x, text, maxW){
+  const lines = []; let cur = '';
+  for(const ch of String(text)){
+    if(x.measureText(cur + ch).width > maxW && cur){
+      let cut = -1;
+      for(let i = cur.length - 1; i > cur.length * .6; i--)
+        if('，。、；： ）'.includes(cur[i])){ cut = i + 1; break; }
+      if(cut > 0){ lines.push(cur.slice(0, cut)); cur = cur.slice(cut); }
+      else { lines.push(cur); cur = ''; }
+    }
+    cur += ch;
+  }
+  if(cur) lines.push(cur);
+  return lines;
+}
+/* 对比块的高度必须实测。模型名长短差一倍，图例换几行直接决定总高，
+   写死一个数迟早会压到页脚上。 */
+function cmpBlockHeight(x, models, series, verdictText){
+  const legend = cmpLegendRows(x, models).length * 46;
+  /* 雷达是方的：上下各留一个标签半径，再加标签本身的行高。
+     少算这几十像素，最下面那个轴名就会压到结论框上——截图上看着像排版紧，不是错。 */
+  const radar = R_LABEL_CV * 2 + 76;
+  x.font = `400 25px ${YY}`;
+  const verdict = wrapText(x, verdictText, CVW - 76).length * 42 + 44;
+  return 60 + legend + 26 + radar + verdict + 46;
+}
+function cmpLegendRows(x, models){
+  // 标签宽度固定，chip 从标签右边开始排，排不下就换行
+  const LW = 148, gap = 26;
+  const rows = [];
+  [['推荐给你', models.filter(m=>m.kind==='rec')],
+   ['你的主力', models.filter(m=>m.kind==='self')]].forEach(([label, ms])=>{
+    if(!ms.length) return;
+    x.font = `700 26px ${YY}`;
+    let cx = CVP + LW, row = {label, chips:[]};
+    ms.forEach(m=>{
+      const w = 22 + x.measureText(m.name).width + gap;
+      if(cx + w > CVP + CVW && row.chips.length){ rows.push(row); row = {label:'', chips:[]}; cx = CVP + LW; }
+      row.chips.push({m, x:cx - CVP - LW});
+      cx += w;
+    });
+    rows.push(row);
+  });
+  /* 有重叠款就要解释那个圈。不解释的话，图上多出来一个记号又不说是什么，
+     读者只会当成画错了 */
+  if(models.some(m=>m.imself)) rows.push({note:true});
+  return rows;
+}
+
+/* 画对比块。手机端是内联 SVG、这边手绘，半径和字号各按各的画布定，
+   但**角度和轴序来自同一份 radarGeom**——两边各算一遍，迟早有一边算歪，
+   而错的那边在测试里照样全绿（图能画出来，只是形状不对）。 */
+const R_RADAR_CV = 236, R_LABEL_CV = 268;
+function drawCmpBlock(x, y0, models, series, verdictText){
+  let y = y0;
+
+  x.fillStyle = INK; x.font = `800 34px ${YY}`;
+  x.fillText('首选 vs 你的主力 · 能力雷达', CVP, y); y += 60;
+
+  // 图例：两个色块，图里的多边形只靠颜色对应回模型
+  cmpLegendRows(x, models).forEach(row=>{
+    if(row.note){
+      x.font = `600 24px ${YY}`; x.fillStyle = GRAY;
+      x.fillText('你填的主力就是这次的首选，所以图上只有一个形状', CVP, y + 6);
+      y += 46; return;
+    }
+    x.font = `700 26px ${YY}`; x.fillStyle = GRAY;
+    if(row.label) x.fillText(row.label, CVP, y + 4);
+    row.chips.forEach(c=>{
+      const cx = CVP + 148 + c.x;
+      x.fillStyle = c.m.color;
+      roundRect(x, cx, y + 8, 18, 18, 5); x.fill();
+      x.fillStyle = INK; x.font = `600 26px ${YY}`;
+      x.fillText(c.m.name, cx + 28, y);
+    });
+    y += 46;
+  });
+  y += 26;
+
+  const geom = radarGeom(series.map(g=>g.k));
+  const axes = radarAxes(models, series);
+  const cx = CVP + CVW / 2, cy = y + R_LABEL_CV;
+
+  // 网格 50 / 75 / 100 —— 外圈恒为满分，绝对刻度，不按实际分数区间缩放
+  [50, 75, 100].forEach(v=>{
+    x.strokeStyle = v === 100 ? '#DED8CB' : '#EAE5D9'; x.lineWidth = 2;
+    x.beginPath(); x.arc(cx, cy, R_RADAR_CV * v / 100, 0, Math.PI * 2); x.stroke();
+    x.fillStyle = '#B6B0A4'; x.font = `600 22px ${YY}`;
+    x.fillText(v, cx + 10, cy - R_RADAR_CV * v / 100 + 4);
+  });
+  // 轴：从正上方开始顺时针，与 radarGeom 同序
+  geom.forEach(g=>{
+    x.strokeStyle = '#EAE5D9'; x.lineWidth = 2;
+    x.beginPath(); x.moveTo(cx, cy);
+    x.lineTo(cx + g.cos * R_RADAR_CV, cy + g.sin * R_RADAR_CV); x.stroke();
+  });
+  // 两个多边形
+  models.forEach(m=>{
+    x.beginPath();
+    geom.forEach((g, i)=>{
+      const r = series[i].rows.find(r2=>r2.name === m.name);
+      const px = cx + g.cos * R_RADAR_CV * r.score / 100;
+      const py = cy + g.sin * R_RADAR_CV * r.score / 100;
+      i ? x.lineTo(px, py) : x.moveTo(px, py);
+    });
+    x.closePath();
+    x.fillStyle = m.color; x.globalAlpha = .16; x.fill(); x.globalAlpha = 1;
+    x.strokeStyle = m.color; x.lineWidth = 3; x.stroke();
+  });
+  // 轴名：差 5 分以上的那几维染成占优一方的颜色，和结论里「能多拿 / 代价是」对得上
+  x.font = `600 24px ${YY}`;
+  geom.forEach((g, i)=>{
+    const hi = axes[i].hi;
+    x.fillStyle = hi === 'rec' ? CMP_REC : (hi === 'self' ? '#57534B' : GRAY);
+    if(hi) x.font = `800 24px ${YY}`; else x.font = `600 24px ${YY}`;
+    const lx = cx + g.cos * R_LABEL_CV, ly = cy + g.sin * R_LABEL_CV + 9;
+    x.textAlign = Math.abs(g.cos) < .35 ? 'center' : (g.cos > 0 ? 'left' : 'right');
+    x.fillText(g.cn, lx, ly);
+  });
+  x.textAlign = 'left';
+  y = cy + R_LABEL_CV + 46;
+
+  // 结论句：与手机端同一份措辞，从 selfVerdict 出来，两边不会走样
+  x.font = `400 25px ${YY}`;
+  const lines = wrapText(x, verdictText, CVW - 76);
+  const bh = lines.length * 42 + 44;
+  x.fillStyle = '#F6E9E5'; roundRect(x, CVP, y, CVW, bh, 18); x.fill();
+  x.fillStyle = '#524D43';
+  lines.forEach((t, i)=> x.fillText(t, CVP + 38, y + 24 + i * 42));
+}
+
 function saveCard(top, all, w, need){
-  const W=1080, H=1640, c=document.createElement('canvas');
-  c.width=W; c.height=H;
-  const x = c.getContext('2d');
-  const YY = '"Microsoft YaHei","PingFang SC",sans-serif';
-  const INK='#2E2C25', GRAY='#8A8378', ACC='#944735', BG='#F5F3EC', VB='#F1EDE3';
+  const W=1080;
+  const list = selfModels(w);
+  /* 只有主力进图。备用是读者留的参照，不是第二条要比的线——
+     这也是「一对二」不会出现的原因：图上恒为一条暖色 + 至多一条灰。 */
+  const cmpModelsArr = list.length ? cmpModels(top, list[0]) : [];
+  /* 全部维度都画。手机端雷达也不折了——轴上少一根形状就不完整，
+     读者存下来的应该就是他看到的。 */
+  const series = cmpModelsArr.length
+    ? cmpSeries(cmpModelsArr, need.map(k=>k[0])) : [];
+
+  const c=document.createElement('canvas');
+  c.width=W; c.height=1640;           // 先建个小画布只为量文字，定稿高度在下面
+  let x = c.getContext('2d');
+  let cmpVerdict = '';
+  if(series.length){
+    const me0 = list[0], g0 = top.match - me0.match;
+    const {gain, lose} = selfDeltas(top, me0, need);
+    /* 手机上「换过去能多拿 / 代价是」是单独的 li，画布上没有列表，
+       只有这一句——漏掉的话结论就变成「差 3.3 个点」然后没了，
+       读者看不到这 3.3 点差在哪。 */
+    /* 月成本一样要带上：「值不值得换」一半取决于钱，而这张图是唯一会被
+       转出去的物料，手机上那条 li 在图里没有对应位置。措辞与手机端同一句。 */
+    const cTop = costBand(top.score.cost||0), cMe = costBand(me0.score.cost||0);
+    const dlt = [
+      gain.length ? '换过去能多拿：' + gain.map(g=>`${DIM_CN[g.k]||g.k} ${g.from} → ${g.to}`).join('、') : '',
+      lose.length ? '代价是：' + lose.map(g=>`${DIM_CN[g.k]||g.k} ${g.from} → ${g.to}`).join('、') : '',
+      cTop === cMe ? `月成本基本不变（${cTop}）` : `月成本从 ${cMe} 变成 ${cTop}`
+    ].filter(Boolean).join('；');
+    /* 备用在图上没有位置（它不进雷达），手机上它是单独一条 li。
+       能存出去的就这一张图，少一句读者就以为备用白填了。
+       但备用恰好就是首选时要改口——图上明明有它（画的是首选那条），
+       再写「不进雷达图」等于和图上画的对着干。 */
+    cmpVerdict = segsText(selfVerdict(top, me0, g0, gain, lose))
+      + (dlt ? ' ' + dlt + '。' : '')
+      + (list[1] ? ` 备用 ${list[1].name} 匹配度 ${list[1].match.toFixed(1)}%`
+          + (list[1].name === top.name ? '，就是上面那款首选。' : '，不进雷达图。') : '')
+      + (S.selfOther.length
+          ? ` 你写的「${S.selfOther.join('、')}」还没有公开实测分，没法逐维比。` : '');
+    c.height = 1640 + cmpBlockHeight(x, cmpModelsArr, series, cmpVerdict);
+    x = c.getContext('2d');           // 改高度会重置画布与上下文状态
+  }
+  const H = c.height;
 
   x.fillStyle=BG; x.fillRect(0,0,W,H);
-  const P=72;
+  const P=CVP;
   x.textBaseline='top';
 
   // 头部
@@ -818,7 +1499,12 @@ function saveCard(top, all, w, need){
   x.textAlign='right'; x.fillText(stampText(S.finishedAt), W-P, 68); x.textAlign='left';
 
   // 冠军卡
-  const cardY=120, cardH=520;   // 520 才装得下「模型名 + 匹配度 + 理由框」，380 时理由框会压住匹配度
+  /* why() 恒定给 4 条（前三维 + 一条成本/实力），手机端全渲染。
+     这里原来写死 slice(0,3)，等于每张存图都静默少一条。高度按条数算，
+     以后 why() 多给一条也不会被裁。 */
+  const bullets = why(top, w);
+  const whyH = 42 + (bullets.length - 1) * 34;          // 3 条 = 110，与旧值一致
+  const cardY=120, cardH=520 + Math.max(0, bullets.length - 3) * 34;
   x.fillStyle='#fff'; roundRect(x,P,cardY,W-P*2,cardH,28); x.fill();
   x.fillStyle=ACC; x.font=`800 24px ${YY}`;
   x.fillText('最推荐', P+46, cardY+42);
@@ -832,10 +1518,13 @@ function saveCard(top, all, w, need){
   x.fillStyle=GRAY; x.font=`700 30px ${YY}`;
   x.fillText('% 匹配', P+46+mw+14, cardY+278);
   // 理由
-  x.fillStyle=VB; roundRect(x,P+34,cardY+cardH-136,W-P*2-68,110,18); x.fill();
+  const whyTop = cardY + cardH - whyH - 26;
+  x.fillStyle=VB; roundRect(x,P+34,whyTop,W-P*2-68,whyH,18); x.fill();
   x.fillStyle='#524D43'; x.font=`400 26px ${YY}`;
-  why(top,w).slice(0,3).forEach((t,i)=>{
-    x.fillText('· ' + t, P+62, cardY+cardH-118+i*34);
+  let whyDrawn = 0;
+  bullets.forEach((t,i)=>{
+    x.fillText('· ' + t, P+62, whyTop + 18 + i*34);
+    whyDrawn++;
   });
 
   // 需求条
@@ -870,13 +1559,26 @@ function saveCard(top, all, w, need){
     x.fillText('匹配度', cx+26, y+118);
   });
 
+  /* 对比块。没选用在什么模型时整块不画，画布高度也就还是 1640——
+     这条同时是 e2e 的回归断言：老报告的图一个像素都不该变。 */
+  if(series.length) drawCmpBlock(x, y + 150 + 46, cmpModelsArr, series, cmpVerdict);
+
   // 页脚
   x.fillStyle=GRAY; x.font=`400 24px ${YY}`;
   x.textAlign='center';
   x.fillText('AI 大模型排行榜 · 数据每日更新', W/2, H-104);
   x.fillStyle=ACC; x.font=`700 26px ${YY}`;
-  x.fillText('从 29 款模型里算出最适合你的那一款', W/2, H-66);
+  x.fillText(`从 ${S.models.length} 款模型里算出最适合你的那一款`, W/2, H-66);
   x.textAlign='left';
+
+  /* 画布上「少画了一条」是像素级的，截图上看着像正常排版，测试也量不出来。
+     把本次真正画进去的条目数摊出来，测试才能拿它跟 why() 对齐。 */
+  window.__cardStats = {
+    bullets: whyDrawn, whyTotal: why(top, w).length,
+    cmpDims: series.length, cmpModels: cmpModelsArr.length,
+    verdict: cmpVerdict,
+    w: W, h: H
+  };
 
   const url = c.toDataURL('image/png');
   const mi = $('#modal-inner');
@@ -903,6 +1605,7 @@ $('#modal').onclick = e=>{ if(e.target.id==='modal') $('#modal').classList.remov
 /* ── 启动 ── */
 $('#data-date').textContent = dataDate();
 boot().then(()=>{
+  if(S.models.length) initUse();   // 库空时不渲染选择器，免得点开是空列表
   if(!S.models.length){
     document.querySelectorAll('#go-full').forEach(b=>{
       b.disabled = true; b.textContent = '模型数据加载失败，刷新重试';
