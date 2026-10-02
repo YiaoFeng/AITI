@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#141018">
+<link rel="icon" href="data:,">
+<title>点单</title>
+<style>
+:root{
+  --bg:#141018; --card:#1e1a24; --line:#2e2836; --txt:#f2ecf5; --dim:#9a90a6;
+  --amber:#e8b04b; --amber-d:#c8902f; --green:#4bc98a; --red:#e0605f;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg); color:var(--txt);
+  font:15px/1.5 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+  overscroll-behavior-y:none;
+}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+img{display:block}
+
+/* ── 顶栏 ── */
+.top{
+  position:sticky;top:0;z-index:30;background:rgba(20,16,24,.94);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--line);
+  padding:12px 14px calc(12px + env(safe-area-inset-bottom,0)) 14px;padding-bottom:12px;
+  display:flex;align-items:center;gap:10px;
+}
+.top h1{font-size:18px;margin:0;font-weight:700;letter-spacing:.5px}
+.top .sub{font-size:12px;color:var(--dim);margin-top:2px}
+.top .spacer{flex:1}
+.mine-btn{
+  border:1px solid var(--amber);color:var(--amber);border-radius:999px;
+  padding:7px 13px;font-size:13px;font-weight:600;white-space:nowrap;position:relative;
+}
+.mine-btn .dot{
+  position:absolute;top:-5px;right:-5px;min-width:17px;height:17px;border-radius:9px;
+  background:var(--red);color:#fff;font-size:11px;line-height:17px;padding:0 4px;font-weight:700;
+}
+
+/* ── 主体：左分类右酒款 ── */
+.wrap{display:flex;align-items:flex-start}
+.rail{
+  position:sticky;top:62px;width:92px;flex:0 0 92px;
+  padding:10px 0 120px 0;max-height:calc(100vh - 62px);overflow-y:auto;
+}
+.rail button{
+  display:block;width:100%;text-align:left;padding:13px 10px 13px 14px;
+  font-size:14px;color:var(--dim);border-left:3px solid transparent;line-height:1.3;
+}
+.rail button.on{color:var(--txt);background:var(--card);border-left-color:var(--amber);font-weight:700}
+.list{flex:1;min-width:0;padding:10px 12px 140px 4px}
+.cat-h{font-size:13px;color:var(--dim);margin:16px 0 8px;font-weight:600;letter-spacing:1px}
+.cat-h:first-child{margin-top:2px}
+
+.item{
+  display:flex;gap:11px;background:var(--card);border:1px solid var(--line);
+  border-radius:14px;padding:10px;margin-bottom:10px;position:relative;
+}
+.item.out{opacity:.45}
+.item .thumb{
+  width:74px;height:74px;flex:0 0 74px;border-radius:10px;overflow:hidden;
+  background:#2a2432;display:flex;align-items:center;justify-content:center;font-size:26px;
+}
+.item .thumb img{width:100%;height:100%;object-fit:cover}
+.item .info{flex:1;min-width:0}
+.item .name{font-size:15.5px;font-weight:700;margin:1px 0 3px}
+.item .blurb{font-size:12.5px;color:var(--dim);line-height:1.45;margin-bottom:5px}
+.item .tags{display:flex;flex-wrap:wrap;gap:6px;font-size:11.5px;align-items:center}
+.tag{border:1px solid var(--line);border-radius:6px;padding:1px 6px;color:var(--dim)}
+.tag.abv{color:#b9a6d8;border-color:#4a3d5c}
+.tag.price{color:var(--amber);border-color:#6b5320;font-weight:700}
+.tag.low{color:var(--red);border-color:#6b3030}
+
+.plus{
+  position:absolute;right:10px;bottom:10px;
+  width:30px;height:30px;border-radius:50%;background:var(--amber);color:#1a1520;
+  font-size:21px;font-weight:700;line-height:28px;text-align:center;
+}
+.item.out .plus{background:#3a3444;color:#6c6478}
+.qty-badge{
+  position:absolute;right:10px;bottom:10px;min-width:30px;height:30px;border-radius:15px;
+  background:var(--amber);color:#1a1520;font-weight:700;font-size:14px;
+  display:flex;align-items:center;justify-content:center;padding:0 9px;
+}
+
+/* ── 底部购物车条 ── */
+.bar{
+  position:fixed;left:0;right:0;bottom:0;z-index:40;
+  background:rgba(24,19,29,.97);backdrop-filter:blur(12px);
+  border-top:1px solid var(--line);
+  padding:11px 14px calc(11px + env(safe-area-inset-bottom,0));
+  display:flex;align-items:center;gap:12px;
+}
+.bar .n{font-size:13px;color:var(--dim)}
+.bar .n b{color:var(--txt);font-size:19px}
+.bar .spacer{flex:1}
+.bar .go{
+  background:var(--amber);color:#1a1520;font-weight:800;border-radius:999px;
+  padding:12px 26px;font-size:15px;
+}
+.bar .go:disabled{background:#3a3444;color:#6c6478}
+
+/* ── 浮层 ── */
+.sheet{
+  position:fixed;inset:0;z-index:60;background:rgba(10,7,13,.6);
+  display:none;align-items:flex-end;
+}
+.sheet.on{display:flex}
+.sheet .panel{
+  width:100%;max-height:88vh;overflow-y:auto;background:var(--bg);
+  border-radius:20px 20px 0 0;border-top:1px solid var(--line);
+  padding:16px 16px calc(16px + env(safe-area-inset-bottom,0));
+}
+.sheet h2{font-size:16px;margin:0 0 14px;display:flex;align-items:center}
+.sheet h2 .x{margin-left:auto;color:var(--dim);font-size:22px;line-height:1;padding:0 4px}
+
+.row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.row .rn{flex:1;font-size:14.5px}
+.row .rn i{font-size:12px;color:var(--dim);font-style:normal;display:block}
+.stepper{display:flex;align-items:center;gap:2px;background:#2a2432;border-radius:999px;padding:3px}
+.stepper button{width:30px;height:30px;font-size:19px;font-weight:700;color:var(--amber);line-height:1}
+.stepper span{min-width:26px;text-align:center;font-weight:700;font-size:15px}
+
+input,textarea{
+  width:100%;background:#221d29;border:1px solid var(--line);border-radius:10px;
+  color:var(--txt);padding:11px 12px;font:inherit;font-size:15px;margin-top:6px;
+}
+input::placeholder,textarea::placeholder{color:#6c6478}
+label.f{display:block;margin-top:14px;font-size:13px;color:var(--dim)}
+.big{
+  width:100%;margin-top:18px;background:var(--amber);color:#1a1520;font-weight:800;
+  border-radius:12px;padding:15px;font-size:16px;
+}
+.big.ghost{background:transparent;border:1px solid var(--line);color:var(--txt);font-weight:600}
+.big:disabled{background:#3a3444;color:#6c6478}
+
+/* ── 单子状态 ── */
+.status{
+  background:var(--card);border:1px solid var(--line);border-radius:16px;
+  padding:18px;text-align:center;margin-bottom:14px;
+}
+.status .big-no{font-size:34px;font-weight:800;color:var(--amber);letter-spacing:1px}
+.status .st{font-size:19px;font-weight:700;margin-top:4px}
+.status .hint{font-size:13px;color:var(--dim);margin-top:4px}
+.pickcode{
+  display:inline-block;margin-top:12px;background:#2a2432;border-radius:10px;
+  padding:9px 18px;font-size:22px;font-weight:800;letter-spacing:5px;color:var(--green);
+}
+.pickcode em{display:block;font-size:11px;letter-spacing:1px;color:var(--dim);font-weight:400;font-style:normal;margin-bottom:2px}
+.steps{display:flex;gap:6px;margin:16px 0 4px}
+.steps div{flex:1;height:4px;border-radius:2px;background:#2e2836}
+.steps div.on{background:var(--amber)}
+.empty{text-align:center;color:var(--dim);padding:50px 20px;font-size:14px}
+.mlist{
+  background:var(--card);border:1px solid var(--line);border-radius:14px;
+  padding:14px;margin-bottom:10px;display:flex;align-items:center;gap:12px;
+}
+.mlist .no{font-size:24px;font-weight:800;color:var(--amber);min-width:56px}
+.mlist .meta{flex:1;min-width:0;font-size:13px;color:var(--dim)}
+.mlist .meta b{color:var(--txt);font-size:14.5px;display:block}
+.mlist .arrow{color:var(--dim);font-size:20px}
+.photo-wrap{margin-top:14px}
+.photo-wrap img{width:100%;border-radius:12px;border:1px solid var(--line)}
+.cardprev{width:100%;border-radius:12px;border:1px solid var(--line);margin-top:12px}
+.tip{font-size:12.5px;color:var(--dim);line-height:1.6;margin-top:10px}
+.toast{
+  position:fixed;left:50%;bottom:96px;transform:translateX(-50%);z-index:99;
+  background:#332b3d;border:1px solid var(--line);border-radius:10px;
+  padding:10px 16px;font-size:14px;display:none;max-width:86vw;text-align:center;
+}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div>
+    <h1 id="shop">小酒馆</h1>
+    <div class="sub" id="sub">今晚想喝点什么</div>
+  </div>
+  <div class="spacer"></div>
+  <button class="mine-btn" onclick="openMine()">我的单子<span class="dot" id="mineDot" style="display:none">0</span></button>
+</div>
+
+<div class="wrap">
+  <div class="rail" id="rail"></div>
+  <div class="list" id="list"></div>
+</div>
+
+<div class="bar">
+  <div class="n">已点 <b id="cartN">0</b> 杯</div>
+  <div class="spacer"></div>
+  <button class="go" id="goBtn" disabled onclick="openCart()">去下单</button>
+</div>
+
+<!-- 购物车 -->
+<div class="sheet" id="cartSheet">
+  <div class="panel">
+    <h2>确认一下 <button class="x" onclick="closeSheet('cartSheet')">×</button></h2>
+    <div id="cartRows"></div>
+    <label class="f">你叫什么（可留空）</label>
+    <input id="whoName" placeholder="比如：小李" maxlength="20">
+    <label class="f">有什么要交代的（可留空）</label>
+    <textarea id="whoNote" rows="2" placeholder="少冰、不要太甜…" maxlength="120"></textarea>
+    <div id="appendBox" style="display:none;margin-top:14px">
+      <label class="f" style="display:flex;gap:8px;align-items:center;color:var(--amber)">
+        <input type="checkbox" id="appendChk" style="width:auto;margin:0" checked>
+        追加到第 <b id="appendNo"></b> 单（不勾就是新开一单）
+      </label>
+    </div>
+    <button class="big" id="submitBtn" onclick="submitOrder()">就这些，下单</button>
+    <button class="big ghost" onclick="closeSheet('cartSheet')">再看看</button>
+  </div>
+</div>
+
+<!-- 我的单子 -->
+<div class="sheet" id="mineSheet">
+  <div class="panel">
+    <h2>我的单子 <button class="x" onclick="closeSheet('mineSheet')">×</button></h2>
+    <div id="mineList"></div>
+    <label class="f">找不到？输四位取单码</label>
+    <input id="findCode" placeholder="4 位数字" inputmode="numeric" maxlength="4">
+    <button class="big ghost" onclick="findByCode()">找我的单子</button>
+  </div>
+</div>
+
+<!-- 单子详情 -->
+<div class="sheet" id="orderSheet">
+  <div class="panel">
+    <h2 id="orderTitle">我的单子 <button class="x" onclick="closeSheet('orderSheet')">×</button></h2>
+    <div id="orderBody"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ───── 本地记着「我点过哪些单」─────
+   存在这台手机的浏览器里，只有这台手机读得到。
+   换手机、清缓存、用无痕打开就没了，那时让朋友输四位取单码找回来。 */
+const KEY = 'bar_orders_v1';
+const load = () => { try { return JSON.parse(localStorage.getItem(KEY)) || []; } catch (e) { return []; } };
+const save = a => localStorage.setItem(KEY, JSON.stringify(a.slice(-40)));
+
+let MENU = { cats: [], items: [] };
+let CART = {};          // item_id -> qty
+let curCat = null;
+let activeOrders = [];  // 还没结束的单
+let viewing = null;     // 正在看的那一单
+let pollTimer = null;
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+function toast(msg, ms) {
+  const t = $('toast');
+  t.textContent = msg; t.style.display = 'block';
+  clearTimeout(t._t); t._t = setTimeout(() => t.style.display = 'none', ms || 2200);
+}
+/* 后端在哪，问同目录的 cfg.json 一句。
+   局域网里、或者直接连隧道，这份是后端现给的 {"base": ""}——「就在原地」。
+   挂到帽子云上时它是随页面部署的静态文件，写着家里那台电脑的隧道地址，
+   所以这一页无论躺在哪，都能找回来。 */
+let API = '';
+let GK = new URLSearchParams(location.search).get('k') || '';
+
+async function initAPI() {
+  try {
+    const r = await fetch('cfg.json?t=' + Date.now(), { cache: 'no-store' });
+    if (r.ok) API = String(((await r.json()) || {}).base || '').replace(/\/+$/, '');
+  } catch (e) { /* 问不到就用相对路径，同源照样能跑 */ }
+}
+
+async function api(path, opt) {
+  // 口令跟着每个请求走，后端只在「从公网进来」时才查它
+  const sep = path.indexOf('?') < 0 ? '?' : '&';
+  const url = API + path + (GK ? sep + 'k=' + encodeURIComponent(GK) : '');
+  const r = await fetch(url, opt);
+  return r.json();
+}
+
+/* ───── 菜单 ───── */
+async function loadMenu() {
+  const d = await api('/api/menu');
+  MENU = d;
+  $('shop').textContent = d.shop_name || '小酒馆';
+  $('sub').textContent = d.shop_sub || '';
+  document.title = d.shop_name || '点单';
+
+  $('rail').innerHTML = d.cats.map(c =>
+    `<button data-cat="${c.id}" class="${curCat === c.id ? 'on' : ''}" onclick="jumpCat(${c.id})">${esc(c.name)}</button>`
+  ).join('') + '<button onclick="openMine()" style="color:var(--amber)">我的单子 ›</button>';
+
+  if (!curCat || !d.cats.some(c => c.id === curCat)) curCat = d.cats[0] && d.cats[0].id;
+
+  let h = '';
+  for (const c of d.cats) {
+    const its = d.items.filter(i => i.cat_id === c.id);
+    if (!its.length) continue;
+    h += `<div class="cat-h" id="cat-${c.id}">${esc(c.name)}</div>`;
+    h += its.map(i => itemHTML(i)).join('');
+  }
+  $('list').innerHTML = h || '<div class="empty">酒单还是空的，去后台加几款吧</div>';
+  renderCart();
+}
+
+function itemHTML(i) {
+  const q = CART[i.id] || 0;
+  const tags = [];
+  if (i.abv) tags.push(`<span class="tag abv">${esc(i.abv)}</span>`);
+  if (i.price) tags.push(`<span class="tag price">${esc(i.price)}</span>`);
+  if (i.stock !== null && i.stock !== undefined)
+    tags.push(`<span class="tag ${i.stock <= 1 ? 'low' : ''}">${i.sold_out ? '已售罄' : '还剩 ' + i.stock}</span>`);
+  const right = i.sold_out ? '' : (q ? `<div class="qty-badge">${q}</div>` : '<div class="plus">+</div>');
+  return `<div class="item ${i.sold_out ? 'out' : ''}" data-id="${i.id}" onclick="${i.sold_out ? '' : `addOne(${i.id})`}">
+    <div class="thumb">${i.image_url ? `<img src="${API}${i.image_url}" alt="">` : '🍸'}</div>
+    <div class="info">
+      <div class="name">${esc(i.name)}</div>
+      ${i.blurb ? `<div class="blurb">${esc(i.blurb)}</div>` : ''}
+      ${tags.length ? `<div class="tags">${tags.join('')}</div>` : ''}
+    </div>
+    ${right}
+  </div>`;
+}
+
+function jumpCat(id) {
+  curCat = id;
+  $('rail').querySelectorAll('button').forEach(b =>
+    b.classList.toggle('on', b.dataset.cat === String(id)));
+  const el = $('cat-' + id);
+  if (el) window.scrollTo({ top: el.offsetTop - 70, behavior: 'smooth' });
+}
+
+/* ───── 购物车 ───── */
+function addOne(id) {
+  const it = MENU.items.find(x => x.id === id);
+  if (!it) return;
+  const cur = CART[id] || 0;
+  if (it.stock !== null && it.stock !== undefined && cur >= it.stock) {
+    return toast(`「${it.name}」只剩 ${it.stock} 份`);
+  }
+  CART[id] = cur + 1;
+  refreshItem(id); renderCart();
+}
+function setQty(id, q) {
+  if (q <= 0) delete CART[id];
+  else {
+    const it = MENU.items.find(x => x.id === id);
+    if (it && it.stock !== null && it.stock !== undefined && q > it.stock)
+      return toast(`「${it.name}」只剩 ${it.stock} 份`);
+    CART[id] = q;
+  }
+  refreshItem(id); renderCart(); renderCartRows();
+}
+function refreshItem(id) {
+  const el = $('list').querySelector(`.item[data-id="${id}"]`);
+  if (!el) return;
+  const it = MENU.items.find(x => x.id === id);
+  el.outerHTML = itemHTML(it);
+}
+function cartCount() { return Object.values(CART).reduce((a, b) => a + b, 0); }
+function renderCart() {
+  const n = cartCount();
+  $('cartN').textContent = n;
+  $('goBtn').disabled = n === 0;
+  $('goBtn').textContent = n ? '去下单' : '还没点';
+}
+function openCart() {
+  if (!cartCount()) return;
+  renderCartRows();
+  // 还有没结束的单，就问一句是追加还是另开
+  const open = activeOrders.filter(o => o.status === 'new' || o.status === 'making');
+  if (open.length) {
+    $('appendBox').style.display = 'block';
+    $('appendNo').textContent = open[0].no;
+    $('appendChk').dataset.token = open[0].token;
+  } else {
+    $('appendBox').style.display = 'none';
+    $('appendChk').dataset.token = '';
+  }
+  $('cartSheet').classList.add('on');
+}
+function renderCartRows() {
+  const rows = Object.keys(CART).map(id => {
+    const it = MENU.items.find(x => x.id === Number(id));
+    return it ? `<div class="row">
+      <div class="rn">${esc(it.name)}<i>${[it.abv, it.price].filter(Boolean).join(' · ')}</i></div>
+      <div class="stepper">
+        <button onclick="setQty(${it.id},${CART[id] - 1})">−</button>
+        <span>${CART[id]}</span>
+        <button onclick="setQty(${it.id},${CART[id] + 1})">+</button>
+      </div></div>` : '';
+  }).join('');
+  $('cartRows').innerHTML = rows || '<div class="empty">还没点东西</div>';
+}
+function closeSheet(id) { $(id).classList.remove('on'); }
+
+async function submitOrder() {
+  const items = Object.keys(CART).map(id => ({ id: Number(id), qty: CART[id] }));
+  if (!items.length) return;
+  const chk = $('appendChk');
+  const append = $('appendBox').style.display !== 'none' && chk.checked;
+  const btn = $('submitBtn');
+  btn.disabled = true; btn.textContent = '正在下单…';
+  const r = await api('/api/order', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      items, name: $('whoName').value, note: $('whoNote').value,
+      append_token: append ? chk.dataset.token : null
+    })
+  });
+  btn.disabled = false; btn.textContent = '就这些，下单';
+  if (!r.ok) return toast(r.msg || '没下成功，再试一次');
+
+  const o = r.order;
+  const list = load().filter(x => x.token !== o.token);
+  list.push({ token: o.token, no: o.no, pick_code: o.pick_code, at: Date.now() });
+  save(list);
+
+  CART = {}; closeSheet('cartSheet');
+  $('whoNote').value = '';
+  await loadMenu(); await refreshMine();
+  openOrder(o.token, true);
+}
+
+/* ───── 我的单子 ───── */
+async function refreshMine() {
+  const list = load();
+  const out = [];
+  for (const x of list) {
+    const r = await api('/api/order/' + x.token).catch(() => null);
+    if (r && r.ok) out.push(r.order);
+    else if (r && r.status === 404) { /* 单没了，留着不碍事 */ }
+  }
+  activeOrders = out.filter(o => o.status !== 'void');
+  const open = out.filter(o => o.status === 'new' || o.status === 'making' || o.status === 'served');
+  const d = $('mineDot');
+  if (open.length) { d.style.display = 'block'; d.textContent = open.length; }
+  else d.style.display = 'none';
+  return out;
+}
+async function openMine() {
+  const all = await refreshMine();
+  $('mineList').innerHTML = all.length ? all.slice().reverse().map(o => `
+    <div class="mlist" onclick="openOrder('${o.token}')">
+      <div class="no">${String(o.no).padStart(2, '0')}</div>
+      <div class="meta"><b>${esc(o.items.map(i => i.name).join('、')) || '（空单）'}</b>
+        ${o.status === 'void' ? '已作废' : o.status_text} · 取单码 ${o.pick_code}</div>
+      <div class="arrow">›</div>
+    </div>`).join('') : '<div class="empty">这台手机还没点过单</div>';
+  $('mineSheet').classList.add('on');
+}
+async function findByCode() {
+  const code = $('findCode').value.replace(/\D/g, '');
+  if (code.length !== 4) return toast('取单码是四位数字');
+  const r = await api('/api/find', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ code })
+  });
+  if (!r.ok) return toast(r.msg || '没找到');
+  const o = r.order;
+  const list = load().filter(x => x.token !== o.token);
+  list.push({ token: o.token, no: o.no, pick_code: o.pick_code, at: Date.now() });
+  save(list);
+  $('findCode').value = '';
+  closeSheet('mineSheet');
+  openOrder(o.token);
+}
+
+/* ───── 单子详情 ───── */
+async function openOrder(token, isNew) {
+  const r = await api('/api/order/' + token);
+  if (!r.ok) return toast('这一单找不到了');
+  viewing = r.order;
+  renderOrder(isNew);
+  $('orderSheet').classList.add('on');
+  startPoll();
+}
+
+function renderOrder(isNew) {
+  const o = viewing;
+  const idx = { new: 0, making: 1, served: 2, closed: 3 }[o.status] ?? 0;
+  const steps = [0, 1, 2, 3].map(i => `<div class="${i <= idx ? 'on' : ''}"></div>`).join('');
+  const itemsH = o.items.map(i =>
+    `<div class="row"><div class="rn">${esc(i.name)}<i>${[i.abv, i.price].filter(Boolean).join(' · ')}</i></div>
+     <div style="font-weight:700">×${i.qty}</div></div>`).join('');
+
+  let extra = '';
+  if (isNew) {
+    extra = `<div class="tip">记一下这个取单码。退出去了再进来还能看到他这一单，找不到就输这四位数字。</div>`;
+  }
+  if (o.status === 'served' || o.status === 'closed') {
+    extra += cardBlock(o);
+  }
+  $('orderTitle').innerHTML = `第 ${o.no} 单 <button class="x" onclick="closeSheet('orderSheet')">×</button>`;
+  $('orderBody').innerHTML = `
+    <div class="status">
+      <div class="big-no">NO. ${String(o.no).padStart(4, '0')}</div>
+      <div class="st">${o.status_text}</div>
+      <div class="hint">${o.hint}</div>
+      <div class="steps">${steps}</div>
+      <div class="pickcode"><em>取单码</em>${o.pick_code}</div>
+    </div>
+    ${itemsH}
+    ${extra}`;
+  if (o.status === 'served' || o.status === 'closed') drawCard(o);
+}
+
+function cardBlock(o) {
+  return `<div class="photo-wrap">
+    <label class="f" style="margin-top:0">${o.photo ? '换一张照片' : '拍一张，和这一杯留个纪念'}</label>
+    <input type="file" accept="image/*" id="photoIn" onchange="uploadPhoto(this)">
+    ${o.photo ? `<img id="shot" src="${API}/photo/${o.photo}" alt="">` : ''}
+    <canvas class="cardprev" id="cardImg"></canvas>
+    <button class="big" onclick="saveCard()">保存纪念卡</button>
+    <div class="tip">长按上面的卡片也能存图。传了照片以后卡片会自动带上，已经存过的可以再存一张。</div>
+  </div>`;
+}
+
+/* 把照片压到长边 1600 再传，省流量也省硬盘 */
+function shrink(file, maxSide) {
+  return new Promise((res, rej) => {
+    const fr = new FileReader();
+    fr.onload = () => {
+      const im = new Image();
+      im.onload = () => {
+        const s = Math.min(1, maxSide / Math.max(im.width, im.height));
+        const cv = document.createElement('canvas');
+        cv.width = Math.round(im.width * s); cv.height = Math.round(im.height * s);
+        cv.getContext('2d').drawImage(im, 0, 0, cv.width, cv.height);
+        res(cv.toDataURL('image/jpeg', 0.86));
+      };
+      im.onerror = rej; im.src = fr.result;
+    };
+    fr.onerror = rej; fr.readAsDataURL(file);
+  });
+}
+async function uploadPhoto(inp) {
+  const f = inp.files && inp.files[0];
+  if (!f) return;
+  toast('照片传着呢…');
+  const data = await shrink(f, 1600);
+  const r = await api(`/api/order/${viewing.token}/photo`, {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ data })
+  });
+  if (!r.ok) return toast(r.msg || '没传上去');
+  viewing = r.order;
+  toast('照片放上去了');
+  renderOrder();
+}
+
+function drawCard(o) {
+  const cv = $('cardImg');
+  if (!cv) return;
+  const W = 750;
+  const pad = 54;
+  const img = new Image();
+  const withPhoto = !!o.photo;
+  const H = withPhoto ? 1180 : 900;
+  cv.width = W; cv.height = H;
+  cv.style.width = '100%';
+  const g = cv.getContext('2d');
+
+  const paint = () => {
+    g.fillStyle = '#f5f0e8'; g.fillRect(0, 0, W, H);          // 纸
+    g.fillStyle = '#1c1620'; g.fillRect(0, 0, W, 150);        // 顶部黑块
+    g.fillStyle = '#e8b04b';
+    g.font = '800 40px "PingFang SC","Microsoft YaHei",sans-serif';
+    g.textAlign = 'center';
+    g.fillText(o.shop_name || '小酒馆', W / 2, 68);
+    g.fillStyle = '#9a90a6';
+    g.font = '400 20px "PingFang SC",sans-serif';
+    g.fillText('COCKTAIL RECEIPT · 留个纪念，不是发票', W / 2, 106);
+    g.fillStyle = '#e8b04b';
+    g.font = '700 22px "PingFang SC",sans-serif';
+    g.textAlign = 'right';
+    g.fillText('NO. ' + String(o.no).padStart(4, '0'), W - 40, 68);
+    g.fillStyle = '#6b6478'; g.font = '400 18px "PingFang SC",sans-serif';
+    g.fillText(o.created_at.slice(0, 10), W - 40, 106);
+
+    let y = 210;
+    g.textAlign = 'left';
+    g.fillStyle = '#9a90a6'; g.font = '400 19px "PingFang SC",sans-serif';
+    g.fillText(o.name ? '致 ' + o.name : '致 今晚的客人', pad, y);
+    y += 34;
+    g.strokeStyle = '#d8cfc2'; g.beginPath(); g.moveTo(pad, y); g.lineTo(W - pad, y); g.stroke();
+    y += 44;
+
+    g.fillStyle = '#1c1620';
+    for (const it of o.items) {
+      g.font = '700 27px "PingFang SC",sans-serif';
+      const qty = '×' + it.qty;
+      g.textAlign = 'left';
+      // 名字太长就截断，别顶到右边的份数上
+      let nm = it.name;
+      while (g.measureText(nm).width > W - pad * 2 - 70 && nm.length > 2) nm = nm.slice(0, -1);
+      if (nm !== it.name) nm += '…';
+      g.fillText(nm, pad, y);
+      g.textAlign = 'right'; g.fillText(qty, W - pad, y);
+      if (it.abv) {
+        g.fillStyle = '#9a90a6'; g.font = '400 18px "PingFang SC",sans-serif';
+        g.textAlign = 'left'; g.fillText(it.abv, pad + 2, y + 25);
+        g.fillStyle = '#1c1620';
+      }
+      g.textAlign = 'left';
+      y += it.abv ? 62 : 46;
+    }
+
+    y += 8;
+    g.strokeStyle = '#d8cfc2'; g.setLineDash([6, 6]);
+    g.beginPath(); g.moveTo(pad, y); g.lineTo(W - pad, y); g.stroke();
+    g.setLineDash([]);
+    y += 36;
+    g.fillStyle = '#9a90a6'; g.font = '400 20px "PingFang SC",sans-serif';
+    g.textAlign = 'left';
+    g.fillText('共 ' + o.items.reduce((a, b) => a + b.qty, 0) + ' 杯', pad, y);
+    if (o.note) { g.fillText('备注：' + o.note.slice(0, 18), pad + 130, y); }
+    y += 30;
+
+    if (withPhoto) {
+      const pw = W - pad * 2, ph = 480;
+      const iw = img.width, ih = img.height;
+      const s = Math.max(pw / iw, ph / ih);
+      const dw = iw * s, dh = ih * s;
+      g.save();
+      g.beginPath(); g.rect(pad, y, pw, ph); g.clip();
+      g.drawImage(img, pad + (pw - dw) / 2, y + (ph - dh) / 2, dw, dh);
+      g.restore();
+      y += ph + 40;
+    }
+
+    g.fillStyle = '#1c1620'; g.font = 'italic 400 22px "PingFang SC",sans-serif';
+    g.textAlign = 'left';
+    g.fillText(o.card_note || '这一杯，是今晚的。', pad, y);
+    y += 40;
+    g.textAlign = 'right';
+    g.fillStyle = '#9a90a6'; g.font = '400 20px "PingFang SC",sans-serif';
+    g.fillText(o.sign_off || '', W - pad, y);
+
+    g.fillStyle = '#c9bfb2'; g.font = '400 16px "PingFang SC",sans-serif';
+    g.textAlign = 'center';
+    g.fillText('取单码 ' + o.pick_code + ' · 全球仅此一张', W / 2, H - 40);
+  };
+
+  if (withPhoto) { img.onload = paint; img.onerror = paint; img.src = API + '/photo/' + o.photo; }
+  else paint();
+}
+function saveCard() {
+  const cv = $('cardImg');
+  if (!cv || !cv.width) return;
+  const a = document.createElement('a');
+  a.download = `第${viewing.no}单-纪念卡.png`;
+  a.href = cv.toDataURL('image/png');
+  a.click();
+  toast('存到相册/下载里了');
+}
+
+/* ───── 轮询：出杯了这边自动变样子 ───── */
+function startPoll() {
+  stopPoll();
+  pollTimer = setInterval(async () => {
+    if (!viewing || document.hidden) return;
+    const r = await api('/api/order/' + viewing.token).catch(() => null);
+    if (!r || !r.ok) return;
+    const changed = r.order.status !== viewing.status || r.order.photo !== viewing.photo;
+    viewing = r.order;
+    if (changed && $('orderSheet').classList.contains('on')) renderOrder();
+    refreshMine();
+  }, 3000);
+}
+function stopPoll() { if (pollTimer) clearInterval(pollTimer); pollTimer = null; }
+
+/* 页面切到后台时轮询会停（省电），切回来得立刻补一次：
+   不然朋友把手机掏出来，看到的还是切走那一刻的旧状态 */
+document.addEventListener('visibilitychange', async () => {
+  if (document.hidden) return;
+  loadMenu(); refreshMine();
+  if (viewing) {
+    const r = await api('/api/order/' + viewing.token).catch(() => null);
+    if (r && r.ok) {
+      viewing = r.order;
+      if ($('orderSheet').classList.contains('on')) renderOrder();
+    }
+  }
+});
+
+/* ───── 启动 ───── */
+(async () => {
+  await initAPI();
+  try {
+    await loadMenu();
+  } catch (e) {
+    // 多半是家里那台电脑没开，或者隧道刚换地址——先给句人话，别让朋友看着空白页
+    $('list').innerHTML = '<div class="empty">酒保还没开张，过一会儿再扫一次</div>';
+    return;
+  }
+  await refreshMine();
+  const open = (await refreshMine()).filter(o => o.status === 'new' || o.status === 'making');
+  if (open.length) {
+    setTimeout(() => toast(`你有 ${open.length} 单还没出，点右上角「我的单子」看看`, 3200), 400);
+  }
+})();
+</script>
+</body>
+</html>

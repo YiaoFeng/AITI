@@ -1,0 +1,4 @@
+{
+  "base": "https://api.trycloudflare.com",
+  "note": "由 cocktail/start.py 自动写入，不要手改"
+}
