@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#141018">
+<link rel="icon" href="data:,">
+<title>上架管理</title>
+<style>
+:root{
+  --bg:#141018; --card:#1e1a24; --line:#2e2836; --txt:#f2ecf5; --dim:#9a90a6;
+  --amber:#e8b04b; --green:#4bc98a; --red:#e0605f;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--txt);
+  font:15px/1.5 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+img{display:block}
+.top{position:sticky;top:0;z-index:20;background:rgba(20,16,24,.95);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);padding:12px 14px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.top h1{font-size:17px;margin:0;font-weight:700;margin-right:6px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tabs button{border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:13px;color:var(--dim)}
+.tabs button.on{background:var(--amber);color:#1a1520;border-color:var(--amber);font-weight:700}
+main{padding:14px;max-width:900px;margin:0 auto;padding-bottom:90px}
+.cat-h{font-size:13px;color:var(--dim);margin:20px 0 8px;font-weight:700;letter-spacing:1px}
+.cat-h:first-child{margin-top:4px}
+.row{display:flex;gap:11px;align-items:center;background:var(--card);border:1px solid var(--line);
+  border-radius:13px;padding:10px;margin-bottom:9px}
+.row.off{opacity:.5}
+.row .thumb{width:56px;height:56px;flex:0 0 56px;border-radius:9px;background:#2a2432;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;font-size:22px}
+.row .thumb img{width:100%;height:100%;object-fit:cover}
+.row .info{flex:1;min-width:0}
+.row .nm{font-weight:700;font-size:15.5px}
+.row .meta{font-size:12px;color:var(--dim);margin-top:2px}
+.row .go{color:var(--dim);font-size:20px;padding:0 4px}
+.addbtn{width:100%;border:1px dashed var(--line);border-radius:13px;padding:14px;color:var(--amber);font-weight:700;margin-top:10px}
+.sheet{position:fixed;inset:0;z-index:60;background:rgba(10,7,13,.6);display:none;align-items:flex-end}
+.sheet.on{display:flex}
+.sheet .panel{width:100%;max-height:92vh;overflow-y:auto;background:var(--bg);
+  border-radius:20px 20px 0 0;border-top:1px solid var(--line);
+  padding:16px 16px calc(16px + env(safe-area-inset-bottom,0))}
+.sheet h2{font-size:16px;margin:0 0 6px;display:flex;align-items:center}
+.sheet h2 .x{margin-left:auto;color:var(--dim);font-size:22px;padding:0 4px}
+input,textarea,select{width:100%;background:#221d29;border:1px solid var(--line);border-radius:10px;
+  color:var(--txt);padding:11px 12px;font:inherit;font-size:15px;margin-top:6px}
+textarea{resize:vertical}
+label.f{display:block;margin-top:14px;font-size:13px;color:var(--dim)}
+label.f i{color:#6c6478;font-style:normal;font-size:12px}
+.two{display:flex;gap:10px}
+.two>div{flex:1}
+.big{width:100%;margin-top:18px;background:var(--amber);color:#1a1520;font-weight:800;
+  border-radius:12px;padding:15px;font-size:16px}
+.big.ghost{background:transparent;border:1px solid var(--line);color:var(--txt);font-weight:600}
+.big.danger{background:transparent;border:1px solid #4a2b2b;color:var(--red);font-weight:600}
+.prev{width:100%;max-height:220px;object-fit:cover;border-radius:10px;margin-top:10px;border:1px solid var(--line)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#332b3d;
+  border:1px solid var(--line);border-radius:10px;padding:10px 18px;font-size:14px;display:none;z-index:99;max-width:86vw;text-align:center}
+.login{max-width:340px;margin:80px auto;text-align:center}
+.login input{text-align:center;letter-spacing:4px;font-size:18px;padding:13px}
+.login button{width:100%;background:var(--amber);color:#1a1520;font-weight:800;border-radius:10px;padding:14px;font-size:16px;margin-top:16px}
+.empty{text-align:center;color:var(--dim);padding:50px 20px}
+.chk{display:flex;align-items:center;gap:8px;margin-top:14px;font-size:14px;color:var(--dim)}
+.chk input{width:auto;margin:0}
+.qrcard{display:inline-block;padding:12px;background:#fff;border-radius:16px;margin-top:6px}
+.qrcard img{width:min(300px,70vw);height:auto;display:block}
+a.big{display:block;text-align:center;text-decoration:none;box-sizing:border-box}
+.urlbox{background:#221d29;border:1px solid var(--line);border-radius:10px;padding:11px 12px;
+  font-size:12.5px;color:var(--dim);word-break:break-all;margin-top:8px;font-family:ui-monospace,Menlo,Consolas,monospace}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:1px}
+</style>
+</head>
+<body>
+
+<div id="loginBox" class="login" style="display:none">
+  <h1 style="font-size:20px">上架管理</h1>
+  <div style="color:var(--dim);font-size:13px;margin-top:6px">输后台口令</div>
+  <input id="pw" type="password" inputmode="numeric" placeholder="口令">
+  <button onclick="doLogin()">进去</button>
+  <div style="color:var(--red);font-size:13px;margin-top:12px" id="loginMsg"></div>
+</div>
+
+<div id="app" style="display:none">
+  <div class="top">
+    <h1>上架管理</h1>
+    <div class="tabs">
+      <button class="on" data-t="items" onclick="tab('items')">酒单</button>
+      <button data-t="cats" onclick="tab('cats')">分类</button>
+      <button data-t="shop" onclick="tab('shop')">店面</button>
+      <button data-t="qr" onclick="tab('qr')">二维码</button>
+      <button onclick="location.href='/bar.html'">出单台</button>
+    </div>
+  </div>
+  <main id="main"></main>
+</div>
+
+<div class="sheet" id="itemSheet">
+  <div class="panel">
+    <h2 id="itemTitle">改一款酒 <button class="x" onclick="closeSheet()">×</button></h2>
+    <div id="itemForm"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const $ = id => document.getElementById(id);
+const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const AKEY = 'bar_admin_token';
+let TOKEN = localStorage.getItem(AKEY) || '';
+let DATA = null;
+let curTab = 'items';
+let editing = null;   // 正在编辑的酒款，null = 新增
+
+/* 后端在哪，问同目录的 cfg.json 一句——跟点单页同一套。
+   挂到帽子云上时它给的是当天的隧道地址；本机打开时 cfg.json 是空的，
+   API 留空就是同源，两种打开方式走同一段代码。 */
+let API = '';
+async function initAPI() {
+  try {
+    const r = await fetch('cfg.json?t=' + Date.now(), { cache: 'no-store' });
+    if (r.ok) API = String(((await r.json()) || {}).base || '').replace(/\/+$/, '');
+  } catch (e) { /* 拿不到就按同源走 */ }
+}
+
+function toast(m, ms){ const t=$('toast'); t.textContent=m; t.style.display='block'; clearTimeout(t._t); t._t=setTimeout(()=>t.style.display='none', ms||2000); }
+
+async function api(path, opt){
+  opt = opt || {};
+  opt.headers = Object.assign({'Content-Type':'application/json'}, opt.headers||{}, {'X-Admin': TOKEN});
+  const r = await fetch(API + path, opt);
+  if (r.status === 401) { showLogin(); throw new Error('need login'); }
+  return r.json();
+}
+function showLogin(){ $('loginBox').style.display='block'; $('app').style.display='none'; }
+async function doLogin(){
+  const r = await fetch(API + '/api/admin/login', {method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({password:$('pw').value})}).then(x=>x.json()).catch(()=>({}));
+  if (!r.ok) { $('loginMsg').textContent = r.msg||'进不去'; return; }
+  TOKEN = r.token; localStorage.setItem(AKEY, TOKEN);
+  $('loginBox').style.display='none'; $('app').style.display='block';
+  load();
+}
+
+async function load(){
+  DATA = await api('/api/admin/menu');
+  render();
+}
+function tab(t){ curTab = t; document.querySelectorAll('.tabs button[data-t]').forEach(b=>b.classList.toggle('on', b.dataset.t===t)); render(); }
+
+function render(){
+  if (!DATA) return;
+  if (curTab === 'items') return renderItems();
+  if (curTab === 'cats') return renderCats();
+  if (curTab === 'qr') return renderQr();
+  return renderShop();
+}
+
+function renderItems(){
+  const cats = DATA.all_cats.slice().sort((a,b)=>a.sort-b.sort||a.id-b.id);
+  let h = '';
+  for (const c of cats) {
+    const its = DATA.all_items.filter(i => i.cat_id === c.id);
+    h += `<div class="cat-h">${esc(c.name)}${c.active?'':'（已隐藏）'} · ${its.length} 款</div>`;
+    h += its.length ? its.map(i => `
+      <div class="row ${i.active?'':'off'}" onclick="editItem(${i.id})">
+        <div class="thumb">${i.image_url?`<img src="${API}${i.image_url}" alt="">`:'🍸'}</div>
+        <div class="info">
+          <div class="nm">${esc(i.name)} ${i.active?'':'· 已下架'}</div>
+          <div class="meta">${[
+            i.abv||'', i.price||'', i.blurb?i.blurb.slice(0,14)+'…':'',
+            i.stock===null?'不限量':('剩 '+i.stock+' 份')
+          ].filter(Boolean).join(' · ')}</div>
+        </div>
+        <div class="go">›</div>
+      </div>`).join('') : '<div style="color:#6c6478;font-size:13px;padding:4px 0 8px">这个分类下还没有酒</div>';
+  }
+  h += `<button class="addbtn" onclick="editItem(0)">+ 上一款新的</button>`;
+  $('main').innerHTML = h;
+}
+
+function renderCats(){
+  const cats = DATA.all_cats.slice().sort((a,b)=>a.sort-b.sort||a.id-b.id);
+  $('main').innerHTML = cats.map(c => {
+    const n = DATA.all_items.filter(i=>i.cat_id===c.id).length;
+    return `<div class="row">
+      <div class="info"><div class="nm">${esc(c.name)}</div>
+        <div class="meta">${n} 款 · 排序 ${c.sort}${c.active?'':' · 已隐藏'}</div></div>
+      <button class="go" onclick="editCat(${c.id})">改</button>
+    </div>`;
+  }).join('') + `<button class="addbtn" onclick="editCat(0)">+ 加一个分类</button>`;
+}
+
+function renderShop(){
+  const s = DATA.settings;
+  $('main').innerHTML = `
+    <label class="f">店名<i>（点单页顶上那行大字）</i></label>
+    <input id="s_name" value="${esc(s.shop_name)}" maxlength="16">
+    <label class="f">副标题<i>（店名下面那行小字）</i></label>
+    <input id="s_sub" value="${esc(s.shop_sub)}" maxlength="24">
+    <label class="f">落款<i>（印在纪念卡右下角，可留空）</i></label>
+    <input id="s_sign" value="${esc(s.sign_off)}" maxlength="20">
+    <button class="big" onclick="saveShop()">存下来</button>
+    <div style="color:var(--dim);font-size:12.5px;line-height:1.7;margin-top:20px">
+      点单页：<b>/</b> · 出单台：<b>/bar.html</b> · 后台：<b>/admin.html</b><br>
+      后台口令存在 data/admin_password.txt，改完要重启服务才生效。
+    </div>`;
+}
+async function saveShop(){
+  const r = await api('/api/admin/settings', {method:'POST', body: JSON.stringify({
+    shop_name: $('s_name').value, shop_sub: $('s_sub').value, sign_off: $('s_sign').value})});
+  toast(r.ok ? '存好了，点单页刷新就变' : '没存上');
+  await load();
+}
+
+/* ── 二维码 ──
+   码里装的是「朋友该打开的网址」。这个网址是固定的（挂在帽子云上），
+   家里电脑每次开机换的是隧道地址，那个写在页面里，不影响这张码。
+   所以这张码印一次就够，贴桌上不用再换。 */
+function renderQr(){
+  const s = DATA.settings;
+  const live = s.has_public;
+  $('main').innerHTML = `
+    <div style="text-align:center">
+      <div class="qrcard"><img id="qrimg" src="${API}/api/qr.png" alt="点单二维码"></div>
+      <div style="font-weight:700;margin-top:14px">朋友扫这张码点单</div>
+      <div style="color:var(--dim);font-size:13px;margin-top:5px">
+        <span class="dot" style="background:${live ? 'var(--green)' : '#c9a227'}"></span>
+        ${live ? '已经接上公网，人在外面也扫得动' : '现在只在局域网里能用，出门就得先接公网'}</div>
+    </div>
+
+    <label class="f">扫码落到哪个网址<i>（就是这个才印进了二维码，改完码会跟着变）</i></label>
+    <input id="q_base" value="${esc(s.public_entry || '')}" placeholder="https://yiaofeng-3ktq2qp.maozi.io/bar/">
+    <button class="big" onclick="saveQrBase()">存下来</button>
+    <a class="big ghost" href="${API}/api/qr.png" download="点单二维码.png">存下这张二维码</a>
+    <button class="big ghost" onclick="copyEntry()">复制朋友能打开的地址</button>
+    <div class="urlbox" id="entryUrl">${esc(s.guest_entry)}</div>
+
+    <div style="color:var(--dim);font-size:12.5px;line-height:1.9;margin-top:22px">
+      地址后面那串 <b>k</b> 是点单口令：从公网过来的下单请求必须带着它，
+      陌生人光知道网址也点不了单。局域网里不用它。<br>
+      网址留空 = 只在家里用，二维码指向本机局域网地址（朋友得连你家 WiFi）。<br>
+      <b>电脑关机就点不了</b>——数据都在家里这台机器上，出门在外想接单得让它一直开着。
+    </div>`;
+}
+async function saveQrBase(){
+  const v = $('q_base').value.trim();
+  const r = await api('/api/admin/settings', {method:'POST', body: JSON.stringify({public_entry: v})});
+  if (!r.ok) return toast(r.msg || '没存上');
+  toast('存好了，二维码跟着换');
+  await load();
+}
+function copyEntry(){
+  const t = DATA.settings.guest_entry;
+  const ta = document.createElement('textarea');
+  ta.value = t;
+  ta.style.position = 'fixed'; ta.style.opacity = '0';
+  document.body.appendChild(ta);
+  ta.select();
+  let ok = false;
+  try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+  ta.remove();
+  toast(ok ? '地址复制好了' : '复制不了，长按下面那行字自己选吧');
+}
+
+/* ── 酒款编辑 ── */
+function editItem(id){
+  editing = id ? DATA.all_items.find(i => i.id === id) : null;
+  const it = editing || {name:'', cat_id:(DATA.all_cats[0]||{}).id, abv:'', price:'', blurb:'', stock:null, sort:0, active:1};
+  $('itemTitle').innerHTML = (id ? '改「'+esc(it.name)+'」' : '上一款新的') +
+    ' <button class="x" onclick="closeSheet()">×</button>';
+  $('itemForm').innerHTML = `
+    <label class="f">名字</label>
+    <input id="f_name" value="${esc(it.name)}" placeholder="比如：威士忌酸" maxlength="24">
+    <label class="f">放在哪个分类</label>
+    <select id="f_cat">${DATA.all_cats.map(c =>
+      `<option value="${c.id}" ${c.id===it.cat_id?'selected':''}>${esc(c.name)}</option>`).join('')}</select>
+    <div class="two">
+      <div><label class="f">酒精度<i>（不填就不显示）</i></label>
+        <input id="f_abv" value="${esc(it.abv||'')}" placeholder="28%" maxlength="8"></div>
+      <div><label class="f">价格<i>（不填就不显示）</i></label>
+        <input id="f_price" value="${esc(it.price||'')}" placeholder="¥68" maxlength="10"></div>
+    </div>
+    <label class="f">一句话介绍<i>（不填就不显示）</i></label>
+    <textarea id="f_blurb" rows="2" maxlength="60" placeholder="酸得干净，泡沫压顶，永远不会出错的一杯">${esc(it.blurb||'')}</textarea>
+    <div class="two">
+      <div><label class="f">库存<i>（留空=不限量，填了就点完为止）</i></label>
+        <input id="f_stock" value="${it.stock===null||it.stock===undefined?'':it.stock}" inputmode="numeric" placeholder="不限量"></div>
+      <div><label class="f">排序<i>（数字小的排前面）</i></label>
+        <input id="f_sort" value="${it.sort||0}" inputmode="numeric"></div>
+    </div>
+    <label class="f">配图<i>（只能传一张，会等比缩到长边 800）</i></label>
+    <input type="file" accept="image/*" id="f_img" onchange="pickImage(this)">
+    <div id="imgPrev">${it.image_url?`<img class="prev" src="${API}${it.image_url}" id="prevImg">`:''}</div>
+    <label class="chk"><input type="checkbox" id="f_active" ${it.active===0?'':'checked'}> 在架上（不勾就是下架，客人看不到）</label>
+    <button class="big" onclick="saveItem()">存下来</button>
+    ${id?`<button class="big danger" onclick="delItem(${id})">删掉这款</button>`:''}`;
+  $('itemSheet').classList.add('on');
+}
+let newImage = null;
+function pickImage(inp){
+  const f = inp.files && inp.files[0]; if (!f) return;
+  shrink(f, 800).then(d => {
+    newImage = d;
+    $('imgPrev').innerHTML = `<img class="prev" src="${d}">`;
+  });
+}
+function shrink(file, maxSide){
+  return new Promise((res, rej)=>{
+    const fr = new FileReader();
+    fr.onload = ()=>{
+      const im = new Image();
+      im.onload = ()=>{
+        const s = Math.min(1, maxSide/Math.max(im.width, im.height));
+        const cv = document.createElement('canvas');
+        cv.width = Math.round(im.width*s); cv.height = Math.round(im.height*s);
+        cv.getContext('2d').drawImage(im,0,0,cv.width,cv.height);
+        res(cv.toDataURL('image/jpeg', .85));
+      };
+      im.onerror = rej; im.src = fr.result;
+    };
+    fr.onerror = rej; fr.readAsDataURL(file);
+  });
+}
+async function saveItem(){
+  const body = {
+    id: editing ? editing.id : 0,
+    name: $('f_name').value,
+    cat_id: Number($('f_cat').value),
+    abv: $('f_abv').value,
+    price: $('f_price').value,
+    blurb: $('f_blurb').value,
+    stock: $('f_stock').value.trim(),
+    sort: $('f_sort').value || 0,
+    active: $('f_active').checked ? 1 : 0,
+  };
+  if (newImage) body.image = newImage;
+  const r = await api('/api/admin/item', {method:'POST', body: JSON.stringify(body)});
+  if (!r.ok) return toast(r.msg||'没存上');
+  if (!newImage && editing && editing.image_url) body.image = editing.image;
+  newImage = null;
+  toast('存好了'); closeSheet(); await load();
+}
+async function delItem(id){
+  const it = DATA.all_items.find(i=>i.id===id);
+  if (!confirm(`删掉「${it.name}」？以前的老单上还留着它的名字，不受影响。`)) return;
+  const r = await api(`/api/admin/item/${id}/delete`, {method:'POST', body:'{}'});
+  if (!r.ok) return toast(r.msg||'没删掉');
+  toast('删了'); closeSheet(); await load();
+}
+
+/* ── 分类编辑 ── */
+function editCat(id){
+  const c = id ? DATA.all_cats.find(x=>x.id===id) : {name:'', sort:(DATA.all_cats.length)};
+  const name = prompt('分类叫什么？', c.name);
+  if (name === null || !name.trim()) return;
+  const sort = prompt('排序（数字小的排前面）', c.sort ?? 0);
+  if (sort === null) return;
+  api('/api/admin/cat', {method:'POST', body: JSON.stringify({
+    id: id||0, name: name.trim(), sort: parseInt(sort,10)||0, active: 1 })})
+    .then(r => { toast(r.ok?'改好了':(r.msg||'没改成')); load(); });
+}
+function closeSheet(){ $('itemSheet').classList.remove('on'); newImage = null; }
+
+(async () => {
+  await initAPI();
+  if (!TOKEN) return showLogin();
+  const s = await fetch(API + '/api/admin/session', {headers:{'X-Admin':TOKEN}}).then(r=>r.json()).catch(()=>({}));
+  if (s.logged_in) { $('app').style.display='block'; load(); } else showLogin();
+})();
+</script>
+</body>
+</html>
