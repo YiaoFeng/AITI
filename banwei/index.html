@@ -4,73 +4,43 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>班味人格图鉴 · 16 种打工人</title>
-<meta name="description" content="四个维度、16 种班味人格，30 题出一张工牌、一张考勤卡和一份完整报告。">
+<meta name="description" content="四个维度、16 种班味人格，30 道题出工牌、考勤卡和完整报告。">
 <!-- data:, 是空 icon，专门用来消掉浏览器自动发的那个 /favicon.ico 请求——
      站点里没放这个文件，不发它就是一条 404 打在控制台里，e2e 的「无 JS 报错」会挂 -->
 <link rel="icon" href="data:,">
 <style>
-/* 2026-09-25 换皮：深蓝黑工牌 → 复古考勤票据。
-   变量名沿用不动（--desk 还是「页面底」、--paper 还是「卡面」），只换值——
-   整套 UI 的结构参数（间距、字号、层级）都挂在这些名字上，改名会牵一发动全身。
-   旧值留在注释里，哪天要回退不用翻 git。 */
 :root{
-  --desk:#C9B48C;      /* 牛皮纸底（旧 #141A22） */
-  --strap:#4A3A24;     /* 票据顶栏 / 挂绳（旧 #1D2A3D） */
-  --paper:#F4EAD2;     /* 票据纸（旧 #FBFAF4） */
-  --paper2:#FAF3E0;    /* 表格内衬、选中态（旧 #F1EEE1 / #F6F4EB） */
-  --ink:#3A2A16;       /* 主墨（旧 #16233A） */
-  --mid:#7A6748;       /* 辅助字（旧 #5C6472） */
-  --dim:#9C8862;       /* 弱字、点线（旧 #939CA8） */
-  --line:#B5A47E;      /* 分隔线（旧 #DAD7CA） */
-  --acc:#C2372A;       /* 章红：只在印章、高亮上用（旧 #D8FF3C 荧光黄绿） */
-  --red:#C2372A;
-  /* 批注蓝：这套票据风的第三色，也是「有趣」的来源。
-     只有米白 + 深褐会滑向怀旧悲情，加一层蓝色手写批注/圈注才像同事随手划过的考勤表。
-     调研口径：红色面积控在整页三成以内，别盖满。 */
-  --blue:#1A4FBF;
-  --serif:"STXingkai","STKaiti","SimHei",serif;   /* 大标题：行楷 */
-  --mono:Consolas,"Courier New",monospace;
+  --desk:#141A22;      /* 挂绳/工位背景：比卡面暗一大截 */
+  --strap:#1D2A3D;     /* 挂绳 */
+  --paper:#FBFAF4;     /* 工牌卡面 */
+  --ink:#16233A;
+  --mid:#5C6472;
+  --dim:#939CA8;
+  --line:#DAD7CA;
+  --acc:#D8FF3C;       /* 荧光黄绿：只在条码和高亮上用 */
+  --red:#B23A2E;
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{
   background:var(--desk); color:var(--ink); min-height:100vh;
-  /* 牛皮纸的横向细纹：两层 3px 的浅色渐变，比贴纹理图省一次请求 */
-  background-image:repeating-linear-gradient(0deg,
-    rgba(255,255,255,.055) 0 1px, transparent 1px 3px);
   font-family:-apple-system,"PingFang SC","Microsoft YaHei","SimHei",sans-serif;
   display:flex; justify-content:center; padding:26px 16px 40px;
 }
 .wrap{width:100%;max-width:520px}
 .hidden{display:none !important}
 .back{
-  display:inline-block; font-size:13px; color:#8A7455; text-decoration:none;
+  display:inline-block; font-size:13px; color:#7C8794; text-decoration:none;
   letter-spacing:1px; margin-bottom:18px;
 }
-/* 票据纸：上下两排齿孔，像从本子上撕下来的一联。
-   齿孔色用 --desk（页面底色），视觉上就是被咬掉的缺口——
-   卡片本身不透明，所以只能这么伪造，不能用 mask（会把内容一起透掉）。 */
-.card{
-  position:relative; background:var(--paper); padding:30px 26px 28px;
-  box-shadow:0 14px 40px rgba(60,40,20,.30);
-}
-.card::before,.card::after{
-  content:''; position:absolute; left:0; right:0; height:20px;
-  background:radial-gradient(circle at 10px 10px, var(--desk) 9px, transparent 10px);
-  background-size:20px 20px;
-}
-.card::before{top:-10px}
-.card::after{bottom:-10px}
+.card{background:var(--paper); padding:30px 26px 28px; box-shadow:0 14px 40px rgba(0,0,0,.35)}
 
 .kicker{
-  font-family:var(--mono); font-size:11.5px;
+  font-family:Consolas,"Courier New",monospace; font-size:11.5px;
   letter-spacing:3px; color:var(--dim); text-transform:uppercase;
 }
-.title{
-  font-family:var(--serif); font-size:40px; font-weight:400; letter-spacing:6px;
-  margin:9px 0 0; line-height:1.25;
-}
+.title{font-size:31px; font-weight:900; letter-spacing:3px; margin:9px 0 0; line-height:1.25}
 .dash{border-top:2px dashed var(--line); margin:18px 0}
-.hr{border-top:3px double var(--line); margin:20px 0}
+.hr{border-top:1px solid var(--line); margin:18px 0}
 .lead{font-size:15px; line-height:1.85; color:var(--mid); margin-top:14px}
 .pts{list-style:none; margin-top:16px}
 .pts li{font-size:14px; line-height:1.7; color:var(--mid); padding-left:20px; position:relative; margin-bottom:9px}
@@ -84,159 +54,118 @@ body{
 }
 .btn:active{opacity:.85}
 .btn:disabled{opacity:.45}
-.btn.ghost{background:none; color:var(--mid); border:2px dashed var(--line); font-weight:400}
+.btn.ghost{background:none; color:var(--mid); border:1px solid var(--line); font-weight:400}
 
-/* ---------- 票据头（原工牌） ---------- */
-.badge{position:relative; margin-top:8px}
-.strap{display:none}                 /* 挂绳是工牌的东西，票据上没有 */
-/* 原来这里是 padding-top:0，因为卡片上方 26px 留着放挂绳。
-   挂绳撤掉之后如果还是 0，票头就顶到齿孔上，「BAN-XXXX-XXXX」会被咬掉上半截。 */
-.bcard{padding-top:26px}
+/* ---------- 工牌 ---------- */
+.badge{position:relative; padding-top:26px; margin-top:8px}
+.strap{
+  position:absolute; top:0; left:50%; transform:translateX(-50%);
+  width:64px; height:34px; background:var(--strap);
+  clip-path:polygon(22% 0,78% 0,100% 100%,0 100%);
+}
+.strap::after{   /* 挂绳孔 */
+  content:''; position:absolute; left:50%; bottom:4px; transform:translateX(-50%);
+  width:13px; height:13px; border-radius:50%; background:var(--desk);
+}
+.bcard{padding-top:0}
 .bhead{
-  background:var(--paper); color:var(--ink); display:flex; align-items:center;
-  justify-content:space-between; gap:12px; padding:0 0 13px;
-  font-size:15px; font-weight:700; letter-spacing:5px;
-  border-bottom:4px double var(--ink);
+  background:var(--strap); color:#EDF1F7; display:flex; align-items:center;
+  justify-content:space-between; padding:11px 16px; font-size:12.5px; letter-spacing:2px;
 }
-.bhead em{font-style:normal; font-family:var(--mono); font-size:12px; color:var(--mid); letter-spacing:2px}
-/* 表头小字：职工考勤记录 ── 内部留存 ── 不许外传 */
-.formno{
-  font-family:var(--mono); font-size:11px; color:var(--mid); letter-spacing:2px;
-  padding:12px 0 0;
-}
-.bbody{display:flex; gap:16px; padding:20px 0 0}
+.bhead em{font-style:normal; font-family:Consolas,monospace; font-size:11px; color:var(--acc); letter-spacing:1px}
+.bbody{display:flex; gap:16px; padding:22px 20px 16px}
 .bphoto{
-  flex:none; width:96px; height:118px; background:var(--paper2);
-  border:2px dashed var(--line);
+  flex:none; width:96px; height:118px; background:#EDEAE0; border:1px solid var(--line);
   display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px;
 }
 .bphoto i{font-style:normal; font-size:44px; line-height:1}
-.bphoto span{font-family:var(--mono); font-size:9.5px; color:var(--dim); letter-spacing:2px}
+.bphoto span{font-family:Consolas,monospace; font-size:9.5px; color:var(--dim); letter-spacing:2px}
 .binfo{flex:1; min-width:0; display:flex; flex-direction:column; justify-content:center}
-.bname{font-family:var(--serif); font-size:46px; font-weight:400; letter-spacing:5px; line-height:1.1}
-.bjob{
-  font-size:14px; color:var(--ink); margin-top:8px; letter-spacing:2px;
-  border-bottom:2px solid var(--ink); display:inline-block;
-  padding-bottom:4px; align-self:flex-start; max-width:100%;
-}
-.brow{display:flex; gap:8px; font-size:12px; margin-top:12px; align-items:baseline}
+.bname{font-size:34px; font-weight:900; letter-spacing:3px; line-height:1.1}
+.bjob{font-size:13px; color:var(--mid); margin-top:7px; letter-spacing:.5px}
+.brow{display:flex; gap:8px; font-size:12px; margin-top:9px; align-items:baseline}
 .brow span{flex:none; width:30px; color:var(--dim); letter-spacing:1px}
-.brow b{font-family:var(--mono); font-size:12.5px; letter-spacing:1px; color:var(--ink)}
-.bslogan{
-  margin-top:18px; padding:14px 0 14px 16px; font-size:14.5px; line-height:1.8;
-  color:var(--ink); border-left:7px solid var(--acc);
-}
-.bcode{display:flex; gap:3px; height:44px; align-items:flex-end; margin-top:16px}
+.brow b{font-family:Consolas,"Courier New",monospace; font-size:12.5px; letter-spacing:1px; color:var(--ink)}
+.bslogan{padding:0 20px 18px; font-size:14px; line-height:1.8; color:var(--mid)}
+.bcode{display:flex; gap:3px; height:44px; align-items:flex-end; padding:0 20px}
 .bcode i{display:block; background:var(--ink); width:4px}
 .bfoot{
-  display:flex; justify-content:space-between; padding:12px 0 0; margin-top:14px;
-  border-top:3px solid var(--ink);
-  font-family:var(--mono); font-size:10.5px; letter-spacing:2px; color:var(--mid);
+  display:flex; justify-content:space-between; padding:9px 20px 14px;
+  font-family:Consolas,monospace; font-size:10.5px; letter-spacing:2px; color:var(--dim);
 }
-/* 红色圆章：斜盖在票据右上，像人事部随手按的。
-   用 --acc 的章红，透明度压到 .8，不然会盖过底下的字。 */
-.stamp{
-  position:absolute; right:-8px; top:152px; width:94px; height:94px;
-  border:4px solid var(--acc); border-radius:50%; color:var(--acc);
-  display:flex; flex-direction:column; align-items:center; justify-content:center;
-  font-size:19px; font-weight:900; letter-spacing:2px; line-height:1.15;
-  transform:rotate(-14deg); opacity:.8; pointer-events:none; text-align:center;
-}
-.stamp i{font-style:normal; font-size:9.5px; letter-spacing:1px; margin-top:3px}
 
 /* ---------- 考勤卡 ---------- */
-.att{margin-top:24px; background:var(--paper2); border:2px solid var(--ink); padding:18px 20px 16px}
+.att{margin-top:22px; background:var(--paper); border:1px solid var(--line); padding:18px 20px 16px}
 .athead{
   display:flex; justify-content:space-between; align-items:baseline;
-  font-size:14px; font-weight:900; letter-spacing:5px; padding-bottom:10px;
-  border-bottom:3px dashed var(--line);
+  font-size:14px; font-weight:900; letter-spacing:2px; padding-bottom:10px;
+  border-bottom:2px solid var(--ink);
 }
-.athead em{font-style:normal; font-family:var(--mono); font-size:11px; color:var(--dim); letter-spacing:1px}
+.athead em{font-style:normal; font-family:Consolas,monospace; font-size:11px; color:var(--dim); letter-spacing:1px}
 .atrow{
   display:flex; justify-content:space-between; align-items:baseline; gap:12px;
-  font-size:14px; padding:11px 0; border-bottom:2px dotted var(--line);
+  font-size:14px; padding:11px 0; border-bottom:1px dashed var(--line);
 }
-.atrow span{color:var(--mid); letter-spacing:1px}
-.atrow b{font-family:var(--mono); font-size:15px; letter-spacing:1px}
+.atrow span{color:var(--mid)}
+.atrow b{font-family:Consolas,"Courier New",monospace; font-size:15px; letter-spacing:1px}
 .atrow b em{font-style:normal; font-size:11px; color:var(--dim); margin-left:2px}
 
-/* 两极刻度条：一根细轨 + 一个空心圆滑块，越靠左越是 a 极。
-   票据风里滑块做成「圈」而不是「块」——实心块在浅底上太重，像涂改过。 */
-.ax{display:flex; align-items:center; gap:12px; padding:14px 0; border-bottom:2px dotted var(--line)}
+/* 两极刻度条：中间那根轨道上的圆点，越靠左越是 a 极 */
+.ax{display:flex; align-items:center; gap:10px; padding:11px 0; border-bottom:1px dashed var(--line)}
 .ax .an{flex:none; width:44px; font-size:12.5px; color:var(--dim); letter-spacing:1px}
 .ax .an.r{text-align:right}
 .ax .an.on{color:var(--ink); font-weight:900}
-.ax .atk{flex:1; height:3px; background:var(--line); position:relative}
+.ax .atk{flex:1; height:6px; background:#E7E4D9; position:relative}
 .ax .atk::before{
-  content:''; position:absolute; left:50%; top:-5px; width:1px; height:13px; background:var(--dim);
+  content:''; position:absolute; left:50%; top:-3px; width:1px; height:12px; background:var(--line);
 }
-.ax .atk i{
-  position:absolute; top:-11px; width:24px; height:24px; margin-left:-12px;
-  border-radius:50%; background:var(--paper2); border:4px solid var(--ink);
-}
-.ax .atk i.b{border-color:var(--acc)}
+.ax .atk i{position:absolute; top:-5px; width:16px; height:16px; margin-left:-8px; background:var(--ink)}
+.ax .atk i.b{background:var(--acc); border:2px solid var(--ink)}
 .axname{font-size:12px; color:var(--dim); letter-spacing:1px; margin:16px 0 2px}
 
 /* ---------- 答题 ---------- */
-/* 进度做成票据上的一道红条：比深褐细线显眼，又不占多少红色面积 */
 .prog{display:flex; align-items:center; gap:12px; margin-bottom:24px}
-.ptrack{flex:1; height:12px; background:var(--paper2); border:2px solid var(--ink); overflow:hidden}
-.pfill{height:100%; background:var(--acc); width:0; transition:width .2s}
-.pnum{font-family:var(--mono); font-size:13px; color:var(--dim); letter-spacing:1px}
+.ptrack{flex:1; height:8px; background:#E7E4D9; overflow:hidden}
+.pfill{height:100%; background:var(--ink); width:0; transition:width .2s}
+.pnum{font-family:Consolas,"Courier New",monospace; font-size:13px; color:var(--dim); letter-spacing:1px}
 .q{font-size:19px; font-weight:700; line-height:1.6; margin-bottom:22px; letter-spacing:.5px}
-/* 选项做成待填的虚线格；选中那一格像被红笔划了一道 */
 .opt{
   display:flex; align-items:flex-start; gap:12px; width:100%; text-align:left;
-  background:var(--paper2); border:2px dotted var(--line); padding:15px 16px; margin-bottom:11px;
+  background:none; border:1px solid var(--line); padding:15px 16px; margin-bottom:11px;
   font-family:inherit; font-size:14.5px; line-height:1.65; color:var(--ink); cursor:pointer;
 }
 .opt .k{
   flex:none; width:22px; height:22px; display:flex; align-items:center; justify-content:center;
-  border:2px solid var(--line); font-family:var(--mono); font-size:12px; color:var(--dim);
+  border:1px solid var(--line); font-family:Consolas,monospace; font-size:12px; color:var(--dim);
 }
-.opt.sel{border:2px solid var(--ink); border-left:8px solid var(--acc); background:var(--paper)}
-.opt.sel .k{background:var(--acc); color:var(--paper); border-color:var(--acc)}
+.opt.sel{border-color:var(--ink); background:#F1EEE1}
+.opt.sel .k{background:var(--ink); color:var(--paper); border-color:var(--ink)}
 .nav{display:flex; gap:10px; margin-top:20px}
 .nav .btn{margin-top:0}
 
 /* ---------- 结果 ---------- */
-.secm{font-size:14px; font-weight:900; letter-spacing:3px; margin-bottom:14px;
-  border-bottom:2px solid var(--ink); padding-bottom:8px}
+.secm{font-size:14px; font-weight:900; letter-spacing:2px; margin-bottom:12px}
 .typepic{font-size:14.5px; line-height:1.9; color:var(--mid)}
-.rxbox{background:var(--paper2); padding:16px; font-size:14.5px; line-height:1.85}
+.rxbox{background:#F1EEE1; padding:16px; font-size:14.5px; line-height:1.85}
 .rxbox div+div{margin-top:10px}
 .rxbox i{font-style:normal; color:var(--dim); margin-right:6px}
-.selfbox{background:var(--paper2); padding:16px; font-size:14.5px; line-height:1.85}
+.selfbox{background:#F1EEE1; padding:16px; font-size:14.5px; line-height:1.85}
 .selfbox div{display:flex; gap:10px; align-items:flex-start}
 .selfbox div+div{margin-top:11px}
 .selfbox i{flex:none; width:15px; height:15px; margin-top:4px; font-style:normal; border:1px solid var(--dim); display:block}
-.shareimg{width:100%; display:block; margin-top:16px; border:2px solid var(--ink)}
+.shareimg{width:100%; display:block; margin-top:16px; border:1px solid var(--line)}
 .dl{display:inline-block; margin-top:12px; font-size:13px; color:var(--mid); text-decoration:none; border-bottom:1px solid var(--line); padding-bottom:2px}
-.footnote{font-size:12px; line-height:1.9; color:#8A7455; margin-top:22px; text-align:center}
-
-/* ---------- 锁定区 ---------- */
-.locked{background:var(--paper2); padding:20px 18px; margin-top:18px}
-.locked .secm{margin-bottom:10px}
-.lk-note{font-size:13.5px; line-height:1.8; color:var(--mid); margin-bottom:12px}
-.lk-list{list-style:none}
-.lk-list li{font-size:14px; line-height:1.75; color:var(--mid); padding-left:18px; position:relative; margin-bottom:9px}
-.lk-list li::before{content:'·'; position:absolute; left:4px; color:var(--dim)}
-.lkbox{border:2px dashed var(--acc); background:var(--paper2); padding:16px 16px 12px; margin-bottom:16px}
-.lkhd{display:flex; align-items:center; gap:8px; font-size:16px; font-weight:900; letter-spacing:1px; margin-bottom:10px}
-.lkhd i{font-style:normal; font-size:15px; filter:grayscale(1); opacity:.6}
-.lkbuy{font-size:13.5px; line-height:1.8; color:var(--mid)}
-.lkbuy b{color:var(--ink)}
-.locked > .btn{margin-top:16px}
+.footnote{font-size:12px; line-height:1.9; color:#7C8794; margin-top:22px; text-align:center}
 
 /* ---------- 验证码弹层 ---------- */
-.mask{position:fixed; inset:0; background:rgba(58,42,22,.75); display:flex; align-items:center; justify-content:center; padding:20px; z-index:50}
+.mask{position:fixed; inset:0; background:rgba(20,26,34,.72); display:flex; align-items:center; justify-content:center; padding:20px; z-index:50}
 .modal{background:var(--paper); width:100%; max-width:400px; padding:30px 26px 26px; position:relative}
 .modal .x{position:absolute; top:10px; right:14px; background:none; border:none; font-size:24px; color:var(--dim); cursor:pointer; line-height:1}
 .mt{font-size:19px; font-weight:900; line-height:1.5; letter-spacing:1px}
 .ms{font-size:13px; line-height:1.75; color:var(--mid); margin-top:10px}
 .codein{
   width:100%; margin-top:18px; padding:15px 14px; border:1px solid var(--line);
-  background:var(--paper2); font-family:Consolas,"Courier New",monospace; font-size:16px;
+  background:#F6F4EB; font-family:Consolas,"Courier New",monospace; font-size:16px;
   letter-spacing:2px; color:var(--ink); outline:none; text-transform:uppercase;
 }
 .codein:focus{border-color:var(--ink)}
@@ -250,16 +179,16 @@ body{
 
   <!-- ============ 首页 ============ -->
   <div id="welcome" class="card">
-    <div class="kicker">职工考勤单 / No.00000</div>
+    <div class="kicker">Badge Scan / No.00000</div>
     <div class="title">班味人格图鉴</div>
     <div class="dash"></div>
-    <div class="lead">四个维度、16 种班味人格。<br>测完给你一张考勤单和这个月的考勤卡。</div>
+    <div class="lead">四个维度、16 种班味人格。<br>测完给你一张工牌和这个月的考勤卡。</div>
     <ul class="pts">
-      <li>30 道题，直接出考勤单、考勤卡和四维刻度</li>
+      <li>30 道题，直接出工牌、考勤卡和四维刻度</li>
       <li>还多出你的四维是怎么组合出来的、分型建议和一份自查表</li>
       <li>凭第一反应选，别想太久——想太久就不是你的答案了</li>
     </ul>
-    <button class="btn" onclick="openCode('full')">输入验证码 · 完整版 30 题</button>
+    <button class="btn" onclick="openCode()">输入验证码 · 开始 30 题</button>
     <div class="fine">一个验证码解锁一次，下单后由卖家单独发给你。</div>
     <div class="fine">本测试为娱乐向内容，不构成任何职场建议。</div>
   </div>
@@ -268,7 +197,7 @@ body{
   <div id="quizpage" class="card hidden">
     <div class="prog">
       <div class="ptrack"><div class="pfill" id="pfill"></div></div>
-      <div class="pnum" id="pnum">01/12</div>
+      <div class="pnum" id="pnum">01/30</div>
     </div>
     <div class="q" id="qtext"></div>
     <div id="opts"></div>
@@ -280,17 +209,16 @@ body{
 
   <!-- ============ 结果 ============ -->
   <div id="result" class="hidden">
-    <div class="kicker">职工考勤记录 / 内部留存</div>
+    <div class="kicker">Badge Scan / Employee Card</div>
     <div class="dash"></div>
 
-    <!-- 考勤票据（原工牌） -->
+    <!-- 工牌 -->
     <div class="badge">
+      <div class="strap"></div>
       <div class="card bcard">
         <div class="bhead">
           <span>班味无限公司</span><em id="bcode2">BAN-0000-0000</em>
         </div>
-        <div class="formno">职工考勤记录 ── 内部留存 ── 不许外传</div>
-        <div class="stamp">本月已阅<i>人事部 · 代章</i></div>
         <div class="bbody">
           <div class="bphoto"><i id="bface">🪫</i><span>PHOTO</span></div>
           <div class="binfo">
@@ -314,24 +242,7 @@ body{
       <div id="rbars"></div>
     </div>
 
-    <!-- 12 题档：锁定区 -->
-    <div class="locked hidden" id="locked">
-      <div class="lkbox">
-        <div class="lkhd"><i>🔒</i>还锁着 18 道题的内容</div>
-        <div class="lk-note">12 题够出一张考勤单，不够说清你为什么是这一型。再答 18 题，会多出：</div>
-        <ul class="lk-list">
-          <li>你的四维组合是怎么推出来的——同一张单子，成因不一样</li>
-          <li>按你的型给的三条，比通用建议具体</li>
-          <li>一份 30 天自查表，四条每周可以对着看一遍</li>
-          <li>考勤卡补上「工位必备」那一行</li>
-        </ul>
-      </div>
-      <button class="btn" onclick="openCode('full')">输入验证码 · 继续答 18 题</button>
-      <div class="lkbuy" style="margin-top:12px">完整版 30 题在店铺里是单独的一档，买回来把码填进去就能接着答——<b>前面 12 题不用重做</b>，直接从第 13 题开始。</div>
-    </div>
-
-    <!-- 30 题档：多出来的板块 -->
-    <div class="hidden" id="fullmod">
+    <div id="fullmod">
       <div class="hr"></div>
       <div class="secm">你是哪一种，怎么来的</div>
       <div class="typepic" id="rtypepic"></div>
@@ -344,9 +255,9 @@ body{
     </div>
 
     <div class="hr"></div>
-    <div class="secm" style="color:#8A7455">这张考勤单可以存下来</div>
-    <img class="shareimg" id="shareimg" alt="班味考勤单">
-    <div style="text-align:center"><a class="dl" id="dl" download="班味考勤单.png">下载这张图</a></div>
+    <div class="secm" style="color:#7C8794">这张工牌可以存下来</div>
+    <img class="shareimg" id="shareimg" alt="班味人格工牌">
+    <div style="text-align:center"><a class="dl" id="dl" download="班味人格工牌.png">下载这张图</a></div>
 
     <div class="footnote">
       本测试为娱乐向内容，不构成任何职场建议。<br>
@@ -372,16 +283,15 @@ body{
 <script src="../config.js"></script>
 <script>
 /* ============================================================
- *  班味人格图鉴 —— 12 题体验版 / 30 题完整版
+ *  班味人格图鉴 —— 30 题完整版
  *
  *  判分跟另外几套不一样：不是算指数，是分型。
  *  四个维度各是一根二元轴，选项直接标了属于哪一极（QUIZ[i].o[ai] = [文本, 维度, 极]），
  *  一维里数票，票多的那极就是你的字母，四个字母拼成 16 型之一。
- *  一维的题数是奇数（体验版 3、完整版 7），所以不会出现平票。
+ *  一维的题数是奇数（7），所以不会出现平票。
  *  彩蛋题的维度是 'egg'，不参与分型，只喂考勤卡的最后一行。
  *
- *  题库是 30 题的长数组，前 12 题就是体验版那一档；S.answers 一次开满 30 格，
- *  所以从 12 题升到 30 题时前面的答案原地保留，直接接着答。
+ *  题库是 30 题的长数组，一次开满 30 格。
  *  后端只做两件事：核销验证码、存结果（见 ai-quiz/server/app.py）。
  * ============================================================ */
 const DIMS   = [{"k": "e", "n": "电量", "a": "耗电", "b": "发电", "d": "上班是把你榨干，还是让你来劲"}, {"k": "v", "n": "情绪出口", "a": "憋着", "b": "直给", "d": "有情绪是咽下去，还是当场说出来"}, {"k": "s", "n": "摸鱼方式", "a": "明摸", "b": "暗摸", "d": "摸得光明正大，还是摸得神不知鬼不觉"}, {"k": "b", "n": "下班边界", "a": "能断", "b": "断不净", "d": "走出公司门就是走出来，还是走不出来"}];
@@ -390,8 +300,7 @@ const TYPES  = {"EHMD": {"n": "打卡机", "job": "按时到岗荣誉员工", "o
 const LETTERS = [{"k": "e", "a": "E", "b": "S"}, {"k": "v", "a": "H", "b": "B"}, {"k": "s", "a": "M", "b": "A"}, {"k": "b", "a": "D", "b": "N"}];
 const EGG    = {"咖啡或者茶": "第三杯咖啡", "耳机": "常年挂着的耳机", "一件外套，空调太冷": "椅背上的外套", "抽屉里的零食": "抽屉里的零食", "静音，随缘看": "静音的手机", "消息基本秒回": "秒回的手", "免打扰一直开着": "免打扰开关", "通知全关，主动去翻": "关掉的通知"};      // 彩蛋选项 → 考勤卡上「工位必备」那一行的短标签
 const KEYS = ["A","B","C","D"];
-const LIGHT_N = 12;   // 体验版题数
-const FULL_N  = 30;   // 完整版题数
+const FULL_N  = 30;   // 题数
 
 // 照片位那张脸：按「电量极 + 情绪极」四种组合给，键就是两个极点字母的连写
 // （aa 耗电+憋着、ab 耗电+直给、ba 发电+憋着、bb 发电+直给）。
@@ -406,7 +315,7 @@ const API = {
       const r = await fetch(API_BASE + '/api/verify', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ code: code, need: need || 'light' })
+        body: JSON.stringify({ code: code, need: need || 'full' })
       });
       const j = await r.json();
       return { ok: !!j.ok, msg: j.msg || '', scope: j.scope || null };
@@ -430,14 +339,12 @@ const S = {
   answers: new Array(FULL_N).fill(-1),
   cur: 0,
   code: '',
-  tier: 'full',
   need: 'full',
-  upto: FULL_N,
 };
 
 /* ---------- 存档 ----------
-   跟其余几套同样的道理：买家看完 12 题的结果、切回店铺下单、过一会儿再回来时，
-   标签页多半已经被手机回收了。每答一题就往 localStorage 存一份，重开能接着答。
+   答题中途切回店铺、过一会儿再回来时，标签页多半已经被手机回收了。
+   每答一题就往 localStorage 存一份，重开能接着答。
    只存在买家自己的浏览器里、不上传；换设备就没有。 */
 const SAVE_KEY = 'ban_state';
 // 重开页面直接落到结果页时，这一次不要再往服务端记一条——来回开关几次就会
@@ -445,9 +352,7 @@ const SAVE_KEY = 'ban_state';
 let skipSave = false;
 function save(){
   try{
-    localStorage.setItem(SAVE_KEY, JSON.stringify({
-      a: S.answers, tier: S.tier, upto: S.upto
-    }));
+    localStorage.setItem(SAVE_KEY, JSON.stringify({ a: S.answers }));
   }catch(e){}
 }
 function restore(){
@@ -456,10 +361,8 @@ function restore(){
   if (!sv || !Array.isArray(sv.a) || sv.a.length !== FULL_N) return false;
   if (!sv.a.filter(v => v >= 0).length) return false;   // 一题没答，当没测过
   S.answers = sv.a;
-  S.tier = sv.tier === 'full' ? 'full' : 'light';
-  S.upto = S.tier === 'full' ? FULL_N : LIGHT_N;
   const done = n => sv.a.slice(0, n).every(v => typeof v === 'number' && v >= 0);
-  if (done(S.upto)){ skipSave = true; showResult(); return true; }
+  if (done(FULL_N)){ skipSave = true; showResult(); return true; }
   const at = S.answers.findIndex(v => v < 0);
   S.cur = at < 0 ? 0 : at;
   show("quizpage");
@@ -491,8 +394,7 @@ function pctOf(t, k){
   const s = t[k].a + t[k].b;
   return s ? Math.round(t[k].a / s * 100) : 0;
 }
-/** 出一份完整判分结果。upto 传第几题就只算到第几题——
-    12 题档和 30 题档共用这一个函数，区别只是 upto。 */
+/** 出一份完整判分结果。upto 传第几题就只算到第几题 */
 function judge(upto){
   const t = tally(upto);
   const poles = {};
@@ -502,8 +404,7 @@ function judge(upto){
   // 页面上会显示一个跟作答完全无关的人格——而且不报错。
   const code = LETTERS.map(l => l[poles[l.k]]).join('');
   // 彩蛋题的答案单独收一份：它不进任何维度，只决定考勤卡最后一行「工位必备」。
-  // 体验版答不到第 29、30 题，所以这里是 null，那一行就整行不渲染——
-  // 不编一个值填上，那行会变成假数据。
+  // 没答到那两题时这里是 null，那一行就整行不渲染——不编一个值填上，那行会变成假数据。
   let egg = null;
   for (let i = 0; i < upto; i++){
     const ai = S.answers[i];
@@ -533,26 +434,14 @@ function attendance(r){
     ['咽回去的话', String(1 + Math.round(va * 22)), '句'],
     ['下班后回消息', String(2 + Math.round((1 - ba) * 40)), '条'],
   ];
-  // 「工位必备」靠彩蛋题，而彩蛋题在第 29、30 题——体验版没答过，judge 给的
-  // egg 就是 null，这里整行不渲染。
+  // 「工位必备」靠彩蛋题（第 29、30 题），judge 没拿到 egg 就整行不渲染。
   return { rows: rows, must: r.egg };
 }
 
 /* ---------- 答题 ---------- */
-function startQuiz(tier){
-  S.tier = tier === 'full' ? 'full' : 'light';
-  S.upto = S.tier === 'full' ? FULL_N : LIGHT_N;
+function startQuiz(){
   S.cur = 0;
   S.answers = new Array(FULL_N).fill(-1);
-  save();
-  show("quizpage");
-  renderQ();
-}
-/** 已答过 12 题的买家升档：答案原地不动，游标直接挪到第 13 题 */
-function resumeFull(){
-  S.tier = 'full';
-  S.upto = FULL_N;
-  S.cur = LIGHT_N;
   save();
   show("quizpage");
   renderQ();
@@ -560,30 +449,29 @@ function resumeFull(){
 function renderQ(){
   const q = QUIZ[S.cur];
   $("qtext").textContent = q.q;
-  $("pnum").textContent = String(S.cur + 1).padStart(2,'0') + "/" + S.upto;
-  $("pfill").style.width = ((S.cur + 1) / S.upto * 100) + "%";
+  $("pnum").textContent = String(S.cur + 1).padStart(2,'0') + "/" + FULL_N;
+  $("pfill").style.width = ((S.cur + 1) / FULL_N * 100) + "%";
   $("opts").innerHTML = q.o.map((o, i) => {
     const sel = S.answers[S.cur] === i ? " sel" : "";
     return '<button class="opt' + sel + '" onclick="pick(' + i + ')">'
          + '<span class="k">' + KEYS[i] + '</span><span>' + o[0] + '</span></button>';
   }).join("");
   $("prevbtn").classList.toggle("hidden", S.cur === 0);
-  $("nextbtn").textContent = S.cur === S.upto - 1 ? "看结果" : "下一题 ›";
+  $("nextbtn").textContent = S.cur === FULL_N - 1 ? "看结果" : "下一题 ›";
   $("nextbtn").disabled = S.answers[S.cur] === -1;
 }
 function pick(i){ S.answers[S.cur] = i; save(); renderQ(); }
 function prevQ(){ if (S.cur > 0){ S.cur--; renderQ(); } }
 function nextQ(){
   if (S.answers[S.cur] === -1) return;
-  if (S.cur >= S.upto - 1){ showResult(); return; }
+  if (S.cur >= FULL_N - 1){ showResult(); return; }
   S.cur++;
   renderQ();
 }
 
 /* ---------- 结果 ---------- */
 function showResult(){
-  const r = judge(S.upto);
-  const full = S.tier === 'full';
+  const r = judge(FULL_N);
   const T = r.T;
   const d = new Date();
   const ds = d.getFullYear() + "." + String(d.getMonth()+1).padStart(2,'0')
@@ -622,31 +510,23 @@ function showResult(){
     const aOn = r.poles[dm.k] === 'a';
     return '<div class="ax">'
       + '<span class="an' + (aOn ? ' on' : '') + '">' + dm.a + '</span>'
-      // p 是 **a 极的占比**，而 a 极的文字摆在左边，所以滑块要用 100-p：
-      // p=100（全选 a 极）时滑块该停在最左。写成 left:p% 的话，越偏 a 滑块越靠右，
-      // 跟旁边高亮的那一侧正好相反——2026-09-25 换皮时才发现，之前一直反着显示。
-      + '<div class="atk"><i class="' + (aOn ? '' : 'b') + '" style="left:' + (100 - p) + '%"></i></div>'
+      + '<div class="atk"><i class="' + (aOn ? '' : 'b') + '" style="left:' + p + '%"></i></div>'
       + '<span class="an r' + (aOn ? '' : ' on') + '">' + dm.b + '</span>'
       + '</div>';
   }).join("");
 
-  // 30 题档才有的三块
-  $("locked").classList.toggle("hidden", full);
-  $("fullmod").classList.toggle("hidden", !full);
-  if (full){
-    $("rtypepic").textContent = T.pic + "\n\n" + T.why;
-    $("rtypeRx").innerHTML = T.rx.map(t => '<div><i>·</i>' + t + '</div>').join("");
-    $("rself").innerHTML = T.self.map(t => '<div><i></i><span>' + t + '</span></div>').join("");
-  }
+  $("rtypepic").textContent = T.pic + "\n\n" + T.why;
+  $("rtypeRx").innerHTML = T.rx.map(t => '<div><i>·</i>' + t + '</div>').join("");
+  $("rself").innerHTML = T.self.map(t => '<div><i></i><span>' + t + '</span></div>').join("");
 
-  drawCard(r, T, att, full);
+  drawCard(r, T, att);
 
   if (skipSave) skipSave = false;
   else API.saveResult({
-    tier: S.tier,
+    tier: 'full',
     product: 'banwei',
     code: S.code || null,
-    answers: S.answers.slice(0, S.upto),
+    answers: S.answers,
     result: { type_code: r.code, type_name: T.n, job: T.job,
               poles: r.poles, dims: {e: pctOf(r.t,'e'), v: pctOf(r.t,'v'),
                                      s: pctOf(r.t,'s'), b: pctOf(r.t,'b')} }
@@ -657,36 +537,23 @@ function showResult(){
 }
 
 /* ---------- 分享卡 ----------
-   用 canvas 画一张考勤单：牛皮纸底 + 票据纸卡面（上下咬一排半圆齿孔）+ 考勤卡几行，
-   标题走行楷。手机上长按保存，比截屏干净。高度不写死——判词和考勤行数都跟着结果变，
-   写死高度长结果会压到页脚上。做法是先在一个测量用的上下文里画一遍，拿到内容结束的 y，
+   用 canvas 画一张工牌：深色卡头 + 白卡面 + 考勤卡几行。手机上长按保存，
+   比截屏干净。高度不写死——判词和考勤行数都跟着结果变，写死高度长结果会压到
+   页脚上。做法是先在一个测量用的上下文里画一遍，拿到内容结束的 y，
    再按实际高度建画布重画一次。 */
-/* 导出图用的调色板。跟 CSS 的 :root 是两套（canvas 读不到 CSS 变量），
-   改配色**两处都要改**，不然页面上换了皮、下载下来的图还是旧配色。
-   三份色板要同步：本文件的 :root、这里的 CARD、出图脚本的 :root。 */
 const CARD = {
-  INK: "#3A2A16", MID: "#7A6748", DIM: "#9C8862",
-  LINE: "#B5A47E", PAPER: "#F4EAD2", PAPER2: "#FAF3E0",
-  KRAFT: "#C9B48C", STRAP: "#4A3A24", ACC: "#C2372A", BLUE: "#1A4FBF",
-  SERIF: '"STXingkai","STKaiti","SimHei",serif',
+  INK: "#16233A", MID: "#5C6472", DIM: "#939CA8",
+  LINE: "#DAD7CA", PAPER: "#FBFAF4", STRAP: "#1D2A3D", ACC: "#D8FF3C",
   SANS: '-apple-system,"PingFang SC","Microsoft YaHei",sans-serif',
   MONO: 'Consolas,"Courier New",monospace'
 };
-function paintCard(x, W, H, PAD, r, T, att, full){
+function paintCard(x, W, H, PAD, r, T, att){
   const INK = CARD.INK, MID = CARD.MID, DIM = CARD.DIM;
-  const LINE = CARD.LINE, PAPER = CARD.PAPER, PAPER2 = CARD.PAPER2, ACC = CARD.ACC;
-  const KRAFT = CARD.KRAFT;
-  const SANS = CARD.SANS, MONO = CARD.MONO, SERIF = CARD.SERIF;
+  const LINE = CARD.LINE, PAPER = CARD.PAPER, STRAP = CARD.STRAP, ACC = CARD.ACC;
+  const SANS = CARD.SANS, MONO = CARD.MONO;
 
-  // 牛皮纸底 + 横向细纹。canvas 没有 repeating-linear-gradient，只能一条条画。
-  x.fillStyle = KRAFT; x.fillRect(0, 0, W, H);
-  x.strokeStyle = "rgba(255,255,255,.09)"; x.lineWidth = 1;
-  for (let gy = 3; gy < H; gy += 4){
-    x.beginPath(); x.moveTo(0, gy); x.lineTo(W, gy); x.stroke();
-  }
-
+  x.fillStyle = "#141A22"; x.fillRect(0, 0, W, H);
   const cx = PAD, cw = W - PAD * 2;
-  const L = cx + 24, R = cx + cw - 24, IW = cw - 48;   // 票面左右内边距
 
   // 换行：不让标点掉到下一行开头（避头点），否则会出现一整行只有一个「。」
   const NO_HEAD = "。，、；：？！）」』%";
@@ -703,7 +570,7 @@ function paintCard(x, W, H, PAD, r, T, att, full){
     if (line){ x.fillText(line, x0, y); y += lh; }
     return y;
   };
-  /** 按跟 wrap 完全一样的规则数行数。票面底色要先铺，就得先知道占几行。 */
+  /** 按跟 wrap 完全一样的规则数行数。卡面底色要先铺，就得先知道占几行。 */
   const countLines = (c, txt, maxW, font) => {
     c.font = font;
     let n = 1, line = "";
@@ -716,161 +583,116 @@ function paintCard(x, W, H, PAD, r, T, att, full){
 
   let y = PAD + 30;
 
-  // 票面底色必须**先**铺：canvas 没有图层，后画的盖住先画的。而票面高度得先算出来
-  // （「一句话」占几行是随型变的），所以先把各段高度定死，绘制时按同一组常量推进。
+  // ---- 工牌 ----
+  x.fillStyle = STRAP; x.fillRect(cx, y, cw, 62);
+  x.font = "20px " + SANS; x.fillStyle = "#EDF1F7";
+  x.fillText("班味无限公司", cx + 22, y + 39);
+  x.font = "17px " + MONO; x.fillStyle = ACC;
+  x.textAlign = "right";
+  x.fillText("BAN-" + r.code, cx + cw - 22, y + 39);
+  x.textAlign = "left";
+  y += 62;
+
+  // 卡面底色必须**先**铺：canvas 没有图层，后画的盖住先画的。而卡面高度得先算出来
+  // （「一句话」占几行是随型变的），所以按跟 wrap 一样的规则先量一遍。
   // 早先写成画完内容再补一层底色，结果整块正文被盖掉，导出的图上只剩一张白板——
   // 页面里看着完全正常，只有下载下来的图是空的。
-  const oneLines = countLines(x, T.one, IW, "22px " + SANS);
-  const nRows = att.rows.length + (att.must ? 1 : 0);
-  const H_HEAD = 104, H_PHOTO = 176, H_ONE = oneLines * 40 + 34;
-  const H_CODE = 92, H_ATT = 76 + nRows * 40, H_DIM = 20 + 4 * 46 + 12, H_FOOT = 60;
-  const CARD_H = H_HEAD + H_PHOTO + H_ONE + H_CODE + H_ATT + H_DIM + H_FOOT;
-  x.fillStyle = PAPER; x.fillRect(cx, y, cw, CARD_H);
-  const top = y;
+  const oneLines = countLines(x, T.one, cw - 44, "22px " + SANS);
+  const BODY_H = 178 + oneLines * 40 + 8 + 62 + 16;
+  x.fillStyle = PAPER; x.fillRect(cx, y, cw, BODY_H);
 
-  // ---- 票头 ----
-  x.font = "bold 21px " + SANS; x.fillStyle = INK;
-  x.fillText("班味无限公司", L, y + 38);
-  x.font = "16px " + MONO; x.fillStyle = MID; x.textAlign = "right";
-  x.fillText("BAN-" + r.code, R, y + 38);
-  x.textAlign = "left";
-  x.strokeStyle = INK;
-  x.lineWidth = 4; x.beginPath(); x.moveTo(L, y + 54); x.lineTo(R, y + 54); x.stroke();
-  x.lineWidth = 1.5; x.beginPath(); x.moveTo(L, y + 61); x.lineTo(R, y + 61); x.stroke();
-  x.font = "13px " + MONO; x.fillStyle = MID;
-  x.fillText("职工考勤记录 ── 内部留存 ── 不许外传", L, y + 86);
-  y += H_HEAD;
+  let cy = y;
+  // 照片位
+  x.fillStyle = "#EDEAE0"; x.fillRect(cx + 22, cy + 24, 108, 132);
+  x.font = "52px " + SANS; x.fillStyle = INK;
+  x.fillText(FACE[r.poles.e + r.poles.v] || "🧑💼", cx + 34, cy + 100);
+  x.font = "12px " + MONO; x.fillStyle = DIM;
+  x.fillText("PHOTO", cx + 46, cy + 136);
+  // 姓名 / 职位 / 部门
+  x.font = "bold 62px " + SANS; x.fillStyle = INK;
+  x.fillText(T.n, cx + 152, cy + 82);
+  x.font = "bold 22px " + SANS; x.fillStyle = MID;
+  x.fillText(T.job, cx + 152, cy + 120);
+  x.font = "19px " + MONO; x.fillStyle = DIM;
+  x.fillText(r.code + " · " + (r.poles.e === 'a' ? '续航焦虑科' : '自发电动科'), cx + 152, cy + 150);
+  cy += 178;
 
-  // ---- 照片位 + 姓名 ----
-  x.fillStyle = PAPER2; x.fillRect(L, y + 2, 100, 122);
-  x.setLineDash([5, 4]); x.strokeStyle = LINE; x.lineWidth = 2;
-  x.strokeRect(L, y + 2, 100, 122);
-  x.setLineDash([]);
-  x.font = "44px " + SANS; x.fillStyle = INK;
-  x.textAlign = "center";
-  x.fillText(FACE[r.poles.e + r.poles.v] || "🧑‍💼", L + 50, y + 76);
-  x.font = "11px " + MONO; x.fillStyle = DIM;
-  x.fillText("PHOTO", L + 50, y + 108);
-  x.textAlign = "left";
+  // 一句话
+  cy = wrap(T.one, cx + 22, cy, cw - 44, 40, "22px " + SANS, MID) + 8;
 
-  x.font = "50px " + SERIF; x.fillStyle = INK;
-  x.fillText(T.n, L + 126, y + 60);
-  x.font = "bold 20px " + SANS; x.fillStyle = INK;
-  x.fillText(T.job, L + 126, y + 98);
-  const jw = x.measureText(T.job).width;             // 职位下的那根横线，跟字一样长
-  x.strokeStyle = INK; x.lineWidth = 2;
-  x.beginPath(); x.moveTo(L + 126, y + 108); x.lineTo(L + 126 + jw + 4, y + 108); x.stroke();
-  x.font = "14px " + MONO; x.fillStyle = MID;
-  x.fillText(r.code + " · " + (r.poles.e === 'a' ? '续航焦虑科' : '自发电动科'), L + 126, y + 140);
-  y += H_PHOTO;
-
-  // ---- 一句话：左侧一道章红竖条 ----
-  x.fillStyle = ACC; x.fillRect(L, y + 2, 7, oneLines * 40 - 8);
-  y = wrap(T.one, L + 20, y + 26, IW - 128, 40, "22px " + SANS, INK) + 8;
-
-  // ---- 红色圆章：斜盖在票面上，像人事部随手按的。
-  //      压 opacity 而不是浅红，才有「印油不够」的旧章感。 ----
-  const stampX = R - 44, stampY = y - 26;
-  x.save();
-  x.globalAlpha = .72;
-  x.translate(stampX, stampY); x.rotate(-14 * Math.PI / 180);
-  x.strokeStyle = ACC; x.lineWidth = 3.5;
-  x.beginPath(); x.arc(0, 0, 46, 0, Math.PI * 2); x.stroke();
-  x.fillStyle = ACC; x.textAlign = "center";
-  x.font = "bold 19px " + SANS;
-  x.fillText("本月已阅", 0, 2);
-  x.font = "10px " + SANS;
-  x.fillText("人事部 · 代章", 0, 22);
-  x.restore();
-  x.textAlign = "left";
-
-  // ---- 卡面条码：用型代码当种子，同一型每次画出来一模一样 ----
+  // 卡面条码：用型代码当种子，同一型每次画出来一模一样
   let seed = 7;
   for (const ch of r.code) seed = seed * 31 + ch.charCodeAt(0);
   const rnd = () => { seed = (seed * 1103515245 + 12345) % 2147483648; return seed / 2147483648; };
-  const base = y + H_CODE - 26;
+  const base = cy + 52;
   x.fillStyle = INK;
   for (let i = 0; i < 46; i++){
     const bh = 16 + Math.round(rnd() * 26);
-    x.fillRect(L + i * 11, base - bh, 3 + Math.round(rnd() * 3), bh);
+    x.fillRect(cx + 22 + i * 11, base - bh, 3 + Math.round(rnd() * 3), bh);
   }
-  y += H_CODE;
+  y += BODY_H;
 
   // ---- 考勤卡 ----
-  const ay = y;
-  x.font = "bold 19px " + SANS; x.fillStyle = INK;
-  x.fillText("本 月 考 勤", L, ay + 24);
-  x.setLineDash([6, 5]); x.strokeStyle = LINE; x.lineWidth = 2;
-  x.beginPath(); x.moveTo(L, ay + 40); x.lineTo(R, ay + 40); x.stroke();
-  x.setLineDash([]);
-  let ry = ay + 76;
+  y += 26;
+  x.strokeStyle = LINE; x.lineWidth = 2;
+  x.strokeRect(cx, y, cw, 0);
+  x.font = "bold 26px " + SANS; x.fillStyle = "#FFFFFF";
+  x.fillText("本月考勤", cx + 22, y);
+  y += 18;
+  x.strokeStyle = LINE; x.beginPath();
+  x.moveTo(cx + 22, y); x.lineTo(cx + cw - 22, y); x.stroke();
+  y += 44;
   const rows = att.rows.concat(att.must ? [['工位必备', att.must, '']] : []);
   rows.forEach(rw => {
-    x.font = "20px " + SANS; x.fillStyle = MID;
-    x.fillText(rw[0], L, ry);
-    x.font = "bold 21px " + MONO; x.fillStyle = INK;
+    x.font = "23px " + SANS; x.fillStyle = DIM;
+    x.fillText(rw[0], cx + 22, y);
+    x.font = "bold 23px " + MONO; x.fillStyle = "#FFFFFF";
     x.textAlign = "right";
-    x.fillText(rw[1] + (rw[2] ? " " + rw[2] : ""), R, ry);
+    x.fillText(rw[1] + (rw[2] ? " " + rw[2] : ""), cx + cw - 22, y);
     x.textAlign = "left";
-    x.setLineDash([3, 4]); x.strokeStyle = LINE; x.lineWidth = 1.5;
-    x.beginPath(); x.moveTo(L, ry + 12); x.lineTo(R, ry + 12); x.stroke();
-    x.setLineDash([]);
-    ry += 40;
+    y += 40;
   });
-  y = ay + H_ATT;
 
-  // ---- 四维刻度：一根细轨 + 一个空心圆滑块。实心方块在浅底上太重，像涂改过。 ----
+  // ---- 四维刻度 ----
   y += 20;
   DIMS.forEach(dm => {
     const p = pctOf(r.t, dm.k);
     const aOn = r.poles[dm.k] === 'a';
-    x.font = (aOn ? "bold " : "") + "19px " + SANS;
-    x.fillStyle = aOn ? INK : DIM;
-    x.fillText(dm.a, L, y);
+    x.font = (aOn ? "bold " : "") + "21px " + SANS;
+    x.fillStyle = aOn ? "#FFFFFF" : DIM;
+    x.fillText(dm.a, cx + 22, y);
     x.textAlign = "right";
-    x.font = (aOn ? "" : "bold ") + "19px " + SANS;
-    x.fillStyle = aOn ? DIM : INK;
-    x.fillText(dm.b, R, y);
+    x.fillStyle = aOn ? DIM : "#FFFFFF";
+    x.font = (aOn ? "" : "bold ") + "21px " + SANS;
+    x.fillText(dm.b, cx + cw - 22, y);
     x.textAlign = "left";
-    const bx = L + 120, bwid = IW - 240;
-    x.fillStyle = LINE; x.fillRect(bx, y - 4, bwid, 3);
-    // 跟页面版同一处口径：p 是 a 极占比，a 极文字在左，所以滑块位置要用 100-p。
-    const sx = bx + bwid * (100 - p) / 100;
-    x.beginPath(); x.arc(sx, y - 2, 11, 0, Math.PI * 2);
-    x.fillStyle = PAPER2; x.fill();
-    x.strokeStyle = aOn ? INK : ACC; x.lineWidth = 4; x.stroke();
-    y += 46;
+    // 轨道
+    const bx = cx + 130, bwid = cw - 260;
+    x.fillStyle = "#2A3444"; x.fillRect(bx, y - 14, bwid, 8);
+    x.fillStyle = aOn ? "#FFFFFF" : ACC;
+    x.fillRect(bx + bwid * p / 100 - 9, y - 19, 18, 18);
+    y += 44;
   });
-  y += 12;
 
-  // ---- 票尾 ----
-  x.strokeStyle = INK; x.lineWidth = 3;
-  x.beginPath(); x.moveTo(L, y); x.lineTo(R, y); x.stroke();
-  x.font = "15px " + MONO; x.fillStyle = MID;
-  x.fillText("12 道题 · 三分钟", L, y + 30);
-  x.textAlign = "right";
-  x.fillText("班味人格图鉴", R, y + 30);
-  x.textAlign = "left";
-
-  return top + CARD_H;
+  return y;
 }
 
-function drawCard(r, T, att, full){
+function drawCard(r, T, att){
   const W = 750, PAD = 40;
   const probe = document.createElement("canvas").getContext("2d");
-  const endY = paintCard(probe, W, 4000, PAD, r, T, att, full);
+  const endY = paintCard(probe, W, 4000, PAD, r, T, att);
   const H = Math.ceil(endY + 150);
 
   const c = document.createElement("canvas");
   c.width = W; c.height = H;
   const x = c.getContext("2d");
-  paintCard(x, W, H, PAD, r, T, att, full);
+  paintCard(x, W, H, PAD, r, T, att);
 
   x.font = "20px " + CARD.SANS;
-  x.fillStyle = CARD.MID;      // 牛皮纸底上，深褐比原来的灰更容易读
+  x.fillStyle = CARD.DIM;
   x.textAlign = "center";
   x.fillText("本测试仅供娱乐，不构成任何职场建议", W/2, H - PAD - 46);
-  x.font = "bold 24px " + CARD.SANS; x.fillStyle = CARD.INK;
+  x.font = "bold 24px " + CARD.SANS; x.fillStyle = "#FFFFFF";
   x.fillText("AI榜老冯", W/2, H - PAD - 12);
   x.textAlign = "left";
 
@@ -880,11 +702,11 @@ function drawCard(r, T, att, full){
 }
 
 /* ---------- 验证码 ---------- */
-function openCode(need){
+function openCode(){
   S.need = 'full';
-  $("codetitle").innerHTML = '输入验证码<br>开始测完整版';
+  $("codetitle").innerHTML = '输入验证码<br>开始测班味人格';
   $("codesub").innerHTML = '一个验证码只能用一次。<br>答完 30 题出完整报告，报告可以直接存成图片。';
-  $("codebtn").textContent = '解锁 · 开始完整版';
+  $("codebtn").textContent = '解锁 · 开始测';
   $("codemask").classList.remove("hidden");
   $("cerr").textContent = "";
   $("cok").textContent = "";
@@ -909,13 +731,8 @@ async function submitCode(){
 
   if (!res.ok){ err.textContent = res.msg; return; }
   S.code = raw;
-  // 以码实际的档位为准，不看请求的那一档：30 题的码测 12 题是允许的，
-  // 反过来会被后端拦下。所以这里是 scope 说了算。
-  const scope = res.scope || S.need;
-  // 前 12 题已经答完的（答完才会看到结果页），升档就接着答，不让人重做
-  const resume = scope === 'full' && S.answers.filter(v => v >= 0).length >= LIGHT_N;
   ok.textContent = "验证通过，正在开始…";
-  setTimeout(() => { closeCode(); resume ? resumeFull() : startQuiz(scope); }, 500);
+  setTimeout(() => { closeCode(); startQuiz(); }, 500);
 }
 
 restore();

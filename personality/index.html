@@ -160,31 +160,7 @@
   .jobs { margin-top: 18px; width: 100%; text-align: center; background: var(--card); border-radius: 14px; padding: 16px 18px; font-size: 15px; line-height: 1.6; }
   .jobs b { color: var(--accent); }
 
-  /* 锁定区 */
-  .locked { width: 100%; margin-top: 24px; background: var(--card); border-radius: 18px; padding: 24px 20px; border: 2px dashed #E4D9CB; }
-  /* 锁定块：灰底 + 虚线框，把「后面还锁着东西」画出来。
-     不上 blur——浅色卡片上盖模糊层，买家第一眼会当成页面没加载出来，
-     反而比不提示更糟。虚线框的语义是「这里有个位置，还没填上」。 */
-  .locked .lkbox { text-align: left; background: var(--viewbg); border: 2px dashed #CFC9BB;
-                   border-radius: 16px; padding: 18px 16px 12px; margin-bottom: 18px; }
-  .locked .lkhd { display: flex; align-items: center; gap: 8px; font-size: 17px;
-                  font-weight: 900; letter-spacing: 1px; margin-bottom: 9px; }
-  .locked .lki { font-size: 16px; filter: grayscale(1); opacity: .7; }
-  /* 「可复购、不用重测」这句必须留在锁定区里，不能只出现在验证码弹窗——
-     买家是看完 12 题结果那一刻决定要不要加测的，那一刻没看到就流失了。 */
-  /* 锁定区整体是居中的（.center 容器），这句必须显式左对齐——
-     居中会把三行以上的说明排成阶梯，末行只剩两个字。 */
-  .locked .lkbuy { text-align: left; font-size: 13.5px; color: var(--gray);
-                   line-height: 1.75; margin-top: 14px; }
-  .locked .lkbuy b { color: var(--accent); }
-  .locked .lk { font-size: 30px; }
-  .locked .lt { font-size: 19px; font-weight: 900; margin-top: 10px; letter-spacing: 1px; }
-  .locked .ls { font-size: 14px; color: var(--gray); margin-top: 8px; line-height: 1.7; }
-  .locked ul { text-align: left; margin: 16px 0 0; padding: 0; list-style: none; }
-  .locked li { font-size: 14px; line-height: 1.6; padding: 7px 0 7px 24px; position: relative; color: var(--dark); }
-  .locked li::before { content: "·"; position: absolute; left: 8px; color: var(--accent); font-weight: 900; font-size: 20px; line-height: 1.2; }
-
-  /* 完整版模块 */
+  /* 报告模块 */
   .sec { width: 100%; margin-top: 20px; text-align: left; background: var(--card); border-radius: 16px; padding: 18px 18px; }
   .sec .st { font-size: 14px; color: var(--gray); font-weight: 700; letter-spacing: 2px; margin-bottom: 14px; text-align: center; }
   .near-row { padding: 11px 0; border-bottom: 1px dashed var(--viewbg); }
@@ -217,11 +193,11 @@
     <h1>16 个 AI 职业人格<br>你是<span class="hl">哪一个</span>？</h1>
     <div class="sub">先看看下面这 16 个角色，猜猜你会是哪个，再往下开始测。</div>
     <div class="meta">
-      <span class="free">30 题完整版</span>
+      <span class="free">30 题</span>
       <span>几分钟出结果</span>
       <span>16 个角色</span>
     </div>
-    <button class="btn" onclick="openCode('full')">输入验证码 · 完整版 30 题</button>
+    <button class="btn" onclick="openCode()">输入验证码 · 开始 30 题</button>
 
     <div class="gal-title">先认识这 16 个角色</div>
     <div class="grid" id="ggrid"></div>
@@ -231,7 +207,7 @@
   <div id="quizpage" class="quiz hidden">
     <div class="progress">
       <div class="bar"><div class="fill" id="fill"></div></div>
-      <div class="num" id="pnum">1/12</div>
+      <div class="num" id="pnum">1/30</div>
     </div>
     <div class="q" id="qtext"></div>
     <div id="opts"></div>
@@ -262,28 +238,8 @@
 
     <div class="jobs" id="rjobs"></div>
 
-    <!-- 体验版：锁定区 -->
-    <div class="locked hidden" id="locked">
-      <div class="lkbox">
-        <div class="lkhd"><span class="lki">🔒</span>还锁着 18 道题的内容</div>
-        <div class="ls">12 题只够看出方向。再答 18 题，完整版会把下面这些一起给你。</div>
-        <ul>
-          <li>跟另外 3 个相近人格的对照，看清楚你像谁、不像谁</li>
-          <li>这种性格最拖后腿的两个地方，以及怎么补</li>
-          <li>你这条路的职业路径，从起步到成熟分三步</li>
-          <li>你这种性格该怎么用 AI，具体到每一句怎么问</li>
-          <li>一份可以存下来的完整报告图</li>
-        </ul>
-      </div>
-      <button class="btn lock" onclick="openCode('full')">输入验证码 · 继续答 18 题</button>
-      <!-- 复购说明放在锁定区、不放页面跳转：页面上任何链接都会被读成推销，
-           也会踩到站外链接那条线。文案只说「店铺里有另一档」，不指路。 -->
-      <div class="lkbuy">完整版 30 题在店铺里是单独的一档，买回来把码填进去就能接着答——<b>前面 12 题不用重做</b>，直接从第 13 题开始。</div>
-      <button class="btn ghost" onclick="window.scrollTo({top:0,behavior:'smooth'})">先不测，回到顶部</button>
-    </div>
-
-    <!-- 完整版：额外模块 -->
-    <div class="hidden" id="fullmod">
+    <!-- 报告追加模块 -->
+    <div id="fullmod">
       <div class="sec" id="rnear"></div>
       <div class="sec" id="rweak"></div>
       <div class="sec" id="rpath"></div>
@@ -308,12 +264,12 @@
   <div class="modal">
     <button class="close" onclick="closeCode()">×</button>
     <div class="box">
-      <div class="bt" id="codetitle">输入验证码<br>解锁完整版 30 题</div>
+      <div class="bt" id="codetitle">输入验证码<br>开始测</div>
       <div class="bs" id="codesub">一个验证码只能用一次。<br>答完 30 题出完整报告，报告可以直接存成图片。</div>
       <input id="codein" class="code-input" placeholder="PER-XXXXX-XXXXX" maxlength="20" autocomplete="off" spellcheck="false">
       <div class="code-err" id="codeerr"></div>
       <div class="code-ok" id="codeok"></div>
-      <button class="btn" id="codebtn" onclick="submitCode()">解锁 · 继续测</button>
+      <button class="btn" id="codebtn" onclick="submitCode()">解锁 · 开始测</button>
     </div>
   </div>
 </div>
@@ -321,9 +277,9 @@
 <script src="../config.js"></script>
 <script>
 /* ============================================================
- *  AI 职业人格测试 —— 双档版
- *  12 题体验版：给最匹配的角色 + 匹配度 + 三个特质 + 关系网（需验证码）
- *  完整 30 题：多给相近人格对照 / 短板 / 职业路径 / AI 用法 / 完整报告图
+ *  AI 职业人格测试 —— 30 题版
+ *  30 题答完给：最匹配的角色 + 匹配度 + 三个特质 + 关系网
+ *  + 相近人格对照 / 短板 / 职业路径 / AI 用法 / 完整报告图（需验证码）
  *
  *  数据层在下面，题目和角色都写在这儿；判分在 judge() 里。
  *  后端只做两件事：核销验证码、存结果（见 ai-quiz/server/app.py）。
@@ -579,12 +535,11 @@ const ROLES = [
 ];
 
 /* ---------- 30 道题 ----------
-   前 12 题 = 体验版；13-30 = 完整版追加。
    o[].r 指向 ROLES 下标。每个人格在选项里出现的次数经过配平，
    判定时再按出现次数归一化（见 judge），不会偏向任何一个人格。
 */
 const QUIZ = [
-  // ── 体验版 12 题 ──
+  // ── 题目 ──
   { q:"周末你最想做什么？", o:[
     { t:"研究一个新 AI 工具怎么玩", r:1 },
     { t:"做点好看的设计 / 图", r:2 },
@@ -646,7 +601,7 @@ const QUIZ = [
     { t:"靠自己，把不确定性扛下来", r:14 },
     { t:"赌一把，机会不等人", r:7 } ] },
 
-  // ── 完整版追加 18 题 ──
+  // ── 后半段 18 题 ──
   { q:"一个项目从零开始，你最想接手哪一块？", o:[
     { t:"定方向、拆目标、带人往前推", r:0 },
     { t:"把界面做得让人一眼就看懂", r:2 },
@@ -739,8 +694,7 @@ const QUIZ = [
     { t:"想到就能做出来的人", r:6 } ] }
 ];
 
-const LIGHT_N = 12;   // 体验版题数
-const FULL_N = 30;    // 完整版题数
+const FULL_N = 30;    // 题数
 const KEYS = ["A","B","C","D"];
 
 /* ============================================================
@@ -751,8 +705,7 @@ const API_BASE = ((window.QUIZ_API || '') + '').replace(/\/$/, '');
 
 const API = {
   /** 校验验证码：由后端原子核销，一个码只能用一次。
-   *  need 是这一档要解锁到哪（light=12 题体验版 / full=30 题完整版）——
-   *  体验版的码开不了完整版，后端会拦下并返回码的实际档位。 */
+   *  need 是这次要解锁到哪一档，以返回的 scope 为准。 */
   async verifyCode(code, need) {
     if (!API_BASE) return { ok:false, msg:"后端地址没配置，请联系我" };
     try {
@@ -787,10 +740,7 @@ const API = {
 const S = {
   answers: new Array(FULL_N).fill(-1),
   cur: 0,
-  tier: 'full',       // 实际解锁到的档位（只剩完整版一档）
   need: 'full',       // 这次要解锁哪一档，决定验证码怎么校验
-  upto: FULL_N,       // 这一档一共答多少题
-  liteRole: '',       // 12 题时的结果，用于在完整版里提示「前后是否一致」
   code: ''
 };
 
@@ -803,12 +753,12 @@ function show(id){
 
 /* ---------- 判定 ----------
    归一化：按「该人格在已答题里出现几次」折算命中率。
-   30 题时各人格出现 7-8 次不相等，直接比命中数会偏向出现多的那个；
-   折算成比例后完全公平。12 题时各人格都是 3 次，折算前后一致。 */
-function judge(upto){
+   各人格出现 7-8 次不相等，直接比命中数会偏向出现多的那个；
+   折算成比例后完全公平。 */
+function judge(){
   const appear = new Array(ROLES.length).fill(0);
   const hit = new Array(ROLES.length).fill(0);
-  for (let i = 0; i < upto; i++){
+  for (let i = 0; i < FULL_N; i++){
     const a = S.answers[i];
     QUIZ[i].o.forEach((o, idx) => {
       appear[o.r]++;
@@ -855,20 +805,9 @@ function openRole(i){
 }
 
 /* ---------- 答题 ---------- */
-function startQuiz(tier){
-  S.tier = tier;
-  S.upto = (tier === 'full') ? FULL_N : LIGHT_N;
+function startQuiz(){
   S.cur = 0;
   S.answers = new Array(FULL_N).fill(-1);
-  show("quizpage");
-  renderQ();
-}
-
-/** 从第 12 题之后接着答（解锁后走这条，前面 12 题不重做） */
-function resumeFull(){
-  S.tier = 'full';
-  S.upto = FULL_N;
-  S.cur = LIGHT_N;
   show("quizpage");
   renderQ();
 }
@@ -876,14 +815,14 @@ function resumeFull(){
 function renderQ(){
   const q = QUIZ[S.cur];
   $("qtext").textContent = (S.cur+1) + ". " + q.q;
-  $("pnum").textContent = (S.cur+1) + "/" + S.upto;
-  $("fill").style.width = (S.cur / S.upto * 100) + "%";
+  $("pnum").textContent = (S.cur+1) + "/" + FULL_N;
+  $("fill").style.width = (S.cur / FULL_N * 100) + "%";
   $("opts").innerHTML = q.o.map((o,i)=>{
     const sel = S.answers[S.cur] === i ? " sel" : "";
     return '<button class="opt'+sel+'" onclick="pick('+i+')"><span class="k">'+KEYS[i]+'</span>'+o.t+'</button>';
   }).join("");
   $("prevbtn").classList.toggle("hidden", S.cur === 0);
-  $("nextbtn").textContent = S.cur === S.upto-1 ? "看结果 ▸" : "下一题 ›";
+  $("nextbtn").textContent = S.cur === FULL_N-1 ? "看结果 ▸" : "下一题 ›";
   $("nextbtn").disabled = S.answers[S.cur] === -1;
 }
 
@@ -891,64 +830,49 @@ function pick(i){ S.answers[S.cur] = i; renderQ(); }
 function prevQ(){ if(S.cur > 0){ S.cur--; renderQ(); } }
 function nextQ(){
   if(S.answers[S.cur] === -1) return;
-  if(S.cur >= S.upto-1){ showResult(); return; }
+  if(S.cur >= FULL_N-1){ showResult(); return; }
   S.cur++;
   renderQ();
 }
 
 /* ---------- 结果页 ---------- */
 function showResult(){
-  const j = judge(S.upto);
+  const j = judge();
   const R = ROLES[j.best];
-  const isFull = S.tier === 'full';
 
-  // 12 题时记一下当时判的是谁，完整版里对比用
-  if(!isFull) S.liteRole = R.n;
-
-  $("rtag").textContent = isFull ? 'AI 预言 · 完整版 30 题' : 'AI 预言 · 12 题版';
+  $("rtag").textContent = 'AI 预言 · 30 题版';
   $("rname").textContent = R.n;
   $("rdom").textContent = R.d;
-
-  // 完整版里如果 12 题和 30 题判得不一样，明说，别让人以为是测错了
-  let vd = R.v;
-  if(isFull && S.liteRole && S.liteRole !== R.n){
-    vd += '（前 12 题先判成了「' + S.liteRole + '」，多答 18 题之后才看清是现在这个）';
-  }
-  $("rverdict").textContent = vd;
+  $("rverdict").textContent = R.v;
 
   $("rtraits").innerHTML = R.t.map(x=>'<span class="chip">'+x+'</span>').join("");
   $("rjobs").innerHTML = R.j;
   $("radar").innerHTML = radarSVG(R.dim, DIMS);
   $("rrel").innerHTML = relHTML(R);
 
-  // 体验版出锁定区，完整版出追加模块
-  $("locked").classList.toggle("hidden", isFull);
-  $("fullmod").classList.toggle("hidden", !isFull);
-  if(isFull) renderFull(R);
+  renderFull(R);
 
   // 匹配度：按归一化命中率给个百分比
   const pct = Math.round(j.rate * 100);
-  $("savetip").textContent = isFull
-    ? '长按上方卡片保存这份完整报告 · 匹配度 ' + pct + '%'
-    : '长按上方卡片保存 · 想要完整版（相近人格 / 短板 / 路径 / AI 用法），往下看';
+  $("savetip").textContent = '长按上方卡片保存这份完整报告 · 匹配度 ' + pct + '%';
 
-  renderShareCard(R, isFull, (dataUrl)=>{
+  renderShareCard(R, (dataUrl)=>{
     $("sharecard").innerHTML = '<img src="'+dataUrl+'" alt="AI 职业人格报告">'
       + '<div style="text-align:center"><a class="dl" download="AI职业人格报告.png" href="'+dataUrl+'">下载图片</a></div>';
   });
 
   API.saveResult({
-    tier: S.tier,
+    tier: 'full',
     product: 'personality',
     code: S.code || null,
-    answers: S.answers.slice(0, S.upto),
+    answers: S.answers,
     result: { role: R.n, domain: R.d, hit: j.hit, rate: j.rate }
   });
 
   show("result");
 }
 
-/* ---------- 完整版追加模块 ---------- */
+/* ---------- 报告追加模块 ---------- */
 function renderFull(R){
   $("rnear").innerHTML = '<div class="st">你和这几个角色最像</div>'
     + R.nr.map(([n,d]) => '<div class="near-row"><div class="nn">'+n+'</div><div class="nd">'+d+'</div></div>').join("");
@@ -974,15 +898,15 @@ function relHTML(R){
 }
 
 /* ---------- 验证码 ---------- */
-function openCode(need){
+function openCode(){
   S.need = 'full';
-  $("codetitle").innerHTML = "输入验证码<br>解锁完整版 30 题";
+  $("codetitle").innerHTML = "输入验证码<br>开始测";
   $("codesub").innerHTML = "一个验证码只能用一次。<br>答完 30 题出完整报告，报告可以直接存成图片。";
-  $("codebtn").textContent = "解锁 · 开始测试";
+  $("codebtn").textContent = "解锁 · 开始测";
   $("codemask").classList.remove("hidden");
   $("codeerr").textContent = "";
   $("codeok").textContent = "";
-  // 清空上一次留下的内容：输错码或换档位再点开时，旧内容会和新手打的码拼在一起
+  // 清空上一次留下的内容：输错码再点开时，旧内容会和新手打的码拼在一起
   $("codein").value = "";
   setTimeout(()=>$("codein").focus(), 100);
 }
@@ -1004,15 +928,10 @@ async function submitCode(){
 
   if(!res.ok){ err.textContent = res.msg; return; }
   S.code = raw;
-  /* 码的档位可能比请求的更高（拿完整版的码去开 12 题），以后端返回的 scope 为准 */
-  const gotFull = res.scope === 'full';
-  ok.textContent = gotFull ? "验证通过，正在进入完整版…" : "验证通过，正在开始 12 题…";
+  ok.textContent = "验证通过，正在开始…";
   setTimeout(()=>{
     closeCode();
-    if(!gotFull){ startQuiz('light'); return; }
-    // 已经答到中途解锁的，从第 13 题接着答；还没开始答的，从第 1 题开始
-    if(S.answers.slice(0, LIGHT_N).every(a => a === -1)) startQuiz('full');
-    else resumeFull();
+    startQuiz();
   }, 500);
 }
 
@@ -1057,14 +976,13 @@ function radarSVG(dims, labels){
 
 /* ============================================================
  *  报告卡（Canvas，可长按保存 / 下载）
- *  体验版 750×1334，完整版 750×1760（多画相近人格和 AI 用法）
  * ============================================================ */
-function renderShareCard(R, isFull, cb){
+function renderShareCard(R, cb){
   const W = 750;
 
   /* 纵向布局：自上而下推游标，画布高度由内容算出来。
      高度以前写死 1334 / 1760，结果判词压住雷达图顶标签、第三个特质压住
-     「关系网」标题、完整版的 AI 用法框被底部横幅切掉一半。 */
+     「关系网」标题、AI 用法框被底部横幅切掉一半。 */
   const RADAR_R = 148;
   let y = 472;                                        // 判词框底（框顶 340 + 高 132）
   y += 12 + RADAR_R + 26 + 5;
@@ -1077,14 +995,12 @@ function renderShareCard(R, isFull, cb){
   y += 28; const REL_BOX  = y;
   y += 168;
   let NEAR_T_Y = 0, NEAR_BOX = 0, AI_T_Y = 0, AI_BOX = 0;
-  if (isFull){
-    y += 40; NEAR_T_Y = y;
-    y += 34; NEAR_BOX = y;
-    y += 60 + R.nr.length * 76;
-    y += 44; AI_T_Y = y;
-    y += 34; AI_BOX = y;
-    y += 60 + R.ai.length * 72;
-  }
+  y += 40; NEAR_T_Y = y;
+  y += 34; NEAR_BOX = y;
+  y += 60 + R.nr.length * 76;
+  y += 44; AI_T_Y = y;
+  y += 34; AI_BOX = y;
+  y += 60 + R.ai.length * 72;
   const H = Math.round(y + 32 + 108);                 // 底部留白 + 横幅
 
   const c = document.createElement("canvas");
@@ -1102,7 +1018,7 @@ function renderShareCard(R, isFull, cb){
   x.fillText("AI 职业人格测试", 52+123, 52+28);
 
   x.fillStyle = "#383931"; x.font = "900 42px "+F;
-  x.fillText(isFull ? "完整版报告 · 30 题" : "12 题版结果", W/2, 158);
+  x.fillText("完整版报告 · 30 题", W/2, 158);
 
   x.fillStyle = "#944735"; x.font = "900 78px "+F;
   x.fillText(R.n, W/2, 238);
@@ -1156,8 +1072,8 @@ function renderShareCard(R, isFull, cb){
     ly += 50;
   });
 
-  // 完整版追加：相近人格 + 两条 AI 用法
-  if (isFull){
+  // 相近人格 + AI 用法
+  {
     const fy = NEAR_BOX;
     x.textAlign = "center";
     x.fillStyle = "#8A837B"; x.font = "700 24px "+F;
@@ -1264,7 +1180,7 @@ function wrapCenter(x, txt, cx, y0, maxW, lineH, maxLines){
 /* ---------- 启动 ---------- */
 renderGallery();
 // 支持从首页直接带 ?full=1 进来（比如发货时给的直链）
-if (location.search.indexOf("full=1") >= 0) setTimeout(()=>openCode("full"), 300);
+if (location.search.indexOf("full=1") >= 0) setTimeout(()=>openCode(), 300);
 </script>
 </body>
 </html>

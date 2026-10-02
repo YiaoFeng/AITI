@@ -127,30 +127,6 @@
   .no{font-family:Consolas,"Courier New",monospace; font-size:11px; letter-spacing:4px;
       color:var(--dim); margin-top:8px}
 
-  /* ---------- 锁定区 / 完整版 ---------- */
-  .locked{background:#F0EDE0; padding:20px 18px; margin-top:18px}
-  .locked .secm{margin-bottom:10px}
-  .lk-note{font-size:13.5px; line-height:1.8; color:var(--mid);margin-bottom:12px}
-  .lk-list{list-style:none}
-  .lk-list li{
-    font-size:14px; line-height:1.75; color:var(--mid); padding-left:18px;
-    position:relative; margin-bottom:9px;
-  }
-  .lk-list li::before{content:'·'; position:absolute; left:4px; color:var(--dim)}
-  /* 锁定块：票纸色底 + 虚线框。不用 blur——票根是一维排版，
-     糊一层在买家眼里等于「这页坏了」。虚线框说的是「有个位置还没填」。 */
-  .locked .lkbox{
-    border:2px dashed var(--line); background:var(--paper);
-    padding:16px 16px 12px; margin-bottom:16px;
-  }
-  .locked .lkhd{display:flex; align-items:center; gap:8px; font-size:16px;
-                font-weight:900; letter-spacing:1px; margin-bottom:10px}
-  .locked .lki{font-style:normal; font-size:15px; filter:grayscale(1); opacity:.6}
-  /* 「可复购、不用重测」必须留在锁定区：买家是看完 12 题那一刻决定加不加测的 */
-  .locked .lkbuy{font-size:13.5px; line-height:1.8; color:var(--mid)}
-  .locked .lkbuy b{color:var(--ink)}
-  .locked > .btn{margin-top:16px}
-
   .typename{font-size:34px; font-weight:900; letter-spacing:4px; margin-bottom:14px}
   .typepic{font-size:14.5px; line-height:1.9; color:var(--mid)}
   .selfbox{background:#F0EDE0; padding:16px; font-size:14.5px; line-height:1.85}
@@ -211,7 +187,7 @@
         <li>还多出你是哪一种恋爱脑、离上一档差什么、分型处方和一份自查表</li>
         <li>凭第一反应选，别想太久，想太久就不是你的答案了</li>
       </ul>
-      <button class="btn" onclick="openCode('full')">输入验证码 · 完整版 30 题</button>
+      <button class="btn" onclick="openCode()">输入验证码 · 开始 30 题</button>
       <div class="fine">一个验证码解锁一次，下单后由卖家单独发给你。</div>
       <div class="fine">本测试为娱乐向内容，结果不构成任何心理或情感建议。</div>
     </div>
@@ -220,7 +196,7 @@
     <div id="quizpage" class="hidden">
       <div class="prog">
         <div class="ptrack"><div class="pfill" id="pfill"></div></div>
-        <div class="pnum" id="pnum">01/12</div>
+        <div class="pnum" id="pnum">01/30</div>
       </div>
       <div class="q" id="qtext"></div>
       <div id="opts"></div>
@@ -240,7 +216,6 @@
       <div class="lvl" id="rlvl">重度患者</div>
       <div class="dash"></div>
       <div class="verdict" id="rverdict"></div>
-      <div class="verdict hidden" id="rshift"></div>
 
       <div class="hr"></div>
       <div class="bars" id="rbars"></div>
@@ -256,28 +231,7 @@
       <div class="barcode" id="rbarcode"></div>
       <div class="no" id="rno"></div>
 
-      <!-- 12 题档：锁定区。不把完整版内容模糊掉，而是直接列清单——
-           模糊遮罩在票根这种一维排版的页面上会显得像加载失败。 -->
-      <div class="locked hidden" id="locked">
-        <div class="hr"></div>
-        <div class="lkbox">
-          <div class="lkhd"><i class="lki">🔒</i>还锁着 18 道题的内容</div>
-          <div class="lk-note">12 题只够算出分数，不够分清你是哪一种。再答 18 题，会多出：</div>
-          <ul class="lk-list">
-            <li>你是哪一种恋爱脑——5 个型的画像，同一分数也会分成不同类型</li>
-            <li>离上一档还差什么，卡在你五个维度里的哪一条</li>
-            <li>按你的型给的三条处方，比通用那两条更具体</li>
-            <li>一份 30 天自查表，四条每周可以对着看一遍</li>
-          </ul>
-        </div>
-        <button class="btn" onclick="openCode('full')">输入验证码 · 继续答 18 题</button>
-        <!-- 这里只做「完整版是单独一档、在店铺里」的提示，不放按钮也不放链接——
-             页面上任何跳转都会被读成推销，也会踩到站外链接那条线。 -->
-        <div class="lkbuy" style="margin-top:12px">完整版 30 题在店铺里是单独的一档，买回来把码填进去就能接着答——<b>前面 12 题不用重做</b>，直接从第 13 题开始。</div>
-      </div>
-
-      <!-- 30 题档：多出来的板块 -->
-      <div class="hidden" id="fullmod">
+      <div id="fullmod">
         <div class="hr"></div>
         <div class="secm">你是哪一种恋爱脑</div>
         <div class="typename" id="rtypename"></div>
@@ -327,10 +281,8 @@
 <script src="../config.js"></script>
 <script>
 /* ============================================================
- *  恋爱脑指数 —— 12 题体验版 / 30 题完整版
- *  题库是一个 30 题的长数组，前 12 题就是体验版那一档。
- *  S.upto 决定这一轮答到第几题，S.answers 一次开满 30 格，
- *  所以从 12 题升到 30 题时前面的答案原地保留，直接接着答。
+ *  恋爱脑指数 —— 30 题完整版
+ *  题库是一个 30 题的长数组，S.answers 一次开满 30 格。
  *  后端只做两件事：核销验证码、存结果（见 ai-quiz/server/app.py）。
  * ============================================================ */
 const DIMS  = [{"k": "bind", "n": "情绪绑定", "d": "他的情绪能牵动你多少", "w": 0.25, "rev": false}, {"k": "time", "n": "时间占据", "d": "一天里有多少时刻在想他", "w": 0.2, "rev": false}, {"k": "give", "n": "自我让渡", "d": "为对方改过多少自己的事", "w": 0.2, "rev": false}, {"k": "dream", "n": "幻想浓度", "d": "脑补未来的频率和画质", "w": 0.2, "rev": false}, {"k": "free", "n": "抽离能力", "d": "吵架冷战后能不能自己回血", "w": 0.15, "rev": true}];
@@ -340,8 +292,7 @@ const SCENES = {"bind": "他回消息慢了十分钟，你已经把那几句话�
 const RX     = {"bind": ["消息发出去之后，先去做一件跟他无关的事。给他回你的时间，也给你自己。", "他的情绪是他的，不用每一条都由你来接住。"], "time": ["每天留一小时不看他手机、不想他的事——就当是给自己上班。", "把「今天想了他几次」记下来，一周后回看，你会吓一跳。"], "give": ["下次他说改时间，你先说自己的安排，别急着配合。", "留一件只属于你的事，不因为任何人取消。"], "dream": ["把「以后」这个词从聊天里去掉，只说这周的事。", "想到未来画面时问自己一句：这是我想要的，还是我以为他想要的？"], "free": ["下次冷战，先哄好自己再谈和解，不用当场把话说开。", "试一次自己出去待一天，不报备细节，看看天会不会塌。"]};
 const TYPES  = {"bind": {"n": "绑定型", "pic": "你对他情绪的敏感度，比对自己还高。他一句话的语气、中间那个停顿，你都能读出三层意思。你不是想控制他，你是控制不了自己不去接收——他的状态就是你的天气，他阴天你就下雨。", "rx": ["他说「没事」的时候，回一句「行，那我不问了，你想说再说」。把追问换成留一扇门。", "发现自己又在读他语气时，先问自己一句：这件事今天影响我吃饭睡觉吗？不影响就先放着。", "把他的聊天框从列表最上面那些位置挪下去。看得见就会点开，点开就会重读。"], "self": ["这周有几次是「他没回我」，又有几次其实是「我在等他回」？", "他情绪不好的时候，我有没有先问过自己现在什么感觉？", "我读出来的那些意思，有几条是他真说过的，有几条是我补的？", "有没有哪一整天，我的心情跟他完全无关？"]}, "time": {"n": "占满型", "pic": "他不是你生活的一部分，他是你生活的背景音。做事的时候他在，发呆的时候他在，连睡着之前最后想到的也是他。你没觉得这有什么问题——因为已经这样很久了，久到想不起来不是这样的日子是什么样。", "rx": ["每天划出一小时，手机放到另一个房间，做一件跟他完全无关的事。", "把「今天想了他几次」用手机计个数，一周后回看，你会吓一跳。", "跟朋友约一次，全程不聊他。聊到了就换话题，看看还能聊什么。"], "self": ["今天有没有哪一段时间，我完全没想起他？", "我最近一次一个人做的事，是什么时候？", "朋友找我，我的第一反应是「他有空吗」还是「我去」？", "我最近有没有一件新的、跟他无关的事可以讲给别人听？"]}, "give": {"n": "让渡型", "pic": "你改过的东西自己都数不清了——吃饭的地方、睡觉的时间、周末的安排、本来想做的事。每一次你都觉得这没什么，改完也没觉得委屈。问题是改得太多以后，你已经想不起来自己原来想吃什么了。", "rx": ["下次他提改时间，先说自己的安排，再说「要不换一天」。顺序别倒过来。", "留一件只属于你的事，写进日程里，不因为任何人取消。", "点一次自己想吃的东西，别先问「你吃什么」。"], "self": ["这一周我迁就了几次？其中有几次是真的心甘情愿？", "有没有一件事，是认识他之后我就没再碰过的？", "上一次我主动提出想法，是什么时候？", "如果他今天问我想干嘛，我答得出来吗？"]}, "dream": {"n": "脑补型", "pic": "你有一个平行世界，那里的一切都已经安排好了。你们去过哪、住哪、养不养狗、老了什么样，你都想过。现实里可能才认识三个月。你不是不理智，你只是太擅长把一点线索补成一整部剧。", "rx": ["把「以后」这个词从聊天里去掉，只说这周和下周的事。", "想到未来画面的时候问自己：这是我想的，还是我以为他想的？", "脑补到停不下来时，把那个画面写下来。写出来就落地了，也就不那么缠人。"], "self": ["今天脑补的那些画面里，有多少是他真的提过的？", "我有没有拿「我们以后」去替一件现在还没说清的事？", "最近一次因为脑补而失望，是因为什么？", "我了解的是他，还是我想象出来的他？"]}, "free": {"n": "断联型", "pic": "你不太能一个人待着。吵架之后那段没有消息的时间，对你来说不是冷静，是煎熬。你会一遍遍看手机，会先低头，哪怕错不在你。你要的不是赢，是赶紧恢复连接。", "rx": ["下次冷战，先给自己两小时——不联系，也不看手机。两小时后再决定说什么。", "试一次自己出去待半天，不报备细节，看看天会不会塌。", "把「必须马上说开」换成「明天再说也一样」。"], "self": ["这次冷战，我撑了多久才先发的消息？", "一个人待着的那段时间，我做了什么？", "我是想解决问题，还是只是想让他回我？", "有没有哪一次，是我等他先开口的？"]}};
 const KEYS = ["A","B","C","D"];
-const LIGHT_N = 12;   // 体验版题数
-const FULL_N  = 30;   // 完整版题数
+const FULL_N  = 30;   // 题数
 
 const API_BASE = ((window.QUIZ_API || '') + '').replace(/\/$/, '');
 const API = {
@@ -352,7 +303,7 @@ const API = {
       const r = await fetch(API_BASE + '/api/verify', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ code: code, need: need || 'light' })
+        body: JSON.stringify({ code: code, need: need || 'full' })
       });
       const j = await r.json();
       return { ok: !!j.ok, msg: j.msg || '', scope: j.scope || null };
@@ -377,15 +328,11 @@ const S = {
   answers: new Array(FULL_N).fill(-1),
   cur: 0,
   code: '',
-  tier: 'full',     // 已经解锁到的档位（只剩完整版一档）
-  need: 'full',     // 这次要解锁哪一档，决定验证码怎么校验
-  upto: FULL_N,     // 这一轮答到第几题
-  liteIndex: null,  // 12 题档判出来的指数，续答后用来对比
+  need: 'full',
 };
 
 /* ---------- 存档 ----------
-   「12 题不用重做」这句承诺，光靠内存里的答案撑不住：买家看完 12 题的结果，
-   切回小红书下单，过一会儿再回来时标签页多半已经被手机回收了，答案就没了。
+   答题中途切回小红书、过一会儿再回来时，标签页多半已经被手机回收了，答案就没了。
    所以每答一题都往 localStorage 存一份，重开页面能接着答。
    只存在买家自己的浏览器里、不上传；换设备就没有，换设备只能重答。 */
 const SAVE_KEY = 'nao_state';
@@ -395,12 +342,10 @@ const SAVE_KEY = 'nao_state';
 let skipSave = false;
 function save(){
   try{
-    localStorage.setItem(SAVE_KEY, JSON.stringify({
-      a: S.answers, tier: S.tier, upto: S.upto, lite: S.liteIndex
-    }));
+    localStorage.setItem(SAVE_KEY, JSON.stringify({ a: S.answers }));
   }catch(e){}
 }
-/** 重开页面时接着上次的位置。答完的档位直接出结果页（那里才有「继续答 18 题」） */
+/** 重开页面时接着上次的位置，答完了就直接出结果页 */
 function restore(){
   let sv = null;
   try{ sv = JSON.parse(localStorage.getItem(SAVE_KEY) || 'null'); }catch(e){ return false; }
@@ -408,10 +353,7 @@ function restore(){
   const done = n => sv.a.slice(0, n).every(v => typeof v === 'number' && v >= 0);
   if (!sv.a.filter(v => v >= 0).length) return false;   // 一题没答，当没测过
   S.answers = sv.a;
-  S.liteIndex = typeof sv.lite === 'number' ? sv.lite : null;
-  S.tier = sv.tier === 'full' ? 'full' : 'light';
-  S.upto = S.tier === 'full' ? FULL_N : LIGHT_N;
-  if (done(S.upto)){ skipSave = true; showResult(); return true; }
+  if (done(FULL_N)){ skipSave = true; showResult(); return true; }
   const at = S.answers.findIndex(v => v < 0);           // 从没答的那题接着答
   S.cur = at < 0 ? 0 : at;
   show("quizpage");
@@ -431,9 +373,7 @@ function show(id){
    直接比原始分会让题多的维度占便宜）；抽离能力是反向的，取 100-v。
    指数是五个维度按权重加权的和，权重加起来是 1。
 
-   upto 传这一轮算到第几题。12 题档传 LIGHT_N 就只算前 12 题——续答到 30 题
-   之后仍然可以再调一次 calc(LIGHT_N) 拿出「只看前 12 题」的分数，
-   结果是拿它跟完整版对比，所以这个参数必须留着，不能改成读 S.upto。 */
+   upto 传这一轮算到第几题 */
 function calc(upto){
   const raw = {}, full = {};
   DIMS.forEach(d => { raw[d.k] = 0; full[d.k] = 0; });
@@ -478,26 +418,9 @@ function levelOf(idx){
 }
 
 /* ---------- 答题 ---------- */
-/** 从头开始答。tier 决定答到第几题，答案槽一律开满 30 格 */
-function startQuiz(tier){
-  S.tier = tier === 'full' ? 'full' : 'light';
-  S.upto = S.tier === 'full' ? FULL_N : LIGHT_N;
+function startQuiz(){
   S.cur = 0;
   S.answers = new Array(FULL_N).fill(-1);
-  S.liteIndex = null;
-  save();
-  show("quizpage");
-  renderQ();
-}
-
-/** 已答过 12 题的买家升档：答案原地不动，游标直接挪到第 13 题。
-    先按前 12 题判一次分存起来，出完整版结果时好跟买家交代
-    「你之前看到的是这个数，多答 18 题之后变成了那个数」。 */
-function resumeFull(){
-  S.tier = 'full';
-  S.upto = FULL_N;
-  S.liteIndex = calc(LIGHT_N).index;
-  S.cur = LIGHT_N;
   save();
   show("quizpage");
   renderQ();
@@ -506,15 +429,15 @@ function resumeFull(){
 function renderQ(){
   const q = QUIZ[S.cur];
   $("qtext").textContent = q.q;
-  $("pnum").textContent = String(S.cur + 1).padStart(2,'0') + "/" + S.upto;
-  $("pfill").style.width = ((S.cur + 1) / S.upto * 100) + "%";
+  $("pnum").textContent = String(S.cur + 1).padStart(2,'0') + "/" + FULL_N;
+  $("pfill").style.width = ((S.cur + 1) / FULL_N * 100) + "%";
   $("opts").innerHTML = q.o.map((o, i) => {
     const sel = S.answers[S.cur] === i ? " sel" : "";
     return '<button class="opt' + sel + '" onclick="pick(' + i + ')">'
          + '<span class="k">' + KEYS[i] + '</span><span>' + o[0] + '</span></button>';
   }).join("");
   $("prevbtn").classList.toggle("hidden", S.cur === 0);
-  $("nextbtn").textContent = S.cur === S.upto - 1 ? "看结果" : "下一题 ›";
+  $("nextbtn").textContent = S.cur === FULL_N - 1 ? "看结果" : "下一题 ›";
   $("nextbtn").disabled = S.answers[S.cur] === -1;
 }
 
@@ -522,7 +445,7 @@ function pick(i){ S.answers[S.cur] = i; save(); renderQ(); }
 function prevQ(){ if (S.cur > 0){ S.cur--; renderQ(); } }
 function nextQ(){
   if (S.answers[S.cur] === -1) return;
-  if (S.cur >= S.upto - 1){ showResult(); return; }
+  if (S.cur >= FULL_N - 1){ showResult(); return; }
   S.cur++;
   renderQ();
 }
@@ -557,9 +480,8 @@ function renderFull(r){
 }
 
 function showResult(){
-  const r = calc(S.upto);
+  const r = calc(FULL_N);
   const L = levelOf(r.index);
-  const full = S.tier === 'full';
 
   $("stamp").textContent = L[3];
   $("rnum").innerHTML = r.index + "<em>分</em>";
@@ -595,31 +517,19 @@ function showResult(){
   $("rbarcode").innerHTML = Array.from({length: 58}, () =>
     '<i style="height:' + (22 + Math.round(rnd() * 30)) + 'px"></i>').join("");
 
-  // 12 题档：锁区列清单；30 题档：换完整版那四块
-  $("locked").classList.toggle("hidden", full);
-  $("fullmod").classList.toggle("hidden", !full);
-  if (full) renderFull(r);
+  $("fullmod").classList.remove("hidden");
+  renderFull(r);
 
-  // 续答上来的人，前后两个分数不一样要认账，不能装作一直是这个数。
-  // 两档题量和配比不同，差几分是正常的——先解释掉，省得买家以为算错了。
-  const shift = $("rshift");
-  if (full && S.liteIndex !== null && S.liteIndex !== r.index){
-    shift.textContent = '你之前 12 题看到的是 ' + S.liteIndex + ' 分，多答 18 题之后才判成现在这个数。'
-                      + '两档的题不一样多，指数差几分是正常的。';
-    shift.classList.remove("hidden");
-  } else shift.classList.add("hidden");
-
-  drawCard(r, L[2], L[3], L[4], order.slice(0, 2), full ? TYPES[r.top] : null);
+  drawCard(r, L[2], L[3], L[4], order.slice(0, 2), TYPES[r.top]);
 
   if (skipSave) skipSave = false;
   else API.saveResult({
-    tier: S.tier,
+    tier: 'full',
     product: 'love_index',
     code: S.code || null,
-    answers: S.answers.slice(0, S.upto),
+    answers: S.answers,
     result: { index: r.index, level: L[2], dims: r.val, top: r.top,
-              type: full ? TYPES[r.top].n : null,
-              lite_index: S.liteIndex }
+              type: TYPES[r.top].n }
   });
 
   save();
@@ -640,7 +550,7 @@ const CARD = {
 };
 
 /** 画卡片正文，返回内容结束的 y（外框和页脚由 drawCard 按最终高度补）。
-    type 是完整版的分型（12 题档传 null），有就多画一段。 */
+    type 是这一型的分型，有就多画一段。 */
 function paintCard(x, W, H, PAD, r, lvlName, stamp, verdict, topDims, type){
   const INK = CARD.INK, MID = CARD.MID, DIM = CARD.DIM;
   const LINE = CARD.LINE, RED = CARD.RED;
@@ -744,7 +654,7 @@ function paintCard(x, W, H, PAD, r, lvlName, stamp, verdict, topDims, type){
     y += 12;
   });
 
-  // 完整版才有的一段：型名 + 画像 + 分型处方
+  // 型名 + 画像 + 分型处方
   if (type){
     y += 18;
     dash(y);
@@ -798,11 +708,11 @@ function drawCard(r, lvlName, stamp, verdict, topDims, type){
 
 /* ---------- 验证码 ---------- */
 /** 只做完整版 30 题一档 */
-function openCode(need){
+function openCode(){
   S.need = 'full';
-  $("codetitle").innerHTML = '输入验证码<br>开始测完整版';
+  $("codetitle").innerHTML = '输入验证码<br>开始测恋爱脑指数';
   $("codesub").innerHTML = '一个验证码只能用一次。<br>答完 30 题出完整报告，报告可以直接存成图片。';
-  $("codebtn").textContent = '解锁 · 开始完整版';
+  $("codebtn").textContent = '解锁 · 开始测';
   $("codemask").classList.remove("hidden");
   $("cerr").textContent = "";
   $("cok").textContent = "";
@@ -827,13 +737,8 @@ async function submitCode(){
 
   if (!res.ok){ err.textContent = res.msg; return; }
   S.code = raw;
-  // 以码实际的档位为准，不看请求的那一档：30 题的码测 12 题是允许的，
-  // 反过来会被后端拦下（上面那步就没过）。所以这里是 scope 说了算。
-  const scope = res.scope || S.need;
-  // 前 12 题已经答完的（答完才会看到结果页），升档就接着答，不让人重做
-  const resume = scope === 'full' && S.answers.filter(v => v >= 0).length >= LIGHT_N;
   ok.textContent = "验证通过，正在开始…";
-  setTimeout(() => { closeCode(); resume ? resumeFull() : startQuiz(scope); }, 500);
+  setTimeout(() => { closeCode(); startQuiz(); }, 500);
 }
 
 // 上次没答完就关掉的，重开接着上次的位置；没测过就停在首页
