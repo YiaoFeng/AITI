@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#141018">
+<link rel="icon" href="data:,">
+<title>出单台</title>
+<style>
+:root{
+  --bg:#141018; --card:#1e1a24; --line:#2e2836; --txt:#f2ecf5; --dim:#9a90a6;
+  --amber:#e8b04b; --green:#4bc98a; --red:#e0605f; --blue:#5c9ce0;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg);color:var(--txt);
+  font:15px/1.5 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+img{display:block}
+.top{
+  position:sticky;top:0;z-index:20;background:rgba(20,16,24,.95);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);padding:12px 14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+}
+.top h1{font-size:17px;margin:0;font-weight:700}
+.tabs{display:flex;gap:6px;margin-left:auto}
+.tabs button{border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:13px;color:var(--dim)}
+.tabs button.on{background:var(--amber);color:#1a1520;border-color:var(--amber);font-weight:700}
+main{padding:14px;max-width:1180px;margin:0 auto}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;position:relative;
+}
+.card.fresh{border-color:var(--amber);box-shadow:0 0 0 1px var(--amber) inset}
+.card.fresh::after{
+  content:'新';position:absolute;top:-9px;left:14px;background:var(--red);color:#fff;
+  font-size:11px;font-weight:800;border-radius:6px;padding:2px 8px;
+}
+.card .head{display:flex;align-items:baseline;gap:10px;margin-bottom:2px}
+.card .no{font-size:26px;font-weight:800;color:var(--amber);letter-spacing:.5px}
+.card .who{font-size:14px;color:var(--dim)}
+.card .st{margin-left:auto;font-size:12px;border-radius:6px;padding:2px 9px;border:1px solid var(--line);color:var(--dim);white-space:nowrap}
+.card .st.new{color:var(--amber);border-color:#6b5320}
+.card .st.making{color:var(--blue);border-color:#2f4c6b}
+.card .st.served{color:var(--green);border-color:#2c6349}
+.card .st.closed{color:var(--dim)}
+.card .st.void{color:var(--red);border-color:#6b3030}
+.card .time{font-size:12px;color:var(--dim);margin-bottom:10px}
+.card ul{list-style:none;margin:0 0 8px;padding:0}
+.card li{display:flex;gap:10px;padding:7px 0;border-bottom:1px dashed var(--line);font-size:16px}
+.card li:last-child{border-bottom:none}
+.card li .q{font-weight:800;color:var(--amber);min-width:38px}
+.card li .nm{flex:1;font-weight:600}
+.card li .ab{font-size:12px;color:var(--dim);align-self:center}
+.card .note{font-size:13px;color:var(--green);background:#1a2620;border-radius:8px;padding:8px 10px;margin-bottom:10px}
+.card .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.card .acts button{border-radius:9px;padding:9px 15px;font-size:14px;font-weight:700;border:1px solid var(--line)}
+.b1{background:var(--amber);color:#1a1520;border-color:var(--amber)!important}
+.b2{background:var(--green);color:#12211a;border-color:var(--green)!important}
+.b3{background:transparent;color:var(--txt)}
+.b9{background:transparent;color:var(--red);border-color:#4a2b2b!important;margin-left:auto}
+.card .thumb{width:100%;border-radius:10px;margin-top:10px;border:1px solid var(--line)}
+.mini{font-size:12px;color:var(--dim);margin-top:8px}
+.empty{text-align:center;color:var(--dim);padding:70px 20px;font-size:15px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#332b3d;border:1px solid var(--line);border-radius:10px;padding:10px 18px;font-size:14px;display:none;z-index:99}
+.login{max-width:340px;margin:80px auto;text-align:center}
+.login input{width:100%;background:#221d29;border:1px solid var(--line);border-radius:10px;color:var(--txt);padding:13px;font-size:18px;text-align:center;letter-spacing:4px;margin:16px 0}
+.login button{width:100%;background:var(--amber);color:#1a1520;font-weight:800;border-radius:10px;padding:14px;font-size:16px}
+.bell{margin-left:8px;border:1px solid var(--line);border-radius:8px;padding:6px 10px;font-size:12px;color:var(--dim)}
+.bell.off{color:var(--red);border-color:#4a2b2b}
+</style>
+</head>
+<body>
+
+<div id="loginBox" class="login" style="display:none">
+  <h1 style="font-size:20px">出单台</h1>
+  <div style="color:var(--dim);font-size:13px;margin-top:6px">输后台口令</div>
+  <input id="pw" type="password" inputmode="numeric" placeholder="口令">
+  <button onclick="doLogin()">进去</button>
+  <div class="mini" id="loginMsg" style="margin-top:12px"></div>
+</div>
+
+<div id="app" style="display:none">
+  <div class="top">
+    <h1 id="shopName">出单台</h1>
+    <button class="bell" id="bell" onclick="toggleSound()">🔔 开</button>
+    <div class="tabs">
+      <button class="on" data-s="active" onclick="switchTab('active')">在做的</button>
+      <button data-s="history" onclick="switchTab('history')">历史</button>
+      <button onclick="location.href='/admin.html'">上架管理</button>
+    </div>
+  </div>
+  <main><div class="grid" id="grid"></div></main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const $ = id => document.getElementById(id);
+const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const AKEY = 'bar_admin_token';
+let TOKEN = localStorage.getItem(AKEY) || '';
+let scope = 'active';
+let known = new Set();      // 见过的单号，用来判「新单」
+let firstLoad = true;
+let soundOn = localStorage.getItem('bar_sound') !== '0';
+let timer = null;
+
+/* 后端在哪，问同目录的 cfg.json 一句——跟点单页、后台页同一套。
+   挂到帽子云上时它给的是当天的隧道地址；本机打开时是空的，API 留空就是同源。 */
+let API = '';
+async function initAPI() {
+  try {
+    const r = await fetch('cfg.json?t=' + Date.now(), { cache: 'no-store' });
+    if (r.ok) API = String(((await r.json()) || {}).base || '').replace(/\/+$/, '');
+  } catch (e) { /* 拿不到就按同源走 */ }
+}
+
+function toast(m, ms){ const t=$('toast'); t.textContent=m; t.style.display='block'; clearTimeout(t._t); t._t=setTimeout(()=>t.style.display='none', ms||2200); }
+
+async function api(path, opt){
+  opt = opt || {};
+  opt.headers = Object.assign({'Content-Type':'application/json'}, opt.headers||{}, {'X-Admin': TOKEN});
+  const r = await fetch(API + path, opt);
+  if (r.status === 401) { showLogin(); throw new Error('need login'); }
+  return r.json();
+}
+
+/* 新单提示音：用 Web Audio 现场合成，不依赖音频文件 */
+function ding(){
+  if (!soundOn) return;
+  try{
+    const C = window.AudioContext || window.webkitAudioContext; if(!C) return;
+    const ac = window._ac || (window._ac = new C());
+    const t0 = ac.currentTime;
+    [880, 1320].forEach((f, i) => {
+      const o = ac.createOscillator(), g = ac.createGain();
+      o.type = 'sine'; o.frequency.value = f;
+      g.gain.setValueAtTime(0.0001, t0 + i*0.18);
+      g.gain.exponentialRampToValueAtTime(0.28, t0 + i*0.18 + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, t0 + i*0.18 + 0.30);
+      o.connect(g); g.connect(ac.destination);
+      o.start(t0 + i*0.18); o.stop(t0 + i*0.18 + 0.32);
+    });
+  }catch(e){}
+}
+function toggleSound(){
+  soundOn = !soundOn;
+  localStorage.setItem('bar_sound', soundOn ? '1' : '0');
+  $('bell').textContent = soundOn ? '🔔 开' : '🔕 关';
+  $('bell').classList.toggle('off', !soundOn);
+  if (soundOn) ding();
+}
+
+async function doLogin(){
+  const r = await fetch(API + '/api/admin/login', {method:'POST',headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({password: $('pw').value})}).then(x=>x.json()).catch(()=>({}));
+  if (!r.ok) { $('loginMsg').textContent = r.msg || '进不去'; return; }
+  TOKEN = r.token; localStorage.setItem(AKEY, TOKEN);
+  start();
+}
+function showLogin(){ $('loginBox').style.display='block'; $('app').style.display='none'; }
+
+function switchTab(s){
+  scope = s;
+  document.querySelectorAll('.tabs button[data-s]').forEach(b=>b.classList.toggle('on', b.dataset.s===s));
+  firstLoad = true; known = new Set();
+  pull();
+}
+
+const NEXT = {new:{s:'making',t:'接单'}, making:{s:'served',t:'出杯了'}, served:{s:'closed',t:'结算收工'}};
+
+function cardHTML(o){
+  const nx = NEXT[o.status];
+  const items = o.items.map(i=>`<li><span class="q">×${i.qty}</span><span class="nm">${esc(i.name)}</span>
+      ${i.abv?`<span class="ab">${esc(i.abv)}</span>`:''}</li>`).join('');
+  const acts = [];
+  if (nx) acts.push(`<button class="b1" onclick="setStatus(${o.no},'${nx.s}')">${nx.t}</button>`);
+  if (o.status !== 'closed')
+    acts.push(`<button class="b3" onclick="pickPhoto(${o.no})">传照片</button>`,
+              `<button class="b3" onclick="setNote(${o.no})">写落款</button>`);
+  if (o.status !== 'closed' && o.status !== 'void')
+    acts.push(`<button class="b9" onclick="voidOrder(${o.no})">作废</button>`);
+  return `<div class="card ${known.has(o.no)?'':'fresh'}" data-no="${o.no}">
+    <div class="head">
+      <span class="no">NO. ${String(o.no).padStart(4,'0')}</span>
+      <span class="who">${esc(o.name||'没留名')}</span>
+      <span class="st ${o.status}">${esc(o.status_cn||o.status)}</span>
+    </div>
+    <div class="time">${esc(o.created_at)} · 取单码 ${o.pick_code}</div>
+    <ul>${items}</ul>
+    ${o.note?`<div class="note">${esc(o.note)}</div>`:''}
+    ${o.photo_url?`<img class="thumb" src="${API}${o.photo_url}" alt="">`:''}
+    <div class="acts">${acts.join('')}</div>
+    <div class="mini">共 ${o.items.reduce((a,b)=>a+b.qty,0)} 杯</div>
+  </div>`;
+}
+
+async function pull(){
+  let d;
+  try { d = await api('/api/admin/orders?scope=' + scope); } catch(e){ return; }
+  $('shopName').textContent = '出单台 · ' + (scope==='active' ? '在做的' : '历史');
+  const list = d.orders || [];
+  const fresh = list.filter(o => !known.has(o.no) && (o.status==='new'||o.status==='making'));
+  // 第一次进来不响铃，免得一打开就炸一串
+  if (!firstLoad && fresh.length) ding();
+  list.forEach(o => known.add(o.no));
+  firstLoad = false;
+  $('grid').innerHTML = list.length ? list.map(cardHTML).join('')
+    : `<div class="empty">${scope==='active' ? '这会儿没有新单，歇着吧 🍸' : '还没有结束的单'}</div>`;
+}
+
+async function setStatus(no, s){
+  const r = await api(`/api/admin/order/${no}/status`, {method:'POST', body: JSON.stringify({status: s})});
+  if (!r.ok) return toast(r.msg||'没改成');
+  const t = {making:'接单了', served:'出杯了，客人那边会自己变', closed:'这一单收工'}[s];
+  toast(t || '好了');
+  if (s === 'closed' || s === 'served') known.add(no);
+  pull();
+}
+async function voidOrder(no){
+  if (!confirm(`第 ${no} 单作废？占掉的库存会还回去。`)) return;
+  const r = await api(`/api/admin/order/${no}/void`, {method:'POST', body:'{}'});
+  if (!r.ok) return toast(r.msg||'没作废成');
+  toast('已作废'); pull();
+}
+async function setNote(no){
+  const v = prompt('给这一单写句落款（会印在纪念卡上）', '这一杯，是今晚的。');
+  if (v === null) return;
+  await api(`/api/admin/order/${no}/note`, {method:'POST', body: JSON.stringify({note: v})});
+  toast('落款写好了');
+}
+
+/* 从出单台也能替客人补一张照片：走同一个接口，把 token 找出来 */
+async function pickPhoto(no){
+  const inp = document.createElement('input');
+  inp.type='file'; inp.accept='image/*';
+  inp.onchange = async () => {
+    const f = inp.files[0]; if (!f) return;
+    toast('传着呢…');
+    const data = await shrink(f, 1600);
+    const r = await api(`/api/admin/order/${no}/photo`, {method:'POST', body: JSON.stringify({data})});
+    if (!r.ok) return toast(r.msg||'没传上去');
+    toast('照片放上去了'); pull();
+  };
+  inp.click();
+}
+function shrink(file, maxSide){
+  return new Promise((res, rej)=>{
+    const fr = new FileReader();
+    fr.onload = ()=>{
+      const im = new Image();
+      im.onload = ()=>{
+        const s = Math.min(1, maxSide/Math.max(im.width, im.height));
+        const cv = document.createElement('canvas');
+        cv.width = Math.round(im.width*s); cv.height = Math.round(im.height*s);
+        cv.getContext('2d').drawImage(im,0,0,cv.width,cv.height);
+        res(cv.toDataURL('image/jpeg', .86));
+      };
+      im.onerror = rej; im.src = fr.result;
+    };
+    fr.onerror = rej; fr.readAsDataURL(file);
+  });
+}
+
+function start(){
+  $('loginBox').style.display='none'; $('app').style.display='block';
+  $('bell').textContent = soundOn ? '🔔 开' : '🔕 关';
+  $('bell').classList.toggle('off', !soundOn);
+  pull();
+  clearInterval(timer);
+  timer = setInterval(()=>{ if(!document.hidden) pull(); }, 3000);
+}
+
+(async () => {
+  await initAPI();
+  if (!TOKEN) return showLogin();
+  const s = await fetch(API + '/api/admin/session', {headers:{'X-Admin':TOKEN}}).then(r=>r.json()).catch(()=>({}));
+  if (s.logged_in) start(); else showLogin();
+})();
+</script>
+</body>
+</html>
