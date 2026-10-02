@@ -18,7 +18,7 @@
   "privacy": "由 本土化 70% + API稳定性 30% 推算（榜单无独立隐私维度）",
   "creative": "由 中文能力 45% + 实际调用 30% + 趋势热度 25% 推算（榜单无独立创意维度）"
  },
- "count": 70,
+ "count": 71,
  "models": [
   {
    "name": "Qwen3.8-Max-0902",
@@ -108,7 +108,7 @@
     "multimodal": 85,
     "longtext": 88,
     "cost": 86,
-    "speed": 96,
+    "speed": 95,
     "privacy": 84,
     "ecosystem": 83,
     "creative": 83
@@ -121,6 +121,32 @@
     "how": "Pro 和 Flash 是两个独立模型，按任务分派",
     "advice": "日常问答走 Flash，难题再交给 Pro",
     "why": "Flash 便宜且快得多，拿 Pro 干简单活是最常见的浪费"
+   },
+   "power": 83
+  },
+  {
+   "name": "Gemini 3.8 Flash",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 80,
+    "coding": 93,
+    "chinese": 72,
+    "multimodal": 81,
+    "longtext": 88,
+    "cost": 80,
+    "speed": 98,
+    "privacy": 74,
+    "ecosystem": 81,
+    "creative": 76
+   },
+   "brief": "DeepSWE 73.7，HLE 47.8",
+   "updated_at": "2026-09-03",
+   "tier": {
+    "key": "google",
+    "label": "思考预算",
+    "how": "thinking budget 可以调，也能设成 0 直接关掉",
+    "advice": "批量跑的小任务关掉，需要多步推理的再开",
+    "why": "思考档位越高延迟越明显，价格随推理 token 一起上涨"
    },
    "power": 83
   },
@@ -186,7 +212,7 @@
     "multimodal": 80,
     "longtext": 98,
     "cost": 69,
-    "speed": 65,
+    "speed": 63,
     "privacy": 82,
     "ecosystem": 83,
     "creative": 79
@@ -229,32 +255,6 @@
    "power": 82
   },
   {
-   "name": "Gemini 3.8 Flash",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 80,
-    "coding": 93,
-    "chinese": 72,
-    "multimodal": 81,
-    "longtext": 88,
-    "cost": 80,
-    "speed": 96,
-    "privacy": 74,
-    "ecosystem": 81,
-    "creative": 76
-   },
-   "brief": "DeepSWE 73.7，HLE 47.8",
-   "updated_at": "2026-09-03",
-   "tier": {
-    "key": "google",
-    "label": "思考预算",
-    "how": "thinking budget 可以调，也能设成 0 直接关掉",
-    "advice": "批量跑的小任务关掉，需要多步推理的再开",
-    "why": "思考档位越高延迟越明显，价格随推理 token 一起上涨"
-   },
-   "power": 82
-  },
-  {
    "name": "Gemini 3.6 Flash",
    "vendor": "海外",
    "score": {
@@ -290,7 +290,7 @@
     "multimodal": 75,
     "longtext": 98,
     "cost": 80,
-    "speed": 79,
+    "speed": 78,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -328,7 +328,7 @@
     "multimodal": 75,
     "longtext": 92,
     "cost": 72,
-    "speed": 78,
+    "speed": 80,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -349,7 +349,7 @@
    "vendor": "海外",
    "score": {
     "reasoning": 81,
-    "coding": 94,
+    "coding": 95,
     "chinese": 72,
     "multimodal": 78,
     "longtext": 90,
@@ -458,7 +458,7 @@
     "multimodal": 82,
     "longtext": 90,
     "cost": 77,
-    "speed": 91,
+    "speed": 90,
     "privacy": 72,
     "ecosystem": 77,
     "creative": 73
@@ -503,7 +503,7 @@
     "multimodal": 75,
     "longtext": 90,
     "cost": 71,
-    "speed": 82,
+    "speed": 83,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -529,7 +529,7 @@
     "multimodal": 75,
     "longtext": 91,
     "cost": 95,
-    "speed": 86,
+    "speed": 87,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -633,7 +633,7 @@
     "multimodal": 77,
     "longtext": 87,
     "cost": 94,
-    "speed": 68,
+    "speed": 69,
     "privacy": 86,
     "ecosystem": 85,
     "creative": 81
@@ -773,6 +773,32 @@
    "power": 79
   },
   {
+   "name": "DeepSeek Pro",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 73,
+    "coding": 83,
+    "chinese": 80,
+    "multimodal": 65,
+    "longtext": 87,
+    "cost": 78,
+    "speed": 82,
+    "privacy": 84,
+    "ecosystem": 77,
+    "creative": 76
+   },
+   "brief": "DeepSWE 62.7，HLE 41.0",
+   "updated_at": "2026-08-24",
+   "tier": {
+    "key": "deepseek",
+    "label": "双版本搭配",
+    "how": "Pro 和 Flash 是两个独立模型，按任务分派",
+    "advice": "日常问答走 Flash，难题再交给 Pro",
+    "why": "Flash 便宜且快得多，拿 Pro 干简单活是最常见的浪费"
+   },
+   "power": 79
+  },
+  {
    "name": "DeepSeek Flash",
    "vendor": "国产",
    "score": {
@@ -818,25 +844,6 @@
    "power": 79
   },
   {
-   "name": "Inkling Small",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 65,
-    "coding": 79,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 81,
-    "cost": 88,
-    "speed": 92,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "SciCode 49.7，TB4.0 1.51",
-   "updated_at": "2026-09-18",
-   "power": 79
-  },
-  {
    "name": "Qwen3.8 2.4T A95B",
    "vendor": "国产",
    "score": {
@@ -846,7 +853,7 @@
     "multimodal": 75,
     "longtext": 87,
     "cost": 74,
-    "speed": 66,
+    "speed": 65,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -861,32 +868,6 @@
     "why": "开着更准，但更慢更贵，简单任务上纯属浪费"
    },
    "power": 79
-  },
-  {
-   "name": "DeepSeek Pro",
-   "vendor": "国产",
-   "score": {
-    "reasoning": 73,
-    "coding": 83,
-    "chinese": 80,
-    "multimodal": 65,
-    "longtext": 87,
-    "cost": 78,
-    "speed": 78,
-    "privacy": 84,
-    "ecosystem": 77,
-    "creative": 76
-   },
-   "brief": "DeepSWE 62.7，HLE 41.0",
-   "updated_at": "2026-08-24",
-   "tier": {
-    "key": "deepseek",
-    "label": "双版本搭配",
-    "how": "Pro 和 Flash 是两个独立模型，按任务分派",
-    "advice": "日常问答走 Flash，难题再交给 Pro",
-    "why": "Flash 便宜且快得多，拿 Pro 干简单活是最常见的浪费"
-   },
-   "power": 78
   },
   {
    "name": "Muse Spark 1.2",
@@ -960,6 +941,51 @@
    "power": 78
   },
   {
+   "name": "Inkling Small",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 65,
+    "coding": 79,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 81,
+    "cost": 88,
+    "speed": 85,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "SciCode 49.7，TB4.0 1.51",
+   "updated_at": "2026-09-18",
+   "power": 78
+  },
+  {
+   "name": "Kimi K2.7 Code",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 63,
+    "coding": 76,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 86,
+    "cost": 79,
+    "speed": 77,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "SciCode 47.8，Tau 20.2",
+   "updated_at": "2026-09-18",
+   "tier": {
+    "key": "moonshot",
+    "label": "思考开关",
+    "how": "可以切换思考模式",
+    "advice": "读文档、做摘要关掉，需要推理再开",
+    "why": "思考模式更慢更贵，长文本场景未必用得上"
+   },
+   "power": 78
+  },
+  {
    "name": "Ling 3.0 Flash",
    "vendor": "国产",
    "score": {
@@ -988,12 +1014,31 @@
     "multimodal": 75,
     "longtext": 91,
     "cost": 87,
-    "speed": 90,
+    "speed": 88,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
    },
    "brief": "Tau 23.5，SciCode 44.9",
+   "updated_at": "2026-09-18",
+   "power": 78
+  },
+  {
+   "name": "K2 Horizon 375B A23B",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 64,
+    "coding": 69,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 87,
+    "cost": 76,
+    "speed": 84,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "Tau 34.2，SciCode 42.9",
    "updated_at": "2026-09-18",
    "power": 78
   },
@@ -1007,7 +1052,7 @@
     "multimodal": 75,
     "longtext": 79,
     "cost": 96,
-    "speed": 70,
+    "speed": 72,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1040,51 +1085,6 @@
     "advice": "批量跑的小任务关掉，需要多步推理的再开",
     "why": "思考档位越高延迟越明显，价格随推理 token 一起上涨"
    },
-   "power": 77
-  },
-  {
-   "name": "Kimi K2.7 Code",
-   "vendor": "国产",
-   "score": {
-    "reasoning": 63,
-    "coding": 76,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 86,
-    "cost": 79,
-    "speed": 73,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "SciCode 47.8，Tau 20.2",
-   "updated_at": "2026-09-18",
-   "tier": {
-    "key": "moonshot",
-    "label": "思考开关",
-    "how": "可以切换思考模式",
-    "advice": "读文档、做摘要关掉，需要推理再开",
-    "why": "思考模式更慢更贵，长文本场景未必用得上"
-   },
-   "power": 77
-  },
-  {
-   "name": "K2 Horizon 375B A23B",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 64,
-    "coding": 69,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 87,
-    "cost": 76,
-    "speed": 75,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "Tau 34.2，SciCode 42.9",
-   "updated_at": "2026-09-18",
    "power": 77
   },
   {
@@ -1123,6 +1123,32 @@
    },
    "brief": "SciCode 43.3，Tau 17.5",
    "updated_at": "2026-09-18",
+   "power": 77
+  },
+  {
+   "name": "Quasar 438B (Max, Based on GLM-5.2)",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 46,
+    "coding": 77,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 82,
+    "cost": 83,
+    "speed": 89,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "Tau 28.7，SciCode 48.1",
+   "updated_at": "2026-09-18",
+   "tier": {
+    "key": "zhipu",
+    "label": "思考开关",
+    "how": "深度思考模式可以开关",
+    "advice": "常规任务关掉，复杂推理再开",
+    "why": "开着思考会拉长响应时间，简单任务上不划算"
+   },
    "power": 77
   },
   {
@@ -1225,7 +1251,7 @@
     "multimodal": 68,
     "longtext": 85,
     "cost": 93,
-    "speed": 79,
+    "speed": 78,
     "privacy": 87,
     "ecosystem": 79,
     "creative": 78
@@ -1251,7 +1277,7 @@
     "multimodal": 67,
     "longtext": 77,
     "cost": 96,
-    "speed": 67,
+    "speed": 68,
     "privacy": 87,
     "ecosystem": 76,
     "creative": 82
@@ -1308,7 +1334,7 @@
     "multimodal": 60,
     "longtext": 91,
     "cost": 88,
-    "speed": 80,
+    "speed": 79,
     "privacy": 79,
     "ecosystem": 68,
     "creative": 67
@@ -1422,7 +1448,7 @@
     "multimodal": 75,
     "longtext": 60,
     "cost": 92,
-    "speed": 76,
+    "speed": 77,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1460,7 +1486,7 @@
     "multimodal": 75,
     "longtext": 60,
     "cost": 76,
-    "speed": 74,
+    "speed": 77,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1498,7 +1524,7 @@
     "multimodal": 75,
     "longtext": 60,
     "cost": 100,
-    "speed": 74,
+    "speed": 72,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1536,7 +1562,7 @@
     "multimodal": 75,
     "longtext": 60,
     "cost": 76,
-    "speed": 71,
+    "speed": 72,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
