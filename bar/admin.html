@@ -77,7 +77,7 @@ a.big{display:block;text-align:center;text-decoration:none;box-sizing:border-box
 <div id="loginBox" class="login" style="display:none">
   <h1 style="font-size:20px">上架管理</h1>
   <div style="color:var(--dim);font-size:13px;margin-top:6px">输后台口令</div>
-  <input id="pw" type="password" inputmode="numeric" placeholder="口令">
+  <input id="pw" type="password" inputmode="text" autocomplete="current-password" placeholder="口令">
   <button onclick="doLogin()">进去</button>
   <div style="color:var(--red);font-size:13px;margin-top:12px" id="loginMsg"></div>
 </div>
@@ -205,7 +205,7 @@ function renderShop(){
     <button class="big" onclick="saveShop()">存下来</button>
     <div style="color:var(--dim);font-size:12.5px;line-height:1.7;margin-top:20px">
       点单页：<b>/</b> · 出单台：<b>/bar.html</b> · 后台：<b>/admin.html</b><br>
-      后台口令存在 data/admin_password.txt，改完要重启服务才生效。
+      后台口令存在 data/admin_password.txt，改完立刻生效，不用重启。
     </div>`;
 }
 async function saveShop(){
