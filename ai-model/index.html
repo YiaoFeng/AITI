@@ -71,6 +71,17 @@
   .pick div{flex:1;background:var(--card);border-radius:14px;padding:14px;text-align:center;box-shadow:var(--shadow)}
   .pick b{display:block;font-size:23px;font-weight:800;color:var(--accent)}
   .pick span{font-size:12px;color:var(--gray)}
+  /* 首页去「单项实力榜」的入口。放在数字块下面、做题入口上面：
+     它是免费的、不用输验证码，先让读者拿到点东西再谈买码，转化比硬推好。 */
+  .ranklink{display:flex;align-items:center;gap:12px;background:var(--card);
+    border-radius:16px;padding:16px 18px;box-shadow:var(--shadow);margin-top:16px;
+    text-decoration:none;color:inherit;transition:.15s}
+  .ranklink:hover{background:#FBF8F3}
+  .ranklink .tx{flex:1;min-width:0}
+  .ranklink .tx b{display:block;font-size:15.5px;font-weight:800;margin-bottom:3px}
+  .ranklink .tx b em{font-style:normal;color:var(--accent)}
+  .ranklink .tx span{font-size:12.5px;color:var(--gray);line-height:1.55;display:block}
+  .ranklink .ar{flex:0 0 auto;font-size:22px;color:var(--accent);font-weight:800;line-height:1}
   .how{background:var(--viewbg);border-radius:16px;padding:18px 20px;margin-top:18px}
   .how h3{font-size:15px;font-weight:800;margin-bottom:10px}
   .how li{list-style:none;font-size:14px;color:#5C574C;padding-left:22px;position:relative;margin-bottom:7px}
@@ -257,20 +268,6 @@
   .tier .tx{flex:1}
   .tier .tx b{font-size:15px}
   .tier .tx p{font-size:13.5px;color:var(--gray);line-height:1.55;margin-top:2px}
-  .lockwrap{position:relative;border-radius:18px;overflow:hidden;margin-bottom:16px;max-height:540px}
-  .lockwrap .blur{filter:blur(6px);opacity:.5;pointer-events:none;user-select:none}
-  .lockwrap .mask{
-    position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
-    background:linear-gradient(180deg,rgba(245,243,236,.35),rgba(245,243,236,.94) 55%);
-    text-align:center;padding:24px
-  }
-  .lockwrap .mask .lk{font-size:30px;margin-bottom:8px}
-  .lockwrap .mask b{font-size:17px;font-weight:800;margin-bottom:6px}
-  .lockwrap .mask p{font-size:13.5px;color:var(--gray);margin-bottom:16px;max-width:340px}
-  .lockwrap .mask .btn{max-width:300px}
-  .lockwrap .mask .buy{font-size:12.5px;color:var(--gray);line-height:1.75;margin-top:15px;
-                       max-width:320px;border-top:1px solid var(--line);padding-top:13px}
-  .lockwrap .mask .buy em{font-style:normal;color:var(--accent);font-weight:700}
   .foot{text-align:center;color:var(--gray);font-size:12.5px;padding:22px 0 0;line-height:1.8}
   .foot b{color:var(--accent)}
   .toast{
@@ -309,6 +306,15 @@
       <div><b>30</b><span>道题</span></div>
     </div>
 
+    <!-- 不做题也能看：六个方向的单项排名，不用验证码 -->
+    <a class="ranklink" href="./rank.html">
+      <div class="tx">
+        <b>不想做题？直接看 <em>单项实力榜</em></b>
+        <span>不看总分，编程 / Agent / 科研 / 长文本 / 中文 / 看图六个方向分别排名，附还没上榜的新模型进度</span>
+      </div>
+      <i class="ar">›</i>
+    </a>
+
     <!-- 你现在用哪款：选填，两个槽（主力 / 备用）。只有主力和推荐款进雷达图 -->
     <div class="card" id="use-card" style="margin-top:18px">
       <div class="use-h">你现在用哪款？
@@ -333,7 +339,7 @@
     </div>
 
     <div style="margin-top:20px">
-      <button class="btn" id="go-full">输入验证码 · 完整版 30 题</button>
+      <button class="btn" id="go-full">输入验证码 · 开始 30 题测试</button>
     </div>
     <div class="how">
       <h3>测完能拿到什么</h3>
@@ -370,7 +376,7 @@
     <div class="qbar">
       <div class="qmeta">
         <span id="q-count">第 1 / 30 题</span>
-        <span id="q-tier">完整版</span>
+        <span>AI 选型测试</span>
       </div>
       <div class="qprog"><i id="q-prog"></i></div>
     </div>
@@ -412,8 +418,7 @@ const API_PROD = window.QUIZ_API || '';   // 由 config.js 提供（隧道地址
 const IS_LOCAL = ['127.0.0.1','localhost',''].includes(location.hostname)
               || location.protocol === 'file:';
 const CONFIG = {
-  apiBase: IS_LOCAL ? 'http://127.0.0.1:8932' : API_PROD,
-  lightCount: 12
+  apiBase: IS_LOCAL ? 'http://127.0.0.1:8932' : API_PROD
 };
 
 const DIM_CN = {
@@ -426,8 +431,8 @@ const DIM_CN = {
 
 /* ── 状态 ── */
 const S = {
-  tier:'full',       // 实际解锁到的档位（只剩完整版一档）
-  need:'full',       // 这次要解锁哪一档，决定验证码怎么校验
+  need:'full',       // 校验用的档位。恒为 full——12 题体验版已于 2026-09-26 下架，
+                     // 这个字段只留给服务端 /api/verify 的契约，不是还有第二档
   idx:0,
   answers:{},        // qid -> 选项下标
   questions:[],
@@ -678,16 +683,15 @@ function rankAll(w, override){
 }
 
 /* ── 流程 ── */
-/* 只做完整版 30 题一档，need 恒为 full。 */
-$('#go-full').onclick  = ()=>{ S.need='full';  S.resume=false; paintCodePage(); show('s-code'); };  // 从首页进来=全新开始
+/* 只有一档（30 题），need 恒为 full。 */
+$('#go-full').onclick  = ()=>{ S.need='full'; paintCodePage(); show('s-code'); };
 $('#code-back').onclick= ()=> show('s-home');
 
-/* 只有完整版一档，文案固定 */
 function paintCodePage(){
-  $('#code-title').textContent = '输入验证码 · 完整版';
-  $('#code-go').textContent    = '开始完整版测试';
+  $('#code-title').textContent = '输入验证码';
+  $('#code-go').textContent    = '开始测试';
   $('#code-hint').className = 'hint';
-  $('#code-hint').textContent  = '输入后立即开始完整版 30 题测试';
+  $('#code-hint').textContent  = '输入后立即开始 30 题测试';
   $('#code-input').value = '';
 }
 
@@ -702,7 +706,7 @@ $('#code-input').addEventListener('input', e=>{
   const v = readCodeInput();
   e.target.value = v.length > 5 ? v.slice(0,5)+'-'+v.slice(5) : v;
   $('#code-hint').className = 'hint';
-  $('#code-hint').textContent = '输入后立即开始完整版 30 题测试';
+  $('#code-hint').textContent = '输入后立即开始 30 题测试';
 });
 $('#code-input').addEventListener('keydown', e=>{ if(e.key==='Enter') $('#code-go').click(); });
 
@@ -721,14 +725,10 @@ $('#code-go').onclick = async ()=>{
       body: JSON.stringify({code, need:S.need})
     }).then(r=>r.json());
     if(!r.ok){ hint.className='hint err'; hint.textContent = r.msg || '验证失败'; return; }
-    S.tier = 'full';
     S.code = code;
     hint.className='hint ok';
-    hint.textContent = '验证通过，开始完整版测试';
-    // 从结果页解锁进来的：保留已答的前 12 题，从第 13 题接着答；
-    // 从首页直接输码的：从头开始。
-    // resume 那条路 need 恒为 full，能过的码也必然是 full，不会出现降档。
-    if(S.resume){ S.resume = false; } else { S.idx = 0; S.answers = {}; }
+    hint.textContent = '验证通过，开始测试';
+    S.idx = 0; S.answers = {};
     setTimeout(()=>{ renderQ(); show('s-quiz'); }, 420);
   }catch(e){
     hint.className='hint err'; hint.textContent = '连不上服务器，检查网络后重试';
@@ -739,11 +739,10 @@ $('#code-go').onclick = async ()=>{
 
 /* ── 答题 ── */
 function renderQ(){
-  const total = S.tier==='full' ? S.questions.length : CONFIG.lightCount;
+  const total = S.questions.length;
   const q = S.questions[S.idx];
 
   $('#q-count').textContent = `第 ${S.idx+1} / ${total} 题`;
-  $('#q-tier').textContent = S.tier==='full' ? '完整版' : '12 题版';
   $('#q-prog').style.width = ((S.idx)/total*100) + '%';
   $('#q-text').textContent = q.text;
   // 题目自带解释就用解释，没有就退回那句默认提示。
@@ -772,7 +771,7 @@ function renderQ(){
   $('#q-next').textContent = (S.idx+1>=total) ? '看结果' : '下一题';
 }
 function next(){
-  const total = S.tier==='full' ? S.questions.length : CONFIG.lightCount;
+  const total = S.questions.length;
   if(S.answers[S.questions[S.idx].id]===undefined){ toast('先选一个答案'); return; }
   if(S.idx+1 >= total) return finish();
   S.idx++; renderQ();
@@ -996,14 +995,13 @@ function finish(){
   const w = weights();
   const all = rankAll(w);
   const top = all[0];
-  const light = S.tier !== 'full';
 
   // 需求画像（正权重降序）
   const need = Object.entries(w).filter(([k,v])=>v>0).sort((a,b)=>b[1]-a[1]);
   const maxNeed = need.length ? need[0][1] : 1;
 
-  $('#r-kicker').textContent = light ? '12 题版 · 初步结果' : '完整版 · 选型报告';
-  $('#r-title').textContent = light ? '最匹配你的模型' : '为你算出的选型方案';
+  $('#r-kicker').textContent = '你的 AI 选型报告';
+  $('#r-title').textContent = '为你算出的选型方案';
   // 这次测试的完成时间，报告顶部和存下来的图片共用同一个，不留两套时间
   S.finishedAt = new Date();
   $('#r-stamp').textContent = '测试完成于 ' + stampText(S.finishedAt);
@@ -1013,7 +1011,7 @@ function finish(){
 
   /* 冠军卡 */
   h += `<div class="card champ">
-    <div class="rank">${light?'TOP 1':'最推荐'}</div>
+    <div class="rank">最推荐</div>
     <div class="name">${esc(top.name)}</div>
     <div class="vendor">${esc(top.vendor)}模型 · 实力分 ${top.power}</div>
     <div class="match">${top.match.toFixed(1)}<span>% 匹配</span></div>
@@ -1029,51 +1027,19 @@ function finish(){
 
   /* 读者勾了自己在用的款，就在冠军卡下面直接回答「换不换」。
      一个都没勾就整块不渲染——空壳比没有更糟。 */
-  if(!light) h += selfBlockHTML(top, w, need);
+  h += selfBlockHTML(top, w, need);
 
   /* 需求画像 */
   h += `<div class="card"><div class="sec-t"><span class="n">1</span>你的需求优先级</div>
     <div class="muted" style="margin-bottom:14px">越靠上，说明你越在意</div><div class="bars">`;
-  need.slice(0, light?6:10).forEach(([k,v])=>{
+  need.slice(0, 10).forEach(([k,v])=>{
     h += `<div class="bar"><div class="lb"><b>${DIM_CN[k]||k}</b><span>${(v).toFixed(1)}</span></div>
       <div class="tr"><i style="width:${Math.max(6, v/maxNeed*100)}%"></i></div></div>`;
   });
   h += `</div>`;
-  if(light) h += `<div class="muted" style="margin-top:12px">完整版会展开全部 10 个维度的优先级</div>`;
   h += `</div>`;
 
-  /* 完整版独有：首选 vs 主力雷达 + 档位 + 成本 + 升降档 */
-  if(light){
-    /* 12 题版也看得到这块：专用需求跟档位无关，通用池那 72 款答不了就是答不了 */
-    h += specialBlock();
-    h += `<div class="lockwrap"><div class="blur">
-      <div class="card"><div class="sec-t"><span class="n">2</span>备选方案对比</div>
-      <div class="row2"><div class="alt"><div class="nm">备选一</div>
-        <div class="mt">— —<span>%</span></div><div class="ds">第二名综合表现</div></div>
-      <div class="alt"><div class="nm">备选二</div><div class="mt">— —<span>%</span></div>
-        <div class="ds">第三名综合表现</div></div></div></div>
-      <div class="card"><div class="sec-t"><span class="n">3</span>档位建议与月成本</div>
-      <div class="tier"><div class="ic">旗</div><div class="tx"><b>旗舰档</b>
-        <p>能力优先，不看价格时的最优解</p></div></div>
-      <div class="tier"><div class="ic">主</div><div class="tx"><b>主力档</b>
-        <p>能力与成本平衡，大多数人的选择</p></div></div>
-      <div class="tier"><div class="ic">省</div><div class="tx"><b>性价比档</b>
-        <p>成本压到最低，效果够用</p></div></div></div>
-      <div class="card"><div class="sec-t"><span class="n">4</span>升档 / 降档方案</div>
-      <div class="tier"><div class="ic">↑</div><div class="tx"><b>预算宽松时</b>
-        <p>换到哪一款、能多拿到什么</p></div></div>
-      <div class="tier"><div class="ic">↓</div><div class="tx"><b>预算收紧时</b>
-        <p>换到哪一款、会牺牲什么</p></div></div></div>
-      </div>
-      <div class="mask">
-        <div class="lk">🔒</div>
-        <b>还差 18 道题，解锁完整报告</b>
-        <p>完整版会给出首选 vs 你的主力能力雷达图、三档位建议、月成本测算和升降档路线，报告能存成图片随时回看</p>
-        <button class="btn" id="unlock">输入验证码 · 继续答 18 题</button>
-        <div class="buy">还没有验证码？回小红书搜「<em>AI 大模型选型测试</em>」，<br>
-          买 30 题那档，码填进上面就能接着答，前面 12 题不用重做</div>
-      </div></div>`;
-  } else {
+  {
     const second = all[1], third = all[2];
     h += `<div class="card"><div class="sec-t"><span class="n">2</span>备选方案</div>
       <div class="muted" style="margin-bottom:13px">如果首选不合适，这两款更偏向别的方向</div>
@@ -1155,14 +1121,8 @@ function finish(){
   $('#r-body').innerHTML = h;
   show('s-result');
 
-  if(light){
-    $('#unlock').onclick = ()=>{ S.code=''; S.resume=true; S.need='full'; paintCodePage(); show('s-code'); };
-    // 已答过前 12 题，解锁后从第 13 题接着答
-    S.idx = CONFIG.lightCount;
-  } else {
-    $('#save-card').onclick = ()=> saveCard(top, all, w, need);
-    report(top, w);
-  }
+  $('#save-card').onclick = ()=> saveCard(top, all, w, need);
+  report(top, w);
 }
 
 /* ── 专用模型推荐块 ──
@@ -1285,13 +1245,13 @@ function costBand(c){
   return '¥1500 以上 / 月';
 }
 
-/* ── 上报（两档都带码，方便回溯是哪一档卖出去的） ── */
+/* ── 上报（带码，方便回溯是哪一次卖出去的） ── */
 function report(top, w){
   if(!CONFIG.apiBase) return;
   fetch(CONFIG.apiBase.replace(/\/$/,'') + '/api/result', {
     method:'POST', headers:{'Content-Type':'application/json'},
     body: JSON.stringify({
-      tier:S.tier, code:S.code || null,
+      tier:'full', code:S.code || null,
       answers:S.answers,
       result:{
         recommend:[{name:top.name, match:+top.match.toFixed(1)}], weights:w,
