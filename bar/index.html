@@ -85,6 +85,14 @@ img{display:block}
   background:var(--amber);color:#1a1520;font-weight:700;font-size:14px;
   display:flex;align-items:center;justify-content:center;padding:0 9px;
 }
+/* 已点的行：右下角给一对加减，误点了一杯当场就能减回去 */
+.item.has-qty .info{padding-right:84px}
+.item .stepper{
+  position:absolute;right:10px;bottom:10px;
+  padding:2px;gap:0;
+}
+.item .stepper button{width:28px;height:28px;font-size:18px}
+.item .stepper span{min-width:22px;font-size:14px;color:var(--txt)}
 
 /* ── 底部购物车条 ── */
 .bar{
@@ -313,8 +321,12 @@ function itemHTML(i) {
   if (i.price) tags.push(`<span class="tag price">${esc(i.price)}</span>`);
   if (i.stock !== null && i.stock !== undefined)
     tags.push(`<span class="tag ${i.stock <= 1 ? 'low' : ''}">${i.sold_out ? '已售罄' : '还剩 ' + i.stock}</span>`);
-  const right = i.sold_out ? '' : (q ? `<div class="qty-badge">${q}</div>` : '<div class="plus">+</div>');
-  return `<div class="item ${i.sold_out ? 'out' : ''}" data-id="${i.id}" onclick="${i.sold_out ? '' : `addOne(${i.id})`}">
+  // 已点的行给一对加减，菜单页上就能改数量，不用先进「确认一下」。
+  // stopPropagation 不能省——整行是 addOne，不拦的话点减号会顺带加回去。
+  const right = i.sold_out ? '' : (q
+    ? `<div class="stepper" onclick="event.stopPropagation()"><button onclick="setQty(${i.id},${q - 1})">−</button><span>${q}</span><button onclick="setQty(${i.id},${q + 1})">+</button></div>`
+    : '<div class="plus">+</div>');
+  return `<div class="item ${i.sold_out ? 'out' : ''}${q ? ' has-qty' : ''}" data-id="${i.id}" onclick="${i.sold_out ? '' : `addOne(${i.id})`}">
     <div class="thumb">${i.image_url ? `<img src="${API}${i.image_url}" alt="">` : '🍸'}</div>
     <div class="info">
       <div class="name">${esc(i.name)}</div>
