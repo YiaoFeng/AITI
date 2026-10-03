@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>人生漏洞扫描 · AI榜老冯</title>
+<link rel="icon" href="data:,">
+<style>
+  /* 体检报告单：米白纸 + 墨黑字 + 三色状态点。
+     和另外四个页面刻意不同——它们测「你是谁」，这张单子只核对「你做了没有」，
+     所以视觉上就该像一张单据，而不是一封情书。 */
+  :root{
+    --paper:#F5F2EA;
+    --card:#FFFDF8;
+    --ink:#17181A;
+    --mid:#5A554B;
+    --dim:#8E887B;
+    --line:#DFD9CB;
+    --rule:#17181A;
+    --red:#BF3B2B;
+    --amber:#C08318;
+    --green:#2C7A57;
+    --mono:ui-monospace,"SF Mono",Consolas,"Courier New",monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  body{
+    background:var(--paper); color:var(--ink); min-height:100vh;
+    padding:34px 20px 56px; display:flex; justify-content:center;
+    font-family:-apple-system,"PingFang SC","Microsoft YaHei","Hiragino Sans GB",sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{width:100%;max-width:520px}
+  .hidden{display:none !important}
+
+  .back{display:inline-block;font-size:13px;color:var(--dim);text-decoration:none;
+        letter-spacing:1px;margin-bottom:30px}
+  .kicker{font-size:11px;letter-spacing:6px;color:var(--dim);font-family:var(--mono)}
+  .title{font-size:36px;line-height:1.25;letter-spacing:1px;margin-top:14px;font-weight:800}
+  .title .hl{background:linear-gradient(transparent 62%,#FFE9A8 62%)}
+  .lead{font-size:15px;line-height:1.95;color:var(--mid);margin-top:20px}
+
+  .rule{height:2px;background:var(--rule);margin:26px 0}
+  .rule.thin{height:1px;background:var(--line)}
+
+  .pts{list-style:none;margin-top:6px}
+  .pts li{font-size:14.5px;line-height:1.9;color:var(--mid);padding-left:20px;position:relative;
+          margin-bottom:10px}
+  .pts li::before{content:'';position:absolute;left:2px;top:11px;width:6px;height:6px;
+                  border:1.5px solid var(--ink)}
+  .fine{font-size:12px;line-height:1.85;color:var(--dim);margin-top:22px}
+
+  .btn{display:block;width:100%;margin-top:26px;padding:17px 16px;
+       background:var(--ink);border:2px solid var(--ink);color:var(--paper);
+       font-size:16px;font-weight:700;letter-spacing:3px;font-family:inherit;cursor:pointer}
+  .btn:active{opacity:.82}
+  .btn:disabled{opacity:.35}
+  .btn.ghost{background:none;color:var(--mid);border-color:var(--line);font-weight:400;
+             letter-spacing:1px;padding:14px;font-size:14px}
+
+  /* ---------- 答题 ---------- */
+  .qtag{display:inline-block;font-size:11px;letter-spacing:2px;color:var(--dim);
+        border:1px solid var(--line);padding:3px 9px;font-family:var(--mono)}
+  .prog{display:flex;align-items:center;gap:12px;margin:18px 0 30px}
+  .ptrack{flex:1;height:3px;background:var(--line)}
+  .pfill{height:100%;background:var(--ink);width:0;transition:width .25s}
+  .pnum{font-size:12px;letter-spacing:1px;color:var(--dim);font-family:var(--mono)}
+  .q{font-size:19.5px;line-height:1.65;margin-bottom:26px;font-weight:700;letter-spacing:.3px}
+  .opt{display:block;width:100%;text-align:left;background:var(--card);
+       border:1px solid var(--line);padding:15px 14px;margin-bottom:10px;
+       font-family:inherit;font-size:15px;line-height:1.6;color:var(--mid);cursor:pointer;
+       transition:all .12s;position:relative}
+  .opt:active{transform:scale(.995)}
+  .opt.sel{background:var(--ink);border-color:var(--ink);color:var(--paper);font-weight:600}
+  .opt.sel::after{content:'✓';position:absolute;right:14px;top:50%;transform:translateY(-50%);
+                  font-size:15px}
+  .nav{display:flex;gap:10px;margin-top:20px}
+  .nav .btn{margin-top:0}
+
+  /* ---------- 结果：报告单 ---------- */
+  .sheet{background:var(--card);border:1px solid var(--line);padding:26px 22px 24px;
+         position:relative}
+  .sheet::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--ink)}
+  .shead{display:flex;justify-content:space-between;align-items:flex-start;
+         border-bottom:2px solid var(--rule);padding-bottom:12px;margin-bottom:18px}
+  .shead h2{font-size:17px;letter-spacing:3px;font-weight:800}
+  .shead div{font-size:11px;color:var(--dim);font-family:var(--mono);line-height:1.7;text-align:right}
+
+  .score{display:flex;align-items:baseline;gap:12px;margin:6px 0 4px}
+  .score b{font-size:64px;line-height:1;font-weight:800;font-family:var(--mono);letter-spacing:-2px}
+  .score span{font-size:13px;color:var(--dim);letter-spacing:1px}
+  .verdict{display:inline-block;font-size:15px;font-weight:800;letter-spacing:2px;
+           padding:5px 14px;color:#fff;margin-top:8px}
+  .verdict.green{background:var(--green)}
+  .verdict.amber{background:var(--amber)}
+  .verdict.red{background:var(--red)}
+  .vsay{font-size:14.5px;line-height:1.95;color:var(--mid);margin-top:16px}
+
+  .secthead{font-size:11px;letter-spacing:4px;color:var(--dim);font-family:var(--mono);
+            margin:28px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+  .row{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:10px;
+       padding:9px 0;border-bottom:1px solid #EFEAE0}
+  .row:last-child{border-bottom:none}
+  .row .nm{font-size:14.5px;color:var(--mid)}
+  .row.todo .nm{color:var(--ink);font-weight:700}
+  .dot{width:9px;height:9px;border-radius:50%;display:inline-block}
+  .dot.green{background:var(--green)}
+  .dot.amber{background:var(--amber)}
+  .dot.red{background:var(--red)}
+  .row .st{font-size:12.5px;letter-spacing:1px;width:52px;text-align:right}
+  .row.green .st{color:var(--green)}
+  .row.amber .st{color:var(--amber)}
+  .row.red .st{color:var(--red)}
+
+  .fix{border:1px solid var(--line);padding:0;margin-top:6px}
+  .fixitem{display:flex;gap:12px;padding:14px;border-bottom:1px solid var(--line)}
+  .fixitem:last-child{border-bottom:none}
+  .fixitem .no{font-family:var(--mono);font-size:20px;font-weight:800;color:var(--red);
+               line-height:1.1;min-width:24px}
+  .fixitem .fb{font-size:14px;line-height:1.8;color:var(--mid)}
+  .fixitem .fb b{display:block;color:var(--ink);font-size:15px;margin-bottom:4px}
+
+  .good{border-left:3px solid var(--green);padding:2px 0 2px 14px;font-size:14px;
+        line-height:1.9;color:var(--mid)}
+  .good b{color:var(--ink)}
+
+  .shareimg{width:100%;display:block;margin-top:16px;border:1px solid var(--line)}
+  .dl{display:inline-block;margin-top:12px;font-size:13px;color:var(--mid);
+      text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:3px}
+  .footnote{font-size:11.5px;line-height:1.9;color:var(--dim);margin-top:32px;text-align:center}
+  .stamp{position:absolute;right:18px;bottom:-1px;font-family:var(--mono);font-size:10px;
+         color:var(--line);letter-spacing:1px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back" href="../index.html">‹ 全部测试</a>
+
+  <!-- ============ 首页 ============ -->
+  <div id="welcome">
+    <div class="kicker">L I F E &nbsp; S C A N</div>
+    <h1 class="title">人生<span class="hl">漏洞扫描</span></h1>
+    <div class="lead">
+      不问你是谁，只核对一件事：<b>该做的，你做了没有。</b><br>
+      30 道题，10 个人生模块，答完出一张体检报告单——
+      哪几块是实的，哪几块漏着，今天先补哪三条。
+    </div>
+
+    <div class="rule"></div>
+
+    <ul class="pts">
+      <li>全部是事实题，不是性格题，凭你现在的真实状态选</li>
+      <li>不适用就按最接近的选，别为了好看挑答案</li>
+      <li>约 4 分钟，答完立刻出单，不收费、不用验证码</li>
+    </ul>
+
+    <div class="rule thin"></div>
+
+    <button class="btn" onclick="startQuiz()">开始扫描</button>
+
+    <div class="fine">
+      题目整理自一份公开的人生攻略文档，只做核对与提醒，不构成医疗、法律或投资建议。
+      报告只在你自己手机上生成，结果会匿名记一条用于统计。
+    </div>
+  </div>
+
+  <!-- ============ 答题 ============ -->
+  <div id="quizpage" class="hidden">
+    <div class="qtag" id="qtag">出行与消防</div>
+    <div class="prog">
+      <div class="ptrack"><div class="pfill" id="pfill"></div></div>
+      <div class="pnum" id="pnum">01 / 30</div>
+    </div>
+    <div class="q" id="qtext"></div>
+    <div id="opts"></div>
+    <div class="nav">
+      <button class="btn ghost hidden" id="prevbtn" onclick="prevQ()">上一题</button>
+      <button class="btn" id="nextbtn" onclick="nextQ()" disabled>下一题</button>
+    </div>
+  </div>
+
+  <!-- ============ 结果 ============ -->
+  <div id="result" class="hidden">
+    <div class="sheet">
+      <div class="shead">
+        <h2>人 生 体 检 单</h2>
+        <div id="rmeta">SN —<br>—</div>
+      </div>
+
+      <div class="score"><b id="rscore">0</b><span>漏洞指数 / 100</span></div>
+      <div><span class="verdict" id="rlevel">—</span></div>
+      <div class="vsay" id="rsay"></div>
+
+      <div class="secthead">检 查 项 目</div>
+      <div id="rrows"></div>
+
+      <div class="secthead">今 天 先 补 这 三 条</div>
+      <div class="fix" id="rfix"></div>
+
+      <div class="secthead">这 几 块 你 做 得 挺 好</div>
+      <div class="good" id="rgood"></div>
+
+      <div class="stamp">LIFE·SCAN</div>
+    </div>
+
+    <img class="shareimg" id="shareimg" alt="报告单">
+    <a class="dl" id="dl" download="人生漏洞扫描.png">保存这张报告单 ›</a>
+
+    <button class="btn ghost" onclick="restart()">重新扫一遍</button>
+
+    <div class="footnote">
+      整理自公开的人生攻略文档 · 只做提醒，不构成医疗、法律或投资建议<br>
+      结果仅供参考 · <b>AI榜老冯</b>
+    </div>
+  </div>
+
+</div>
+
+<!-- 后端地址由根目录 config.js 提供（隧道地址变了只改那个文件） -->
+<script src="../config.js"></script>
+<script>
+const MODULES = [{"k": "safety", "n": "出行与消防", "d": "保命的那部分", "act": "今天把灭火器放到顺手的位置，并确认最近一台 AED 在哪。"}, {"k": "body", "n": "身体与筛查", "d": "你自己量得出的那部分", "act": "先量一次血压；再花几十块查一次乙肝两对半，没抗体就去补疫苗。"}, {"k": "med", "n": "吃药与看病", "d": "最容易吃出来的那部分", "act": "今天把家里药箱翻一遍，过期药和重复成分的感冒药连包装投有害垃圾。"}, {"k": "energy", "n": "精力与时间", "d": "每天都在漏的那部分", "act": "今晚关掉手机非必要通知，睡前一小时不碰屏幕，明天要做的写成带时间地点的一句。"}, {"k": "money", "n": "钱与兜底", "d": "不算不知道的那部分", "act": "今天把所有自动续费关成手动；顺手确认一遍保单受益人写的是不是具体的人。"}, {"k": "law", "n": "法律红线", "d": "踩了才知道的那部分", "act": "本月免费查一次个人征信报告，看看有没有不是自己办的贷款和卡。"}, {"k": "work", "n": "工作与劳动", "d": "离职时才想起来的那部分", "act": "把劳动合同翻出来看一遍试用期和工资条款，拍张照存到云端。"}, {"k": "info", "n": "账号与信息", "d": "被盗了才着急的那部分", "act": "现在就去给邮箱开二次验证，选手机弹窗那种，它能挡住九成以上的盗号。"}, {"k": "family", "n": "关系与家庭", "d": "不好意思开口的那部分", "act": "下次大额转账，在备注里写清用途，聊天记录别删。"}, {"k": "future", "n": "应急与安排", "d": "总觉得还早的那部分", "act": "把行程和紧急联系人发给一位家人，并告诉 TA 你的重要材料放在哪。"}];
+const QUIZ = [{"m": "safety", "q": "坐车时系安全带、骑电动车戴头盔，你是什么状态？", "o": [["每次都系、每次都戴，后排短途也一样", 2], ["想起来才做，短途基本省掉", 1], ["嫌麻烦，基本不弄", 0]]}, {"m": "safety", "q": "家里的烟雾报警器、灭火器、急救包，你有吗？", "o": [["都没有，也没想过要备", 0], ["有一两样，但装了就没再检查过", 1], ["都有，知道放哪、也没过期", 2]]}, {"m": "safety", "q": "电动车充电，你的习惯是？", "o": [["偶尔图方便在楼道或家里充", 1], ["经常推回家、推楼道里充", 0], ["只在室外充电桩充，从不进楼", 2]]}, {"m": "body", "q": "你最近一次量血压是什么时候？", "o": [["一年内量过，大概知道自己的数", 2], ["三年内量过，具体数记不清了", 1], ["从记事起没量过", 0]]}, {"m": "body", "q": "乙肝两对半查过吗？有没有抗体？", "o": [["从没查过", 0], ["查过，但没抗体，也没去补打疫苗", 1], ["查过，有抗体，或者已经打过疫苗", 2]]}, {"m": "body", "q": "复合维生素、鱼油、氨糖、维生素 D 这类，你现在的状态是？", "o": [["长期吃好几种，觉得吃了安心", 0], ["偶尔买，通常吃不完就放着", 1], ["不买，钱花在三餐和走路上", 2]]}, {"m": "med", "q": "家里的药箱，最近翻过吗？", "o": [["翻过，过期的都挑出来处理了", 2], ["知道有个药箱，很久没动过", 1], ["家里没有固定的药箱", 0]]}, {"m": "med", "q": "感冒药、退烧药、止痛药一起吃之前，你会看成分表吗？", "o": [["不舒服就一起吃，没想过要看", 0], ["知道有这回事，但没细看过", 1], ["会看，知道对乙酰氨基酚不能叠加", 2]]}, {"m": "med", "q": "看完病，你会自己留一份病历和检查报告吗？", "o": [["经常留，检查单按时间存着", 2], ["偶尔留，大部分随手丢了", 1], ["从来不留，都在医院系统里", 0]]}, {"m": "energy", "q": "手机上的非必要通知，你是什么状态？", "o": [["全开着，一响就看一眼", 0], ["关掉了一部分", 1], ["都关了，只留电话和必要的消息", 2]]}, {"m": "energy", "q": "你的睡觉时间怎么样？", "o": [["基本固定，能睡够七小时", 2], ["想早睡，但常拖到一两点", 1], ["长期熬夜，没睡够过", 0]]}, {"m": "energy", "q": "「打算做的事」，你一般怎么处理？", "o": [["写在备忘录里，但基本不会去做", 1], ["只在脑子里想想", 0], ["写成几点、在哪、做什么，到点就做", 2]]}, {"m": "money", "q": "各种会员和软件订阅的自动续费，你现在是什么状态？", "o": [["早就关成手动续了，只留真在用的", 2], ["有几个忘了在扣，懒得管", 1], ["没查过，不知道每月扣掉多少", 0]]}, {"m": "money", "q": "手头有没有能撑三到六个月生活费的应急金？", "o": [["没有，基本月光", 0], ["有一点，但撑不到三个月", 1], ["有，放在随时能取的地方", 2]]}, {"m": "money", "q": "有人跟你推「保本高收益」「稳赚不赔」的项目，你会？", "o": [["会研究研究，看看能不能赚一笔", 0], ["会犹豫，但大概率还是不投", 1], ["直接走开，知道这就是红线", 2]]}, {"m": "law", "q": "银行卡、手机卡、身份证，你借给过别人吗？", "o": [["借过，还帮人「走过账」", 0], ["借给过亲戚朋友，觉得没什么", 1], ["从来没有，谁开口都不给", 2]]}, {"m": "law", "q": "自己的征信报告，你查过吗？", "o": [["一年查过一两次", 2], ["很久以前查过一次", 1], ["从来没查过", 0]]}, {"m": "law", "q": "签字之前，你会把纸上的字看完吗？", "o": [["别人指哪我签哪", 0], ["大概扫一眼就签", 1], ["一定看完，不明白的地方就不签", 2]]}, {"m": "work", "q": "你的劳动合同，自己手里有一份吗？", "o": [["有，还看过岗位、工资、试用期", 2], ["签是签了，但没给我一份", 1], ["没签过，或者不记得签过", 0]]}, {"m": "work", "q": "离职补偿（N、N+1）你知道怎么算吗？", "o": [["完全不了解", 0], ["听说过大概的意思", 1], ["知道，也知道主动辞职是没有补偿的", 2]]}, {"m": "work", "q": "花钱考个证、报个班之前，你会先做什么？", "o": [["看着有用就直接报", 0], ["问问别人值不值", 1], ["先查它在不在国家职业资格目录里", 2]]}, {"m": "info", "q": "你的邮箱，开了二次验证吗？", "o": [["没开，只有密码", 0], ["开了，是短信验证码那种", 1], ["开了，用手机弹窗确认的那种", 2]]}, {"m": "info", "q": "邮箱的密码，和别的网站重复吗？", "o": [["到处都用一个密码，好记", 0], ["有那么几个网站是同一个", 1], ["单独一个，别的任何地方都不用", 2]]}, {"m": "info", "q": "手机丢了，你的第一反应会是什么？", "o": [["没想过这事，先找手机要紧", 0], ["远程锁定，把数据抹掉", 1], ["先挂失 SIM 卡，再去改重要账号的密码", 2]]}, {"m": "family", "q": "恋爱或婚姻里的大额转账、彩礼，你会留痕吗？", "o": [["直接转，什么都没留", 0], ["聊天记录留着，但转账没写备注", 1], ["备注里写清用途，聊天记录也留着", 2]]}, {"m": "family", "q": "父母出钱给你买房或结婚，说清过是借还是送吗？", "o": [["没提过这件事", 0], ["心里有数，但没写下来", 1], ["说清楚了，也留下了记录", 2]]}, {"m": "family", "q": "家里老人的安排（遗嘱、监护人、养老），你们谈过吗？", "o": [["谈过，也落到纸面上了", 2], ["提过，但一直没定下来", 1], ["没谈过，觉得不吉利", 0]]}, {"m": "future", "q": "火灾、有人突然倒地、噎住，你的第一反应是？", "o": [["会慌，不知道从哪下手", 0], ["大概知道该做什么，但没把握", 1], ["知道第一步做什么，也学过或练过", 2]]}, {"m": "future", "q": "出远门时，你会把行程和住处告诉家人吗？", "o": [["出远门必发，总是有人知道我在哪", 2], ["偶尔说一声", 1], ["不说，家里也不知道我的安排", 0]]}, {"m": "future", "q": "保单、紧急联系人、重要材料放在哪，家里人知道吗？", "o": [["没想过这件事", 0], ["说过，但没写下来", 1], ["都写清楚了，家人知道去哪找", 2]]}];
+const LEVELS = [{"max": 20, "n": "基本没漏洞", "tone": "green", "say": "该核对的都核对过了。这类事的天花板也就是这样，剩下的交给概率。"}, {"max": 45, "n": "有几处漏风", "tone": "green", "say": "大面上是稳的，漏的都是小事。但出事往往就出在小事上——不是运气差，是概率攒够了。"}, {"max": 70, "n": "洞不少", "tone": "amber", "say": "有几块是真的空着。好消息是这些地方不需要花钱也不需要毅力，只是从来没人告诉过你要做。"}, {"max": 101, "n": "到处是洞", "tone": "red", "say": "这份单子的价值不在于让你焦虑，而在于下面那三条——今天就能补,补一条少一条。"}];
+const FULL_N = QUIZ.length;
+const MAXQ = 2;
+
+const API_BASE = ((window.QUIZ_API || '') + '').replace(/\/$/, '');
+const API = {
+  async saveResult(payload){
+    if (!API_BASE) return;
+    try{
+      await fetch(API_BASE + '/api/result', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+    }catch(e){}
+  }
+};
+
+const S = { answers: new Array(FULL_N).fill(-1), cur: 0 };
+
+/* ---------- 答题中途被杀掉的兜底 ----------
+   手机上切回小红书，标签页很快被回收。每答一题存一次，重开能接着答。 */
+const SAVE_KEY = 'lifescan_state';
+let skipSave = false;
+function save(){ try{ localStorage.setItem(SAVE_KEY, JSON.stringify({a:S.answers})); }catch(e){} }
+function restore(){
+  let sv = null;
+  try{ sv = JSON.parse(localStorage.getItem(SAVE_KEY) || 'null'); }catch(e){ return false; }
+  if (!sv || !Array.isArray(sv.a) || sv.a.length !== FULL_N) return false;
+  if (!sv.a.filter(v => v >= 0).length) return false;
+  S.answers = sv.a;
+  if (sv.a.every(v => typeof v === 'number' && v >= 0)){ skipSave = true; showResult(); return true; }
+  const at = S.answers.findIndex(v => v < 0);
+  S.cur = at < 0 ? 0 : at;
+  show('quizpage'); renderQ();
+  return true;
+}
+
+function $(id){ return document.getElementById(id); }
+function show(id){
+  ['welcome','quizpage','result'].forEach(x => $(x).classList.add('hidden'));
+  $(id).classList.remove('hidden');
+  window.scrollTo(0,0);
+}
+
+/* ---------- 判分 ----------
+   每模块 3 题、每题 0–2 分，满分 6。
+   漏洞指数 = 100 - 得分率。同样答案永远同样结果，无随机。 */
+function calc(){
+  const score = {};
+  MODULES.forEach(m => score[m.k] = 0);
+  for (let i = 0; i < FULL_N; i++){
+    const a = S.answers[i];
+    if (a < 0) continue;
+    score[QUIZ[i].m] += QUIZ[i].o[a][1];
+  }
+  const total = Object.values(score).reduce((a,b) => a+b, 0);
+  const full = FULL_N * MAXQ;
+  const leak = Math.round((1 - total / full) * 100);
+  // 模块按得分升序：最差的最上面。
+  const order = MODULES.slice().sort((a,b) =>
+    score[a.k] !== score[b.k] ? score[a.k]-score[b.k] : MODULES.indexOf(a)-MODULES.indexOf(b));
+  return { score, leak, order, total, full };
+}
+
+function toneOf(v, full){          // 单模块状态
+  const r = v / full;
+  if (r >= 5/6) return 'green';
+  if (r >= 2/6) return 'amber';
+  return 'red';
+}
+const TONE_CN = { green:'扎实', amber:'有漏洞', red:'高危' };
+
+/* ---------- 答题 ---------- */
+function startQuiz(){
+  S.cur = 0; S.answers = new Array(FULL_N).fill(-1);
+  save(); show('quizpage'); renderQ();
+}
+function renderQ(){
+  const q = QUIZ[S.cur];
+  const mod = MODULES.find(m => m.k === q.m);
+  $('qtag').textContent = mod ? mod.n : '';
+  $('qtext').textContent = q.q;
+  $('pnum').textContent = String(S.cur+1).padStart(2,'0') + ' / ' + FULL_N;
+  $('pfill').style.width = ((S.cur+1) / FULL_N * 100) + '%';
+  $('opts').innerHTML = q.o.map((o,i) =>
+    '<button class="opt' + (S.answers[S.cur] === i ? ' sel' : '') +
+    '" onclick="pick(' + i + ')">' + o[0] + '</button>').join('');
+  $('prevbtn').classList.toggle('hidden', S.cur === 0);
+  $('nextbtn').textContent = S.cur === FULL_N-1 ? '出报告单' : '下一题';
+  $('nextbtn').disabled = S.answers[S.cur] === -1;
+}
+function pick(i){ S.answers[S.cur] = i; save(); renderQ(); }
+function prevQ(){ if (S.cur > 0){ S.cur--; renderQ(); } }
+function nextQ(){
+  if (S.answers[S.cur] === -1) return;
+  if (S.cur >= FULL_N-1){ showResult(); return; }
+  S.cur++; renderQ();
+}
+function restart(){
+  try{ localStorage.removeItem(SAVE_KEY); }catch(e){}
+  S.answers = new Array(FULL_N).fill(-1); S.cur = 0;
+  show('welcome');
+}
+
+/* ---------- 结果 ---------- */
+function showResult(){
+  const r = calc();
+  const lv = LEVELS.find(l => r.leak < l.max) || LEVELS[LEVELS.length-1];
+
+  const d = new Date();
+  const sn = 'SN-' + String(Math.abs(r.total*7919 % 9000) + 1000);
+  $('rmeta').innerHTML = sn + '<br>' + d.getFullYear() + '.' +
+    String(d.getMonth()+1).padStart(2,'0') + '.' + String(d.getDate()).padStart(2,'0');
+
+  $('rscore').textContent = r.leak;
+  const el = $('rlevel');
+  el.textContent = lv.n; el.className = 'verdict ' + lv.tone;
+  $('rsay').textContent = lv.say;
+
+  // 检查项目表
+  $('rrows').innerHTML = r.order.map(m => {
+    const v = r.score[m.k], tone = toneOf(v, 3*MAXQ);
+    return '<div class="row ' + tone + (tone !== 'green' ? ' todo' : '') + '">' +
+      '<span class="nm">' + m.n + '</span>' +
+      '<span class="dot ' + tone + '"></span>' +
+      '<span class="st">' + TONE_CN[tone] + '</span></div>';
+  }).join('');
+
+  // 最该补的三条：从最差的模块里取，只取非 green 的
+  const todo = r.order.filter(m => toneOf(r.score[m.k], 3*MAXQ) !== 'green').slice(0, 3);
+  const picked = todo.length ? todo : r.order.slice(0, 1);
+  $('rfix').innerHTML = picked.map((m,i) =>
+    '<div class="fixitem"><span class="no">' + (i+1) + '</span>' +
+    '<span class="fb"><b>' + m.n + '：' + m.d + '</b>' + m.act + '</span></div>').join('');
+
+  // 做得好的
+  const good = r.order.filter(m => toneOf(r.score[m.k], 3*MAXQ) === 'green')
+                       .sort((a,b) => r.score[b.k]-r.score[a.k]).slice(0,3);
+  $('rgood').innerHTML = good.length
+    ? '这几块你已经有底了：<b>' + good.map(m => m.n).join('、') + '</b>。它们平时不出声，出事的时候顶用。'
+    : '这份单子这次没找出明显扎实的模块——不是说你哪都差，是这些事本来就没人教过。从上面的第 1 条开始就行。';
+
+  drawCard(r, lv, picked);
+
+  if (skipSave) skipSave = false;
+  else API.saveResult({
+    tier: 'full', product: 'life_scan', code: null,
+    answers: S.answers,
+    result: { leak: r.leak, level: lv.n, score: r.score }
+  });
+
+  save(); show('result');
+}
+
+/* ---------- 分享卡：白底单据，跟页面同一套语言 ---------- */
+const CARD = { INK:'#17181A', MID:'#5A554B', DIM:'#8E887B', LINE:'#DFD9CB',
+               PAPER:'#FFFDF8', RED:'#BF3B2B', AMBER:'#C08318', GREEN:'#2C7A57',
+               MONO:'ui-monospace,Consolas,"Courier New",monospace',
+               SANS:'-apple-system,"PingFang SC","Microsoft YaHei",sans-serif' };
+
+/** 正文绘制，返回结束 y。 */
+function paint(c, W, PAD, r, lv, picked){
+  const I=CARD.INK, M=CARD.MID, D=CARD.DIM, L=CARD.LINE, S=CARD.SANS, MO=CARD.MONO;
+  const NO_HEAD = '。，、；：？！）」』%';
+  const wrap = (txt, x0, y0, maxW, lh, font, color) => {
+    c.font = font; c.fillStyle = color;
+    let line = '', y = y0;
+    for (const ch of txt){
+      if (ch === '\n'){ c.fillText(line, x0, y); line=''; y+=lh; continue; }
+      const over = c.measureText(line+ch).width > maxW;
+      if (over && !(line && NO_HEAD.includes(ch))){ c.fillText(line, x0, y); line=ch; y+=lh; }
+      else line += ch;
+    }
+    if (line){ c.fillText(line, x0, y); y+=lh; }
+    return y;
+  };
+
+  let y = PAD;
+  c.fillStyle = I; c.fillRect(0, 0, W, 8);          // 顶部墨条
+  y += 46;
+  c.font = '600 15px ' + MO; c.fillStyle = D;
+  c.fillText('L I F E   S C A N', PAD, y);
+  y += 34;
+  c.font = '800 30px ' + S; c.fillStyle = I;
+  c.fillText('人生漏洞扫描', PAD, y);
+  y += 30;
+  c.fillStyle = I; c.fillRect(PAD, y, W - PAD*2, 2);
+  y += 52;
+
+  // 大分数
+  c.font = '800 96px ' + MO; c.fillStyle = I;
+  const sc = String(r.leak);
+  c.fillText(sc, PAD, y);
+  const sw = c.measureText(sc).width;
+  c.font = '400 16px ' + S; c.fillStyle = D;
+  c.fillText('漏洞指数 / 100', PAD + sw + 14, y - 8);
+  y += 46;
+
+  // 等级词
+  const tone = lv.tone === 'green' ? CARD.GREEN : (lv.tone === 'amber' ? CARD.AMBER : CARD.RED);
+  c.font = '800 22px ' + S; c.fillStyle = tone;
+  c.fillText(lv.n, PAD, y);
+  y += 40;
+  c.fillStyle = L; c.fillRect(PAD, y, W - PAD*2, 1);
+  y += 42;
+
+  // 三条
+  c.font = '600 14px ' + MO; c.fillStyle = D;
+  c.fillText('先 补 这 三 条', PAD, y);
+  y += 34;
+  picked.forEach((m, i) => {
+    c.font = '800 26px ' + MO; c.fillStyle = CARD.RED;
+    c.fillText(String(i+1), PAD, y);
+    y = wrap(m.n + '：' + m.act, PAD + 40, y, W - PAD*2 - 40, 32, '400 19px ' + S, M);
+    y += 22;
+  });
+  return y + 6;
+}
+
+function drawCard(r, lv, picked){
+  const W = 720, PAD = 52;
+  // 先量一遍拿高度，再按真实高度建画布——判定句长短随人变，写死会压到页脚。
+  const probe = document.createElement('canvas').getContext('2d');
+  let h = paint(probe, W, PAD, r, lv, picked);
+  h += 74;                                   // 页脚
+  const c = document.createElement('canvas');
+  c.width = W; c.height = h;
+  const x = c.getContext('2d');
+  x.fillStyle = CARD.PAPER; x.fillRect(0, 0, W, h);
+  const endY = paint(x, W, PAD, r, lv, picked);
+
+  x.fillStyle = CARD.LINE; x.fillRect(PAD, h - 66, W - PAD*2, 1);
+  x.font = '400 14px ' + CARD.SANS; x.fillStyle = CARD.DIM;
+  x.fillText('AI榜老冯 · 人生体检单', PAD, h - 34);
+  x.textAlign = 'right';
+  x.fillText('结果仅供参考', W - PAD, h - 34);
+  x.textAlign = 'left';
+
+  const url = c.toDataURL('image/png');
+  $('shareimg').src = url;
+  $('dl').href = url;
+}
+
+if (!restore()) show('welcome');
+</script>
+</body>
+</html>
