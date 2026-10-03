@@ -18,7 +18,7 @@
   "privacy": "由 本土化 70% + API稳定性 30% 推算（榜单无独立隐私维度）",
   "creative": "由 中文能力 45% + 实际调用 30% + 趋势热度 25% 推算（榜单无独立创意维度）"
  },
- "count": 71,
+ "count": 72,
  "models": [
   {
    "name": "Qwen3.8-Max-0902",
@@ -30,7 +30,7 @@
     "multimodal": 82,
     "longtext": 87,
     "cost": 74,
-    "speed": 65,
+    "speed": 64,
     "privacy": 87,
     "ecosystem": 84,
     "creative": 88
@@ -300,25 +300,6 @@
    "power": 82
   },
   {
-   "name": "小米 MiMo-V2.6-Pro",
-   "vendor": "国产",
-   "score": {
-    "reasoning": 81,
-    "coding": 94,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 95,
-    "cost": 87,
-    "speed": 68,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "HLE 49.4，DeepSWE 71.9",
-   "updated_at": "2026-09-18",
-   "power": 82
-  },
-  {
    "name": "GPT-6 Sol",
    "vendor": "海外",
    "score": {
@@ -328,7 +309,7 @@
     "multimodal": 75,
     "longtext": 92,
     "cost": 72,
-    "speed": 80,
+    "speed": 83,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -380,7 +361,7 @@
     "multimodal": 75,
     "longtext": 86,
     "cost": 77,
-    "speed": 75,
+    "speed": 76,
     "privacy": 84,
     "ecosystem": 78,
     "creative": 77
@@ -458,7 +439,7 @@
     "multimodal": 82,
     "longtext": 90,
     "cost": 77,
-    "speed": 90,
+    "speed": 89,
     "privacy": 72,
     "ecosystem": 77,
     "creative": 73
@@ -520,6 +501,25 @@
    "power": 81
   },
   {
+   "name": "小米 MiMo-V2.6-Pro",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 81,
+    "coding": 94,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 95,
+    "cost": 87,
+    "speed": 67,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "HLE 49.4，DeepSWE 71.9",
+   "updated_at": "2026-09-18",
+   "power": 81
+  },
+  {
    "name": "GPT-6 Luna",
    "vendor": "海外",
    "score": {
@@ -529,7 +529,7 @@
     "multimodal": 75,
     "longtext": 91,
     "cost": 95,
-    "speed": 87,
+    "speed": 86,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -633,7 +633,7 @@
     "multimodal": 77,
     "longtext": 87,
     "cost": 94,
-    "speed": 69,
+    "speed": 71,
     "privacy": 86,
     "ecosystem": 85,
     "creative": 81
@@ -690,7 +690,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "SciCode 55.0，HLE 42.7",
+   "brief": "SciCode 55.0，TB4.0 6.57",
    "updated_at": "2026-09-18",
    "tier": {
     "key": "xai",
@@ -730,7 +730,7 @@
     "multimodal": 75,
     "longtext": 82,
     "cost": 74,
-    "speed": 78,
+    "speed": 77,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -782,7 +782,7 @@
     "multimodal": 65,
     "longtext": 87,
     "cost": 78,
-    "speed": 82,
+    "speed": 84,
     "privacy": 84,
     "ecosystem": 77,
     "creative": 76
@@ -834,12 +834,50 @@
     "multimodal": 75,
     "longtext": 83,
     "cost": 78,
-    "speed": 92,
+    "speed": 90,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
    },
    "brief": "SciCode 47.0，TB4.0 0.0",
+   "updated_at": "2026-09-18",
+   "power": 79
+  },
+  {
+   "name": "Inkling Small",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 65,
+    "coding": 79,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 81,
+    "cost": 88,
+    "speed": 92,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "SciCode 49.7，TB4.0 1.51",
+   "updated_at": "2026-09-18",
+   "power": 79
+  },
+  {
+   "name": "JT-4.1 Flash 236B A21B",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 74,
+    "coding": 83,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 84,
+    "cost": 76,
+    "speed": 75,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "SciCode 52.0，HLE 43.6",
    "updated_at": "2026-09-18",
    "power": 79
   },
@@ -853,7 +891,7 @@
     "multimodal": 75,
     "longtext": 87,
     "cost": 74,
-    "speed": 65,
+    "speed": 64,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -898,7 +936,7 @@
     "multimodal": 74,
     "longtext": 89,
     "cost": 82,
-    "speed": 67,
+    "speed": 68,
     "privacy": 85,
     "ecosystem": 84,
     "creative": 82
@@ -941,25 +979,6 @@
    "power": 78
   },
   {
-   "name": "Inkling Small",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 65,
-    "coding": 79,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 81,
-    "cost": 88,
-    "speed": 85,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "SciCode 49.7，TB4.0 1.51",
-   "updated_at": "2026-09-18",
-   "power": 78
-  },
-  {
    "name": "Kimi K2.7 Code",
    "vendor": "国产",
    "score": {
@@ -969,7 +988,7 @@
     "multimodal": 75,
     "longtext": 86,
     "cost": 79,
-    "speed": 77,
+    "speed": 78,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1014,7 +1033,7 @@
     "multimodal": 75,
     "longtext": 91,
     "cost": 87,
-    "speed": 88,
+    "speed": 87,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1033,7 +1052,7 @@
     "multimodal": 75,
     "longtext": 87,
     "cost": 76,
-    "speed": 84,
+    "speed": 85,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1052,7 +1071,7 @@
     "multimodal": 75,
     "longtext": 79,
     "cost": 96,
-    "speed": 72,
+    "speed": 70,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1135,7 +1154,7 @@
     "multimodal": 75,
     "longtext": 82,
     "cost": 83,
-    "speed": 89,
+    "speed": 88,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1251,7 +1270,7 @@
     "multimodal": 68,
     "longtext": 85,
     "cost": 93,
-    "speed": 78,
+    "speed": 79,
     "privacy": 87,
     "ecosystem": 79,
     "creative": 78
@@ -1334,7 +1353,7 @@
     "multimodal": 60,
     "longtext": 91,
     "cost": 88,
-    "speed": 79,
+    "speed": 76,
     "privacy": 79,
     "ecosystem": 68,
     "creative": 67
@@ -1420,6 +1439,25 @@
    "power": 72
   },
   {
+   "name": "North Mini Code",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 37,
+    "coding": 64,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 60,
+    "cost": 76,
+    "speed": 79,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "SciCode 38.8，Tau 6.4",
+   "updated_at": "2026-09-18",
+   "power": 71
+  },
+  {
    "name": "K2 Horizon 7B",
    "vendor": "海外",
    "score": {
@@ -1467,31 +1505,12 @@
     "multimodal": 75,
     "longtext": 60,
     "cost": 100,
-    "speed": 96,
+    "speed": 95,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
    },
    "brief": "Tau 5.6，SciCode 25.3",
-   "updated_at": "2026-09-18",
-   "power": 70
-  },
-  {
-   "name": "North Mini Code",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 37,
-    "coding": 64,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 60,
-    "cost": 76,
-    "speed": 77,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "SciCode 38.8，Tau 6.4",
    "updated_at": "2026-09-18",
    "power": 70
   },
@@ -1515,25 +1534,6 @@
    "power": 70
   },
   {
-   "name": "Granite 4.2 8B",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 37,
-    "coding": 53,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 60,
-    "cost": 100,
-    "speed": 72,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "Tau 7.6，SciCode 31.5",
-   "updated_at": "2026-09-18",
-   "power": 69
-  },
-  {
    "name": "MiniCPM5-2B",
    "vendor": "国产",
    "score": {
@@ -1553,6 +1553,25 @@
    "power": 69
   },
   {
+   "name": "Granite 4.2 8B",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 37,
+    "coding": 53,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 60,
+    "cost": 100,
+    "speed": 70,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "Tau 7.6，SciCode 31.5",
+   "updated_at": "2026-09-18",
+   "power": 68
+  },
+  {
    "name": "Ling 3.0 Tiny",
    "vendor": "国产",
    "score": {
@@ -1562,7 +1581,7 @@
     "multimodal": 75,
     "longtext": 60,
     "cost": 76,
-    "speed": 72,
+    "speed": 69,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
