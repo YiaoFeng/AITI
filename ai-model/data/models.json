@@ -24,16 +24,16 @@
    "name": "GPT-6 Astra",
    "vendor": "海外",
    "score": {
-    "reasoning": 89,
+    "reasoning": 90,
     "coding": 99,
-    "chinese": 83,
+    "chinese": 76,
     "multimodal": 100,
     "longtext": 88,
     "cost": 60,
     "speed": 71,
     "privacy": 77,
     "ecosystem": 92,
-    "creative": 90
+    "creative": 86
    },
    "brief": "TB4.0 57.07 前三，DeepSWE 74.1 前三",
    "updated_at": "2026-09-04",
@@ -44,189 +44,7 @@
     "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
     "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
    },
-   "power": 88
-  },
-  {
-   "name": "Claude Fable 5",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 82,
-    "coding": 97,
-    "chinese": 87,
-    "multimodal": 100,
-    "longtext": 90,
-    "cost": 60,
-    "speed": 74,
-    "privacy": 73,
-    "ecosystem": 88,
-    "creative": 89
-   },
-   "brief": "HLE 55.5 前三，DeepSWE 70.0",
-   "updated_at": "2026-09-01",
-   "tier": {
-    "key": "anthropic",
-    "label": "思考预算",
-    "how": "能给思考过程设一个 token 上限，也能整个关掉",
-    "advice": "闲聊和简单问答关掉思考，写代码、读长文再打开",
-    "why": "开着思考回复会明显变慢，token 消耗也跟着翻上去"
-   },
    "power": 87
-  },
-  {
-   "name": "Claude Fable 5.1",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 88,
-    "coding": 98,
-    "chinese": 91,
-    "multimodal": 83,
-    "longtext": 94,
-    "cost": 60,
-    "speed": 75,
-    "privacy": 73,
-    "ecosystem": 89,
-    "creative": 92
-   },
-   "brief": "HLE 59.1 前三，TB4.0 49.49 前三",
-   "updated_at": "2026-09-02",
-   "tier": {
-    "key": "anthropic",
-    "label": "思考预算",
-    "how": "能给思考过程设一个 token 上限，也能整个关掉",
-    "advice": "闲聊和简单问答关掉思考，写代码、读长文再打开",
-    "why": "开着思考回复会明显变慢，token 消耗也跟着翻上去"
-   },
-   "power": 87
-  },
-  {
-   "name": "Gemini 3.8 Flash",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 82,
-    "coding": 89,
-    "chinese": 89,
-    "multimodal": 94,
-    "longtext": 88,
-    "cost": 80,
-    "speed": 98,
-    "privacy": 74,
-    "ecosystem": 81,
-    "creative": 87
-   },
-   "brief": "DeepSWE 73.7，HLE 47.8",
-   "updated_at": "2026-09-03",
-   "tier": {
-    "key": "google",
-    "label": "思考预算",
-    "how": "thinking budget 可以调，也能设成 0 直接关掉",
-    "advice": "批量跑的小任务关掉，需要多步推理的再开",
-    "why": "思考档位越高延迟越明显，价格随推理 token 一起上涨"
-   },
-   "power": 87
-  },
-  {
-   "name": "Claude Opus 5.5",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 96,
-    "coding": 96,
-    "chinese": 95,
-    "multimodal": 75,
-    "longtext": 93,
-    "cost": 67,
-    "speed": 80,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 87
-   },
-   "brief": "HLE 61.4 全场第一，TB4.0 61.62 全场第一",
-   "updated_at": "2026-09-18",
-   "tier": {
-    "key": "anthropic",
-    "label": "思考预算",
-    "how": "能给思考过程设一个 token 上限，也能整个关掉",
-    "advice": "闲聊和简单问答关掉思考，写代码、读长文再打开",
-    "why": "开着思考回复会明显变慢，token 消耗也跟着翻上去"
-   },
-   "power": 87
-  },
-  {
-   "name": "Gemini 3.7 Flash",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 79,
-    "coding": 87,
-    "chinese": 89,
-    "multimodal": 96,
-    "longtext": 89,
-    "cost": 80,
-    "speed": 100,
-    "privacy": 73,
-    "ecosystem": 76,
-    "creative": 84
-   },
-   "brief": "HLE 47.9，DeepSWE 65.3",
-   "updated_at": "2026-08-28",
-   "tier": {
-    "key": "google",
-    "label": "思考预算",
-    "how": "thinking budget 可以调，也能设成 0 直接关掉",
-    "advice": "批量跑的小任务关掉，需要多步推理的再开",
-    "why": "思考档位越高延迟越明显，价格随推理 token 一起上涨"
-   },
-   "power": 86
-  },
-  {
-   "name": "Claude Opus 5",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 85,
-    "coding": 99,
-    "chinese": 91,
-    "multimodal": 98,
-    "longtext": 86,
-    "cost": 65,
-    "speed": 69,
-    "privacy": 76,
-    "ecosystem": 80,
-    "creative": 80
-   },
-   "brief": "HLE 54.9，DeepSWE 74.0",
-   "updated_at": "2026-09-01",
-   "tier": {
-    "key": "anthropic",
-    "label": "思考预算",
-    "how": "能给思考过程设一个 token 上限，也能整个关掉",
-    "advice": "闲聊和简单问答关掉思考，写代码、读长文再打开",
-    "why": "开着思考回复会明显变慢，token 消耗也跟着翻上去"
-   },
-   "power": 85
-  },
-  {
-   "name": "Kimi K3",
-   "vendor": "国产",
-   "score": {
-    "reasoning": 79,
-    "coding": 92,
-    "chinese": 89,
-    "multimodal": 91,
-    "longtext": 98,
-    "cost": 69,
-    "speed": 63,
-    "privacy": 82,
-    "ecosystem": 83,
-    "creative": 84
-   },
-   "brief": "HLE 46.9，DeepSWE 67.5",
-   "updated_at": "2026-08-24",
-   "tier": {
-    "key": "moonshot",
-    "label": "思考开关",
-    "how": "可以切换思考模式",
-    "advice": "读文档、做摘要关掉，需要推理再开",
-    "why": "思考模式更慢更贵，长文本场景未必用得上"
-   },
-   "power": 85
   },
   {
    "name": "Qwen3.8-Max-0902",
@@ -234,14 +52,14 @@
    "score": {
     "reasoning": 79,
     "coding": 92,
-    "chinese": 88,
+    "chinese": 93,
     "multimodal": 96,
     "longtext": 87,
     "cost": 74,
     "speed": 64,
     "privacy": 87,
     "ecosystem": 84,
-    "creative": 85
+    "creative": 88
    },
    "brief": "DeepSWE 69.3，TB4.0 24.75",
    "updated_at": "2026-09-02",
@@ -252,44 +70,77 @@
     "advice": "客服、摘要这类关掉，解题和写代码再开",
     "why": "开着更准，但更慢更贵，简单任务上纯属浪费"
    },
-   "power": 85
+   "power": 86
   },
   {
-   "name": "Muse Spark 1.3",
+   "name": "Claude Fable 5",
    "vendor": "海外",
    "score": {
     "reasoning": 81,
-    "coding": 91,
-    "chinese": 86,
-    "multimodal": 96,
+    "coding": 97,
+    "chinese": 72,
+    "multimodal": 100,
     "longtext": 90,
-    "cost": 77,
-    "speed": 89,
-    "privacy": 72,
-    "ecosystem": 77,
-    "creative": 82
+    "cost": 60,
+    "speed": 74,
+    "privacy": 73,
+    "ecosystem": 88,
+    "creative": 80
    },
-   "brief": "DeepSWE 75.4 全场第一，HLE 48.7",
-   "updated_at": "2026-09-03",
-   "power": 85
+   "brief": "HLE 55.5 前三，DeepSWE 70.0",
+   "updated_at": "2026-09-01",
+   "tier": {
+    "key": "anthropic",
+    "label": "思考预算",
+    "how": "能给思考过程设一个 token 上限，也能整个关掉",
+    "advice": "闲聊和简单问答关掉思考，写代码、读长文再打开",
+    "why": "开着思考回复会明显变慢，token 消耗也跟着翻上去"
+   },
+   "power": 84
   },
   {
-   "name": "Gemini 3.6 Flash",
+   "name": "Claude Fable 5.1",
    "vendor": "海外",
    "score": {
-    "reasoning": 74,
-    "coding": 86,
-    "chinese": 90,
-    "multimodal": 88,
-    "longtext": 87,
-    "cost": 80,
-    "speed": 94,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 84
+    "reasoning": 87,
+    "coding": 98,
+    "chinese": 73,
+    "multimodal": 83,
+    "longtext": 94,
+    "cost": 60,
+    "speed": 75,
+    "privacy": 73,
+    "ecosystem": 89,
+    "creative": 82
    },
-   "brief": "IOI 35.06，TB4.0 4.54",
-   "updated_at": "2026-09-18",
+   "brief": "HLE 59.1 前三，TB4.0 49.49 前三",
+   "updated_at": "2026-09-02",
+   "tier": {
+    "key": "anthropic",
+    "label": "思考预算",
+    "how": "能给思考过程设一个 token 上限，也能整个关掉",
+    "advice": "闲聊和简单问答关掉思考，写代码、读长文再打开",
+    "why": "开着思考回复会明显变慢，token 消耗也跟着翻上去"
+   },
+   "power": 84
+  },
+  {
+   "name": "Gemini 3.8 Flash",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 80,
+    "coding": 89,
+    "chinese": 72,
+    "multimodal": 94,
+    "longtext": 88,
+    "cost": 80,
+    "speed": 98,
+    "privacy": 74,
+    "ecosystem": 81,
+    "creative": 76
+   },
+   "brief": "DeepSWE 73.7，HLE 47.8",
+   "updated_at": "2026-09-03",
    "tier": {
     "key": "google",
     "label": "思考预算",
@@ -297,74 +148,22 @@
     "advice": "批量跑的小任务关掉，需要多步推理的再开",
     "why": "思考档位越高延迟越明显，价格随推理 token 一起上涨"
    },
-   "power": 85
-  },
-  {
-   "name": "Qwen3.8 Max",
-   "vendor": "国产",
-   "score": {
-    "reasoning": 80,
-    "coding": 89,
-    "chinese": 93,
-    "multimodal": 96,
-    "longtext": 84,
-    "cost": 74,
-    "speed": 66,
-    "privacy": 86,
-    "ecosystem": 80,
-    "creative": 82
-   },
-   "brief": "TB4.0 24.75，HLE 43.0",
-   "updated_at": "2026-08-24",
-   "tier": {
-    "key": "qwen",
-    "label": "思考开关",
-    "how": "深度思考模式可以开关",
-    "advice": "客服、摘要这类关掉，解题和写代码再开",
-    "why": "开着更准，但更慢更贵，简单任务上纯属浪费"
-   },
-   "power": 84
-  },
-  {
-   "name": "智谱 GLM-5.3-Flash",
-   "vendor": "国产",
-   "score": {
-    "reasoning": 76,
-    "coding": 86,
-    "chinese": 91,
-    "multimodal": 86,
-    "longtext": 87,
-    "cost": 94,
-    "speed": 71,
-    "privacy": 86,
-    "ecosystem": 85,
-    "creative": 90
-   },
-   "brief": "TB4.0 19.7，DeepSWE 63.4",
-   "updated_at": "2026-08-26",
-   "tier": {
-    "key": "zhipu",
-    "label": "思考开关",
-    "how": "深度思考模式可以开关",
-    "advice": "常规任务关掉，复杂推理再开",
-    "why": "开着思考会拉长响应时间，简单任务上不划算"
-   },
    "power": 84
   },
   {
    "name": "DeepSeek V4.1 Flash",
    "vendor": "国产",
    "score": {
-    "reasoning": 74,
+    "reasoning": 73,
     "coding": 92,
-    "chinese": 89,
+    "chinese": 87,
     "multimodal": 61,
     "longtext": 92,
     "cost": 88,
     "speed": 95,
     "privacy": 87,
     "ecosystem": 82,
-    "creative": 85
+    "creative": 84
    },
    "brief": "DeepSWE 74.2 前三，TB4.0 11.62",
    "updated_at": "2026-09-10",
@@ -378,73 +177,54 @@
    "power": 84
   },
   {
-   "name": "GPT-5.6 Terra",
+   "name": "Claude Opus 5.5",
    "vendor": "海外",
    "score": {
-    "reasoning": 77,
-    "coding": 89,
-    "chinese": 89,
-    "multimodal": 77,
-    "longtext": 90,
-    "cost": 71,
-    "speed": 83,
+    "reasoning": 94,
+    "coding": 96,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 93,
+    "cost": 67,
+    "speed": 80,
     "privacy": 83,
     "ecosystem": 80,
-    "creative": 84
+    "creative": 78
    },
-   "brief": "IOI 87.61 前三，TB4.0 26.26",
+   "brief": "HLE 61.4 全场第一，TB4.0 61.62 全场第一",
    "updated_at": "2026-09-18",
    "tier": {
-    "key": "openai",
-    "label": "推理档位",
-    "how": "reasoning_effort 有 low / medium / high 三档",
-    "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
-    "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
+    "key": "anthropic",
+    "label": "思考预算",
+    "how": "能给思考过程设一个 token 上限，也能整个关掉",
+    "advice": "闲聊和简单问答关掉思考，写代码、读长文再打开",
+    "why": "开着思考回复会明显变慢，token 消耗也跟着翻上去"
    },
    "power": 84
   },
   {
-   "name": "Step 5 Preview",
+   "name": "Kimi K3",
    "vendor": "国产",
    "score": {
-    "reasoning": 76,
-    "coding": 89,
-    "chinese": 87,
-    "multimodal": 80,
+    "reasoning": 79,
+    "coding": 92,
+    "chinese": 80,
+    "multimodal": 91,
     "longtext": 98,
-    "cost": 80,
-    "speed": 78,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 83
-   },
-   "brief": "DeepSWE 67.7，HLE 46.5",
-   "updated_at": "2026-09-18",
-   "power": 84
-  },
-  {
-   "name": "GPT-5.6 Sol",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 83,
-    "coding": 95,
-    "chinese": 86,
-    "multimodal": 81,
-    "longtext": 92,
-    "cost": 67,
-    "speed": 72,
-    "privacy": 75,
+    "cost": 69,
+    "speed": 63,
+    "privacy": 82,
     "ecosystem": 83,
-    "creative": 83
+    "creative": 79
    },
-   "brief": "HLE 49.5，DeepSWE 73.0",
-   "updated_at": "2026-08-23",
+   "brief": "HLE 46.9，DeepSWE 67.5",
+   "updated_at": "2026-08-24",
    "tier": {
-    "key": "openai",
-    "label": "推理档位",
-    "how": "reasoning_effort 有 low / medium / high 三档",
-    "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
-    "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
+    "key": "moonshot",
+    "label": "思考开关",
+    "how": "可以切换思考模式",
+    "advice": "读文档、做摘要关掉，需要推理再开",
+    "why": "思考模式更慢更贵，长文本场景未必用得上"
    },
    "power": 83
   },
@@ -475,25 +255,6 @@
    "power": 83
   },
   {
-   "name": "Muse Spark 1.2",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 74,
-    "coding": 85,
-    "chinese": 86,
-    "multimodal": 91,
-    "longtext": 85,
-    "cost": 77,
-    "speed": 98,
-    "privacy": 72,
-    "ecosystem": 75,
-    "creative": 80
-   },
-   "brief": "HLE 45.5，DeepSWE 59.3",
-   "updated_at": "2026-09-01",
-   "power": 83
-  },
-  {
    "name": "Qwen3.8-Flash-Next",
    "vendor": "国产",
    "score": {
@@ -520,67 +281,22 @@
    "power": 83
   },
   {
-   "name": "小米 MiMo-V2.6-Pro",
-   "vendor": "国产",
-   "score": {
-    "reasoning": 83,
-    "coding": 92,
-    "chinese": 90,
-    "multimodal": 74,
-    "longtext": 95,
-    "cost": 87,
-    "speed": 67,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 84
-   },
-   "brief": "HLE 49.4，DeepSWE 71.9",
-   "updated_at": "2026-09-18",
-   "power": 83
-  },
-  {
-   "name": "GLM-5.3",
-   "vendor": "国产",
-   "score": {
-    "reasoning": 77,
-    "coding": 91,
-    "chinese": 90,
-    "multimodal": 75,
-    "longtext": 86,
-    "cost": 77,
-    "speed": 76,
-    "privacy": 84,
-    "ecosystem": 78,
-    "creative": 82
-   },
-   "brief": "TB4.0 25.25，DeepSWE 66.9",
-   "updated_at": "2026-08-24",
-   "tier": {
-    "key": "zhipu",
-    "label": "思考开关",
-    "how": "深度思考模式可以开关",
-    "advice": "常规任务关掉，复杂推理再开",
-    "why": "开着思考会拉长响应时间，简单任务上不划算"
-   },
-   "power": 82
-  },
-  {
-   "name": "Gemini 3.1 Pro",
+   "name": "Gemini 3.6 Flash",
    "vendor": "海外",
    "score": {
-    "reasoning": 74,
-    "coding": 84,
-    "chinese": 87,
+    "reasoning": 73,
+    "coding": 86,
+    "chinese": 80,
     "multimodal": 88,
-    "longtext": 89,
-    "cost": 71,
-    "speed": 85,
-    "privacy": 74,
-    "ecosystem": 78,
-    "creative": 82
+    "longtext": 87,
+    "cost": 80,
+    "speed": 94,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
    },
-   "brief": "IOI 51.83，HLE 47.0",
-   "updated_at": "2026-08-24",
+   "brief": "IOI 35.06，TB4.0 4.54",
+   "updated_at": "2026-09-18",
    "tier": {
     "key": "google",
     "label": "思考预算",
@@ -588,25 +304,25 @@
     "advice": "批量跑的小任务关掉，需要多步推理的再开",
     "why": "思考档位越高延迟越明显，价格随推理 token 一起上涨"
    },
-   "power": 82
+   "power": 83
   },
   {
-   "name": "Claude Sonnet 5",
+   "name": "Claude Opus 5",
    "vendor": "海外",
    "score": {
-    "reasoning": 73,
-    "coding": 88,
-    "chinese": 85,
-    "multimodal": 79,
-    "longtext": 89,
-    "cost": 72,
-    "speed": 80,
-    "privacy": 83,
+    "reasoning": 84,
+    "coding": 99,
+    "chinese": 78,
+    "multimodal": 98,
+    "longtext": 86,
+    "cost": 65,
+    "speed": 69,
+    "privacy": 76,
     "ecosystem": 80,
-    "creative": 81
+    "creative": 72
    },
-   "brief": "IOI 45.0，TB4.0 8.08",
-   "updated_at": "2026-09-18",
+   "brief": "HLE 54.9，DeepSWE 74.0",
+   "updated_at": "2026-09-01",
    "tier": {
     "key": "anthropic",
     "label": "思考预算",
@@ -617,21 +333,118 @@
    "power": 82
   },
   {
-   "name": "GPT-5.6 Luna",
+   "name": "Qwen3.8 Max",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 78,
+    "coding": 89,
+    "chinese": 85,
+    "multimodal": 96,
+    "longtext": 84,
+    "cost": 74,
+    "speed": 66,
+    "privacy": 86,
+    "ecosystem": 80,
+    "creative": 77
+   },
+   "brief": "TB4.0 24.75，HLE 43.0",
+   "updated_at": "2026-08-24",
+   "tier": {
+    "key": "qwen",
+    "label": "思考开关",
+    "how": "深度思考模式可以开关",
+    "advice": "客服、摘要这类关掉，解题和写代码再开",
+    "why": "开着更准，但更慢更贵，简单任务上纯属浪费"
+   },
+   "power": 82
+  },
+  {
+   "name": "Gemini 3.7 Flash",
    "vendor": "海外",
    "score": {
-    "reasoning": 71,
+    "reasoning": 76,
     "coding": 87,
-    "chinese": 85,
-    "multimodal": 73,
-    "longtext": 92,
-    "cost": 89,
-    "speed": 82,
-    "privacy": 83,
-    "ecosystem": 80,
+    "chinese": 67,
+    "multimodal": 96,
+    "longtext": 89,
+    "cost": 80,
+    "speed": 100,
+    "privacy": 73,
+    "ecosystem": 76,
+    "creative": 71
+   },
+   "brief": "HLE 47.9，DeepSWE 65.3",
+   "updated_at": "2026-08-28",
+   "tier": {
+    "key": "google",
+    "label": "思考预算",
+    "how": "thinking budget 可以调，也能设成 0 直接关掉",
+    "advice": "批量跑的小任务关掉，需要多步推理的再开",
+    "why": "思考档位越高延迟越明显，价格随推理 token 一起上涨"
+   },
+   "power": 82
+  },
+  {
+   "name": "智谱 GLM-5.3-Flash",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 75,
+    "coding": 86,
+    "chinese": 77,
+    "multimodal": 86,
+    "longtext": 87,
+    "cost": 94,
+    "speed": 71,
+    "privacy": 86,
+    "ecosystem": 85,
     "creative": 81
    },
-   "brief": "IOI 61.78 前三，TB4.0 4.54",
+   "brief": "TB4.0 19.7，DeepSWE 63.4",
+   "updated_at": "2026-08-26",
+   "tier": {
+    "key": "zhipu",
+    "label": "思考开关",
+    "how": "深度思考模式可以开关",
+    "advice": "常规任务关掉，复杂推理再开",
+    "why": "开着思考会拉长响应时间，简单任务上不划算"
+   },
+   "power": 82
+  },
+  {
+   "name": "Muse Spark 1.3",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 79,
+    "coding": 91,
+    "chinese": 71,
+    "multimodal": 96,
+    "longtext": 90,
+    "cost": 77,
+    "speed": 89,
+    "privacy": 72,
+    "ecosystem": 77,
+    "creative": 73
+   },
+   "brief": "DeepSWE 75.4 全场第一，HLE 48.7",
+   "updated_at": "2026-09-03",
+   "power": 82
+  },
+  {
+   "name": "GPT-5.6 Terra",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 76,
+    "coding": 89,
+    "chinese": 80,
+    "multimodal": 77,
+    "longtext": 90,
+    "cost": 71,
+    "speed": 83,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "IOI 87.61 前三，TB4.0 26.26",
    "updated_at": "2026-09-18",
    "tier": {
     "key": "openai",
@@ -643,47 +456,21 @@
    "power": 82
   },
   {
-   "name": "Grok 4.5",
-   "vendor": "海外",
+   "name": "Step 5 Preview",
+   "vendor": "国产",
    "score": {
     "reasoning": 76,
     "coding": 89,
-    "chinese": 87,
-    "multimodal": 84,
-    "longtext": 86,
-    "cost": 74,
-    "speed": 74,
+    "chinese": 80,
+    "multimodal": 80,
+    "longtext": 98,
+    "cost": 80,
+    "speed": 78,
     "privacy": 83,
     "ecosystem": 80,
-    "creative": 82
+    "creative": 78
    },
-   "brief": "IOI 40.56，TB4.0 6.57",
-   "updated_at": "2026-09-18",
-   "tier": {
-    "key": "xai",
-    "label": "推理档位",
-    "how": "推理强度可以调",
-    "advice": "默认档够用，难题再往上调",
-    "why": "推理强度越高，响应越慢、消耗越大"
-   },
-   "power": 82
-  },
-  {
-   "name": "Muse Spark 1.1",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 72,
-    "coding": 87,
-    "chinese": 89,
-    "multimodal": 87,
-    "longtext": 85,
-    "cost": 77,
-    "speed": 75,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 84
-   },
-   "brief": "Vibe Code 72.16 全场第一，Tau 31.8",
+   "brief": "DeepSWE 67.7，HLE 46.5",
    "updated_at": "2026-09-18",
    "power": 82
   },
@@ -693,14 +480,14 @@
    "score": {
     "reasoning": 77,
     "coding": 93,
-    "chinese": 78,
+    "chinese": 80,
     "multimodal": 75,
     "longtext": 92,
     "cost": 72,
     "speed": 83,
     "privacy": 83,
     "ecosystem": 80,
-    "creative": 77
+    "creative": 78
    },
    "brief": "HLE 47.9，DeepSWE 68.8",
    "updated_at": "2026-09-18",
@@ -714,28 +501,28 @@
    "power": 82
   },
   {
-   "name": "Qwen3.8-27B",
+   "name": "GLM-5.3",
    "vendor": "国产",
    "score": {
-    "reasoning": 70,
-    "coding": 83,
-    "chinese": 88,
-    "multimodal": 77,
-    "longtext": 89,
-    "cost": 82,
-    "speed": 68,
-    "privacy": 85,
-    "ecosystem": 84,
-    "creative": 87
+    "reasoning": 76,
+    "coding": 91,
+    "chinese": 83,
+    "multimodal": 75,
+    "longtext": 86,
+    "cost": 77,
+    "speed": 76,
+    "privacy": 84,
+    "ecosystem": 78,
+    "creative": 77
    },
-   "brief": "DeepSWE 42.2，TB4.0 4.04",
+   "brief": "TB4.0 25.25，DeepSWE 66.9",
    "updated_at": "2026-08-24",
    "tier": {
-    "key": "qwen",
+    "key": "zhipu",
     "label": "思考开关",
     "how": "深度思考模式可以开关",
-    "advice": "客服、摘要这类关掉，解题和写代码再开",
-    "why": "开着更准，但更慢更贵，简单任务上纯属浪费"
+    "advice": "常规任务关掉，复杂推理再开",
+    "why": "开着思考会拉长响应时间，简单任务上不划算"
    },
    "power": 81
   },
@@ -766,47 +553,73 @@
    "power": 81
   },
   {
-   "name": "GLM-5.2",
-   "vendor": "国产",
+   "name": "Claude Sonnet 5",
+   "vendor": "海外",
    "score": {
-    "reasoning": 71,
-    "coding": 85,
-    "chinese": 89,
-    "multimodal": 75,
-    "longtext": 84,
-    "cost": 77,
-    "speed": 75,
+    "reasoning": 72,
+    "coding": 88,
+    "chinese": 80,
+    "multimodal": 79,
+    "longtext": 89,
+    "cost": 72,
+    "speed": 80,
     "privacy": 83,
     "ecosystem": 80,
-    "creative": 84
+    "creative": 78
    },
-   "brief": "Vibe Code 63.96 前三，Tau 34.6",
+   "brief": "IOI 45.0，TB4.0 8.08",
    "updated_at": "2026-09-18",
    "tier": {
-    "key": "zhipu",
-    "label": "思考开关",
-    "how": "深度思考模式可以开关",
-    "advice": "常规任务关掉，复杂推理再开",
-    "why": "开着思考会拉长响应时间，简单任务上不划算"
+    "key": "anthropic",
+    "label": "思考预算",
+    "how": "能给思考过程设一个 token 上限，也能整个关掉",
+    "advice": "闲聊和简单问答关掉思考，写代码、读长文再打开",
+    "why": "开着思考回复会明显变慢，token 消耗也跟着翻上去"
    },
    "power": 81
   },
   {
-   "name": "Grok 4.7",
+   "name": "GPT-5.6 Luna",
    "vendor": "海外",
    "score": {
-    "reasoning": 77,
-    "coding": 92,
-    "chinese": 84,
-    "multimodal": 75,
-    "longtext": 82,
-    "cost": 74,
-    "speed": 77,
+    "reasoning": 71,
+    "coding": 87,
+    "chinese": 80,
+    "multimodal": 73,
+    "longtext": 92,
+    "cost": 89,
+    "speed": 82,
     "privacy": 83,
     "ecosystem": 80,
-    "creative": 80
+    "creative": 78
    },
-   "brief": "TB4.0 28.28，DeepSWE 71.0",
+   "brief": "IOI 61.78 前三，TB4.0 4.54",
+   "updated_at": "2026-09-18",
+   "tier": {
+    "key": "openai",
+    "label": "推理档位",
+    "how": "reasoning_effort 有 low / medium / high 三档",
+    "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
+    "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
+   },
+   "power": 81
+  },
+  {
+   "name": "Grok 4.5",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 75,
+    "coding": 89,
+    "chinese": 80,
+    "multimodal": 84,
+    "longtext": 86,
+    "cost": 74,
+    "speed": 74,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "IOI 40.56，TB4.0 6.57",
    "updated_at": "2026-09-18",
    "tier": {
     "key": "xai",
@@ -818,19 +631,57 @@
    "power": 81
   },
   {
+   "name": "Muse Spark 1.1",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 71,
+    "coding": 87,
+    "chinese": 80,
+    "multimodal": 87,
+    "longtext": 85,
+    "cost": 77,
+    "speed": 75,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "Vibe Code 72.16 全场第一，Tau 31.8",
+   "updated_at": "2026-09-18",
+   "power": 81
+  },
+  {
+   "name": "小米 MiMo-V2.6-Pro",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 81,
+    "coding": 92,
+    "chinese": 80,
+    "multimodal": 74,
+    "longtext": 95,
+    "cost": 87,
+    "speed": 67,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "HLE 49.4，DeepSWE 71.9",
+   "updated_at": "2026-09-18",
+   "power": 81
+  },
+  {
    "name": "GPT-6 Luna",
    "vendor": "海外",
    "score": {
     "reasoning": 70,
     "coding": 88,
-    "chinese": 81,
+    "chinese": 80,
     "multimodal": 75,
     "longtext": 91,
     "cost": 95,
     "speed": 86,
     "privacy": 83,
     "ecosystem": 80,
-    "creative": 79
+    "creative": 78
    },
    "brief": "DeepSWE 66.6，HLE 38.5",
    "updated_at": "2026-09-18",
@@ -844,22 +695,100 @@
    "power": 81
   },
   {
-   "name": "Inkling",
+   "name": "GPT-5.6 Sol",
    "vendor": "海外",
    "score": {
-    "reasoning": 64,
-    "coding": 79,
-    "chinese": 87,
-    "multimodal": 75,
-    "longtext": 83,
-    "cost": 78,
-    "speed": 90,
-    "privacy": 83,
-    "ecosystem": 80,
+    "reasoning": 82,
+    "coding": 95,
+    "chinese": 70,
+    "multimodal": 81,
+    "longtext": 92,
+    "cost": 67,
+    "speed": 72,
+    "privacy": 75,
+    "ecosystem": 83,
+    "creative": 73
+   },
+   "brief": "HLE 49.5，DeepSWE 73.0",
+   "updated_at": "2026-08-23",
+   "tier": {
+    "key": "openai",
+    "label": "推理档位",
+    "how": "reasoning_effort 有 low / medium / high 三档",
+    "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
+    "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
+   },
+   "power": 80
+  },
+  {
+   "name": "Muse Spark 1.2",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 72,
+    "coding": 85,
+    "chinese": 70,
+    "multimodal": 91,
+    "longtext": 85,
+    "cost": 77,
+    "speed": 98,
+    "privacy": 72,
+    "ecosystem": 75,
+    "creative": 70
+   },
+   "brief": "HLE 45.5，DeepSWE 59.3",
+   "updated_at": "2026-09-01",
+   "power": 80
+  },
+  {
+   "name": "Qwen3.8-27B",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 69,
+    "coding": 83,
+    "chinese": 82,
+    "multimodal": 77,
+    "longtext": 89,
+    "cost": 82,
+    "speed": 68,
+    "privacy": 85,
+    "ecosystem": 84,
     "creative": 82
    },
-   "brief": "IOI 14.94，TB4.0 0.0",
+   "brief": "DeepSWE 42.2，TB4.0 4.04",
+   "updated_at": "2026-08-24",
+   "tier": {
+    "key": "qwen",
+    "label": "思考开关",
+    "how": "深度思考模式可以开关",
+    "advice": "客服、摘要这类关掉，解题和写代码再开",
+    "why": "开着更准，但更慢更贵，简单任务上纯属浪费"
+   },
+   "power": 80
+  },
+  {
+   "name": "Grok 4.7",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 77,
+    "coding": 92,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 82,
+    "cost": 74,
+    "speed": 77,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "TB4.0 28.28，DeepSWE 71.0",
    "updated_at": "2026-09-18",
+   "tier": {
+    "key": "xai",
+    "label": "推理档位",
+    "how": "推理强度可以调",
+    "advice": "默认档够用，难题再往上调",
+    "why": "推理强度越高，响应越慢、消耗越大"
+   },
    "power": 80
   },
   {
@@ -915,28 +844,28 @@
    "power": 79
   },
   {
-   "name": "Grok 4.6",
+   "name": "Gemini 3.1 Pro",
    "vendor": "海外",
    "score": {
-    "reasoning": 79,
-    "coding": 91,
-    "chinese": 82,
-    "multimodal": 66,
-    "longtext": 87,
-    "cost": 74,
-    "speed": 73,
-    "privacy": 71,
+    "reasoning": 73,
+    "coding": 84,
+    "chinese": 70,
+    "multimodal": 88,
+    "longtext": 89,
+    "cost": 71,
+    "speed": 85,
+    "privacy": 74,
     "ecosystem": 78,
-    "creative": 81
+    "creative": 72
    },
-   "brief": "TB4.0 17.17，DeepSWE 65.9",
-   "updated_at": "2026-09-01",
+   "brief": "IOI 51.83，HLE 47.0",
+   "updated_at": "2026-08-24",
    "tier": {
-    "key": "xai",
-    "label": "推理档位",
-    "how": "推理强度可以调",
-    "advice": "默认档够用，难题再往上调",
-    "why": "推理强度越高，响应越慢、消耗越大"
+    "key": "google",
+    "label": "思考预算",
+    "how": "thinking budget 可以调，也能设成 0 直接关掉",
+    "advice": "批量跑的小任务关掉，需要多步推理的再开",
+    "why": "思考档位越高延迟越明显，价格随推理 token 一起上涨"
    },
    "power": 79
   },
@@ -946,14 +875,14 @@
    "score": {
     "reasoning": 51,
     "coding": 79,
-    "chinese": 85,
+    "chinese": 80,
     "multimodal": 75,
     "longtext": 81,
     "cost": 84,
     "speed": 100,
     "privacy": 83,
     "ecosystem": 80,
-    "creative": 81
+    "creative": 78
    },
    "brief": "Vibe Code 37.16，Tau 17.5",
    "updated_at": "2026-09-18",
@@ -967,21 +896,21 @@
    "power": 79
   },
   {
-   "name": "Inkling Small",
+   "name": "Inkling",
    "vendor": "海外",
    "score": {
-    "reasoning": 65,
-    "coding": 81,
-    "chinese": 84,
-    "multimodal": 62,
-    "longtext": 81,
-    "cost": 88,
-    "speed": 92,
+    "reasoning": 63,
+    "coding": 79,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 83,
+    "cost": 78,
+    "speed": 90,
     "privacy": 83,
     "ecosystem": 80,
-    "creative": 81
+    "creative": 78
    },
-   "brief": "IOI 9.33，TB4.0 1.51",
+   "brief": "IOI 14.94，TB4.0 0.0",
    "updated_at": "2026-09-18",
    "power": 79
   },
@@ -1002,32 +931,6 @@
    },
    "brief": "SciCode 52.0 前三，HLE 43.6",
    "updated_at": "2026-09-18",
-   "power": 79
-  },
-  {
-   "name": "Qwen3.7 Plus",
-   "vendor": "国产",
-   "score": {
-    "reasoning": 64,
-    "coding": 79,
-    "chinese": 89,
-    "multimodal": 81,
-    "longtext": 77,
-    "cost": 85,
-    "speed": 71,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 83
-   },
-   "brief": "Vibe Code 46.39，Tau 17.5",
-   "updated_at": "2026-09-18",
-   "tier": {
-    "key": "qwen",
-    "label": "思考开关",
-    "how": "深度思考模式可以开关",
-    "advice": "客服、摘要这类关掉，解题和写代码再开",
-    "why": "开着更准，但更慢更贵，简单任务上纯属浪费"
-   },
    "power": 79
   },
   {
@@ -1057,23 +960,49 @@
    "power": 79
   },
   {
-   "name": "小米 MiMo-V2.6-Flash",
+   "name": "GLM-5.2",
    "vendor": "国产",
    "score": {
-    "reasoning": 72,
-    "coding": 88,
-    "chinese": 88,
-    "multimodal": 72,
-    "longtext": 79,
-    "cost": 96,
-    "speed": 70,
+    "reasoning": 70,
+    "coding": 85,
+    "chinese": 76,
+    "multimodal": 75,
+    "longtext": 84,
+    "cost": 77,
+    "speed": 75,
     "privacy": 83,
     "ecosystem": 80,
-    "creative": 83
+    "creative": 76
    },
-   "brief": "DeepSWE 67.9，TB4.0 21.21",
+   "brief": "Vibe Code 63.96 前三，Tau 34.6",
    "updated_at": "2026-09-18",
-   "power": 79
+   "tier": {
+    "key": "zhipu",
+    "label": "思考开关",
+    "how": "深度思考模式可以开关",
+    "advice": "常规任务关掉，复杂推理再开",
+    "why": "开着思考会拉长响应时间，简单任务上不划算"
+   },
+   "power": 78
+  },
+  {
+   "name": "Inkling Small",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 65,
+    "coding": 81,
+    "chinese": 80,
+    "multimodal": 62,
+    "longtext": 81,
+    "cost": 88,
+    "speed": 92,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "IOI 9.33，TB4.0 1.51",
+   "updated_at": "2026-09-18",
+   "power": 78
   },
   {
    "name": "Kimi K2.7 Code",
@@ -1121,6 +1050,25 @@
    "power": 78
   },
   {
+   "name": "Muse Glimmer",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 53,
+    "coding": 72,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 91,
+    "cost": 87,
+    "speed": 87,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "SciCode 44.9，Tau 23.5",
+   "updated_at": "2026-09-18",
+   "power": 78
+  },
+  {
    "name": "K2 Horizon 375B A23B",
    "vendor": "海外",
    "score": {
@@ -1140,22 +1088,48 @@
    "power": 78
   },
   {
-   "name": "Muse Glimmer",
-   "vendor": "海外",
+   "name": "小米 MiMo-V2.6-Flash",
+   "vendor": "国产",
    "score": {
-    "reasoning": 52,
-    "coding": 72,
-    "chinese": 79,
-    "multimodal": 75,
-    "longtext": 91,
-    "cost": 87,
-    "speed": 87,
+    "reasoning": 71,
+    "coding": 88,
+    "chinese": 80,
+    "multimodal": 72,
+    "longtext": 79,
+    "cost": 96,
+    "speed": 70,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "SciCode 44.9，Tau 23.5",
+   "brief": "DeepSWE 67.9，TB4.0 21.21",
    "updated_at": "2026-09-18",
+   "power": 78
+  },
+  {
+   "name": "Qwen3.7 Plus",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 63,
+    "coding": 79,
+    "chinese": 80,
+    "multimodal": 81,
+    "longtext": 77,
+    "cost": 85,
+    "speed": 71,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "Vibe Code 46.39，Tau 17.5",
+   "updated_at": "2026-09-18",
+   "tier": {
+    "key": "qwen",
+    "label": "思考开关",
+    "how": "深度思考模式可以开关",
+    "advice": "客服、摘要这类关掉，解题和写代码再开",
+    "why": "开着更准，但更慢更贵，简单任务上纯属浪费"
+   },
    "power": 77
   },
   {
@@ -1223,64 +1197,45 @@
    "power": 77
   },
   {
-   "name": "腾讯混元 HY3",
-   "vendor": "国产",
+   "name": "Grok 4.6",
+   "vendor": "海外",
    "score": {
-    "reasoning": 64,
-    "coding": 57,
-    "chinese": 84,
-    "multimodal": 68,
-    "longtext": 85,
-    "cost": 93,
-    "speed": 79,
-    "privacy": 87,
-    "ecosystem": 79,
-    "creative": 82
+    "reasoning": 78,
+    "coding": 91,
+    "chinese": 70,
+    "multimodal": 66,
+    "longtext": 87,
+    "cost": 74,
+    "speed": 73,
+    "privacy": 71,
+    "ecosystem": 78,
+    "creative": 74
    },
-   "brief": "Tau 22.9，DeepSWE 28.0",
-   "updated_at": "2026-08-24",
+   "brief": "TB4.0 17.17，DeepSWE 65.9",
+   "updated_at": "2026-09-01",
    "tier": {
-    "key": "tencent",
-    "label": "思考开关",
-    "how": "支持思考模式切换",
-    "advice": "日常对话关掉，复杂任务再开",
-    "why": "思考模式消耗更高，简单场景没必要"
+    "key": "xai",
+    "label": "推理档位",
+    "how": "推理强度可以调",
+    "advice": "默认档够用，难题再往上调",
+    "why": "推理强度越高，响应越慢、消耗越大"
    },
-   "power": 76
-  },
-  {
-   "name": "MiniMax M3",
-   "vendor": "国产",
-   "score": {
-    "reasoning": 66,
-    "coding": 79,
-    "chinese": 83,
-    "multimodal": 68,
-    "longtext": 91,
-    "cost": 88,
-    "speed": 76,
-    "privacy": 79,
-    "ecosystem": 68,
-    "creative": 72
-   },
-   "brief": "Vibe Code 47.57 前三，Tau 15.3",
-   "updated_at": "2026-08-24",
    "power": 76
   },
   {
    "name": "小米 MiMo-V2.5",
    "vendor": "国产",
    "score": {
-    "reasoning": 53,
+    "reasoning": 52,
     "coding": 78,
-    "chinese": 86,
+    "chinese": 88,
     "multimodal": 76,
     "longtext": 77,
     "cost": 96,
     "speed": 68,
     "privacy": 87,
     "ecosystem": 76,
-    "creative": 80
+    "creative": 82
    },
    "brief": "Vibe Code 42.17，Tau 8.7",
    "updated_at": "2026-08-24",
@@ -1323,6 +1278,51 @@
    "brief": "Tau 35.3，SciCode 42.2",
    "updated_at": "2026-09-18",
    "power": 76
+  },
+  {
+   "name": "腾讯混元 HY3",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 64,
+    "coding": 57,
+    "chinese": 77,
+    "multimodal": 68,
+    "longtext": 85,
+    "cost": 93,
+    "speed": 79,
+    "privacy": 87,
+    "ecosystem": 79,
+    "creative": 78
+   },
+   "brief": "Tau 22.9，DeepSWE 28.0",
+   "updated_at": "2026-08-24",
+   "tier": {
+    "key": "tencent",
+    "label": "思考开关",
+    "how": "支持思考模式切换",
+    "advice": "日常对话关掉，复杂任务再开",
+    "why": "思考模式消耗更高，简单场景没必要"
+   },
+   "power": 75
+  },
+  {
+   "name": "MiniMax M3",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 64,
+    "coding": 79,
+    "chinese": 75,
+    "multimodal": 68,
+    "longtext": 91,
+    "cost": 88,
+    "speed": 76,
+    "privacy": 79,
+    "ecosystem": 68,
+    "creative": 67
+   },
+   "brief": "Vibe Code 47.57 前三，Tau 15.3",
+   "updated_at": "2026-08-24",
+   "power": 74
   },
   {
    "name": "A.X-K2",
@@ -1368,18 +1368,18 @@
    "score": {
     "reasoning": 60,
     "coding": 60,
-    "chinese": 80,
+    "chinese": 76,
     "multimodal": 75,
     "longtext": 67,
     "cost": 88,
     "speed": 75,
     "privacy": 83,
     "ecosystem": 80,
-    "creative": 78
+    "creative": 76
    },
    "brief": "SciCode 36.3，Tau 13.2",
    "updated_at": "2026-09-18",
-   "power": 73
+   "power": 72
   },
   {
    "name": "K-EXAONE 2.0 0803",
@@ -1480,9 +1480,9 @@
    "name": "Granite 4.2 30B",
    "vendor": "海外",
    "score": {
-    "reasoning": 38,
+    "reasoning": 39,
     "coding": 62,
-    "chinese": 79,
+    "chinese": 80,
     "multimodal": 75,
     "longtext": 60,
     "cost": 92,
@@ -1492,6 +1492,25 @@
     "creative": 78
    },
    "brief": "SciCode 37.8，Tau 14.4",
+   "updated_at": "2026-09-18",
+   "power": 70
+  },
+  {
+   "name": "Granite 4.2 3B",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 35,
+    "coding": 45,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 60,
+    "cost": 100,
+    "speed": 95,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "SciCode 25.3，Tau 5.6",
    "updated_at": "2026-09-18",
    "power": 70
   },
@@ -1534,6 +1553,25 @@
    "power": 69
   },
   {
+   "name": "Granite 4.2 8B",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 37,
+    "coding": 53,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 60,
+    "cost": 100,
+    "speed": 70,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "SciCode 31.5，Tau 7.6",
+   "updated_at": "2026-09-18",
+   "power": 68
+  },
+  {
    "name": "Ling 3.0 Tiny",
    "vendor": "国产",
    "score": {
@@ -1570,44 +1608,6 @@
    "brief": "Tau 19.6，SciCode 22.0",
    "updated_at": "2026-09-18",
    "power": 68
-  },
-  {
-   "name": "Granite 4.2 3B",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 32,
-    "coding": 45,
-    "chinese": 66,
-    "multimodal": 75,
-    "longtext": 60,
-    "cost": 100,
-    "speed": 95,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 70
-   },
-   "brief": "SciCode 25.3，Tau 5.6",
-   "updated_at": "2026-09-18",
-   "power": 67
-  },
-  {
-   "name": "Granite 4.2 8B",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 34,
-    "coding": 53,
-    "chinese": 75,
-    "multimodal": 75,
-    "longtext": 60,
-    "cost": 100,
-    "speed": 70,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 75
-   },
-   "brief": "SciCode 31.5，Tau 7.6",
-   "updated_at": "2026-09-18",
-   "power": 67
   },
   {
    "name": "LFM2.5-2.6B",
