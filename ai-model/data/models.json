@@ -27,7 +27,7 @@
     "reasoning": 90,
     "coding": 99,
     "chinese": 76,
-    "multimodal": 100,
+    "multimodal": 102,
     "longtext": 88,
     "cost": 60,
     "speed": 71,
@@ -53,7 +53,7 @@
     "reasoning": 79,
     "coding": 92,
     "chinese": 93,
-    "multimodal": 96,
+    "multimodal": 95,
     "longtext": 87,
     "cost": 74,
     "speed": 64,
@@ -70,7 +70,7 @@
     "advice": "客服、摘要这类关掉，解题和写代码再开",
     "why": "开着更准，但更慢更贵，简单任务上纯属浪费"
    },
-   "power": 86
+   "power": 85
   },
   {
    "name": "Claude Opus 5.5",
@@ -79,7 +79,7 @@
     "reasoning": 94,
     "coding": 96,
     "chinese": 80,
-    "multimodal": 86,
+    "multimodal": 85,
     "longtext": 93,
     "cost": 67,
     "speed": 80,
@@ -96,7 +96,7 @@
     "advice": "闲聊和简单问答关掉思考，写代码、读长文再打开",
     "why": "开着思考回复会明显变慢，token 消耗也跟着翻上去"
    },
-   "power": 86
+   "power": 85
   },
   {
    "name": "Claude Fable 5.1",
@@ -105,7 +105,7 @@
     "reasoning": 87,
     "coding": 98,
     "chinese": 73,
-    "multimodal": 83,
+    "multimodal": 82,
     "longtext": 94,
     "cost": 60,
     "speed": 75,
@@ -125,39 +125,13 @@
    "power": 84
   },
   {
-   "name": "Gemini 3.8 Flash",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 80,
-    "coding": 89,
-    "chinese": 72,
-    "multimodal": 94,
-    "longtext": 88,
-    "cost": 80,
-    "speed": 98,
-    "privacy": 74,
-    "ecosystem": 81,
-    "creative": 76
-   },
-   "brief": "DeepSWE 73.7，HLE 47.8",
-   "updated_at": "2026-09-03",
-   "tier": {
-    "key": "google",
-    "label": "思考预算",
-    "how": "thinking budget 可以调，也能设成 0 直接关掉",
-    "advice": "批量跑的小任务关掉，需要多步推理的再开",
-    "why": "思考档位越高延迟越明显，价格随推理 token 一起上涨"
-   },
-   "power": 84
-  },
-  {
    "name": "DeepSeek V4.1 Flash",
    "vendor": "国产",
    "score": {
     "reasoning": 73,
     "coding": 92,
     "chinese": 87,
-    "multimodal": 61,
+    "multimodal": 60,
     "longtext": 92,
     "cost": 88,
     "speed": 95,
@@ -173,32 +147,6 @@
     "how": "Pro 和 Flash 是两个独立模型，按任务分派",
     "advice": "日常问答走 Flash，难题再交给 Pro",
     "why": "Flash 便宜且快得多，拿 Pro 干简单活是最常见的浪费"
-   },
-   "power": 84
-  },
-  {
-   "name": "GPT-6 Sol",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 77,
-    "coding": 93,
-    "chinese": 80,
-    "multimodal": 86,
-    "longtext": 92,
-    "cost": 72,
-    "speed": 83,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "HLE 47.9，DeepSWE 68.8",
-   "updated_at": "2026-09-18",
-   "tier": {
-    "key": "openai",
-    "label": "推理档位",
-    "how": "reasoning_effort 有 low / medium / high 三档",
-    "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
-    "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
    },
    "power": 84
   },
@@ -235,7 +183,7 @@
     "reasoning": 79,
     "coding": 92,
     "chinese": 80,
-    "multimodal": 91,
+    "multimodal": 89,
     "longtext": 98,
     "cost": 69,
     "speed": 63,
@@ -261,7 +209,7 @@
     "reasoning": 70,
     "coding": 81,
     "chinese": 81,
-    "multimodal": 86,
+    "multimodal": 85,
     "longtext": 88,
     "cost": 86,
     "speed": 95,
@@ -281,13 +229,39 @@
    "power": 83
   },
   {
+   "name": "Gemini 3.8 Flash",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 80,
+    "coding": 89,
+    "chinese": 72,
+    "multimodal": 93,
+    "longtext": 88,
+    "cost": 80,
+    "speed": 98,
+    "privacy": 74,
+    "ecosystem": 81,
+    "creative": 76
+   },
+   "brief": "DeepSWE 73.7，HLE 47.8",
+   "updated_at": "2026-09-03",
+   "tier": {
+    "key": "google",
+    "label": "思考预算",
+    "how": "thinking budget 可以调，也能设成 0 直接关掉",
+    "advice": "批量跑的小任务关掉，需要多步推理的再开",
+    "why": "思考档位越高延迟越明显，价格随推理 token 一起上涨"
+   },
+   "power": 83
+  },
+  {
    "name": "Qwen3.8-Flash-Next",
    "vendor": "国产",
    "score": {
     "reasoning": 75,
     "coding": 84,
     "chinese": 88,
-    "multimodal": 86,
+    "multimodal": 85,
     "longtext": 86,
     "cost": 94,
     "speed": 70,
@@ -333,6 +307,32 @@
    "power": 83
   },
   {
+   "name": "GPT-6 Sol",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 77,
+    "coding": 93,
+    "chinese": 80,
+    "multimodal": 85,
+    "longtext": 92,
+    "cost": 72,
+    "speed": 83,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "HLE 47.9，DeepSWE 68.8",
+   "updated_at": "2026-09-18",
+   "tier": {
+    "key": "openai",
+    "label": "推理档位",
+    "how": "reasoning_effort 有 low / medium / high 三档",
+    "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
+    "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
+   },
+   "power": 83
+  },
+  {
    "name": "Claude Opus 5",
    "vendor": "海外",
    "score": {
@@ -365,7 +365,7 @@
     "reasoning": 76,
     "coding": 91,
     "chinese": 83,
-    "multimodal": 86,
+    "multimodal": 85,
     "longtext": 86,
     "cost": 77,
     "speed": 76,
@@ -437,39 +437,13 @@
    "power": 82
   },
   {
-   "name": "智谱 GLM-5.3-Flash",
-   "vendor": "国产",
-   "score": {
-    "reasoning": 75,
-    "coding": 86,
-    "chinese": 77,
-    "multimodal": 86,
-    "longtext": 87,
-    "cost": 94,
-    "speed": 71,
-    "privacy": 86,
-    "ecosystem": 85,
-    "creative": 81
-   },
-   "brief": "TB4.0 19.7，DeepSWE 63.4",
-   "updated_at": "2026-08-26",
-   "tier": {
-    "key": "zhipu",
-    "label": "思考开关",
-    "how": "深度思考模式可以开关",
-    "advice": "常规任务关掉，复杂推理再开",
-    "why": "开着思考会拉长响应时间，简单任务上不划算"
-   },
-   "power": 82
-  },
-  {
    "name": "腾讯混元 Hy4 preview",
    "vendor": "国产",
    "score": {
     "reasoning": 74,
     "coding": 86,
     "chinese": 86,
-    "multimodal": 86,
+    "multimodal": 85,
     "longtext": 90,
     "cost": 80,
     "speed": 68,
@@ -559,7 +533,7 @@
     "reasoning": 77,
     "coding": 92,
     "chinese": 80,
-    "multimodal": 86,
+    "multimodal": 85,
     "longtext": 82,
     "cost": 74,
     "speed": 77,
@@ -585,7 +559,7 @@
     "reasoning": 70,
     "coding": 88,
     "chinese": 80,
-    "multimodal": 86,
+    "multimodal": 85,
     "longtext": 91,
     "cost": 95,
     "speed": 86,
@@ -603,6 +577,32 @@
     "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
    },
    "power": 82
+  },
+  {
+   "name": "智谱 GLM-5.3-Flash",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 75,
+    "coding": 86,
+    "chinese": 77,
+    "multimodal": 85,
+    "longtext": 87,
+    "cost": 94,
+    "speed": 71,
+    "privacy": 86,
+    "ecosystem": 85,
+    "creative": 81
+   },
+   "brief": "TB4.0 19.7，DeepSWE 63.4",
+   "updated_at": "2026-08-26",
+   "tier": {
+    "key": "zhipu",
+    "label": "思考开关",
+    "how": "深度思考模式可以开关",
+    "advice": "常规任务关掉，复杂推理再开",
+    "why": "开着思考会拉长响应时间，简单任务上不划算"
+   },
+   "power": 81
   },
   {
    "name": "Claude Sonnet 5",
@@ -753,7 +753,7 @@
     "reasoning": 78,
     "coding": 86,
     "chinese": 80,
-    "multimodal": 86,
+    "multimodal": 85,
     "longtext": 87,
     "cost": 74,
     "speed": 64,
@@ -1229,7 +1229,7 @@
     "reasoning": 52,
     "coding": 78,
     "chinese": 88,
-    "multimodal": 76,
+    "multimodal": 75,
     "longtext": 77,
     "cost": 96,
     "speed": 68,
