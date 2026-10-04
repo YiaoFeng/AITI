@@ -24,7 +24,7 @@
    "name": "GPT-6 Astra",
    "vendor": "海外",
    "score": {
-    "reasoning": 90,
+    "reasoning": 91,
     "coding": 99,
     "chinese": 76,
     "multimodal": 102,
@@ -50,8 +50,8 @@
    "name": "Qwen3.8-Max-0902",
    "vendor": "国产",
    "score": {
-    "reasoning": 79,
-    "coding": 92,
+    "reasoning": 80,
+    "coding": 91,
     "chinese": 93,
     "multimodal": 95,
     "longtext": 87,
@@ -76,7 +76,7 @@
    "name": "Claude Opus 5.5",
    "vendor": "海外",
    "score": {
-    "reasoning": 94,
+    "reasoning": 89,
     "coding": 96,
     "chinese": 80,
     "multimodal": 85,
@@ -102,7 +102,7 @@
    "name": "Claude Fable 5.1",
    "vendor": "海外",
    "score": {
-    "reasoning": 87,
+    "reasoning": 86,
     "coding": 98,
     "chinese": 73,
     "multimodal": 82,
@@ -128,8 +128,8 @@
    "name": "DeepSeek V4.1 Flash",
    "vendor": "国产",
    "score": {
-    "reasoning": 73,
-    "coding": 92,
+    "reasoning": 75,
+    "coding": 91,
     "chinese": 87,
     "multimodal": 60,
     "longtext": 92,
@@ -147,6 +147,32 @@
     "how": "Pro 和 Flash 是两个独立模型，按任务分派",
     "advice": "日常问答走 Flash，难题再交给 Pro",
     "why": "Flash 便宜且快得多，拿 Pro 干简单活是最常见的浪费"
+   },
+   "power": 84
+  },
+  {
+   "name": "GPT-6 Sol",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 81,
+    "coding": 93,
+    "chinese": 80,
+    "multimodal": 85,
+    "longtext": 92,
+    "cost": 72,
+    "speed": 83,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "AutomationBench 61.6 全场第一，HLE 47.9",
+   "updated_at": "2026-09-18",
+   "tier": {
+    "key": "openai",
+    "label": "推理档位",
+    "how": "reasoning_effort 有 low / medium / high 三档",
+    "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
+    "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
    },
    "power": 84
   },
@@ -180,7 +206,7 @@
    "name": "Kimi K3",
    "vendor": "国产",
    "score": {
-    "reasoning": 79,
+    "reasoning": 78,
     "coding": 92,
     "chinese": 80,
     "multimodal": 89,
@@ -232,8 +258,8 @@
    "name": "Gemini 3.8 Flash",
    "vendor": "海外",
    "score": {
-    "reasoning": 80,
-    "coding": 89,
+    "reasoning": 77,
+    "coding": 90,
     "chinese": 72,
     "multimodal": 93,
     "longtext": 88,
@@ -258,8 +284,8 @@
    "name": "Qwen3.8-Flash-Next",
    "vendor": "国产",
    "score": {
-    "reasoning": 75,
-    "coding": 84,
+    "reasoning": 74,
+    "coding": 83,
     "chinese": 88,
     "multimodal": 85,
     "longtext": 86,
@@ -284,7 +310,7 @@
    "name": "Gemini 3.6 Flash",
    "vendor": "海外",
    "score": {
-    "reasoning": 73,
+    "reasoning": 72,
     "coding": 86,
     "chinese": 80,
     "multimodal": 88,
@@ -307,21 +333,21 @@
    "power": 83
   },
   {
-   "name": "GPT-6 Sol",
+   "name": "GPT-6 Luna",
    "vendor": "海外",
    "score": {
-    "reasoning": 77,
-    "coding": 93,
+    "reasoning": 75,
+    "coding": 88,
     "chinese": 80,
     "multimodal": 85,
-    "longtext": 92,
-    "cost": 72,
-    "speed": 83,
+    "longtext": 91,
+    "cost": 95,
+    "speed": 86,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "HLE 47.9，DeepSWE 68.8",
+   "brief": "AutomationBench 53.2 前三，DeepSWE 66.6",
    "updated_at": "2026-09-18",
    "tier": {
     "key": "openai",
@@ -336,7 +362,7 @@
    "name": "Claude Opus 5",
    "vendor": "海外",
    "score": {
-    "reasoning": 84,
+    "reasoning": 85,
     "coding": 99,
     "chinese": 78,
     "multimodal": 96,
@@ -362,7 +388,7 @@
    "name": "GLM-5.3",
    "vendor": "国产",
    "score": {
-    "reasoning": 76,
+    "reasoning": 78,
     "coding": 91,
     "chinese": 83,
     "multimodal": 85,
@@ -388,8 +414,8 @@
    "name": "Qwen3.8 Max",
    "vendor": "国产",
    "score": {
-    "reasoning": 78,
-    "coding": 89,
+    "reasoning": 79,
+    "coding": 88,
     "chinese": 85,
     "multimodal": 96,
     "longtext": 84,
@@ -414,8 +440,8 @@
    "name": "Gemini 3.7 Flash",
    "vendor": "海外",
    "score": {
-    "reasoning": 76,
-    "coding": 87,
+    "reasoning": 74,
+    "coding": 88,
     "chinese": 67,
     "multimodal": 96,
     "longtext": 89,
@@ -467,7 +493,7 @@
    "vendor": "海外",
    "score": {
     "reasoning": 79,
-    "coding": 91,
+    "coding": 92,
     "chinese": 71,
     "multimodal": 96,
     "longtext": 90,
@@ -485,8 +511,8 @@
    "name": "GPT-5.6 Terra",
    "vendor": "海外",
    "score": {
-    "reasoning": 76,
-    "coding": 89,
+    "reasoning": 78,
+    "coding": 90,
     "chinese": 80,
     "multimodal": 78,
     "longtext": 90,
@@ -511,7 +537,7 @@
    "name": "Step 5 Preview",
    "vendor": "国产",
    "score": {
-    "reasoning": 76,
+    "reasoning": 74,
     "coding": 89,
     "chinese": 80,
     "multimodal": 78,
@@ -522,68 +548,16 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "DeepSWE 67.7，HLE 46.5",
+   "brief": "AutomationBench 51.0 前三，DeepSWE 67.7",
    "updated_at": "2026-09-18",
-   "power": 82
-  },
-  {
-   "name": "Grok 4.7",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 77,
-    "coding": 92,
-    "chinese": 80,
-    "multimodal": 85,
-    "longtext": 82,
-    "cost": 74,
-    "speed": 77,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "TB4.0 28.28，DeepSWE 71.0",
-   "updated_at": "2026-09-18",
-   "tier": {
-    "key": "xai",
-    "label": "推理档位",
-    "how": "推理强度可以调",
-    "advice": "默认档够用，难题再往上调",
-    "why": "推理强度越高，响应越慢、消耗越大"
-   },
-   "power": 82
-  },
-  {
-   "name": "GPT-6 Luna",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 70,
-    "coding": 88,
-    "chinese": 80,
-    "multimodal": 85,
-    "longtext": 91,
-    "cost": 95,
-    "speed": 86,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "DeepSWE 66.6，HLE 38.5",
-   "updated_at": "2026-09-18",
-   "tier": {
-    "key": "openai",
-    "label": "推理档位",
-    "how": "reasoning_effort 有 low / medium / high 三档",
-    "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
-    "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
-   },
    "power": 82
   },
   {
    "name": "智谱 GLM-5.3-Flash",
    "vendor": "国产",
    "score": {
-    "reasoning": 75,
-    "coding": 86,
+    "reasoning": 74,
+    "coding": 85,
     "chinese": 77,
     "multimodal": 85,
     "longtext": 87,
@@ -608,7 +582,7 @@
    "name": "Claude Sonnet 5",
    "vendor": "海外",
    "score": {
-    "reasoning": 72,
+    "reasoning": 75,
     "coding": 88,
     "chinese": 80,
     "multimodal": 78,
@@ -627,6 +601,51 @@
     "how": "能给思考过程设一个 token 上限，也能整个关掉",
     "advice": "闲聊和简单问答关掉思考，写代码、读长文再打开",
     "why": "开着思考回复会明显变慢，token 消耗也跟着翻上去"
+   },
+   "power": 81
+  },
+  {
+   "name": "Muse Spark 1.1",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 73,
+    "coding": 87,
+    "chinese": 80,
+    "multimodal": 85,
+    "longtext": 85,
+    "cost": 77,
+    "speed": 75,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "Vibe Code 72.16 全场第一，Tau 31.8",
+   "updated_at": "2026-09-18",
+   "power": 81
+  },
+  {
+   "name": "Grok 4.7",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 76,
+    "coding": 92,
+    "chinese": 80,
+    "multimodal": 85,
+    "longtext": 82,
+    "cost": 74,
+    "speed": 77,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "TB4.0 28.28，DeepSWE 71.0",
+   "updated_at": "2026-09-18",
+   "tier": {
+    "key": "xai",
+    "label": "推理档位",
+    "how": "推理强度可以调",
+    "advice": "默认档够用，难题再往上调",
+    "why": "推理强度越高，响应越慢、消耗越大"
    },
    "power": 81
   },
@@ -679,8 +698,8 @@
    "name": "GPT-5.6 Luna",
    "vendor": "海外",
    "score": {
-    "reasoning": 71,
-    "coding": 87,
+    "reasoning": 73,
+    "coding": 88,
     "chinese": 80,
     "multimodal": 66,
     "longtext": 92,
@@ -705,8 +724,8 @@
    "name": "Grok 4.5",
    "vendor": "海外",
    "score": {
-    "reasoning": 75,
-    "coding": 89,
+    "reasoning": 73,
+    "coding": 88,
     "chinese": 80,
     "multimodal": 78,
     "longtext": 86,
@@ -725,25 +744,6 @@
     "advice": "默认档够用，难题再往上调",
     "why": "推理强度越高，响应越慢、消耗越大"
    },
-   "power": 80
-  },
-  {
-   "name": "Muse Spark 1.1",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 71,
-    "coding": 87,
-    "chinese": 80,
-    "multimodal": 85,
-    "longtext": 85,
-    "cost": 77,
-    "speed": 75,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "Vibe Code 72.16 全场第一，Tau 31.8",
-   "updated_at": "2026-09-18",
    "power": 80
   },
   {
@@ -776,7 +776,7 @@
    "name": "小米 MiMo-V2.6-Pro",
    "vendor": "国产",
    "score": {
-    "reasoning": 81,
+    "reasoning": 77,
     "coding": 92,
     "chinese": 80,
     "multimodal": 68,
@@ -844,37 +844,11 @@
    "power": 79
   },
   {
-   "name": "Gemini 3.1 Pro",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 73,
-    "coding": 84,
-    "chinese": 70,
-    "multimodal": 85,
-    "longtext": 89,
-    "cost": 71,
-    "speed": 85,
-    "privacy": 74,
-    "ecosystem": 78,
-    "creative": 72
-   },
-   "brief": "IOI 51.83，HLE 47.0",
-   "updated_at": "2026-08-24",
-   "tier": {
-    "key": "google",
-    "label": "思考预算",
-    "how": "thinking budget 可以调，也能设成 0 直接关掉",
-    "advice": "批量跑的小任务关掉，需要多步推理的再开",
-    "why": "思考档位越高延迟越明显，价格随推理 token 一起上涨"
-   },
-   "power": 79
-  },
-  {
    "name": "Qwen3.8-27B",
    "vendor": "国产",
    "score": {
-    "reasoning": 69,
-    "coding": 83,
+    "reasoning": 70,
+    "coding": 82,
     "chinese": 82,
     "multimodal": 73,
     "longtext": 89,
@@ -896,11 +870,37 @@
    "power": 79
   },
   {
+   "name": "Gemini 3.5 Flash-Lite",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 56,
+    "coding": 79,
+    "chinese": 80,
+    "multimodal": 72,
+    "longtext": 81,
+    "cost": 84,
+    "speed": 100,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "Vibe Code 37.16，Tau 17.5",
+   "updated_at": "2026-09-18",
+   "tier": {
+    "key": "google",
+    "label": "思考预算",
+    "how": "thinking budget 可以调，也能设成 0 直接关掉",
+    "advice": "批量跑的小任务关掉，需要多步推理的再开",
+    "why": "思考档位越高延迟越明显，价格随推理 token 一起上涨"
+   },
+   "power": 79
+  },
+  {
    "name": "Inkling",
    "vendor": "海外",
    "score": {
-    "reasoning": 63,
-    "coding": 79,
+    "reasoning": 64,
+    "coding": 80,
     "chinese": 80,
     "multimodal": 75,
     "longtext": 83,
@@ -934,22 +934,48 @@
    "power": 79
   },
   {
-   "name": "Gemini 3.5 Flash-Lite",
-   "vendor": "海外",
+   "name": "Kimi K2.7 Code",
+   "vendor": "国产",
    "score": {
-    "reasoning": 51,
-    "coding": 79,
+    "reasoning": 65,
+    "coding": 83,
     "chinese": 80,
-    "multimodal": 72,
-    "longtext": 81,
-    "cost": 84,
-    "speed": 100,
+    "multimodal": 75,
+    "longtext": 86,
+    "cost": 79,
+    "speed": 78,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "Vibe Code 37.16，Tau 17.5",
+   "brief": "Vibe Code 47.21，Tau 20.2",
    "updated_at": "2026-09-18",
+   "tier": {
+    "key": "moonshot",
+    "label": "思考开关",
+    "how": "可以切换思考模式",
+    "advice": "读文档、做摘要关掉，需要推理再开",
+    "why": "思考模式更慢更贵，长文本场景未必用得上"
+   },
+   "power": 79
+  },
+  {
+   "name": "Gemini 3.1 Pro",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 68,
+    "coding": 85,
+    "chinese": 70,
+    "multimodal": 85,
+    "longtext": 89,
+    "cost": 71,
+    "speed": 85,
+    "privacy": 74,
+    "ecosystem": 78,
+    "creative": 72
+   },
+   "brief": "IOI 51.83，HLE 47.0",
+   "updated_at": "2026-08-24",
    "tier": {
     "key": "google",
     "label": "思考预算",
@@ -963,7 +989,7 @@
    "name": "GLM-5.2",
    "vendor": "国产",
    "score": {
-    "reasoning": 70,
+    "reasoning": 72,
     "coding": 85,
     "chinese": 76,
     "multimodal": 75,
@@ -1005,32 +1031,6 @@
    "power": 78
   },
   {
-   "name": "Kimi K2.7 Code",
-   "vendor": "国产",
-   "score": {
-    "reasoning": 63,
-    "coding": 83,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 86,
-    "cost": 79,
-    "speed": 78,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "Vibe Code 47.21，Tau 20.2",
-   "updated_at": "2026-09-18",
-   "tier": {
-    "key": "moonshot",
-    "label": "思考开关",
-    "how": "可以切换思考模式",
-    "advice": "读文档、做摘要关掉，需要推理再开",
-    "why": "思考模式更慢更贵，长文本场景未必用得上"
-   },
-   "power": 78
-  },
-  {
    "name": "Ling 3.0 Flash",
    "vendor": "国产",
    "score": {
@@ -1053,7 +1053,7 @@
    "name": "Muse Glimmer",
    "vendor": "海外",
    "score": {
-    "reasoning": 53,
+    "reasoning": 54,
     "coding": 72,
     "chinese": 80,
     "multimodal": 75,
@@ -1072,7 +1072,7 @@
    "name": "K2 Horizon 375B A23B",
    "vendor": "海外",
    "score": {
-    "reasoning": 64,
+    "reasoning": 65,
     "coding": 69,
     "chinese": 80,
     "multimodal": 75,
@@ -1088,10 +1088,29 @@
    "power": 78
   },
   {
+   "name": "小米 MiMo-V2.6-Flash",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 75,
+    "coding": 88,
+    "chinese": 80,
+    "multimodal": 68,
+    "longtext": 79,
+    "cost": 96,
+    "speed": 70,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "DeepSWE 67.9，TB4.0 21.21",
+   "updated_at": "2026-09-18",
+   "power": 78
+  },
+  {
    "name": "Qwen3.7 Plus",
    "vendor": "国产",
    "score": {
-    "reasoning": 63,
+    "reasoning": 64,
     "coding": 79,
     "chinese": 80,
     "multimodal": 79,
@@ -1117,7 +1136,7 @@
    "name": "Apodex 1.1",
    "vendor": "海外",
    "score": {
-    "reasoning": 61,
+    "reasoning": 63,
     "coding": 73,
     "chinese": 80,
     "multimodal": 75,
@@ -1152,29 +1171,10 @@
    "power": 77
   },
   {
-   "name": "小米 MiMo-V2.6-Flash",
-   "vendor": "国产",
-   "score": {
-    "reasoning": 71,
-    "coding": 88,
-    "chinese": 80,
-    "multimodal": 68,
-    "longtext": 79,
-    "cost": 96,
-    "speed": 70,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "DeepSWE 67.9，TB4.0 21.21",
-   "updated_at": "2026-09-18",
-   "power": 77
-  },
-  {
    "name": "Quasar 438B (Max, Based on GLM-5.2)",
    "vendor": "海外",
    "score": {
-    "reasoning": 46,
+    "reasoning": 50,
     "coding": 77,
     "chinese": 80,
     "multimodal": 75,
@@ -1200,8 +1200,8 @@
    "name": "Grok 4.6",
    "vendor": "海外",
    "score": {
-    "reasoning": 78,
-    "coding": 91,
+    "reasoning": 77,
+    "coding": 90,
     "chinese": 70,
     "multimodal": 66,
     "longtext": 87,
@@ -1226,7 +1226,7 @@
    "name": "小米 MiMo-V2.5",
    "vendor": "国产",
    "score": {
-    "reasoning": 52,
+    "reasoning": 56,
     "coding": 78,
     "chinese": 88,
     "multimodal": 75,
@@ -1245,7 +1245,7 @@
    "name": "Solar Open2 250B",
    "vendor": "海外",
    "score": {
-    "reasoning": 57,
+    "reasoning": 59,
     "coding": 77,
     "chinese": 80,
     "multimodal": 75,
@@ -1264,7 +1264,7 @@
    "name": "Motif 3",
    "vendor": "海外",
    "score": {
-    "reasoning": 62,
+    "reasoning": 66,
     "coding": 68,
     "chinese": 80,
     "multimodal": 75,
@@ -1283,7 +1283,7 @@
    "name": "腾讯混元 HY3",
    "vendor": "国产",
    "score": {
-    "reasoning": 64,
+    "reasoning": 63,
     "coding": 57,
     "chinese": 77,
     "multimodal": 68,
@@ -1309,7 +1309,7 @@
    "name": "MiniMax M3",
    "vendor": "国产",
    "score": {
-    "reasoning": 64,
+    "reasoning": 63,
     "coding": 79,
     "chinese": 75,
     "multimodal": 68,
@@ -1328,7 +1328,7 @@
    "name": "A.X-K2",
    "vendor": "海外",
    "score": {
-    "reasoning": 56,
+    "reasoning": 58,
     "coding": 67,
     "chinese": 80,
     "multimodal": 75,
@@ -1347,7 +1347,7 @@
    "name": "K2 Horizon MoVA 36B A4B",
    "vendor": "海外",
    "score": {
-    "reasoning": 55,
+    "reasoning": 57,
     "coding": 65,
     "chinese": 80,
     "multimodal": 75,
@@ -1366,7 +1366,7 @@
    "name": "LongCat-2.0",
    "vendor": "国产",
    "score": {
-    "reasoning": 60,
+    "reasoning": 61,
     "coding": 60,
     "chinese": 76,
     "multimodal": 75,
@@ -1379,13 +1379,13 @@
    },
    "brief": "SciCode 36.3，Tau 13.2",
    "updated_at": "2026-09-18",
-   "power": 72
+   "power": 73
   },
   {
    "name": "K-EXAONE 2.0 0803",
    "vendor": "海外",
    "score": {
-    "reasoning": 48,
+    "reasoning": 49,
     "coding": 68,
     "chinese": 80,
     "multimodal": 75,
@@ -1404,7 +1404,7 @@
    "name": "Nemotron 3.5 Lightning",
    "vendor": "海外",
    "score": {
-    "reasoning": 37,
+    "reasoning": 41,
     "coding": 54,
     "chinese": 80,
     "multimodal": 75,
@@ -1423,7 +1423,7 @@
    "name": "G9v3-39A5B",
    "vendor": "国产",
    "score": {
-    "reasoning": 48,
+    "reasoning": 50,
     "coding": 61,
     "chinese": 80,
     "multimodal": 75,
@@ -1439,10 +1439,29 @@
    "power": 72
   },
   {
+   "name": "Granite 4.2 30B",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 43,
+    "coding": 62,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 60,
+    "cost": 92,
+    "speed": 77,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "SciCode 37.8，Tau 14.4",
+   "updated_at": "2026-09-18",
+   "power": 71
+  },
+  {
    "name": "North Mini Code",
    "vendor": "海外",
    "score": {
-    "reasoning": 37,
+    "reasoning": 40,
     "coding": 64,
     "chinese": 80,
     "multimodal": 75,
@@ -1461,7 +1480,7 @@
    "name": "K2 Horizon 7B",
    "vendor": "海外",
    "score": {
-    "reasoning": 46,
+    "reasoning": 50,
     "coding": 48,
     "chinese": 80,
     "multimodal": 75,
@@ -1477,29 +1496,10 @@
    "power": 71
   },
   {
-   "name": "Granite 4.2 30B",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 39,
-    "coding": 62,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 60,
-    "cost": 92,
-    "speed": 77,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "SciCode 37.8，Tau 14.4",
-   "updated_at": "2026-09-18",
-   "power": 70
-  },
-  {
    "name": "Granite 4.2 3B",
    "vendor": "海外",
    "score": {
-    "reasoning": 35,
+    "reasoning": 38,
     "coding": 45,
     "chinese": 80,
     "multimodal": 75,
@@ -1518,7 +1518,7 @@
    "name": "Celeris-1",
    "vendor": "海外",
    "score": {
-    "reasoning": 34,
+    "reasoning": 37,
     "coding": 40,
     "chinese": 80,
     "multimodal": 75,
@@ -1534,10 +1534,29 @@
    "power": 70
   },
   {
+   "name": "Granite 4.2 8B",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 40,
+    "coding": 53,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 60,
+    "cost": 100,
+    "speed": 70,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "SciCode 31.5，Tau 7.6",
+   "updated_at": "2026-09-18",
+   "power": 69
+  },
+  {
    "name": "MiniCPM5-2B",
    "vendor": "国产",
    "score": {
-    "reasoning": 40,
+    "reasoning": 43,
     "coding": 46,
     "chinese": 80,
     "multimodal": 75,
@@ -1553,29 +1572,29 @@
    "power": 69
   },
   {
-   "name": "Granite 4.2 8B",
+   "name": "K2 Horizon 3.7B",
    "vendor": "海外",
    "score": {
-    "reasoning": 37,
-    "coding": 53,
+    "reasoning": 45,
+    "coding": 40,
     "chinese": 80,
     "multimodal": 75,
-    "longtext": 60,
-    "cost": 100,
-    "speed": 70,
+    "longtext": 63,
+    "cost": 76,
+    "speed": 75,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "SciCode 31.5，Tau 7.6",
+   "brief": "Tau 19.6，SciCode 22.0",
    "updated_at": "2026-09-18",
-   "power": 68
+   "power": 69
   },
   {
    "name": "Ling 3.0 Tiny",
    "vendor": "国产",
    "score": {
-    "reasoning": 40,
+    "reasoning": 43,
     "coding": 43,
     "chinese": 80,
     "multimodal": 75,
@@ -1591,29 +1610,10 @@
    "power": 68
   },
   {
-   "name": "K2 Horizon 3.7B",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 42,
-    "coding": 40,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 63,
-    "cost": 76,
-    "speed": 75,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "Tau 19.6，SciCode 22.0",
-   "updated_at": "2026-09-18",
-   "power": 68
-  },
-  {
    "name": "LFM2.5-2.6B",
    "vendor": "海外",
    "score": {
-    "reasoning": 35,
+    "reasoning": 38,
     "coding": 30,
     "chinese": 80,
     "multimodal": 75,
@@ -1626,13 +1626,13 @@
    },
    "brief": "SciCode 14.4，Tau 7.2",
    "updated_at": "2026-09-18",
-   "power": 66
+   "power": 67
   },
   {
    "name": "K2 Horizon 0.9B",
    "vendor": "海外",
    "score": {
-    "reasoning": 34,
+    "reasoning": 37,
     "coding": 24,
     "chinese": 80,
     "multimodal": 75,
@@ -1645,7 +1645,7 @@
    },
    "brief": "SciCode 6.9，Tau 4.9",
    "updated_at": "2026-09-18",
-   "power": 65
+   "power": 66
   }
  ],
  "specialized": {
