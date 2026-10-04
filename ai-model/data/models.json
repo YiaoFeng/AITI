@@ -18,7 +18,7 @@
   "privacy": "由 本土化 70% + API稳定性 30% 推算（榜单无独立隐私维度）",
   "creative": "由 中文能力 45% + 实际调用 30% + 趋势热度 25% 推算（榜单无独立创意维度）"
  },
- "count": 72,
+ "count": 73,
  "models": [
   {
    "name": "GPT-6 Astra",
@@ -35,7 +35,7 @@
     "ecosystem": 92,
     "creative": 86
    },
-   "brief": "TB4.0 57.07 前三，DeepSWE 74.1 前三",
+   "brief": "GPQA 96.0 全场第一，IOI 100.0 全场第一",
    "updated_at": "2026-09-04",
    "tier": {
     "key": "openai",
@@ -61,7 +61,7 @@
     "ecosystem": 84,
     "creative": 88
    },
-   "brief": "DeepSWE 69.3，TB4.0 24.75",
+   "brief": "LMArena Code 1670.0 前三，Tau 47.8",
    "updated_at": "2026-09-02",
    "tier": {
     "key": "qwen",
@@ -79,7 +79,7 @@
     "reasoning": 89,
     "coding": 96,
     "chinese": 80,
-    "multimodal": 85,
+    "multimodal": 82,
     "longtext": 93,
     "cost": 67,
     "speed": 80,
@@ -87,7 +87,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "HLE 61.4 全场第一，TB4.0 61.62 全场第一",
+   "brief": "HLE 61.4 全场第一，APEX-SWE 67.6 全场第一",
    "updated_at": "2026-09-18",
    "tier": {
     "key": "anthropic",
@@ -113,7 +113,7 @@
     "ecosystem": 89,
     "creative": 82
    },
-   "brief": "HLE 59.1 前三，TB4.0 49.49 前三",
+   "brief": "ProofBench 100.0 全场第一，ProgramBench 7.0 前三",
    "updated_at": "2026-09-02",
    "tier": {
     "key": "anthropic",
@@ -139,7 +139,7 @@
     "ecosystem": 82,
     "creative": 84
    },
-   "brief": "DeepSWE 74.2 前三，TB4.0 11.62",
+   "brief": "DeepSWE 74.2 前三，AutomationBench 68.9 前三",
    "updated_at": "2026-09-10",
    "tier": {
     "key": "deepseek",
@@ -157,7 +157,7 @@
     "reasoning": 81,
     "coding": 93,
     "chinese": 80,
-    "multimodal": 85,
+    "multimodal": 82,
     "longtext": 92,
     "cost": 72,
     "speed": 83,
@@ -165,7 +165,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "AutomationBench 61.6 全场第一，HLE 47.9",
+   "brief": "TB Science 30.0，Code Migration 57.2",
    "updated_at": "2026-09-18",
    "tier": {
     "key": "openai",
@@ -191,7 +191,7 @@
     "ecosystem": 88,
     "creative": 80
    },
-   "brief": "HLE 55.5 前三，DeepSWE 70.0",
+   "brief": "Vibe Code 90.3 全场第一，HLE 55.5 前三",
    "updated_at": "2026-09-01",
    "tier": {
     "key": "anthropic",
@@ -217,7 +217,7 @@
     "ecosystem": 83,
     "creative": 79
    },
-   "brief": "HLE 46.9，DeepSWE 67.5",
+   "brief": "LMArena Code 1658.0 前三，ProofBench 87.0",
    "updated_at": "2026-08-24",
    "tier": {
     "key": "moonshot",
@@ -235,7 +235,7 @@
     "reasoning": 70,
     "coding": 81,
     "chinese": 81,
-    "multimodal": 85,
+    "multimodal": 82,
     "longtext": 88,
     "cost": 86,
     "speed": 95,
@@ -243,7 +243,7 @@
     "ecosystem": 83,
     "creative": 83
    },
-   "brief": "Tau 41.0 前三，DeepSWE 59.3",
+   "brief": "Tau 41.0，GPQA 91.3",
    "updated_at": "2026-08-24",
    "tier": {
     "key": "deepseek",
@@ -269,7 +269,7 @@
     "ecosystem": 81,
     "creative": 76
    },
-   "brief": "DeepSWE 73.7，HLE 47.8",
+   "brief": "GPQA 95.3 前三，DeepSWE 73.7",
    "updated_at": "2026-09-03",
    "tier": {
     "key": "google",
@@ -287,7 +287,7 @@
     "reasoning": 74,
     "coding": 83,
     "chinese": 88,
-    "multimodal": 85,
+    "multimodal": 82,
     "longtext": 86,
     "cost": 94,
     "speed": 70,
@@ -295,7 +295,7 @@
     "ecosystem": 85,
     "creative": 87
    },
-   "brief": "Tau 45.4 前三，DeepSWE 58.7",
+   "brief": "LMArena Code 1637.0，Tau 45.4",
    "updated_at": "2026-09-07",
    "tier": {
     "key": "qwen",
@@ -321,7 +321,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "IOI 35.06，TB4.0 4.54",
+   "brief": "GPQA 92.8，SWE-bench 79.6",
    "updated_at": "2026-09-18",
    "tier": {
     "key": "google",
@@ -339,7 +339,7 @@
     "reasoning": 75,
     "coding": 88,
     "chinese": 80,
-    "multimodal": 85,
+    "multimodal": 82,
     "longtext": 91,
     "cost": 95,
     "speed": 86,
@@ -347,7 +347,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "AutomationBench 53.2 前三，DeepSWE 66.6",
+   "brief": "FrontierMath T4 56.1，Vibe Code 81.7",
    "updated_at": "2026-09-18",
    "tier": {
     "key": "openai",
@@ -373,7 +373,7 @@
     "ecosystem": 80,
     "creative": 72
    },
-   "brief": "HLE 54.9，DeepSWE 74.0",
+   "brief": "SWE-bench 97.0 全场第一，ProofBench 99.0 前三",
    "updated_at": "2026-09-01",
    "tier": {
     "key": "anthropic",
@@ -391,7 +391,7 @@
     "reasoning": 78,
     "coding": 91,
     "chinese": 83,
-    "multimodal": 85,
+    "multimodal": 82,
     "longtext": 86,
     "cost": 77,
     "speed": 76,
@@ -399,7 +399,7 @@
     "ecosystem": 78,
     "creative": 77
    },
-   "brief": "TB4.0 25.25，DeepSWE 66.9",
+   "brief": "SWE-bench 95.4，Tau 50.3",
    "updated_at": "2026-08-24",
    "tier": {
     "key": "zhipu",
@@ -425,7 +425,7 @@
     "ecosystem": 80,
     "creative": 77
    },
-   "brief": "TB4.0 24.75，HLE 43.0",
+   "brief": "LMArena Code 1671.0 全场第一，Tau 51.3 全场第一",
    "updated_at": "2026-08-24",
    "tier": {
     "key": "qwen",
@@ -451,7 +451,7 @@
     "ecosystem": 76,
     "creative": 71
    },
-   "brief": "HLE 47.9，DeepSWE 65.3",
+   "brief": "GPQA 94.5，IOI 67.8",
    "updated_at": "2026-08-28",
    "tier": {
     "key": "google",
@@ -469,7 +469,7 @@
     "reasoning": 74,
     "coding": 86,
     "chinese": 86,
-    "multimodal": 85,
+    "multimodal": 82,
     "longtext": 90,
     "cost": 80,
     "speed": 68,
@@ -477,7 +477,7 @@
     "ecosystem": 80,
     "creative": 84
    },
-   "brief": "GPQA 92.3 前三，DeepSWE 64.3",
+   "brief": "LMArena Code 1633.0，GPQA 92.3",
    "updated_at": "2026-08-29",
    "tier": {
     "key": "tencent",
@@ -503,7 +503,7 @@
     "ecosystem": 77,
     "creative": 73
    },
-   "brief": "DeepSWE 75.4 全场第一，HLE 48.7",
+   "brief": "DeepSWE 75.4 全场第一，Tau 50.5 前三",
    "updated_at": "2026-09-03",
    "power": 82
   },
@@ -522,7 +522,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "IOI 87.61 前三，TB4.0 26.26",
+   "brief": "IOI 87.6，TB4.0 26.3",
    "updated_at": "2026-09-18",
    "tier": {
     "key": "openai",
@@ -548,7 +548,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "AutomationBench 51.0 前三，DeepSWE 67.7",
+   "brief": "SciCode 58.9，GPQA 93.5",
    "updated_at": "2026-09-18",
    "power": 82
   },
@@ -567,7 +567,7 @@
     "ecosystem": 85,
     "creative": 81
    },
-   "brief": "TB4.0 19.7，DeepSWE 63.4",
+   "brief": "Tau 47.2，SWE-bench 92.0",
    "updated_at": "2026-08-26",
    "tier": {
     "key": "zhipu",
@@ -593,7 +593,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "IOI 45.0，TB4.0 8.08",
+   "brief": "ProofBench 77.0，Vibe Code 81.3",
    "updated_at": "2026-09-18",
    "tier": {
     "key": "anthropic",
@@ -619,7 +619,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "Vibe Code 72.16 全场第一，Tau 31.8",
+   "brief": "SciCode 58.8，HLE 46.2",
    "updated_at": "2026-09-18",
    "power": 81
   },
@@ -630,7 +630,7 @@
     "reasoning": 76,
     "coding": 92,
     "chinese": 80,
-    "multimodal": 85,
+    "multimodal": 82,
     "longtext": 82,
     "cost": 74,
     "speed": 77,
@@ -638,7 +638,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "TB4.0 28.28，DeepSWE 71.0",
+   "brief": "LMArena Code 1638.0，TB4.0 28.3",
    "updated_at": "2026-09-18",
    "tier": {
     "key": "xai",
@@ -664,7 +664,7 @@
     "ecosystem": 83,
     "creative": 73
    },
-   "brief": "HLE 49.5，DeepSWE 73.0",
+   "brief": "SWE-bench 96.2 前三，HLE 49.5",
    "updated_at": "2026-08-23",
    "tier": {
     "key": "openai",
@@ -690,7 +690,7 @@
     "ecosystem": 75,
     "creative": 70
    },
-   "brief": "HLE 45.5，DeepSWE 59.3",
+   "brief": "SWE-bench 86.6，HLE 45.5",
    "updated_at": "2026-09-01",
    "power": 80
   },
@@ -701,7 +701,7 @@
     "reasoning": 73,
     "coding": 88,
     "chinese": 80,
-    "multimodal": 66,
+    "multimodal": 67,
     "longtext": 92,
     "cost": 89,
     "speed": 82,
@@ -709,7 +709,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "IOI 61.78 前三，TB4.0 4.54",
+   "brief": "SWE-bench 93.0，FrontierMath T4 61.0",
    "updated_at": "2026-09-18",
    "tier": {
     "key": "openai",
@@ -735,7 +735,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "IOI 40.56，TB4.0 6.57",
+   "brief": "APEX-SWE 53.6，GPQA 93.1",
    "updated_at": "2026-09-18",
    "tier": {
     "key": "xai",
@@ -753,7 +753,7 @@
     "reasoning": 78,
     "coding": 86,
     "chinese": 80,
-    "multimodal": 85,
+    "multimodal": 82,
     "longtext": 87,
     "cost": 74,
     "speed": 64,
@@ -761,7 +761,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "Tau 49.1 全场第一，SciCode 54.1 全场第一",
+   "brief": "Tau 49.1，GPQA 93.5",
    "updated_at": "2026-09-18",
    "tier": {
     "key": "qwen",
@@ -779,7 +779,7 @@
     "reasoning": 77,
     "coding": 92,
     "chinese": 80,
-    "multimodal": 68,
+    "multimodal": 67,
     "longtext": 95,
     "cost": 87,
     "speed": 67,
@@ -787,7 +787,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "HLE 49.4，DeepSWE 71.9",
+   "brief": "SciCode 60.9，HLE 49.4",
    "updated_at": "2026-09-18",
    "power": 80
   },
@@ -806,7 +806,7 @@
     "ecosystem": 77,
     "creative": 76
    },
-   "brief": "DeepSWE 62.7，HLE 41.0",
+   "brief": "Tau 39.6，GPQA 92.4",
    "updated_at": "2026-08-24",
    "tier": {
     "key": "deepseek",
@@ -832,7 +832,7 @@
     "ecosystem": 81,
     "creative": 80
    },
-   "brief": "TB4.0 9.09，DeepSWE 54.4",
+   "brief": "TB4.0 9.1，DeepSWE 54.4",
    "updated_at": "2026-08-24",
    "tier": {
     "key": "deepseek",
@@ -858,7 +858,7 @@
     "ecosystem": 84,
     "creative": 82
    },
-   "brief": "DeepSWE 42.2，TB4.0 4.04",
+   "brief": "Tau 48.0，APEX-SWE 50.7",
    "updated_at": "2026-08-24",
    "tier": {
     "key": "qwen",
@@ -884,7 +884,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "Vibe Code 37.16，Tau 17.5",
+   "brief": "SWE-bench 75.0，FrontierMath T4 0.0",
    "updated_at": "2026-09-18",
    "tier": {
     "key": "google",
@@ -910,7 +910,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "IOI 14.94，TB4.0 0.0",
+   "brief": "AutomationBench 5.0，SWE-bench 77.6",
    "updated_at": "2026-09-18",
    "power": 79
   },
@@ -929,7 +929,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "SciCode 52.0 前三，HLE 43.6",
+   "brief": "HLE 43.6，SciCode 52.0",
    "updated_at": "2026-09-18",
    "power": 79
   },
@@ -948,7 +948,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "Vibe Code 47.21，Tau 20.2",
+   "brief": "APEX-SWE 40.3，FrontierMath T4 12.2",
    "updated_at": "2026-09-18",
    "tier": {
     "key": "moonshot",
@@ -974,7 +974,7 @@
     "ecosystem": 78,
     "creative": 72
    },
-   "brief": "IOI 51.83，HLE 47.0",
+   "brief": "GPQA 94.3，SciCode 58.7",
    "updated_at": "2026-08-24",
    "tier": {
     "key": "google",
@@ -1000,7 +1000,7 @@
     "ecosystem": 80,
     "creative": 76
    },
-   "brief": "Vibe Code 63.96 前三，Tau 34.6",
+   "brief": "SWE-bench 82.8，FrontierMath T4 29.3",
    "updated_at": "2026-09-18",
    "tier": {
     "key": "zhipu",
@@ -1026,7 +1026,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "IOI 9.33，TB4.0 1.51",
+   "brief": "SWE-bench 82.2，FrontierMath T4 17.1",
    "updated_at": "2026-09-18",
    "power": 78
   },
@@ -1045,7 +1045,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "Tau 27.2，SciCode 42.0",
+   "brief": "Tau 27.2，GPQA 85.5",
    "updated_at": "2026-09-18",
    "power": 78
   },
@@ -1064,7 +1064,26 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "SciCode 44.9，Tau 23.5",
+   "brief": "AutomationBench 6.8，SciCode 44.9",
+   "updated_at": "2026-09-18",
+   "power": 78
+  },
+  {
+   "name": "Nemotron 3 Ultra 550B A55B",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 65,
+    "coding": 78,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 85,
+    "cost": 76,
+    "speed": 75,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "AutomationBench 3.0，SWE-bench 69.0",
    "updated_at": "2026-09-18",
    "power": 78
   },
@@ -1083,7 +1102,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "Tau 34.2，SciCode 42.9",
+   "brief": "AutomationBench 37.2，GPQA 87.3",
    "updated_at": "2026-09-18",
    "power": 78
   },
@@ -1094,7 +1113,7 @@
     "reasoning": 75,
     "coding": 88,
     "chinese": 80,
-    "multimodal": 68,
+    "multimodal": 67,
     "longtext": 79,
     "cost": 96,
     "speed": 70,
@@ -1102,7 +1121,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "DeepSWE 67.9，TB4.0 21.21",
+   "brief": "DeepSWE 67.9，MysteryMechanism 21.6",
    "updated_at": "2026-09-18",
    "power": 78
   },
@@ -1121,7 +1140,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "Vibe Code 46.39，Tau 17.5",
+   "brief": "GPQA 90.0，Vibe Code 46.4",
    "updated_at": "2026-09-18",
    "tier": {
     "key": "qwen",
@@ -1147,7 +1166,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "SciCode 45.5，Tau 25.2",
+   "brief": "Tau 25.2，HLE 34.1",
    "updated_at": "2026-09-18",
    "power": 77
   },
@@ -1166,7 +1185,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "SciCode 43.3，Tau 17.5",
+   "brief": "GPQA 89.2，Tau 17.5",
    "updated_at": "2026-09-18",
    "power": 77
   },
@@ -1185,7 +1204,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "SciCode 48.1 前三，Tau 28.7",
+   "brief": "Tau 28.7，SciCode 48.1",
    "updated_at": "2026-09-18",
    "tier": {
     "key": "zhipu",
@@ -1211,7 +1230,7 @@
     "ecosystem": 78,
     "creative": 74
    },
-   "brief": "TB4.0 17.17，DeepSWE 65.9",
+   "brief": "Tau 50.7 前三，GPQA 94.9 前三",
    "updated_at": "2026-09-01",
    "tier": {
     "key": "xai",
@@ -1237,7 +1256,7 @@
     "ecosystem": 76,
     "creative": 82
    },
-   "brief": "Vibe Code 42.17，Tau 8.7",
+   "brief": "SWE-bench 71.0，ProofBench 16.0",
    "updated_at": "2026-08-24",
    "power": 76
   },
@@ -1275,7 +1294,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "Tau 35.3，SciCode 42.2",
+   "brief": "Tau 35.3，HLE 37.0",
    "updated_at": "2026-09-18",
    "power": 76
   },
@@ -1294,7 +1313,7 @@
     "ecosystem": 79,
     "creative": 78
    },
-   "brief": "Tau 22.9，DeepSWE 28.0",
+   "brief": "GPQA 90.9，DeepSWE 28.0",
    "updated_at": "2026-08-24",
    "tier": {
     "key": "tencent",
@@ -1320,7 +1339,7 @@
     "ecosystem": 68,
     "creative": 67
    },
-   "brief": "Vibe Code 47.57 前三，Tau 15.3",
+   "brief": "GPQA 92.9，AutomationBench 21.3",
    "updated_at": "2026-08-24",
    "power": 74
   },
@@ -1339,7 +1358,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "SciCode 41.0，Tau 16.1",
+   "brief": "GPQA 85.7，Tau 16.1",
    "updated_at": "2026-09-18",
    "power": 74
   },
@@ -1358,7 +1377,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "Tau 32.0，SciCode 40.0",
+   "brief": "Tau 32.0，GPQA 82.2",
    "updated_at": "2026-09-18",
    "power": 74
   },
@@ -1377,7 +1396,7 @@
     "ecosystem": 80,
     "creative": 76
    },
-   "brief": "SciCode 36.3，Tau 13.2",
+   "brief": "GPQA 88.9，Tau 13.2",
    "updated_at": "2026-09-18",
    "power": 73
   },
@@ -1396,7 +1415,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "SciCode 42.0，Tau 11.5",
+   "brief": "GPQA 82.9，SciCode 42.0",
    "updated_at": "2026-09-18",
    "power": 72
   },
@@ -1415,7 +1434,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "SciCode 32.1，Tau 8.9",
+   "brief": "GPQA 74.3，Tau 8.9",
    "updated_at": "2026-09-18",
    "power": 72
   },
@@ -1434,7 +1453,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "Tau 22.1，SciCode 36.8",
+   "brief": "Tau 22.1，GPQA 80.5",
    "updated_at": "2026-09-18",
    "power": 72
   },
@@ -1453,7 +1472,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "SciCode 37.8，Tau 14.4",
+   "brief": "Tau 14.4，SciCode 37.8",
    "updated_at": "2026-09-18",
    "power": 71
   },
@@ -1472,7 +1491,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "SciCode 38.8，Tau 6.4",
+   "brief": "GPQA 75.7，SciCode 38.8",
    "updated_at": "2026-09-18",
    "power": 71
   },
@@ -1491,7 +1510,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "Tau 27.6，SciCode 27.5",
+   "brief": "Tau 27.6，GPQA 75.3",
    "updated_at": "2026-09-18",
    "power": 71
   },
@@ -1510,7 +1529,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "SciCode 25.3，Tau 5.6",
+   "brief": "Tau 5.6，GPQA 55.9",
    "updated_at": "2026-09-18",
    "power": 70
   },
@@ -1529,7 +1548,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "SciCode 21.6，Tau 3.9",
+   "brief": "GPQA 63.1，Tau 3.9",
    "updated_at": "2026-09-18",
    "power": 70
   },
@@ -1548,7 +1567,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "SciCode 31.5，Tau 7.6",
+   "brief": "Tau 7.6，GPQA 63.1",
    "updated_at": "2026-09-18",
    "power": 69
   },
@@ -1567,7 +1586,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "Tau 20.8，SciCode 26.3",
+   "brief": "Tau 20.8，GPQA 70.2",
    "updated_at": "2026-09-18",
    "power": 69
   },
@@ -1586,7 +1605,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "Tau 19.6，SciCode 22.0",
+   "brief": "Tau 19.6，GPQA 69.2",
    "updated_at": "2026-09-18",
    "power": 69
   },
@@ -1605,7 +1624,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "Tau 20.8，SciCode 24.2",
+   "brief": "Tau 20.8，GPQA 73.4",
    "updated_at": "2026-09-18",
    "power": 68
   },
@@ -1624,7 +1643,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "SciCode 14.4，Tau 7.2",
+   "brief": "Tau 7.2，GPQA 55.8",
    "updated_at": "2026-09-18",
    "power": 67
   },
@@ -1643,7 +1662,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "SciCode 6.9，Tau 4.9",
+   "brief": "Tau 4.9，GPQA 29.3",
    "updated_at": "2026-09-18",
    "power": 66
   }
