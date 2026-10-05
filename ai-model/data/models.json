@@ -1,6 +1,6 @@
 {
  "version": "1.0",
- "generated_at": "2026-10-04",
+ "generated_at": "2026-10-05",
  "source": "data/rankings/benchmarks.json",
  "dims": [
   "reasoning",
@@ -1672,8 +1672,8 @@
   "groups": [
    {
     "key": "speech",
-    "label": "语音对话 / 语音转写",
-    "intro": "通用大模型只能把语音转成文字再去理解，中间隔了一层；实时对话要靠专门的端到端语音模型。",
+    "label": "语音对话 / 语音转写 / 语音合成",
+    "intro": "通用大模型只能把语音转成文字再去理解，中间隔了一层；实时对话、录音转写和配音都要靠专门的语音模型。",
     "picks": [
      {
       "name": "Gemini 3.8 Live",
@@ -1705,6 +1705,22 @@
       "vendor": "国产",
       "why": "蚂蚁开源的 9B 全双工交互模型，Apache-2.0 权重公开",
       "caveat": "没有官方 API，要自己部署才能用"
+     },
+     {
+      "name": "Gemini 3.8 Flash TTS",
+      "vendor": "海外",
+      "why": "文本转语音，支持用自然语言描述生成音色、30 秒音频克隆，内置 2000+ 音色、支持 100+ 语言"
+     },
+     {
+      "name": "Gemini 3.8 Flash-Lite TTS",
+      "vendor": "海外",
+      "why": "同日发布的轻量档，面向大容量配音和语音代理，音色管理与逐行表演控制跟 Flash 档一致"
+     },
+     {
+      "name": "Suno Speech",
+      "vendor": "海外",
+      "why": "Suno 推出的语音合成，走的是它做音乐那套声音质感",
+      "caveat": "刚出 beta，接口和配额还在变"
      }
     ]
    },
@@ -1717,6 +1733,11 @@
       "name": "Gemini 3.1 Flash Lite Image",
       "vendor": "海外",
       "why": "Nano Banana 2 Lite，主打超低延迟和低成本，批量出图划算"
+     },
+     {
+      "name": "FLUX 3 Image",
+      "vendor": "海外",
+      "why": "原生 4K 生成 + 多参考编辑，10/3 上线 OpenRouter，可以直接调用"
      },
      {
       "name": "腾讯 Hy Image 3.5",
@@ -1746,6 +1767,11 @@
       "name": "Wan3.0",
       "vendor": "国产",
       "why": "Artificial Analysis 文生视频与视频编辑两个榜都是第一"
+     },
+     {
+      "name": "可灵 Kling 4.0",
+      "vendor": "国产",
+      "why": "10 月正式上线，单次原生生成最长 30 秒、最多 10 张关键帧，支持 4K/1080p 10-bit HDR"
      }
     ]
    },
