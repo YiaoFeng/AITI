@@ -30,7 +30,7 @@
     "multimodal": 102,
     "longtext": 88,
     "cost": 60,
-    "speed": 71,
+    "speed": 74,
     "privacy": 77,
     "ecosystem": 92,
     "creative": 86
@@ -99,32 +99,6 @@
    "power": 85
   },
   {
-   "name": "Claude Fable 5.1",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 86,
-    "coding": 98,
-    "chinese": 73,
-    "multimodal": 82,
-    "longtext": 94,
-    "cost": 60,
-    "speed": 75,
-    "privacy": 73,
-    "ecosystem": 89,
-    "creative": 82
-   },
-   "brief": "ProofBench 100.0 全场第一，ProgramBench 7.0 前三",
-   "updated_at": "2026-09-02",
-   "tier": {
-    "key": "anthropic",
-    "label": "思考预算",
-    "how": "能给思考过程设一个 token 上限，也能整个关掉",
-    "advice": "闲聊和简单问答关掉思考，写代码、读长文再打开",
-    "why": "开着思考回复会明显变慢，token 消耗也跟着翻上去"
-   },
-   "power": 84
-  },
-  {
    "name": "DeepSeek V4.1 Flash",
    "vendor": "国产",
    "score": {
@@ -134,7 +108,7 @@
     "multimodal": 60,
     "longtext": 92,
     "cost": 88,
-    "speed": 95,
+    "speed": 94,
     "privacy": 87,
     "ecosystem": 82,
     "creative": 84
@@ -212,7 +186,7 @@
     "multimodal": 89,
     "longtext": 98,
     "cost": 69,
-    "speed": 63,
+    "speed": 65,
     "privacy": 82,
     "ecosystem": 83,
     "creative": 79
@@ -238,7 +212,7 @@
     "multimodal": 82,
     "longtext": 88,
     "cost": 86,
-    "speed": 95,
+    "speed": 94,
     "privacy": 84,
     "ecosystem": 83,
     "creative": 83
@@ -255,6 +229,32 @@
    "power": 83
   },
   {
+   "name": "Claude Fable 5.1",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 86,
+    "coding": 98,
+    "chinese": 73,
+    "multimodal": 82,
+    "longtext": 94,
+    "cost": 60,
+    "speed": 74,
+    "privacy": 73,
+    "ecosystem": 89,
+    "creative": 82
+   },
+   "brief": "ProofBench 100.0 全场第一，ProgramBench 7.0 前三",
+   "updated_at": "2026-09-02",
+   "tier": {
+    "key": "anthropic",
+    "label": "思考预算",
+    "how": "能给思考过程设一个 token 上限，也能整个关掉",
+    "advice": "闲聊和简单问答关掉思考，写代码、读长文再打开",
+    "why": "开着思考回复会明显变慢，token 消耗也跟着翻上去"
+   },
+   "power": 83
+  },
+  {
    "name": "Gemini 3.8 Flash",
    "vendor": "海外",
    "score": {
@@ -264,7 +264,7 @@
     "multimodal": 93,
     "longtext": 88,
     "cost": 80,
-    "speed": 98,
+    "speed": 96,
     "privacy": 74,
     "ecosystem": 81,
     "creative": 76
@@ -498,7 +498,7 @@
     "multimodal": 96,
     "longtext": 90,
     "cost": 77,
-    "speed": 89,
+    "speed": 90,
     "privacy": 72,
     "ecosystem": 77,
     "creative": 73
@@ -517,7 +517,7 @@
     "multimodal": 78,
     "longtext": 90,
     "cost": 71,
-    "speed": 83,
+    "speed": 84,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -543,7 +543,7 @@
     "multimodal": 78,
     "longtext": 98,
     "cost": 80,
-    "speed": 78,
+    "speed": 79,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -562,7 +562,7 @@
     "multimodal": 85,
     "longtext": 87,
     "cost": 94,
-    "speed": 71,
+    "speed": 69,
     "privacy": 86,
     "ecosystem": 85,
     "creative": 81
@@ -633,7 +633,7 @@
     "multimodal": 82,
     "longtext": 82,
     "cost": 74,
-    "speed": 77,
+    "speed": 76,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -782,7 +782,7 @@
     "multimodal": 67,
     "longtext": 95,
     "cost": 87,
-    "speed": 67,
+    "speed": 68,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -801,7 +801,7 @@
     "multimodal": 65,
     "longtext": 87,
     "cost": 78,
-    "speed": 84,
+    "speed": 82,
     "privacy": 84,
     "ecosystem": 77,
     "creative": 76
@@ -905,7 +905,7 @@
     "multimodal": 75,
     "longtext": 83,
     "cost": 78,
-    "speed": 90,
+    "speed": 91,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -943,7 +943,7 @@
     "multimodal": 75,
     "longtext": 86,
     "cost": 79,
-    "speed": 78,
+    "speed": 80,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -969,7 +969,7 @@
     "multimodal": 85,
     "longtext": 89,
     "cost": 71,
-    "speed": 85,
+    "speed": 84,
     "privacy": 74,
     "ecosystem": 78,
     "creative": 72
@@ -1021,7 +1021,7 @@
     "multimodal": 60,
     "longtext": 81,
     "cost": 88,
-    "speed": 92,
+    "speed": 93,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1059,7 +1059,7 @@
     "multimodal": 75,
     "longtext": 91,
     "cost": 87,
-    "speed": 87,
+    "speed": 86,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1097,7 +1097,7 @@
     "multimodal": 75,
     "longtext": 87,
     "cost": 76,
-    "speed": 85,
+    "speed": 84,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1467,12 +1467,31 @@
     "multimodal": 75,
     "longtext": 60,
     "cost": 92,
-    "speed": 77,
+    "speed": 76,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
    },
    "brief": "Tau 14.4，SciCode 37.8",
+   "updated_at": "2026-09-18",
+   "power": 71
+  },
+  {
+   "name": "Granite 4.2 3B",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 38,
+    "coding": 45,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 60,
+    "cost": 100,
+    "speed": 96,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "Tau 5.6，GPQA 55.9",
    "updated_at": "2026-09-18",
    "power": 71
   },
@@ -1486,7 +1505,7 @@
     "multimodal": 75,
     "longtext": 60,
     "cost": 76,
-    "speed": 79,
+    "speed": 82,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1515,25 +1534,6 @@
    "power": 71
   },
   {
-   "name": "Granite 4.2 3B",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 38,
-    "coding": 45,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 60,
-    "cost": 100,
-    "speed": 95,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "Tau 5.6，GPQA 55.9",
-   "updated_at": "2026-09-18",
-   "power": 70
-  },
-  {
    "name": "Celeris-1",
    "vendor": "海外",
    "score": {
@@ -1551,25 +1551,6 @@
    "brief": "GPQA 63.1，Tau 3.9",
    "updated_at": "2026-09-18",
    "power": 70
-  },
-  {
-   "name": "Granite 4.2 8B",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 40,
-    "coding": 53,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 60,
-    "cost": 100,
-    "speed": 70,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "Tau 7.6，GPQA 63.1",
-   "updated_at": "2026-09-18",
-   "power": 69
   },
   {
    "name": "MiniCPM5-2B",
@@ -1608,6 +1589,25 @@
    "brief": "Tau 19.6，GPQA 69.2",
    "updated_at": "2026-09-18",
    "power": 69
+  },
+  {
+   "name": "Granite 4.2 8B",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 40,
+    "coding": 53,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 60,
+    "cost": 100,
+    "speed": 67,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "Tau 7.6，GPQA 63.1",
+   "updated_at": "2026-09-18",
+   "power": 68
   },
   {
    "name": "Ling 3.0 Tiny",
