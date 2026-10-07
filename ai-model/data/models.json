@@ -18,7 +18,7 @@
   "privacy": "由 本土化 70% + API稳定性 30% 推算（榜单无独立隐私维度）",
   "creative": "由 中文能力 45% + 实际调用 30% + 趋势热度 25% 推算（榜单无独立创意维度）"
  },
- "count": 81,
+ "count": 82,
  "models": [
   {
    "name": "GPT-6 Astra",
@@ -1507,6 +1507,25 @@
    },
    "brief": "Tau 32.0，GPQA 82.2",
    "updated_at": "2026-09-18",
+   "power": 74
+  },
+  {
+   "name": "Mistral Large 4",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 57,
+    "coding": 56,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 85,
+    "cost": 77,
+    "speed": 75,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "",
+   "updated_at": "2026-10-07",
    "power": 74
   },
   {
