@@ -1,6 +1,6 @@
 {
  "version": "1.0",
- "generated_at": "2026-10-07",
+ "generated_at": "2026-10-08",
  "source": "data/rankings/benchmarks.json",
  "dims": [
   "reasoning",
@@ -18,7 +18,7 @@
   "privacy": "由 本土化 70% + API稳定性 30% 推算（榜单无独立隐私维度）",
   "creative": "由 中文能力 45% + 实际调用 30% + 趋势热度 25% 推算（榜单无独立创意维度）"
  },
- "count": 82,
+ "count": 83,
  "models": [
   {
    "name": "GPT-6 Astra",
@@ -1526,6 +1526,32 @@
    },
    "brief": "",
    "updated_at": "2026-10-07",
+   "power": 74
+  },
+  {
+   "name": "Claude Haiku 5.5",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 57,
+    "coding": 56,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 85,
+    "cost": 77,
+    "speed": 75,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "",
+   "updated_at": "2026-10-08",
+   "tier": {
+    "key": "anthropic",
+    "label": "思考预算",
+    "how": "能给思考过程设一个 token 上限，也能整个关掉",
+    "advice": "闲聊和简单问答关掉思考，写代码、读长文再打开",
+    "why": "开着思考回复会明显变慢，token 消耗也跟着翻上去"
+   },
    "power": 74
   },
   {
