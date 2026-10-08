@@ -18,39 +18,13 @@
   "privacy": "由 本土化 70% + API稳定性 30% 推算（榜单无独立隐私维度）",
   "creative": "由 中文能力 45% + 实际调用 30% + 趋势热度 25% 推算（榜单无独立创意维度）"
  },
- "count": 83,
+ "count": 82,
  "models": [
-  {
-   "name": "GPT-6 Astra",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 89,
-    "coding": 99,
-    "chinese": 87,
-    "multimodal": 97,
-    "longtext": 88,
-    "cost": 60,
-    "speed": 74,
-    "privacy": 77,
-    "ecosystem": 92,
-    "creative": 92
-   },
-   "brief": "GPQA 96.0 全场第一，IOI 100.0 全场第一",
-   "updated_at": "2026-09-04",
-   "tier": {
-    "key": "openai",
-    "label": "推理档位",
-    "how": "reasoning_effort 有 low / medium / high 三档",
-    "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
-    "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
-   },
-   "power": 88
-  },
   {
    "name": "Claude Opus 5.5",
    "vendor": "海外",
    "score": {
-    "reasoning": 91,
+    "reasoning": 93,
     "coding": 96,
     "chinese": 90,
     "multimodal": 99,
@@ -70,13 +44,39 @@
     "advice": "闲聊和简单问答关掉思考，写代码、读长文再打开",
     "why": "开着思考回复会明显变慢，token 消耗也跟着翻上去"
    },
+   "power": 89
+  },
+  {
+   "name": "GPT-6 Astra",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 89,
+    "coding": 99,
+    "chinese": 87,
+    "multimodal": 97,
+    "longtext": 88,
+    "cost": 60,
+    "speed": 68,
+    "privacy": 77,
+    "ecosystem": 92,
+    "creative": 92
+   },
+   "brief": "GPQA 96.0 全场第一，IOI 100.0 全场第一",
+   "updated_at": "2026-09-04",
+   "tier": {
+    "key": "openai",
+    "label": "推理档位",
+    "how": "reasoning_effort 有 low / medium / high 三档",
+    "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
+    "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
+   },
    "power": 88
   },
   {
    "name": "Claude Fable 5.1",
    "vendor": "海外",
    "score": {
-    "reasoning": 87,
+    "reasoning": 88,
     "coding": 98,
     "chinese": 82,
     "multimodal": 95,
@@ -108,12 +108,12 @@
     "multimodal": 71,
     "longtext": 92,
     "cost": 88,
-    "speed": 94,
+    "speed": 95,
     "privacy": 87,
-    "ecosystem": 87,
-    "creative": 90
+    "ecosystem": 89,
+    "creative": 92
    },
-   "brief": "DeepSWE 74.2 前三，AutomationBench 68.9 前三",
+   "brief": "DeepSWE 74.2，MysteryMechanism 21.2",
    "updated_at": "2026-09-10",
    "tier": {
     "key": "deepseek",
@@ -122,24 +122,50 @@
     "advice": "日常问答走 Flash，难题再交给 Pro",
     "why": "Flash 便宜且快得多，拿 Pro 干简单活是最常见的浪费"
    },
-   "power": 86
+   "power": 87
+  },
+  {
+   "name": "Claude Sonnet 5.5",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 89,
+    "coding": 96,
+    "chinese": 86,
+    "multimodal": 87,
+    "longtext": 90,
+    "cost": 72,
+    "speed": 86,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 82
+   },
+   "brief": "Vibe Code 92.4 全场第一，TB4.0 64.1 前三",
+   "updated_at": "2026-10-06",
+   "tier": {
+    "key": "anthropic",
+    "label": "思考预算",
+    "how": "能给思考过程设一个 token 上限，也能整个关掉",
+    "advice": "闲聊和简单问答关掉思考，写代码、读长文再打开",
+    "why": "开着思考回复会明显变慢，token 消耗也跟着翻上去"
+   },
+   "power": 87
   },
   {
    "name": "GPT-6.1 Sol",
    "vendor": "海外",
    "score": {
-    "reasoning": 87,
+    "reasoning": 88,
     "coding": 96,
     "chinese": 86,
     "multimodal": 94,
     "longtext": 91,
-    "cost": 77,
-    "speed": 75,
+    "cost": 72,
+    "speed": 71,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 82
    },
-   "brief": "FrontierMath T4 100.0 全场第一，IOI 96.9 前三",
+   "brief": "FrontierMath T4 100.0 全场第一，DeepSWE 75.2 前三",
    "updated_at": "2026-10-06",
    "tier": {
     "key": "openai",
@@ -165,7 +191,7 @@
     "ecosystem": 88,
     "creative": 86
    },
-   "brief": "Vibe Code 90.3 前三，HLE 55.5",
+   "brief": "HLE 55.5，Vibe Code 90.3",
    "updated_at": "2026-09-01",
    "tier": {
     "key": "anthropic",
@@ -177,62 +203,10 @@
    "power": 85
   },
   {
-   "name": "智谱 GLM-5.3-Flash",
-   "vendor": "国产",
-   "score": {
-    "reasoning": 74,
-    "coding": 85,
-    "chinese": 94,
-    "multimodal": 89,
-    "longtext": 87,
-    "cost": 94,
-    "speed": 69,
-    "privacy": 86,
-    "ecosystem": 85,
-    "creative": 92
-   },
-   "brief": "Tau 47.2，SWE-bench 92.0",
-   "updated_at": "2026-08-26",
-   "tier": {
-    "key": "zhipu",
-    "label": "思考开关",
-    "how": "深度思考模式可以开关",
-    "advice": "常规任务关掉，复杂推理再开",
-    "why": "开着思考会拉长响应时间，简单任务上不划算"
-   },
-   "power": 85
-  },
-  {
-   "name": "Gemini 3.8 Flash",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 78,
-    "coding": 90,
-    "chinese": 84,
-    "multimodal": 94,
-    "longtext": 88,
-    "cost": 80,
-    "speed": 96,
-    "privacy": 74,
-    "ecosystem": 81,
-    "creative": 84
-   },
-   "brief": "GPQA 95.3 前三，DeepSWE 73.7",
-   "updated_at": "2026-09-03",
-   "tier": {
-    "key": "google",
-    "label": "思考预算",
-    "how": "thinking budget 可以调，也能设成 0 直接关掉",
-    "advice": "批量跑的小任务关掉，需要多步推理的再开",
-    "why": "思考档位越高延迟越明显，价格随推理 token 一起上涨"
-   },
-   "power": 85
-  },
-  {
    "name": "GPT-6 Sol",
    "vendor": "海外",
    "score": {
-    "reasoning": 80,
+    "reasoning": 81,
     "coding": 93,
     "chinese": 84,
     "multimodal": 86,
@@ -258,18 +232,18 @@
    "name": "Gemini 4 Argon",
    "vendor": "海外",
    "score": {
-    "reasoning": 91,
+    "reasoning": 92,
     "coding": 96,
     "chinese": 86,
     "multimodal": 85,
     "longtext": 86,
-    "cost": 77,
+    "cost": 72,
     "speed": 75,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 82
    },
-   "brief": "Vibe Code 91.9 全场第一，AutomationBench 77.5 全场第一",
+   "brief": "DeepSWE 77.9 全场第一，HLE 57.1 前三",
    "updated_at": "2026-10-06",
    "tier": {
     "key": "google",
@@ -307,6 +281,32 @@
    "power": 84
   },
   {
+   "name": "智谱 GLM-5.3-Flash",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 74,
+    "coding": 85,
+    "chinese": 94,
+    "multimodal": 87,
+    "longtext": 87,
+    "cost": 94,
+    "speed": 69,
+    "privacy": 86,
+    "ecosystem": 85,
+    "creative": 92
+   },
+   "brief": "Tau 47.2，SWE-bench 92.0",
+   "updated_at": "2026-08-26",
+   "tier": {
+    "key": "zhipu",
+    "label": "思考开关",
+    "how": "深度思考模式可以开关",
+    "advice": "常规任务关掉，复杂推理再开",
+    "why": "开着思考会拉长响应时间，简单任务上不划算"
+   },
+   "power": 84
+  },
+  {
    "name": "腾讯混元 Hy4 preview",
    "vendor": "国产",
    "score": {
@@ -321,7 +321,7 @@
     "ecosystem": 80,
     "creative": 90
    },
-   "brief": "LMArena Code 1633.0，GPQA 92.3",
+   "brief": "LMArena Code 1632.0，GPQA 92.3",
    "updated_at": "2026-08-29",
    "tier": {
     "key": "tencent",
@@ -347,7 +347,7 @@
     "ecosystem": 84,
     "creative": 85
    },
-   "brief": "LMArena Code 1670.0 前三，Tau 47.8",
+   "brief": "LMArena Code 1672.0 前三，Tau 47.8",
    "updated_at": "2026-09-02",
    "tier": {
     "key": "qwen",
@@ -359,54 +359,54 @@
    "power": 84
   },
   {
-   "name": "GPT-5.6 Terra",
+   "name": "Gemini 3.8 Flash",
    "vendor": "海外",
    "score": {
     "reasoning": 78,
     "coding": 90,
-    "chinese": 86,
-    "multimodal": 80,
-    "longtext": 90,
-    "cost": 71,
-    "speed": 84,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 82
+    "chinese": 84,
+    "multimodal": 94,
+    "longtext": 88,
+    "cost": 80,
+    "speed": 87,
+    "privacy": 74,
+    "ecosystem": 81,
+    "creative": 84
    },
-   "brief": "SWE-bench 95.4，FrontierMath T4 70.7",
-   "updated_at": "2026-09-18",
+   "brief": "GPQA 95.3 前三，DeepSWE 73.7",
+   "updated_at": "2026-09-03",
    "tier": {
-    "key": "openai",
-    "label": "推理档位",
-    "how": "reasoning_effort 有 low / medium / high 三档",
-    "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
-    "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
+    "key": "google",
+    "label": "思考预算",
+    "how": "thinking budget 可以调，也能设成 0 直接关掉",
+    "advice": "批量跑的小任务关掉，需要多步推理的再开",
+    "why": "思考档位越高延迟越明显，价格随推理 token 一起上涨"
    },
    "power": 84
   },
   {
-   "name": "GPT-6 Luna",
+   "name": "Claude Haiku 5.5",
    "vendor": "海外",
    "score": {
-    "reasoning": 73,
-    "coding": 88,
-    "chinese": 89,
-    "multimodal": 78,
-    "longtext": 91,
+    "reasoning": 81,
+    "coding": 91,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 90,
     "cost": 95,
-    "speed": 86,
+    "speed": 96,
     "privacy": 83,
     "ecosystem": 80,
-    "creative": 84
+    "creative": 78
    },
-   "brief": "FrontierMath T4 56.1，Vibe Code 81.7",
-   "updated_at": "2026-09-18",
+   "brief": "Vibe Code 90.4 前三，ProofBench 86.0",
+   "updated_at": "2026-10-08",
    "tier": {
-    "key": "openai",
-    "label": "推理档位",
-    "how": "reasoning_effort 有 low / medium / high 三档",
-    "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
-    "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
+    "key": "anthropic",
+    "label": "思考预算",
+    "how": "能给思考过程设一个 token 上限，也能整个关掉",
+    "advice": "闲聊和简单问答关掉思考，写代码、读长文再打开",
+    "why": "开着思考回复会明显变慢，token 消耗也跟着翻上去"
    },
    "power": 84
   },
@@ -451,7 +451,7 @@
     "ecosystem": 83,
     "creative": 82
    },
-   "brief": "LMArena Code 1658.0 前三，GPQA 93.5",
+   "brief": "LMArena Code 1655.0，GPQA 93.5",
    "updated_at": "2026-08-24",
    "tier": {
     "key": "moonshot",
@@ -472,7 +472,7 @@
     "multimodal": 85,
     "longtext": 86,
     "cost": 77,
-    "speed": 76,
+    "speed": 74,
     "privacy": 84,
     "ecosystem": 78,
     "creative": 82
@@ -486,25 +486,6 @@
     "advice": "常规任务关掉，复杂推理再开",
     "why": "开着思考会拉长响应时间，简单任务上不划算"
    },
-   "power": 83
-  },
-  {
-   "name": "Muse Spark 1.3",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 78,
-    "coding": 92,
-    "chinese": 82,
-    "multimodal": 84,
-    "longtext": 90,
-    "cost": 77,
-    "speed": 90,
-    "privacy": 72,
-    "ecosystem": 77,
-    "creative": 80
-   },
-   "brief": "DeepSWE 75.4 全场第一，Tau 50.5 前三",
-   "updated_at": "2026-09-03",
    "power": 83
   },
   {
@@ -534,29 +515,93 @@
    "power": 83
   },
   {
-   "name": "Claude Sonnet 5.5",
+   "name": "GPT-5.6 Terra",
    "vendor": "海外",
    "score": {
-    "reasoning": 90,
-    "coding": 94,
-    "chinese": 80,
-    "multimodal": 75,
+    "reasoning": 78,
+    "coding": 90,
+    "chinese": 86,
+    "multimodal": 80,
     "longtext": 90,
+    "cost": 71,
+    "speed": 81,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 82
+   },
+   "brief": "SWE-bench 95.4，FrontierMath T4 70.7",
+   "updated_at": "2026-09-18",
+   "tier": {
+    "key": "openai",
+    "label": "推理档位",
+    "how": "reasoning_effort 有 low / medium / high 三档",
+    "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
+    "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
+   },
+   "power": 83
+  },
+  {
+   "name": "Step 5 Preview",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 77,
+    "coding": 89,
+    "chinese": 86,
+    "multimodal": 69,
+    "longtext": 98,
+    "cost": 80,
+    "speed": 79,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 82
+   },
+   "brief": "SciCode 58.9，GPQA 93.5",
+   "updated_at": "2026-09-18",
+   "power": 83
+  },
+  {
+   "name": "GPT-6 Luna",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 73,
+    "coding": 88,
+    "chinese": 89,
+    "multimodal": 78,
+    "longtext": 91,
+    "cost": 95,
+    "speed": 85,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 84
+   },
+   "brief": "FrontierMath T4 56.1，Vibe Code 81.7",
+   "updated_at": "2026-09-18",
+   "tier": {
+    "key": "openai",
+    "label": "推理档位",
+    "how": "reasoning_effort 有 low / medium / high 三档",
+    "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
+    "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
+   },
+   "power": 83
+  },
+  {
+   "name": "Ember-1",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 77,
+    "coding": 91,
+    "chinese": 86,
+    "multimodal": 85,
+    "longtext": 85,
     "cost": 77,
     "speed": 75,
     "privacy": 83,
     "ecosystem": 80,
-    "creative": 78
+    "creative": 82
    },
-   "brief": "TB4.0 64.1 前三，HLE 55.0",
-   "updated_at": "2026-10-06",
-   "tier": {
-    "key": "anthropic",
-    "label": "思考预算",
-    "how": "能给思考过程设一个 token 上限，也能整个关掉",
-    "advice": "闲聊和简单问答关掉思考，写代码、读长文再打开",
-    "why": "开着思考回复会明显变慢，token 消耗也跟着翻上去"
-   },
+   "brief": "DeepSWE 75.2，MysteryMechanism 22.5",
+   "updated_at": "2026-09-18",
    "power": 83
   },
   {
@@ -574,7 +619,7 @@
     "ecosystem": 80,
     "creative": 73
    },
-   "brief": "SWE-bench 97.0 全场第一，ProofBench 99.0 前三",
+   "brief": "SWE-bench 97.0 全场第一，ProofBench 99.0",
    "updated_at": "2026-09-01",
    "tier": {
     "key": "anthropic",
@@ -600,7 +645,7 @@
     "ecosystem": 80,
     "creative": 79
    },
-   "brief": "LMArena Code 1671.0 全场第一，Tau 51.3 全场第一",
+   "brief": "LMArena Code 1672.0 全场第一，Tau 51.3 全场第一",
    "updated_at": "2026-08-24",
    "tier": {
     "key": "qwen",
@@ -612,29 +657,22 @@
    "power": 82
   },
   {
-   "name": "DeepSeek V4 Vision",
-   "vendor": "国产",
+   "name": "Muse Spark 1.3",
+   "vendor": "海外",
    "score": {
-    "reasoning": 70,
-    "coding": 81,
-    "chinese": 87,
-    "multimodal": 65,
-    "longtext": 88,
-    "cost": 86,
-    "speed": 94,
-    "privacy": 84,
-    "ecosystem": 83,
-    "creative": 86
+    "reasoning": 78,
+    "coding": 92,
+    "chinese": 82,
+    "multimodal": 84,
+    "longtext": 90,
+    "cost": 77,
+    "speed": 82,
+    "privacy": 72,
+    "ecosystem": 77,
+    "creative": 80
    },
-   "brief": "Tau 41.0，GPQA 91.3",
-   "updated_at": "2026-08-24",
-   "tier": {
-    "key": "deepseek",
-    "label": "双版本搭配",
-    "how": "Pro 和 Flash 是两个独立模型，按任务分派",
-    "advice": "日常问答走 Flash，难题再交给 Pro",
-    "why": "Flash 便宜且快得多，拿 Pro 干简单活是最常见的浪费"
-   },
+   "brief": "DeepSWE 75.4 前三，Tau 50.5 前三",
+   "updated_at": "2026-09-03",
    "power": 82
   },
   {
@@ -652,7 +690,7 @@
     "ecosystem": 85,
     "creative": 87
    },
-   "brief": "LMArena Code 1637.0，Tau 45.4",
+   "brief": "LMArena Code 1632.0，Tau 45.4",
    "updated_at": "2026-09-07",
    "tier": {
     "key": "qwen",
@@ -664,23 +702,49 @@
    "power": 82
   },
   {
-   "name": "Step 5 Preview",
+   "name": "Ling 3.1 Flash",
    "vendor": "国产",
    "score": {
-    "reasoning": 76,
-    "coding": 89,
-    "chinese": 86,
-    "multimodal": 69,
-    "longtext": 98,
-    "cost": 80,
-    "speed": 79,
+    "reasoning": 72,
+    "coding": 86,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 91,
+    "cost": 89,
+    "speed": 94,
     "privacy": 83,
     "ecosystem": 80,
-    "creative": 82
+    "creative": 78
    },
-   "brief": "SciCode 58.9，GPQA 93.5",
-   "updated_at": "2026-09-18",
+   "brief": "SciCode 54.1，HLE 39.4",
+   "updated_at": "2026-10-06",
    "power": 82
+  },
+  {
+   "name": "DeepSeek V4 Vision",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 70,
+    "coding": 81,
+    "chinese": 81,
+    "multimodal": 65,
+    "longtext": 88,
+    "cost": 86,
+    "speed": 94,
+    "privacy": 84,
+    "ecosystem": 83,
+    "creative": 83
+   },
+   "brief": "Tau 41.0，GPQA 91.3",
+   "updated_at": "2026-08-24",
+   "tier": {
+    "key": "deepseek",
+    "label": "双版本搭配",
+    "how": "Pro 和 Flash 是两个独立模型，按任务分派",
+    "advice": "日常问答走 Flash，难题再交给 Pro",
+    "why": "Flash 便宜且快得多，拿 Pro 干简单活是最常见的浪费"
+   },
+   "power": 81
   },
   {
    "name": "GPT-5.6 Luna",
@@ -763,39 +827,13 @@
     "multimodal": 73,
     "longtext": 95,
     "cost": 87,
-    "speed": 68,
+    "speed": 64,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 79
    },
-   "brief": "APEX-SWE 54.2，HLE 49.4",
+   "brief": "SciCode 60.9，HLE 49.4",
    "updated_at": "2026-09-18",
-   "power": 81
-  },
-  {
-   "name": "Grok 4.7",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 73,
-    "coding": 92,
-    "chinese": 86,
-    "multimodal": 74,
-    "longtext": 82,
-    "cost": 74,
-    "speed": 76,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 82
-   },
-   "brief": "LMArena Code 1638.0，AutomationBench 65.6",
-   "updated_at": "2026-09-18",
-   "tier": {
-    "key": "xai",
-    "label": "推理档位",
-    "how": "推理强度可以调",
-    "advice": "默认档够用，难题再往上调",
-    "why": "推理强度越高，响应越慢、消耗越大"
-   },
    "power": 81
   },
   {
@@ -818,94 +856,49 @@
    "power": 80
   },
   {
-   "name": "Kimi K2.7 Code",
-   "vendor": "国产",
+   "name": "Grok 4.7",
+   "vendor": "海外",
    "score": {
-    "reasoning": 65,
-    "coding": 83,
-    "chinese": 87,
-    "multimodal": 75,
-    "longtext": 86,
-    "cost": 79,
-    "speed": 80,
+    "reasoning": 73,
+    "coding": 92,
+    "chinese": 86,
+    "multimodal": 74,
+    "longtext": 82,
+    "cost": 74,
+    "speed": 72,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 82
    },
-   "brief": "APEX-SWE 40.3，FrontierMath T4 12.2",
+   "brief": "LMArena Code 1638.0，MysteryMechanism 25.2",
    "updated_at": "2026-09-18",
    "tier": {
-    "key": "moonshot",
-    "label": "思考开关",
-    "how": "可以切换思考模式",
-    "advice": "读文档、做摘要关掉，需要推理再开",
-    "why": "思考模式更慢更贵，长文本场景未必用得上"
+    "key": "xai",
+    "label": "推理档位",
+    "how": "推理强度可以调",
+    "advice": "默认档够用，难题再往上调",
+    "why": "推理强度越高，响应越慢、消耗越大"
    },
    "power": 80
   },
   {
-   "name": "Ling 3.1 Flash",
-   "vendor": "国产",
-   "score": {
-    "reasoning": 71,
-    "coding": 86,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 91,
-    "cost": 77,
-    "speed": 75,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "SciCode 54.1，HLE 39.4",
-   "updated_at": "2026-10-06",
-   "power": 80
-  },
-  {
-   "name": "Ember-1",
+   "name": "Mistral Large 4",
    "vendor": "海外",
    "score": {
-    "reasoning": 71,
-    "coding": 96,
+    "reasoning": 70,
+    "coding": 86,
     "chinese": 80,
-    "multimodal": 75,
-    "longtext": 85,
+    "multimodal": 69,
+    "longtext": 88,
     "cost": 77,
-    "speed": 75,
+    "speed": 82,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "DeepSWE 75.2 前三，TB4.0 19.7",
-   "updated_at": "2026-09-18",
+   "brief": "TB4.0 22.7，Vibe Code 78.4",
+   "updated_at": "2026-10-07",
    "power": 80
-  },
-  {
-   "name": "DeepSeek Pro",
-   "vendor": "国产",
-   "score": {
-    "reasoning": 74,
-    "coding": 83,
-    "chinese": 80,
-    "multimodal": 65,
-    "longtext": 87,
-    "cost": 78,
-    "speed": 82,
-    "privacy": 84,
-    "ecosystem": 77,
-    "creative": 76
-   },
-   "brief": "Tau 39.6，GPQA 92.4",
-   "updated_at": "2026-08-24",
-   "tier": {
-    "key": "deepseek",
-    "label": "双版本搭配",
-    "how": "Pro 和 Flash 是两个独立模型，按任务分派",
-    "advice": "日常问答走 Flash，难题再交给 Pro",
-    "why": "Flash 便宜且快得多，拿 Pro 干简单活是最常见的浪费"
-   },
-   "power": 79
   },
   {
    "name": "DeepSeek Flash",
@@ -922,7 +915,7 @@
     "ecosystem": 81,
     "creative": 80
    },
-   "brief": "Tau 39.4，DeepSWE 54.4",
+   "brief": "Tau 39.4，GPQA 90.8",
    "updated_at": "2026-08-24",
    "tier": {
     "key": "deepseek",
@@ -963,7 +956,7 @@
    "name": "Qwen3.8-27B",
    "vendor": "国产",
    "score": {
-    "reasoning": 70,
+    "reasoning": 71,
     "coding": 82,
     "chinese": 82,
     "multimodal": 69,
@@ -1000,7 +993,7 @@
     "ecosystem": 80,
     "creative": 73
    },
-   "brief": "ProofBench 77.0，Vibe Code 81.3",
+   "brief": "ProofBench 77.0，Code Migration 44.4",
    "updated_at": "2026-09-18",
    "tier": {
     "key": "anthropic",
@@ -1064,6 +1057,51 @@
    "power": 79
   },
   {
+   "name": "Mercury 2.5",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 63,
+    "coding": 75,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 76,
+    "cost": 90,
+    "speed": 100,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "TB Science 0.0，IOI 2.4",
+   "updated_at": "2026-10-06",
+   "power": 79
+  },
+  {
+   "name": "DeepSeek Pro",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 74,
+    "coding": 83,
+    "chinese": 80,
+    "multimodal": 65,
+    "longtext": 87,
+    "cost": 78,
+    "speed": 80,
+    "privacy": 84,
+    "ecosystem": 77,
+    "creative": 76
+   },
+   "brief": "Tau 39.6，GPQA 92.4",
+   "updated_at": "2026-08-24",
+   "tier": {
+    "key": "deepseek",
+    "label": "双版本搭配",
+    "how": "Pro 和 Flash 是两个独立模型，按任务分派",
+    "advice": "日常问答走 Flash，难题再交给 Pro",
+    "why": "Flash 便宜且快得多，拿 Pro 干简单活是最常见的浪费"
+   },
+   "power": 78
+  },
+  {
    "name": "Grok 4.6",
    "vendor": "海外",
    "score": {
@@ -1116,25 +1154,6 @@
    "power": 78
   },
   {
-   "name": "Inkling",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 62,
-    "coding": 80,
-    "chinese": 80,
-    "multimodal": 61,
-    "longtext": 83,
-    "cost": 78,
-    "speed": 91,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "SWE-bench 77.6，AutomationBench 5.0",
-   "updated_at": "2026-09-18",
-   "power": 78
-  },
-  {
    "name": "Inkling Small",
    "vendor": "海外",
    "score": {
@@ -1144,7 +1163,7 @@
     "multimodal": 63,
     "longtext": 81,
     "cost": 88,
-    "speed": 93,
+    "speed": 91,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1173,25 +1192,6 @@
    "power": 78
   },
   {
-   "name": "Nemotron 3 Ultra 550B A55B",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 65,
-    "coding": 78,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 85,
-    "cost": 76,
-    "speed": 75,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "AutomationBench 3.0，SWE-bench 69.0",
-   "updated_at": "2026-09-18",
-   "power": 78
-  },
-  {
    "name": "K2 Horizon 375B A23B",
    "vendor": "海外",
    "score": {
@@ -1201,12 +1201,12 @@
     "multimodal": 75,
     "longtext": 87,
     "cost": 76,
-    "speed": 84,
+    "speed": 85,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "AutomationBench 37.2，GPQA 87.3",
+   "brief": "Tau 34.2，GPQA 87.3",
    "updated_at": "2026-09-18",
    "power": 78
   },
@@ -1220,12 +1220,12 @@
     "multimodal": 60,
     "longtext": 79,
     "cost": 96,
-    "speed": 70,
+    "speed": 71,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 80
    },
-   "brief": "DeepSWE 67.9，MysteryMechanism 21.6",
+   "brief": "LMArena Code 1636.0，MysteryMechanism 21.6",
    "updated_at": "2026-09-18",
    "power": 78
   },
@@ -1238,8 +1238,8 @@
     "chinese": 80,
     "multimodal": 75,
     "longtext": 91,
-    "cost": 77,
-    "speed": 75,
+    "cost": 96,
+    "speed": 73,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1247,6 +1247,44 @@
    "brief": "SciCode 47.6，HLE 25.8",
    "updated_at": "2026-10-06",
    "power": 78
+  },
+  {
+   "name": "Ling-3.0-flash-Fin",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 60,
+    "coding": 69,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 78,
+    "cost": 99,
+    "speed": 100,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "Tau 38.6，SciCode 42.4",
+   "updated_at": "2026-10-06",
+   "power": 78
+  },
+  {
+   "name": "Inkling",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 62,
+    "coding": 80,
+    "chinese": 80,
+    "multimodal": 61,
+    "longtext": 83,
+    "cost": 78,
+    "speed": 88,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "SWE-bench 77.6，FrontierMath T4 4.9",
+   "updated_at": "2026-09-18",
+   "power": 77
   },
   {
    "name": "JT-4.1 Flash 236B A21B",
@@ -1315,7 +1353,7 @@
     "multimodal": 75,
     "longtext": 82,
     "cost": 83,
-    "speed": 88,
+    "speed": 85,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1332,23 +1370,23 @@
    "power": 77
   },
   {
-   "name": "Muse Glimmer",
+   "name": "Beam",
    "vendor": "海外",
    "score": {
-    "reasoning": 51,
-    "coding": 72,
+    "reasoning": 69,
+    "coding": 67,
     "chinese": 80,
-    "multimodal": 64,
-    "longtext": 91,
-    "cost": 87,
-    "speed": 86,
+    "multimodal": 75,
+    "longtext": 85,
+    "cost": 77,
+    "speed": 75,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "AutomationBench 6.8，GPQA 83.5",
-   "updated_at": "2026-09-18",
-   "power": 76
+   "brief": "GPQA 90.5，DeepSWE 44.4",
+   "updated_at": "2026-10-08",
+   "power": 77
   },
   {
    "name": "Solar Open2 250B",
@@ -1389,23 +1427,23 @@
    "power": 76
   },
   {
-   "name": "Mercury 2.5",
+   "name": "Muse Glimmer",
    "vendor": "海外",
    "score": {
-    "reasoning": 63,
-    "coding": 75,
+    "reasoning": 51,
+    "coding": 72,
     "chinese": 80,
-    "multimodal": 75,
-    "longtext": 76,
-    "cost": 77,
-    "speed": 75,
+    "multimodal": 64,
+    "longtext": 91,
+    "cost": 87,
+    "speed": 79,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "TB Science 0.0，IOI 2.4",
-   "updated_at": "2026-10-06",
-   "power": 76
+   "brief": "Tau 23.5，GPQA 83.5",
+   "updated_at": "2026-09-18",
+   "power": 75
   },
   {
    "name": "Qwen3.7 Plus",
@@ -1417,7 +1455,7 @@
     "multimodal": 80,
     "longtext": 77,
     "cost": 85,
-    "speed": 71,
+    "speed": 70,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 72
@@ -1434,25 +1472,6 @@
    "power": 75
   },
   {
-   "name": "Ling-3.0-flash-Fin",
-   "vendor": "国产",
-   "score": {
-    "reasoning": 60,
-    "coding": 69,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 78,
-    "cost": 77,
-    "speed": 75,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "Tau 38.6，SciCode 42.4",
-   "updated_at": "2026-10-06",
-   "power": 75
-  },
-  {
    "name": "MiniMax M3",
    "vendor": "国产",
    "score": {
@@ -1462,12 +1481,12 @@
     "multimodal": 75,
     "longtext": 91,
     "cost": 88,
-    "speed": 76,
+    "speed": 78,
     "privacy": 79,
     "ecosystem": 68,
     "creative": 65
    },
-   "brief": "GPQA 92.9，AutomationBench 21.3",
+   "brief": "GPQA 92.9，SWE-bench 75.0",
    "updated_at": "2026-08-24",
    "power": 74
   },
@@ -1507,51 +1526,6 @@
    },
    "brief": "Tau 32.0，GPQA 82.2",
    "updated_at": "2026-09-18",
-   "power": 74
-  },
-  {
-   "name": "Mistral Large 4",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 57,
-    "coding": 56,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 85,
-    "cost": 77,
-    "speed": 75,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "",
-   "updated_at": "2026-10-07",
-   "power": 74
-  },
-  {
-   "name": "Claude Haiku 5.5",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 57,
-    "coding": 56,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 85,
-    "cost": 77,
-    "speed": 75,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "",
-   "updated_at": "2026-10-08",
-   "tier": {
-    "key": "anthropic",
-    "label": "思考预算",
-    "how": "能给思考过程设一个 token 上限，也能整个关掉",
-    "advice": "闲聊和简单问答关掉思考，写代码、读长文再打开",
-    "why": "开着思考回复会明显变慢，token 消耗也跟着翻上去"
-   },
    "power": 74
   },
   {
@@ -1647,7 +1621,7 @@
     "multimodal": 75,
     "longtext": 60,
     "cost": 100,
-    "speed": 100,
+    "speed": 99,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1674,25 +1648,6 @@
    "brief": "Tau 22.1，GPQA 80.5",
    "updated_at": "2026-09-18",
    "power": 72
-  },
-  {
-   "name": "North Mini Code",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 40,
-    "coding": 64,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 60,
-    "cost": 76,
-    "speed": 82,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "GPQA 75.7，Tau 6.4",
-   "updated_at": "2026-09-18",
-   "power": 71
   },
   {
    "name": "K2 Horizon 7B",
@@ -1742,12 +1697,31 @@
     "multimodal": 75,
     "longtext": 60,
     "cost": 100,
-    "speed": 96,
+    "speed": 95,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
    },
    "brief": "Tau 5.6，GPQA 55.9",
+   "updated_at": "2026-09-18",
+   "power": 70
+  },
+  {
+   "name": "North Mini Code",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 40,
+    "coding": 64,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 60,
+    "cost": 76,
+    "speed": 70,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "GPQA 75.7，Tau 6.4",
    "updated_at": "2026-09-18",
    "power": 70
   },
@@ -1818,7 +1792,7 @@
     "multimodal": 75,
     "longtext": 60,
     "cost": 100,
-    "speed": 67,
+    "speed": 70,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1837,7 +1811,7 @@
     "multimodal": 75,
     "longtext": 60,
     "cost": 76,
-    "speed": 69,
+    "speed": 71,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
