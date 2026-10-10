@@ -56,7 +56,7 @@
     "multimodal": 97,
     "longtext": 88,
     "cost": 60,
-    "speed": 68,
+    "speed": 69,
     "privacy": 77,
     "ecosystem": 92,
     "creative": 92
@@ -134,7 +134,7 @@
     "multimodal": 87,
     "longtext": 90,
     "cost": 72,
-    "speed": 86,
+    "speed": 87,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 82
@@ -156,14 +156,14 @@
    "score": {
     "reasoning": 88,
     "coding": 96,
-    "chinese": 86,
+    "chinese": 89,
     "multimodal": 94,
     "longtext": 91,
     "cost": 72,
-    "speed": 71,
+    "speed": 72,
     "privacy": 83,
     "ecosystem": 80,
-    "creative": 82
+    "creative": 84
    },
    "brief": "FrontierMath T4 100.0 全场第一，DeepSWE 75.2 前三",
    "updated_at": "2026-10-06",
@@ -368,7 +368,7 @@
     "multimodal": 94,
     "longtext": 88,
     "cost": 80,
-    "speed": 85,
+    "speed": 86,
     "privacy": 74,
     "ecosystem": 81,
     "creative": 84
@@ -381,6 +381,58 @@
     "how": "thinking budget 可以调，也能设成 0 直接关掉",
     "advice": "批量跑的小任务关掉，需要多步推理的再开",
     "why": "思考档位越高延迟越明显，价格随推理 token 一起上涨"
+   },
+   "power": 84
+  },
+  {
+   "name": "GPT-5.6 Terra",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 78,
+    "coding": 90,
+    "chinese": 86,
+    "multimodal": 80,
+    "longtext": 90,
+    "cost": 71,
+    "speed": 84,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 82
+   },
+   "brief": "SWE-bench 95.4，FrontierMath T4 70.7",
+   "updated_at": "2026-09-18",
+   "tier": {
+    "key": "openai",
+    "label": "推理档位",
+    "how": "reasoning_effort 有 low / medium / high 三档",
+    "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
+    "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
+   },
+   "power": 84
+  },
+  {
+   "name": "GPT-6 Luna",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 73,
+    "coding": 88,
+    "chinese": 89,
+    "multimodal": 78,
+    "longtext": 91,
+    "cost": 95,
+    "speed": 88,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 84
+   },
+   "brief": "FrontierMath T4 56.1，Vibe Code 81.7",
+   "updated_at": "2026-09-18",
+   "tier": {
+    "key": "openai",
+    "label": "推理档位",
+    "how": "reasoning_effort 有 low / medium / high 三档",
+    "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
+    "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
    },
    "power": 84
   },
@@ -407,6 +459,32 @@
     "how": "reasoning_effort 有 low / medium / high 三档",
     "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
     "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
+   },
+   "power": 83
+  },
+  {
+   "name": "Kimi K3",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 77,
+    "coding": 92,
+    "chinese": 85,
+    "multimodal": 80,
+    "longtext": 98,
+    "cost": 69,
+    "speed": 64,
+    "privacy": 82,
+    "ecosystem": 83,
+    "creative": 82
+   },
+   "brief": "LMArena Code 1655.0，GPQA 93.5",
+   "updated_at": "2026-08-24",
+   "tier": {
+    "key": "moonshot",
+    "label": "思考开关",
+    "how": "可以切换思考模式",
+    "advice": "读文档、做摘要关掉，需要推理再开",
+    "why": "思考模式更慢更贵，长文本场景未必用得上"
    },
    "power": 83
   },
@@ -489,77 +567,6 @@
    "power": 83
   },
   {
-   "name": "GPT-5.6 Terra",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 78,
-    "coding": 90,
-    "chinese": 86,
-    "multimodal": 80,
-    "longtext": 90,
-    "cost": 71,
-    "speed": 82,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 82
-   },
-   "brief": "SWE-bench 95.4，FrontierMath T4 70.7",
-   "updated_at": "2026-09-18",
-   "tier": {
-    "key": "openai",
-    "label": "推理档位",
-    "how": "reasoning_effort 有 low / medium / high 三档",
-    "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
-    "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
-   },
-   "power": 83
-  },
-  {
-   "name": "Step 5 Preview",
-   "vendor": "国产",
-   "score": {
-    "reasoning": 77,
-    "coding": 89,
-    "chinese": 86,
-    "multimodal": 69,
-    "longtext": 98,
-    "cost": 80,
-    "speed": 79,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 82
-   },
-   "brief": "SciCode 58.9，GPQA 93.5",
-   "updated_at": "2026-09-18",
-   "power": 83
-  },
-  {
-   "name": "GPT-6 Luna",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 73,
-    "coding": 88,
-    "chinese": 89,
-    "multimodal": 78,
-    "longtext": 91,
-    "cost": 95,
-    "speed": 85,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 84
-   },
-   "brief": "FrontierMath T4 56.1，Vibe Code 81.7",
-   "updated_at": "2026-09-18",
-   "tier": {
-    "key": "openai",
-    "label": "推理档位",
-    "how": "reasoning_effort 有 low / medium / high 三档",
-    "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
-    "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
-   },
-   "power": 83
-  },
-  {
    "name": "Ember-1",
    "vendor": "海外",
    "score": {
@@ -605,32 +612,6 @@
    "power": 82
   },
   {
-   "name": "Kimi K3",
-   "vendor": "国产",
-   "score": {
-    "reasoning": 77,
-    "coding": 92,
-    "chinese": 85,
-    "multimodal": 80,
-    "longtext": 98,
-    "cost": 69,
-    "speed": 63,
-    "privacy": 82,
-    "ecosystem": 83,
-    "creative": 82
-   },
-   "brief": "LMArena Code 1655.0，GPQA 93.5",
-   "updated_at": "2026-08-24",
-   "tier": {
-    "key": "moonshot",
-    "label": "思考开关",
-    "how": "可以切换思考模式",
-    "advice": "读文档、做摘要关掉，需要推理再开",
-    "why": "思考模式更慢更贵，长文本场景未必用得上"
-   },
-   "power": 82
-  },
-  {
    "name": "Qwen3.8 Max",
    "vendor": "国产",
    "score": {
@@ -666,7 +647,7 @@
     "multimodal": 84,
     "longtext": 90,
     "cost": 77,
-    "speed": 80,
+    "speed": 84,
     "privacy": 72,
     "ecosystem": 77,
     "creative": 80
@@ -685,7 +666,7 @@
     "multimodal": 78,
     "longtext": 86,
     "cost": 94,
-    "speed": 70,
+    "speed": 69,
     "privacy": 89,
     "ecosystem": 85,
     "creative": 87
@@ -699,6 +680,25 @@
     "advice": "客服、摘要这类关掉，解题和写代码再开",
     "why": "开着更准，但更慢更贵，简单任务上纯属浪费"
    },
+   "power": 82
+  },
+  {
+   "name": "Step 5 Preview",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 77,
+    "coding": 89,
+    "chinese": 82,
+    "multimodal": 69,
+    "longtext": 98,
+    "cost": 80,
+    "speed": 79,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 79
+   },
+   "brief": "SciCode 58.9，GPQA 93.5",
+   "updated_at": "2026-09-18",
    "power": 82
   },
   {
@@ -730,7 +730,7 @@
     "multimodal": 65,
     "longtext": 88,
     "cost": 86,
-    "speed": 94,
+    "speed": 95,
     "privacy": 84,
     "ecosystem": 83,
     "creative": 83
@@ -827,7 +827,7 @@
     "multimodal": 73,
     "longtext": 95,
     "cost": 87,
-    "speed": 65,
+    "speed": 66,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 79
@@ -846,7 +846,7 @@
     "multimodal": 74,
     "longtext": 82,
     "cost": 74,
-    "speed": 74,
+    "speed": 77,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 82
@@ -936,7 +936,7 @@
     "multimodal": 85,
     "longtext": 89,
     "cost": 71,
-    "speed": 84,
+    "speed": 85,
     "privacy": 74,
     "ecosystem": 78,
     "creative": 72
@@ -1066,7 +1066,7 @@
     "multimodal": 75,
     "longtext": 86,
     "cost": 79,
-    "speed": 74,
+    "speed": 72,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 82
@@ -1180,6 +1180,25 @@
    "power": 78
   },
   {
+   "name": "Inkling",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 62,
+    "coding": 80,
+    "chinese": 80,
+    "multimodal": 61,
+    "longtext": 83,
+    "cost": 78,
+    "speed": 94,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "SWE-bench 77.6，FrontierMath T4 4.9",
+   "updated_at": "2026-09-18",
+   "power": 78
+  },
+  {
    "name": "Ling 3.0 Flash",
    "vendor": "国产",
    "score": {
@@ -1208,7 +1227,7 @@
     "multimodal": 75,
     "longtext": 87,
     "cost": 76,
-    "speed": 85,
+    "speed": 84,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1227,13 +1246,32 @@
     "multimodal": 60,
     "longtext": 79,
     "cost": 96,
-    "speed": 71,
+    "speed": 70,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 80
    },
    "brief": "LMArena Code 1636.0，ProofBench 63.0",
    "updated_at": "2026-09-18",
+   "power": 78
+  },
+  {
+   "name": "Solar Mini 4",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 62,
+    "coding": 76,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 91,
+    "cost": 96,
+    "speed": 73,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "SciCode 47.6，HLE 25.8",
+   "updated_at": "2026-10-06",
    "power": 78
   },
   {
@@ -1254,25 +1292,6 @@
    "brief": "Tau 38.6，SciCode 42.4",
    "updated_at": "2026-10-06",
    "power": 78
-  },
-  {
-   "name": "Inkling",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 62,
-    "coding": 80,
-    "chinese": 80,
-    "multimodal": 61,
-    "longtext": 83,
-    "cost": 78,
-    "speed": 90,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "SWE-bench 77.6，FrontierMath T4 4.9",
-   "updated_at": "2026-09-18",
-   "power": 77
   },
   {
    "name": "Inkling Small",
@@ -1360,7 +1379,7 @@
     "multimodal": 75,
     "longtext": 82,
     "cost": 83,
-    "speed": 84,
+    "speed": 85,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1374,25 +1393,6 @@
     "advice": "常规任务关掉，复杂推理再开",
     "why": "开着思考会拉长响应时间，简单任务上不划算"
    },
-   "power": 77
-  },
-  {
-   "name": "Solar Mini 4",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 62,
-    "coding": 76,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 91,
-    "cost": 96,
-    "speed": 72,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "SciCode 47.6，HLE 25.8",
-   "updated_at": "2026-10-06",
    "power": 77
   },
   {
@@ -1424,7 +1424,7 @@
     "multimodal": 64,
     "longtext": 91,
     "cost": 87,
-    "speed": 83,
+    "speed": 86,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1472,6 +1472,25 @@
    "power": 76
   },
   {
+   "name": "MiniMax M3",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 64,
+    "coding": 79,
+    "chinese": 70,
+    "multimodal": 75,
+    "longtext": 91,
+    "cost": 88,
+    "speed": 81,
+    "privacy": 79,
+    "ecosystem": 68,
+    "creative": 65
+   },
+   "brief": "GPQA 92.9，SWE-bench 75.0",
+   "updated_at": "2026-08-24",
+   "power": 75
+  },
+  {
    "name": "Qwen3.7 Plus",
    "vendor": "国产",
    "score": {
@@ -1496,25 +1515,6 @@
     "why": "开着更准，但更慢更贵，简单任务上纯属浪费"
    },
    "power": 75
-  },
-  {
-   "name": "MiniMax M3",
-   "vendor": "国产",
-   "score": {
-    "reasoning": 64,
-    "coding": 79,
-    "chinese": 70,
-    "multimodal": 75,
-    "longtext": 91,
-    "cost": 88,
-    "speed": 79,
-    "privacy": 79,
-    "ecosystem": 68,
-    "creative": 65
-   },
-   "brief": "GPQA 92.9，SWE-bench 75.0",
-   "updated_at": "2026-08-24",
-   "power": 74
   },
   {
    "name": "A.X-K2",
@@ -1589,8 +1589,8 @@
     "chinese": 80,
     "multimodal": 75,
     "longtext": 67,
-    "cost": 88,
-    "speed": 75,
+    "cost": 81,
+    "speed": 74,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1647,7 +1647,7 @@
     "multimodal": 75,
     "longtext": 60,
     "cost": 100,
-    "speed": 100,
+    "speed": 99,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1674,6 +1674,25 @@
    "brief": "Tau 22.1，GPQA 80.5",
    "updated_at": "2026-09-18",
    "power": 72
+  },
+  {
+   "name": "North Mini Code",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 40,
+    "coding": 64,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 60,
+    "cost": 76,
+    "speed": 76,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "GPQA 75.7，Tau 6.4",
+   "updated_at": "2026-09-18",
+   "power": 71
   },
   {
    "name": "K2 Horizon 7B",
@@ -1729,25 +1748,6 @@
     "creative": 78
    },
    "brief": "Tau 5.6，GPQA 55.9",
-   "updated_at": "2026-09-18",
-   "power": 70
-  },
-  {
-   "name": "North Mini Code",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 40,
-    "coding": 64,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 60,
-    "cost": 76,
-    "speed": 70,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "GPQA 75.7，Tau 6.4",
    "updated_at": "2026-09-18",
    "power": 70
   },
