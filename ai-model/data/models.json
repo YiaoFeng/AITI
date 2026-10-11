@@ -18,7 +18,7 @@
   "privacy": "由 本土化 70% + API稳定性 30% 推算（榜单无独立隐私维度）",
   "creative": "由 中文能力 45% + 实际调用 30% + 趋势热度 25% 推算（榜单无独立创意维度）"
  },
- "count": 83,
+ "count": 85,
  "models": [
   {
    "name": "Claude Opus 5.5",
@@ -706,7 +706,7 @@
    "vendor": "国产",
    "score": {
     "reasoning": 72,
-    "coding": 86,
+    "coding": 83,
     "chinese": 80,
     "multimodal": 75,
     "longtext": 91,
@@ -716,7 +716,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "SciCode 54.1，HLE 39.4",
+   "brief": "DeepSWE 59.7，HLE 39.4",
    "updated_at": "2026-10-06",
    "power": 82
   },
@@ -898,6 +898,25 @@
    },
    "brief": "TB4.0 22.7，Vibe Code 78.4",
    "updated_at": "2026-10-07",
+   "power": 80
+  },
+  {
+   "name": "Pareto 26.9",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 72,
+    "coding": 95,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 85,
+    "cost": 77,
+    "speed": 75,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "DeepSWE 74.0，GPQA 91.6",
+   "updated_at": "2026-09-18",
    "power": 80
   },
   {
@@ -1256,6 +1275,32 @@
    "power": 78
   },
   {
+   "name": "Qwen3.8-Omni-Flash",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 70,
+    "coding": 80,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 85,
+    "cost": 77,
+    "speed": 75,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "GPQA 91.0，DeepSWE 57.8",
+   "updated_at": "2026-09-18",
+   "tier": {
+    "key": "qwen",
+    "label": "思考开关",
+    "how": "深度思考模式可以开关",
+    "advice": "客服、摘要这类关掉，解题和写代码再开",
+    "why": "开着更准，但更慢更贵，简单任务上纯属浪费"
+   },
+   "power": 78
+  },
+  {
    "name": "Inkling Small",
    "vendor": "海外",
    "score": {
@@ -1448,7 +1493,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "Tau 21.6，GPQA 85.7",
+   "brief": "Tau 21.6，SciCode 48.0",
    "updated_at": "2026-09-18",
    "power": 76
   },
@@ -1652,7 +1697,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "GPQA 74.3，Tau 8.9",
+   "brief": "Tau 8.9，GPQA 74.3",
    "updated_at": "2026-09-18",
    "power": 72
   },
@@ -1766,7 +1811,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "GPQA 63.1，Tau 3.9",
+   "brief": "Tau 3.9，GPQA 63.1",
    "updated_at": "2026-09-18",
    "power": 70
   },
