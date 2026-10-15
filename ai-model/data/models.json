@@ -125,28 +125,28 @@
    "power": 87
   },
   {
-   "name": "Claude Sonnet 5.5",
+   "name": "Gemini 4 Argon",
    "vendor": "海外",
    "score": {
-    "reasoning": 88,
+    "reasoning": 90,
     "coding": 96,
-    "chinese": 87,
-    "multimodal": 87,
-    "longtext": 90,
+    "chinese": 96,
+    "multimodal": 86,
+    "longtext": 86,
     "cost": 72,
-    "speed": 86,
+    "speed": 75,
     "privacy": 83,
     "ecosystem": 80,
-    "creative": 82
+    "creative": 88
    },
-   "brief": "Vibe Code 92.4 全场第一，TB4.0 64.1 前三",
+   "brief": "AutomationBench 77.5 全场第一，IOI 100.0 前三",
    "updated_at": "2026-10-06",
    "tier": {
-    "key": "anthropic",
+    "key": "google",
     "label": "思考预算",
-    "how": "能给思考过程设一个 token 上限，也能整个关掉",
-    "advice": "闲聊和简单问答关掉思考，写代码、读长文再打开",
-    "why": "开着思考回复会明显变慢，token 消耗也跟着翻上去"
+    "how": "thinking budget 可以调，也能设成 0 直接关掉",
+    "advice": "批量跑的小任务关掉，需要多步推理的再开",
+    "why": "思考档位越高延迟越明显，价格随推理 token 一起上涨"
    },
    "power": 87
   },
@@ -243,7 +243,7 @@
     "ecosystem": 86,
     "creative": 92
    },
-   "brief": "SWE-bench 92.0，AutomationBench 60.4",
+   "brief": "AutomationBench 60.4，APEX-SWE 46.1",
    "updated_at": "2026-08-26",
    "tier": {
     "key": "zhipu",
@@ -269,7 +269,7 @@
     "ecosystem": 80,
     "creative": 82
    },
-   "brief": "GPQA 92.8，SWE-bench 79.6",
+   "brief": "GPQA 92.8，APEX-SWE 39.4",
    "updated_at": "2026-09-18",
    "tier": {
     "key": "google",
@@ -307,28 +307,28 @@
    "power": 85
   },
   {
-   "name": "Gemini 4 Argon",
+   "name": "Claude Sonnet 5.5",
    "vendor": "海外",
    "score": {
-    "reasoning": 91,
+    "reasoning": 88,
     "coding": 96,
-    "chinese": 87,
-    "multimodal": 86,
-    "longtext": 86,
+    "chinese": 78,
+    "multimodal": 87,
+    "longtext": 90,
     "cost": 72,
-    "speed": 75,
+    "speed": 86,
     "privacy": 83,
     "ecosystem": 80,
-    "creative": 82
+    "creative": 77
    },
-   "brief": "AutomationBench 77.5 全场第一，IOI 100.0 前三",
+   "brief": "Vibe Code 92.4 全场第一，TB4.0 64.1 前三",
    "updated_at": "2026-10-06",
    "tier": {
-    "key": "google",
+    "key": "anthropic",
     "label": "思考预算",
-    "how": "thinking budget 可以调，也能设成 0 直接关掉",
-    "advice": "批量跑的小任务关掉，需要多步推理的再开",
-    "why": "思考档位越高延迟越明显，价格随推理 token 一起上涨"
+    "how": "能给思考过程设一个 token 上限，也能整个关掉",
+    "advice": "闲聊和简单问答关掉思考，写代码、读长文再打开",
+    "why": "开着思考回复会明显变慢，token 消耗也跟着翻上去"
    },
    "power": 85
   },
@@ -385,7 +385,7 @@
     "ecosystem": 83,
     "creative": 81
    },
-   "brief": "SWE-bench 96.2 前三，GPQA 94.1",
+   "brief": "IOI 91.2，GPQA 94.1",
    "updated_at": "2026-08-23",
    "tier": {
     "key": "openai",
@@ -515,7 +515,7 @@
     "ecosystem": 79,
     "creative": 82
    },
-   "brief": "SWE-bench 95.4，AutomationBench 62.2",
+   "brief": "AutomationBench 62.2，SciCode 59.0",
    "updated_at": "2026-08-24",
    "tier": {
     "key": "zhipu",
@@ -567,7 +567,7 @@
     "ecosystem": 80,
     "creative": 82
    },
-   "brief": "SWE-bench 95.4，FrontierMath T4 70.7",
+   "brief": "IOI 87.6，FrontierMath T4 70.7",
    "updated_at": "2026-09-18",
    "tier": {
     "key": "openai",
@@ -657,7 +657,7 @@
     "ecosystem": 80,
     "creative": 73
    },
-   "brief": "SWE-bench 97.0 全场第一，ProofBench 99.0",
+   "brief": "APEX-SWE 63.7 前三，ProofBench 99.0",
    "updated_at": "2026-09-01",
    "tier": {
     "key": "anthropic",
@@ -808,7 +808,7 @@
    "vendor": "海外",
    "score": {
     "reasoning": 73,
-    "coding": 88,
+    "coding": 87,
     "chinese": 80,
     "multimodal": 75,
     "longtext": 92,
@@ -818,7 +818,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "SWE-bench 93.0，FrontierMath T4 61.0",
+   "brief": "FrontierMath T4 61.0，IOI 61.8",
    "updated_at": "2026-09-18",
    "tier": {
     "key": "openai",
@@ -908,7 +908,7 @@
     "ecosystem": 75,
     "creative": 70
    },
-   "brief": "SWE-bench 86.6，HLE 45.5",
+   "brief": "SciCode 57.4，HLE 45.5",
    "updated_at": "2026-09-01",
    "power": 80
   },
@@ -917,7 +917,7 @@
    "vendor": "海外",
    "score": {
     "reasoning": 61,
-    "coding": 79,
+    "coding": 78,
     "chinese": 80,
     "multimodal": 76,
     "longtext": 81,
@@ -927,7 +927,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "SWE-bench 75.0，FrontierMath T4 0.0",
+   "brief": "FrontierMath T4 0.0，ProgramBench 0.0",
    "updated_at": "2026-09-18",
    "tier": {
     "key": "google",
@@ -953,7 +953,7 @@
     "ecosystem": 80,
     "creative": 82
    },
-   "brief": "SWE-bench 78.2，FrontierMath T4 12.2",
+   "brief": "APEX-SWE 40.3，FrontierMath T4 12.2",
    "updated_at": "2026-09-18",
    "tier": {
     "key": "moonshot",
@@ -1014,7 +1014,7 @@
    "vendor": "海外",
    "score": {
     "reasoning": 72,
-    "coding": 85,
+    "coding": 84,
     "chinese": 70,
     "multimodal": 85,
     "longtext": 89,
@@ -1036,37 +1036,11 @@
    "power": 79
   },
   {
-   "name": "Qwen3.8-27B",
-   "vendor": "国产",
-   "score": {
-    "reasoning": 68,
-    "coding": 82,
-    "chinese": 82,
-    "multimodal": 69,
-    "longtext": 89,
-    "cost": 82,
-    "speed": 66,
-    "privacy": 85,
-    "ecosystem": 84,
-    "creative": 82
-   },
-   "brief": "SWE-bench 86.0，AutomationBench 48.2",
-   "updated_at": "2026-08-24",
-   "tier": {
-    "key": "qwen",
-    "label": "思考开关",
-    "how": "深度思考模式可以开关",
-    "advice": "客服、摘要这类关掉，解题和写代码再开",
-    "why": "开着更准，但更慢更贵，简单任务上纯属浪费"
-   },
-   "power": 79
-  },
-  {
    "name": "Claude Sonnet 5",
    "vendor": "海外",
    "score": {
     "reasoning": 74,
-    "coding": 88,
+    "coding": 89,
     "chinese": 71,
     "multimodal": 71,
     "longtext": 89,
@@ -1076,7 +1050,7 @@
     "ecosystem": 80,
     "creative": 73
    },
-   "brief": "ProofBench 77.0，SWE-bench 79.6",
+   "brief": "ProofBench 77.0，APEX-SWE 46.4",
    "updated_at": "2026-09-18",
    "tier": {
     "key": "anthropic",
@@ -1244,7 +1218,7 @@
     "ecosystem": 78,
     "creative": 78
    },
-   "brief": "GPQA 94.9 前三，SWE-bench 95.6 前三",
+   "brief": "GPQA 94.9 前三，APEX-SWE 57.7",
    "updated_at": "2026-09-01",
    "tier": {
     "key": "xai",
@@ -1252,6 +1226,32 @@
     "how": "推理强度可以调",
     "advice": "默认档够用，难题再往上调",
     "why": "推理强度越高，响应越慢、消耗越大"
+   },
+   "power": 78
+  },
+  {
+   "name": "Qwen3.8-27B",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 68,
+    "coding": 81,
+    "chinese": 82,
+    "multimodal": 69,
+    "longtext": 89,
+    "cost": 82,
+    "speed": 66,
+    "privacy": 85,
+    "ecosystem": 84,
+    "creative": 82
+   },
+   "brief": "APEX-SWE 50.7，AutomationBench 48.2",
+   "updated_at": "2026-08-24",
+   "tier": {
+    "key": "qwen",
+    "label": "思考开关",
+    "how": "深度思考模式可以开关",
+    "advice": "客服、摘要这类关掉，解题和写代码再开",
+    "why": "开着更准，但更慢更贵，简单任务上纯属浪费"
    },
    "power": 78
   },
@@ -1270,7 +1270,7 @@
     "ecosystem": 80,
     "creative": 75
    },
-   "brief": "SWE-bench 82.8，FrontierMath T4 29.3",
+   "brief": "ProgramBench 0.5，FrontierMath T4 29.3",
    "updated_at": "2026-09-18",
    "tier": {
     "key": "zhipu",
@@ -1286,7 +1286,7 @@
    "vendor": "海外",
    "score": {
     "reasoning": 62,
-    "coding": 80,
+    "coding": 79,
     "chinese": 80,
     "multimodal": 61,
     "longtext": 83,
@@ -1296,7 +1296,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "SWE-bench 77.6，AutomationBench 5.0",
+   "brief": "AutomationBench 5.0，FrontierMath T4 4.9",
    "updated_at": "2026-09-18",
    "power": 78
   },
@@ -1305,7 +1305,7 @@
    "vendor": "海外",
    "score": {
     "reasoning": 64,
-    "coding": 81,
+    "coding": 80,
     "chinese": 80,
     "multimodal": 63,
     "longtext": 81,
@@ -1315,7 +1315,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "SWE-bench 82.2，FrontierMath T4 17.1",
+   "brief": "ProgramBench 0.5，FrontierMath T4 17.1",
    "updated_at": "2026-09-18",
    "power": 78
   },
@@ -1362,7 +1362,7 @@
    "vendor": "海外",
    "score": {
     "reasoning": 66,
-    "coding": 78,
+    "coding": 77,
     "chinese": 80,
     "multimodal": 75,
     "longtext": 85,
@@ -1372,7 +1372,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "SWE-bench 69.0，AutomationBench 3.0",
+   "brief": "AutomationBench 3.0，ProgramBench 0.0",
    "updated_at": "2026-09-18",
    "power": 78
   },
@@ -1633,7 +1633,7 @@
     "ecosystem": 68,
     "creative": 65
    },
-   "brief": "GPQA 92.9，SWE-bench 75.0",
+   "brief": "GPQA 92.9，AutomationBench 21.3",
    "updated_at": "2026-08-24",
    "power": 75
   },
@@ -1725,7 +1725,7 @@
    "vendor": "国产",
    "score": {
     "reasoning": 64,
-    "coding": 78,
+    "coding": 77,
     "chinese": 73,
     "multimodal": 66,
     "longtext": 77,
@@ -1735,7 +1735,7 @@
     "ecosystem": 76,
     "creative": 72
    },
-   "brief": "SWE-bench 71.0，ProofBench 16.0",
+   "brief": "ProofBench 16.0，Vibe Code 42.2",
    "updated_at": "2026-08-24",
    "power": 73
   },
