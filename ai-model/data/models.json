@@ -30,7 +30,7 @@
     "multimodal": 97,
     "longtext": 88,
     "cost": 60,
-    "speed": 70,
+    "speed": 69,
     "privacy": 77,
     "ecosystem": 92,
     "creative": 92
@@ -160,7 +160,7 @@
     "multimodal": 94,
     "longtext": 91,
     "cost": 72,
-    "speed": 71,
+    "speed": 70,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 84
@@ -232,13 +232,13 @@
    "name": "智谱 GLM-5.3-Flash",
    "vendor": "国产",
    "score": {
-    "reasoning": 74,
+    "reasoning": 76,
     "coding": 85,
     "chinese": 94,
     "multimodal": 87,
     "longtext": 87,
     "cost": 94,
-    "speed": 72,
+    "speed": 73,
     "privacy": 86,
     "ecosystem": 86,
     "creative": 92
@@ -877,7 +877,7 @@
     "multimodal": 74,
     "longtext": 82,
     "cost": 74,
-    "speed": 73,
+    "speed": 74,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 82
@@ -948,7 +948,7 @@
     "multimodal": 75,
     "longtext": 86,
     "cost": 79,
-    "speed": 72,
+    "speed": 71,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 82
@@ -1045,7 +1045,7 @@
     "multimodal": 69,
     "longtext": 89,
     "cost": 82,
-    "speed": 67,
+    "speed": 66,
     "privacy": 85,
     "ecosystem": 84,
     "creative": 82
@@ -1146,10 +1146,10 @@
     "reasoning": 72,
     "coding": 78,
     "chinese": 80,
-    "multimodal": 75,
+    "multimodal": 66,
     "longtext": 91,
     "cost": 97,
-    "speed": 75,
+    "speed": 85,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1291,7 +1291,7 @@
     "multimodal": 61,
     "longtext": 83,
     "cost": 78,
-    "speed": 93,
+    "speed": 94,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1443,7 +1443,7 @@
     "multimodal": 75,
     "longtext": 91,
     "cost": 96,
-    "speed": 77,
+    "speed": 76,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1692,7 +1692,7 @@
     "multimodal": 75,
     "longtext": 67,
     "cost": 81,
-    "speed": 74,
+    "speed": 73,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1901,7 +1901,7 @@
     "multimodal": 75,
     "longtext": 60,
     "cost": 100,
-    "speed": 73,
+    "speed": 74,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
