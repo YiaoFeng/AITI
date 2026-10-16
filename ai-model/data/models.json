@@ -18,7 +18,7 @@
   "privacy": "由 本土化 70% + API稳定性 30% 推算（榜单无独立隐私维度）",
   "creative": "由 中文能力 45% + 实际调用 30% + 趋势热度 25% 推算（榜单无独立创意维度）"
  },
- "count": 92,
+ "count": 91,
  "models": [
   {
    "name": "GPT-6 Astra",
@@ -82,7 +82,7 @@
     "multimodal": 95,
     "longtext": 94,
     "cost": 60,
-    "speed": 73,
+    "speed": 74,
     "privacy": 73,
     "ecosystem": 89,
     "creative": 87
@@ -134,7 +134,7 @@
     "multimodal": 86,
     "longtext": 86,
     "cost": 72,
-    "speed": 75,
+    "speed": 81,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 88
@@ -160,7 +160,7 @@
     "multimodal": 94,
     "longtext": 91,
     "cost": 72,
-    "speed": 70,
+    "speed": 72,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 84
@@ -200,6 +200,25 @@
     "advice": "闲聊和简单问答关掉思考，写代码、读长文再打开",
     "why": "开着思考回复会明显变慢，token 消耗也跟着翻上去"
    },
+   "power": 86
+  },
+  {
+   "name": "Muse Wonder",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 84,
+    "coding": 94,
+    "chinese": 87,
+    "multimodal": 86,
+    "longtext": 88,
+    "cost": 67,
+    "speed": 92,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 82
+   },
+   "brief": "DeepSWE 78.8 前三，TB4.0 49.5",
+   "updated_at": "2026-10-13",
    "power": 86
   },
   {
@@ -243,7 +262,7 @@
     "ecosystem": 86,
     "creative": 92
    },
-   "brief": "AutomationBench 60.4，APEX-SWE 46.1",
+   "brief": "SWE-bench 92.0，AutomationBench 60.4",
    "updated_at": "2026-08-26",
    "tier": {
     "key": "zhipu",
@@ -269,7 +288,7 @@
     "ecosystem": 80,
     "creative": 82
    },
-   "brief": "GPQA 92.8，APEX-SWE 39.4",
+   "brief": "GPQA 92.8，SWE-bench 79.6",
    "updated_at": "2026-09-18",
    "tier": {
     "key": "google",
@@ -316,7 +335,7 @@
     "multimodal": 87,
     "longtext": 90,
     "cost": 72,
-    "speed": 86,
+    "speed": 87,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 77
@@ -352,25 +371,6 @@
    "power": 85
   },
   {
-   "name": "Muse Wonder",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 84,
-    "coding": 94,
-    "chinese": 87,
-    "multimodal": 86,
-    "longtext": 88,
-    "cost": 67,
-    "speed": 83,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 82
-   },
-   "brief": "DeepSWE 78.8 前三，TB4.0 49.5",
-   "updated_at": "2026-10-13",
-   "power": 85
-  },
-  {
    "name": "GPT-5.6 Sol",
    "vendor": "海外",
    "score": {
@@ -385,7 +385,7 @@
     "ecosystem": 83,
     "creative": 81
    },
-   "brief": "IOI 91.2，GPQA 94.1",
+   "brief": "SWE-bench 96.2 前三，GPQA 94.1",
    "updated_at": "2026-08-23",
    "tier": {
     "key": "openai",
@@ -432,7 +432,7 @@
     "multimodal": 86,
     "longtext": 87,
     "cost": 74,
-    "speed": 65,
+    "speed": 64,
     "privacy": 87,
     "ecosystem": 84,
     "creative": 85
@@ -475,6 +475,32 @@
    "power": 84
   },
   {
+   "name": "GPT-5.6 Terra",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 77,
+    "coding": 90,
+    "chinese": 87,
+    "multimodal": 80,
+    "longtext": 90,
+    "cost": 71,
+    "speed": 84,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 82
+   },
+   "brief": "SWE-bench 95.4，FrontierMath T4 70.7",
+   "updated_at": "2026-09-18",
+   "tier": {
+    "key": "openai",
+    "label": "推理档位",
+    "how": "reasoning_effort 有 low / medium / high 三档",
+    "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
+    "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
+   },
+   "power": 84
+  },
+  {
    "name": "Kimi K3",
    "vendor": "国产",
    "score": {
@@ -510,12 +536,12 @@
     "multimodal": 86,
     "longtext": 86,
     "cost": 77,
-    "speed": 74,
+    "speed": 75,
     "privacy": 84,
     "ecosystem": 79,
     "creative": 82
    },
-   "brief": "AutomationBench 62.2，SciCode 59.0",
+   "brief": "SWE-bench 95.4，AutomationBench 62.2",
    "updated_at": "2026-08-24",
    "tier": {
     "key": "zhipu",
@@ -549,32 +575,6 @@
     "how": "支持思考模式切换",
     "advice": "日常对话关掉，复杂任务再开",
     "why": "思考模式消耗更高，简单场景没必要"
-   },
-   "power": 83
-  },
-  {
-   "name": "GPT-5.6 Terra",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 77,
-    "coding": 90,
-    "chinese": 87,
-    "multimodal": 80,
-    "longtext": 90,
-    "cost": 71,
-    "speed": 82,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 82
-   },
-   "brief": "IOI 87.6，FrontierMath T4 70.7",
-   "updated_at": "2026-09-18",
-   "tier": {
-    "key": "openai",
-    "label": "推理档位",
-    "how": "reasoning_effort 有 low / medium / high 三档",
-    "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
-    "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
    },
    "power": 83
   },
@@ -657,7 +657,7 @@
     "ecosystem": 80,
     "creative": 73
    },
-   "brief": "APEX-SWE 63.7 前三，ProofBench 99.0",
+   "brief": "SWE-bench 97.0 全场第一，ProofBench 99.0",
    "updated_at": "2026-09-01",
    "tier": {
     "key": "anthropic",
@@ -704,7 +704,7 @@
     "multimodal": 84,
     "longtext": 90,
     "cost": 77,
-    "speed": 83,
+    "speed": 86,
     "privacy": 72,
     "ecosystem": 77,
     "creative": 80
@@ -723,7 +723,7 @@
     "multimodal": 78,
     "longtext": 86,
     "cost": 94,
-    "speed": 70,
+    "speed": 68,
     "privacy": 89,
     "ecosystem": 85,
     "creative": 87
@@ -737,25 +737,6 @@
     "advice": "客服、摘要这类关掉，解题和写代码再开",
     "why": "开着更准，但更慢更贵，简单任务上纯属浪费"
    },
-   "power": 82
-  },
-  {
-   "name": "Step 5 Preview",
-   "vendor": "国产",
-   "score": {
-    "reasoning": 75,
-    "coding": 89,
-    "chinese": 82,
-    "multimodal": 69,
-    "longtext": 98,
-    "cost": 80,
-    "speed": 79,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 79
-   },
-   "brief": "GPQA 93.5，SciCode 58.9",
-   "updated_at": "2026-09-18",
    "power": 82
   },
   {
@@ -787,7 +768,7 @@
     "multimodal": 65,
     "longtext": 88,
     "cost": 86,
-    "speed": 90,
+    "speed": 91,
     "privacy": 84,
     "ecosystem": 83,
     "creative": 83
@@ -808,7 +789,7 @@
    "vendor": "海外",
    "score": {
     "reasoning": 73,
-    "coding": 87,
+    "coding": 88,
     "chinese": 80,
     "multimodal": 75,
     "longtext": 92,
@@ -818,7 +799,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "FrontierMath T4 61.0，IOI 61.8",
+   "brief": "SWE-bench 93.0，FrontierMath T4 61.0",
    "updated_at": "2026-09-18",
    "tier": {
     "key": "openai",
@@ -849,6 +830,25 @@
    "power": 81
   },
   {
+   "name": "Step 5 Preview",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 75,
+    "coding": 89,
+    "chinese": 82,
+    "multimodal": 69,
+    "longtext": 98,
+    "cost": 80,
+    "speed": 78,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 79
+   },
+   "brief": "GPQA 93.5，SciCode 58.9",
+   "updated_at": "2026-09-18",
+   "power": 81
+  },
+  {
    "name": "小米 MiMo-V2.6-Pro",
    "vendor": "国产",
    "score": {
@@ -858,7 +858,7 @@
     "multimodal": 72,
     "longtext": 95,
     "cost": 87,
-    "speed": 64,
+    "speed": 69,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 79
@@ -877,7 +877,7 @@
     "multimodal": 74,
     "longtext": 82,
     "cost": 74,
-    "speed": 74,
+    "speed": 78,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 82
@@ -891,6 +891,25 @@
     "advice": "默认档够用，难题再往上调",
     "why": "推理强度越高，响应越慢、消耗越大"
    },
+   "power": 81
+  },
+  {
+   "name": "Muse Spark Open",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 75,
+    "coding": 85,
+    "chinese": 80,
+    "multimodal": 81,
+    "longtext": 84,
+    "cost": 77,
+    "speed": 83,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "SciCode 58.4，HLE 43.9",
+   "updated_at": "2026-10-16",
    "power": 81
   },
   {
@@ -908,7 +927,7 @@
     "ecosystem": 75,
     "creative": 70
    },
-   "brief": "SciCode 57.4，HLE 45.5",
+   "brief": "SWE-bench 86.6，HLE 45.5",
    "updated_at": "2026-09-01",
    "power": 80
   },
@@ -917,7 +936,7 @@
    "vendor": "海外",
    "score": {
     "reasoning": 61,
-    "coding": 78,
+    "coding": 79,
     "chinese": 80,
     "multimodal": 76,
     "longtext": 81,
@@ -927,7 +946,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "FrontierMath T4 0.0，ProgramBench 0.0",
+   "brief": "SWE-bench 75.0，FrontierMath T4 0.0",
    "updated_at": "2026-09-18",
    "tier": {
     "key": "google",
@@ -948,12 +967,12 @@
     "multimodal": 75,
     "longtext": 86,
     "cost": 79,
-    "speed": 71,
+    "speed": 69,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 82
    },
-   "brief": "APEX-SWE 40.3，FrontierMath T4 12.2",
+   "brief": "SWE-bench 78.2，FrontierMath T4 12.2",
    "updated_at": "2026-09-18",
    "tier": {
     "key": "moonshot",
@@ -1014,12 +1033,12 @@
    "vendor": "海外",
    "score": {
     "reasoning": 72,
-    "coding": 84,
+    "coding": 85,
     "chinese": 70,
     "multimodal": 85,
     "longtext": 89,
     "cost": 71,
-    "speed": 86,
+    "speed": 87,
     "privacy": 74,
     "ecosystem": 78,
     "creative": 72
@@ -1040,7 +1059,7 @@
    "vendor": "海外",
    "score": {
     "reasoning": 74,
-    "coding": 89,
+    "coding": 88,
     "chinese": 71,
     "multimodal": 71,
     "longtext": 89,
@@ -1097,7 +1116,7 @@
     "multimodal": 75,
     "longtext": 87,
     "cost": 74,
-    "speed": 65,
+    "speed": 64,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1123,7 +1142,7 @@
     "multimodal": 66,
     "longtext": 91,
     "cost": 97,
-    "speed": 85,
+    "speed": 84,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1187,7 +1206,7 @@
     "multimodal": 65,
     "longtext": 87,
     "cost": 78,
-    "speed": 78,
+    "speed": 80,
     "privacy": 84,
     "ecosystem": 77,
     "creative": 76
@@ -1218,7 +1237,7 @@
     "ecosystem": 78,
     "creative": 78
    },
-   "brief": "GPQA 94.9 前三，APEX-SWE 57.7",
+   "brief": "GPQA 94.9 前三，SWE-bench 95.6 前三",
    "updated_at": "2026-09-01",
    "tier": {
     "key": "xai",
@@ -1234,17 +1253,17 @@
    "vendor": "国产",
    "score": {
     "reasoning": 68,
-    "coding": 81,
+    "coding": 82,
     "chinese": 82,
     "multimodal": 69,
     "longtext": 89,
     "cost": 82,
-    "speed": 66,
+    "speed": 65,
     "privacy": 85,
     "ecosystem": 84,
     "creative": 82
    },
-   "brief": "APEX-SWE 50.7，AutomationBench 48.2",
+   "brief": "SWE-bench 86.0，AutomationBench 48.2",
    "updated_at": "2026-08-24",
    "tier": {
     "key": "qwen",
@@ -1270,7 +1289,7 @@
     "ecosystem": 80,
     "creative": 75
    },
-   "brief": "ProgramBench 0.5，FrontierMath T4 29.3",
+   "brief": "SWE-bench 82.8，FrontierMath T4 29.3",
    "updated_at": "2026-09-18",
    "tier": {
     "key": "zhipu",
@@ -1286,7 +1305,7 @@
    "vendor": "海外",
    "score": {
     "reasoning": 62,
-    "coding": 79,
+    "coding": 80,
     "chinese": 80,
     "multimodal": 61,
     "longtext": 83,
@@ -1296,7 +1315,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "AutomationBench 5.0，FrontierMath T4 4.9",
+   "brief": "SWE-bench 77.6，AutomationBench 5.0",
    "updated_at": "2026-09-18",
    "power": 78
   },
@@ -1305,17 +1324,17 @@
    "vendor": "海外",
    "score": {
     "reasoning": 64,
-    "coding": 80,
+    "coding": 81,
     "chinese": 80,
     "multimodal": 63,
     "longtext": 81,
     "cost": 88,
-    "speed": 92,
+    "speed": 93,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "ProgramBench 0.5，FrontierMath T4 17.1",
+   "brief": "SWE-bench 82.2，FrontierMath T4 17.1",
    "updated_at": "2026-09-18",
    "power": 78
   },
@@ -1362,7 +1381,7 @@
    "vendor": "海外",
    "score": {
     "reasoning": 66,
-    "coding": 77,
+    "coding": 78,
     "chinese": 80,
     "multimodal": 75,
     "longtext": 85,
@@ -1372,7 +1391,7 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "AutomationBench 3.0，ProgramBench 0.0",
+   "brief": "SWE-bench 69.0，AutomationBench 3.0",
    "updated_at": "2026-09-18",
    "power": 78
   },
@@ -1462,13 +1481,32 @@
     "multimodal": 75,
     "longtext": 78,
     "cost": 99,
-    "speed": 99,
+    "speed": 98,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
    },
    "brief": "SciCode 42.4，HLE 22.6",
    "updated_at": "2026-10-06",
+   "power": 78
+  },
+  {
+   "name": "Nemotron 3.5 Super VL",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 68,
+    "coding": 76,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 72,
+    "cost": 92,
+    "speed": 92,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "SciCode 47.8，HLE 30.7",
+   "updated_at": "2026-10-16",
    "power": 78
   },
   {
@@ -1519,7 +1557,7 @@
     "multimodal": 75,
     "longtext": 82,
     "cost": 83,
-    "speed": 87,
+    "speed": 86,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1564,7 +1602,7 @@
     "multimodal": 64,
     "longtext": 91,
     "cost": 88,
-    "speed": 87,
+    "speed": 88,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1583,7 +1621,7 @@
     "multimodal": 80,
     "longtext": 77,
     "cost": 85,
-    "speed": 71,
+    "speed": 70,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 72
@@ -1628,12 +1666,12 @@
     "multimodal": 75,
     "longtext": 91,
     "cost": 88,
-    "speed": 81,
+    "speed": 82,
     "privacy": 79,
     "ecosystem": 68,
     "creative": 65
    },
-   "brief": "GPQA 92.9，AutomationBench 21.3",
+   "brief": "GPQA 92.9，SWE-bench 75.0",
    "updated_at": "2026-08-24",
    "power": 75
   },
@@ -1692,7 +1730,7 @@
     "multimodal": 75,
     "longtext": 67,
     "cost": 81,
-    "speed": 73,
+    "speed": 74,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1721,68 +1759,11 @@
    "power": 74
   },
   {
-   "name": "Muse Spark Open",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 57,
-    "coding": 56,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 85,
-    "cost": 77,
-    "speed": 75,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "",
-   "updated_at": "2026-10-16",
-   "power": 74
-  },
-  {
-   "name": "Nemotron 3.5 Super VL",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 57,
-    "coding": 56,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 85,
-    "cost": 77,
-    "speed": 75,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "",
-   "updated_at": "2026-10-16",
-   "power": 74
-  },
-  {
-   "name": "Nemotron 3.5 Bolt 74B-A9B",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 57,
-    "coding": 56,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 85,
-    "cost": 77,
-    "speed": 75,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "",
-   "updated_at": "2026-10-16",
-   "power": 74
-  },
-  {
    "name": "小米 MiMo-V2.5",
    "vendor": "国产",
    "score": {
     "reasoning": 64,
-    "coding": 77,
+    "coding": 78,
     "chinese": 73,
     "multimodal": 66,
     "longtext": 77,
@@ -1792,7 +1773,7 @@
     "ecosystem": 76,
     "creative": 72
    },
-   "brief": "ProofBench 16.0，Vibe Code 42.2",
+   "brief": "SWE-bench 71.0，ProofBench 16.0",
    "updated_at": "2026-08-24",
    "power": 73
   },
@@ -1844,7 +1825,7 @@
     "multimodal": 75,
     "longtext": 60,
     "cost": 76,
-    "speed": 77,
+    "speed": 76,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1882,12 +1863,31 @@
     "multimodal": 75,
     "longtext": 60,
     "cost": 92,
-    "speed": 77,
+    "speed": 76,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
    },
    "brief": "GPQA 64.4，SciCode 37.8",
+   "updated_at": "2026-09-18",
+   "power": 71
+  },
+  {
+   "name": "Granite 4.2 8B",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 41,
+    "coding": 53,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 60,
+    "cost": 100,
+    "speed": 86,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "GPQA 63.1，SciCode 31.5",
    "updated_at": "2026-09-18",
    "power": 71
   },
@@ -1947,25 +1947,6 @@
    "brief": "GPQA 55.9，SciCode 25.3",
    "updated_at": "2026-09-18",
    "power": 70
-  },
-  {
-   "name": "Granite 4.2 8B",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 41,
-    "coding": 53,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 60,
-    "cost": 100,
-    "speed": 74,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "GPQA 63.1，SciCode 31.5",
-   "updated_at": "2026-09-18",
-   "power": 69
   },
   {
    "name": "MiniCPM5-2B",
