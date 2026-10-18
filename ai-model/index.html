@@ -851,7 +851,9 @@ function selfBlockHTML(top, w, need){
   if(!list.length) return '';
   const me = list[0];                                  // 恒为「主力」，selfModels 不排序
   const backup = list[1] || null;
-  const gap = top.match - me.match;                    // top 是全库最高分，gap 恒 ≥ 0
+  // 先按展示精度取整再分支：1.46 显示成「1.5 个点」却走「只差 1.5 个点、没有换的必要」，
+  // 读者会看到自相矛盾的一句话。分支和文案必须用同一个数。
+  const gap = +(top.match - me.match).toFixed(1);      // top 是全库最高分，gap 恒 ≥ 0
   const {gain, lose} = selfDeltas(top, me, need);
   const v = selfVerdict(top, me, gap, gain, lose)
     .map(s => s.b ? `<b>${esc(s.t)}</b>` : esc(s.t)).join('');
