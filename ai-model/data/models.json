@@ -30,7 +30,7 @@
     "multimodal": 97,
     "longtext": 88,
     "cost": 60,
-    "speed": 72,
+    "speed": 73,
     "privacy": 77,
     "ecosystem": 92,
     "creative": 92
@@ -82,9 +82,9 @@
     "multimodal": 71,
     "longtext": 92,
     "cost": 88,
-    "speed": 92,
+    "speed": 95,
     "privacy": 87,
-    "ecosystem": 89,
+    "ecosystem": 90,
     "creative": 92
    },
    "brief": "DeepSWE 77.0，AutomationBench 68.9",
@@ -134,7 +134,7 @@
     "multimodal": 91,
     "longtext": 87,
     "cost": 94,
-    "speed": 76,
+    "speed": 77,
     "privacy": 86,
     "ecosystem": 86,
     "creative": 92
@@ -160,7 +160,7 @@
     "multimodal": 91,
     "longtext": 94,
     "cost": 60,
-    "speed": 74,
+    "speed": 75,
     "privacy": 73,
     "ecosystem": 89,
     "creative": 87
@@ -186,7 +186,7 @@
     "multimodal": 94,
     "longtext": 91,
     "cost": 72,
-    "speed": 71,
+    "speed": 72,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 84
@@ -283,7 +283,7 @@
     "multimodal": 87,
     "longtext": 88,
     "cost": 67,
-    "speed": 92,
+    "speed": 90,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 82
@@ -380,10 +380,10 @@
     "multimodal": 87,
     "longtext": 86,
     "cost": 77,
-    "speed": 76,
+    "speed": 77,
     "privacy": 84,
-    "ecosystem": 79,
-    "creative": 82
+    "ecosystem": 80,
+    "creative": 83
    },
    "brief": "SWE-bench 95.4，AutomationBench 62.2",
    "updated_at": "2026-08-24",
@@ -484,38 +484,12 @@
     "multimodal": 80,
     "longtext": 90,
     "cost": 71,
-    "speed": 85,
+    "speed": 86,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 82
    },
    "brief": "SWE-bench 95.4，FrontierMath T4 70.7",
-   "updated_at": "2026-09-18",
-   "tier": {
-    "key": "openai",
-    "label": "推理档位",
-    "how": "reasoning_effort 有 low / medium / high 三档",
-    "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
-    "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
-   },
-   "power": 84
-  },
-  {
-   "name": "GPT-6 Luna",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 73,
-    "coding": 88,
-    "chinese": 89,
-    "multimodal": 78,
-    "longtext": 91,
-    "cost": 95,
-    "speed": 86,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 84
-   },
-   "brief": "FrontierMath T4 56.1，Vibe Code 81.7",
    "updated_at": "2026-09-18",
    "tier": {
     "key": "openai",
@@ -631,6 +605,32 @@
    "power": 83
   },
   {
+   "name": "GPT-6 Luna",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 73,
+    "coding": 88,
+    "chinese": 89,
+    "multimodal": 78,
+    "longtext": 91,
+    "cost": 95,
+    "speed": 85,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 84
+   },
+   "brief": "FrontierMath T4 56.1，Vibe Code 81.7",
+   "updated_at": "2026-09-18",
+   "tier": {
+    "key": "openai",
+    "label": "推理档位",
+    "how": "reasoning_effort 有 low / medium / high 三档",
+    "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
+    "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
+   },
+   "power": 83
+  },
+  {
    "name": "Ember-1",
    "vendor": "海外",
    "score": {
@@ -704,7 +704,7 @@
     "multimodal": 84,
     "longtext": 90,
     "cost": 77,
-    "speed": 84,
+    "speed": 83,
     "privacy": 72,
     "ecosystem": 77,
     "creative": 80
@@ -723,7 +723,7 @@
     "multimodal": 78,
     "longtext": 86,
     "cost": 94,
-    "speed": 69,
+    "speed": 70,
     "privacy": 89,
     "ecosystem": 85,
     "creative": 87
@@ -858,7 +858,7 @@
     "multimodal": 72,
     "longtext": 95,
     "cost": 87,
-    "speed": 68,
+    "speed": 67,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 79
@@ -877,7 +877,7 @@
     "multimodal": 74,
     "longtext": 82,
     "cost": 74,
-    "speed": 78,
+    "speed": 77,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 82
@@ -1063,7 +1063,7 @@
     "chinese": 78,
     "multimodal": 60,
     "longtext": 86,
-    "cost": 86,
+    "cost": 96,
     "speed": 96,
     "privacy": 84,
     "ecosystem": 81,
@@ -1090,7 +1090,7 @@
     "multimodal": 85,
     "longtext": 89,
     "cost": 71,
-    "speed": 87,
+    "speed": 86,
     "privacy": 74,
     "ecosystem": 78,
     "creative": 72
@@ -1116,7 +1116,7 @@
     "multimodal": 75,
     "longtext": 87,
     "cost": 74,
-    "speed": 64,
+    "speed": 63,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1152,6 +1152,25 @@
    "power": 79
   },
   {
+   "name": "Solar Mini 4",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 64,
+    "coding": 76,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 91,
+    "cost": 96,
+    "speed": 81,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "SciCode 47.6，HLE 25.8",
+   "updated_at": "2026-10-06",
+   "power": 79
+  },
+  {
    "name": "Mercury 2.5",
    "vendor": "海外",
    "score": {
@@ -1168,6 +1187,25 @@
    },
    "brief": "TB Science 0.0，IOI 2.4",
    "updated_at": "2026-10-06",
+   "power": 79
+  },
+  {
+   "name": "Mistral Large 4",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 70,
+    "coding": 86,
+    "chinese": 80,
+    "multimodal": 69,
+    "longtext": 88,
+    "cost": 77,
+    "speed": 73,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "AutomationBench 59.9，Vibe Code 78.4",
+   "updated_at": "2026-10-07",
    "power": 79
   },
   {
@@ -1453,25 +1491,6 @@
    "power": 78
   },
   {
-   "name": "小米 MiMo-V2.6-Flash",
-   "vendor": "国产",
-   "score": {
-    "reasoning": 75,
-    "coding": 88,
-    "chinese": 83,
-    "multimodal": 60,
-    "longtext": 79,
-    "cost": 96,
-    "speed": 72,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 80
-   },
-   "brief": "LMArena Code 1636.0，ProofBench 63.0",
-   "updated_at": "2026-09-18",
-   "power": 78
-  },
-  {
    "name": "Quasar 438B (Max, Based on GLM-5.2)",
    "vendor": "海外",
    "score": {
@@ -1498,25 +1517,6 @@
    "power": 78
   },
   {
-   "name": "Solar Mini 4",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 64,
-    "coding": 76,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 91,
-    "cost": 96,
-    "speed": 77,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "SciCode 47.6，HLE 25.8",
-   "updated_at": "2026-10-06",
-   "power": 78
-  },
-  {
    "name": "Ling-3.0-flash-Fin",
    "vendor": "国产",
    "score": {
@@ -1526,32 +1526,13 @@
     "multimodal": 75,
     "longtext": 78,
     "cost": 99,
-    "speed": 97,
+    "speed": 98,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
    },
    "brief": "SciCode 42.4，HLE 22.6",
    "updated_at": "2026-10-06",
-   "power": 78
-  },
-  {
-   "name": "Mistral Large 4",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 70,
-    "coding": 86,
-    "chinese": 80,
-    "multimodal": 69,
-    "longtext": 88,
-    "cost": 77,
-    "speed": 68,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "AutomationBench 59.9，Vibe Code 78.4",
-   "updated_at": "2026-10-07",
    "power": 78
   },
   {
@@ -1570,6 +1551,25 @@
     "creative": 78
    },
    "brief": "GPQA 85.7，SciCode 48.0",
+   "updated_at": "2026-09-18",
+   "power": 77
+  },
+  {
+   "name": "小米 MiMo-V2.6-Flash",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 75,
+    "coding": 88,
+    "chinese": 83,
+    "multimodal": 60,
+    "longtext": 79,
+    "cost": 96,
+    "speed": 69,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 80
+   },
+   "brief": "LMArena Code 1636.0，ProofBench 63.0",
    "updated_at": "2026-09-18",
    "power": 77
   },
@@ -1666,7 +1666,7 @@
     "multimodal": 75,
     "longtext": 91,
     "cost": 88,
-    "speed": 86,
+    "speed": 83,
     "privacy": 79,
     "ecosystem": 68,
     "creative": 65
@@ -1723,7 +1723,7 @@
     "multimodal": 75,
     "longtext": 67,
     "cost": 81,
-    "speed": 74,
+    "speed": 73,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
