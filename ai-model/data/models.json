@@ -1,6 +1,6 @@
 {
  "version": "1.0",
- "generated_at": "2026-10-19",
+ "generated_at": "2026-10-20",
  "source": "data/rankings/benchmarks.json",
  "dims": [
   "reasoning",
@@ -18,7 +18,7 @@
   "privacy": "由 本土化 70% + API稳定性 30% 推算（榜单无独立隐私维度）",
   "creative": "由 中文能力 45% + 实际调用 30% + 趋势热度 25% 推算（榜单无独立创意维度）"
  },
- "count": 93,
+ "count": 94,
  "models": [
   {
    "name": "GPT-6 Astra",
@@ -1794,6 +1794,25 @@
     "advice": "日常问答走 Flash，难题再交给 Pro",
     "why": "Flash 便宜且快得多，拿 Pro 干简单活是最常见的浪费"
    },
+   "power": 74
+  },
+  {
+   "name": "MiniMax-M3.1-Flash",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 57,
+    "coding": 56,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 85,
+    "cost": 77,
+    "speed": 75,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "",
+   "updated_at": "2026-10-20",
    "power": 74
   },
   {
