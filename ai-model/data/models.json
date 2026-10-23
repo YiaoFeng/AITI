@@ -35,7 +35,7 @@
     "ecosystem": 90,
     "creative": 92
    },
-   "brief": "DeepSWE 77.0，AutomationBench 68.9",
+   "brief": "AutomationBench 68.9，DeepSWE 74.2",
    "updated_at": "2026-09-10",
    "tier": {
     "key": "deepseek",
@@ -271,7 +271,7 @@
    "vendor": "国产",
    "score": {
     "reasoning": 79,
-    "coding": 92,
+    "coding": 93,
     "chinese": 87,
     "multimodal": 80,
     "longtext": 90,
@@ -281,7 +281,7 @@
     "ecosystem": 82,
     "creative": 85
    },
-   "brief": "Vibe Code 87.7，FrontierMath T4 46.3",
+   "brief": "DeepSWE 77.0，FrontierMath T4 46.3",
    "updated_at": "2026-10-19",
    "tier": {
     "key": "deepseek",
@@ -437,7 +437,7 @@
     "ecosystem": 84,
     "creative": 85
    },
-   "brief": "FrontierMath T4 46.3，DeepSWE 69.3",
+   "brief": "FrontierMath T4 46.3，TB4.0 34.3",
    "updated_at": "2026-09-02",
    "tier": {
     "key": "qwen",
