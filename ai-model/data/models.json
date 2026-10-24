@@ -1,6 +1,6 @@
 {
  "version": "1.0",
- "generated_at": "2026-10-23",
+ "generated_at": "2026-10-24",
  "source": "data/rankings/benchmarks.json",
  "dims": [
   "reasoning",
@@ -18,7 +18,7 @@
   "privacy": "由 本土化 70% + API稳定性 30% 推算（榜单无独立隐私维度）",
   "creative": "由 中文能力 45% + 实际调用 30% + 趋势热度 25% 推算（榜单无独立创意维度）"
  },
- "count": 94,
+ "count": 95,
  "models": [
   {
    "name": "DeepSeek V4.1 Flash",
@@ -30,7 +30,7 @@
     "multimodal": 89,
     "longtext": 90,
     "cost": 88,
-    "speed": 93,
+    "speed": 91,
     "privacy": 87,
     "ecosystem": 90,
     "creative": 92
@@ -113,7 +113,7 @@
     "ecosystem": 80,
     "creative": 88
    },
-   "brief": "LMArena Code 1672.7 全场第一，AutomationBench 77.5 全场第一",
+   "brief": "LMArena Code 1674.2 全场第一，AutomationBench 77.5 全场第一",
    "updated_at": "2026-10-06",
    "tier": {
     "key": "google",
@@ -134,7 +134,7 @@
     "multimodal": 91,
     "longtext": 87,
     "cost": 94,
-    "speed": 75,
+    "speed": 73,
     "privacy": 86,
     "ecosystem": 87,
     "creative": 93
@@ -160,7 +160,7 @@
     "multimodal": 91,
     "longtext": 94,
     "cost": 60,
-    "speed": 74,
+    "speed": 75,
     "privacy": 73,
     "ecosystem": 89,
     "creative": 87
@@ -186,7 +186,7 @@
     "multimodal": 94,
     "longtext": 91,
     "cost": 72,
-    "speed": 72,
+    "speed": 71,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 84
@@ -203,38 +203,12 @@
    "power": 86
   },
   {
-   "name": "Claude Sonnet 5.5",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 88,
-    "coding": 96,
-    "chinese": 78,
-    "multimodal": 91,
-    "longtext": 90,
-    "cost": 72,
-    "speed": 87,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 77
-   },
-   "brief": "Vibe Code 92.4 全场第一，TB4.0 64.1 前三",
-   "updated_at": "2026-10-06",
-   "tier": {
-    "key": "anthropic",
-    "label": "思考预算",
-    "how": "能给思考过程设一个 token 上限，也能整个关掉",
-    "advice": "闲聊和简单问答关掉思考，写代码、读长文再打开",
-    "why": "开着思考回复会明显变慢，token 消耗也跟着翻上去"
-   },
-   "power": 86
-  },
-  {
    "name": "Muse Wonder Full",
    "vendor": "海外",
    "score": {
     "reasoning": 88,
     "coding": 96,
-    "chinese": 87,
+    "chinese": 86,
     "multimodal": 89,
     "longtext": 92,
     "cost": 77,
@@ -253,11 +227,11 @@
    "score": {
     "reasoning": 84,
     "coding": 94,
-    "chinese": 87,
+    "chinese": 86,
     "multimodal": 89,
     "longtext": 88,
     "cost": 67,
-    "speed": 89,
+    "speed": 87,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 82
@@ -298,7 +272,7 @@
    "score": {
     "reasoning": 75,
     "coding": 86,
-    "chinese": 87,
+    "chinese": 86,
     "multimodal": 91,
     "longtext": 87,
     "cost": 80,
@@ -345,6 +319,58 @@
    "power": 85
   },
   {
+   "name": "Claude Sonnet 5.5",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 88,
+    "coding": 96,
+    "chinese": 78,
+    "multimodal": 91,
+    "longtext": 90,
+    "cost": 72,
+    "speed": 86,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 77
+   },
+   "brief": "Vibe Code 92.4 全场第一，TB4.0 64.1 前三",
+   "updated_at": "2026-10-06",
+   "tier": {
+    "key": "anthropic",
+    "label": "思考预算",
+    "how": "能给思考过程设一个 token 上限，也能整个关掉",
+    "advice": "闲聊和简单问答关掉思考，写代码、读长文再打开",
+    "why": "开着思考回复会明显变慢，token 消耗也跟着翻上去"
+   },
+   "power": 85
+  },
+  {
+   "name": "Kimi K3",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 77,
+    "coding": 92,
+    "chinese": 85,
+    "multimodal": 89,
+    "longtext": 98,
+    "cost": 69,
+    "speed": 64,
+    "privacy": 82,
+    "ecosystem": 83,
+    "creative": 82
+   },
+   "brief": "LMArena Code 1654.9，GPQA 93.5",
+   "updated_at": "2026-08-24",
+   "tier": {
+    "key": "moonshot",
+    "label": "思考开关",
+    "how": "可以切换思考模式",
+    "advice": "读文档、做摘要关掉，需要推理再开",
+    "why": "思考模式更慢更贵，长文本场景未必用得上"
+   },
+   "power": 84
+  },
+  {
    "name": "GLM-5.3",
    "vendor": "国产",
    "score": {
@@ -354,7 +380,7 @@
     "multimodal": 89,
     "longtext": 86,
     "cost": 77,
-    "speed": 73,
+    "speed": 76,
     "privacy": 84,
     "ecosystem": 80,
     "creative": 83
@@ -411,7 +437,7 @@
     "ecosystem": 84,
     "creative": 85
    },
-   "brief": "FrontierMath T4 46.3，DeepSWE 69.3",
+   "brief": "FrontierMath T4 46.3，TB4.0 34.3",
    "updated_at": "2026-09-02",
    "tier": {
     "key": "qwen",
@@ -454,11 +480,11 @@
    "score": {
     "reasoning": 77,
     "coding": 90,
-    "chinese": 87,
+    "chinese": 86,
     "multimodal": 80,
     "longtext": 90,
     "cost": 71,
-    "speed": 85,
+    "speed": 84,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 82
@@ -484,7 +510,7 @@
     "multimodal": 78,
     "longtext": 91,
     "cost": 95,
-    "speed": 88,
+    "speed": 86,
     "privacy": 83,
     "ecosystem": 83,
     "creative": 86
@@ -501,12 +527,38 @@
    "power": 84
   },
   {
+   "name": "Kimi K3.1 Pro",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 83,
+    "coding": 96,
+    "chinese": 80,
+    "multimodal": 89,
+    "longtext": 95,
+    "cost": 72,
+    "speed": 74,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "DeepSWE 75.5，HLE 52.5",
+   "updated_at": "2026-10-24",
+   "tier": {
+    "key": "moonshot",
+    "label": "思考开关",
+    "how": "可以切换思考模式",
+    "advice": "读文档、做摘要关掉，需要推理再开",
+    "why": "思考模式更慢更贵，长文本场景未必用得上"
+   },
+   "power": 84
+  },
+  {
    "name": "GPT-5.6 Sol",
    "vendor": "海外",
    "score": {
     "reasoning": 83,
     "coding": 95,
-    "chinese": 84,
+    "chinese": 83,
     "multimodal": 80,
     "longtext": 92,
     "cost": 67,
@@ -527,38 +579,12 @@
    "power": 83
   },
   {
-   "name": "Kimi K3",
-   "vendor": "国产",
-   "score": {
-    "reasoning": 77,
-    "coding": 92,
-    "chinese": 85,
-    "multimodal": 80,
-    "longtext": 98,
-    "cost": 69,
-    "speed": 65,
-    "privacy": 82,
-    "ecosystem": 83,
-    "creative": 82
-   },
-   "brief": "LMArena Code 1654.7，GPQA 93.5",
-   "updated_at": "2026-08-24",
-   "tier": {
-    "key": "moonshot",
-    "label": "思考开关",
-    "how": "可以切换思考模式",
-    "advice": "读文档、做摘要关掉，需要推理再开",
-    "why": "思考模式更慢更贵，长文本场景未必用得上"
-   },
-   "power": 83
-  },
-  {
    "name": "Qwen3.8 Max",
    "vendor": "国产",
    "score": {
     "reasoning": 81,
     "coding": 88,
-    "chinese": 89,
+    "chinese": 88,
     "multimodal": 91,
     "longtext": 84,
     "cost": 74,
@@ -567,7 +593,7 @@
     "ecosystem": 80,
     "creative": 79
    },
-   "brief": "LMArena Code 1672.5 前三，TB Science 12.9",
+   "brief": "LMArena Code 1672.2 前三，TB Science 12.9",
    "updated_at": "2026-08-24",
    "tier": {
     "key": "qwen",
@@ -605,25 +631,6 @@
    "power": 83
   },
   {
-   "name": "Muse Spark 1.3",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 78,
-    "coding": 92,
-    "chinese": 83,
-    "multimodal": 91,
-    "longtext": 90,
-    "cost": 77,
-    "speed": 81,
-    "privacy": 72,
-    "ecosystem": 77,
-    "creative": 80
-   },
-   "brief": "LMArena Code 1657.4 前三，GPQA 93.5",
-   "updated_at": "2026-09-03",
-   "power": 83
-  },
-  {
    "name": "Step 5 Preview",
    "vendor": "国产",
    "score": {
@@ -633,7 +640,7 @@
     "multimodal": 69,
     "longtext": 98,
     "cost": 80,
-    "speed": 93,
+    "speed": 95,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 79
@@ -648,7 +655,7 @@
    "score": {
     "reasoning": 77,
     "coding": 91,
-    "chinese": 87,
+    "chinese": 86,
     "multimodal": 89,
     "longtext": 85,
     "cost": 77,
@@ -693,7 +700,7 @@
    "score": {
     "reasoning": 74,
     "coding": 95,
-    "chinese": 87,
+    "chinese": 86,
     "multimodal": 89,
     "longtext": 85,
     "cost": 77,
@@ -733,6 +740,25 @@
    "power": 82
   },
   {
+   "name": "Muse Spark 1.3",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 78,
+    "coding": 92,
+    "chinese": 82,
+    "multimodal": 91,
+    "longtext": 90,
+    "cost": 77,
+    "speed": 80,
+    "privacy": 72,
+    "ecosystem": 77,
+    "creative": 80
+   },
+   "brief": "LMArena Code 1657.2 前三，GPQA 93.5",
+   "updated_at": "2026-09-03",
+   "power": 82
+  },
+  {
    "name": "Qwen3.8-Flash-Next",
    "vendor": "国产",
    "score": {
@@ -747,7 +773,7 @@
     "ecosystem": 85,
     "creative": 87
    },
-   "brief": "LMArena Code 1628.0，GPQA 91.7",
+   "brief": "LMArena Code 1628.8，GPQA 91.7",
    "updated_at": "2026-09-07",
    "tier": {
     "key": "qwen",
@@ -768,32 +794,13 @@
     "multimodal": 75,
     "longtext": 91,
     "cost": 89,
-    "speed": 95,
+    "speed": 94,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
    },
    "brief": "DeepSWE 59.7，HLE 39.4",
    "updated_at": "2026-10-06",
-   "power": 82
-  },
-  {
-   "name": "Muse Spark Open",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 73,
-    "coding": 86,
-    "chinese": 80,
-    "multimodal": 81,
-    "longtext": 84,
-    "cost": 77,
-    "speed": 89,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "APEX-SWE 49.1，HLE 43.9",
-   "updated_at": "2026-10-16",
    "power": 82
   },
   {
@@ -806,7 +813,7 @@
     "multimodal": 65,
     "longtext": 88,
     "cost": 86,
-    "speed": 92,
+    "speed": 90,
     "privacy": 84,
     "ecosystem": 83,
     "creative": 83
@@ -877,7 +884,7 @@
     "multimodal": 72,
     "longtext": 95,
     "cost": 87,
-    "speed": 68,
+    "speed": 67,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 79
@@ -896,12 +903,12 @@
     "multimodal": 74,
     "longtext": 82,
     "cost": 74,
-    "speed": 80,
+    "speed": 79,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 82
    },
-   "brief": "LMArena Code 1636.6，AutomationBench 65.6",
+   "brief": "LMArena Code 1637.9，AutomationBench 65.6",
    "updated_at": "2026-09-18",
    "tier": {
     "key": "xai",
@@ -910,6 +917,25 @@
     "advice": "默认档够用，难题再往上调",
     "why": "推理强度越高，响应越慢、消耗越大"
    },
+   "power": 81
+  },
+  {
+   "name": "Muse Spark Open",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 73,
+    "coding": 86,
+    "chinese": 80,
+    "multimodal": 81,
+    "longtext": 84,
+    "cost": 77,
+    "speed": 87,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "APEX-SWE 49.1，HLE 43.9",
+   "updated_at": "2026-10-16",
    "power": 81
   },
   {
@@ -1048,6 +1074,32 @@
    "power": 80
   },
   {
+   "name": "Kimi K2.7 Code",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 72,
+    "coding": 83,
+    "chinese": 87,
+    "multimodal": 75,
+    "longtext": 86,
+    "cost": 79,
+    "speed": 68,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 82
+   },
+   "brief": "SWE-bench 78.2，FrontierMath T4 12.2",
+   "updated_at": "2026-09-18",
+   "tier": {
+    "key": "moonshot",
+    "label": "思考开关",
+    "how": "可以切换思考模式",
+    "advice": "读文档、做摘要关掉，需要推理再开",
+    "why": "思考模式更慢更贵，长文本场景未必用得上"
+   },
+   "power": 80
+  },
+  {
    "name": "K2 Horizon 375B A23B",
    "vendor": "海外",
    "score": {
@@ -1119,32 +1171,6 @@
    "power": 79
   },
   {
-   "name": "Kimi K2.7 Code",
-   "vendor": "国产",
-   "score": {
-    "reasoning": 72,
-    "coding": 83,
-    "chinese": 87,
-    "multimodal": 75,
-    "longtext": 86,
-    "cost": 79,
-    "speed": 67,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 82
-   },
-   "brief": "SWE-bench 78.2，FrontierMath T4 12.2",
-   "updated_at": "2026-09-18",
-   "tier": {
-    "key": "moonshot",
-    "label": "思考开关",
-    "how": "可以切换思考模式",
-    "advice": "读文档、做摘要关掉，需要推理再开",
-    "why": "思考模式更慢更贵，长文本场景未必用得上"
-   },
-   "power": 79
-  },
-  {
    "name": "Qwen3.8 2.4T A95B",
    "vendor": "国产",
    "score": {
@@ -1180,7 +1206,7 @@
     "multimodal": 66,
     "longtext": 91,
     "cost": 97,
-    "speed": 82,
+    "speed": 84,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1237,7 +1263,7 @@
     "multimodal": 69,
     "longtext": 88,
     "cost": 77,
-    "speed": 78,
+    "speed": 79,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1538,7 +1564,7 @@
     "multimodal": 75,
     "longtext": 82,
     "cost": 96,
-    "speed": 90,
+    "speed": 89,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1621,12 +1647,12 @@
     "multimodal": 60,
     "longtext": 79,
     "cost": 96,
-    "speed": 69,
+    "speed": 67,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 80
    },
-   "brief": "LMArena Code 1634.0，ProofBench 63.0",
+   "brief": "LMArena Code 1634.8，ProofBench 63.0",
    "updated_at": "2026-09-18",
    "power": 77
   },
@@ -1640,7 +1666,7 @@
     "multimodal": 64,
     "longtext": 91,
     "cost": 88,
-    "speed": 87,
+    "speed": 84,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1704,7 +1730,7 @@
     "multimodal": 75,
     "longtext": 91,
     "cost": 88,
-    "speed": 79,
+    "speed": 78,
     "privacy": 79,
     "ecosystem": 68,
     "creative": 65
@@ -1731,32 +1757,6 @@
    "brief": "GPQA 85.7，SciCode 41.0",
    "updated_at": "2026-09-18",
    "power": 75
-  },
-  {
-   "name": "腾讯混元 HY3",
-   "vendor": "国产",
-   "score": {
-    "reasoning": 67,
-    "coding": 57,
-    "chinese": 68,
-    "multimodal": 68,
-    "longtext": 85,
-    "cost": 93,
-    "speed": 79,
-    "privacy": 87,
-    "ecosystem": 79,
-    "creative": 72
-   },
-   "brief": "GPQA 90.9，DeepSWE 28.0",
-   "updated_at": "2026-08-24",
-   "tier": {
-    "key": "tencent",
-    "label": "思考开关",
-    "how": "支持思考模式切换",
-    "advice": "日常对话关掉，复杂任务再开",
-    "why": "思考模式消耗更高，简单场景没必要"
-   },
-   "power": 74
   },
   {
    "name": "小米 MiMo-V2.5",
@@ -1787,7 +1787,7 @@
     "multimodal": 75,
     "longtext": 67,
     "cost": 81,
-    "speed": 73,
+    "speed": 75,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1833,6 +1833,32 @@
    "brief": "GPQA 86.4，SciCode 39.7",
    "updated_at": "2026-10-16",
    "power": 74
+  },
+  {
+   "name": "腾讯混元 HY3",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 67,
+    "coding": 57,
+    "chinese": 68,
+    "multimodal": 68,
+    "longtext": 85,
+    "cost": 93,
+    "speed": 78,
+    "privacy": 87,
+    "ecosystem": 79,
+    "creative": 72
+   },
+   "brief": "GPQA 90.9，DeepSWE 28.0",
+   "updated_at": "2026-08-24",
+   "tier": {
+    "key": "tencent",
+    "label": "思考开关",
+    "how": "支持思考模式切换",
+    "advice": "日常对话关掉，复杂任务再开",
+    "why": "思考模式消耗更高，简单场景没必要"
+   },
+   "power": 73
   },
   {
    "name": "K-EXAONE 2.0 0803",
@@ -1901,7 +1927,7 @@
     "multimodal": 75,
     "longtext": 60,
     "cost": 92,
-    "speed": 81,
+    "speed": 80,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1920,7 +1946,7 @@
     "multimodal": 75,
     "longtext": 60,
     "cost": 76,
-    "speed": 70,
+    "speed": 71,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1977,7 +2003,7 @@
     "multimodal": 75,
     "longtext": 60,
     "cost": 100,
-    "speed": 84,
+    "speed": 82,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1996,7 +2022,7 @@
     "multimodal": 75,
     "longtext": 60,
     "cost": 100,
-    "speed": 80,
+    "speed": 79,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
