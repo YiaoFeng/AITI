@@ -699,8 +699,12 @@ function floors(){
     const i = S.answers[q.id];
     if(i===undefined || i===null || i<0) return;
     const opt = q.options[i];
-    if(!opt || !opt.floorPct) return;
-    for(const k in opt.floorPct) f[k] = Math.max(f[k]||0, pctLine(k, opt.floorPct[k]));
+    if(!opt) return;
+    // 分位底线：和模型池比排名，适合「数据敏感」「必须私有部署」这类相对要求
+    if(opt.floorPct) for(const k in opt.floorPct) f[k] = Math.max(f[k]||0, pctLine(k, opt.floorPct[k]));
+    // 绝对底线：写死分数，目前只用于预算——「每月几十块」是钱的价格，
+    // 不能按排名算（成本分 85 对应 ¥200/月以内，跟池子里有几款便宜货无关）
+    if(opt.floor) for(const k in opt.floor) f[k] = Math.max(f[k]||0, opt.floor[k]);
   });
   return f;
 }
@@ -800,13 +804,14 @@ function resolveFloors(){
 }
 
 /* 分数差在这个范围内就算同一档。取值来自 2026-10-25 的蒙特卡洛误差测试：
-   300 个连贯画像 × 每画像 13 次扰动（12% 的题在读者本来就纠结的两个选项间改选，
-   模型每维再加 ±2 分噪声）后——
-     分差 0-1 分：第一名有 59.6% 的概率被换掉；
-     分差 1-2 分：28.2%；
-     分差 2-3 分：13.2%；
-     分差 3-5 分：6.4%。
-   所以 3 分以内不算分出了高下。数据在 ai-quiz/docs/v2误差测试.json。 */
+   300 个连贯画像 × 每画像 13 次扰动（5% 的题在读者本来就纠结的两个选项间改选，
+   模型每维再加 ±2 分噪声；硬条件被改选的扰动不计，那不算排名精度）后——
+     分差 0-1 分：第一名有 58.5% 的概率被换掉；
+     分差 1-2 分：42.0%；
+     分差 2-3 分：26.3%；
+     分差 3-5 分：25.7%。
+   所以 3 分以内不算分出了高下；即便差 3-5 分，也还有约四分之一的概率换人。
+   数据在 ai-quiz/docs/v2误差测试.json。 */
 const TIE_BAND = 3.0;
 
 function rankAll(w, override){
