@@ -699,7 +699,10 @@ function paintCodePage(){
    粘贴完整码时自动剥掉前缀（真码字符集不含 I，所以开头的 AIM 一定是前缀）。 */
 function readCodeInput(){
   let v = $('#code-input').value.toUpperCase().replace(/[^A-Z0-9]/g,'');
-  if(v.startsWith('AIM') && v.length > 10) v = v.slice(3);
+  // 整串粘进来时把产品前缀去掉（AIM2 要排在 AIM 前面判断）
+  for(const p of ['AIM2','AIM','PER','NAO','QUE','BAN','HUM']){
+    if(v.startsWith(p) && v.length > 10){ v = v.slice(p.length); break; }
+  }
   return v.slice(0,10);
 }
 $('#code-input').addEventListener('input', e=>{
