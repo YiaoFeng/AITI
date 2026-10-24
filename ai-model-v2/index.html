@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
 <title>AI 大模型选型测试 V2 · 找到最适合你的那一款</title>
-<meta name="description" content="45 道题，从 29 款主流大模型里算出最匹配你需求的那一款：附能力雷达图、档位建议、月成本测算。">
+<meta name="description" content="29 道题，从主流大模型里算出最匹配你需求的那一款：附能力雷达图、档位建议、月成本测算。">
 <link rel="icon" href="data:,">
 <script>
   // 分享卡片/生成图用不到，但手机端需要它阻止 favicon 404
@@ -192,12 +192,21 @@
     font:16px/1.5 inherit;color:var(--ink);cursor:pointer;box-shadow:var(--shadow);transition:.15s;
   }
   .opt:hover{border-color:#E2D3CD}
+  /* 兜底项（都用不上 / 说不清 / 不适用）用虚线框，和真答案分开——
+     读者扫一眼就知道「这题有我的选项」，不会以为自己没得选 */
+  .opt.skip{color:#6E675C;background:transparent;box-shadow:none;border:2px dashed #DDD5C7}
+  .opt.skip .k{background:transparent;border:1.5px dashed #D8D0C2;color:var(--gray)}
+  .opt.skip.pick{border-style:solid;border-color:var(--accent);background:#FDF7F5}
   .opt .k{
     flex:0 0 27px;height:27px;border-radius:50%;background:var(--viewbg);color:var(--gray);
     font:800 14px/27px inherit;text-align:center;transition:.15s
   }
   .opt.pick{border-color:var(--accent);background:#FDF7F5}
   .opt.pick .k{background:var(--accent);color:#fff}
+  /* 多选题的勾选框用方角，和单选题的圆角编号一眼能分开 */
+  .opt.multi .k{border-radius:7px;font-size:15px}
+  .qsec{font-size:12px;font-weight:800;color:var(--accent);letter-spacing:2px;
+        margin:18px 0 2px}
   .qnav{display:flex;gap:10px;margin-top:6px}
 
   /* ---------- 结果 ---------- */
@@ -305,7 +314,7 @@
     <div class="pick">
       <div><b id="cnt-models">—</b><span>款模型</span></div>
       <div><b>10</b><span>个维度</span></div>
-      <div><b>45</b><span>道题</span></div>
+      <div><b>29</b><span>道题</span></div>
     </div>
 
     <!-- 不做题也能看：六个方向的单项排名，不用验证码 -->
@@ -341,12 +350,12 @@
     </div>
 
     <div style="margin-top:20px">
-      <button class="btn" id="go-full">输入验证码 · 开始 45 题测试</button>
+      <button class="btn" id="go-full">输入验证码 · 开始 29 题测试</button>
     </div>
     <div class="how">
       <h3>测完能拿到什么</h3>
       <ul>
-        <li>45 道题，从 <span id="cnt-how">—</span> 款主流模型里算出最匹配你的那一款</li>
+        <li>29 道题，从 <span id="cnt-how">—</span> 款主流模型里算出最匹配你的那一款</li>
         <li>填了主力就多一张能力雷达图，另外还有档位建议、月成本测算、升降档方案，报告可存成图片</li>
         <li>题目基于真实的实测数据，一个验证码解锁一次，下单后由卖家单独发给你</li>
       </ul>
@@ -377,11 +386,12 @@
   <section class="screen" id="s-quiz">
     <div class="qbar">
       <div class="qmeta">
-        <span id="q-count">第 1 / 45 题</span>
+        <span id="q-count">第 1 / 29 题</span>
         <span>AI 选型测试</span>
       </div>
       <div class="qprog"><i id="q-prog"></i></div>
     </div>
+    <div class="qsec" id="q-sec"></div>
     <div class="qtext" id="q-text"></div>
     <div class="qsub" id="q-sub">选一个最接近你情况的</div>
     <div id="q-opts"></div>
@@ -658,17 +668,37 @@ function initUse(){
   };
 }
 
+/* 答案统一成数组：单选是长度 1 的数组，多选是选中项下标的数组。
+   后面所有算权重、算底线、查冲突的代码都只认这一种形状。 */
+function pickedIdx(q){
+  const a = S.answers[q.id];
+  if(a===undefined || a===null) return [];
+  return Array.isArray(a) ? a : [a];
+}
+function answered(q){
+  const a = S.answers[q.id];
+  if(Array.isArray(a)) return a.length > 0;
+  return a!==undefined && a!==null && a>=0;
+}
+
 /* ── 推荐算法 ──
-   权重 = Σ 选中选项的维度权重（负权重表示「我越不在意这个维度」）
-   匹配度 = Σ(权重 × 模型该维度分) ÷ Σ|权重|   —— 加权平均，0-100 直接读作契合度 */
+   权重 = Σ 每题归一化后的维度需求，匹配度 = 需求被满足了多少。
+   多选题按「选中项里该维度的最大值」计，不按加总——选了写代码又选了写文章，
+   等于两个需求都要，不等于编程需求翻倍。 */
 function weights(){
   const w = {};
   S.questions.forEach(q=>{
-    const i = S.answers[q.id];
-    if(i===undefined || i===null || i<0) return;
-    const opt = q.options[i];
-    if(!opt || opt.skip) return;
-    for(const k in (opt.w||{})){
+    const live = pickedIdx(q).map(i=>q.options[i]).filter(o=>o && !o.skip);
+    if(!live.length) return;
+    /* 多选题按「选中项相加」计：同时要读图表、要生成图、要生成视频，
+       多模态需求确实比只选一项更强。封顶 2.5 是防止一题勾满把其他题全盖住——
+       相加不等于无限放大，一道题最多算两题半的分量。 */
+    const agg = {};
+    live.forEach(o=>{
+      for(const k in (o.w||{})) agg[k] = (agg[k]||0) + o.w[k];
+    });
+    for(const k in agg) agg[k] = Math.min(agg[k], 2.5);
+    for(const k in agg){
       /* 对比归一：这一题里，该维度从「最不在意的选项」到「最在意的选项」跨了多远，
          读者选中的位置折成 0-1。不这么做的话，一个维度只在很多题里当次要项出现
          （题库里推理、生态就是这样），累加起来会盖过读者真正在意的维度。 */
@@ -678,10 +708,28 @@ function weights(){
         if(v < lo) lo = v;
         if(v > hi) hi = v;
       });
-      if(hi > lo) w[k] = (w[k]||0) + (opt.w[k]-lo)/(hi-lo);
+      if(hi > lo) w[k] = (w[k]||0) + (agg[k]-lo)/(hi-lo);
     }
   });
+  /* 全程选「说不清 / 都用不上」时十维都是空的，匹配度会全变 0。
+     这时按「什么都要一点」处理：优先推综合实力均衡的款，而不是随机取第一个。 */
+  if(!Object.keys(w).some(k=>w[k] > 0)){
+    Object.keys(DIM_CN).forEach(k=>{ w[k] = 1; });
+  }
   return w;
+}
+
+/* 只允许国产：公司合规里最常见的一条硬要求，单独拎出来当过滤器，
+   不混进分数——分数高不能抵消「不能用境外服务」。 */
+function vendorOnly(){
+  let v = null;
+  S.questions.forEach(q=>{
+    pickedIdx(q).forEach(i=>{
+      const o = q.options[i];
+      if(o && o.onlyVendor) v = o.onlyVendor;
+    });
+  });
+  return v;
 }
 
 /* 底线要求：选项上标了 floorPct（该维要排在模型池的前百分之几）。
@@ -696,15 +744,15 @@ function pctLine(k, pct){
 function floors(){
   const f = {};
   S.questions.forEach(q=>{
-    const i = S.answers[q.id];
-    if(i===undefined || i===null || i<0) return;
-    const opt = q.options[i];
-    if(!opt) return;
-    // 分位底线：和模型池比排名，适合「数据敏感」「必须私有部署」这类相对要求
-    if(opt.floorPct) for(const k in opt.floorPct) f[k] = Math.max(f[k]||0, pctLine(k, opt.floorPct[k]));
-    // 绝对底线：写死分数，目前只用于预算——「每月几十块」是钱的价格，
-    // 不能按排名算（成本分 85 对应 ¥200/月以内，跟池子里有几款便宜货无关）
-    if(opt.floor) for(const k in opt.floor) f[k] = Math.max(f[k]||0, opt.floor[k]);
+    pickedIdx(q).forEach(i=>{
+      const opt = q.options[i];
+      if(!opt) return;
+      // 分位底线：和模型池比排名，适合「数据敏感」「必须私有部署」这类相对要求
+      if(opt.floorPct) for(const k in opt.floorPct) f[k] = Math.max(f[k]||0, pctLine(k, opt.floorPct[k]));
+      // 绝对底线：写死分数，用于预算和「资料有多敏感」——这两件事是硬要求，
+      // 不能按排名算（成本分 85 对应几百元/月，跟池子里有几款便宜货无关）
+      if(opt.floor) for(const k in opt.floor) f[k] = Math.max(f[k]||0, opt.floor[k]);
+    });
   });
   return f;
 }
@@ -787,43 +835,49 @@ function meetsFloors(m, f){
 
 /* 底线太严、筛完不足 3 款时，从最严的一条开始放宽，并把放宽了哪几维记下来，
    报告里如实写出来。不能悄悄放宽——读者会以为自己的硬要求被满足了。 */
+function inPool(m, f, vendor){
+  return meetsFloors(m, f) && (!vendor || m.vendor === vendor);
+}
 function resolveFloors(){
   const fl = floors();
-  let pool = S.models.filter(m=>meetsFloors(m, fl));
+  const vendor = vendorOnly();
+  let pool = S.models.filter(m=>inPool(m, fl, vendor));
   const relaxed = [];
   if(pool.length < 3){
     Object.keys(fl).sort((a,b)=>fl[b]-fl[a]).forEach(k=>{
       if(pool.length >= 3) return;
       delete fl[k]; relaxed.push(k);
-      pool = S.models.filter(m=>meetsFloors(m, fl));
+      pool = S.models.filter(m=>inPool(m, fl, vendor));
     });
   }
   S.effectiveFloors = fl;
   S.floorRelaxed = relaxed;
+  /* 国产限制不放宽：这是合规要求，宁可分数降级也不能推荐用不了的服务。
+     国产库有 30 多款，放宽完分数底线一定够 3 款，不存在空池。 */
+  S.effectiveVendor = vendor;
   return fl;
 }
 
-/* 分数差在这个范围内就算同一档。取值来自 2026-10-25 的蒙特卡洛误差测试：
-   300 个连贯画像 × 每画像 13 次扰动（5% 的题在读者本来就纠结的两个选项间改选，
-   模型每维再加 ±2 分噪声；硬条件被改选的扰动不计，那不算排名精度）后——
-     分差 0-1 分：第一名有 58.5% 的概率被换掉；
-     分差 1-2 分：42.0%；
-     分差 2-3 分：26.3%；
-     分差 3-5 分：25.7%。
-   所以 3 分以内不算分出了高下；即便差 3-5 分，也还有约四分之一的概率换人。
-   数据在 ai-quiz/docs/v2误差测试.json。 */
+/* 分数差在这个范围内就算同一档。取值来自 2026-10-25 的蒙特卡洛误差测试
+   （29 题新版题库，300 个连贯画像 × 每画像 13 次扰动：5% 的题在读者本来就
+   纠结的选项间改选，模型每维再加 ±2 分噪声；硬条件被改选的扰动不计）——
+     分差 0-1 分：第一名有 57.3% 的概率被换掉；
+     分差 1-2 分：30.4%；
+     分差 2-3 分：21.3%；
+     分差 3-5 分：16.1%。
+   所以 3 分以内不算分出了高下。数据在 ai-quiz/docs/v2误差测试.json。 */
 const TIE_BAND = 3.0;
 
 function rankAll(w, override){
   const ww = Object.assign({}, w, override||{});
   const fl = S.effectiveFloors || resolveFloors();
-  return S.models.filter(m=>meetsFloors(m, fl))
+  return S.models.filter(m=>inPool(m, fl, S.effectiveVendor))
     .map(m=>Object.assign({}, m, {match: matchScore(m, ww)}))
     .sort((a,b)=>b.match-a.match);
 }
 
 /* ── 流程 ── */
-/* 只有一档（45 题），need 恒为 full。 */
+/* 只有一档（29 题），need 恒为 full。 */
 $('#go-full').onclick  = ()=>{ S.need='full'; paintCodePage(); show('s-code'); };
 $('#code-back').onclick= ()=> show('s-home');
 
@@ -831,7 +885,7 @@ function paintCodePage(){
   $('#code-title').textContent = '输入验证码';
   $('#code-go').textContent    = '开始测试';
   $('#code-hint').className = 'hint';
-  $('#code-hint').textContent  = '输入后立即开始 45 题测试';
+  $('#code-hint').textContent  = '输入后立即开始 29 题测试';
   $('#code-input').value = '';
 }
 
@@ -849,7 +903,7 @@ $('#code-input').addEventListener('input', e=>{
   const v = readCodeInput();
   e.target.value = v.length > 5 ? v.slice(0,5)+'-'+v.slice(5) : v;
   $('#code-hint').className = 'hint';
-  $('#code-hint').textContent = '输入后立即开始 45 题测试';
+  $('#code-hint').textContent = '输入后立即开始 29 题测试';
 });
 $('#code-input').addEventListener('keydown', e=>{ if(e.key==='Enter') $('#code-go').click(); });
 
@@ -884,38 +938,69 @@ $('#code-go').onclick = async ()=>{
 function renderQ(){
   const total = S.questions.length;
   const q = S.questions[S.idx];
+  const multi = q.type === 'multi';
+  const picks = pickedIdx(q);
 
   $('#q-count').textContent = `第 ${S.idx+1} / ${total} 题`;
   $('#q-prog').style.width = ((S.idx)/total*100) + '%';
+  $('#q-sec').textContent = q.section || '';
   $('#q-text').textContent = q.text;
   // 题目自带解释就用解释，没有就退回那句默认提示。
   // 解释写在题库（data/questions.json 的 hint）里，不写在这——改题面的人顺手就改了。
-  $('#q-sub').textContent = q.hint || '选一个最接近你情况的';
+  // 专业词一律在 hint 里解释，不要求读者自己去猜「IDE」「翻译腔」「按用量付费」。
+  // 多选题的「最多选几项」固定接在解释后面，不能只靠勾选框让读者自己猜。
+  const multiTip = multi ? `可以多选，最多选 ${q.max} 项。` : '选一个最接近你情况的';
+  $('#q-sub').textContent = q.hint ? q.hint + (multi ? multiTip : '') : multiTip;
   $('#q-sub').classList.toggle('qnote', !!q.hint);
 
   $('#q-opts').innerHTML = q.options.map((o,i)=>
-    `<button class="opt${S.answers[q.id]===i?' pick':''}" data-i="${i}">
-       <span class="k">${'ABCDEFGH'[i]}</span><span>${esc(o.t)}</span></button>`).join('');
+    `<button class="opt${multi?' multi':''}${o.skip?' skip':''}${picks.includes(i)?' pick':''}" data-i="${i}">
+       <span class="k">${multi ? (picks.includes(i)?'✓':'') : ('ABCDEFGHIJ'[i] || (i+1))}</span>
+       <span>${esc(o.t)}</span></button>`).join('');
 
   document.querySelectorAll('.opt').forEach(b=>{
     b.onclick = ()=>{
-      S.answers[q.id] = +b.dataset.i;
-      // 需求分流题（带 flag 选项的题）：把选中的专用方向带进报告。
-      // 这题没有 flag 选项时清空，避免用户改选之后报告里还留着上一次的方向。
-      if(q.options.some(o=>o.flag)) S.pick = q.options[+b.dataset.i].flag || null;
-      document.querySelectorAll('.opt').forEach(x=>x.classList.toggle('pick', x===b));
-      $('#q-next').disabled = false;
-      setTimeout(next, 260);
+      const i = +b.dataset.i;
+
+      if(!multi){
+        S.answers[q.id] = i;
+        // 需求分流题（带 flag 选项的题）：把选中的专用方向带进报告。
+        if(q.options.some(o=>o.flag)) S.pick = q.options[i].flag || null;
+        document.querySelectorAll('.opt').forEach(x=>x.classList.toggle('pick', x===b));
+        $('#q-next').disabled = false;
+        setTimeout(next, 260);
+        return;
+      }
+
+      /* 多选：点一下勾上/取消。兜底项（都用不上 / 以上都没有）和其他项互斥——
+         既勾了「写代码」又勾了「以上都没有」，逻辑上说不通。 */
+      let arr = picks.slice();
+      if(q.options[i].skip){
+        arr = arr.includes(i) ? [] : [i];
+      }else{
+        arr = arr.filter(j=>!q.options[j].skip);
+        if(arr.includes(i)){
+          arr = arr.filter(j=>j!==i);
+        }else{
+          if(arr.length >= (q.max || 99)){ toast(`这题最多选 ${q.max} 项`); return; }
+          arr.push(i);
+        }
+      }
+      S.answers[q.id] = arr;
+      renderQ();
+      $('#q-next').disabled = !arr.length;
+      return;
     };
   });
 
   $('#q-prev').style.visibility = S.idx===0 ? 'hidden' : 'visible';
-  $('#q-next').disabled = S.answers[q.id]===undefined;
+  $('#q-next').disabled = !answered(q);
   $('#q-next').textContent = (S.idx+1>=total) ? '看结果' : '下一题';
 }
 function next(){
   const total = S.questions.length;
-  if(S.answers[S.questions[S.idx].id]===undefined){ toast('先选一个答案'); return; }
+  const q = S.questions[S.idx];
+  if(!answered(q)){ toast(q.type==='multi' ? '至少选一项' : '先选一个答案'); return; }
   if(S.idx+1 >= total) return finish();
   S.idx++; renderQ();
 }
@@ -1143,6 +1228,7 @@ function conflicts(){
   (S.qchecks||[]).forEach(c=>{
     const hit = c.when.every(w=>{
       const a = S.answers[w.q];
+      if(Array.isArray(a)) return w.options.some(i=>a.includes(i));
       return a!==undefined && w.options.includes(a);
     });
     if(hit) out.push(c.text);
@@ -1173,7 +1259,7 @@ function finish(){
   /* 答案自相矛盾时先提醒。不阻断答题：每道题都按它自己的答案算，
      冲突只说明读者可能点错了一个，改不改由他决定。 */
   const cf = conflicts();
-  if(cf.length) h += `<div class="pickhint">有两处答案对不上：${cf.map(esc).join('；')}。
+  if(cf.length) h += `<div class="pickhint">有 ${cf.length} 处答案对不上：${cf.map(esc).join('；')}。
     不影响下面的结果，但如果确实点错了，回去改一下会更准。</div>`;
 
   const second = all[1];
@@ -1435,12 +1521,15 @@ function costBlock(top, w){
     按相对成本指数换算的区间，实际账单取决于你的真实调用量。</div>`;
   return h;
 }
+/* 档位措辞要和预算题的硬底线对得上：
+   预算「50 元以内」把成本底线卡在 92，这里就不该再出现「50 – 200」这种更宽的档。
+   宁可写模糊一点（几十元），也不能让报告里的价格看着比用户选的预算还高。 */
 function costBand(c){
-  if(c>=92) return '¥50 以内 / 月';
-  if(c>=85) return '¥50 – 200 / 月';
-  if(c>=70) return '¥200 – 600 / 月';
-  if(c>=55) return '¥600 – 1500 / 月';
-  return '¥1500 以上 / 月';
+  if(c>=92) return '基本免费 / 几十元每月';
+  if(c>=85) return '几十到 200 元 / 月';
+  if(c>=70) return '200 – 600 元 / 月';
+  if(c>=55) return '600 – 1500 元 / 月';
+  return '1500 元以上 / 月';
 }
 
 /* ── 上报（带码，方便回溯是哪一次卖出去的） ── */
