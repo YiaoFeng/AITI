@@ -1,6 +1,6 @@
 {
  "version": "1.0",
- "generated_at": "2026-10-25",
+ "generated_at": "2026-10-26",
  "source": "data/rankings/benchmarks.json",
  "dims": [
   "reasoning",
@@ -30,7 +30,7 @@
     "multimodal": 89,
     "longtext": 90,
     "cost": 88,
-    "speed": 89,
+    "speed": 88,
     "privacy": 87,
     "ecosystem": 90,
     "creative": 92
@@ -108,7 +108,7 @@
     "multimodal": 89,
     "longtext": 86,
     "cost": 72,
-    "speed": 77,
+    "speed": 76,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 88
@@ -132,9 +132,9 @@
     "coding": 85,
     "chinese": 94,
     "multimodal": 91,
-    "longtext": 87,
+    "longtext": 88,
     "cost": 94,
-    "speed": 73,
+    "speed": 74,
     "privacy": 86,
     "ecosystem": 87,
     "creative": 93
@@ -184,7 +184,7 @@
     "coding": 96,
     "chinese": 89,
     "multimodal": 94,
-    "longtext": 91,
+    "longtext": 90,
     "cost": 72,
     "speed": 71,
     "privacy": 83,
@@ -354,7 +354,7 @@
     "multimodal": 89,
     "longtext": 95,
     "cost": 72,
-    "speed": 69,
+    "speed": 68,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 82
@@ -378,7 +378,7 @@
     "coding": 91,
     "chinese": 90,
     "multimodal": 89,
-    "longtext": 86,
+    "longtext": 87,
     "cost": 77,
     "speed": 78,
     "privacy": 84,
@@ -458,7 +458,7 @@
     "multimodal": 94,
     "longtext": 88,
     "cost": 80,
-    "speed": 85,
+    "speed": 84,
     "privacy": 74,
     "ecosystem": 81,
     "creative": 84
@@ -482,7 +482,7 @@
     "coding": 90,
     "chinese": 87,
     "multimodal": 80,
-    "longtext": 90,
+    "longtext": 91,
     "cost": 71,
     "speed": 84,
     "privacy": 83,
@@ -510,7 +510,7 @@
     "multimodal": 78,
     "longtext": 91,
     "cost": 95,
-    "speed": 86,
+    "speed": 84,
     "privacy": 83,
     "ecosystem": 83,
     "creative": 86
@@ -560,7 +560,7 @@
     "coding": 88,
     "chinese": 89,
     "multimodal": 91,
-    "longtext": 84,
+    "longtext": 86,
     "cost": 74,
     "speed": 66,
     "privacy": 86,
@@ -612,7 +612,7 @@
     "coding": 92,
     "chinese": 83,
     "multimodal": 91,
-    "longtext": 90,
+    "longtext": 91,
     "cost": 77,
     "speed": 80,
     "privacy": 72,
@@ -633,7 +633,7 @@
     "multimodal": 69,
     "longtext": 98,
     "cost": 80,
-    "speed": 94,
+    "speed": 93,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 79
@@ -733,32 +733,6 @@
    "power": 82
   },
   {
-   "name": "Kimi K3",
-   "vendor": "国产",
-   "score": {
-    "reasoning": 77,
-    "coding": 92,
-    "chinese": 85,
-    "multimodal": 72,
-    "longtext": 98,
-    "cost": 69,
-    "speed": 65,
-    "privacy": 82,
-    "ecosystem": 83,
-    "creative": 82
-   },
-   "brief": "LMArena Code 1654.9，GPQA 93.5",
-   "updated_at": "2026-08-24",
-   "tier": {
-    "key": "moonshot",
-    "label": "思考开关",
-    "how": "可以切换思考模式",
-    "advice": "读文档、做摘要关掉，需要推理再开",
-    "why": "思考模式更慢更贵，长文本场景未必用得上"
-   },
-   "power": 82
-  },
-  {
    "name": "Qwen3.8-Flash-Next",
    "vendor": "国产",
    "score": {
@@ -804,6 +778,51 @@
    "power": 82
   },
   {
+   "name": "Muse Spark Open",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 73,
+    "coding": 86,
+    "chinese": 80,
+    "multimodal": 81,
+    "longtext": 84,
+    "cost": 77,
+    "speed": 89,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "APEX-SWE 49.1，HLE 43.9",
+   "updated_at": "2026-10-16",
+   "power": 82
+  },
+  {
+   "name": "Kimi K3",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 77,
+    "coding": 92,
+    "chinese": 85,
+    "multimodal": 72,
+    "longtext": 96,
+    "cost": 69,
+    "speed": 62,
+    "privacy": 82,
+    "ecosystem": 83,
+    "creative": 82
+   },
+   "brief": "LMArena Code 1654.9，GPQA 93.5",
+   "updated_at": "2026-08-24",
+   "tier": {
+    "key": "moonshot",
+    "label": "思考开关",
+    "how": "可以切换思考模式",
+    "advice": "读文档、做摘要关掉，需要推理再开",
+    "why": "思考模式更慢更贵，长文本场景未必用得上"
+   },
+   "power": 81
+  },
+  {
    "name": "DeepSeek V4 Vision",
    "vendor": "国产",
    "score": {
@@ -813,7 +832,7 @@
     "multimodal": 65,
     "longtext": 88,
     "cost": 86,
-    "speed": 89,
+    "speed": 88,
     "privacy": 84,
     "ecosystem": 83,
     "creative": 83
@@ -863,7 +882,7 @@
     "coding": 87,
     "chinese": 80,
     "multimodal": 87,
-    "longtext": 85,
+    "longtext": 84,
     "cost": 77,
     "speed": 75,
     "privacy": 83,
@@ -882,9 +901,9 @@
     "coding": 92,
     "chinese": 82,
     "multimodal": 72,
-    "longtext": 95,
+    "longtext": 94,
     "cost": 87,
-    "speed": 68,
+    "speed": 66,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 79
@@ -903,7 +922,7 @@
     "multimodal": 74,
     "longtext": 82,
     "cost": 74,
-    "speed": 77,
+    "speed": 76,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 82
@@ -920,25 +939,6 @@
    "power": 81
   },
   {
-   "name": "Muse Spark Open",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 73,
-    "coding": 86,
-    "chinese": 80,
-    "multimodal": 81,
-    "longtext": 84,
-    "cost": 77,
-    "speed": 87,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "APEX-SWE 49.1，HLE 43.9",
-   "updated_at": "2026-10-16",
-   "power": 81
-  },
-  {
    "name": "MiniMax-M3.1-Flash",
    "vendor": "国产",
    "score": {
@@ -948,7 +948,7 @@
     "multimodal": 76,
     "longtext": 86,
     "cost": 93,
-    "speed": 83,
+    "speed": 82,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 77
@@ -984,7 +984,7 @@
     "coding": 85,
     "chinese": 70,
     "multimodal": 90,
-    "longtext": 85,
+    "longtext": 86,
     "cost": 77,
     "speed": 98,
     "privacy": 72,
@@ -1083,7 +1083,7 @@
     "multimodal": 75,
     "longtext": 86,
     "cost": 79,
-    "speed": 72,
+    "speed": 76,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 82
@@ -1119,6 +1119,32 @@
    "power": 80
   },
   {
+   "name": "DeepSeek Pro",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 74,
+    "coding": 83,
+    "chinese": 80,
+    "multimodal": 65,
+    "longtext": 87,
+    "cost": 78,
+    "speed": 81,
+    "privacy": 84,
+    "ecosystem": 77,
+    "creative": 76
+   },
+   "brief": "GPQA 92.4，DeepSWE 62.7",
+   "updated_at": "2026-08-24",
+   "tier": {
+    "key": "deepseek",
+    "label": "双版本搭配",
+    "how": "Pro 和 Flash 是两个独立模型，按任务分派",
+    "advice": "日常问答走 Flash，难题再交给 Pro",
+    "why": "Flash 便宜且快得多，拿 Pro 干简单活是最常见的浪费"
+   },
+   "power": 79
+  },
+  {
    "name": "DeepSeek Flash",
    "vendor": "国产",
    "score": {
@@ -1152,9 +1178,9 @@
     "coding": 85,
     "chinese": 70,
     "multimodal": 85,
-    "longtext": 89,
+    "longtext": 90,
     "cost": 71,
-    "speed": 86,
+    "speed": 85,
     "privacy": 74,
     "ecosystem": 78,
     "creative": 72
@@ -1197,6 +1223,32 @@
    "power": 79
   },
   {
+   "name": "GLM-5.2",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 74,
+    "coding": 85,
+    "chinese": 75,
+    "multimodal": 75,
+    "longtext": 86,
+    "cost": 77,
+    "speed": 75,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 75
+   },
+   "brief": "SWE-bench 82.8，FrontierMath T4 29.3",
+   "updated_at": "2026-09-18",
+   "tier": {
+    "key": "zhipu",
+    "label": "思考开关",
+    "how": "深度思考模式可以开关",
+    "advice": "常规任务关掉，复杂推理再开",
+    "why": "开着思考会拉长响应时间，简单任务上不划算"
+   },
+   "power": 79
+  },
+  {
    "name": "Qwen3.8 2.4T A95B",
    "vendor": "国产",
    "score": {
@@ -1220,25 +1272,6 @@
     "advice": "客服、摘要这类关掉，解题和写代码再开",
     "why": "开着更准，但更慢更贵，简单任务上纯属浪费"
    },
-   "power": 79
-  },
-  {
-   "name": "K2 Horizon 375B A23B",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 65,
-    "coding": 69,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 87,
-    "cost": 76,
-    "speed": 90,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "AutomationBench 37.2，GPQA 87.3",
-   "updated_at": "2026-09-18",
    "power": 79
   },
   {
@@ -1270,7 +1303,7 @@
     "multimodal": 75,
     "longtext": 91,
     "cost": 96,
-    "speed": 82,
+    "speed": 83,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1344,32 +1377,6 @@
    "power": 79
   },
   {
-   "name": "DeepSeek Pro",
-   "vendor": "国产",
-   "score": {
-    "reasoning": 74,
-    "coding": 83,
-    "chinese": 80,
-    "multimodal": 65,
-    "longtext": 87,
-    "cost": 78,
-    "speed": 80,
-    "privacy": 84,
-    "ecosystem": 77,
-    "creative": 76
-   },
-   "brief": "GPQA 92.4，DeepSWE 62.7",
-   "updated_at": "2026-08-24",
-   "tier": {
-    "key": "deepseek",
-    "label": "双版本搭配",
-    "how": "Pro 和 Flash 是两个独立模型，按任务分派",
-    "advice": "日常问答走 Flash，难题再交给 Pro",
-    "why": "Flash 便宜且快得多，拿 Pro 干简单活是最常见的浪费"
-   },
-   "power": 78
-  },
-  {
    "name": "Grok 4.6",
    "vendor": "海外",
    "score": {
@@ -1396,51 +1403,6 @@
    "power": 78
   },
   {
-   "name": "GLM-5.2",
-   "vendor": "国产",
-   "score": {
-    "reasoning": 74,
-    "coding": 85,
-    "chinese": 75,
-    "multimodal": 75,
-    "longtext": 84,
-    "cost": 77,
-    "speed": 75,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 75
-   },
-   "brief": "SWE-bench 82.8，FrontierMath T4 29.3",
-   "updated_at": "2026-09-18",
-   "tier": {
-    "key": "zhipu",
-    "label": "思考开关",
-    "how": "深度思考模式可以开关",
-    "advice": "常规任务关掉，复杂推理再开",
-    "why": "开着思考会拉长响应时间，简单任务上不划算"
-   },
-   "power": 78
-  },
-  {
-   "name": "Inkling",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 62,
-    "coding": 80,
-    "chinese": 80,
-    "multimodal": 61,
-    "longtext": 83,
-    "cost": 78,
-    "speed": 94,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "SWE-bench 77.6，AutomationBench 5.0",
-   "updated_at": "2026-09-18",
-   "power": 78
-  },
-  {
    "name": "Inkling Small",
    "vendor": "海外",
    "score": {
@@ -1450,7 +1412,7 @@
     "multimodal": 63,
     "longtext": 81,
     "cost": 88,
-    "speed": 95,
+    "speed": 94,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1517,6 +1479,25 @@
    "power": 78
   },
   {
+   "name": "K2 Horizon 375B A23B",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 65,
+    "coding": 69,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 87,
+    "cost": 76,
+    "speed": 88,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "AutomationBench 37.2，GPQA 87.3",
+   "updated_at": "2026-09-18",
+   "power": 78
+  },
+  {
    "name": "Apodex 1.1",
    "vendor": "海外",
    "score": {
@@ -1555,29 +1536,22 @@
    "power": 78
   },
   {
-   "name": "Quasar 438B (Max, Based on GLM-5.2)",
-   "vendor": "海外",
+   "name": "小米 MiMo-V2.6-Flash",
+   "vendor": "国产",
    "score": {
-    "reasoning": 55,
-    "coding": 77,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 82,
+    "reasoning": 75,
+    "coding": 88,
+    "chinese": 83,
+    "multimodal": 60,
+    "longtext": 81,
     "cost": 96,
-    "speed": 88,
+    "speed": 69,
     "privacy": 83,
     "ecosystem": 80,
-    "creative": 78
+    "creative": 80
    },
-   "brief": "SciCode 48.1，GPQA 73.2",
+   "brief": "LMArena Code 1634.8，ProofBench 63.0",
    "updated_at": "2026-09-18",
-   "tier": {
-    "key": "zhipu",
-    "label": "思考开关",
-    "how": "深度思考模式可以开关",
-    "advice": "常规任务关掉，复杂推理再开",
-    "why": "开着思考会拉长响应时间，简单任务上不划算"
-   },
    "power": 78
   },
   {
@@ -1619,6 +1593,25 @@
    "power": 78
   },
   {
+   "name": "Inkling",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 62,
+    "coding": 80,
+    "chinese": 80,
+    "multimodal": 61,
+    "longtext": 83,
+    "cost": 78,
+    "speed": 90,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "SWE-bench 77.6，AutomationBench 5.0",
+   "updated_at": "2026-09-18",
+   "power": 77
+  },
+  {
    "name": "Solar Open2 250B",
    "vendor": "海外",
    "score": {
@@ -1638,22 +1631,29 @@
    "power": 77
   },
   {
-   "name": "小米 MiMo-V2.6-Flash",
-   "vendor": "国产",
+   "name": "Quasar 438B (Max, Based on GLM-5.2)",
+   "vendor": "海外",
    "score": {
-    "reasoning": 75,
-    "coding": 88,
-    "chinese": 83,
-    "multimodal": 60,
-    "longtext": 79,
+    "reasoning": 55,
+    "coding": 77,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 82,
     "cost": 96,
-    "speed": 69,
+    "speed": 87,
     "privacy": 83,
     "ecosystem": 80,
-    "creative": 80
+    "creative": 78
    },
-   "brief": "LMArena Code 1634.8，ProofBench 63.0",
+   "brief": "SciCode 48.1，GPQA 73.2",
    "updated_at": "2026-09-18",
+   "tier": {
+    "key": "zhipu",
+    "label": "思考开关",
+    "how": "深度思考模式可以开关",
+    "advice": "常规任务关掉，复杂推理再开",
+    "why": "开着思考会拉长响应时间，简单任务上不划算"
+   },
    "power": 77
   },
   {
@@ -1666,7 +1666,7 @@
     "multimodal": 64,
     "longtext": 91,
     "cost": 88,
-    "speed": 84,
+    "speed": 82,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1787,7 +1787,7 @@
     "multimodal": 75,
     "longtext": 67,
     "cost": 81,
-    "speed": 75,
+    "speed": 76,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1844,7 +1844,7 @@
     "multimodal": 68,
     "longtext": 85,
     "cost": 93,
-    "speed": 78,
+    "speed": 77,
     "privacy": 87,
     "ecosystem": 79,
     "creative": 72
@@ -1889,7 +1889,7 @@
     "multimodal": 75,
     "longtext": 60,
     "cost": 100,
-    "speed": 99,
+    "speed": 100,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1897,6 +1897,25 @@
    "brief": "GPQA 74.3，SciCode 32.1",
    "updated_at": "2026-09-18",
    "power": 73
+  },
+  {
+   "name": "North Mini Code",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 48,
+    "coding": 64,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 60,
+    "cost": 76,
+    "speed": 77,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "GPQA 75.7，SciCode 38.8",
+   "updated_at": "2026-09-18",
+   "power": 72
   },
   {
    "name": "G9v3-39A5B",
@@ -1916,25 +1935,6 @@
    "brief": "GPQA 80.5，SciCode 36.8",
    "updated_at": "2026-09-18",
    "power": 72
-  },
-  {
-   "name": "North Mini Code",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 48,
-    "coding": 64,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 60,
-    "cost": 76,
-    "speed": 75,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "GPQA 75.7，SciCode 38.8",
-   "updated_at": "2026-09-18",
-   "power": 71
   },
   {
    "name": "K2 Horizon 7B",
@@ -1984,7 +1984,7 @@
     "multimodal": 75,
     "longtext": 60,
     "cost": 92,
-    "speed": 70,
+    "speed": 65,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1992,25 +1992,6 @@
    "brief": "GPQA 64.4，SciCode 37.8",
    "updated_at": "2026-09-18",
    "power": 70
-  },
-  {
-   "name": "Granite 4.2 8B",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 41,
-    "coding": 53,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 60,
-    "cost": 100,
-    "speed": 68,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "GPQA 63.1，SciCode 31.5",
-   "updated_at": "2026-09-18",
-   "power": 69
   },
   {
    "name": "MiniCPM5-2B",
@@ -2051,21 +2032,21 @@
    "power": 69
   },
   {
-   "name": "Granite 4.2 3B",
+   "name": "Granite 4.2 8B",
    "vendor": "海外",
    "score": {
-    "reasoning": 37,
-    "coding": 45,
+    "reasoning": 41,
+    "coding": 53,
     "chinese": 80,
     "multimodal": 75,
     "longtext": 60,
     "cost": 100,
-    "speed": 71,
+    "speed": 66,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "GPQA 55.9，SciCode 25.3",
+   "brief": "GPQA 63.1，SciCode 31.5",
    "updated_at": "2026-09-18",
    "power": 68
   },
@@ -2079,7 +2060,7 @@
     "multimodal": 75,
     "longtext": 60,
     "cost": 76,
-    "speed": 72,
+    "speed": 71,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -2087,6 +2068,25 @@
    "brief": "GPQA 73.4，SciCode 24.2",
    "updated_at": "2026-09-18",
    "power": 68
+  },
+  {
+   "name": "Granite 4.2 3B",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 37,
+    "coding": 45,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 60,
+    "cost": 100,
+    "speed": 66,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "GPQA 55.9，SciCode 25.3",
+   "updated_at": "2026-09-18",
+   "power": 67
   },
   {
    "name": "LFM2.5-2.6B",
