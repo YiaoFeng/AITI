@@ -1,6 +1,6 @@
 {
  "version": "1.0",
- "generated_at": "2026-10-26",
+ "generated_at": "2026-10-27",
  "source": "data/rankings/benchmarks.json",
  "dims": [
   "reasoning",
@@ -18,7 +18,7 @@
   "privacy": "由 本土化 70% + API稳定性 30% 推算（榜单无独立隐私维度）",
   "creative": "由 中文能力 45% + 实际调用 30% + 趋势热度 25% 推算（榜单无独立创意维度）"
  },
- "count": 95,
+ "count": 96,
  "models": [
   {
    "name": "DeepSeek V4.1 Flash",
@@ -1832,6 +1832,32 @@
    },
    "brief": "GPQA 86.4，SciCode 39.7",
    "updated_at": "2026-10-16",
+   "power": 74
+  },
+  {
+   "name": "GPT-6.1 Terra",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 57,
+    "coding": 56,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 85,
+    "cost": 77,
+    "speed": 75,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "",
+   "updated_at": "2026-10-27",
+   "tier": {
+    "key": "openai",
+    "label": "推理档位",
+    "how": "reasoning_effort 有 low / medium / high 三档",
+    "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
+    "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
+   },
    "power": 74
   },
   {
