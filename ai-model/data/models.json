@@ -18,7 +18,7 @@
   "privacy": "由 本土化 70% + API稳定性 30% 推算（榜单无独立隐私维度）",
   "creative": "由 中文能力 45% + 实际调用 30% + 趋势热度 25% 推算（榜单无独立创意维度）"
  },
- "count": 95,
+ "count": 96,
  "models": [
   {
    "name": "DeepSeek V4.1 Flash",
@@ -1623,6 +1623,25 @@
    },
    "brief": "SciCode 42.4，HLE 22.6",
    "updated_at": "2026-10-06",
+   "power": 78
+  },
+  {
+   "name": "Beam",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 71,
+    "coding": 73,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 85,
+    "cost": 77,
+    "speed": 75,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "APEX-SWE 41.6，GPQA 90.6",
+   "updated_at": "2026-10-08",
    "power": 78
   },
   {
