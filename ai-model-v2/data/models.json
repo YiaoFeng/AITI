@@ -18,7 +18,7 @@
   "privacy": "由 本土化 70% + API稳定性 30% 推算（榜单无独立隐私维度）",
   "creative": "由 中文能力 45% + 实际调用 30% + 趋势热度 25% 推算（榜单无独立创意维度）"
  },
- "count": 96,
+ "count": 95,
  "models": [
   {
    "name": "DeepSeek V4.1 Flash",
@@ -30,7 +30,7 @@
     "multimodal": 89,
     "longtext": 90,
     "cost": 88,
-    "speed": 88,
+    "speed": 89,
     "privacy": 87,
     "ecosystem": 90,
     "creative": 92
@@ -108,7 +108,7 @@
     "multimodal": 89,
     "longtext": 86,
     "cost": 72,
-    "speed": 76,
+    "speed": 77,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 88
@@ -134,7 +134,7 @@
     "multimodal": 91,
     "longtext": 88,
     "cost": 94,
-    "speed": 74,
+    "speed": 75,
     "privacy": 86,
     "ecosystem": 87,
     "creative": 93
@@ -186,7 +186,7 @@
     "multimodal": 94,
     "longtext": 90,
     "cost": 72,
-    "speed": 71,
+    "speed": 73,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 84
@@ -234,7 +234,7 @@
    "score": {
     "reasoning": 88,
     "coding": 96,
-    "chinese": 87,
+    "chinese": 86,
     "multimodal": 89,
     "longtext": 92,
     "cost": 77,
@@ -253,16 +253,16 @@
    "score": {
     "reasoning": 84,
     "coding": 94,
-    "chinese": 87,
+    "chinese": 86,
     "multimodal": 89,
     "longtext": 88,
     "cost": 67,
-    "speed": 84,
+    "speed": 89,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 82
    },
-   "brief": "DeepSWE 78.8 前三，TB Science 22.9",
+   "brief": "DeepSWE 78.8 前三，TB4.0 49.5",
    "updated_at": "2026-10-13",
    "power": 86
   },
@@ -298,7 +298,7 @@
    "score": {
     "reasoning": 76,
     "coding": 86,
-    "chinese": 87,
+    "chinese": 86,
     "multimodal": 91,
     "longtext": 87,
     "cost": 80,
@@ -348,13 +348,13 @@
    "name": "Kimi K3.1 Pro",
    "vendor": "国产",
    "score": {
-    "reasoning": 88,
+    "reasoning": 87,
     "coding": 95,
     "chinese": 87,
     "multimodal": 89,
     "longtext": 95,
     "cost": 72,
-    "speed": 68,
+    "speed": 64,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 82
@@ -371,6 +371,32 @@
    "power": 85
   },
   {
+   "name": "GPT-6.1 Terra",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 82,
+    "coding": 90,
+    "chinese": 86,
+    "multimodal": 89,
+    "longtext": 90,
+    "cost": 77,
+    "speed": 79,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 82
+   },
+   "brief": "TB4.0 49.5，Vibe Code 84.0",
+   "updated_at": "2026-10-27",
+   "tier": {
+    "key": "openai",
+    "label": "推理档位",
+    "how": "reasoning_effort 有 low / medium / high 三档",
+    "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
+    "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
+   },
+   "power": 85
+  },
+  {
    "name": "GLM-5.3",
    "vendor": "国产",
    "score": {
@@ -380,7 +406,7 @@
     "multimodal": 89,
     "longtext": 87,
     "cost": 77,
-    "speed": 78,
+    "speed": 77,
     "privacy": 84,
     "ecosystem": 80,
     "creative": 83
@@ -458,7 +484,7 @@
     "multimodal": 94,
     "longtext": 88,
     "cost": 80,
-    "speed": 84,
+    "speed": 86,
     "privacy": 74,
     "ecosystem": 81,
     "creative": 84
@@ -480,11 +506,11 @@
    "score": {
     "reasoning": 77,
     "coding": 90,
-    "chinese": 87,
+    "chinese": 86,
     "multimodal": 80,
     "longtext": 91,
     "cost": 71,
-    "speed": 84,
+    "speed": 87,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 82
@@ -532,7 +558,7 @@
    "score": {
     "reasoning": 83,
     "coding": 95,
-    "chinese": 84,
+    "chinese": 83,
     "multimodal": 80,
     "longtext": 92,
     "cost": 67,
@@ -558,7 +584,7 @@
    "score": {
     "reasoning": 81,
     "coding": 88,
-    "chinese": 89,
+    "chinese": 88,
     "multimodal": 91,
     "longtext": 86,
     "cost": 74,
@@ -610,7 +636,7 @@
    "score": {
     "reasoning": 78,
     "coding": 92,
-    "chinese": 83,
+    "chinese": 82,
     "multimodal": 91,
     "longtext": 91,
     "cost": 77,
@@ -648,7 +674,7 @@
    "score": {
     "reasoning": 77,
     "coding": 91,
-    "chinese": 87,
+    "chinese": 86,
     "multimodal": 89,
     "longtext": 85,
     "cost": 77,
@@ -693,7 +719,7 @@
    "score": {
     "reasoning": 74,
     "coding": 95,
-    "chinese": 87,
+    "chinese": 86,
     "multimodal": 89,
     "longtext": 85,
     "cost": 77,
@@ -742,7 +768,7 @@
     "multimodal": 78,
     "longtext": 86,
     "cost": 94,
-    "speed": 69,
+    "speed": 70,
     "privacy": 89,
     "ecosystem": 85,
     "creative": 87
@@ -787,7 +813,7 @@
     "multimodal": 81,
     "longtext": 84,
     "cost": 77,
-    "speed": 89,
+    "speed": 95,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -832,7 +858,7 @@
     "multimodal": 65,
     "longtext": 88,
     "cost": 86,
-    "speed": 88,
+    "speed": 90,
     "privacy": 84,
     "ecosystem": 83,
     "creative": 83
@@ -903,7 +929,7 @@
     "multimodal": 72,
     "longtext": 94,
     "cost": 87,
-    "speed": 66,
+    "speed": 67,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 79
@@ -1100,6 +1126,25 @@
    "power": 80
   },
   {
+   "name": "K2 Horizon 375B A23B",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 65,
+    "coding": 69,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 87,
+    "cost": 76,
+    "speed": 100,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "AutomationBench 37.2，GPQA 87.3",
+   "updated_at": "2026-09-18",
+   "power": 80
+  },
+  {
    "name": "Mistral Large 4",
    "vendor": "海外",
    "score": {
@@ -1109,7 +1154,7 @@
     "multimodal": 69,
     "longtext": 88,
     "cost": 77,
-    "speed": 84,
+    "speed": 85,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1180,7 +1225,7 @@
     "multimodal": 85,
     "longtext": 90,
     "cost": 71,
-    "speed": 85,
+    "speed": 86,
     "privacy": 74,
     "ecosystem": 78,
     "creative": 72
@@ -1193,32 +1238,6 @@
     "how": "thinking budget 可以调，也能设成 0 直接关掉",
     "advice": "批量跑的小任务关掉，需要多步推理的再开",
     "why": "思考档位越高延迟越明显，价格随推理 token 一起上涨"
-   },
-   "power": 79
-  },
-  {
-   "name": "Qwen3.8-27B",
-   "vendor": "国产",
-   "score": {
-    "reasoning": 68,
-    "coding": 82,
-    "chinese": 82,
-    "multimodal": 69,
-    "longtext": 89,
-    "cost": 82,
-    "speed": 66,
-    "privacy": 85,
-    "ecosystem": 84,
-    "creative": 82
-   },
-   "brief": "SWE-bench 86.0，AutomationBench 48.2",
-   "updated_at": "2026-08-24",
-   "tier": {
-    "key": "qwen",
-    "label": "思考开关",
-    "how": "深度思考模式可以开关",
-    "advice": "客服、摘要这类关掉，解题和写代码再开",
-    "why": "开着更准，但更慢更贵，简单任务上纯属浪费"
    },
    "power": 79
   },
@@ -1303,7 +1322,7 @@
     "multimodal": 75,
     "longtext": 91,
     "cost": 96,
-    "speed": 83,
+    "speed": 82,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1403,6 +1422,32 @@
    "power": 78
   },
   {
+   "name": "Qwen3.8-27B",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 68,
+    "coding": 82,
+    "chinese": 82,
+    "multimodal": 69,
+    "longtext": 89,
+    "cost": 82,
+    "speed": 65,
+    "privacy": 85,
+    "ecosystem": 84,
+    "creative": 82
+   },
+   "brief": "SWE-bench 86.0，AutomationBench 48.2",
+   "updated_at": "2026-08-24",
+   "tier": {
+    "key": "qwen",
+    "label": "思考开关",
+    "how": "深度思考模式可以开关",
+    "advice": "客服、摘要这类关掉，解题和写代码再开",
+    "why": "开着更准，但更慢更贵，简单任务上纯属浪费"
+   },
+   "power": 78
+  },
+  {
    "name": "Inkling Small",
    "vendor": "海外",
    "score": {
@@ -1412,7 +1457,7 @@
     "multimodal": 63,
     "longtext": 81,
     "cost": 88,
-    "speed": 94,
+    "speed": 96,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1463,7 +1508,7 @@
    "name": "Nemotron 3 Ultra 550B A55B",
    "vendor": "海外",
    "score": {
-    "reasoning": 66,
+    "reasoning": 67,
     "coding": 78,
     "chinese": 80,
     "multimodal": 75,
@@ -1475,25 +1520,6 @@
     "creative": 78
    },
    "brief": "SWE-bench 69.0，AutomationBench 3.0",
-   "updated_at": "2026-09-18",
-   "power": 78
-  },
-  {
-   "name": "K2 Horizon 375B A23B",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 65,
-    "coding": 69,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 87,
-    "cost": 76,
-    "speed": 88,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "AutomationBench 37.2，GPQA 87.3",
    "updated_at": "2026-09-18",
    "power": 78
   },
@@ -1545,13 +1571,39 @@
     "multimodal": 60,
     "longtext": 81,
     "cost": 96,
-    "speed": 69,
+    "speed": 70,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 80
    },
    "brief": "LMArena Code 1634.8，ProofBench 63.0",
    "updated_at": "2026-09-18",
+   "power": 78
+  },
+  {
+   "name": "Quasar 438B (Max, Based on GLM-5.2)",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 55,
+    "coding": 77,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 82,
+    "cost": 96,
+    "speed": 89,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "SciCode 48.1，GPQA 73.2",
+   "updated_at": "2026-09-18",
+   "tier": {
+    "key": "zhipu",
+    "label": "思考开关",
+    "how": "深度思考模式可以开关",
+    "advice": "常规任务关掉，复杂推理再开",
+    "why": "开着思考会拉长响应时间，简单任务上不划算"
+   },
    "power": 78
   },
   {
@@ -1571,25 +1623,6 @@
    },
    "brief": "SciCode 42.4，HLE 22.6",
    "updated_at": "2026-10-06",
-   "power": 78
-  },
-  {
-   "name": "Beam",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 71,
-    "coding": 73,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 85,
-    "cost": 77,
-    "speed": 75,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "APEX-SWE 41.6，GPQA 90.6",
-   "updated_at": "2026-10-08",
    "power": 78
   },
   {
@@ -1631,32 +1664,6 @@
    "power": 77
   },
   {
-   "name": "Quasar 438B (Max, Based on GLM-5.2)",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 55,
-    "coding": 77,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 82,
-    "cost": 96,
-    "speed": 87,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "SciCode 48.1，GPQA 73.2",
-   "updated_at": "2026-09-18",
-   "tier": {
-    "key": "zhipu",
-    "label": "思考开关",
-    "how": "深度思考模式可以开关",
-    "advice": "常规任务关掉，复杂推理再开",
-    "why": "开着思考会拉长响应时间，简单任务上不划算"
-   },
-   "power": 77
-  },
-  {
    "name": "Muse Glimmer",
    "vendor": "海外",
    "score": {
@@ -1666,7 +1673,7 @@
     "multimodal": 64,
     "longtext": 91,
     "cost": 88,
-    "speed": 82,
+    "speed": 85,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1730,7 +1737,7 @@
     "multimodal": 75,
     "longtext": 91,
     "cost": 88,
-    "speed": 79,
+    "speed": 81,
     "privacy": 79,
     "ecosystem": 68,
     "creative": 65
@@ -1835,32 +1842,6 @@
    "power": 74
   },
   {
-   "name": "GPT-6.1 Terra",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 57,
-    "coding": 56,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 85,
-    "cost": 77,
-    "speed": 75,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "",
-   "updated_at": "2026-10-27",
-   "tier": {
-    "key": "openai",
-    "label": "推理档位",
-    "how": "reasoning_effort 有 low / medium / high 三档",
-    "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
-    "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
-   },
-   "power": 74
-  },
-  {
    "name": "腾讯混元 HY3",
    "vendor": "国产",
    "score": {
@@ -1925,25 +1906,6 @@
    "power": 73
   },
   {
-   "name": "North Mini Code",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 48,
-    "coding": 64,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 60,
-    "cost": 76,
-    "speed": 77,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "GPQA 75.7，SciCode 38.8",
-   "updated_at": "2026-09-18",
-   "power": 72
-  },
-  {
    "name": "G9v3-39A5B",
    "vendor": "国产",
    "score": {
@@ -1961,6 +1923,25 @@
    "brief": "GPQA 80.5，SciCode 36.8",
    "updated_at": "2026-09-18",
    "power": 72
+  },
+  {
+   "name": "North Mini Code",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 48,
+    "coding": 64,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 60,
+    "cost": 76,
+    "speed": 74,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "GPQA 75.7，SciCode 38.8",
+   "updated_at": "2026-09-18",
+   "power": 71
   },
   {
    "name": "K2 Horizon 7B",
