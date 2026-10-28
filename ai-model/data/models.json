@@ -1,6 +1,6 @@
 {
  "version": "1.0",
- "generated_at": "2026-10-27",
+ "generated_at": "2026-10-28",
  "source": "data/rankings/benchmarks.json",
  "dims": [
   "reasoning",
@@ -18,7 +18,7 @@
   "privacy": "由 本土化 70% + API稳定性 30% 推算（榜单无独立隐私维度）",
   "creative": "由 中文能力 45% + 实际调用 30% + 趋势热度 25% 推算（榜单无独立创意维度）"
  },
- "count": 96,
+ "count": 97,
  "models": [
   {
    "name": "DeepSeek V4.1 Flash",
@@ -30,7 +30,7 @@
     "multimodal": 89,
     "longtext": 90,
     "cost": 88,
-    "speed": 89,
+    "speed": 90,
     "privacy": 87,
     "ecosystem": 90,
     "creative": 92
@@ -56,7 +56,7 @@
     "multimodal": 97,
     "longtext": 88,
     "cost": 60,
-    "speed": 73,
+    "speed": 75,
     "privacy": 77,
     "ecosystem": 92,
     "creative": 92
@@ -108,12 +108,12 @@
     "multimodal": 89,
     "longtext": 86,
     "cost": 72,
-    "speed": 77,
+    "speed": 78,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 88
    },
-   "brief": "LMArena Code 1674.2 全场第一，AutomationBench 77.5 全场第一",
+   "brief": "AutomationBench 77.5 全场第一，IOI 100.0 前三",
    "updated_at": "2026-10-06",
    "tier": {
     "key": "google",
@@ -121,6 +121,32 @@
     "how": "thinking budget 可以调，也能设成 0 直接关掉",
     "advice": "批量跑的小任务关掉，需要多步推理的再开",
     "why": "思考档位越高延迟越明显，价格随推理 token 一起上涨"
+   },
+   "power": 87
+  },
+  {
+   "name": "GPT-6.1 Sol",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 87,
+    "coding": 96,
+    "chinese": 89,
+    "multimodal": 94,
+    "longtext": 90,
+    "cost": 72,
+    "speed": 77,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 84
+   },
+   "brief": "FrontierMath T4 100.0 全场第一，IOI 96.9 前三",
+   "updated_at": "2026-10-06",
+   "tier": {
+    "key": "openai",
+    "label": "推理档位",
+    "how": "reasoning_effort 有 low / medium / high 三档",
+    "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
+    "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
    },
    "power": 87
   },
@@ -134,7 +160,7 @@
     "multimodal": 91,
     "longtext": 88,
     "cost": 94,
-    "speed": 75,
+    "speed": 77,
     "privacy": 86,
     "ecosystem": 87,
     "creative": 93
@@ -173,32 +199,6 @@
     "how": "能给思考过程设一个 token 上限，也能整个关掉",
     "advice": "闲聊和简单问答关掉思考，写代码、读长文再打开",
     "why": "开着思考回复会明显变慢，token 消耗也跟着翻上去"
-   },
-   "power": 86
-  },
-  {
-   "name": "GPT-6.1 Sol",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 87,
-    "coding": 96,
-    "chinese": 89,
-    "multimodal": 94,
-    "longtext": 90,
-    "cost": 72,
-    "speed": 73,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 84
-   },
-   "brief": "FrontierMath T4 100.0 全场第一，IOI 96.9 前三",
-   "updated_at": "2026-10-06",
-   "tier": {
-    "key": "openai",
-    "label": "推理档位",
-    "how": "reasoning_effort 有 low / medium / high 三档",
-    "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
-    "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
    },
    "power": 86
   },
@@ -257,7 +257,7 @@
     "multimodal": 89,
     "longtext": 88,
     "cost": 67,
-    "speed": 89,
+    "speed": 92,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 82
@@ -374,7 +374,7 @@
    "name": "GPT-6.1 Terra",
    "vendor": "海外",
    "score": {
-    "reasoning": 82,
+    "reasoning": 83,
     "coding": 90,
     "chinese": 86,
     "multimodal": 89,
@@ -385,7 +385,7 @@
     "ecosystem": 80,
     "creative": 82
    },
-   "brief": "TB4.0 49.5，Vibe Code 84.0",
+   "brief": "FrontierMath T4 92.7，TB4.0 49.5",
    "updated_at": "2026-10-27",
    "tier": {
     "key": "openai",
@@ -463,7 +463,7 @@
     "ecosystem": 84,
     "creative": 85
    },
-   "brief": "FrontierMath T4 46.3，DeepSWE 69.3",
+   "brief": "GPQA 92.8，AutomationBench 56.2",
    "updated_at": "2026-09-02",
    "tier": {
     "key": "qwen",
@@ -510,7 +510,7 @@
     "multimodal": 80,
     "longtext": 91,
     "cost": 71,
-    "speed": 87,
+    "speed": 85,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 82
@@ -593,7 +593,7 @@
     "ecosystem": 80,
     "creative": 79
    },
-   "brief": "LMArena Code 1672.2 前三，TB Science 12.9",
+   "brief": "LMArena Code 1671.9 全场第一，TB Science 12.9",
    "updated_at": "2026-08-24",
    "tier": {
     "key": "qwen",
@@ -619,7 +619,7 @@
     "ecosystem": 80,
     "creative": 90
    },
-   "brief": "LMArena Code 1631.2，GPQA 92.3",
+   "brief": "LMArena Code 1630.9，GPQA 92.3",
    "updated_at": "2026-08-29",
    "tier": {
     "key": "tencent",
@@ -645,7 +645,7 @@
     "ecosystem": 77,
     "creative": 80
    },
-   "brief": "LMArena Code 1657.2 前三，GPQA 93.5",
+   "brief": "LMArena Code 1656.2 前三，GPQA 93.5",
    "updated_at": "2026-09-03",
    "power": 83
   },
@@ -659,7 +659,7 @@
     "multimodal": 69,
     "longtext": 98,
     "cost": 80,
-    "speed": 93,
+    "speed": 92,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 79
@@ -773,7 +773,7 @@
     "ecosystem": 85,
     "creative": 87
    },
-   "brief": "LMArena Code 1628.8，GPQA 91.7",
+   "brief": "LMArena Code 1628.1，GPQA 91.7",
    "updated_at": "2026-09-07",
    "tier": {
     "key": "qwen",
@@ -794,7 +794,7 @@
     "multimodal": 75,
     "longtext": 91,
     "cost": 89,
-    "speed": 94,
+    "speed": 95,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -818,8 +818,27 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "APEX-SWE 49.1，HLE 43.9",
+   "brief": "SciCode 58.4，HLE 43.9",
    "updated_at": "2026-10-16",
+   "power": 82
+  },
+  {
+   "name": "Beam 1.0",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 70,
+    "coding": 84,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 84,
+    "cost": 86,
+    "speed": 100,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "MysteryMechanism 22.1，IOI 22.8",
+   "updated_at": "2026-10-28",
    "power": 82
   },
   {
@@ -837,7 +856,7 @@
     "ecosystem": 83,
     "creative": 82
    },
-   "brief": "LMArena Code 1654.9，GPQA 93.5",
+   "brief": "LMArena Code 1656.2 前三，GPQA 93.5",
    "updated_at": "2026-08-24",
    "tier": {
     "key": "moonshot",
@@ -858,7 +877,7 @@
     "multimodal": 65,
     "longtext": 88,
     "cost": 86,
-    "speed": 90,
+    "speed": 91,
     "privacy": 84,
     "ecosystem": 83,
     "creative": 83
@@ -929,7 +948,7 @@
     "multimodal": 72,
     "longtext": 94,
     "cost": 87,
-    "speed": 67,
+    "speed": 71,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 79
@@ -948,12 +967,12 @@
     "multimodal": 74,
     "longtext": 82,
     "cost": 74,
-    "speed": 76,
+    "speed": 79,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 82
    },
-   "brief": "LMArena Code 1637.9，AutomationBench 65.6",
+   "brief": "LMArena Code 1637.2，AutomationBench 65.6",
    "updated_at": "2026-09-18",
    "tier": {
     "key": "xai",
@@ -969,17 +988,17 @@
    "vendor": "国产",
    "score": {
     "reasoning": 80,
-    "coding": 86,
+    "coding": 90,
     "chinese": 78,
     "multimodal": 76,
     "longtext": 86,
     "cost": 93,
-    "speed": 82,
+    "speed": 81,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 77
    },
-   "brief": "HLE 48.0，TB4.0 25.2",
+   "brief": "DeepSWE 73.7，HLE 48.0",
    "updated_at": "2026-10-20",
    "power": 81
   },
@@ -1036,7 +1055,7 @@
     "ecosystem": 80,
     "creative": 73
    },
-   "brief": "ProofBench 77.0，SWE-bench 79.6",
+   "brief": "ProofBench 77.0，APEX-SWE 46.4",
    "updated_at": "2026-09-18",
    "tier": {
     "key": "anthropic",
@@ -1109,7 +1128,7 @@
     "multimodal": 75,
     "longtext": 86,
     "cost": 79,
-    "speed": 76,
+    "speed": 72,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 82
@@ -1154,7 +1173,7 @@
     "multimodal": 69,
     "longtext": 88,
     "cost": 77,
-    "speed": 85,
+    "speed": 82,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1162,32 +1181,6 @@
    "brief": "AutomationBench 59.9，Vibe Code 78.4",
    "updated_at": "2026-10-07",
    "power": 80
-  },
-  {
-   "name": "DeepSeek Pro",
-   "vendor": "国产",
-   "score": {
-    "reasoning": 74,
-    "coding": 83,
-    "chinese": 80,
-    "multimodal": 65,
-    "longtext": 87,
-    "cost": 78,
-    "speed": 81,
-    "privacy": 84,
-    "ecosystem": 77,
-    "creative": 76
-   },
-   "brief": "GPQA 92.4，DeepSWE 62.7",
-   "updated_at": "2026-08-24",
-   "tier": {
-    "key": "deepseek",
-    "label": "双版本搭配",
-    "how": "Pro 和 Flash 是两个独立模型，按任务分派",
-    "advice": "日常问答走 Flash，难题再交给 Pro",
-    "why": "Flash 便宜且快得多，拿 Pro 干简单活是最常见的浪费"
-   },
-   "power": 79
   },
   {
    "name": "DeepSeek Flash",
@@ -1225,7 +1218,7 @@
     "multimodal": 85,
     "longtext": 90,
     "cost": 71,
-    "speed": 86,
+    "speed": 87,
     "privacy": 74,
     "ecosystem": 78,
     "creative": 72
@@ -1322,7 +1315,7 @@
     "multimodal": 75,
     "longtext": 91,
     "cost": 96,
-    "speed": 82,
+    "speed": 81,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1396,6 +1389,32 @@
    "power": 79
   },
   {
+   "name": "DeepSeek Pro",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 74,
+    "coding": 83,
+    "chinese": 80,
+    "multimodal": 65,
+    "longtext": 87,
+    "cost": 78,
+    "speed": 77,
+    "privacy": 84,
+    "ecosystem": 77,
+    "creative": 76
+   },
+   "brief": "GPQA 92.4，DeepSWE 62.7",
+   "updated_at": "2026-08-24",
+   "tier": {
+    "key": "deepseek",
+    "label": "双版本搭配",
+    "how": "Pro 和 Flash 是两个独立模型，按任务分派",
+    "advice": "日常问答走 Flash，难题再交给 Pro",
+    "why": "Flash 便宜且快得多，拿 Pro 干简单活是最常见的浪费"
+   },
+   "power": 78
+  },
+  {
    "name": "Grok 4.6",
    "vendor": "海外",
    "score": {
@@ -1431,7 +1450,7 @@
     "multimodal": 69,
     "longtext": 89,
     "cost": 82,
-    "speed": 65,
+    "speed": 64,
     "privacy": 85,
     "ecosystem": 84,
     "creative": 82
@@ -1445,6 +1464,25 @@
     "advice": "客服、摘要这类关掉，解题和写代码再开",
     "why": "开着更准，但更慢更贵，简单任务上纯属浪费"
    },
+   "power": 78
+  },
+  {
+   "name": "Inkling",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 62,
+    "coding": 80,
+    "chinese": 80,
+    "multimodal": 61,
+    "longtext": 83,
+    "cost": 78,
+    "speed": 91,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "SWE-bench 77.6，AutomationBench 5.0",
+   "updated_at": "2026-09-18",
    "power": 78
   },
   {
@@ -1508,7 +1546,7 @@
    "name": "Nemotron 3 Ultra 550B A55B",
    "vendor": "海外",
    "score": {
-    "reasoning": 67,
+    "reasoning": 66,
     "coding": 78,
     "chinese": 80,
     "multimodal": 75,
@@ -1571,12 +1609,12 @@
     "multimodal": 60,
     "longtext": 81,
     "cost": 96,
-    "speed": 70,
+    "speed": 72,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 80
    },
-   "brief": "LMArena Code 1634.8，ProofBench 63.0",
+   "brief": "LMArena Code 1637.6，ProofBench 63.0",
    "updated_at": "2026-09-18",
    "power": 78
   },
@@ -1590,7 +1628,7 @@
     "multimodal": 75,
     "longtext": 82,
     "cost": 96,
-    "speed": 89,
+    "speed": 90,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1645,25 +1683,6 @@
    "power": 78
   },
   {
-   "name": "Inkling",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 62,
-    "coding": 80,
-    "chinese": 80,
-    "multimodal": 61,
-    "longtext": 83,
-    "cost": 78,
-    "speed": 90,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "SWE-bench 77.6，AutomationBench 5.0",
-   "updated_at": "2026-09-18",
-   "power": 77
-  },
-  {
    "name": "Solar Open2 250B",
    "vendor": "海外",
    "score": {
@@ -1692,7 +1711,7 @@
     "multimodal": 64,
     "longtext": 91,
     "cost": 88,
-    "speed": 85,
+    "speed": 86,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1813,7 +1832,7 @@
     "multimodal": 75,
     "longtext": 67,
     "cost": 81,
-    "speed": 76,
+    "speed": 77,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1870,7 +1889,7 @@
     "multimodal": 68,
     "longtext": 85,
     "cost": 93,
-    "speed": 77,
+    "speed": 78,
     "privacy": 87,
     "ecosystem": 79,
     "creative": 72
@@ -1953,7 +1972,7 @@
     "multimodal": 75,
     "longtext": 60,
     "cost": 76,
-    "speed": 74,
+    "speed": 75,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -2020,6 +2039,25 @@
    "power": 70
   },
   {
+   "name": "Granite 4.2 8B",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 41,
+    "coding": 53,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 60,
+    "cost": 100,
+    "speed": 70,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "brief": "GPQA 63.1，SciCode 31.5",
+   "updated_at": "2026-09-18",
+   "power": 69
+  },
+  {
    "name": "MiniCPM5-2B",
    "vendor": "国产",
    "score": {
@@ -2058,25 +2096,6 @@
    "power": 69
   },
   {
-   "name": "Granite 4.2 8B",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 41,
-    "coding": 53,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 60,
-    "cost": 100,
-    "speed": 66,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "brief": "GPQA 63.1，SciCode 31.5",
-   "updated_at": "2026-09-18",
-   "power": 68
-  },
-  {
    "name": "Ling 3.0 Tiny",
    "vendor": "国产",
    "score": {
@@ -2105,7 +2124,7 @@
     "multimodal": 75,
     "longtext": 60,
     "cost": 100,
-    "speed": 66,
+    "speed": 69,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
