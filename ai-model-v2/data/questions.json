@@ -479,41 +479,47 @@
           "t": "看截图、照片，告诉我里面是什么",
           "w": {
             "multimodal": 0.8
-          }
+          },
+          "flag": "vision"
         },
         {
           "t": "读图表、认图片里的字",
           "w": {
             "multimodal": 1,
             "reasoning": 0.3
-          }
+          },
+          "flag": "vision"
         },
         {
           "t": "生成图片：海报、插画、配图",
           "w": {
             "multimodal": 0.9,
             "creative": 0.5
-          }
+          },
+          "flag": "image_gen"
         },
         {
           "t": "语音对话：像打电话一样聊",
           "w": {
             "multimodal": 0.8,
             "speed": 0.3
-          }
+          },
+          "flag": "speech"
         },
         {
           "t": "把录音转成文字",
           "w": {
             "multimodal": 0.8
-          }
+          },
+          "flag": "speech"
         },
         {
           "t": "生成视频",
           "w": {
             "multimodal": 1,
             "creative": 0.4
-          }
+          },
+          "flag": "video_gen"
         },
         {
           "t": "都用不上",

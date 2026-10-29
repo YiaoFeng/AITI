@@ -450,7 +450,8 @@ const S = {
   questions:[],
   models:[],
   code:'',
-  pick:null,         // 需求分流题选中的专用方向 vision / image_gen / speech / video_gen
+  pick:null,         // 需求分流题选中的第一个专用方向（vision / image_gen / speech / video_gen）
+  picks:[],          // 多选分流题可以同时勾「做图」和「做视频」，全量放这里
   specialized:null,  // 专用模型推荐池（来自 models.json，无公开基准、不排名）
   /* 读者在用的模型，库里精确 name。**位置即角色：self[0]=主力，self[1]=备用。**
      只有主力进雷达图和结论，备用只在结论里报一个匹配度——「值不值得换」这个问题
@@ -968,7 +969,10 @@ function renderQ(){
       if(!multi){
         S.answers[q.id] = i;
         // 需求分流题（带 flag 选项的题）：把选中的专用方向带进报告。
-        if(q.options.some(o=>o.flag)) S.pick = q.options[i].flag || null;
+        if(q.options.some(o=>o.flag)){
+          S.pick = q.options[i].flag || null;
+          S.picks = S.pick ? [S.pick] : [];
+        }
         document.querySelectorAll('.opt').forEach(x=>x.classList.toggle('pick', x===b));
         $('#q-next').disabled = false;
         setTimeout(next, 260);
@@ -990,6 +994,13 @@ function renderQ(){
         }
       }
       S.answers[q.id] = arr;
+      /* 多选分流题（第 9 题）：看图、出图、语音、视频可以同时勾。
+         勾了几个方向，报告里就出几组专用模型——去重是因为「看截图」和
+         「读图表」两个选项都指向 vision，勾两个不该出两张一样的卡。 */
+      if(q.options.some(o=>o.flag)){
+        S.picks = [...new Set(arr.map(i=>q.options[i].flag).filter(Boolean))];
+        S.pick = S.picks[0] || null;
+      }
       renderQ();
       $('#q-next').disabled = !arr.length;
       return;
@@ -1397,9 +1408,10 @@ function finish(){
 
   /* 选了专用方向的用户，冠军卡后面补一句衔接。不写这句，上面推的是个文字模型、
      下面说「这类需求通用模型干不好」，读起来像自己拆自己的台。 */
-  const spg = S.pick && S.specialized &&
-              (S.specialized.groups || []).find(x => x.key === S.pick);
-  if (spg) h += `<div class="pickhint">你选的「${esc(spg.label)}」通用模型做不好，
+  const spgs = (S.picks && S.picks.length ? S.picks : (S.pick ? [S.pick] : []))
+    .map(k => (S.specialized && (S.specialized.groups || []).find(x => x.key === k)))
+    .filter(Boolean);
+  if (spgs.length) h += `<div class="pickhint">你选的「${spgs.map(g=>esc(g.label)).join('」「')}」通用模型做不好，
     往下翻，单独给你列了这几款</div>`;
 
   /* 读者勾了自己在用的款，就在冠军卡下面直接回答「换不换」。
@@ -1517,12 +1529,16 @@ function finish(){
    数据来自 models.json 的 specialized（源头 data/rankings/specialized_pool.json）。 */
 function specialBlock(){
   const box = S.specialized;
-  if(!S.pick || !box || !box.groups) return '';
-  const g = box.groups.find(x=>x.key===S.pick);
-  if(!g || !g.picks || !g.picks.length) return '';
+  if(!box || !box.groups) return '';
+  const keys = (S.picks && S.picks.length) ? S.picks : (S.pick ? [S.pick] : []);
+  const gs = keys.map(k => box.groups.find(x => x.key === k))
+                 .filter(g => g && g.picks && g.picks.length);
+  if(!gs.length) return '';
 
-  return `<div class="card spec">
-    <div class="spec-tag">这类需求，通用大模型干不好</div>
+  /* 一组一张卡。读者勾了「做图」又勾了「做视频」时，两张卡并排往下排，
+     比把两组塞进一张卡更好读——每组自己的取舍标准不一样。 */
+  return gs.map((g, idx) => `<div class="card spec">
+    ${idx === 0 ? '<div class="spec-tag">这类需求，通用大模型干不好</div>' : ''}
     <div class="spec-h">${esc(g.label)}</div>
     <div class="spec-p">${esc(g.intro)}</div>
     ${g.picks.map(p=>`<div class="tier"><div class="ic">专</div><div class="tx">
@@ -1530,7 +1546,7 @@ function specialBlock(){
       <p>${esc(p.why)}${p.caveat?'（'+esc(p.caveat)+'）':''}</p></div></div>`).join('')}
     <div class="spec-note">这几款厂商都没有公布公开基准，分数没法互相比，
       所以这里只按能力方向推荐、不做排名，也不给分数。</div>
-  </div>`;
+  </div>`).join('');
 }
 
 /* ── 时间戳 ── */
