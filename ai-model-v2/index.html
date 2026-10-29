@@ -493,6 +493,9 @@ async function boot(){
   S.models = m.models || [];
   S.modelMeta = { generated_at:m.generated_at, derived:m._derived };
   S.specialized = m.specialized || null;
+  // 各方向头名（gen_models.py 生成）。「方向最强」块读它，不在这里另算——
+  // 十维的口径只留生成器一处，前端再算一遍迟早两边打架。
+  S.leaders = m.leaders || null;
 }
 
 /* ══════════ 首页 · 你现在用哪款 ══════════
@@ -1120,6 +1123,111 @@ function selfBlockHTML(top, w, need){
   </div>`;
 }
 
+/* ══════════ 某一方向特别突出：这个方向最强 + 怎么和 Agent 款搭配 ══════════
+
+   为什么需要这一块：综合匹配度是十维加权后的平均，恰好会把「编程 97、别的 75」
+   这种专精款压平。读者的需求如果都压在一件事上，按综合分推荐给他的可能是
+   样样都行、但那件事不是最顶尖的一款。所以当一个方向占到需求的大头时，
+   单独把这个方向的头名拎出来，并说明它和 Agent 型模型怎么分工。
+
+   判定看两件事：占比够大（≥25%）、且和第二名拉得开（≥1.5 倍）。
+   只满足一条就不说——权重是读者点出来的，不该反过来教训他「你其实没那么在意」。 */
+const FOCUS_SHARE = 0.25;
+const FOCUS_RATIO = 1.5;
+
+/* 头名只在**满足硬条件的款**里挑（pool 就是 rankAll 选出来的那批）。
+   不能直接用全库头名：读者设了预算、地区这类硬条件后，全库最强的往往正是被
+   筛掉的那一款，推给他等于无视他自己定的规则。全库头名只在旁边提一句
+   「它更强，但不满足你的条件」，让他自己决定要不要放宽。 */
+function leaderOf(k, pool){
+  const sc = m => k === 'agent' ? m.agent : (m.score || {})[k];
+  const cand = (pool && pool.length ? pool : S.models).filter(m => typeof sc(m) === 'number');
+  if(!cand.length) return null;
+  const best = cand.slice().sort((a,b)=> sc(b)-sc(a) || (b.power||0)-(a.power||0))[0];
+  return {name:best.name, vendor:best.vendor, score:sc(best), power:best.power};
+}
+
+function focusBlock(top, need, pool){
+  if(!need.length) return '';
+  const total = need.reduce((s,p)=>s+p[1], 0);
+  if(total <= 0) return '';
+  const [k, v] = need[0];
+  /* 成本单独成块（第 5、6 节讲省钱），不掺进「方向尖子」：
+     「最省的那款 + 再配一款强的」这两句话放在一起会互相拆台。 */
+  if(k === 'cost') return '';
+  const second = need[1] ? need[1][1] : 0;
+  if(v/total < FOCUS_SHARE) return '';
+  if(second > 0 && v < second * FOCUS_RATIO) return '';
+
+  const lead = leaderOf(k, pool);
+  if(!lead) return '';
+  const cn = DIM_CN[k] || k;
+  const leadM = S.models.find(m => m.name === lead.name) || null;
+  const topScore = (top.score || {})[k];
+  const share = Math.round(v/total*100);
+  const times = second > 0 ? (v/second).toFixed(1) : null;
+
+  /* 左卡：这个方向的尖子 */
+  let leadDs;
+  if(lead.name === top.name){
+    leadDs = `它就是上面的首选，${cn}这一项在满足你条件的款里最高，不用再另挑一款。`;
+  } else if(typeof topScore === 'number'){
+    leadDs = `首选 ${top.name} 综合更高，但${cn}这一项是 ${topScore} 分，比它低 ${lead.score - topScore} 分。`;
+  } else {
+    leadDs = `只看${cn}，它比首选更专。`;
+  }
+
+  /* 全库头名被硬条件筛掉时说一句，别让读者以为这个方向真的只有这么强。
+     数据照实给，放宽与否是他自己的决定。 */
+  const canon = (S.leaders || {})[k];
+  let excl = '';
+  if(canon && canon.name !== lead.name && !(pool || []).some(m => m.name === canon.name)){
+    excl = `${canon.name} 这一项是 ${canon.score} 分，更高，但它不满足你选的硬条件，没有参与排名。`;
+  }
+
+  /* 右卡：Agent 搭配。用户要的就是这句「可以配一款 Agent 强的组合使用」 */
+  const ag = leaderOf('agent', pool);
+  const leadAg = leadM && typeof leadM.agent === 'number' ? leadM.agent : null;
+  let agName, agVal, agDs, verdict;
+
+  if(!ag){
+    agName = '不用另配'; agVal = '';
+    agDs = '这一项目前没有可比的执行分，先按上面的选。';
+    verdict = `如果${cn}占了你大部分工作量，就选 ${lead.name}；其余杂活顺手交给手边的工具做。`;
+  } else if(lead.name === ag.name){
+    agName = '它自己就行'; agVal = '';
+    agDs = `它自己拆步骤、调工具跑完整个流程的能力也是库里最强的（Agent 执行 ${ag.score} 分），不用再配一款。`;
+    verdict = `把${cn}的活整块交给 ${lead.name} 就行——判断和跑流程它都能自己扛。`;
+  } else if(leadAg === null){
+    agName = ag.name; agVal = ag.score;
+    agDs = `它可以领流程、调工具，把 ${lead.name} 当成出方案的那一环。`;
+    verdict = `常用做法是让 ${ag.name} 拆步骤、调工具，中间要用到${cn}时交给 ${lead.name}。`;
+  } else if(leadAg >= ag.score - 5){
+    agName = ag.name; agVal = ag.score;
+    agDs = `${lead.name} 自己也能跑流程（Agent 执行 ${leadAg} 分），配上它只是再稳一点。`;
+    verdict = `一款就够用：${lead.name} 在${cn}上是尖子，自己也能拆步骤跑流程。`;
+  } else {
+    agName = ag.name; agVal = ag.score;
+    agDs = `${lead.name} 自己拆步骤、调工具跑完整条流程是 ${leadAg} 分，不是它的强项；这款是 ${ag.score} 分。`;
+    verdict = `组合起来用更划算：让 ${ag.name} 领流程、调工具，${cn}这块交给 ${lead.name}。`;
+  }
+
+  return `<div class="card focusdir" id="r-focus">
+    <div class="sec-t">你有一个方向特别突出：${esc(cn)}</div>
+    <div class="muted" style="margin-bottom:13px">这一项占了你全部需求的 ${share}%${times ? `，是第二名（${esc(DIM_CN[need[1][0]] || need[1][0])}）的 ${times} 倍` : ''}，结果就按这个来挑</div>
+    <div class="row2">
+      <div class="alt"><div class="nm">这个方向最强 · ${esc(lead.name)}</div>
+        <div class="mt">${lead.score}<span>分 ${esc(cn)}</span></div>
+        <div class="ds">${esc(leadDs)}</div></div>
+      <div class="alt"><div class="nm">搭配 · ${esc(agName)}</div>
+        <div class="mt">${agVal !== '' ? agVal : '—'}<span>${agVal !== '' ? '分 Agent 执行' : '另配一款'}</span></div>
+        <div class="ds">${esc(agDs)}</div></div>
+    </div>
+    ${excl ? `<div class="muted" style="margin-top:10px;font-size:12.5px;line-height:1.6">${esc(excl)}</div>` : ''}
+    <div class="verdict">${esc(verdict)}</div>
+  </div>`;
+}
+
 /* ══════════ 首选 vs 你的主力 · 能力雷达 ══════════
    为什么是雷达不是横条：横条逐维报数，读者要自己把几条竖着对读、在脑子里拼形状；
    「换过去值不值」问的其实是形状像不像——你最在意的那几维上，两个多边形哪边鼓出来，
@@ -1297,6 +1405,10 @@ function finish(){
   /* 读者勾了自己在用的款，就在冠军卡下面直接回答「换不换」。
      一个都没勾就整块不渲染——空壳比没有更糟。 */
   h += selfBlockHTML(top, w, need);
+
+  /* 某个方向占了大头，就把这个方向的尖子和搭配方式单独说清楚。
+     不突出的用户整块不渲染——十维都差不多还在挑「尖子」，纯属噪声。 */
+  h += focusBlock(top, need, all);
 
   /* 需求画像 */
   h += `<div class="card"><div class="sec-t"><span class="n">1</span>你的需求优先级</div>

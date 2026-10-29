@@ -1,6 +1,6 @@
 {
  "version": "1.0",
- "generated_at": "2026-10-28",
+ "generated_at": "2026-10-29",
  "source": "data/rankings/benchmarks.json",
  "dims": [
   "reasoning",
@@ -35,7 +35,8 @@
     "ecosystem": 90,
     "creative": 92
    },
-   "brief": "DeepSWE 77.0，AutomationBench 68.9",
+   "agent": 79,
+   "brief": "fc2 28.5 前三，AutomationBench 68.9",
    "updated_at": "2026-10-17",
    "tier": {
     "key": "deepseek",
@@ -43,6 +44,33 @@
     "how": "Pro 和 Flash 是两个独立模型，按任务分派",
     "advice": "日常问答走 Flash，难题再交给 Pro",
     "why": "Flash 便宜且快得多，拿 Pro 干简单活是最常见的浪费"
+   },
+   "power": 89
+  },
+  {
+   "name": "Claude Opus 5.5",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 92,
+    "coding": 96,
+    "chinese": 90,
+    "multimodal": 99,
+    "longtext": 93,
+    "cost": 67,
+    "speed": 80,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 84
+   },
+   "agent": 94,
+   "brief": "HLE 61.4 全场第一，APEX-SWE 67.6 全场第一",
+   "updated_at": "2026-09-18",
+   "tier": {
+    "key": "anthropic",
+    "label": "思考预算",
+    "how": "能给思考过程设一个 token 上限，也能整个关掉",
+    "advice": "闲聊和简单问答关掉思考，写代码、读长文再打开",
+    "why": "开着思考回复会明显变慢，token 消耗也跟着翻上去"
    },
    "power": 89
   },
@@ -61,6 +89,7 @@
     "ecosystem": 92,
     "creative": 92
    },
+   "agent": 91,
    "brief": "GPQA 96.0 全场第一，IOI 100.0 全场第一",
    "updated_at": "2026-09-04",
    "tier": {
@@ -69,32 +98,6 @@
     "how": "reasoning_effort 有 low / medium / high 三档",
     "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
     "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
-   },
-   "power": 88
-  },
-  {
-   "name": "Claude Opus 5.5",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 91,
-    "coding": 96,
-    "chinese": 90,
-    "multimodal": 99,
-    "longtext": 93,
-    "cost": 67,
-    "speed": 80,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 84
-   },
-   "brief": "HLE 61.4 全场第一，APEX-SWE 67.6 全场第一",
-   "updated_at": "2026-09-18",
-   "tier": {
-    "key": "anthropic",
-    "label": "思考预算",
-    "how": "能给思考过程设一个 token 上限，也能整个关掉",
-    "advice": "闲聊和简单问答关掉思考，写代码、读长文再打开",
-    "why": "开着思考回复会明显变慢，token 消耗也跟着翻上去"
    },
    "power": 88
   },
@@ -113,6 +116,7 @@
     "ecosystem": 80,
     "creative": 88
    },
+   "agent": 91,
    "brief": "AutomationBench 77.5 全场第一，IOI 100.0 前三",
    "updated_at": "2026-10-06",
    "tier": {
@@ -139,6 +143,7 @@
     "ecosystem": 80,
     "creative": 84
    },
+   "agent": 89,
    "brief": "FrontierMath T4 100.0 全场第一，IOI 96.9 前三",
    "updated_at": "2026-10-06",
    "tier": {
@@ -165,6 +170,7 @@
     "ecosystem": 87,
     "creative": 93
    },
+   "agent": 81,
    "brief": "SWE-bench 92.0，AutomationBench 60.4",
    "updated_at": "2026-08-26",
    "tier": {
@@ -191,7 +197,8 @@
     "ecosystem": 89,
     "creative": 87
    },
-   "brief": "ProofBench 100.0 全场第一，ProgramBench 7.0 前三",
+   "agent": 89,
+   "brief": "ProofBench 100.0 全场第一，fc2 31.6 全场第一",
    "updated_at": "2026-09-02",
    "tier": {
     "key": "anthropic",
@@ -217,6 +224,7 @@
     "ecosystem": 80,
     "creative": 77
    },
+   "agent": 93,
    "brief": "Vibe Code 92.4 全场第一，TB4.0 64.1 前三",
    "updated_at": "2026-10-06",
    "tier": {
@@ -232,7 +240,7 @@
    "name": "Muse Wonder Full",
    "vendor": "海外",
    "score": {
-    "reasoning": 88,
+    "reasoning": 87,
     "coding": 96,
     "chinese": 86,
     "multimodal": 89,
@@ -243,7 +251,8 @@
     "ecosystem": 80,
     "creative": 82
    },
-   "brief": "DeepSWE 79.0 全场第一，TB4.0 58.1",
+   "agent": 96,
+   "brief": "DeepSWE 79.0 全场第一，hled 48.5",
    "updated_at": "2026-10-13",
    "power": 86
   },
@@ -262,7 +271,8 @@
     "ecosystem": 80,
     "creative": 82
    },
-   "brief": "DeepSWE 78.8 前三，TB4.0 49.5",
+   "agent": 90,
+   "brief": "DeepSWE 78.8 前三，hled 39.0",
    "updated_at": "2026-10-13",
    "power": 86
   },
@@ -281,6 +291,7 @@
     "ecosystem": 88,
     "creative": 86
    },
+   "agent": 86,
    "brief": "HLE 55.5，Vibe Code 90.3",
    "updated_at": "2026-09-01",
    "tier": {
@@ -307,6 +318,7 @@
     "ecosystem": 80,
     "creative": 82
    },
+   "agent": 75,
    "brief": "GPQA 92.8，SWE-bench 79.6",
    "updated_at": "2026-09-18",
    "tier": {
@@ -333,6 +345,7 @@
     "ecosystem": 80,
     "creative": 81
    },
+   "agent": 84,
    "brief": "FrontierMath T4 90.0，Code Migration 57.2",
    "updated_at": "2026-09-18",
    "tier": {
@@ -359,6 +372,7 @@
     "ecosystem": 80,
     "creative": 82
    },
+   "agent": 99,
    "brief": "TB4.0 63.6 前三，DeepSWE 75.5",
    "updated_at": "2026-10-24",
    "tier": {
@@ -374,7 +388,7 @@
    "name": "GPT-6.1 Terra",
    "vendor": "海外",
    "score": {
-    "reasoning": 83,
+    "reasoning": 84,
     "coding": 90,
     "chinese": 86,
     "multimodal": 89,
@@ -385,6 +399,7 @@
     "ecosystem": 80,
     "creative": 82
    },
+   "agent": 90,
    "brief": "FrontierMath T4 92.7，TB4.0 49.5",
    "updated_at": "2026-10-27",
    "tier": {
@@ -411,6 +426,7 @@
     "ecosystem": 80,
     "creative": 83
    },
+   "agent": 82,
    "brief": "SWE-bench 95.4，AutomationBench 62.2",
    "updated_at": "2026-08-24",
    "tier": {
@@ -437,6 +453,7 @@
     "ecosystem": 76,
     "creative": 79
    },
+   "agent": 68,
    "brief": "GPQA 94.5，IOI 67.8",
    "updated_at": "2026-08-28",
    "tier": {
@@ -453,7 +470,7 @@
    "vendor": "国产",
    "score": {
     "reasoning": 80,
-    "coding": 90,
+    "coding": 91,
     "chinese": 88,
     "multimodal": 86,
     "longtext": 87,
@@ -463,7 +480,8 @@
     "ecosystem": 84,
     "creative": 85
    },
-   "brief": "GPQA 92.8，AutomationBench 56.2",
+   "agent": 77,
+   "brief": "fc2 23.4，GPQA 92.8",
    "updated_at": "2026-09-02",
    "tier": {
     "key": "qwen",
@@ -489,6 +507,7 @@
     "ecosystem": 81,
     "creative": 84
    },
+   "agent": 73,
    "brief": "GPQA 95.3 前三，DeepSWE 73.7",
    "updated_at": "2026-09-03",
    "tier": {
@@ -515,6 +534,7 @@
     "ecosystem": 80,
     "creative": 82
    },
+   "agent": 74,
    "brief": "SWE-bench 95.4，FrontierMath T4 70.7",
    "updated_at": "2026-09-18",
    "tier": {
@@ -531,7 +551,7 @@
    "vendor": "海外",
    "score": {
     "reasoning": 73,
-    "coding": 88,
+    "coding": 89,
     "chinese": 89,
     "multimodal": 78,
     "longtext": 91,
@@ -541,7 +561,8 @@
     "ecosystem": 83,
     "creative": 86
    },
-   "brief": "FrontierMath T4 56.1，AutomationBench 53.2",
+   "agent": 68,
+   "brief": "fc2 25.2，FrontierMath T4 56.1",
    "updated_at": "2026-09-18",
    "tier": {
     "key": "openai",
@@ -567,6 +588,7 @@
     "ecosystem": 83,
     "creative": 81
    },
+   "agent": 83,
    "brief": "SWE-bench 96.2 前三，GPQA 94.1",
    "updated_at": "2026-08-23",
    "tier": {
@@ -593,6 +615,7 @@
     "ecosystem": 80,
     "creative": 79
    },
+   "agent": 81,
    "brief": "LMArena Code 1671.9 全场第一，TB Science 12.9",
    "updated_at": "2026-08-24",
    "tier": {
@@ -619,6 +642,7 @@
     "ecosystem": 80,
     "creative": 90
    },
+   "agent": 65,
    "brief": "LMArena Code 1630.9，GPQA 92.3",
    "updated_at": "2026-08-29",
    "tier": {
@@ -645,6 +669,7 @@
     "ecosystem": 77,
     "creative": 80
    },
+   "agent": 67,
    "brief": "LMArena Code 1656.2 前三，GPQA 93.5",
    "updated_at": "2026-09-03",
    "power": 83
@@ -664,6 +689,7 @@
     "ecosystem": 80,
     "creative": 79
    },
+   "agent": 75,
    "brief": "GPQA 93.5，SciCode 58.9",
    "updated_at": "2026-09-18",
    "power": 83
@@ -683,6 +709,7 @@
     "ecosystem": 80,
     "creative": 82
    },
+   "agent": 73,
    "brief": "DeepSWE 75.2，MysteryMechanism 22.5",
    "updated_at": "2026-09-18",
    "power": 83
@@ -691,7 +718,7 @@
    "name": "Claude Haiku 5.5",
    "vendor": "海外",
    "score": {
-    "reasoning": 80,
+    "reasoning": 79,
     "coding": 92,
     "chinese": 68,
     "multimodal": 89,
@@ -702,6 +729,7 @@
     "ecosystem": 80,
     "creative": 71
    },
+   "agent": 75,
    "brief": "Vibe Code 90.4 前三，MysteryMechanism 35.1",
    "updated_at": "2026-10-08",
    "tier": {
@@ -728,6 +756,7 @@
     "ecosystem": 80,
     "creative": 82
    },
+   "agent": 75,
    "brief": "DeepSWE 74.0，GPQA 91.6",
    "updated_at": "2026-09-18",
    "power": 83
@@ -747,6 +776,7 @@
     "ecosystem": 80,
     "creative": 73
    },
+   "agent": 93,
    "brief": "SWE-bench 97.0 全场第一，ProofBench 99.0",
    "updated_at": "2026-09-01",
    "tier": {
@@ -773,6 +803,7 @@
     "ecosystem": 85,
     "creative": 87
    },
+   "agent": 75,
    "brief": "LMArena Code 1628.1，GPQA 91.7",
    "updated_at": "2026-09-07",
    "tier": {
@@ -799,6 +830,7 @@
     "ecosystem": 80,
     "creative": 78
    },
+   "agent": 75,
    "brief": "DeepSWE 59.7，HLE 39.4",
    "updated_at": "2026-10-06",
    "power": 82
@@ -807,7 +839,7 @@
    "name": "Muse Spark Open",
    "vendor": "海外",
    "score": {
-    "reasoning": 73,
+    "reasoning": 74,
     "coding": 86,
     "chinese": 80,
     "multimodal": 81,
@@ -818,7 +850,8 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "SciCode 58.4，HLE 43.9",
+   "agent": 64,
+   "brief": "hled 26.3，SciCode 58.4",
    "updated_at": "2026-10-16",
    "power": 82
   },
@@ -837,6 +870,7 @@
     "ecosystem": 80,
     "creative": 78
    },
+   "agent": 62,
    "brief": "MysteryMechanism 22.1，IOI 22.8",
    "updated_at": "2026-10-28",
    "power": 82
@@ -856,6 +890,7 @@
     "ecosystem": 83,
     "creative": 82
    },
+   "agent": 70,
    "brief": "LMArena Code 1656.2 前三，GPQA 93.5",
    "updated_at": "2026-08-24",
    "tier": {
@@ -882,6 +917,7 @@
     "ecosystem": 83,
     "creative": 83
    },
+   "agent": 75,
    "brief": "GPQA 91.3，DeepSWE 59.3",
    "updated_at": "2026-08-24",
    "tier": {
@@ -908,6 +944,7 @@
     "ecosystem": 80,
     "creative": 78
    },
+   "agent": 67,
    "brief": "SWE-bench 93.0，FrontierMath T4 61.0",
    "updated_at": "2026-09-18",
    "tier": {
@@ -934,6 +971,7 @@
     "ecosystem": 80,
     "creative": 78
    },
+   "agent": 75,
    "brief": "SciCode 58.8，HLE 46.2",
    "updated_at": "2026-09-18",
    "power": 81
@@ -953,6 +991,7 @@
     "ecosystem": 80,
     "creative": 79
    },
+   "agent": 76,
    "brief": "SciCode 60.9，HLE 49.4",
    "updated_at": "2026-09-18",
    "power": 81
@@ -972,7 +1011,8 @@
     "ecosystem": 80,
     "creative": 82
    },
-   "brief": "LMArena Code 1637.2，AutomationBench 65.6",
+   "agent": 78,
+   "brief": "fc2 28.7 前三，AutomationBench 65.6",
    "updated_at": "2026-09-18",
    "tier": {
     "key": "xai",
@@ -998,7 +1038,8 @@
     "ecosystem": 80,
     "creative": 77
    },
-   "brief": "DeepSWE 73.7，HLE 48.0",
+   "agent": 76,
+   "brief": "hled 28.1，DeepSWE 73.7",
    "updated_at": "2026-10-20",
    "power": 81
   },
@@ -1006,7 +1047,7 @@
    "name": "Ling 3.1 Flash 1019",
    "vendor": "国产",
    "score": {
-    "reasoning": 77,
+    "reasoning": 76,
     "coding": 90,
     "chinese": 80,
     "multimodal": 75,
@@ -1017,7 +1058,8 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "SciCode 56.8，HLE 43.5",
+   "agent": 75,
+   "brief": "hled 17.2，SciCode 56.8",
    "updated_at": "2026-10-23",
    "power": 81
   },
@@ -1036,6 +1078,7 @@
     "ecosystem": 75,
     "creative": 70
    },
+   "agent": 64,
    "brief": "SWE-bench 86.6，HLE 45.5",
    "updated_at": "2026-09-01",
    "power": 80
@@ -1055,6 +1098,7 @@
     "ecosystem": 80,
     "creative": 73
    },
+   "agent": 66,
    "brief": "ProofBench 77.0，APEX-SWE 46.4",
    "updated_at": "2026-09-18",
    "tier": {
@@ -1081,6 +1125,7 @@
     "ecosystem": 80,
     "creative": 78
    },
+   "agent": 75,
    "brief": "SWE-bench 75.0，FrontierMath T4 0.0",
    "updated_at": "2026-09-18",
    "tier": {
@@ -1107,6 +1152,7 @@
     "ecosystem": 80,
     "creative": 75
    },
+   "agent": 65,
    "brief": "APEX-SWE 53.6，GPQA 93.1",
    "updated_at": "2026-09-18",
    "tier": {
@@ -1133,6 +1179,7 @@
     "ecosystem": 80,
     "creative": 82
    },
+   "agent": 75,
    "brief": "SWE-bench 78.2，FrontierMath T4 12.2",
    "updated_at": "2026-09-18",
    "tier": {
@@ -1148,7 +1195,7 @@
    "name": "K2 Horizon 375B A23B",
    "vendor": "海外",
    "score": {
-    "reasoning": 65,
+    "reasoning": 66,
     "coding": 69,
     "chinese": 80,
     "multimodal": 75,
@@ -1159,7 +1206,8 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "AutomationBench 37.2，GPQA 87.3",
+   "agent": 59,
+   "brief": "AutomationBench 37.2，hled 10.2",
    "updated_at": "2026-09-18",
    "power": 80
   },
@@ -1167,7 +1215,7 @@
    "name": "Mistral Large 4",
    "vendor": "海外",
    "score": {
-    "reasoning": 70,
+    "reasoning": 71,
     "coding": 86,
     "chinese": 80,
     "multimodal": 69,
@@ -1178,7 +1226,8 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "AutomationBench 59.9，Vibe Code 78.4",
+   "agent": 76,
+   "brief": "AutomationBench 59.9，hled 15.1",
    "updated_at": "2026-10-07",
    "power": 80
   },
@@ -1197,6 +1246,7 @@
     "ecosystem": 81,
     "creative": 80
    },
+   "agent": 72,
    "brief": "TB4.0 18.7，GPQA 90.8",
    "updated_at": "2026-08-24",
    "tier": {
@@ -1223,6 +1273,7 @@
     "ecosystem": 78,
     "creative": 72
    },
+   "agent": 62,
    "brief": "GPQA 94.3，SciCode 58.7",
    "updated_at": "2026-08-24",
    "tier": {
@@ -1249,6 +1300,7 @@
     "ecosystem": 80,
     "creative": 75
    },
+   "agent": 75,
    "brief": "SWE-bench 82.8，FrontierMath T4 29.3",
    "updated_at": "2026-09-18",
    "tier": {
@@ -1275,6 +1327,7 @@
     "ecosystem": 80,
     "creative": 78
    },
+   "agent": 75,
    "brief": "GPQA 93.5，SciCode 54.1",
    "updated_at": "2026-09-18",
    "tier": {
@@ -1301,6 +1354,7 @@
     "ecosystem": 80,
     "creative": 78
    },
+   "agent": 75,
    "brief": "GPQA 90.5，SciCode 48.8",
    "updated_at": "2026-09-18",
    "power": 79
@@ -1320,6 +1374,7 @@
     "ecosystem": 80,
     "creative": 78
    },
+   "agent": 74,
    "brief": "SciCode 47.6，HLE 25.8",
    "updated_at": "2026-10-06",
    "power": 79
@@ -1339,6 +1394,7 @@
     "ecosystem": 80,
     "creative": 78
    },
+   "agent": 60,
    "brief": "TB Science 0.0，IOI 2.4",
    "updated_at": "2026-10-06",
    "power": 79
@@ -1358,6 +1414,7 @@
     "ecosystem": 80,
     "creative": 78
    },
+   "agent": 75,
    "brief": "GPQA 91.0，DeepSWE 57.8",
    "updated_at": "2026-09-18",
    "tier": {
@@ -1373,7 +1430,7 @@
    "name": "Nemotron 3.5 Super VL",
    "vendor": "海外",
    "score": {
-    "reasoning": 67,
+    "reasoning": 69,
     "coding": 74,
     "chinese": 80,
     "multimodal": 75,
@@ -1384,7 +1441,8 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "APEX-SWE 22.3，HLE 30.7",
+   "agent": 72,
+   "brief": "hled 8.8，APEX-SWE 22.3",
    "updated_at": "2026-10-16",
    "power": 79
   },
@@ -1403,6 +1461,7 @@
     "ecosystem": 77,
     "creative": 76
    },
+   "agent": 67,
    "brief": "GPQA 92.4，DeepSWE 62.7",
    "updated_at": "2026-08-24",
    "tier": {
@@ -1429,6 +1488,7 @@
     "ecosystem": 78,
     "creative": 78
    },
+   "agent": 73,
    "brief": "GPQA 94.9 前三，SWE-bench 95.6 前三",
    "updated_at": "2026-09-01",
    "tier": {
@@ -1444,7 +1504,7 @@
    "name": "Qwen3.8-27B",
    "vendor": "国产",
    "score": {
-    "reasoning": 68,
+    "reasoning": 69,
     "coding": 82,
     "chinese": 82,
     "multimodal": 69,
@@ -1455,7 +1515,8 @@
     "ecosystem": 84,
     "creative": 82
    },
-   "brief": "SWE-bench 86.0，AutomationBench 48.2",
+   "agent": 64,
+   "brief": "SWE-bench 86.0，hled 15.3",
    "updated_at": "2026-08-24",
    "tier": {
     "key": "qwen",
@@ -1470,7 +1531,7 @@
    "name": "Inkling",
    "vendor": "海外",
    "score": {
-    "reasoning": 62,
+    "reasoning": 63,
     "coding": 80,
     "chinese": 80,
     "multimodal": 61,
@@ -1481,7 +1542,8 @@
     "ecosystem": 80,
     "creative": 78
    },
-   "brief": "SWE-bench 77.6，AutomationBench 5.0",
+   "agent": 55,
+   "brief": "SWE-bench 77.6，hled 10.6",
    "updated_at": "2026-09-18",
    "power": 78
   },
@@ -1500,6 +1562,7 @@
     "ecosystem": 80,
     "creative": 78
    },
+   "agent": 60,
    "brief": "SWE-bench 82.2，FrontierMath T4 17.1",
    "updated_at": "2026-09-18",
    "power": 78
@@ -1519,6 +1582,7 @@
     "ecosystem": 80,
     "creative": 78
    },
+   "agent": 75,
    "brief": "HLE 43.6，SciCode 52.0",
    "updated_at": "2026-09-18",
    "power": 78
@@ -1538,6 +1602,7 @@
     "ecosystem": 80,
     "creative": 78
    },
+   "agent": 64,
    "brief": "GPQA 85.5，SciCode 42.0",
    "updated_at": "2026-09-18",
    "power": 78
@@ -1557,6 +1622,7 @@
     "ecosystem": 80,
     "creative": 78
    },
+   "agent": 42,
    "brief": "SWE-bench 69.0，AutomationBench 3.0",
    "updated_at": "2026-09-18",
    "power": 78
@@ -1576,6 +1642,7 @@
     "ecosystem": 80,
     "creative": 78
    },
+   "agent": 71,
    "brief": "GPQA 86.4，SciCode 45.5",
    "updated_at": "2026-09-18",
    "power": 78
@@ -1595,6 +1662,7 @@
     "ecosystem": 80,
     "creative": 78
    },
+   "agent": 67,
    "brief": "GPQA 89.2，SciCode 43.3",
    "updated_at": "2026-09-18",
    "power": 78
@@ -1614,6 +1682,7 @@
     "ecosystem": 80,
     "creative": 80
    },
+   "agent": 75,
    "brief": "LMArena Code 1637.6，ProofBench 63.0",
    "updated_at": "2026-09-18",
    "power": 78
@@ -1633,6 +1702,7 @@
     "ecosystem": 80,
     "creative": 78
    },
+   "agent": 75,
    "brief": "SciCode 48.1，GPQA 73.2",
    "updated_at": "2026-09-18",
    "tier": {
@@ -1659,6 +1729,7 @@
     "ecosystem": 80,
     "creative": 78
    },
+   "agent": 65,
    "brief": "SciCode 42.4，HLE 22.6",
    "updated_at": "2026-10-06",
    "power": 78
@@ -1678,6 +1749,7 @@
     "ecosystem": 80,
     "creative": 78
    },
+   "agent": 71,
    "brief": "APEX-SWE 41.6，GPQA 90.6",
    "updated_at": "2026-10-08",
    "power": 78
@@ -1697,6 +1769,7 @@
     "ecosystem": 80,
     "creative": 78
    },
+   "agent": 75,
    "brief": "GPQA 85.7，SciCode 48.0",
    "updated_at": "2026-09-18",
    "power": 77
@@ -1716,6 +1789,7 @@
     "ecosystem": 80,
     "creative": 78
    },
+   "agent": 43,
    "brief": "AutomationBench 6.8，GPQA 83.5",
    "updated_at": "2026-09-18",
    "power": 76
@@ -1735,6 +1809,7 @@
     "ecosystem": 80,
     "creative": 72
    },
+   "agent": 75,
    "brief": "GPQA 90.0，Vibe Code 46.4",
    "updated_at": "2026-09-18",
    "tier": {
@@ -1761,6 +1836,7 @@
     "ecosystem": 80,
     "creative": 78
    },
+   "agent": 65,
    "brief": "HLE 37.0，SciCode 42.2",
    "updated_at": "2026-09-18",
    "power": 76
@@ -1780,6 +1856,7 @@
     "ecosystem": 68,
     "creative": 65
    },
+   "agent": 58,
    "brief": "GPQA 92.9，SWE-bench 75.0",
    "updated_at": "2026-08-24",
    "power": 75
@@ -1799,6 +1876,7 @@
     "ecosystem": 80,
     "creative": 78
    },
+   "agent": 63,
    "brief": "GPQA 85.7，SciCode 41.0",
    "updated_at": "2026-09-18",
    "power": 75
@@ -1818,6 +1896,7 @@
     "ecosystem": 76,
     "creative": 72
    },
+   "agent": 75,
    "brief": "SWE-bench 71.0，ProofBench 16.0",
    "updated_at": "2026-08-24",
    "power": 74
@@ -1837,6 +1916,7 @@
     "ecosystem": 80,
     "creative": 78
    },
+   "agent": 64,
    "brief": "GPQA 88.9，SciCode 36.3",
    "updated_at": "2026-09-18",
    "power": 74
@@ -1856,6 +1936,7 @@
     "ecosystem": 80,
     "creative": 78
    },
+   "agent": 61,
    "brief": "GPQA 82.2，SciCode 40.0",
    "updated_at": "2026-09-18",
    "power": 74
@@ -1875,6 +1956,7 @@
     "ecosystem": 80,
     "creative": 78
    },
+   "agent": 60,
    "brief": "GPQA 86.4，SciCode 39.7",
    "updated_at": "2026-10-16",
    "power": 74
@@ -1894,6 +1976,7 @@
     "ecosystem": 79,
     "creative": 72
    },
+   "agent": 65,
    "brief": "GPQA 90.9，DeepSWE 28.0",
    "updated_at": "2026-08-24",
    "tier": {
@@ -1920,6 +2003,7 @@
     "ecosystem": 80,
     "creative": 78
    },
+   "agent": 64,
    "brief": "GPQA 82.9，SciCode 42.0",
    "updated_at": "2026-09-18",
    "power": 73
@@ -1939,6 +2023,7 @@
     "ecosystem": 80,
     "creative": 78
    },
+   "agent": 47,
    "brief": "GPQA 74.3，SciCode 32.1",
    "updated_at": "2026-09-18",
    "power": 73
@@ -1958,6 +2043,7 @@
     "ecosystem": 80,
     "creative": 78
    },
+   "agent": 55,
    "brief": "GPQA 80.5，SciCode 36.8",
    "updated_at": "2026-09-18",
    "power": 72
@@ -1977,6 +2063,7 @@
     "ecosystem": 80,
     "creative": 78
    },
+   "agent": 59,
    "brief": "GPQA 75.7，SciCode 38.8",
    "updated_at": "2026-09-18",
    "power": 71
@@ -1996,6 +2083,7 @@
     "ecosystem": 80,
     "creative": 78
    },
+   "agent": 39,
    "brief": "GPQA 75.3，SciCode 27.5",
    "updated_at": "2026-09-18",
    "power": 71
@@ -2015,6 +2103,7 @@
     "ecosystem": 80,
     "creative": 78
    },
+   "agent": 29,
    "brief": "GPQA 63.1，SciCode 21.6",
    "updated_at": "2026-09-18",
    "power": 71
@@ -2034,6 +2123,7 @@
     "ecosystem": 80,
     "creative": 78
    },
+   "agent": 57,
    "brief": "GPQA 64.4，SciCode 37.8",
    "updated_at": "2026-09-18",
    "power": 70
@@ -2053,6 +2143,7 @@
     "ecosystem": 80,
     "creative": 78
    },
+   "agent": 46,
    "brief": "GPQA 63.1，SciCode 31.5",
    "updated_at": "2026-09-18",
    "power": 69
@@ -2072,6 +2163,7 @@
     "ecosystem": 80,
     "creative": 78
    },
+   "agent": 37,
    "brief": "GPQA 70.2，SciCode 26.3",
    "updated_at": "2026-09-18",
    "power": 69
@@ -2091,6 +2183,7 @@
     "ecosystem": 80,
     "creative": 78
    },
+   "agent": 32,
    "brief": "GPQA 69.2，SciCode 22.0",
    "updated_at": "2026-09-18",
    "power": 69
@@ -2110,6 +2203,7 @@
     "ecosystem": 80,
     "creative": 78
    },
+   "agent": 34,
    "brief": "GPQA 73.4，SciCode 24.2",
    "updated_at": "2026-09-18",
    "power": 68
@@ -2129,6 +2223,7 @@
     "ecosystem": 80,
     "creative": 78
    },
+   "agent": 35,
    "brief": "GPQA 55.9，SciCode 25.3",
    "updated_at": "2026-09-18",
    "power": 67
@@ -2148,6 +2243,7 @@
     "ecosystem": 80,
     "creative": 78
    },
+   "agent": 25,
    "brief": "GPQA 55.8，SciCode 14.4",
    "updated_at": "2026-09-18",
    "power": 67
@@ -2167,11 +2263,81 @@
     "ecosystem": 80,
     "creative": 78
    },
+   "agent": 24,
    "brief": "GPQA 29.3，SciCode 6.9",
    "updated_at": "2026-09-18",
    "power": 66
   }
  ],
+ "leaders": {
+  "_note": "各方向第一名，按选型分排；agent 一栏按榜单 Agent 执行分排",
+  "reasoning": {
+   "name": "Claude Opus 5.5",
+   "vendor": "海外",
+   "score": 92,
+   "power": 89
+  },
+  "coding": {
+   "name": "GPT-6 Astra",
+   "vendor": "海外",
+   "score": 99,
+   "power": 88
+  },
+  "chinese": {
+   "name": "腾讯混元 Hy4 preview",
+   "vendor": "国产",
+   "score": 97,
+   "power": 83
+  },
+  "multimodal": {
+   "name": "Claude Opus 5.5",
+   "vendor": "海外",
+   "score": 99,
+   "power": 89
+  },
+  "longtext": {
+   "name": "Step 5 Preview",
+   "vendor": "国产",
+   "score": 98,
+   "power": 83
+  },
+  "cost": {
+   "name": "Nemotron 3.5 Lightning",
+   "vendor": "海外",
+   "score": 100,
+   "power": 73
+  },
+  "speed": {
+   "name": "Gemini 3.7 Flash",
+   "vendor": "海外",
+   "score": 100,
+   "power": 84
+  },
+  "privacy": {
+   "name": "Qwen3.8-Flash-Next",
+   "vendor": "国产",
+   "score": 89,
+   "power": 82
+  },
+  "ecosystem": {
+   "name": "GPT-6 Astra",
+   "vendor": "海外",
+   "score": 92,
+   "power": 88
+  },
+  "creative": {
+   "name": "智谱 GLM-5.3-Flash",
+   "vendor": "国产",
+   "score": 93,
+   "power": 86
+  },
+  "agent": {
+   "name": "Kimi K3.1 Pro",
+   "vendor": "国产",
+   "score": 99,
+   "power": 85
+  }
+ },
  "specialized": {
   "_note": "垂直专用模型，无公开基准可比，不排名、只推荐",
   "groups": [
