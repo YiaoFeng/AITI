@@ -1,6 +1,6 @@
 {
-  "version": "3.0",
-  "updated": "2026-10-25",
+  "version": "3.1",
+  "updated": "2026-10-31",
   "dims": [
     {
       "key": "reasoning",
@@ -141,7 +141,9 @@
           "t": "其他",
           "w": {}
         }
-      ]
+      ],
+      "tagOnly": true,
+      "tag": "身份"
     },
     {
       "id": 2,
@@ -802,7 +804,9 @@
           "t": "不写代码 / 不适用",
           "skip": true
         }
-      ]
+      ],
+      "tagOnly": true,
+      "tag": "写代码场所"
     },
     {
       "id": 17,
@@ -1244,7 +1248,9 @@
           "t": "说不清",
           "skip": true
         }
-      ]
+      ],
+      "tagOnly": true,
+      "tag": "技术背景"
     },
     {
       "id": 29,

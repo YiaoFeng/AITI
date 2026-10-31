@@ -1,7 +1,12 @@
 {
- "version": "1.0",
+ "version": "1.1",
  "generated_at": "2026-10-31",
- "source": "data/rankings/benchmarks.json",
+ "source": "data/rankings/benchmarks.json + pricing.json + board_history.json + usage_history/ + open_models.json",
+ "meta": {
+  "price_source": "OpenRouter 公开标价（$/百万 token，blended=3:1 输入:输出）",
+  "usage_as_of": "20261030",
+  "boards_as_of": "20261031"
+ },
  "dims": [
   "reasoning",
   "coding",
@@ -45,6 +50,28 @@
     "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
     "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
    },
+   "price": {
+    "in": 10.0,
+    "out": 50.0,
+    "blended": 20.0,
+    "ctx": 1050000
+   },
+   "boards": {
+    "综合": 3,
+    "纯能力": 3,
+    "编程": 5,
+    "Agent": 6,
+    "科学": 3,
+    "中文写作": 3,
+    "调用量": 23
+   },
+   "hot": {
+    "rank": 23,
+    "score": 1.51,
+    "as_of": "20261030",
+    "change": -72.6,
+    "days": 44
+   },
    "power": 88
   },
   {
@@ -71,6 +98,34 @@
     "how": "Pro 和 Flash 是两个独立模型，按任务分派",
     "advice": "日常问答走 Flash，难题再交给 Pro",
     "why": "Flash 便宜且快得多，拿 Pro 干简单活是最常见的浪费"
+   },
+   "price": {
+    "in": 0.045,
+    "out": 0.5,
+    "blended": 0.1588,
+    "ctx": 1048576
+   },
+   "boards": {
+    "综合": 12,
+    "纯能力": 16,
+    "编程": 19,
+    "Agent": 15,
+    "科学": 26,
+    "文档": 18,
+    "中文写作": 8,
+    "开源": 1,
+    "调用量": 1
+   },
+   "hot": {
+    "rank": 1,
+    "score": 90.0,
+    "as_of": "20261030",
+    "change": 59.5,
+    "days": 44
+   },
+   "open": {
+    "open": true,
+    "license": "MIT"
    },
    "power": 88
   },
@@ -99,6 +154,29 @@
     "advice": "闲聊和简单问答关掉思考，写代码、读长文再打开",
     "why": "开着思考回复会明显变慢，token 消耗也跟着翻上去"
    },
+   "price": {
+    "in": 4.0,
+    "out": 20.0,
+    "blended": 8.0,
+    "ctx": 1000000
+   },
+   "boards": {
+    "综合": 1,
+    "纯能力": 1,
+    "编程": 1,
+    "Agent": 3,
+    "科学": 2,
+    "文档": 6,
+    "中文写作": 5,
+    "调用量": 9
+   },
+   "hot": {
+    "rank": 9,
+    "score": 12.62,
+    "as_of": "20261030",
+    "change": 130.3,
+    "days": 36
+   },
    "power": 88
   },
   {
@@ -125,6 +203,20 @@
     "how": "thinking budget 可以调，也能设成 0 直接关掉",
     "advice": "批量跑的小任务关掉，需要多步推理的再开",
     "why": "思考档位越高延迟越明显，价格随推理 token 一起上涨"
+   },
+   "price": {
+    "in": 2.0,
+    "out": 10.0,
+    "blended": 4.0,
+    "ctx": 1048576
+   },
+   "boards": {
+    "综合": 4,
+    "纯能力": 4,
+    "编程": 4,
+    "Agent": 5,
+    "科学": 7,
+    "中文写作": 1
    },
    "power": 87
   },
@@ -153,6 +245,29 @@
     "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
     "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
    },
+   "price": {
+    "in": 2.0,
+    "out": 10.0,
+    "blended": 4.0,
+    "ctx": 1050000
+   },
+   "boards": {
+    "综合": 5,
+    "纯能力": 5,
+    "编程": 7,
+    "Agent": 8,
+    "科学": 4,
+    "文档": 17,
+    "中文写作": 6,
+    "调用量": 12
+   },
+   "hot": {
+    "rank": 12,
+    "score": 4.89,
+    "as_of": "20261030",
+    "change": -16.8,
+    "days": 24
+   },
    "power": 86
   },
   {
@@ -179,6 +294,31 @@
     "how": "深度思考模式可以开关",
     "advice": "常规任务关掉，复杂推理再开",
     "why": "开着思考会拉长响应时间，简单任务上不划算"
+   },
+   "price": {
+    "in": 0.15,
+    "out": 0.5,
+    "blended": 0.2375,
+    "ctx": 1048576
+   },
+   "boards": {
+    "综合": 20,
+    "纯能力": 30,
+    "Agent": 18,
+    "中文写作": 2,
+    "开源": 6,
+    "调用量": 2
+   },
+   "hot": {
+    "rank": 2,
+    "score": 54.22,
+    "as_of": "20261030",
+    "change": 28.0,
+    "days": 36
+   },
+   "open": {
+    "open": true,
+    "license": "MIT"
    },
    "power": 85
   },
@@ -207,6 +347,21 @@
     "advice": "闲聊和简单问答关掉思考，写代码、读长文再打开",
     "why": "开着思考回复会明显变慢，token 消耗也跟着翻上去"
    },
+   "price": {
+    "in": 10.0,
+    "out": 50.0,
+    "blended": 20.0,
+    "ctx": 1000000
+   },
+   "boards": {
+    "综合": 7,
+    "纯能力": 7,
+    "编程": 11,
+    "Agent": 10,
+    "科学": 5,
+    "文档": 5,
+    "中文写作": 12
+   },
    "power": 85
   },
   {
@@ -234,6 +389,29 @@
     "advice": "闲聊和简单问答关掉思考，写代码、读长文再打开",
     "why": "开着思考回复会明显变慢，token 消耗也跟着翻上去"
    },
+   "price": {
+    "in": 2.0,
+    "out": 10.0,
+    "blended": 4.0,
+    "ctx": 1000000
+   },
+   "boards": {
+    "综合": 6,
+    "纯能力": 6,
+    "编程": 3,
+    "Agent": 2,
+    "科学": 6,
+    "文档": 19,
+    "中文写作": 28,
+    "调用量": 14
+   },
+   "hot": {
+    "rank": 14,
+    "score": 4.14,
+    "as_of": "20261030",
+    "change": 77.7,
+    "days": 24
+   },
    "power": 85
   },
   {
@@ -254,6 +432,26 @@
    "agent": 80,
    "brief": "DeepSWE 78.8 前三，HLE-Diamond 39.0",
    "updated_at": "2026-10-13",
+   "price": {
+    "in": 4.0,
+    "out": 20.0,
+    "blended": 8.0,
+    "ctx": 1048576
+   },
+   "boards": {
+    "综合": 14,
+    "纯能力": 14,
+    "编程": 15,
+    "Agent": 11,
+    "科学": 15,
+    "中文写作": 16,
+    "调用量": 25
+   },
+   "hot": {
+    "rank": 25,
+    "score": 0.84,
+    "as_of": "20261030"
+   },
    "power": 85
   },
   {
@@ -280,6 +478,21 @@
     "how": "reasoning_effort 有 low / medium / high 三档",
     "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
     "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
+   },
+   "price": {
+    "in": 1.0,
+    "out": 5.0,
+    "blended": 2.0,
+    "ctx": 1050000
+   },
+   "boards": {
+    "综合": 8,
+    "纯能力": 9,
+    "编程": 6,
+    "Agent": 12,
+    "科学": 10,
+    "文档": 21,
+    "中文写作": 14
    },
    "power": 85
   },
@@ -308,6 +521,14 @@
     "advice": "批量跑的小任务关掉，需要多步推理的再开",
     "why": "思考档位越高延迟越明显，价格随推理 token 一起上涨"
    },
+   "boards": {
+    "综合": 2,
+    "纯能力": 2,
+    "编程": 2,
+    "Agent": 4,
+    "科学": 1,
+    "中文写作": 11
+   },
    "power": 85
   },
   {
@@ -334,6 +555,21 @@
     "how": "能给思考过程设一个 token 上限，也能整个关掉",
     "advice": "闲聊和简单问答关掉思考，写代码、读长文再打开",
     "why": "开着思考回复会明显变慢，token 消耗也跟着翻上去"
+   },
+   "price": {
+    "in": 10.0,
+    "out": 50.0,
+    "blended": 20.0,
+    "ctx": 1000000
+   },
+   "boards": {
+    "综合": 10,
+    "纯能力": 11,
+    "编程": 8,
+    "Agent": 14,
+    "科学": 8,
+    "文档": 22,
+    "中文写作": 15
    },
    "power": 84
   },
@@ -362,6 +598,16 @@
     "advice": "批量跑的小任务关掉，需要多步推理的再开",
     "why": "思考档位越高延迟越明显，价格随推理 token 一起上涨"
    },
+   "price": {
+    "in": 0.75,
+    "out": 3.75,
+    "blended": 1.5,
+    "ctx": 1048576
+   },
+   "boards": {
+    "综合": 24,
+    "中文写作": 20
+   },
    "power": 84
   },
   {
@@ -389,6 +635,21 @@
     "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
     "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
    },
+   "price": {
+    "in": 2.0,
+    "out": 10.0,
+    "blended": 4.0,
+    "ctx": 1050000
+   },
+   "boards": {
+    "综合": 15,
+    "纯能力": 13,
+    "编程": 14,
+    "Agent": 13,
+    "科学": 14,
+    "文档": 9,
+    "中文写作": 25
+   },
    "power": 84
   },
   {
@@ -409,6 +670,21 @@
    "agent": 83,
    "brief": "DeepSWE 79.0 全场第一，HLE-Diamond 48.5",
    "updated_at": "2026-10-13",
+   "price": {
+    "in": 4.0,
+    "out": 20.0,
+    "blended": 8.0,
+    "ctx": 1048576
+   },
+   "boards": {
+    "综合": 9,
+    "纯能力": 8,
+    "编程": 10,
+    "Agent": 7,
+    "科学": 11,
+    "文档": 10,
+    "中文写作": 13
+   },
    "power": 84
   },
   {
@@ -435,6 +711,32 @@
     "how": "深度思考模式可以开关",
     "advice": "常规任务关掉，复杂推理再开",
     "why": "开着思考会拉长响应时间，简单任务上不划算"
+   },
+   "price": {
+    "in": 0.08,
+    "out": 3.6,
+    "blended": 0.96,
+    "ctx": 1048576
+   },
+   "boards": {
+    "综合": 21,
+    "纯能力": 18,
+    "编程": 24,
+    "Agent": 16,
+    "中文写作": 4,
+    "开源": 2,
+    "调用量": 4
+   },
+   "hot": {
+    "rank": 4,
+    "score": 24.73,
+    "as_of": "20261030",
+    "change": 625.2,
+    "days": 36
+   },
+   "open": {
+    "open": true,
+    "license": "GLM-5.3 License（营收门槛）"
    },
    "power": 83
   },
@@ -463,6 +765,19 @@
     "advice": "批量跑的小任务关掉，需要多步推理的再开",
     "why": "思考档位越高延迟越明显，价格随推理 token 一起上涨"
    },
+   "price": {
+    "in": 0.75,
+    "out": 3.75,
+    "blended": 1.5,
+    "ctx": 1048576
+   },
+   "boards": {
+    "综合": 27,
+    "编程": 29,
+    "科学": 22,
+    "文档": 27,
+    "中文写作": 24
+   },
    "power": 83
   },
   {
@@ -489,6 +804,28 @@
     "how": "thinking budget 可以调，也能设成 0 直接关掉",
     "advice": "批量跑的小任务关掉，需要多步推理的再开",
     "why": "思考档位越高延迟越明显，价格随推理 token 一起上涨"
+   },
+   "price": {
+    "in": 0.825,
+    "out": 4.125,
+    "blended": 1.65,
+    "ctx": 1048576
+   },
+   "boards": {
+    "综合": 19,
+    "纯能力": 22,
+    "Agent": 29,
+    "科学": 21,
+    "文档": 30,
+    "中文写作": 9,
+    "调用量": 13
+   },
+   "hot": {
+    "rank": 13,
+    "score": 4.56,
+    "as_of": "20261030",
+    "change": 3.4,
+    "days": 44
    },
    "power": 83
   },
@@ -517,6 +854,26 @@
     "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
     "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
    },
+   "price": {
+    "in": 0.1,
+    "out": 0.5,
+    "blended": 0.2,
+    "ctx": 1050000
+   },
+   "boards": {
+    "综合": 23,
+    "科学": 29,
+    "文档": 11,
+    "中文写作": 7,
+    "调用量": 3
+   },
+   "hot": {
+    "rank": 3,
+    "score": 38.01,
+    "as_of": "20261030",
+    "change": 476.8,
+    "days": 36
+   },
    "power": 83
   },
   {
@@ -543,6 +900,29 @@
     "how": "可以切换思考模式",
     "advice": "读文档、做摘要关掉，需要推理再开",
     "why": "思考模式更慢更贵，长文本场景未必用得上"
+   },
+   "price": {
+    "in": 2.0,
+    "out": 10.0,
+    "blended": 4.0,
+    "ctx": 1048576
+   },
+   "boards": {
+    "综合": 13,
+    "纯能力": 12,
+    "编程": 17,
+    "Agent": 1,
+    "科学": 12,
+    "文档": 4,
+    "中文写作": 10,
+    "调用量": 18
+   },
+   "hot": {
+    "rank": 18,
+    "score": 1.92,
+    "as_of": "20261030",
+    "change": -57.9,
+    "days": 1
    },
    "power": 83
   },
@@ -571,6 +951,19 @@
     "advice": "客服、摘要这类关掉，解题和写代码再开",
     "why": "开着更准，但更慢更贵，简单任务上纯属浪费"
    },
+   "price": {
+    "in": 2.0,
+    "out": 6.0,
+    "blended": 3.0,
+    "ctx": 1000000
+   },
+   "boards": {
+    "综合": 25,
+    "纯能力": 25,
+    "Agent": 21,
+    "科学": 30,
+    "中文写作": 21
+   },
    "power": 82
   },
   {
@@ -597,6 +990,19 @@
     "how": "深度思考模式可以开关",
     "advice": "客服、摘要这类关掉，解题和写代码再开",
     "why": "开着更准，但更慢更贵，简单任务上纯属浪费"
+   },
+   "price": {
+    "in": 0.15,
+    "out": 0.47,
+    "blended": 0.23,
+    "ctx": 1000000
+   },
+   "boards": {
+    "开源": 9
+   },
+   "open": {
+    "open": true,
+    "license": "Qwen Community License 1.0（营收门槛）"
    },
    "power": 82
   },
@@ -625,6 +1031,21 @@
     "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
     "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
    },
+   "price": {
+    "in": 2.0,
+    "out": 12.0,
+    "blended": 4.5,
+    "ctx": 1050000
+   },
+   "boards": {
+    "综合": 18,
+    "纯能力": 17,
+    "编程": 16,
+    "Agent": 30,
+    "科学": 16,
+    "文档": 14,
+    "中文写作": 18
+   },
    "power": 82
   },
   {
@@ -645,6 +1066,19 @@
    "agent": 68,
    "brief": "DeepSWE 75.2，MysteryMechanism 22.5",
    "updated_at": "2026-09-18",
+   "price": {
+    "in": 3.0,
+    "out": 15.0,
+    "blended": 6.0,
+    "ctx": 1048576
+   },
+   "boards": {
+    "综合": 26,
+    "纯能力": 28,
+    "编程": 30,
+    "科学": 24,
+    "中文写作": 19
+   },
    "power": 82
   },
   {
@@ -671,6 +1105,29 @@
     "how": "能给思考过程设一个 token 上限，也能整个关掉",
     "advice": "闲聊和简单问答关掉思考，写代码、读长文再打开",
     "why": "开着思考回复会明显变慢，token 消耗也跟着翻上去"
+   },
+   "price": {
+    "in": 0.1,
+    "out": 0.5,
+    "blended": 0.2,
+    "ctx": 1000000
+   },
+   "boards": {
+    "综合": 17,
+    "纯能力": 20,
+    "编程": 13,
+    "Agent": 26,
+    "科学": 17,
+    "文档": 20,
+    "中文写作": 30,
+    "调用量": 10
+   },
+   "hot": {
+    "rank": 10,
+    "score": 11.88,
+    "as_of": "20261030",
+    "change": 85.3,
+    "days": 15
    },
    "power": 82
   },
@@ -699,6 +1156,20 @@
     "advice": "闲聊和简单问答关掉思考，写代码、读长文再打开",
     "why": "开着思考回复会明显变慢，token 消耗也跟着翻上去"
    },
+   "price": {
+    "in": 5.0,
+    "out": 25.0,
+    "blended": 10.0,
+    "ctx": 1000000
+   },
+   "boards": {
+    "综合": 11,
+    "纯能力": 10,
+    "编程": 9,
+    "Agent": 9,
+    "科学": 9,
+    "中文写作": 26
+   },
    "power": 81
   },
   {
@@ -725,6 +1196,21 @@
     "how": "reasoning_effort 有 low / medium / high 三档",
     "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
     "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
+   },
+   "price": {
+    "in": 4.0,
+    "out": 20.0,
+    "blended": 8.0,
+    "ctx": 1050000
+   },
+   "boards": {
+    "综合": 16,
+    "纯能力": 15,
+    "编程": 12,
+    "Agent": 17,
+    "科学": 13,
+    "文档": 7,
+    "中文写作": 17
    },
    "power": 81
   },
@@ -753,6 +1239,22 @@
     "advice": "客服、摘要这类关掉，解题和写代码再开",
     "why": "开着更准，但更慢更贵，简单任务上纯属浪费"
    },
+   "price": {
+    "in": 4.0,
+    "out": 12.0,
+    "blended": 6.0,
+    "ctx": 1000000
+   },
+   "boards": {
+    "纯能力": 23,
+    "Agent": 20,
+    "科学": 28,
+    "开源": 5
+   },
+   "open": {
+    "open": true,
+    "license": "Qwen3.8-Max License（营收门槛）"
+   },
    "power": 81
   },
   {
@@ -780,6 +1282,27 @@
     "advice": "日常对话关掉，复杂任务再开",
     "why": "思考模式消耗更高，简单场景没必要"
    },
+   "price": {
+    "in": 0.834,
+    "out": 2.501,
+    "blended": 1.2508,
+    "ctx": 1048576
+   },
+   "boards": {
+    "开源": 12,
+    "调用量": 15
+   },
+   "hot": {
+    "rank": 15,
+    "score": 3.76,
+    "as_of": "20261030",
+    "change": -60.5,
+    "days": 44
+   },
+   "open": {
+    "open": true,
+    "license": "Apache-2.0"
+   },
    "power": 81
   },
   {
@@ -800,6 +1323,29 @@
    "agent": 72,
    "brief": "SciCode 58.9，HLE-Diamond 24.3",
    "updated_at": "2026-09-18",
+   "price": {
+    "in": 1.0,
+    "out": 2.7,
+    "blended": 1.425,
+    "ctx": 1048576
+   },
+   "boards": {
+    "Agent": 24,
+    "文档": 2,
+    "开源": 7,
+    "调用量": 24
+   },
+   "hot": {
+    "rank": 24,
+    "score": 0.98,
+    "as_of": "20261030",
+    "change": -20.3,
+    "days": 20
+   },
+   "open": {
+    "open": true,
+    "license": "StepFun Model License 1.0"
+   },
    "power": 81
   },
   {
@@ -820,6 +1366,20 @@
    "agent": 70,
    "brief": "DeepSWE 59.7，HLE 39.4",
    "updated_at": "2026-10-06",
+   "price": {
+    "in": 0.075,
+    "out": 0.225,
+    "blended": 0.1125,
+    "ctx": 1000000
+   },
+   "boards": {
+    "文档": 16,
+    "开源": 8
+   },
+   "open": {
+    "open": true,
+    "license": "MIT"
+   },
    "power": 81
   },
   {
@@ -840,6 +1400,19 @@
    "agent": 63,
    "brief": "HLE-Diamond 26.3，SciCode 58.4",
    "updated_at": "2026-10-16",
+   "price": {
+    "in": 1.25,
+    "out": 4.25,
+    "blended": 2.0,
+    "ctx": 1048576
+   },
+   "boards": {
+    "开源": 21
+   },
+   "open": {
+    "open": true,
+    "license": "Muse Model License"
+   },
    "power": 81
   },
   {
@@ -866,6 +1439,33 @@
     "how": "可以切换思考模式",
     "advice": "读文档、做摘要关掉，需要推理再开",
     "why": "思考模式更慢更贵，长文本场景未必用得上"
+   },
+   "price": {
+    "in": 0.192,
+    "out": 15.0,
+    "blended": 3.894,
+    "ctx": 1048576
+   },
+   "boards": {
+    "综合": 28,
+    "纯能力": 19,
+    "编程": 22,
+    "科学": 18,
+    "文档": 1,
+    "中文写作": 22,
+    "开源": 3,
+    "调用量": 16
+   },
+   "hot": {
+    "rank": 16,
+    "score": 3.54,
+    "as_of": "20261030",
+    "change": -31.3,
+    "days": 44
+   },
+   "open": {
+    "open": true,
+    "license": "修改版 MIT（营收门槛）"
    },
    "power": 80
   },
@@ -894,6 +1494,14 @@
     "advice": "日常问答走 Flash，难题再交给 Pro",
     "why": "Flash 便宜且快得多，拿 Pro 干简单活是最常见的浪费"
    },
+   "boards": {
+    "文档": 29,
+    "开源": 14
+   },
+   "open": {
+    "open": true,
+    "license": "MIT"
+   },
    "power": 80
   },
   {
@@ -920,6 +1528,12 @@
     "how": "thinking budget 可以调，也能设成 0 直接关掉",
     "advice": "批量跑的小任务关掉，需要多步推理的再开",
     "why": "思考档位越高延迟越明显，价格随推理 token 一起上涨"
+   },
+   "price": {
+    "in": 0.3,
+    "out": 2.5,
+    "blended": 0.85,
+    "ctx": 1048576
    },
    "power": 80
   },
@@ -948,6 +1562,25 @@
     "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
     "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
    },
+   "price": {
+    "in": 0.2,
+    "out": 1.2,
+    "blended": 0.45,
+    "ctx": 1050000
+   },
+   "boards": {
+    "编程": 23,
+    "科学": 25,
+    "文档": 8,
+    "调用量": 11
+   },
+   "hot": {
+    "rank": 11,
+    "score": 10.24,
+    "as_of": "20261030",
+    "change": -82.5,
+    "days": 44
+   },
    "power": 80
   },
   {
@@ -968,6 +1601,19 @@
    "agent": 70,
    "brief": "HLE 23.7，SciCode 42.0",
    "updated_at": "2026-09-18",
+   "price": {
+    "in": 0.021,
+    "out": 0.063,
+    "blended": 0.0315,
+    "ctx": 262144
+   },
+   "boards": {
+    "开源": 23
+   },
+   "open": {
+    "open": true,
+    "license": "MIT"
+   },
    "power": 80
   },
   {
@@ -988,6 +1634,17 @@
    "agent": 70,
    "brief": "SciCode 58.8，HLE 46.2",
    "updated_at": "2026-09-18",
+   "price": {
+    "in": 1.25,
+    "out": 4.25,
+    "blended": 2.0,
+    "ctx": 1048576
+   },
+   "boards": {
+    "纯能力": 29,
+    "编程": 28,
+    "科学": 20
+   },
    "power": 80
   },
   {
@@ -1008,6 +1665,13 @@
    "agent": 62,
    "brief": "AutomationBench 37.2，FrontierCode 2.0 11.8",
    "updated_at": "2026-09-18",
+   "boards": {
+    "开源": 29
+   },
+   "open": {
+    "open": true,
+    "license": "Apache-2.0"
+   },
    "power": 80
   },
   {
@@ -1028,6 +1692,25 @@
    "agent": 72,
    "brief": "SciCode 60.9，HLE 49.4",
    "updated_at": "2026-09-18",
+   "price": {
+    "in": 0.435,
+    "out": 0.87,
+    "blended": 0.5437,
+    "ctx": 1050000
+   },
+   "boards": {
+    "综合": 22,
+    "纯能力": 21,
+    "编程": 25,
+    "Agent": 22,
+    "文档": 3,
+    "中文写作": 27,
+    "开源": 4
+   },
+   "open": {
+    "open": true,
+    "license": "MIT"
+   },
    "power": 80
   },
   {
@@ -1055,6 +1738,27 @@
     "advice": "默认档够用，难题再往上调",
     "why": "推理强度越高，响应越慢、消耗越大"
    },
+   "price": {
+    "in": 2.0,
+    "out": 6.0,
+    "blended": 3.0,
+    "ctx": 500000
+   },
+   "boards": {
+    "综合": 30,
+    "纯能力": 27,
+    "编程": 21,
+    "Agent": 19,
+    "中文写作": 23,
+    "调用量": 8
+   },
+   "hot": {
+    "rank": 8,
+    "score": 15.01,
+    "as_of": "20261030",
+    "change": 6722.7,
+    "days": 27
+   },
    "power": 80
   },
   {
@@ -1075,6 +1779,12 @@
    "agent": 70,
    "brief": "SciCode 42.4，HLE 22.6",
    "updated_at": "2026-10-06",
+   "price": {
+    "in": 0.021,
+    "out": 0.063,
+    "blended": 0.0315,
+    "ctx": 262144
+   },
    "power": 80
   },
   {
@@ -1095,6 +1805,22 @@
    "agent": 62,
    "brief": "MysteryMechanism 22.1，FrontierCode 2.0 5.5",
    "updated_at": "2026-10-28",
+   "price": {
+    "in": 0.25,
+    "out": 1.0,
+    "blended": 0.4375,
+    "ctx": 1048576
+   },
+   "boards": {
+    "调用量": 6
+   },
+   "hot": {
+    "rank": 6,
+    "score": 22.21,
+    "as_of": "20261030",
+    "change": 598.4,
+    "days": 12
+   },
    "power": 80
   },
   {
@@ -1122,6 +1848,19 @@
     "advice": "日常问答走 Flash，难题再交给 Pro",
     "why": "Flash 便宜且快得多，拿 Pro 干简单活是最常见的浪费"
    },
+   "price": {
+    "in": 0.0339,
+    "out": 1.14,
+    "blended": 0.3104,
+    "ctx": 1048576
+   },
+   "boards": {
+    "开源": 19
+   },
+   "open": {
+    "open": true,
+    "license": "MIT"
+   },
    "power": 79
   },
   {
@@ -1142,6 +1881,12 @@
    "agent": 62,
    "brief": "SWE-bench 86.6，HLE 45.5",
    "updated_at": "2026-09-01",
+   "price": {
+    "in": 1.25,
+    "out": 4.25,
+    "blended": 2.0,
+    "ctx": 1048576
+   },
    "power": 79
   },
   {
@@ -1162,6 +1907,28 @@
    "agent": 67,
    "brief": "DeepSWE 75.4，MysteryMechanism 36.0",
    "updated_at": "2026-09-03",
+   "price": {
+    "in": 1.25,
+    "out": 4.25,
+    "blended": 2.0,
+    "ctx": 1048576
+   },
+   "boards": {
+    "综合": 29,
+    "纯能力": 24,
+    "编程": 18,
+    "科学": 19,
+    "文档": 13,
+    "中文写作": 29,
+    "调用量": 22
+   },
+   "hot": {
+    "rank": 22,
+    "score": 1.54,
+    "as_of": "20261030",
+    "change": -44.0,
+    "days": 44
+   },
    "power": 79
   },
   {
@@ -1188,6 +1955,17 @@
     "how": "能给思考过程设一个 token 上限，也能整个关掉",
     "advice": "闲聊和简单问答关掉思考，写代码、读长文再打开",
     "why": "开着思考回复会明显变慢，token 消耗也跟着翻上去"
+   },
+   "price": {
+    "in": 2.0,
+    "out": 10.0,
+    "blended": 4.0,
+    "ctx": 1000000
+   },
+   "boards": {
+    "编程": 26,
+    "科学": 27,
+    "文档": 26
    },
    "power": 79
   },
@@ -1216,6 +1994,15 @@
     "advice": "默认档够用，难题再往上调",
     "why": "推理强度越高，响应越慢、消耗越大"
    },
+   "price": {
+    "in": 2.0,
+    "out": 6.0,
+    "blended": 3.0,
+    "ctx": 500000
+   },
+   "boards": {
+    "编程": 27
+   },
    "power": 79
   },
   {
@@ -1243,6 +2030,19 @@
     "advice": "读文档、做摘要关掉，需要推理再开",
     "why": "思考模式更慢更贵，长文本场景未必用得上"
    },
+   "price": {
+    "in": 0.56,
+    "out": 3.1,
+    "blended": 1.195,
+    "ctx": 262144
+   },
+   "boards": {
+    "开源": 13
+   },
+   "open": {
+    "open": true,
+    "license": "修改版 MIT（营收门槛）"
+   },
    "power": 79
   },
   {
@@ -1263,6 +2063,9 @@
    "agent": 70,
    "brief": "HLE 37.5，SciCode 48.8",
    "updated_at": "2026-09-18",
+   "boards": {
+    "文档": 15
+   },
    "power": 79
   },
   {
@@ -1283,6 +2086,14 @@
    "agent": 70,
    "brief": "HLE 33.7，SciCode 43.3",
    "updated_at": "2026-09-18",
+   "boards": {
+    "文档": 28,
+    "开源": 15
+   },
+   "open": {
+    "open": true,
+    "license": "Apache-2.0"
+   },
    "power": 79
   },
   {
@@ -1310,6 +2121,12 @@
     "advice": "常规任务关掉，复杂推理再开",
     "why": "开着思考会拉长响应时间，简单任务上不划算"
    },
+   "price": {
+    "in": 1.0,
+    "out": 3.2,
+    "blended": 1.55,
+    "ctx": 204800
+   },
    "power": 79
   },
   {
@@ -1330,6 +2147,15 @@
    "agent": 70,
    "brief": "SciCode 47.6，HLE 25.8",
    "updated_at": "2026-10-06",
+   "price": {
+    "in": 0.05,
+    "out": 0.2,
+    "blended": 0.0875,
+    "ctx": 524288
+   },
+   "boards": {
+    "文档": 12
+   },
    "power": 79
   },
   {
@@ -1350,6 +2176,15 @@
    "agent": 72,
    "brief": "AutomationBench 59.9，TB Science (AA) 4.3",
    "updated_at": "2026-10-07",
+   "price": {
+    "in": 2.0,
+    "out": 6.0,
+    "blended": 3.0,
+    "ctx": 128000
+   },
+   "boards": {
+    "Agent": 23
+   },
    "power": 79
   },
   {
@@ -1370,6 +2205,24 @@
    "agent": 70,
    "brief": "DeepSWE 73.7，HLE-Diamond 28.1",
    "updated_at": "2026-10-20",
+   "price": {
+    "in": 0.15,
+    "out": 0.6,
+    "blended": 0.2625,
+    "ctx": 1048576
+   },
+   "boards": {
+    "Agent": 27,
+    "科学": 23,
+    "调用量": 19
+   },
+   "hot": {
+    "rank": 19,
+    "score": 1.83,
+    "as_of": "20261030",
+    "change": -84.0,
+    "days": 9
+   },
    "power": 79
   },
   {
@@ -1390,6 +2243,15 @@
    "agent": 70,
    "brief": "TB Science (AA) 4.3，FrontierCode 2.0 17.0",
    "updated_at": "2026-10-23",
+   "price": {
+    "in": 0.075,
+    "out": 0.225,
+    "blended": 0.1125,
+    "ctx": 1000000
+   },
+   "boards": {
+    "文档": 23
+   },
    "power": 79
   },
   {
@@ -1416,6 +2278,15 @@
     "how": "thinking budget 可以调，也能设成 0 直接关掉",
     "advice": "批量跑的小任务关掉，需要多步推理的再开",
     "why": "思考档位越高延迟越明显，价格随推理 token 一起上涨"
+   },
+   "price": {
+    "in": 2.0,
+    "out": 12.0,
+    "blended": 4.5,
+    "ctx": 1048576
+   },
+   "boards": {
+    "文档": 24
    },
    "power": 78
   },
@@ -1444,6 +2315,20 @@
     "advice": "客服、摘要这类关掉，解题和写代码再开",
     "why": "开着更准，但更慢更贵，简单任务上纯属浪费"
    },
+   "price": {
+    "in": 0.15,
+    "out": 1.875,
+    "blended": 0.5813,
+    "ctx": 1000000
+   },
+   "boards": {
+    "文档": 25,
+    "开源": 17
+   },
+   "open": {
+    "open": true,
+    "license": "Apache-2.0"
+   },
    "power": 78
   },
   {
@@ -1471,6 +2356,19 @@
     "advice": "常规任务关掉，复杂推理再开",
     "why": "开着思考会拉长响应时间，简单任务上不划算"
    },
+   "price": {
+    "in": 0.006,
+    "out": 7.0,
+    "blended": 1.7545,
+    "ctx": 1048576
+   },
+   "boards": {
+    "开源": 10
+   },
+   "open": {
+    "open": true,
+    "license": "MIT"
+   },
    "power": 78
   },
   {
@@ -1491,6 +2389,16 @@
    "agent": 46,
    "brief": "AutomationBench 6.8，SciCode 44.9",
    "updated_at": "2026-09-18",
+   "price": {
+    "in": 0.3,
+    "out": 1.2,
+    "blended": 0.525,
+    "ctx": 131072
+   },
+   "open": {
+    "open": true,
+    "license": "Apache-2.0"
+   },
    "power": 78
   },
   {
@@ -1517,6 +2425,16 @@
     "how": "深度思考模式可以开关",
     "advice": "客服、摘要这类关掉，解题和写代码再开",
     "why": "开着更准，但更慢更贵，简单任务上纯属浪费"
+   },
+   "price": {
+    "in": 2.0,
+    "out": 6.0,
+    "blended": 3.0,
+    "ctx": 1048576
+   },
+   "open": {
+    "open": true,
+    "license": "Qwen3.8-Max License（营收门槛）"
    },
    "power": 78
   },
@@ -1558,6 +2476,13 @@
    "agent": 70,
    "brief": "HLE 37.0，SciCode 42.2",
    "updated_at": "2026-09-18",
+   "boards": {
+    "开源": 16
+   },
+   "open": {
+    "open": true,
+    "license": "MIT"
+   },
    "power": 78
   },
   {
@@ -1578,6 +2503,12 @@
    "agent": 66,
    "brief": "FrontierCode 2.0 6.1，HLE-Diamond 8.8",
    "updated_at": "2026-10-16",
+   "price": {
+    "in": 0.15,
+    "out": 0.5,
+    "blended": 0.2375,
+    "ctx": 1048576
+   },
    "power": 78
   },
   {
@@ -1604,6 +2535,19 @@
     "how": "Pro 和 Flash 是两个独立模型，按任务分派",
     "advice": "日常问答走 Flash，难题再交给 Pro",
     "why": "Flash 便宜且快得多，拿 Pro 干简单活是最常见的浪费"
+   },
+   "price": {
+    "in": 0.1035,
+    "out": 4.0,
+    "blended": 1.0776,
+    "ctx": 1048576
+   },
+   "boards": {
+    "开源": 18
+   },
+   "open": {
+    "open": true,
+    "license": "MIT"
    },
    "power": 77
   },
@@ -1632,6 +2576,17 @@
     "advice": "默认档够用，难题再往上调",
     "why": "推理强度越高，响应越慢、消耗越大"
    },
+   "price": {
+    "in": 2.0,
+    "out": 6.0,
+    "blended": 3.0,
+    "ctx": 500000
+   },
+   "boards": {
+    "纯能力": 26,
+    "编程": 20,
+    "Agent": 25
+   },
    "power": 77
   },
   {
@@ -1652,6 +2607,13 @@
    "agent": 70,
    "brief": "HLE 29.6，SciCode 41.0",
    "updated_at": "2026-09-18",
+   "boards": {
+    "开源": 22
+   },
+   "open": {
+    "open": true,
+    "license": "Apache-2.0"
+   },
    "power": 77
   },
   {
@@ -1692,6 +2654,16 @@
    "agent": 70,
    "brief": "SciCode 32.1，HLE 10.6",
    "updated_at": "2026-09-18",
+   "price": {
+    "in": 0.07,
+    "out": 0.2,
+    "blended": 0.1025,
+    "ctx": 262144
+   },
+   "open": {
+    "open": true,
+    "license": "OpenMDW-1.1"
+   },
    "power": 77
   },
   {
@@ -1712,6 +2684,16 @@
    "agent": 45,
    "brief": "SWE-bench 69.0，AutomationBench 3.0",
    "updated_at": "2026-09-18",
+   "price": {
+    "in": 0.6,
+    "out": 2.4,
+    "blended": 1.05,
+    "ctx": 262144
+   },
+   "open": {
+    "open": true,
+    "license": "OpenMDW-1.1"
+   },
    "power": 77
   },
   {
@@ -1732,6 +2714,13 @@
    "agent": 70,
    "brief": "SciCode 48.0，HLE 28.5",
    "updated_at": "2026-09-18",
+   "boards": {
+    "开源": 20
+   },
+   "open": {
+    "open": true,
+    "license": "Upstage Solar License（署名要求）"
+   },
    "power": 77
   },
   {
@@ -1752,6 +2741,13 @@
    "agent": 70,
    "brief": "HLE 23.4，SciCode 40.0",
    "updated_at": "2026-09-18",
+   "boards": {
+    "开源": 24
+   },
+   "open": {
+    "open": true,
+    "license": "Apache-2.0"
+   },
    "power": 77
   },
   {
@@ -1792,6 +2788,28 @@
    "agent": 70,
    "brief": "ProofBench 63.0，DeepSWE 67.9",
    "updated_at": "2026-09-18",
+   "price": {
+    "in": 0.14,
+    "out": 0.28,
+    "blended": 0.175,
+    "ctx": 1050000
+   },
+   "boards": {
+    "Agent": 28,
+    "开源": 11,
+    "调用量": 17
+   },
+   "hot": {
+    "rank": 17,
+    "score": 2.55,
+    "as_of": "20261030",
+    "change": -26.3,
+    "days": 34
+   },
+   "open": {
+    "open": true,
+    "license": "MIT"
+   },
    "power": 77
   },
   {
@@ -1812,6 +2830,19 @@
    "agent": 70,
    "brief": "HLE 33.7，SciCode 36.3",
    "updated_at": "2026-09-18",
+   "price": {
+    "in": 0.3,
+    "out": 1.2,
+    "blended": 0.525,
+    "ctx": 1048756
+   },
+   "boards": {
+    "开源": 25
+   },
+   "open": {
+    "open": true,
+    "license": "MIT"
+   },
    "power": 76
   },
   {
@@ -1832,6 +2863,10 @@
    "agent": 68,
    "brief": "HLE 18.2，SciCode 27.5",
    "updated_at": "2026-09-18",
+   "open": {
+    "open": true,
+    "license": "Apache-2.0"
+   },
    "power": 76
   },
   {
@@ -1852,6 +2887,13 @@
    "agent": 70,
    "brief": "HLE 17.5，SciCode 36.8",
    "updated_at": "2026-09-18",
+   "boards": {
+    "开源": 30
+   },
+   "open": {
+    "open": true,
+    "license": "Apache-2.0"
+   },
    "power": 76
   },
   {
@@ -1899,6 +2941,27 @@
     "advice": "日常对话关掉，复杂任务再开",
     "why": "思考模式消耗更高，简单场景没必要"
    },
+   "price": {
+    "in": 0.132,
+    "out": 0.528,
+    "blended": 0.231,
+    "ctx": 262144
+   },
+   "boards": {
+    "开源": 28,
+    "调用量": 20
+   },
+   "hot": {
+    "rank": 20,
+    "score": 1.63,
+    "as_of": "20261030",
+    "change": -69.9,
+    "days": 36
+   },
+   "open": {
+    "open": true,
+    "license": "Apache-2.0"
+   },
    "power": 75
   },
   {
@@ -1919,6 +2982,10 @@
    "agent": 70,
    "brief": "SciCode 42.0，HLE 18.6",
    "updated_at": "2026-09-18",
+   "open": {
+    "open": true,
+    "license": "Apache-2.0"
+   },
    "power": 75
   },
   {
@@ -1939,6 +3006,10 @@
    "agent": 70,
    "brief": "SciCode 38.8，HLE 11.1",
    "updated_at": "2026-09-18",
+   "open": {
+    "open": true,
+    "license": "Apache-2.0"
+   },
    "power": 75
   },
   {
@@ -1966,6 +3037,12 @@
     "advice": "客服、摘要这类关掉，解题和写代码再开",
     "why": "开着更准，但更慢更贵，简单任务上纯属浪费"
    },
+   "price": {
+    "in": 0.32,
+    "out": 1.28,
+    "blended": 0.56,
+    "ctx": 1000000
+   },
    "power": 75
   },
   {
@@ -1986,6 +3063,19 @@
    "agent": 70,
    "brief": "SWE-bench 71.0，ProofBench 16.0",
    "updated_at": "2026-08-24",
+   "price": {
+    "in": 0.4,
+    "out": 2.0,
+    "blended": 0.8,
+    "ctx": 1050000
+   },
+   "boards": {
+    "开源": 26
+   },
+   "open": {
+    "open": true,
+    "license": "MIT"
+   },
    "power": 74
   },
   {
@@ -2006,6 +3096,10 @@
    "agent": 66,
    "brief": "HLE 9.3，SciCode 24.2",
    "updated_at": "2026-09-18",
+   "open": {
+    "open": true,
+    "license": "MIT"
+   },
    "power": 74
   },
   {
@@ -2026,6 +3120,10 @@
    "agent": 67,
    "brief": "SciCode 26.3，HLE 8.9",
    "updated_at": "2026-09-18",
+   "open": {
+    "open": true,
+    "license": "Apache-2.0"
+   },
    "power": 74
   },
   {
@@ -2046,6 +3144,10 @@
    "agent": 66,
    "brief": "HLE 13.9，SciCode 22.0",
    "updated_at": "2026-09-18",
+   "open": {
+    "open": true,
+    "license": "Apache-2.0"
+   },
    "power": 74
   },
   {
@@ -2066,6 +3168,10 @@
    "agent": 70,
    "brief": "SciCode 37.8，HLE 11.2",
    "updated_at": "2026-09-18",
+   "open": {
+    "open": true,
+    "license": "Apache-2.0"
+   },
    "power": 73
   },
   {
@@ -2086,6 +3192,10 @@
    "agent": 67,
    "brief": "SciCode 25.3，HLE 6.6",
    "updated_at": "2026-09-18",
+   "open": {
+    "open": true,
+    "license": "Apache-2.0"
+   },
    "power": 73
   },
   {
@@ -2106,6 +3216,16 @@
    "agent": 69,
    "brief": "SciCode 31.5，HLE 9.7",
    "updated_at": "2026-09-18",
+   "price": {
+    "in": 0.06,
+    "out": 0.15,
+    "blended": 0.0825,
+    "ctx": 131072
+   },
+   "open": {
+    "open": true,
+    "license": "Apache-2.0"
+   },
    "power": 73
   },
   {
@@ -2126,6 +3246,16 @@
    "agent": 62,
    "brief": "HLE 6.2，SciCode 14.4",
    "updated_at": "2026-09-18",
+   "price": {
+    "in": 0.35,
+    "out": 0.5,
+    "blended": 0.3875,
+    "ctx": 128000
+   },
+   "open": {
+    "open": true,
+    "license": "LFM Open License（营收门槛）"
+   },
    "power": 73
   },
   {
@@ -2146,6 +3276,10 @@
    "agent": 60,
    "brief": "HLE 5.4，SciCode 6.9",
    "updated_at": "2026-09-18",
+   "open": {
+    "open": true,
+    "license": "Apache-2.0（待复核）"
+   },
    "power": 73
   }
  ],

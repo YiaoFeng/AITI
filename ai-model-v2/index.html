@@ -241,6 +241,16 @@
   .alt .mt{font-size:22px;font-weight:800;color:var(--accent)}
   .alt .mt span{font-size:12px;color:var(--gray);font-weight:700}
   .alt .ds{font-size:12.5px;color:var(--gray);margin-top:6px;line-height:1.5}
+  /* ---------- 结果 · 人群标签 / 多答案 ---------- */
+  .persona{display:flex;flex-wrap:wrap;gap:7px;margin:2px 0 13px}
+  .persona .chip{font-size:12px;font-weight:700;color:var(--ink);background:var(--viewbg);
+                 border-radius:99px;padding:5px 11px;line-height:1}
+  .persona .chip:first-child{background:var(--accent);color:#fff}
+  .persona .chip em{font-style:normal;font-weight:800}
+  .swapnote{font-size:12.5px;color:var(--gray);line-height:1.65;margin-top:10px}
+  .whyline{font-size:13px;color:var(--gray);line-height:1.7;margin-top:8px}
+  .whyline b{color:var(--ink)}
+  .combo-h{font-size:12.5px;font-weight:800;color:var(--accent);letter-spacing:1px;margin-bottom:2px}
   /* ---------- 结果 · 首选 vs 你的主力（雷达） ---------- */
   .cmp-legend{display:flex;flex-wrap:wrap;gap:7px 16px;margin:2px 0 10px}
   .cmp-legend .lg{display:flex;align-items:center;gap:6px;font-size:12.5px;min-width:0}
@@ -279,6 +289,44 @@
   .tier .tx{flex:1}
   .tier .tx b{font-size:15px}
   .tier .tx p{font-size:13.5px;color:var(--gray);line-height:1.55;margin-top:2px}
+  /* ---------- 结果 · 深读六块 ---------- */
+  .gaprow{display:flex;align-items:center;gap:9px;font-size:13px;padding:7px 0;
+          border-bottom:1px dashed var(--line)}
+  .gaprow:last-child{border-bottom:0}
+  .gaprow .gk{flex:0 0 62px;font-weight:700;color:#524D43}
+  .gaprow .gv{flex:1;color:var(--gray);font-size:12.5px}
+  .gaprow .gd{flex:0 0 52px;text-align:right;font-weight:800}
+  .gaprow .gd.up{color:var(--ok)}
+  .gaprow .gd.down{color:var(--accent)}
+  .stabbig{font-size:46px;font-weight:800;color:var(--accent);line-height:1.1;margin:4px 0 2px}
+  .stabbig span{font-size:15px;font-weight:700;color:var(--gray)}
+  .dimrow{display:grid;grid-template-columns:66px 1fr 34px;gap:9px;align-items:center;
+          margin-bottom:6px;font-size:12.5px}
+  .dimrow .nm{font-weight:700;white-space:nowrap}
+  .dimrow .tr{height:8px;border-radius:99px;background:var(--viewbg);overflow:hidden}
+  .dimrow .tr i{display:block;height:100%;border-radius:99px;background:#C9C2B6}
+  .dimrow.high .tr i{background:var(--ok)}
+  .dimrow.low .tr i{background:var(--accent-soft)}
+  .dimrow .sc{text-align:right;color:var(--gray);font-weight:700}
+  .coord{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 4px}
+  .coord span{background:var(--viewbg);border-radius:9px;padding:6px 10px;
+              font-size:12.5px;font-weight:700;color:#524D43}
+  .coord span em{font-style:normal;color:var(--accent);font-weight:800;margin-left:2px}
+  .moneyrow{display:flex;gap:10px;margin:10px 0 4px}
+  .moneyrow .m{flex:1;background:var(--viewbg);border-radius:13px;padding:12px 13px;min-width:0}
+  .moneyrow .m .who{font-size:12px;color:var(--gray);font-weight:700;white-space:nowrap;
+                    overflow:hidden;text-overflow:ellipsis}
+  .moneyrow .m .amt{font-size:23px;font-weight:800;color:var(--accent);line-height:1.25;margin-top:2px}
+  .moneyrow .m .amt small{font-size:11.5px;font-weight:700;color:var(--gray)}
+  .moneyrow .m .sub{font-size:11.5px;color:var(--gray);margin-top:3px;line-height:1.5}
+  .planrow{display:flex;gap:10px;align-items:flex-start;padding:11px 0;border-bottom:1px solid var(--line)}
+  .planrow:last-child{border-bottom:0;padding-bottom:0}
+  .planrow .ic{flex:0 0 30px;height:30px;border-radius:9px;background:var(--viewbg);
+               font:800 13px/30px inherit;text-align:center}
+  .planrow .tx{flex:1;min-width:0}
+  .planrow .tx b{font-size:14px}
+  .planrow .tx .task{font-size:12px;color:var(--accent);font-weight:700;margin-left:5px}
+  .planrow .tx p{font-size:12.5px;color:var(--gray);line-height:1.6;margin-top:2px}
   .foot{text-align:center;color:var(--gray);font-size:12.5px;padding:22px 0 0;line-height:1.8}
   .foot b{color:var(--accent)}
   .toast{
@@ -492,7 +540,7 @@ async function boot(){
   S.questions = q.questions;
   S.qchecks = q.checks || [];
   S.models = m.models || [];
-  S.modelMeta = { generated_at:m.generated_at, derived:m._derived };
+  S.modelMeta = Object.assign({ generated_at:m.generated_at, derived:m._derived }, m.meta || {});
   S.specialized = m.specialized || null;
   // 各方向头名（gen_models.py 生成）。「方向最强」块读它，不在这里另算——
   // 十维的口径只留生成器一处，前端再算一遍迟早两边打架。
@@ -692,6 +740,11 @@ function answered(q){
 function weights(){
   const w = {};
   S.questions.forEach(q=>{
+    /* 背景题（身份 / 在哪写代码 / 技术背景）只用来打人群标签，不进需求权重。
+       2026-10-31：原来这些题的陪衬权重（+0.3、+0.8）会被单题归一化放大成 1.0，
+       结果半数画像的「头号需求」都是生态——用户从没说过在意生态。
+       见 audit_reco_diversity.py：改前生态在 50% 的随机画像里排第一。 */
+    if(q.tagOnly) return;
     const live = pickedIdx(q).map(i=>q.options[i]).filter(o=>o && !o.skip);
     if(!live.length) return;
     /* 多选题按「选中项相加」计：同时要读图表、要生成图、要生成视频，
@@ -783,14 +836,14 @@ function dimLines(){
    现在的做法是给每个维度按需求高低算一条目标线：
      - 达到目标线就算满足，超出只给 10% 的额外奖励（超额能力不封神）；
      - 没达到按平方衰减（差得越多扣得越狠）；
-     - 需求权重按 rel 的 2.5 次方放大：最在意的那一两项几乎决定结果，
+     - 需求权重按 rel 的 1.8 次方放大：最在意的那一两项几乎决定结果，
        顺带提到的维度只当微调，否则通用款照样通吃。
    目标线的上限同样不写死 90，取该维模型池的 90 分位——写死 90 会出现
    「这项最重要，但 88 分就够了」的悖论，推荐款永远落在各维都 88 的通用款上。
    读者越在意的维度，目标线越高；不在意的维度几乎不参与。 */
 const SHORT_EXP  = 2.2;     // 未达标时的衰减指数
 const OVER_BONUS = 0.1;     // 超过目标线后的额外奖励系数
-const NEED_EXP   = 1.8;     // 需求权重的放大指数（越大越只听最在意的那几项）
+const NEED_EXP   = 1.8;     // 需求权重的放大指数（越大越只听最在意的那几项；2026-10-31 定为 1.8）
 
 /* 该维「能有多好」的参考线：模型池的 90 分位。 */
 let DIM_HI = null;
@@ -1100,15 +1153,12 @@ function selfBlockHTML(top, w, need){
   const v = selfVerdict(top, me, gap, gain, lose)
     .map(s => s.b ? `<b>${esc(s.t)}</b>` : esc(s.t)).join('');
 
-  const band = m => costBand(m.score.cost||0);
   const li = [];
   if(gain.length)
     li.push('换过去能多拿：' + gain.map(g=>`${DIM_CN[g.k]||g.k} ${g.from} → ${g.to}`).join('、'));
   if(lose.length)
     li.push('代价是：' + lose.map(g=>`${DIM_CN[g.k]||g.k} ${g.from} → ${g.to}`).join('、'));
-  li.push(band(me) === band(top)
-    ? `月成本基本不变（${band(top)}）`
-    : `月成本从 ${band(me)} 变成 ${band(top)}`);
+  li.push(costTransition(top, me));
   /* 库里没有的款：直说比不了。拿别的模型的分数冒充当读者的模型，
      是砸这产品唯一的卖点——所有分数都得能指到一份实测数据上。 */
   /* 备用只在结论里报一个匹配度，不进上面的雷达——读者填备用是为了有个参照，
@@ -1355,6 +1405,778 @@ function conflicts(){
   return out;
 }
 
+/* ══════════ 人群画像：从背景题读，不从权重猜 ══════════
+   背景题（身份 / 在哪写代码 / 技术背景）已标 tagOnly，不参与匹配度计算。
+   但它们是「你是哪类人」的唯一来源：同一款模型对不同的人，说法应该不一样。
+   画像只驱动下面几张解释性卡片，不改首选——首选永远只按读者自己答的需求算。 */
+const ARCHETYPES = {
+  dev_pro:{label:'开发者', who:'写代码、自己做技术决定',
+    w:{coding:1, reasoning:.7, ecosystem:.5}, care:'编程和推理'},
+  dev_new:{label:'编程入门', who:'刚开始写代码、怕折腾',
+    w:{coding:.8, chinese:.6, ecosystem:.6, cost:.5}, care:'容易上手、别太贵'},
+  writer:{label:'文字工作者', who:'靠写东西吃饭',
+    w:{chinese:1, creative:.7, longtext:.3}, care:'中文写得像不像人话'},
+  researcher:{label:'研究 / 学习', who:'读大量资料、做长期研究',
+    w:{longtext:1, reasoning:.8, cost:.4}, care:'能不能一次读完、想明白'},
+  analyst:{label:'数据 / 分析', who:'看表、算数、做判断',
+    w:{reasoning:1, longtext:.6, privacy:.4}, care:'算得准不准'},
+  creator:{label:'内容创作', who:'做图、做视频、写脚本',
+    w:{multimodal:1, creative:.8}, care:'图片和创意'},
+  compliance:{label:'企业 / 合规', who:'公司不许用境外服务、资料不能外传',
+    w:{privacy:1, ecosystem:.6, chinese:.4}, care:'数据能不能留在合规的地方'},
+  general:{label:'通用型用户', who:'日常问答、写点东西、偶尔查资料',
+    w:{ecosystem:.7, chinese:.7, cost:.5, speed:.4}, care:'少折腾、够用'}
+};
+/* 每个维度「谁才真的需要它」。换款建议要落到人身上，不能只报分数。 */
+const DIM_USE = {
+  reasoning:'论文、方案、要反复判断的难题',
+  coding:'天天写代码、要它同时改好几个文件',
+  chinese:'公文、报告、对翻译腔特别敏感',
+  multimodal:'看图识图、做海报、剪短视频',
+  longtext:'整本书或几十份文件一起读',
+  cost:'用量大、预算卡得死',
+  speed:'要秒回，慢一点就换工具',
+  privacy:'资料不能出门、要私有部署',
+  ecosystem:'要接进现有系统或 IDE',
+  creative:'广告文案、脚本、起标题'
+};
+function ansOf(id){ const a = S.answers[id]; return Array.isArray(a) ? a : (a==null ? [] : [a]); }
+
+function personaOf(){
+  const q1=ansOf(1)[0], q2=ansOf(2), q4=ansOf(4), q8=ansOf(8)[0],
+        q9=ansOf(9), q14=ansOf(14)[0], q20=ansOf(20)[0], q23=ansOf(23)[0],
+        q24=ansOf(24)[0], q28=ansOf(28)[0], picks=S.picks||[];
+  let key='general';
+  /* 顺序有意义：合规是硬约束，排第一；做图做视频的，通用池本来也答不好。 */
+  if(q20===1) key='compliance';
+  /* 做图做视频只认 q9 的生成类选项：q2 选「做海报」可能只是偶尔配张图，
+     用它判成「内容创作」会把写文章的人全划进来。 */
+  else if(q9.includes(2) || q9.includes(5) || picks.includes('image_gen') || picks.includes('video_gen')) key='creator';
+  else if(q2.includes(0) || q14===0 || q14===1) key = q28===0 ? 'dev_pro' : 'dev_new';
+  else if(q2.includes(4) || q8===3) key='researcher';
+  else if(q2.includes(3)) key='analyst';
+  else if(q2.includes(1)) key='writer';
+
+  const chips=[ARCHETYPES[key].label];
+  const ID={0:'公司职员',1:'学生',2:'自由职业',3:'团队负责人',4:'老师 / 研究员',5:'家庭用户'};
+  if(ID[q1]) chips.push(ID[q1]);
+  const TECH={0:'程序员',1:'半技术',2:'新手',3:'零基础'};
+  if(TECH[q28]) chips.push(TECH[q28]);
+  if(q24===0 || q24===1) chips.push('预算紧');
+  else if(q24===4) chips.push('预算宽');
+  else if(q23===0) chips.push('自费');
+  else if(q23===1 || q23===2 || q24===5) chips.push('公司出钱');
+  return {key, chips};
+}
+
+/* 同类人卡：按这类人「只看共性」的口味单独排一次，再看和读者自己的首选差在哪。
+   不是给读者的权重加偏移——那点偏移改不了名次（实测 6 类画像全部和首选同一款），
+   卡片就变成了复读。单独排，才能看出同一类人也会因为侧重点不同选到别的款。 */
+function personaBlock(top, w, need){
+  const P = personaOf(), A = ARCHETYPES[P.key];
+  const ranked = rankAll(A.w);
+  if(!ranked.length) return '';
+  const same = ranked[0].name === top.name;
+  const pick = same ? (ranked.find(m=>m.name!==top.name) || ranked[0]) : ranked[0];
+  /* 解释「差在哪」必须挑它真正领先的那一维。按自身分挑会挑出它更低的一维，
+     读起来就成了「这一类人更适合一款更弱的」。没有领先项时就说实话。 */
+  const edge = Object.keys(A.w)
+    .map(k=>({k, d:(pick.score[k]||0)-(top.score[k]||0)}))
+    .sort((a,b)=>b.d-a.d)[0];
+
+  let body;
+  if(same){
+    body = `<b>${esc(ranked[0].name)}</b> 还是第一，和你的首选是同一款——
+      说明你的需求和这类人高度一致，不用纠结。
+      ${pick.name !== ranked[0].name ? (edge && edge.d > 0
+        ? `这类人里排第二的是 ${esc(pick.name)}，
+           如果以后更看重${DIM_CN[edge.k]}，它是更贴近的选择。`
+        : `这类人里排第二的是 ${esc(pick.name)}，整体更均衡。`) : ''}`;
+  }else{
+    /* 读者自己那条线为什么选了另一款：优先拿他排第一的需求来解释，
+       这一维上首选不领先时，再找他领先最多的一维。 */
+    const back = (need[0] && need[0][0] && (top.score[need[0][0]]||0) > (pick.score[need[0][0]]||0))
+      ? {k:need[0][0], d:top.score[need[0][0]]-pick.score[need[0][0]]}
+      : Object.keys(DIM_CN).map(k=>({k, d:(top.score[k]||0)-(pick.score[k]||0)}))
+          .sort((a,b)=>b.d-a.d)[0];
+    /* 只有真的排第一时才能写「你排第一的」；回退到其它维度时要改口径，
+       否则会出现「你排第一的响应速度」而上面需求条第一明明是中文。 */
+    const backTxt = back.d > 0
+      ? (need[0] && back.k === need[0][0]
+          ? `你排第一的${DIM_CN[back.k]}，首选高 ${back.d} 分`
+          : `首选在${DIM_CN[back.k]}上高 ${back.d} 分`)
+      : '你的需求更分散，首选靠整体覆盖胜出';
+    body = `只按这类人最看重的算，第一是 <b>${esc(pick.name)}</b>；你的首选是 ${esc(top.name)}。
+      ${edge && edge.d > 0
+        ? `${DIM_CN[edge.k]} 这一维它 ${pick.score[edge.k]} 分，${esc(top.name)} ${top.score[edge.k]} 分；
+           但${backTxt}。差的不是好坏，是侧重。`
+        : `它不是某一项更强，而是更贴合这类人的整体口味；但${backTxt}，所以按你自己的需求排第一。`}`;
+  }
+  return `<div class="card">
+    <div class="sec-t">和你同一类的人</div>
+    <div class="persona">${P.chips.map((c,i)=>`<span class="chip">${i===0?'<em>'+esc(c)+'</em>':esc(c)}</span>`).join('')}</div>
+    <div class="muted" style="margin-bottom:9px">${esc(A.who)}。这类人通常更看重${esc(A.care)}。</div>
+    <div style="font-size:14px;line-height:1.7">${body}</div>
+    <div class="swapnote">这只是同类人的共同口味，不替换你的首选——首选永远只按你自己答出来的需求算。</div>
+  </div>`;
+}
+
+/* 三条路线：同一份答案，三种取舍各出一个不同的第一名。
+   原来的「三档」是在同一份排名里过滤，三条路线经常给出同一款，等于没给选择。 */
+function routeData(top, w, need){
+  const mx = Math.max(1, ...Object.values(w));
+  const u = usageEstimate();
+  const topCost = top.price ? monthlyRMB(top, u) : null;
+  const wStable = {};
+  need.slice(0,3).forEach(([k],i)=>{ wStable[k] = [1,.7,.45][i] || .3; });
+  const used = new Set([top.name]);
+  const k1 = need[0] && need[0][0];
+  const k2 = (need[1] && need[1][0]) || k1;
+  /* 「稳妥路线」不能只看窄权重排出来的第二名：它在第一、第二需求上
+     可能都比首选低，读者会问「这叫稳妥？」。要求前两项都不低于首选，
+     才配叫稳妥；没有这样的款就不出这一条。 */
+  const stable = k1 ? (()=>{
+    const m = rankAll(wStable).find(x=>x.name !== top.name
+      && (x.score[k1]||0) >= (top.score[k1]||0)
+      && (x.score[k2]||0) >= (top.score[k2]||0));
+    if(m) used.add(m.name);
+    return m;
+  })() : null;
+  const take = list => { const m = list.find(x=>!used.has(x.name)); if(m) used.add(m.name); return m; };
+  /* 「省钱路线」得真的更便宜。按成本分加权的排名不保证月账单更低，
+     首选本身就是 Haiku 这类便宜款时尤其容易翻车。
+     有真实标价就按同一份用量比账单；找不到更便宜的，宁可不出这一条。 */
+  let save = null, saving = false;
+  if(topCost != null){
+    save = cheaperAlt(top, rankAll(w), u, used);
+    if(save){ used.add(save.name); saving = true; }
+  }else{
+    save = take(rankAll(Object.assign({}, w, {cost: mx*2})));
+  }
+
+  const rows = [];
+  if(stable) rows.push({ic:'稳', name:'稳妥路线', m:stable,
+    txt:`只盯你最在意的${DIM_CN[k1]}${need[1]?`和${DIM_CN[need[1][0]]}`:''}，其他项让路。
+      ${DIM_CN[k1]} ${stable.score[k1]} 分${stable.score[k1]>=top.score[k1]?'，不比首选低':'，和首选差 '+(top.score[k1]-stable.score[k1])+' 分'}。`});
+  rows.push({ic:'衡', name:'你的均衡解', m:top,
+    txt:`按你全部需求加权算出来的第一名；预算、速度、能力都兼顾。`});
+  if(save) rows.push({ic:'省', name:saving?'省钱路线':'低成本路线', m:save,
+    txt:`${costHint(save)}。${saving
+      ? '重活留给首选，日常和批量都交给它。'
+      : '按成本分挑的，实际账单还看你的用量；重活留给首选。'}`});
+  /* 只剩「均衡」一条就不叫路线选择，整块让位给后面的深读内容。 */
+  return rows.length >= 2 ? rows : [];
+}
+function routeBlock(top, w, need){
+  const rows = routeData(top, w, need);
+  if(rows.length < 2) return '';
+  const saveRow = rows.find(r=>r.ic === '省');
+  const stableRow = rows.find(r=>r.ic === '稳');
+  const bits = ['心里有数选均衡'];
+  if(saveRow) bits.push(saveRow.name === '省钱路线' ? '想省钱选省钱' : '想压成本看低成本路线');
+  if(stableRow) bits.push('怕以后不够用选稳妥');
+  /* 没有稳妥款就别再提「选稳妥」：两块路线里出现一个不存在的选项，
+     读者会以为是页面上漏了一行。 */
+  const note = bits.length > 1
+    ? bits.join('；') + '。'
+    : '按你的用量，没找到更合适的省钱替代；先按均衡解，用量变了再重算。';
+  const three = rows.length >= 3;
+  return `<div class="card">
+    <div class="sec-t"><span class="n">${++S.secN}</span>${three ? '三条路线，三个答案' : '两条路线，两种取舍'}</div>
+    <div class="muted" style="margin-bottom:8px">不是名次，是取舍；每款都单独算过</div>
+    ${rows.map(r=>`<div class="tier"><div class="ic">${r.ic}</div><div class="tx">
+      <div class="combo-h">${r.name}</div>
+      <b>${esc(r.m.name)}</b>
+      <p>${esc(r.txt)}</p></div></div>`).join('')}
+    <div class="swapnote">${esc(note)}</div>
+  </div>`;
+}
+
+/* 三项最强能力各自的「拉满答案」。
+   这不是名次，是一个反事实：如果只保这一维，谁更合适。专精款就是靠这块露脸的。 */
+function swapData(top, need, pool){
+  const rows = [];
+  const leadOf = k => pool.slice().sort((a,b)=>((b.score[k]||0)-(a.score[k]||0)) || (b.power-a.power))[0];
+  need.slice(0,3).forEach(([k])=>{
+    const lead = leadOf(k);
+    if(!lead) return;
+    const hit = rows.find(r=>r.m.name===lead.name);
+    if(hit){ hit.dims.push(k); return; }
+    rows.push({m:lead, dims:[k]});
+  });
+  return rows;
+}
+function swapBlock(top, need, pool){
+  const k1 = need[0] && need[0][0];
+  const rows = swapData(top, need, pool)
+    /* 领先不到 2 分不算「拉满」：为 +1 分换掉首选，代价通常是十几分，
+       这种建议发出去只会显得不专业。并列或更低同样不叫换。
+       「首选本来就最强」这一行只在第一需求上才有意义——写第三维最强，
+       读者会问「我说的是这一项吗」。 */
+    .filter(r=>r.m.name===top.name
+      ? r.dims.includes(k1)
+      : r.dims.some(k=>(r.m.score[k]||0)-(top.score[k]||0)>=2))
+    .sort((a,b)=>Number(a.m.name===top.name)-Number(b.m.name===top.name));
+  if(!rows.length) return '';
+  return `<div class="card">
+    <div class="sec-t"><span class="n">${++S.secN}</span>只把这一项拉满，会换成谁</div>
+    <div class="muted" style="margin-bottom:8px">按你最在意的三项各算一次，不是综合排名</div>
+    ${rows.map(r=>{
+      const k = r.dims[0], same = r.m.name===top.name;
+      const lead = r.dims.map(x=>{
+        const d = (r.m.score[x]||0)-(top.score[x]||0);
+        return `${DIM_CN[x]} ${r.m.score[x]} 分（比首选${d>0?'高 '+d+' 分':'持平'}）`;
+      }).join('，');
+      const lose = Object.keys(DIM_CN).map(x=>({x,d:(top.score[x]||0)-(r.m.score[x]||0)}))
+        .sort((a,b)=>b.d-a.d)[0];
+      const dims = r.dims.map(x=>DIM_CN[x]).join(' + ');
+      const body = same
+        ? `首选在${r.dims.map(x=>`${DIM_CN[x]} ${r.m.score[x]} 分`).join('、')}，已经是你能选的模型里最高，不用换。`
+        : `${lead}。代价是${DIM_CN[lose.x]}低 ${lose.d} 分。适合：${r.dims.map(x=>DIM_USE[x]).join('；')}。`;
+      return `<div class="tier"><div class="ic">${same?'首':'换'}</div><div class="tx">
+        <b>${esc(r.m.name)}${r.dims.length>1?' · '+dims+'双料第一':''}</b>
+        <p>${esc(body)}</p></div></div>`;
+    }).join('')}
+    <div class="swapnote">只在你这一项需求再重一点时才值得换；日常还是用首选更稳。</div>
+  </div>`;
+}
+
+/* 组合方案：真实用法很少只用一个模型。
+   主模型干重要的活，便宜的干批量，长文单独交给最擅长的——一页里自然带出 2–3 款。 */
+function comboData(top, w, need, pool, avoid){
+  const mx = Math.max(1, ...Object.values(w));
+  const u = usageEstimate();
+  const topCost = top.price ? monthlyRMB(top, u) : null;
+  /* 组合块里不再出现三条路线已经提过的款：同一份报告里一款模型只承担一个角色，
+     读者才能看到更多选择。 */
+  const used = new Set([top.name, ...(avoid||[])]);
+  /* 「辅」不能比主模型还贵。有标价时按同一份用量找真正更便宜的；
+     找不到就只留主力和长文分工，不硬凑第二款。 */
+  const cheap = topCost != null
+    ? cheaperAlt(top, pool, u, used)
+    : rankAll(Object.assign({}, w, {cost: mx*2})).find(m=>!used.has(m.name)) || null;
+  let aux = null;
+  /* 长文只有在前三需求里才值得单买一款；第 6 位的长文本需求
+     再配一个「长文专用」只是在凑数，读者不会为它多付一份钱。 */
+  if(need.slice(0,3).some(([k])=>k==='longtext')){
+    aux = pool.filter(m=>!used.has(m.name) && m.name!==(cheap&&cheap.name))
+              .sort((a,b)=>(b.score.longtext||0)-(a.score.longtext||0))[0] || null;
+    /* 只强 1 分不值得再买一款；和「拉满」同一条线，至少高 2 分。 */
+    if(aux && (aux.score.longtext||0) < (top.score.longtext||0) + 2) aux = null;
+  }
+  const rows = [
+    {ic:'主', m:top, txt:`重要、复杂、错了要返工的活交给它；你的首选。`},
+    cheap ? {ic:'辅', m:cheap, txt:`批量、重复、不在乎质量的活交给它。${costHint(cheap)}。`} : null,
+    aux ? {ic:'长', m:aux, txt:`几十份文件一起读时用它；长文本 ${aux.score.longtext} 分，比首选高 ${aux.score.longtext-top.score.longtext} 分。`} : null
+  ].filter(Boolean);
+  /* 只剩主力一款就不叫「组合」了；手机端和存图共用这个判断。 */
+  return rows.length >= 2 ? rows : [];
+}
+function comboBlock(top, w, need, pool){
+  const rows = comboData(top, w, need, pool, routeData(top, w, need).map(r=>r.m.name));
+  if(rows.length < 2) return '';
+  return `<div class="card">
+    <div class="sec-t"><span class="n">${++S.secN}</span>一套组合，而不是只买一款</div>
+    <div class="muted" style="margin-bottom:8px">真实用法大多是分工：重要的活给首选，重复的活给更便宜的</div>
+    ${rows.map(r=>`<div class="tier"><div class="ic">${r.ic}</div><div class="tx">
+      <b>${esc(r.m.name)}</b><p>${esc(r.txt)}</p></div></div>`).join('')}
+  </div>`;
+}
+
+/* 分更高的款为什么没推：把「总分」和「你这条线」的差别说透。
+   只列综合实力不低于首选的款，否则就变成贬低别人。 */
+function whyNotBlock(top, need, pool){
+  const k = need[0] && need[0][0];
+  if(!k) return '';
+  const cands = pool.filter(m=>m.name!==top.name && m.power>=top.power
+      && (m.score[k]||0) <= (top.score[k]||0) - 8)
+    .sort((a,b)=>b.power-a.power).slice(0,2);
+  if(!cands.length) return '';
+  return `<div class="card">
+    <div class="sec-t"><span class="n">${++S.secN}</span>分更高，为什么没推给你</div>
+    <div class="muted" style="margin-bottom:6px">选模型的顺序是先过你这条线，再看总分</div>
+    ${cands.map(m=>`<div class="whyline"><b>${esc(m.name)}</b> 综合实力 ${m.power} 分，
+      不比首选低；但${DIM_CN[k]}只有 ${m.score[k]} 分，比首选低 ${top.score[k]-m.score[k]}。
+      你把这一维排在第一，所以它先出局。</div>`).join('')}
+  </div>`;
+}
+
+/* ══════════ 深读六块（2026-10-31）══════════
+   付费报告不能只给一个名字。这六块全部由现有数据算出：
+   models.json 的十维/价格/榜单/调用量/开源字段，加上读者自己答的题。
+   任何一块没有数据就整块不渲染——空标题比没有更糟。 */
+
+const USD_CNY = 7.2;
+const DIM_BOARD = {coding:'编程', reasoning:'科学', longtext:'文档', chinese:'中文写作', ecosystem:'Agent'};
+const DIM_RISK = {
+  reasoning:'需要专业判断、不能出错的活（法律、金融、医疗分析）',
+  coding:'天天写代码、要同时改好几个文件的人',
+  chinese:'靠中文写作吃饭的人（公文、报告、自媒体）',
+  multimodal:'要看图、做海报、剪视频、转录音的人',
+  longtext:'一次要读整本书或几十份文件的人',
+  cost:'预算卡得很紧、用量又大的人',
+  speed:'要秒回、批量跑客服的人',
+  privacy:'资料不能出内网、要私有部署的人',
+  ecosystem:'要接进现有软件或公司系统的人',
+  creative:'做广告文案、短视频脚本的人'
+};
+/* 存图一行里用的短标签：完整解释在手机端，图上只留「不适合谁」的落点。 */
+const DIM_RISK_SHORT = {
+  reasoning:'专业判断类任务', coding:'多人协作写代码', chinese:'中文写作',
+  multimodal:'看图做视频', longtext:'读整本书', cost:'高频大用量',
+  speed:'秒回客服', privacy:'涉密资料', ecosystem:'接公司系统', creative:'广告脚本'
+};
+
+/* 金额：十块以内留一位小数，否则取整带千分位。币种统一人民币。 */
+function money(v){
+  if(v == null || !isFinite(v)) return '—';
+  if(v < 10) return '¥' + v.toFixed(1);
+  return '¥' + Math.round(v).toLocaleString('zh-CN');
+}
+function pctLabel(p){
+  if(p >= 90) return `全场前 ${Math.max(1, Math.round(100-p))}%`;
+  if(p >= 75) return `全场前 ${Math.round(100-p)}%`;
+  if(p >= 60) return '中上';
+  if(p >= 40) return '中游';
+  return `全场后 ${Math.max(1, Math.round(p))}%`;
+}
+/* 用量估算：频率 × 人数 × 单次材料长度。只用来把单价折成月账单，
+   不是读者的真实 token 账单——报告里必须写清这是 API 按量口径。 */
+function usageEstimate(){
+  const q3 = ansOf(3)[0], q8 = ansOf(8)[0], q22 = ansOf(22)[0];
+  const base = [30, 10, 3, 1, 5][q3];
+  const team = [1, 3, 10, 30, 1][q22];
+  const calls = Math.max(1, Math.min(3000, (base == null ? 5 : base) * (team == null ? 1 : team)));
+  const inTok = [400, 1500, 4000, 12000, 1500][q8] || 1500;
+  const outTok = 600;
+  return {
+    calls, inTok, outTok,
+    inM: calls * 30 * inTok / 1e6,
+    outM: calls * 30 * outTok / 1e6,
+    inWan: calls * 30 * inTok / 1e4,
+  };
+}
+function monthlyRMB(m, u){
+  if(!m || !m.price) return null;
+  return (m.price.in * u.inM + m.price.out * u.outM) * USD_CNY;
+}
+function budgetCap(){
+  const q = ansOf(24)[0];
+  return [0, 50, 200, 600, 2000, null, null][q] ?? null;
+}
+function costHint(m){
+  const v = monthlyRMB(m, usageEstimate());
+  return v != null ? `月账单约 ${money(v)}` : `成本分 ${m.score.cost}（${costBand(m.score.cost)}）`;
+}
+/* 换模型的月账单变化：两边都有公开标价就报真钱，否则退回成本分区间。 */
+function costTransition(to, from){
+  const u = usageEstimate();
+  const ct = monthlyRMB(to, u), cf = monthlyRMB(from, u);
+  if(ct != null && cf != null)
+    return ct === cf ? `月账单基本不变（${money(ct)}）` : `月账单从 ${money(cf)} 变成 ${money(ct)}`;
+  const bt = costBand(to.score.cost || 0), bf = costBand(from.score.cost || 0);
+  return bt === bf ? `月成本基本不变（${bt}）` : `月成本从 ${bf} 变成 ${bt}`;
+}
+function freqText(){
+  const q = ansOf(3)[0];
+  return ['一天好几次', '基本每天一次', '一周几次', '偶尔用', '说不清'][q] || '说不清';
+}
+function teamText(){
+  const q = ansOf(22)[0];
+  return ['你自己用', '2–5 人一起用', '6–20 人一起用', '20 人以上一起用', '说不清几个人用'][q] || '说不清几个人用';
+}
+function priceLine(p){
+  if(!p) return '';
+  return `$${p.in} 输入 / $${p.out} 输出 · 每百万 token`;
+}
+
+/* ── 1. 分差归因 ── */
+function gapData(top, all, w, need){
+  const second = all[1];
+  if(!second) return null;
+  /* 归因不能按「分差绝对值」排：那样不管读者问什么，都会写成速度/多模态赢。
+     先乘上读者自己的权重，再比贡献——只有真正把首选托上去的维度才配当理由。 */
+  const weighted = Object.keys(DIM_CN).map(k=>({
+    k, a: top.score[k] || 0, b: second.score[k] || 0,
+    d: (top.score[k] || 0) - (second.score[k] || 0),
+    c: ((top.score[k] || 0) - (second.score[k] || 0)) * (w[k] || 0)
+  })).filter(r=>r.d !== 0 && r.c !== 0)
+    .sort((a,b)=>Math.abs(b.c)-Math.abs(a.c) || Math.abs(b.d)-Math.abs(a.d));
+  const raw = Object.keys(DIM_CN).map(k=>({
+    k, a: top.score[k] || 0, b: second.score[k] || 0,
+    d: (top.score[k] || 0) - (second.score[k] || 0)
+  })).filter(r=>r.d !== 0).sort((a,b)=>Math.abs(b.d)-Math.abs(a.d));
+  const rows = (weighted.length ? weighted : raw).slice(0,6);
+  const k0 = need[0] && need[0][0];
+  const lead = k0 ? {
+    k: k0, a: top.score[k0] || 0, b: second.score[k0] || 0,
+    d: (top.score[k0] || 0) - (second.score[k0] || 0)
+  } : null;
+  return {second, rows, lead, gap: top.match - second.match, byNeed: weighted.length > 0};
+}
+function gapBlock(top){
+  const g = S.deep && S.deep.gap;
+  if(!g) return '';
+  const {second, rows, lead, gap} = g;
+  let leadTxt;
+  if(!lead) leadTxt = '你的需求比较分散，胜负由加权后的整体覆盖决定。';
+  else if(lead.d >= 1) leadTxt = `你的第一需求是${DIM_CN[lead.k]}，首选在这一维高 ${lead.d} 分，这一项基本决定了结果。`;
+  else if(lead.d <= -1) leadTxt = `你的第一需求是${DIM_CN[lead.k]}，首选反而低 ${-lead.d} 分；它是靠其他维度把总分补回来的。`;
+  else leadTxt = `第一需求${DIM_CN[lead.k]}上两款打平，分差来自其他维度。`;
+  const tie = gap < TIE_BAND
+    ? `<div class="pickhint">只差 ${gap.toFixed(1)} 分，在误差范围内属于同一档；不是谁更强，是你的权重刚好偏了它一点。</div>` : '';
+  return `<div class="card">
+    <div class="sec-t">它凭什么排第一</div>
+    <div class="muted" style="margin-bottom:8px">首选 ${top.match.toFixed(1)}% vs 第二 ${esc(second.name)} ${second.match.toFixed(1)}%，差 ${gap.toFixed(1)} 分。${g.byNeed ? '按你在意的程度，逐维看差在哪。' : '逐维看差在哪。'}</div>
+    ${tie}
+    ${rows.map(r=>`<div class="gaprow"><div class="gk">${DIM_CN[r.k]}</div>
+      <div class="gv">首选 ${r.a} · 第二 ${r.b}</div>
+      <div class="gd ${r.d>0?'up':'down'}">${r.d>0?'+':''}${r.d}</div></div>`).join('')}
+    <div class="whyline">${esc(leadTxt)}</div>
+    <div class="swapnote">${g.byNeed ? '已按你的需求权重排序，只列真正影响结果的' : '只列差距最大的'} ${rows.length} 项。分数是十维原始分，不是加权后的匹配度。</div>
+  </div>`;
+}
+
+/* ── 2. 答案稳定性：把每一题单独改一遍，看第一名会不会换 ── */
+function altAnswers(q, ans){
+  const chosen = ansOf(q.id).slice();
+  const live = q.options.map((o,i)=>i).filter(i=>!q.options[i].skip);
+  const out = [];
+  if(q.type === 'multi'){
+    if(chosen.length > 1) chosen.forEach(i=>out.push(chosen.filter(x=>x!==i)));
+    const room = (q.max || 99) - chosen.length;
+    live.filter(i=>!chosen.includes(i)).forEach(i=>{
+      if(room > 0) out.push(chosen.concat(i).sort((a,b)=>a-b));
+      else chosen.forEach(j=>out.push(chosen.filter(x=>x!==j).concat(i).sort((a,b)=>a-b)));
+    });
+  }else{
+    live.filter(i=>i !== chosen[0]).forEach(i=>out.push(i));
+  }
+  return out.slice(0, 12);
+}
+function altLabel(q, alt){
+  return (Array.isArray(alt) ? alt : [alt])
+    .map(i=>q.options[i] && q.options[i].t).filter(Boolean).join('、');
+}
+function stabilityData(top){
+  const base = S.answers;
+  const qs = S.questions.filter(q=>!q.tagOnly);
+  let total = 0, flips = 0;
+  const altCount = {}, qFlips = {}, cases = [];
+  try{
+    for(const q of qs){
+      const alts = altAnswers(q, base);
+      altCount[q.id] = alts.length;
+      for(const alt of alts){
+        const clone = JSON.parse(JSON.stringify(base));
+        clone[q.id] = alt;
+        S.answers = clone;
+        resolveFloors();
+        const r = rankAll(weights());
+        total++;
+        if(r[0] && r[0].name !== top.name){
+          flips++;
+          qFlips[q.id] = (qFlips[q.id] || 0) + 1;
+          cases.push({qid:q.id, alt:altLabel(q, alt), rival:r[0].name, match:r[0].match});
+        }
+      }
+    }
+  }finally{
+    S.answers = base;
+    resolveFloors();
+  }
+  if(!total) return null;
+  const rivals = {};
+  cases.forEach(c=>{ rivals[c.rival] = (rivals[c.rival] || 0) + 1; });
+  const rival = Object.entries(rivals).sort((a,b)=>b[1]-a[1])[0] || null;
+  const example = rival ? cases.filter(c=>c.rival === rival[0])
+    .sort((a,b)=>b.match - a.match)[0] : null;
+  const qBest = Object.entries(qFlips).sort((a,b)=>b[1]-a[1])[0] || null;
+  const qBestRate = qBest ? qFlips[qBest[0]] / Math.max(1, altCount[qBest[0]]) : 0;
+  return {total, flips, rate: flips/total, rival, example, qBest, qBestRate};
+}
+function stabilityBlock(top){
+  const s = S.deep && S.deep.stable;
+  if(!s) return '';
+  const keep = Math.round((1 - s.rate) * 100);
+  let tone;
+  if(keep >= 80) tone = '这个答案很稳：除非你连着改好几题，否则结果不会变。';
+  else if(keep >= 60) tone = '还算稳：真正的分水岭只在一两道题上。';
+  else tone = '不算稳：你的需求有几项在互相拉扯，下面这两款都可以试。';
+  let ex = '';
+  if(s.example){
+    const q = S.questions.find(x=>x.id === s.example.qid);
+    const qt = q ? q.text : `第 ${s.example.qid} 题`;
+    const al = s.example.alt.length > 16 ? s.example.alt.slice(0, 16) : s.example.alt;
+    ex = `<div class="whyline">最典型的一处：<b>${esc(qt)}</b> —— 改选「${esc(al)}」，结果就会变成 <b>${esc(s.example.rival)}</b>。</div>`;
+  }
+  const rival = s.rival
+    ? `<div class="whyline">它掉下去时，最常换成的款是 <b>${esc(s.rival[0])}</b>，占 ${Math.round(s.rival[1]/s.flips*100)}% 的翻盘情况。</div>` : '';
+  const sens = s.qBest && s.qBestRate >= .25
+    ? `<div class="swapnote">最敏感的是第 ${s.qBest[0]} 题：这题换个选项，首选有 ${Math.round(s.qBestRate*100)}% 的改法会变。</div>` : '';
+  return `<div class="card">
+    <div class="sec-t">换个答案，会不会变</div>
+    <div class="muted">把影响结果的 ${S.questions.filter(q=>!q.tagOnly).length} 道题逐题单独换一遍，共 ${s.total} 种改法。</div>
+    <div class="stabbig">${keep}%<span> 的改法还是它</span></div>
+    <div class="muted" style="margin-bottom:8px">${s.flips} 种改法会换掉首选。${esc(tone)}</div>
+    ${ex}${rival}${sens}
+  </div>`;
+}
+
+/* ── 3. 十维体检 + 不适合谁 ── */
+function checkData(top, need){
+  const rows = Object.keys(DIM_CN).map(k=>({
+    k, v: top.score[k] || 0, p: dimPct(k, top.score[k] || 0)
+  })).sort((a,b)=>b.v - a.v);
+  const strong = rows.slice(0,2);
+  const weak = rows.slice(-2).reverse();
+  /* 体检要先回答「接不接得住你的需求」，再看十维强弱。
+     needTop 是前三需求上的原始分和百分位，与全场最强/最弱分开。 */
+  const needTop = need.slice(0,3).map(([k],i)=>({
+    k, v: top.score[k] || 0, p: dimPct(k, top.score[k] || 0), rank: i + 1
+  }));
+  const weakNeed = weak.map(r=>Object.assign({}, r, {
+    rank: need.findIndex(([k])=>k === r.k) + 1
+  })).filter(r=>r.rank > 0);
+  /* 只有撞进前三需求的短板才值得警告；第 6、第 9 需求上的弱项，
+     现在几乎不影响结果，写成「明显吃力」是吓唬人。
+     撞进前三也不等于真弱：推理 77 分仍是全场前 25%，只是它自己十维里最低，
+     这种情况应该说过得去，而不是吓读者。 */
+  const critical = weakNeed.filter(r=>r.rank <= 3);
+  /* 只有真正掉到全库中位数以下的维度，才配写进「不适合」。
+     推理 77 分还在前 18%，说人家干不了法律金融医疗，是拿相对弱项当缺陷。 */
+  const risks = weak.filter(r=>r.p < 50);
+  return {rows, strong, weak, needTop, weakNeed, critical,
+          criticalReal: critical.filter(r=>r.p < 50),
+          criticalMild: critical.filter(r=>r.p >= 50), risks};
+}
+function checkBlock(top){
+  const c = S.deep && S.deep.check;
+  if(!c) return '';
+  const hi = new Set(c.strong.map(r=>r.k)), lo = new Set(c.weak.map(r=>r.k));
+  let weakNeed;
+  if(c.critical.length){
+    weakNeed = '';
+    if(c.criticalReal.length){
+      const r = c.criticalReal[0];
+      weakNeed += `其中${c.criticalReal.map(x=>`${DIM_CN[x.k]}是你排第 ${x.rank} 的需求`).join('、')}——这一维只有 ${r.v} 分（${pctLabel(r.p)}），选它之后这类活会明显吃力。`;
+    }
+    if(c.criticalMild.length){
+      const r = c.criticalMild[0];
+      weakNeed += `${c.criticalMild.map(x=>DIM_CN[x.k]).join('、')}虽然也在你的前三需求里，但 ${r.v} 分${pctLabel(r.p).startsWith('全场前') ? `还在${pctLabel(r.p)}` : `只是${pctLabel(r.p)}`}，按你现在的用法够用，不用为它换款。`;
+    }
+    const rest = c.weak.filter(r=>!c.critical.some(x=>x.k === r.k));
+    if(rest.length) weakNeed += `另一项${DIM_CN[rest[0].k]}不在你的前三需求里，眼下影响有限。`;
+  }else{
+    const rankNote = c.weakNeed.length
+      ? `（${c.weakNeed.map(r=>`${DIM_CN[r.k]}排第 ${r.rank}`).join('、')}）` : '';
+    weakNeed = `两个短板都不在你的前三需求里${rankNote}，眼下影响有限。`;
+    if(c.risks.length) weakNeed += '以后要做这些方向的活，会明显吃力。';
+  }
+  return `<div class="card">
+    <div class="sec-t">十项能力体检</div>
+    <div class="muted" style="margin-bottom:10px">先看它接不接得住你的前三需求，再看十维短板。</div>
+    ${c.rows.map(r=>`<div class="dimrow ${hi.has(r.k)?'high':''} ${lo.has(r.k)?'low':''}">
+      <div class="nm">${DIM_CN[r.k]}</div>
+      <div class="tr"><i style="width:${r.v}%"></i></div>
+      <div class="sc">${r.v}</div></div>`).join('')}
+    <div class="whyline"><b>按你的需求看：</b>${c.needTop.map(r=>`${DIM_CN[r.k]} ${r.v}（${pctLabel(r.p)}）`).join('、')}。</div>
+    <div class="whyline"><b>全场最强：</b>${c.strong.map(r=>`${DIM_CN[r.k]} ${r.v}（${pctLabel(r.p)}）`).join('、')}；这只是它的绝对强项，不一定是你需要的。</div>
+    <div class="whyline"><b>十维最弱：</b>${c.weak.map(r=>`${DIM_CN[r.k]} ${r.v}（${pctLabel(r.p)}）`).join('、')}。${esc(weakNeed)}</div>
+    <div class="swapnote">${c.risks.length
+      ? `不适合：${c.risks.map(r=>DIM_RISK[r.k]).join('；')}。`
+      : `没有明显不适合的活：最弱两项也还在${pctLabel(c.weak[0].p)}，只是相对不突出。`}</div>
+  </div>`;
+}
+
+/* ── 4. 真实世界坐标：公开榜单 + 真实调用 + 开源 ── */
+function coordsData(top, need){
+  const b = top.boards || {};
+  const order = ['综合', '纯能力'];
+  need.slice(0,3).forEach(([k])=>{ if(DIM_BOARD[k]) order.push(DIM_BOARD[k]); });
+  order.push('调用量', '开源');
+  const list = [];
+  order.forEach(k=>{ if(b[k] && !list.some(x=>x.k === k)) list.push({k, rank:b[k]}); });
+  return {list: list.slice(0,6), hot: top.hot, open: top.open,
+          boardDate: S.modelMeta && S.modelMeta.boards_as_of,
+          useDate: S.modelMeta && S.modelMeta.usage_as_of};
+}
+function fmtSnap(s){
+  s = String(s || '');
+  return s.length === 8 ? `${+s.slice(4,6)}/${+s.slice(6,8)}` : '';
+}
+function coordsBlock(top){
+  const c = S.deep && S.deep.coords;
+  if(!c) return '';
+  const hot = c.hot ? `真实调用第 ${c.hot.rank}（热度 ${c.hot.score}）` : '';
+  const trend = c.hot && c.hot.days >= 5 && c.hot.change != null
+    ? `，近 ${c.hot.days} 天 ${c.hot.change > 0 ? '+' : ''}${c.hot.change}%` : '';
+  const open = c.open ? `开放权重，可下载${c.open.license ? ' · ' + c.open.license : ''}` : '';
+  const dates = (c.list.length || c.hot)
+    ? [c.boardDate ? `榜单 ${fmtSnap(c.boardDate)}` : '',
+       c.useDate ? `调用量 ${fmtSnap(c.useDate)}` : ''].filter(Boolean).join(' · ')
+    : '';
+  return `<div class="card">
+    <div class="sec-t">它在真实世界的坐标</div>
+    <div class="muted" style="margin-bottom:4px">不是我们算的分，是公开榜单上的位置；各榜只列头部名次。</div>
+    <div class="coord">${c.list.map(x=>`<span>${x.k}<em>#${x.rank}</em></span>`).join('')}</div>
+    ${c.list.length ? '' : '<div class="muted">这份报告的款没有进任何一张公开榜的头部。</div>'}
+    ${hot ? `<div class="whyline">${esc(hot)}${esc(trend)}。</div>` : ''}
+    ${open ? `<div class="whyline">${esc(open)}。</div>` : ''}
+    ${dates ? `<div class="swapnote">${esc(dates)}。</div>` : ''}
+  </div>`;
+}
+
+/* 「更省」的统一口径：同一份用量下真更便宜，且匹配度不掉队。
+   不是挑匹配度最高的——会出现 77.5 分、¥24 的款压过 76.9 分、¥4.5 的款，
+   差 0.6 分却贵五倍。先收窄到最佳替代的 3 分以内，再选账单最低的。
+   账单块、三条路线、组合方案共用这一把尺子，免得同一页里三个「更省」互相打架。 */
+function cheaperAlt(top, all, u, exclude){
+  const topCost = top.price ? monthlyRMB(top, u) : null;
+  if(topCost == null) return null;
+  const used = exclude || new Set();
+  const cands = all.filter(m=>m.name !== top.name && !used.has(m.name) && m.price
+    && monthlyRMB(m, u) < topCost);
+  if(!cands.length) return null;
+  const best = Math.max(...cands.map(m=>m.match));
+  return cands.filter(m=>m.match >= best - 3)
+    .sort((a,b)=>monthlyRMB(a, u) - monthlyRMB(b, u))[0] || null;
+}
+
+/* ── 5. 真实账单：OpenRouter 标价 × 读者的用量 ── */
+function priceData(top, w, need, all){
+  const u = usageEstimate();
+  const topCost = monthlyRMB(top, u);
+  if(topCost == null) return null;
+  const cheap = cheaperAlt(top, all, u);
+  const cheapCost = cheap ? monthlyRMB(cheap, u) : null;
+  const cap = budgetCap();
+  let budgetBest = null;
+  if(cap != null && cap > 0){
+    budgetBest = all.find(m=>m.price && monthlyRMB(m, u) <= cap) || null;
+  }
+  return {u, topCost, cheap, cheapCost, cap, budgetBest, price:top.price};
+}
+function priceBlock(top, w){
+  const p = S.deep && S.deep.price;
+  if(!p) return `<div class="card"><div class="sec-t"><span class="n">${++S.secN}</span>月成本怎么算</div>
+    <div id="cost-body">${costBlock(top, w)}</div></div>`;
+  const u = p.u;
+  let budget = '';
+  if(p.cap === 0){
+    budget = `<div class="whyline">你选了一分不花：API 按量计费没有 0 元档，这份账单只能当参照；免费额度或包月订阅另算。</div>`;
+  }else if(p.cap && p.budgetBest && p.budgetBest.name !== top.name){
+    const bc = monthlyRMB(p.budgetBest, u);
+    budget = `<div class="whyline">你的预算上限是每月 ¥${p.cap}。按这个用量，首选会到 ${money(p.topCost)}，超了；预算内匹配度最高的是 <b>${esc(p.budgetBest.name)}</b>，约 ${money(bc)}/月（匹配度 ${p.budgetBest.match.toFixed(0)}%，比首选低 ${(top.match-p.budgetBest.match).toFixed(1)} 分）。</div>`;
+  }else if(p.cap && p.budgetBest){
+    budget = `<div class="whyline">在每月 ¥${p.cap} 的预算内，首选约 ${money(p.topCost)}，留有余量。</div>`;
+  }else if(p.cap){
+    budget = `<div class="whyline">按这个用量，每月 ¥${p.cap} 以内没有能覆盖你需求的款；要么降调用量，要么放宽预算。</div>`;
+  }
+  let cheapLine = '';
+  if(p.cheap && p.cheapCost != null && p.cheapCost < p.topCost){
+    const lose = Object.keys(DIM_CN).map(k=>({k, d:(top.score[k]||0)-(p.cheap.score[k]||0)}))
+      .sort((a,b)=>b.d-a.d)[0];
+    cheapLine = `<div class="whyline">在匹配度接近的款里，<b>${esc(p.cheap.name)}</b>每月少花 ${money(p.topCost - p.cheapCost)}${lose.d >= 2 ? `，代价是${DIM_CN[lose.k]}低 ${lose.d} 分` : '，能力基本打平'}。</div>`;
+  }
+  const ctx = p.price.ctx ? `上下文 ${(p.price.ctx/1e4).toFixed(0)} 万 token。` : '';
+  return `<div class="card">
+    <div class="sec-t"><span class="n">${++S.secN}</span>这笔账，按月算</div>
+    <div class="muted" style="margin-bottom:8px">按「${esc(freqText())}、${esc(teamText())}」折算：每天约 ${u.calls} 次调用，每月合计约 ${u.calls*30} 次、${Math.round(u.inWan)} 万输入 token。</div>
+    <div class="moneyrow">
+      <div class="m"><div class="who">首选 · ${esc(top.name)}</div>
+        <div class="amt">${money(p.topCost)}<small>/月</small></div>
+        <div class="sub">${esc(priceLine(p.price))}</div></div>
+      ${p.cheap && p.cheapCost != null ? `<div class="m"><div class="who">更省 · ${esc(p.cheap.name)}</div>
+        <div class="amt">${money(p.cheapCost)}<small>/月</small></div>
+        <div class="sub">${esc(priceLine(p.cheap.price))}</div></div>` : ''}
+    </div>
+    ${cheapLine}${budget}
+    <div class="swapnote">按 OpenRouter 公开 API 标价、1 美元≈7.2 元折算，${ctx}不含包月订阅、免费额度和缓存折扣，实际以账单为准。</div>
+  </div>`;
+}
+
+/* ── 6. 分工：把这一周的活落到具体模型上 ── */
+function planData(top, w, need, all, routes, combos, cheaper){
+  const rows = [];
+  const q2 = S.questions.find(q=>q.id === 2);
+  const tasks = q2 ? ansOf(2).filter(i=>q2.options[i] && !q2.options[i].skip)
+    .map(i=>q2.options[i].t) : [];
+  const k0 = need[0] && need[0][0];
+  rows.push({ic:'主', name:top.name, task:tasks[0] || '日常主力',
+    txt:`复杂、错了要返工的活交给它${k0?`；你的第一需求${DIM_CN[k0]} ${top.score[k0]} 分`:''}。`});
+  /* 批量位优先用账单块里那款「真更省」的；组合块没凑出更便宜的款时也能有分工。 */
+  const comboCheap = combos.find(r=>r.ic === '辅');
+  /* 分工表里的「批量」必须和上面组合块推荐的是同一款；
+     否则图上一套组合写 Ling-Fin，结论里又写 Ling，读者会以为算错了。 */
+  const cheapM = (comboCheap && comboCheap.m) || cheaper;
+  if(cheapM){
+    const u = usageEstimate();
+    let pc;
+    if(cheapM.price){
+      const cc = monthlyRMB(cheapM, u);
+      const diff = top.price ? monthlyRMB(top, u) - cc : 0;
+      pc = `月账单约 ${money(cc)}${diff > 0 ? `，比首选每月少花 ${money(diff)}` : ''}`;
+    }else{
+      pc = `成本分 ${cheapM.score.cost}`;
+    }
+    rows.push({ic:'批', name:cheapM.name, task:'批量、重复的活',
+      txt:`一次丢一批、格式固定的活交给它；${pc}。`});
+  }
+  const long = combos.find(r=>r.ic === '长');
+  if(long){
+    rows.push({ic:'长', name:long.m.name, task:'一次读很多资料',
+      txt:`长文本 ${long.m.score.longtext} 分，比首选高 ${long.m.score.longtext - top.score.longtext} 分；整本书、几十份文件一起丢给它。`});
+  }
+  const box = S.specialized;
+  const keys = (S.picks && S.picks.length) ? S.picks : (S.pick ? [S.pick] : []);
+  keys.forEach(k=>{
+    const g = box && (box.groups || []).find(x=>x.key === k);
+    if(g && g.picks && g.picks.length){
+      rows.push({ic:'专', name:g.picks[0].name, task:g.label,
+        txt:'这类需求通用模型干不好，直接用它。'});
+    }
+  });
+  /* 没有更便宜的款可以分担批量时，至少给一个备用：
+     一份报告里「分工」只剩首选自己，读者会觉得这块没做完。 */
+  if(rows.length < 2){
+    const alt = all.find(m=>m.name !== top.name);
+    if(alt) rows.push({ic:'备', name:alt.name, task:'首选限流或想对照时',
+      txt:`匹配度 ${alt.match.toFixed(0)}%，比首选低 ${(top.match - alt.match).toFixed(1)} 分；同类任务可以顶上。`});
+  }
+  /* 同一款不在一张分工表里出现两次 */
+  const seen = new Set();
+  return rows.filter(r=>{
+    if(seen.has(r.name)) return false;
+    seen.add(r.name); return true;
+  }).slice(0,5);
+}
+function planBlock(top){
+  const rows = S.deep && S.deep.plan;
+  if(!rows || rows.length < 2) return '';
+  return `<div class="card">
+    <div class="sec-t"><span class="n">${++S.secN}</span>这周的活，这样分</div>
+    <div class="muted" style="margin-bottom:6px">不是每件事都该用最贵的那款；重要的留给首选，其余按成本和专长分派。</div>
+    ${rows.map(r=>`<div class="planrow"><div class="ic">${r.ic}</div><div class="tx">
+      <b>${esc(r.name)}</b><span class="task">${esc(r.task)}</span>
+      <p>${esc(r.txt)}</p></div></div>`).join('')}
+  </div>`;
+}
+
+function buildDeep(top, all, w, need){
+  const routes = routeData(top, w, need);
+  const combos = comboData(top, w, need, all, routes.map(r=>r.m.name));
+  const price = priceData(top, w, need, all);
+  return {
+    gap: gapData(top, all, w, need),
+    stable: stabilityData(top),
+    check: checkData(top, need),
+    coords: coordsData(top, need),
+    price,
+    plan: planData(top, w, need, all, routes, combos, price && price.cheap)
+  };
+}
+
 /* ── 出结果 ── */
 function finish(){
   resolveFloors();
@@ -1365,6 +2187,9 @@ function finish(){
   // 需求画像（正权重降序）
   const need = Object.entries(w).filter(([k,v])=>v>0).sort((a,b)=>b[1]-a[1]);
   const maxNeed = need.length ? need[0][1] : 1;
+  /* 深读六块先一次性算完：稳定性要反复改答案、重排模型，
+     渲染到一半再算会拖慢首屏，也容易把全局答案改坏。 */
+  S.deep = buildDeep(top, all, w, need);
 
   $('#r-kicker').textContent = '你的 AI 选型报告';
   $('#r-title').textContent = '为你算出的选型方案';
@@ -1422,8 +2247,20 @@ function finish(){
      不突出的用户整块不渲染——十维都差不多还在挑「尖子」，纯属噪声。 */
   h += focusBlock(top, need, all);
 
+  /* 你是谁：从背景题读，只影响解释口径，不改首选。 */
+  h += personaBlock(top, w, need);
+
+  /* 深读：为什么是它、这个答案稳不稳。两块都在编号章节之前，
+     因为它们解释的是「冠军」本身，不是新的推荐。 */
+  h += gapBlock(top);
+  h += stabilityBlock(top);
+
+  /* 章节编号从 1 开始，新增的块不用再手写序号——
+     原来 3/4/5/6/7 是手抄的，中间插一块就得全改一遍。 */
+  S.secN = 0;
+
   /* 需求画像 */
-  h += `<div class="card"><div class="sec-t"><span class="n">1</span>你的需求优先级</div>
+  h += `<div class="card"><div class="sec-t"><span class="n">${++S.secN}</span>你的需求优先级</div>
     <div class="muted" style="margin-bottom:14px">越靠上，说明你越在意</div><div class="bars">`;
   need.slice(0, 10).forEach(([k,v])=>{
     h += `<div class="bar"><div class="lb"><b>${DIM_CN[k]||k}</b><span>${Math.round(v/maxNeed*100)}%</span></div>
@@ -1432,87 +2269,63 @@ function finish(){
   h += `</div>`;
   h += `</div>`;
 
-  {
-    const second = all[1], third = all[2];
-    h += `<div class="card"><div class="sec-t"><span class="n">2</span>备选方案</div>
-      <div class="muted" style="margin-bottom:13px">如果首选不合适，这两款更偏向别的方向</div>
-      <div class="row2">
-        ${[second,third].map((m,i)=>m?`<div class="alt"><div class="nm">${esc(m.name)}</div>
-          <div class="mt">${m.match.toFixed(0)}<span>% 匹配</span></div>
-          <div class="ds">${esc(contrast(top,m))}</div></div>`:'').join('')}
-      </div></div>`;
+  /* 同一个答案，三种取舍；每一款都单独算过，不是从同一份排名里截前三。
+     2026-10-31 替换原「备选方案」+「三个档位」：那两块本质是同一份排名的不同切片，
+     读者翻完看到的还是同一梯队。 */
+  h += routeBlock(top, w, need, all);
 
-    /* 专用需求：通用池答不了的那部分单独说。
-       故意不编进上面那套序号，插在中间也不会打乱后面的 3/4/5/6/7 */
-    h += specialBlock();
+  /* 只把某一维拉满时的答案：专精款靠这里露脸。 */
+  h += swapBlock(top, need, all);
 
-    /* 能力雷达：只有填了主力才出。没填就整块不渲染，不留空壳标题——
-       「你的主力」都没填，图上画什么都是编的。
-       原来这里还有一张 Top3 三列表格，已撤：同一份数据在雷达上已经能读形状，
-       三列数字只会把「我手上这款换成首选会怎样」这个唯一的问题冲淡。 */
-    const cmpB = cmpBlockHTML(top, w, need);
-    if(cmpB){
-      h += `<div class="card"><div class="sec-t"><span class="n">3</span>首选 vs 你的主力</div>
-        ${cmpB}</div>`;
-    }
+  /* 主 + 辅的组合，比只推一款更接近真实用法。 */
+  h += comboBlock(top, w, need, all);
 
-    /* 档位建议 */
-    h += `<div class="card"><div class="sec-t"><span class="n">4</span>三个档位怎么选</div>
-      <div class="muted" style="margin-bottom:8px">同一份需求，按预算给出三种答案</div>`;
-    const baseRank = rankAll(w, {});
-    const usedTier = [];
-    TIERS.forEach(t=>{
-      const pool = t.filter ? baseRank.filter(t.filter) : baseRank;
-      const pick = pool.find(m=>!usedTier.includes(m.name)) || pool[0] || baseRank[0];
-      usedTier.push(pick.name);
-      h += `<div class="tier"><div class="ic">${t.ic}</div><div class="tx">
-        <b>${t.name} · ${esc(pick.name)}${pick.name===top.name?'（就是上面这款）':''}</b>
-        <p>${esc(t.desc(pick))}</p></div></div>`;
-    });
-    h += `</div>`;
+  /* 总分更高却没被推荐的款，要说清原因——排除也是差异化。 */
+  h += whyNotBlock(top, need, all);
 
-    /* 月成本 */
-    h += `<div class="card"><div class="sec-t"><span class="n">5</span>月成本怎么算</div>
-      <div id="cost-body">${costBlock(top, w)}</div></div>`;
+  /* 十维体检：强项之外，把短板和「不适合谁」也写出来。
+     付费报告只夸不贬，读者反而不会信。 */
+  h += checkBlock(top);
 
-    /* 档位建议：同一款模型内部自己调，比换模型省事得多。
-       接口不用换、输出风格不变，只是把内部思考的深度降一档。
-       没有档位数据的模型（4 款）跳过这一块，编号也不留空。 */
-    let nRoute = 6;
-    if(top.tier){
-      nRoute = 7;
-      const t = top.tier;
-      h += `<div class="card"><div class="sec-t"><span class="n">6</span>这款还能再省一点</div>
-        <div class="muted" style="margin-bottom:12px">不用换模型——${esc(top.name)} 自己就能调，接口和输出风格都不变。</div>
-        <div class="tier knob"><div class="ic">调</div><div class="tx">
-          <b>${esc(t.label)}：${esc(t.how)}</b>
-          <p>${esc(t.advice)}。${esc(t.why)}。</p></div></div>
-        <div class="muted" style="margin-top:10px;font-size:12.5px">
-          具体能省多少要看你的任务长短，拿账单比一比就知道了。</div>
-      </div>`;
-    }
+  /* 公开榜单上的位置：和公众号每天发的榜单一套数据。 */
+  h += coordsBlock(top);
 
-    /* 升降档 */
-    /* 升档 = 完全不计成本；降档 = 成本需求拉到最高。
-       不能再像 V1 那样塞负权重——新算法会忽略非正权重，负权重等于没设置。 */
-    const maxW = Math.max(1, ...Object.values(w));
-    const richer = rankAll(w, {cost:0})[0];
-    const cheaper = rankAll(w, {cost:maxW*2})[0];
-    const upIsTop = richer.name === top.name;
-    const downIsTop = cheaper.name === top.name;
-    h += `<div class="card"><div class="sec-t"><span class="n">${nRoute}</span>升档 / 降档路线</div>
-      <div class="tier"><div class="ic">↑</div><div class="tx"><b>${
-        upIsTop ? '已经在能力最强档，不用再升' : '预算宽松了，换 ' + esc(richer.name)}</b>
-        <p>${esc(upIsTop ? '你现在的选择就是不计成本时的最优解。'
-                         : upgradeText(top, richer))}</p></div></div>
-      <div class="tier"><div class="ic">↓</div><div class="tx"><b>${
-        downIsTop ? '已经在最省档，降不下去了' : '预算收紧了，换 ' + esc(cheaper.name)}</b>
-        <p>${esc(downIsTop ? '这款本身就是同档里最省的选择。'
-                           : downgradeText(top, cheaper))}</p></div></div></div>`;
+  /* 专用需求：通用池答不了的那部分单独说，不占上面的序号。 */
+  h += specialBlock();
 
-    h += `<button class="btn" id="save-card">保存报告图片</button>
-      <div class="muted" style="text-align:center;margin-top:10px">保存后可以随时翻出来对比</div>`;
+  /* 能力雷达：只有填了主力才出。没填就整块不渲染，不留空壳标题——
+     「你的主力」都没填，图上画什么都是编的。
+     原来这里还有一张 Top3 三列表格，已撤：同一份数据在雷达上已经能读形状，
+     三列数字只会把「我手上这款换成首选会怎样」这个唯一的问题冲淡。 */
+  const cmpB = cmpBlockHTML(top, w, need);
+  if(cmpB){
+    h += `<div class="card"><div class="sec-t"><span class="n">${++S.secN}</span>首选 vs 你的主力</div>
+      ${cmpB}</div>`;
   }
+
+  /* 真实账单：有公开标价就按月折算，没有就退回旧的成本分区间。 */
+  h += priceBlock(top, w);
+
+  /* 分工：把报告从「选哪款」落到「这周怎么用」。 */
+  h += planBlock(top);
+
+  /* 档位建议：同一款模型内部自己调，比换模型省事得多。
+     接口不用换、输出风格不变，只是把内部思考的深度降一档。
+     没有档位数据的模型（4 款）跳过这一块，编号也不留空。 */
+  if(top.tier){
+    const t = top.tier;
+    h += `<div class="card"><div class="sec-t"><span class="n">${++S.secN}</span>这款还能再省一点</div>
+      <div class="muted" style="margin-bottom:12px">不用换模型——${esc(top.name)} 自己就能调，接口和输出风格都不变。</div>
+      <div class="tier knob"><div class="ic">调</div><div class="tx">
+        <b>${esc(t.label)}：${esc(t.how)}</b>
+        <p>${esc(t.advice)}。${esc(t.why)}。</p></div></div>
+      <div class="muted" style="margin-top:10px;font-size:12.5px">
+        具体能省多少要看你的任务长短，拿账单比一比就知道了。</div>
+    </div>`;
+  }
+
+  h += `<button class="btn" id="save-card">保存报告图片</button>
+    <div class="muted" style="text-align:center;margin-top:10px">保存后可以随时翻出来对比</div>`;
 
   $('#r-body').innerHTML = h;
   show('s-result');
@@ -1579,8 +2392,7 @@ function why(m, w){
   const need = Object.entries(w).filter(([k,v])=>v>0).sort((a,b)=>b[1]-a[1]).slice(0,3);
   const out = need.map(([k])=>{
     const p = dimPct(k, m.score[k]||0);
-    const rel = p>=90 ? '全场前 10%' : p>=75 ? '全场前 25%' : p>=50 ? '中上水平' : '中等偏后';
-    return `${DIM_CN[k]} ${m.score[k]} 分，${rel}`;
+    return `${DIM_CN[k]} ${m.score[k]} 分，${pctLabel(p)}`;
   });
   const costW = w.cost||0;
   // 这行的作用是「说明成本需求起作用了」，前面维度那句已经报过成本分了，
@@ -1591,34 +2403,6 @@ function why(m, w){
   else out.push(`综合实力 ${m.power} 分，在 ${S.models.length} 款模型里排第 ${S.models.filter(x=>x.power>m.power).length+1}`);
   return out;
 }
-function contrast(a,b){
-  const dif = Object.keys(DIM_CN).map(k=>({k, d:(b.score[k]||0)-(a.score[k]||0)}))
-    .sort((x,y)=>y.d-x.d)[0];
-  if(!dif || dif.d<=0) return '各项都略低于首选，没有单项反超';
-  return `${DIM_CN[dif.k]}更突出（${b.score[dif.k]} 分，比首选高 ${dif.d}）`;
-}
-/* ── 档位 ── */
-/* 档位按「成本分」分层，而不是改权重——改权重时能力强的模型会三档通吃，
-   三个档位给出同一个答案，报告就没有信息量了。 */
-const TIERS = [
-  { ic:'旗', name:'旗舰档', filter:null,
-    desc: p=>`不看价格，${p.name} 是你需求下能力最强的一档。` },
-  { ic:'主', name:'主力档', filter: m=>m.score.cost>=70,
-    desc: p=>`${p.name} 匹配度 ${p.match.toFixed(0)}%，价格也压得住，适合当日常主力。` },
-  { ic:'省', name:'省钱档', filter: m=>m.score.cost>=90,
-    desc: p=>`${p.name} 成本分 ${p.score.cost}，能力不退太多，能省的地方都省了。` }
-];
-function upgradeText(from, to){
-  const gain = Object.keys(DIM_CN).map(k=>({k, d:(to.score[k]||0)-(from.score[k]||0)}))
-    .sort((a,b)=>b.d-a.d)[0];
-  return `多花预算能换来 ${DIM_CN[gain.k]} 提升（${from.score[gain.k]} → ${to.score[gain.k]}）。`;
-}
-function downgradeText(from, to){
-  const lose = Object.keys(DIM_CN).map(k=>({k, d:(from.score[k]||0)-(to.score[k]||0)}))
-    .sort((a,b)=>b.d-a.d)[0];
-  return `省钱要接受 ${DIM_CN[lose.k]} 从 ${from.score[lose.k]} 降到 ${to.score[lose.k]}。`;
-}
-
 /* ── 月成本估算 ── */
 function costBlock(top, w){
   const costW = w.cost || 0;
@@ -1819,6 +2603,61 @@ function drawCmpBlock(x, y0, models, series, verdictText){
   lines.forEach((t, i)=> x.fillText(t, CVP + 38, y + 24 + i * 42));
 }
 
+/* 存图里的「深读结论」：手机端六块各有一屏解释，图里只留每块一句结论。
+   图是会被转出去的物料，太长没人看完；但缺了这几句，付费报告看起来还是只有一张卡。 */
+function deepCardRows(){
+  const d = S.deep;
+  if(!d) return [];
+  const rows = [];
+  if(d.stable)
+    rows.push({lb:'稳定性', txt:`${Math.round((1-d.stable.rate)*100)}% 换一题还是它`
+      + (d.stable.rival ? `；最常换成 ${d.stable.rival[0]}` : '')});
+  if(d.gap && d.gap.rows.length){
+    const mark = k => d.gap.lead && k === d.gap.lead.k ? '（第一需求）' : '';
+    const win = d.gap.rows.filter(r=>r.d>0).slice(0,2)
+      .map(r=>`${DIM_CN[r.k]} +${r.d}${mark(r.k)}`).join('、');
+    const lose = d.gap.rows.filter(r=>r.d<0).slice(0,2)
+      .map(r=>`${DIM_CN[r.k]} ${r.d}${mark(r.k)}`).join('、');
+    const rival = cardName(d.gap.second.name);
+    rows.push({lb:'分差', txt:`比第二的 ${rival} 高 ${d.gap.gap.toFixed(1)} 分；`
+      + ([win && `赢在 ${win}`, lose && `输在 ${lose}`].filter(Boolean).join('；') || '十维几乎打平')});
+  }
+  if(d.check){
+    /* 图上不能只写「最强创意/最弱编程」——对研究型用户，创意分再高也不构成推荐理由。
+       先把前三需求上的分数摊开，再点名真正不能碰的活。 */
+    const needTxt = d.check.needTop
+      .map(r=>`${DIM_CN[r.k]} ${r.v}（${pctLabel(r.p)}）`).join('、');
+    const riskTxt = d.check.risks.length
+      ? `；不适合${d.check.risks.map(r=>DIM_RISK_SHORT[r.k]).join('、')}`
+      : '；没有明显不能碰的活';
+    rows.push({lb:'体检', txt:`前三需求 ${needTxt}${riskTxt}`});
+  }
+  if(d.coords){
+    const bits = d.coords.list.map(x=>`${x.k} #${x.rank}`);
+    /* 榜单里已有「调用量」名次时别再加一条「调用 #N」，同一份报告说两遍。 */
+    if(d.coords.hot && !d.coords.list.some(x=>x.k === '调用量'))
+      bits.push(`调用 #${d.coords.hot.rank}`);
+    rows.push({lb:'坐标', txt:bits.length ? bits.slice(0,5).join(' · ') : '暂无公开榜单头部名次'});
+  }
+  if(d.price){
+    let priceTxt = `按 API 用量约 ${money(d.price.topCost)}/月`;
+    if(d.price.cheap && d.price.cheapCost != null){
+      const diff = d.price.topCost - d.price.cheapCost;
+      priceTxt += `；换 ${cardName(d.price.cheap.name)} 约 ${money(d.price.cheapCost)}/月`
+        + (diff > 0 ? `，省 ${money(diff)}` : '');
+    }
+    rows.push({lb:'月账单', txt:priceTxt});
+  }
+  if(d.plan && d.plan.length >= 2){
+    /* 图上一行只留角色和款名：任务描述截断到 8 个字会切出「查技术问」这种残句，
+       完整分派留在手机端。 */
+    const role = {主:'主力', 批:'批量', 长:'长文', 专:'专用', 备:'备用'};
+    rows.push({lb:'分工', txt:d.plan.slice(0,3)
+      .map(r=>`${role[r.ic] || r.ic}→${cardName(r.name)}`).join('；')});
+  }
+  return rows;
+}
+
 function saveCard(top, all, w, need){
   const W=1080;
   const list = selfModels(w);
@@ -1830,8 +2669,32 @@ function saveCard(top, all, w, need){
   const series = cmpModelsArr.length
     ? cmpSeries(cmpModelsArr, need.map(k=>k[0])) : [];
 
+  /* 存图跟着手机端一起长出三块：人群标签、三条路线、组合方案。
+     图上只放「换个答案」的结论，不放解释——解释留在手机端，图要能一眼看懂。 */
+  const chips = personaOf().chips;
+  const routes = routeData(top, w, need);
+  const combos = comboData(top, w, need, all, routes.map(r=>r.m.name));
+  /* 行高必须实测：路线说明有一行也有两行，写死 92 就会压到下一行。
+     先拿一块量字画布算出总高，定稿后再正式画——和对比块的算法一致。 */
+  const meas = document.createElement('canvas').getContext('2d');
+  const rowH = r => {
+    meas.font = `400 22px ${YY}`;
+    return wrapText(meas, r.txt.split('。')[0]+'。', W-CVP*2-56).length * 29 + 52;
+  };
+  const CHIP_H = 52;
+  const ROUTE_H = routes.length ? 58 + routes.reduce((a,r)=>a+rowH(r), 0) : 0;
+  const COMBO_H = combos.length ? 58 + combos.reduce((a,r)=>a+rowH(r), 0) : 0;
+  /* 深读结论也要先量再建画布：每行文字长度差一倍，写死高度会压到页脚。 */
+  const deepRows = deepCardRows();
+  const deepRowH = r => {
+    meas.font = `400 22px ${YY}`;
+    return 30 + wrapText(meas, r.txt, CVW - 154).length * 29 + 12;
+  };
+  const DEEP_H = deepRows.length ? 58 + deepRows.reduce((a,r)=>a+deepRowH(r), 0) : 0;
+  const BASE_H = 1640 + CHIP_H + (ROUTE_H - 222) + COMBO_H + DEEP_H;
+
   const c=document.createElement('canvas');
-  c.width=W; c.height=1640;           // 先建个小画布只为量文字，定稿高度在下面
+  c.width=W; c.height=BASE_H;         // 先建个小画布只为量文字，定稿高度在下面
   let x = c.getContext('2d');
   let cmpVerdict = '';
   if(series.length){
@@ -1842,11 +2705,10 @@ function saveCard(top, all, w, need){
        读者看不到这 3.3 点差在哪。 */
     /* 月成本一样要带上：「值不值得换」一半取决于钱，而这张图是唯一会被
        转出去的物料，手机上那条 li 在图里没有对应位置。措辞与手机端同一句。 */
-    const cTop = costBand(top.score.cost||0), cMe = costBand(me0.score.cost||0);
     const dlt = [
       gain.length ? '换过去能多拿：' + gain.map(g=>`${DIM_CN[g.k]||g.k} ${g.from} → ${g.to}`).join('、') : '',
       lose.length ? '代价是：' + lose.map(g=>`${DIM_CN[g.k]||g.k} ${g.from} → ${g.to}`).join('、') : '',
-      cTop === cMe ? `月成本基本不变（${cTop}）` : `月成本从 ${cMe} 变成 ${cTop}`
+      costTransition(top, me0)
     ].filter(Boolean).join('；');
     /* 备用在图上没有位置（它不进雷达），手机上它是单独一条 li。
        能存出去的就这一张图，少一句读者就以为备用白填了。
@@ -1858,7 +2720,7 @@ function saveCard(top, all, w, need){
           + (list[1].name === top.name ? '，就是上面那款首选。' : '，不进雷达图。') : '')
       + (S.selfOther.length
           ? ` 你写的「${S.selfOther.join('、')}」还没有公开实测分，没法逐维比。` : '');
-    c.height = 1640 + cmpBlockHeight(x, cmpModelsArr, series, cmpVerdict);
+    c.height = BASE_H + cmpBlockHeight(x, cmpModelsArr, series, cmpVerdict);
     x = c.getContext('2d');           // 改高度会重置画布与上下文状态
   }
   const H = c.height;
@@ -1873,13 +2735,26 @@ function saveCard(top, all, w, need){
   x.fillStyle=ACC; x.font=`800 26px ${YY}`;
   x.textAlign='right'; x.fillText(stampText(S.finishedAt), W-P, 68); x.textAlign='left';
 
+  // 人群标签
+  let cx0 = P;
+  chips.forEach((c,i)=>{
+    x.font = `700 24px ${YY}`;
+    const tw = x.measureText(c).width + 34;
+    if(cx0 + tw > W-P) return;
+    x.fillStyle = i===0 ? ACC : VB;
+    roundRect(x, cx0, 122, tw, 38, 19); x.fill();
+    x.fillStyle = i===0 ? '#fff' : INK;
+    x.fillText(c, cx0+17, 131);
+    cx0 += tw + 10;
+  });
+
   // 冠军卡
   /* why() 恒定给 4 条（前三维 + 一条成本/实力），手机端全渲染。
      这里原来写死 slice(0,3)，等于每张存图都静默少一条。高度按条数算，
      以后 why() 多给一条也不会被裁。 */
   const bullets = why(top, w);
   const whyH = 42 + (bullets.length - 1) * 34;          // 3 条 = 110，与旧值一致
-  const cardY=120, cardH=520 + Math.max(0, bullets.length - 3) * 34;
+  const cardY=120+CHIP_H, cardH=520 + Math.max(0, bullets.length - 3) * 34;
   x.fillStyle='#fff'; roundRect(x,P,cardY,W-P*2,cardH,28); x.fill();
   x.fillStyle=ACC; x.font=`800 24px ${YY}`;
   x.fillText('最推荐', P+46, cardY+42);
@@ -1918,32 +2793,58 @@ function saveCard(top, all, w, need){
     y+=46;
   });
 
-  // 备选
-  x.fillStyle=INK; x.font=`800 34px ${YY}`;
-  x.fillText('备选方案', P, y+16); y+=72;
-  const others = all.slice(1,3);
-  const cw = (W-P*2-24)/2;
-  others.forEach((m,i)=>{
-    const cx = P + i*(cw+24);
-    x.fillStyle=VB; roundRect(x,cx,y,cw,150,20); x.fill();
-    x.fillStyle=INK; x.font=`800 30px ${YY}`;
-    x.fillText(cardName(m.name), cx+26, y+26);
-    x.fillStyle=ACC; x.font=`800 40px ${YY}`;
-    x.fillText(m.match.toFixed(1)+'%', cx+26, y+70);
-    x.fillStyle=GRAY; x.font=`400 22px ${YY}`;
-    x.fillText('匹配度', cx+26, y+118);
-  });
+  // 三路线 / 组合：和手机端同一份数据，只压成一句
+  const drawRows = (rows)=>{
+    rows.forEach(r=>{
+      x.fillStyle=VB; roundRect(x,P,y,40,40,12); x.fill();
+      x.fillStyle=ACC; x.font=`800 22px ${YY}`; x.textAlign='center';
+      x.fillText(r.ic, P+20, y+9); x.textAlign='left';
+      x.fillStyle=INK; x.font=`800 26px ${YY}`;
+      x.fillText(cardName(r.m.name), P+56, y+1);
+      x.fillStyle=GRAY; x.font=`400 22px ${YY}`;
+      const lines = wrapText(x, r.txt.split('。')[0]+'。', W-P*2-56);
+      lines.forEach((ln,i)=>x.fillText(ln, P+56, y+36+i*29));
+      y += 40 + Math.max(1,lines.length)*29 + 12;
+    });
+  };
 
-  /* 对比块。没选用在什么模型时整块不画，画布高度也就还是 1640——
-     这条同时是 e2e 的回归断言：老报告的图一个像素都不该变。 */
-  if(series.length) drawCmpBlock(x, y + 150 + 46, cmpModelsArr, series, cmpVerdict);
+  if(routes.length){
+    x.fillStyle=INK; x.font=`800 34px ${YY}`;
+    x.fillText(routes.length >= 3 ? '三条路线，三个答案' : '两条路线，两种取舍', P, y+14); y+=58;
+    drawRows(routes);
+  }
+
+  if(combos.length){
+    y += 20;
+    x.fillStyle=INK; x.font=`800 34px ${YY}`;
+    x.fillText('一套组合，而不是只买一款', P, y+14); y+=58;
+    drawRows(combos);
+  }
+
+  /* 深读结论：六块各压成一句，图里只放结论不放解释。 */
+  if(deepRows.length){
+    y += 20;
+    x.fillStyle=INK; x.font=`800 34px ${YY}`;
+    x.fillText('深读结论', P, y+14); y+=58;
+    deepRows.forEach(r=>{
+      x.fillStyle=GRAY; x.font=`700 22px ${YY}`;
+      x.fillText(r.lb, P, y+2);
+      x.fillStyle=INK; x.font=`400 22px ${YY}`;
+      const lines = wrapText(x, r.txt, CVW - 154);
+      lines.forEach((ln,i)=>x.fillText(ln, P+118, y+2+i*29));
+      y += 30 + lines.length*29 + 12;
+    });
+  }
+
+  /* 对比块。没选用在什么模型时整块不画——画布高度也就少了这一块。 */
+  if(series.length) drawCmpBlock(x, y + 30, cmpModelsArr, series, cmpVerdict);
 
   // 页脚
   x.fillStyle=GRAY; x.font=`400 24px ${YY}`;
   x.textAlign='center';
   x.fillText('AI 大模型排行榜 · 数据每日更新', W/2, H-104);
   x.fillStyle=ACC; x.font=`700 26px ${YY}`;
-  x.fillText(`从 ${S.models.length} 款模型里算出最适合你的那一款`, W/2, H-66);
+  x.fillText(`从 ${S.models.length} 款模型里算出你的答案和分工`, W/2, H-66);
   x.textAlign='left';
 
   /* 画布上「少画了一条」是像素级的，截图上看着像正常排版，测试也量不出来。
@@ -1951,6 +2852,8 @@ function saveCard(top, all, w, need){
   window.__cardStats = {
     bullets: whyDrawn, whyTotal: why(top, w).length,
     cmpDims: series.length, cmpModels: cmpModelsArr.length,
+    routes: routes.map(r=>r.m.name), combos: combos.map(r=>r.m.name),
+    deepRows: deepRows.length, chips: chips.length,
     verdict: cmpVerdict,
     w: W, h: H
   };
