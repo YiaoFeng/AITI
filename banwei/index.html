@@ -281,6 +281,7 @@ body{
 </div>
 
 <script>/* 带时间戳加载：隧道地址变更后不会被浏览器/CDN 的旧缓存挡住 */document.write('<script src="../config.js?v='+Date.now()+'"><\/script>');</script>
+<script>/* 弱网或被内置浏览器拦掉时 config.js 可能拉不到：换个 URL 再要一次，仍失败才由页面提示刷新 */if(!window.QUIZ_API){document.write('<script src="../config.js?retry='+Date.now()+'"><\/script>');}</script>
 <script>
 /* ============================================================
  *  班味人格图鉴 —— 30 题完整版
@@ -310,7 +311,7 @@ const FACE = {"aa":"🪫","ab":"🫠","ba":"🧊","bb":"⚡"};
 const API_BASE = ((window.QUIZ_API || '') + '').replace(/\/$/, '');
 const API = {
   async verifyCode(code, need) {
-    if (!API_BASE) return { ok:false, msg:"后端地址还没配置，请联系我" };
+    if (!API_BASE) return { ok:false, msg:"网络没连上，请刷新页面后重试" };
     try {
       const r = await fetch(API_BASE + '/api/verify', {
         method: 'POST',

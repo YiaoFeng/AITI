@@ -275,6 +275,7 @@
 </div>
 
 <script>/* 带时间戳加载：隧道地址变更后不会被浏览器/CDN 的旧缓存挡住 */document.write('<script src="../config.js?v='+Date.now()+'"><\/script>');</script>
+<script>/* 弱网或被内置浏览器拦掉时 config.js 可能拉不到：换个 URL 再要一次，仍失败才由页面提示刷新 */if(!window.QUIZ_API){document.write('<script src="../config.js?retry='+Date.now()+'"><\/script>');}</script>
 <script>
 /* ============================================================
  *  AI 职业人格测试 —— 30 题版
@@ -707,7 +708,7 @@ const API = {
   /** 校验验证码：由后端原子核销，一个码只能用一次。
    *  need 是这次要解锁到哪一档，以返回的 scope 为准。 */
   async verifyCode(code, need) {
-    if (!API_BASE) return { ok:false, msg:"后端地址没配置，请联系我" };
+    if (!API_BASE) return { ok:false, msg:"网络没连上，请刷新页面后重试" };
     try {
       const r = await fetch(API_BASE + '/api/verify', {
         method: 'POST',

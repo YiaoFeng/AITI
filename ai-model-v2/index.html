@@ -469,6 +469,7 @@
 
 <!-- 后端地址单独放这里，隧道地址变了只改这个文件，不用动 index.html -->
 <script>/* 带时间戳加载：隧道地址变更后不会被浏览器/CDN 的旧缓存挡住 */document.write('<script src="../config.js?v='+Date.now()+'"><\/script>');</script>
+<script>/* 弱网或被内置浏览器拦掉时 config.js 可能拉不到：换个 URL 再要一次，仍失败才由页面提示刷新 */if(!window.QUIZ_API){document.write('<script src="../config.js?retry='+Date.now()+'"><\/script>');}</script>
 <script>
 /* ═══════════════════════════════════════════════════════
    配置：后端地址（Cloudflare 隧道 / 将来的域名）
@@ -969,7 +970,7 @@ $('#code-go').onclick = async ()=>{
   const hint = $('#code-hint');
   if(raw.length !== 10){ hint.className='hint err'; hint.textContent='验证码是 10 位字符（不含前面的 AIM2-）'; return; }
   const code = 'AIM2-' + raw.slice(0,5) + '-' + raw.slice(5);
-  if(!CONFIG.apiBase){ hint.className='hint err'; hint.textContent='后端地址还没配置，暂时无法验证'; return; }
+  if(!CONFIG.apiBase){ hint.className='hint err'; hint.textContent='网络没连上，请刷新页面后重试'; return; }
 
   const btn = $('#code-go'); const old = btn.innerHTML;
   btn.disabled = true; btn.innerHTML = '<span class="spin"></span>验证中';
