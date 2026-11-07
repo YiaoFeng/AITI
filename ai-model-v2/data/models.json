@@ -1,10 +1,10 @@
 {
  "version": "1.1",
- "generated_at": "2026-11-06",
+ "generated_at": "2026-11-07",
  "source": "data/rankings/benchmarks.json + pricing.json + board_history.json + usage_history/ + open_models.json",
  "meta": {
   "price_source": "OpenRouter 公开标价（$/百万 token，blended=3:1 输入:输出）",
-  "usage_as_of": "20261106",
+  "usage_as_of": "20261107",
   "boards_as_of": "20261107"
  },
  "dims": [
@@ -69,10 +69,10 @@
    },
    "hot": {
     "rank": 1,
-    "score": 91.23,
-    "as_of": "20261106",
-    "change": 61.7,
-    "days": 51
+    "score": 92.1,
+    "as_of": "20261107",
+    "change": 63.2,
+    "days": 52
    },
    "open": {
     "open": true,
@@ -122,11 +122,11 @@
     "调用量": 4
    },
    "hot": {
-    "rank": 4,
-    "score": 19.63,
-    "as_of": "20261106",
-    "change": 258.2,
-    "days": 43
+    "rank": 5,
+    "score": 16.64,
+    "as_of": "20261107",
+    "change": 203.6,
+    "days": 44
    },
    "power": 88
   },
@@ -171,11 +171,11 @@
     "调用量": 16
    },
    "hot": {
-    "rank": 16,
-    "score": 1.66,
-    "as_of": "20261106",
-    "change": -69.9,
-    "days": 51
+    "rank": 19,
+    "score": 1.51,
+    "as_of": "20261107",
+    "change": -72.6,
+    "days": 52
    },
    "power": 87
   },
@@ -296,13 +296,6 @@
     "中文写作": 12,
     "调用量": 25
    },
-   "hot": {
-    "rank": 25,
-    "score": 0.79,
-    "as_of": "20261106",
-    "change": -65.4,
-    "days": 51
-   },
    "power": 85
   },
   {
@@ -347,11 +340,11 @@
     "调用量": 8
    },
    "hot": {
-    "rank": 8,
-    "score": 9.96,
-    "as_of": "20261106",
-    "change": 69.4,
-    "days": 31
+    "rank": 9,
+    "score": 9.5,
+    "as_of": "20261107",
+    "change": 61.6,
+    "days": 32
    },
    "power": 85
   },
@@ -397,11 +390,11 @@
     "调用量": 10
    },
    "hot": {
-    "rank": 10,
-    "score": 7.48,
-    "as_of": "20261106",
-    "change": 221.0,
-    "days": 31
+    "rank": 11,
+    "score": 6.27,
+    "as_of": "20261107",
+    "change": 169.1,
+    "days": 32
    },
    "power": 85
   },
@@ -564,10 +557,10 @@
    },
    "hot": {
     "rank": 3,
-    "score": 32.39,
-    "as_of": "20261106",
-    "change": -23.6,
-    "days": 43
+    "score": 23.32,
+    "as_of": "20261107",
+    "change": -45.0,
+    "days": 44
    },
    "open": {
     "open": true,
@@ -694,10 +687,10 @@
    },
    "hot": {
     "rank": 12,
-    "score": 5.32,
-    "as_of": "20261106",
-    "change": 3.3,
-    "days": 51
+    "score": 3.96,
+    "as_of": "20261107",
+    "change": -23.1,
+    "days": 52
    },
    "open": {
     "open": true,
@@ -746,11 +739,11 @@
     "调用量": 11
    },
    "hot": {
-    "rank": 11,
-    "score": 6.57,
-    "as_of": "20261106",
-    "change": 92.7,
-    "days": 43
+    "rank": 7,
+    "score": 12.4,
+    "as_of": "20261107",
+    "change": 263.6,
+    "days": 44
    },
    "open": {
     "open": true,
@@ -840,11 +833,11 @@
     "调用量": 26
    },
    "hot": {
-    "rank": 26,
-    "score": 0.76,
-    "as_of": "20261106",
-    "change": -82.8,
-    "days": 51
+    "rank": 25,
+    "score": 0.85,
+    "as_of": "20261107",
+    "change": -80.7,
+    "days": 52
    },
    "power": 83
   },
@@ -890,10 +883,10 @@
    },
    "hot": {
     "rank": 2,
-    "score": 36.11,
-    "as_of": "20261106",
-    "change": 448.0,
-    "days": 43
+    "score": 29.84,
+    "as_of": "20261107",
+    "change": 352.8,
+    "days": 44
    },
    "power": 83
   },
@@ -916,9 +909,9 @@
    "brief": "DeepSWE 59.7，HLE 39.4",
    "updated_at": "2026-10-06",
    "price": {
-    "in": 0.075,
-    "out": 0.225,
-    "blended": 0.1125,
+    "in": 0.045,
+    "out": 0.135,
+    "blended": 0.0675,
     "ctx": 1000000
    },
    "boards": {
@@ -1049,11 +1042,11 @@
     "调用量": 17
    },
    "hot": {
-    "rank": 17,
-    "score": 1.32,
-    "as_of": "20261106",
-    "change": -52.0,
-    "days": 51
+    "rank": 20,
+    "score": 1.29,
+    "as_of": "20261107",
+    "change": -53.1,
+    "days": 52
    },
    "power": 82
   },
@@ -1276,11 +1269,11 @@
     "调用量": 7
    },
    "hot": {
-    "rank": 7,
-    "score": 11.43,
-    "as_of": "20261106",
-    "change": 78.3,
-    "days": 22
+    "rank": 8,
+    "score": 9.99,
+    "as_of": "20261107",
+    "change": 55.9,
+    "days": 23
    },
    "power": 82
   },
@@ -1326,11 +1319,11 @@
     "调用量": 22
    },
    "hot": {
-    "rank": 22,
-    "score": 0.94,
-    "as_of": "20261106",
-    "change": -79.4,
-    "days": 8
+    "rank": 14,
+    "score": 2.86,
+    "as_of": "20261107",
+    "change": -37.3,
+    "days": 9
    },
    "power": 82
   },
@@ -1454,11 +1447,11 @@
     "调用量": 14
    },
    "hot": {
-    "rank": 14,
-    "score": 2.21,
-    "as_of": "20261106",
-    "change": -76.8,
-    "days": 51
+    "rank": 18,
+    "score": 1.65,
+    "as_of": "20261107",
+    "change": -82.6,
+    "days": 52
    },
    "open": {
     "open": true,
@@ -1501,10 +1494,10 @@
    },
    "hot": {
     "rank": 23,
-    "score": 0.93,
-    "as_of": "20261106",
-    "change": -24.4,
-    "days": 27
+    "score": 0.94,
+    "as_of": "20261107",
+    "change": -23.6,
+    "days": 28
    },
    "open": {
     "open": true,
@@ -1585,11 +1578,11 @@
     "调用量": 9
    },
    "hot": {
-    "rank": 9,
-    "score": 8.78,
-    "as_of": "20261106",
-    "change": -85.0,
-    "days": 51
+    "rank": 10,
+    "score": 7.22,
+    "as_of": "20261107",
+    "change": -87.7,
+    "days": 52
    },
    "power": 80
   },
@@ -1764,11 +1757,11 @@
     "调用量": 13
    },
    "hot": {
-    "rank": 13,
-    "score": 2.52,
-    "as_of": "20261106",
-    "change": -78.0,
-    "days": 16
+    "rank": 15,
+    "score": 2.31,
+    "as_of": "20261107",
+    "change": -79.8,
+    "days": 17
    },
    "power": 80
   },
@@ -1800,11 +1793,11 @@
     "调用量": 6
    },
    "hot": {
-    "rank": 6,
-    "score": 18.69,
-    "as_of": "20261106",
-    "change": 487.7,
-    "days": 19
+    "rank": 4,
+    "score": 16.96,
+    "as_of": "20261107",
+    "change": 433.3,
+    "days": 20
    },
    "power": 80
   },
@@ -2009,11 +2002,11 @@
     "调用量": 19
    },
    "hot": {
-    "rank": 19,
-    "score": 1.26,
-    "as_of": "20261106",
-    "change": 472.7,
-    "days": 34
+    "rank": 16,
+    "score": 1.95,
+    "as_of": "20261107",
+    "change": 786.4,
+    "days": 35
    },
    "power": 79
   },
@@ -2098,9 +2091,9 @@
    "brief": "FrontierCode 2.0 17.0，HLE-Diamond 17.2",
    "updated_at": "2026-10-23",
    "price": {
-    "in": 0.075,
-    "out": 0.225,
-    "blended": 0.1125,
+    "in": 0.045,
+    "out": 0.135,
+    "blended": 0.0675,
     "ctx": 1000000
    },
    "boards": {
@@ -2126,6 +2119,12 @@
    "agent": 68,
    "brief": "DeepSWE 72.1，Legal Research 46.6",
    "updated_at": "2026-09-18",
+   "price": {
+    "in": 1.0,
+    "out": 4.05,
+    "blended": 1.7625,
+    "ctx": 524288
+   },
    "boards": {
     "编程": 24
    },
@@ -2963,13 +2962,6 @@
     "开源": 10,
     "调用量": 15
    },
-   "hot": {
-    "rank": 15,
-    "score": 1.93,
-    "as_of": "20261106",
-    "change": -44.2,
-    "days": 41
-   },
    "open": {
     "open": true,
     "license": "MIT"
@@ -3032,11 +3024,11 @@
     "调用量": 18
    },
    "hot": {
-    "rank": 18,
-    "score": 1.3,
-    "as_of": "20261106",
-    "change": -76.0,
-    "days": 43
+    "rank": 21,
+    "score": 1.24,
+    "as_of": "20261107",
+    "change": -77.1,
+    "days": 44
    },
    "open": {
     "open": true,
