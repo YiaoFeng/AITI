@@ -4,7 +4,7 @@
  "source": "data/rankings/benchmarks.json + pricing.json + board_history.json + usage_history/ + open_models.json",
  "meta": {
   "price_source": "OpenRouter 公开标价（$/百万 token，blended=3:1 输入:输出）",
-  "usage_as_of": "20261107",
+  "usage_as_of": "20261108",
   "boards_as_of": "20261109"
  },
  "dims": [
@@ -68,10 +68,10 @@
    },
    "hot": {
     "rank": 5,
-    "score": 16.64,
-    "as_of": "20261107",
-    "change": 203.6,
-    "days": 44
+    "score": 17.15,
+    "as_of": "20261108",
+    "change": 213.0,
+    "days": 45
    },
    "power": 88
   },
@@ -116,11 +116,11 @@
     "调用量": 19
    },
    "hot": {
-    "rank": 19,
-    "score": 1.51,
-    "as_of": "20261107",
-    "change": -72.6,
-    "days": 52
+    "rank": 18,
+    "score": 1.5,
+    "as_of": "20261108",
+    "change": -72.8,
+    "days": 53
    },
    "power": 87
   },
@@ -168,10 +168,10 @@
    },
    "hot": {
     "rank": 1,
-    "score": 92.1,
-    "as_of": "20261107",
-    "change": 63.2,
-    "days": 52
+    "score": 91.99,
+    "as_of": "20261108",
+    "change": 63.0,
+    "days": 53
    },
    "open": {
     "open": true,
@@ -340,10 +340,10 @@
    },
    "hot": {
     "rank": 9,
-    "score": 9.5,
-    "as_of": "20261107",
-    "change": 61.6,
-    "days": 32
+    "score": 9.06,
+    "as_of": "20261108",
+    "change": 54.1,
+    "days": 33
    },
    "power": 85
   },
@@ -390,10 +390,10 @@
    },
    "hot": {
     "rank": 11,
-    "score": 6.27,
-    "as_of": "20261107",
-    "change": 169.1,
-    "days": 32
+    "score": 6.24,
+    "as_of": "20261108",
+    "change": 167.8,
+    "days": 33
    },
    "power": 85
   },
@@ -507,9 +507,9 @@
     "why": "开着思考会拉长响应时间，简单任务上不划算"
    },
    "price": {
-    "in": 0.15,
-    "out": 0.5,
-    "blended": 0.2375,
+    "in": 0.0335,
+    "out": 0.083,
+    "blended": 0.0459,
     "ctx": 1048576
    },
    "boards": {
@@ -521,10 +521,10 @@
    },
    "hot": {
     "rank": 3,
-    "score": 23.32,
-    "as_of": "20261107",
-    "change": -45.0,
-    "days": 44
+    "score": 20.97,
+    "as_of": "20261108",
+    "change": -50.5,
+    "days": 45
    },
    "open": {
     "open": true,
@@ -685,11 +685,11 @@
     "调用量": 12
    },
    "hot": {
-    "rank": 12,
-    "score": 3.96,
-    "as_of": "20261107",
-    "change": -23.1,
-    "days": 52
+    "rank": 14,
+    "score": 2.58,
+    "as_of": "20261108",
+    "change": -49.9,
+    "days": 53
    },
    "open": {
     "open": true,
@@ -738,11 +738,11 @@
     "调用量": 7
    },
    "hot": {
-    "rank": 7,
-    "score": 12.4,
-    "as_of": "20261107",
-    "change": 263.6,
-    "days": 44
+    "rank": 6,
+    "score": 16.55,
+    "as_of": "20261108",
+    "change": 385.3,
+    "days": 45
    },
    "open": {
     "open": true,
@@ -831,11 +831,11 @@
     "调用量": 25
    },
    "hot": {
-    "rank": 25,
-    "score": 0.85,
-    "as_of": "20261107",
-    "change": -80.7,
-    "days": 52
+    "rank": 24,
+    "score": 0.94,
+    "as_of": "20261108",
+    "change": -78.7,
+    "days": 53
    },
    "power": 83
   },
@@ -879,10 +879,10 @@
    },
    "hot": {
     "rank": 2,
-    "score": 29.84,
-    "as_of": "20261107",
-    "change": 352.8,
-    "days": 44
+    "score": 32.58,
+    "as_of": "20261108",
+    "change": 394.4,
+    "days": 45
    },
    "power": 83
   },
@@ -1004,10 +1004,10 @@
    },
    "hot": {
     "rank": 20,
-    "score": 1.29,
-    "as_of": "20261107",
-    "change": -53.1,
-    "days": 52
+    "score": 1.3,
+    "as_of": "20261108",
+    "change": -52.7,
+    "days": 53
    },
    "power": 82
   },
@@ -1228,10 +1228,10 @@
    },
    "hot": {
     "rank": 8,
-    "score": 9.99,
-    "as_of": "20261107",
-    "change": 55.9,
-    "days": 23
+    "score": 11.13,
+    "as_of": "20261108",
+    "change": 73.6,
+    "days": 24
    },
    "power": 82
   },
@@ -1277,11 +1277,11 @@
     "调用量": 14
    },
    "hot": {
-    "rank": 14,
-    "score": 2.86,
-    "as_of": "20261107",
-    "change": -37.3,
-    "days": 9
+    "rank": 13,
+    "score": 3.08,
+    "as_of": "20261108",
+    "change": -32.5,
+    "days": 10
    },
    "power": 82
   },
@@ -1405,11 +1405,11 @@
     "调用量": 18
    },
    "hot": {
-    "rank": 18,
-    "score": 1.65,
-    "as_of": "20261107",
-    "change": -82.6,
-    "days": 52
+    "rank": 19,
+    "score": 1.33,
+    "as_of": "20261108",
+    "change": -86.0,
+    "days": 53
    },
    "open": {
     "open": true,
@@ -1452,10 +1452,10 @@
    },
    "hot": {
     "rank": 23,
-    "score": 0.94,
-    "as_of": "20261107",
-    "change": -23.6,
-    "days": 28
+    "score": 0.96,
+    "as_of": "20261108",
+    "change": -22.0,
+    "days": 29
    },
    "open": {
     "open": true,
@@ -1537,10 +1537,10 @@
    },
    "hot": {
     "rank": 10,
-    "score": 7.22,
-    "as_of": "20261107",
-    "change": -87.7,
-    "days": 52
+    "score": 6.86,
+    "as_of": "20261108",
+    "change": -88.3,
+    "days": 53
    },
    "power": 80
   },
@@ -1697,11 +1697,11 @@
     "调用量": 15
    },
    "hot": {
-    "rank": 15,
-    "score": 2.31,
-    "as_of": "20261107",
-    "change": -79.8,
-    "days": 17
+    "rank": 16,
+    "score": 2.2,
+    "as_of": "20261108",
+    "change": -80.8,
+    "days": 18
    },
    "power": 80
   },
@@ -1734,10 +1734,10 @@
    },
    "hot": {
     "rank": 4,
-    "score": 16.96,
-    "as_of": "20261107",
-    "change": 433.3,
-    "days": 20
+    "score": 17.66,
+    "as_of": "20261108",
+    "change": 455.3,
+    "days": 21
    },
    "power": 80
   },
@@ -1870,11 +1870,11 @@
     "调用量": 16
    },
    "hot": {
-    "rank": 16,
-    "score": 1.95,
-    "as_of": "20261107",
-    "change": 786.4,
-    "days": 35
+    "rank": 17,
+    "score": 1.83,
+    "as_of": "20261108",
+    "change": 731.8,
+    "days": 36
    },
    "power": 79
   },
@@ -2475,12 +2475,6 @@
    "agent": 60,
    "brief": "IOI 2.4，ProofBench 3.0",
    "updated_at": "2026-10-06",
-   "price": {
-    "in": 0.04,
-    "out": 0.15,
-    "blended": 0.0675,
-    "ctx": 260000
-   },
    "power": 78
   },
   {
@@ -3134,10 +3128,10 @@
    },
    "hot": {
     "rank": 21,
-    "score": 1.24,
-    "as_of": "20261107",
-    "change": -77.1,
-    "days": 44
+    "score": 1.17,
+    "as_of": "20261108",
+    "change": -78.4,
+    "days": 45
    },
    "open": {
     "open": true,
