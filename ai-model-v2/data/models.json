@@ -5,7 +5,7 @@
  "meta": {
   "price_source": "OpenRouter 公开标价（$/百万 token，blended=3:1 输入:输出）",
   "usage_as_of": "20261110",
-  "boards_as_of": "20261110"
+  "boards_as_of": "20261111"
  },
  "dims": [
   "reasoning",
@@ -85,7 +85,7 @@
     "multimodal": 97,
     "longtext": 88,
     "cost": 60,
-    "speed": 70,
+    "speed": 71,
     "privacy": 77,
     "ecosystem": 92,
     "creative": 92
@@ -113,7 +113,7 @@
     "Agent": 5,
     "科学": 3,
     "中文写作": 3,
-    "调用量": 23
+    "调用量": 17
    },
    "hot": {
     "rank": 17,
@@ -265,13 +265,13 @@
     "multimodal": 94,
     "longtext": 91,
     "cost": 72,
-    "speed": 78,
+    "speed": 76,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 84
    },
    "agent": 82,
-   "brief": "FrontierMath T4 100.0 全场第一，LMArena Code 1742.6 前三",
+   "brief": "FrontierMath T4 100.0 全场第一，LMArena Code 1742.8 前三",
    "updated_at": "2026-10-06",
    "tier": {
     "key": "openai",
@@ -294,7 +294,7 @@
     "科学": 4,
     "文档": 17,
     "中文写作": 6,
-    "调用量": 9
+    "调用量": 10
    },
    "hot": {
     "rank": 10,
@@ -321,7 +321,7 @@
     "creative": 87
    },
    "agent": 81,
-   "brief": "ProofBench 100.0 全场第一，LMArena Code 1744.3 全场第一",
+   "brief": "ProofBench 100.0 全场第一，LMArena Code 1744.6 全场第一",
    "updated_at": "2026-09-02",
    "tier": {
     "key": "anthropic",
@@ -343,8 +343,49 @@
     "Agent": 9,
     "科学": 5,
     "文档": 5,
-    "中文写作": 12,
-    "调用量": 28
+    "中文写作": 12
+   },
+   "power": 85
+  },
+  {
+   "name": "GPT-6 Sol",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 77,
+    "coding": 85,
+    "chinese": 84,
+    "multimodal": 90,
+    "longtext": 92,
+    "cost": 72,
+    "speed": 90,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 81
+   },
+   "agent": 76,
+   "brief": "FrontierMath T4 90.0，SRE Bench 30.5",
+   "updated_at": "2026-09-18",
+   "tier": {
+    "key": "openai",
+    "label": "推理档位",
+    "how": "reasoning_effort 有 low / medium / high 三档",
+    "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
+    "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
+   },
+   "price": {
+    "in": 2.0,
+    "out": 10.0,
+    "blended": 4.0,
+    "ctx": 1050000
+   },
+   "boards": {
+    "综合": 15,
+    "纯能力": 14,
+    "编程": 13,
+    "Agent": 15,
+    "科学": 14,
+    "文档": 9,
+    "中文写作": 25
    },
    "power": 85
   },
@@ -358,7 +399,7 @@
     "multimodal": 92,
     "longtext": 90,
     "cost": 72,
-    "speed": 86,
+    "speed": 85,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 77
@@ -386,8 +427,8 @@
     "Agent": 4,
     "科学": 6,
     "文档": 19,
-    "中文写作": 28,
-    "调用量": 13
+    "中文写作": 29,
+    "调用量": 9
    },
    "hot": {
     "rank": 9,
@@ -408,7 +449,7 @@
     "multimodal": 91,
     "longtext": 90,
     "cost": 77,
-    "speed": 82,
+    "speed": 81,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 82
@@ -492,7 +533,7 @@
     "multimodal": 92,
     "longtext": 87,
     "cost": 94,
-    "speed": 71,
+    "speed": 70,
     "privacy": 86,
     "ecosystem": 87,
     "creative": 93
@@ -518,7 +559,7 @@
     "Agent": 22,
     "中文写作": 2,
     "开源": 7,
-    "调用量": 4
+    "调用量": 5
    },
    "hot": {
     "rank": 5,
@@ -530,48 +571,6 @@
    "open": {
     "open": true,
     "license": "MIT"
-   },
-   "power": 84
-  },
-  {
-   "name": "GPT-6 Sol",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 77,
-    "coding": 85,
-    "chinese": 84,
-    "multimodal": 90,
-    "longtext": 92,
-    "cost": 72,
-    "speed": 88,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 81
-   },
-   "agent": 76,
-   "brief": "FrontierMath T4 90.0，SRE Bench 30.5",
-   "updated_at": "2026-09-18",
-   "tier": {
-    "key": "openai",
-    "label": "推理档位",
-    "how": "reasoning_effort 有 low / medium / high 三档",
-    "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
-    "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
-   },
-   "price": {
-    "in": 2.0,
-    "out": 10.0,
-    "blended": 4.0,
-    "ctx": 1050000
-   },
-   "boards": {
-    "综合": 15,
-    "纯能力": 14,
-    "编程": 13,
-    "Agent": 15,
-    "科学": 14,
-    "文档": 9,
-    "中文写作": 24
    },
    "power": 84
   },
@@ -620,7 +619,7 @@
     "multimodal": 89,
     "longtext": 88,
     "cost": 67,
-    "speed": 87,
+    "speed": 86,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 82
@@ -654,7 +653,7 @@
     "multimodal": 90,
     "longtext": 98,
     "cost": 69,
-    "speed": 69,
+    "speed": 67,
     "privacy": 82,
     "ecosystem": 83,
     "creative": 82
@@ -683,7 +682,7 @@
     "文档": 1,
     "中文写作": 22,
     "开源": 2,
-    "调用量": 17
+    "调用量": 12
    },
    "hot": {
     "rank": 12,
@@ -736,7 +735,7 @@
     "Agent": 16,
     "中文写作": 4,
     "开源": 3,
-    "调用量": 7
+    "调用量": 3
    },
    "hot": {
     "rank": 3,
@@ -787,7 +786,7 @@
     "纯能力": 28,
     "科学": 20,
     "文档": 27,
-    "中文写作": 23
+    "中文写作": 24
    },
    "power": 83
   },
@@ -823,13 +822,13 @@
     "ctx": 1048576
    },
    "boards": {
-    "综合": 20,
+    "综合": 19,
     "纯能力": 22,
     "Agent": 26,
     "科学": 21,
     "文档": 29,
     "中文写作": 9,
-    "调用量": 12
+    "调用量": 14
    },
    "hot": {
     "rank": 14,
@@ -872,7 +871,7 @@
     "科学": 19,
     "文档": 13,
     "中文写作": 18,
-    "调用量": 19
+    "调用量": 18
    },
    "hot": {
     "rank": 18,
@@ -880,46 +879,6 @@
     "as_of": "20261110",
     "change": -52.7,
     "days": 55
-   },
-   "power": 83
-  },
-  {
-   "name": "Qwen3.8-Flash-Next",
-   "vendor": "国产",
-   "score": {
-    "reasoning": 72,
-    "coding": 77,
-    "chinese": 88,
-    "multimodal": 78,
-    "longtext": 86,
-    "cost": 94,
-    "speed": 81,
-    "privacy": 89,
-    "ecosystem": 85,
-    "creative": 87
-   },
-   "agent": 66,
-   "brief": "GPQA 91.7，tb21 83.3",
-   "updated_at": "2026-09-07",
-   "tier": {
-    "key": "qwen",
-    "label": "思考开关",
-    "how": "深度思考模式可以开关",
-    "advice": "客服、摘要这类关掉，解题和写代码再开",
-    "why": "开着更准，但更慢更贵，简单任务上纯属浪费"
-   },
-   "price": {
-    "in": 0.15,
-    "out": 0.47,
-    "blended": 0.23,
-    "ctx": 1000000
-   },
-   "boards": {
-    "开源": 10
-   },
-   "open": {
-    "open": true,
-    "license": "Qwen Community License 1.0（营收门槛）"
    },
    "power": 83
   },
@@ -955,7 +914,7 @@
     "ctx": 1050000
    },
    "boards": {
-    "综合": 19,
+    "综合": 20,
     "纯能力": 20,
     "编程": 21,
     "Agent": 28,
@@ -1022,7 +981,7 @@
     "multimodal": 76,
     "longtext": 92,
     "cost": 67,
-    "speed": 83,
+    "speed": 84,
     "privacy": 75,
     "ecosystem": 83,
     "creative": 81
@@ -1095,6 +1054,46 @@
    "power": 82
   },
   {
+   "name": "Qwen3.8-Flash-Next",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 72,
+    "coding": 77,
+    "chinese": 88,
+    "multimodal": 78,
+    "longtext": 86,
+    "cost": 94,
+    "speed": 80,
+    "privacy": 89,
+    "ecosystem": 85,
+    "creative": 87
+   },
+   "agent": 66,
+   "brief": "GPQA 91.7，tb21 83.3",
+   "updated_at": "2026-09-07",
+   "tier": {
+    "key": "qwen",
+    "label": "思考开关",
+    "how": "深度思考模式可以开关",
+    "advice": "客服、摘要这类关掉，解题和写代码再开",
+    "why": "开着更准，但更慢更贵，简单任务上纯属浪费"
+   },
+   "price": {
+    "in": 0.15,
+    "out": 0.47,
+    "blended": 0.23,
+    "ctx": 1000000
+   },
+   "boards": {
+    "开源": 10
+   },
+   "open": {
+    "open": true,
+    "license": "Qwen Community License 1.0（营收门槛）"
+   },
+   "power": 82
+  },
+  {
    "name": "Gemini 3.6 Flash",
    "vendor": "海外",
    "score": {
@@ -1104,7 +1103,7 @@
     "multimodal": 88,
     "longtext": 87,
     "cost": 80,
-    "speed": 94,
+    "speed": 93,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1252,7 +1251,7 @@
     "creative": 82
    },
    "agent": 82,
-   "brief": "TB4.0 63.6 前三，LMArena Code 1686.9",
+   "brief": "TB4.0 63.6 前三，LMArena Code 1687.8",
    "updated_at": "2026-10-24",
    "tier": {
     "key": "moonshot",
@@ -1275,7 +1274,7 @@
     "科学": 12,
     "文档": 4,
     "中文写作": 15,
-    "调用量": 21
+    "调用量": 20
    },
    "hot": {
     "rank": 20,
@@ -1296,7 +1295,7 @@
     "multimodal": 92,
     "longtext": 86,
     "cost": 65,
-    "speed": 69,
+    "speed": 70,
     "privacy": 76,
     "ecosystem": 80,
     "creative": 73
@@ -1323,7 +1322,7 @@
     "编程": 11,
     "Agent": 10,
     "科学": 9,
-    "中文写作": 25
+    "中文写作": 26
    },
    "power": 81
   },
@@ -1402,8 +1401,7 @@
     "ctx": 1048576
    },
    "boards": {
-    "开源": 9,
-    "调用量": 25
+    "开源": 9
    },
    "open": {
     "open": true,
@@ -1421,7 +1419,7 @@
     "multimodal": 69,
     "longtext": 98,
     "cost": 80,
-    "speed": 88,
+    "speed": 90,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 79
@@ -1440,9 +1438,9 @@
     "纯能力": 30,
     "Agent": 27,
     "文档": 2,
-    "中文写作": 27,
+    "中文写作": 28,
     "开源": 6,
-    "调用量": 26
+    "调用量": 24
    },
    "hot": {
     "rank": 24,
@@ -1500,7 +1498,7 @@
     "multimodal": 65,
     "longtext": 88,
     "cost": 86,
-    "speed": 86,
+    "speed": 87,
     "privacy": 84,
     "ecosystem": 83,
     "creative": 83
@@ -1559,8 +1557,7 @@
    "boards": {
     "编程": 30,
     "科学": 28,
-    "文档": 8,
-    "调用量": 11
+    "文档": 8
    },
    "power": 80
   },
@@ -1601,7 +1598,7 @@
     "multimodal": 76,
     "longtext": 95,
     "cost": 87,
-    "speed": 68,
+    "speed": 72,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 79
@@ -1621,12 +1618,52 @@
     "编程": 22,
     "Agent": 23,
     "文档": 3,
-    "中文写作": 26,
+    "中文写作": 27,
     "开源": 4
    },
    "open": {
     "open": true,
     "license": "MIT"
+   },
+   "power": 80
+  },
+  {
+   "name": "Grok 4.7",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 71,
+    "coding": 82,
+    "chinese": 86,
+    "multimodal": 74,
+    "longtext": 82,
+    "cost": 74,
+    "speed": 76,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 82
+   },
+   "agent": 74,
+   "brief": "LMArena Code 1639.4，AutomationBench 65.6",
+   "updated_at": "2026-09-18",
+   "tier": {
+    "key": "xai",
+    "label": "推理档位",
+    "how": "推理强度可以调",
+    "advice": "默认档够用，难题再往上调",
+    "why": "推理强度越高，响应越慢、消耗越大"
+   },
+   "price": {
+    "in": 2.0,
+    "out": 6.0,
+    "blended": 3.0,
+    "ctx": 500000
+   },
+   "boards": {
+    "综合": 30,
+    "纯能力": 27,
+    "编程": 20,
+    "Agent": 20,
+    "中文写作": 23
    },
    "power": 80
   },
@@ -1704,7 +1741,7 @@
     "multimodal": 76,
     "longtext": 86,
     "cost": 93,
-    "speed": 91,
+    "speed": 90,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 77
@@ -1719,10 +1756,8 @@
     "ctx": 1048576
    },
    "boards": {
-    "综合": 30,
     "科学": 22,
-    "中文写作": 29,
-    "调用量": 18
+    "调用量": 15
    },
    "hot": {
     "rank": 15,
@@ -1758,7 +1793,7 @@
     "ctx": 1048576
    },
    "boards": {
-    "调用量": 3
+    "调用量": 7
    },
    "hot": {
     "rank": 7,
@@ -1785,7 +1820,7 @@
     "creative": 78
    },
    "agent": 68,
-   "brief": "LMArena Code 1648.6，HLE-Diamond 28.7",
+   "brief": "LMArena Code 1649.5，HLE-Diamond 28.7",
    "updated_at": "2026-09-18",
    "price": {
     "in": 1.0,
@@ -1800,6 +1835,32 @@
    "power": 80
   },
   {
+   "name": "Muse Spark 1.2",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 71,
+    "coding": 77,
+    "chinese": 70,
+    "multimodal": 90,
+    "longtext": 85,
+    "cost": 77,
+    "speed": 97,
+    "privacy": 72,
+    "ecosystem": 75,
+    "creative": 70
+   },
+   "agent": 66,
+   "brief": "ProgramBench 0.5，Legal Research 43.8",
+   "updated_at": "2026-09-01",
+   "price": {
+    "in": 1.25,
+    "out": 4.25,
+    "blended": 2.0,
+    "ctx": 1048576
+   },
+   "power": 79
+  },
+  {
    "name": "Kimi K2.7 Code",
    "vendor": "国产",
    "score": {
@@ -1809,7 +1870,7 @@
     "multimodal": 75,
     "longtext": 86,
     "cost": 79,
-    "speed": 75,
+    "speed": 76,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 82
@@ -1860,44 +1921,6 @@
    "power": 79
   },
   {
-   "name": "Grok 4.7",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 71,
-    "coding": 82,
-    "chinese": 86,
-    "multimodal": 74,
-    "longtext": 82,
-    "cost": 74,
-    "speed": 75,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 82
-   },
-   "agent": 74,
-   "brief": "LMArena Code 1639.7，AutomationBench 65.6",
-   "updated_at": "2026-09-18",
-   "tier": {
-    "key": "xai",
-    "label": "推理档位",
-    "how": "推理强度可以调",
-    "advice": "默认档够用，难题再往上调",
-    "why": "推理强度越高，响应越慢、消耗越大"
-   },
-   "price": {
-    "in": 2.0,
-    "out": 6.0,
-    "blended": 3.0,
-    "ctx": 500000
-   },
-   "boards": {
-    "纯能力": 27,
-    "编程": 20,
-    "Agent": 20
-   },
-   "power": 79
-  },
-  {
    "name": "Solar Mini 4",
    "vendor": "海外",
    "score": {
@@ -1907,7 +1930,7 @@
     "multimodal": 75,
     "longtext": 91,
     "cost": 96,
-    "speed": 79,
+    "speed": 80,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -2080,7 +2103,7 @@
     "multimodal": 85,
     "longtext": 89,
     "cost": 71,
-    "speed": 85,
+    "speed": 86,
     "privacy": 74,
     "ecosystem": 78,
     "creative": 72
@@ -2103,32 +2126,6 @@
    },
    "boards": {
     "文档": 24
-   },
-   "power": 78
-  },
-  {
-   "name": "Muse Spark 1.2",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 71,
-    "coding": 77,
-    "chinese": 70,
-    "multimodal": 90,
-    "longtext": 85,
-    "cost": 77,
-    "speed": 96,
-    "privacy": 72,
-    "ecosystem": 75,
-    "creative": 70
-   },
-   "agent": 66,
-   "brief": "ProgramBench 0.5，Legal Research 43.8",
-   "updated_at": "2026-09-01",
-   "price": {
-    "in": 1.25,
-    "out": 4.25,
-    "blended": 2.0,
-    "ctx": 1048576
    },
    "power": 78
   },
@@ -2700,7 +2697,7 @@
     "multimodal": 64,
     "longtext": 91,
     "cost": 88,
-    "speed": 86,
+    "speed": 82,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -2817,6 +2814,39 @@
    "power": 77
   },
   {
+   "name": "Inkling Small",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 64,
+    "coding": 71,
+    "chinese": 80,
+    "multimodal": 63,
+    "longtext": 81,
+    "cost": 88,
+    "speed": 80,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "agent": 60,
+   "brief": "ProgramBench 0.5，FrontierMath T4 17.1",
+   "updated_at": "2026-09-18",
+   "price": {
+    "in": 0.45,
+    "out": 1.2,
+    "blended": 0.6375,
+    "ctx": 524288
+   },
+   "boards": {
+    "开源": 22
+   },
+   "open": {
+    "open": true,
+    "license": "Apache-2.0"
+   },
+   "power": 76
+  },
+  {
    "name": "Nemotron 3 Ultra 550B A55B",
    "vendor": "海外",
    "score": {
@@ -2895,7 +2925,8 @@
     "ctx": 1050000
    },
    "boards": {
-    "开源": 8
+    "开源": 8,
+    "调用量": 16
    },
    "hot": {
     "rank": 16,
@@ -3001,39 +3032,6 @@
    "power": 75
   },
   {
-   "name": "Inkling Small",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 64,
-    "coding": 71,
-    "chinese": 80,
-    "multimodal": 63,
-    "longtext": 81,
-    "cost": 88,
-    "speed": 78,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "agent": 60,
-   "brief": "ProgramBench 0.5，FrontierMath T4 17.1",
-   "updated_at": "2026-09-18",
-   "price": {
-    "in": 0.45,
-    "out": 1.2,
-    "blended": 0.6375,
-    "ctx": 524288
-   },
-   "boards": {
-    "开源": 22
-   },
-   "open": {
-    "open": true,
-    "license": "Apache-2.0"
-   },
-   "power": 75
-  },
-  {
    "name": "K2 Horizon MoVA 36B A4B",
    "vendor": "海外",
    "score": {
@@ -3120,7 +3118,7 @@
     "multimodal": 68,
     "longtext": 85,
     "cost": 93,
-    "speed": 72,
+    "speed": 71,
     "privacy": 87,
     "ecosystem": 79,
     "creative": 72
@@ -3143,7 +3141,7 @@
    },
    "boards": {
     "开源": 26,
-    "调用量": 24
+    "调用量": 23
    },
    "hot": {
     "rank": 23,
@@ -3168,7 +3166,7 @@
     "multimodal": 75,
     "longtext": 60,
     "cost": 100,
-    "speed": 99,
+    "speed": 98,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -3198,7 +3196,7 @@
     "multimodal": 75,
     "longtext": 60,
     "cost": 76,
-    "speed": 91,
+    "speed": 90,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -3338,7 +3336,7 @@
     "chinese": 73,
     "multimodal": 68,
     "longtext": 77,
-    "cost": 94,
+    "cost": 98,
     "speed": 77,
     "privacy": 87,
     "ecosystem": 76,
@@ -3359,36 +3357,6 @@
    "open": {
     "open": true,
     "license": "MIT"
-   },
-   "power": 73
-  },
-  {
-   "name": "Granite 4.2 8B",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 38,
-    "coding": 72,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 60,
-    "cost": 100,
-    "speed": 87,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "agent": 0,
-   "brief": "GPQA 63.1，tb21 18.4",
-   "updated_at": "2026-09-18",
-   "price": {
-    "in": 0.06,
-    "out": 0.25,
-    "blended": 0.1075,
-    "ctx": 131072
-   },
-   "open": {
-    "open": true,
-    "license": "Apache-2.0"
    },
    "power": 73
   },
@@ -3489,6 +3457,36 @@
    "brief": "tb21 57.5，GPQA 69.7",
    "updated_at": "2026-09-18",
    "power": 73
+  },
+  {
+   "name": "Granite 4.2 8B",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 38,
+    "coding": 72,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 60,
+    "cost": 100,
+    "speed": 86,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "agent": 0,
+   "brief": "GPQA 63.1，tb21 18.4",
+   "updated_at": "2026-09-18",
+   "price": {
+    "in": 0.06,
+    "out": 0.25,
+    "blended": 0.1075,
+    "ctx": 131072
+   },
+   "open": {
+    "open": true,
+    "license": "Apache-2.0"
+   },
+   "power": 72
   },
   {
    "name": "K2 Horizon 3.7B",
@@ -3781,7 +3779,7 @@
    "name": "Qwen3.8-Flash-Next",
    "vendor": "国产",
    "score": 89,
-   "power": 83
+   "power": 82
   },
   "ecosystem": {
    "name": "GPT-6 Astra",
