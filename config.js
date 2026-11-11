@@ -1,2 +1,2 @@
 /* 后端地址配置 —— 由 start_all.py 自动写入，不要手改 */
-window.QUIZ_API = 'https://offset-reform-group-terry.trycloudflare.com';
+window.QUIZ_API = 'https://academics-alphabetical-memo-durable.trycloudflare.com';
