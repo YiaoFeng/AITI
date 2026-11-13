@@ -1,10 +1,10 @@
 {
  "version": "1.1",
- "generated_at": "2026-11-12",
+ "generated_at": "2026-11-13",
  "source": "data/rankings/benchmarks.json + pricing.json + board_history.json + usage_history/ + open_models.json",
  "meta": {
   "price_source": "OpenRouter 公开标价（$/百万 token，blended=3:1 输入:输出）",
-  "usage_as_of": "20261112",
+  "usage_as_of": "20261113",
   "boards_as_of": "20261113"
  },
  "dims": [
@@ -68,10 +68,10 @@
    },
    "hot": {
     "rank": 5,
-    "score": 19.45,
-    "as_of": "20261112",
-    "change": 254.9,
-    "days": 49
+    "score": 21.37,
+    "as_of": "20261113",
+    "change": 290.0,
+    "days": 50
    },
    "power": 88
   },
@@ -115,13 +115,6 @@
     "中文写作": 3,
     "调用量": 25
    },
-   "hot": {
-    "rank": 25,
-    "score": 0.71,
-    "as_of": "20261112",
-    "change": -87.1,
-    "days": 57
-   },
    "power": 87
   },
   {
@@ -150,9 +143,9 @@
     "why": "Flash 便宜且快得多，拿 Pro 干简单活是最常见的浪费"
    },
    "price": {
-    "in": 0.022,
-    "out": 0.4,
-    "blended": 0.1165,
+    "in": 0.3,
+    "out": 1.2,
+    "blended": 0.525,
     "ctx": 1048576
    },
    "boards": {
@@ -168,10 +161,10 @@
    },
    "hot": {
     "rank": 1,
-    "score": 90.0,
-    "as_of": "20261112",
-    "change": 59.5,
-    "days": 57
+    "score": 87.16,
+    "as_of": "20261113",
+    "change": 54.5,
+    "days": 58
    },
    "open": {
     "open": true,
@@ -346,10 +339,10 @@
    },
    "hot": {
     "rank": 11,
-    "score": 6.73,
-    "as_of": "20261112",
-    "change": 14.5,
-    "days": 37
+    "score": 5.21,
+    "as_of": "20261113",
+    "change": -11.4,
+    "days": 38
    },
    "power": 85
   },
@@ -396,10 +389,10 @@
    },
    "hot": {
     "rank": 10,
-    "score": 7.81,
-    "as_of": "20261112",
-    "change": 235.2,
-    "days": 37
+    "score": 9.09,
+    "as_of": "20261113",
+    "change": 290.1,
+    "days": 38
    },
    "power": 85
   },
@@ -526,11 +519,11 @@
     "调用量": 4
    },
    "hot": {
-    "rank": 4,
-    "score": 23.29,
-    "as_of": "20261112",
-    "change": -45.0,
-    "days": 49
+    "rank": 2,
+    "score": 38.97,
+    "as_of": "20261113",
+    "change": -8.0,
+    "days": 50
    },
    "open": {
     "open": true,
@@ -691,11 +684,11 @@
     "调用量": 14
    },
    "hot": {
-    "rank": 14,
-    "score": 3.55,
-    "as_of": "20261112",
-    "change": -31.1,
-    "days": 57
+    "rank": 13,
+    "score": 4.61,
+    "as_of": "20261113",
+    "change": -10.5,
+    "days": 58
    },
    "open": {
     "open": true,
@@ -729,9 +722,9 @@
     "why": "开着思考会拉长响应时间，简单任务上不划算"
    },
    "price": {
-    "in": 0.0699,
-    "out": 1.4,
-    "blended": 0.4024,
+    "in": 0.084,
+    "out": 3.6,
+    "blended": 0.963,
     "ctx": 1048576
    },
    "boards": {
@@ -744,11 +737,11 @@
     "调用量": 3
    },
    "hot": {
-    "rank": 3,
-    "score": 27.47,
-    "as_of": "20261112",
-    "change": 705.6,
-    "days": 49
+    "rank": 4,
+    "score": 34.15,
+    "as_of": "20261113",
+    "change": 901.5,
+    "days": 50
    },
    "open": {
     "open": true,
@@ -837,11 +830,11 @@
     "调用量": 16
    },
    "hot": {
-    "rank": 16,
-    "score": 2.24,
-    "as_of": "20261112",
-    "change": -49.2,
-    "days": 57
+    "rank": 15,
+    "score": 3.01,
+    "as_of": "20261113",
+    "change": -31.7,
+    "days": 58
    },
    "power": 83
   },
@@ -881,10 +874,10 @@
    },
    "hot": {
     "rank": 21,
-    "score": 1.29,
-    "as_of": "20261112",
-    "change": -53.1,
-    "days": 57
+    "score": 1.26,
+    "as_of": "20261113",
+    "change": -54.2,
+    "days": 58
    },
    "power": 83
   },
@@ -927,11 +920,11 @@
     "调用量": 2
    },
    "hot": {
-    "rank": 2,
-    "score": 31.89,
-    "as_of": "20261112",
-    "change": 383.9,
-    "days": 49
+    "rank": 3,
+    "score": 34.39,
+    "as_of": "20261113",
+    "change": 421.9,
+    "days": 50
    },
    "power": 83
   },
@@ -1194,10 +1187,10 @@
    },
    "hot": {
     "rank": 8,
-    "score": 12.38,
-    "as_of": "20261112",
-    "change": 93.1,
-    "days": 28
+    "score": 15.65,
+    "as_of": "20261113",
+    "change": 144.1,
+    "days": 29
    },
    "power": 82
   },
@@ -1227,9 +1220,9 @@
     "why": "思考模式更慢更贵，长文本场景未必用得上"
    },
    "price": {
-    "in": 0.2375,
-    "out": 8.4085,
-    "blended": 2.2803,
+    "in": 2.0,
+    "out": 10.0,
+    "blended": 4.0,
     "ctx": 1048576
    },
    "boards": {
@@ -1243,11 +1236,11 @@
     "调用量": 12
    },
    "hot": {
-    "rank": 12,
-    "score": 5.51,
-    "as_of": "20261112",
-    "change": 20.8,
-    "days": 14
+    "rank": 14,
+    "score": 3.62,
+    "as_of": "20261113",
+    "change": -20.6,
+    "days": 15
    },
    "power": 82
   },
@@ -1450,10 +1443,10 @@
    },
    "hot": {
     "rank": 24,
-    "score": 0.97,
-    "as_of": "20261112",
-    "change": -21.1,
-    "days": 33
+    "score": 0.93,
+    "as_of": "20261113",
+    "change": -24.4,
+    "days": 34
    },
    "open": {
     "open": true,
@@ -1671,11 +1664,11 @@
     "调用量": 15
    },
    "hot": {
-    "rank": 15,
-    "score": 2.9,
-    "as_of": "20261112",
-    "change": 1218.2,
-    "days": 40
+    "rank": 17,
+    "score": 1.96,
+    "as_of": "20261113",
+    "change": 790.9,
+    "days": 41
    },
    "power": 80
   },
@@ -1741,10 +1734,10 @@
    },
    "hot": {
     "rank": 19,
-    "score": 1.72,
-    "as_of": "20261112",
-    "change": -85.0,
-    "days": 22
+    "score": 1.61,
+    "as_of": "20261113",
+    "change": -85.9,
+    "days": 23
    },
    "power": 80
   },
@@ -1777,10 +1770,10 @@
    },
    "hot": {
     "rank": 6,
-    "score": 14.76,
-    "as_of": "20261112",
-    "change": 364.2,
-    "days": 25
+    "score": 18.0,
+    "as_of": "20261113",
+    "change": 466.0,
+    "days": 26
    },
    "power": 80
   },
@@ -1803,10 +1796,10 @@
    "brief": "LMArena Code 1646.2，HLE-Diamond 28.7",
    "updated_at": "2026-09-18",
    "price": {
-    "in": 1.0,
-    "out": 4.05,
-    "blended": 1.7625,
-    "ctx": 524288
+    "in": 0.3,
+    "out": 1.0,
+    "blended": 0.475,
+    "ctx": 1048576
    },
    "boards": {
     "编程": 24,
@@ -2053,9 +2046,9 @@
     "why": "Flash 便宜且快得多，拿 Pro 干简单活是最常见的浪费"
    },
    "price": {
-    "in": 0.022,
-    "out": 0.4,
-    "blended": 0.1165,
+    "in": 0.038,
+    "out": 0.5,
+    "blended": 0.1535,
     "ctx": 1048576
    },
    "boards": {
@@ -2547,6 +2540,10 @@
    "boards": {
     "Agent": 21
    },
+   "open": {
+    "open": true,
+    "license": "MIT"
+   },
    "power": 78
   },
   {
@@ -2950,10 +2947,10 @@
    },
    "hot": {
     "rank": 18,
-    "score": 1.87,
-    "as_of": "20261112",
-    "change": -46.0,
-    "days": 47
+    "score": 1.94,
+    "as_of": "20261113",
+    "change": -43.9,
+    "days": 48
    },
    "open": {
     "open": true,
@@ -3081,9 +3078,9 @@
    "brief": "tb21 80.5，DeepSWE 44.3",
    "updated_at": "2026-09-18",
    "price": {
-    "in": 0.2,
-    "out": 0.6,
-    "blended": 0.3,
+    "in": 0.1,
+    "out": 0.3,
+    "blended": 0.15,
     "ctx": 1048576
    },
    "boards": {
@@ -3132,10 +3129,10 @@
    },
    "hot": {
     "rank": 23,
-    "score": 0.99,
-    "as_of": "20261112",
-    "change": -81.7,
-    "days": 49
+    "score": 0.94,
+    "as_of": "20261113",
+    "change": -82.7,
+    "days": 50
    },
    "open": {
     "open": true,
@@ -3498,8 +3495,8 @@
    "updated_at": "2026-09-18",
    "price": {
     "in": 0.06,
-    "out": 0.15,
-    "blended": 0.0825,
+    "out": 0.25,
+    "blended": 0.1075,
     "ctx": 131072
    },
    "open": {
