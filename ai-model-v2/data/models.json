@@ -1,11 +1,11 @@
 {
  "version": "1.1",
- "generated_at": "2026-11-13",
+ "generated_at": "2026-11-14",
  "source": "data/rankings/benchmarks.json + pricing.json + board_history.json + usage_history/ + open_models.json",
  "meta": {
   "price_source": "OpenRouter 公开标价（$/百万 token，blended=3:1 输入:输出）",
   "usage_as_of": "20261113",
-  "boards_as_of": "20261113"
+  "boards_as_of": "20261115"
  },
  "dims": [
   "reasoning",
@@ -25,6 +25,61 @@
  },
  "count": 110,
  "models": [
+  {
+   "name": "DeepSeek V4.1 Flash",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 76,
+    "coding": 83,
+    "chinese": 90,
+    "multimodal": 90,
+    "longtext": 90,
+    "cost": 88,
+    "speed": 90,
+    "privacy": 87,
+    "ecosystem": 90,
+    "creative": 92
+   },
+   "agent": 74,
+   "brief": "DeepSWE 77.0，AutomationBench 68.9",
+   "updated_at": "2026-10-17",
+   "tier": {
+    "key": "deepseek",
+    "label": "双版本搭配",
+    "how": "Pro 和 Flash 是两个独立模型，按任务分派",
+    "advice": "日常问答走 Flash，难题再交给 Pro",
+    "why": "Flash 便宜且快得多，拿 Pro 干简单活是最常见的浪费"
+   },
+   "price": {
+    "in": 0.3,
+    "out": 1.2,
+    "blended": 0.525,
+    "ctx": 1048576
+   },
+   "boards": {
+    "综合": 11,
+    "纯能力": 16,
+    "编程": 19,
+    "Agent": 18,
+    "科学": 26,
+    "文档": 18,
+    "中文写作": 8,
+    "开源": 1,
+    "调用量": 1
+   },
+   "hot": {
+    "rank": 1,
+    "score": 87.16,
+    "as_of": "20261113",
+    "change": 54.5,
+    "days": 58
+   },
+   "open": {
+    "open": true,
+    "license": "MIT"
+   },
+   "power": 88
+  },
   {
    "name": "Claude Opus 5.5",
    "vendor": "海外",
@@ -85,7 +140,7 @@
     "multimodal": 97,
     "longtext": 88,
     "cost": 60,
-    "speed": 67,
+    "speed": 66,
     "privacy": 77,
     "ecosystem": 92,
     "creative": 92
@@ -107,68 +162,12 @@
     "ctx": 1050000
    },
    "boards": {
-    "综合": 3,
+    "综合": 4,
     "纯能力": 3,
     "编程": 5,
     "Agent": 5,
     "科学": 3,
-    "中文写作": 3,
-    "调用量": 25
-   },
-   "power": 87
-  },
-  {
-   "name": "DeepSeek V4.1 Flash",
-   "vendor": "国产",
-   "score": {
-    "reasoning": 76,
-    "coding": 83,
-    "chinese": 90,
-    "multimodal": 90,
-    "longtext": 90,
-    "cost": 88,
-    "speed": 89,
-    "privacy": 87,
-    "ecosystem": 90,
-    "creative": 92
-   },
-   "agent": 74,
-   "brief": "DeepSWE 77.0，AutomationBench 68.9",
-   "updated_at": "2026-10-17",
-   "tier": {
-    "key": "deepseek",
-    "label": "双版本搭配",
-    "how": "Pro 和 Flash 是两个独立模型，按任务分派",
-    "advice": "日常问答走 Flash，难题再交给 Pro",
-    "why": "Flash 便宜且快得多，拿 Pro 干简单活是最常见的浪费"
-   },
-   "price": {
-    "in": 0.3,
-    "out": 1.2,
-    "blended": 0.525,
-    "ctx": 1048576
-   },
-   "boards": {
-    "综合": 11,
-    "纯能力": 16,
-    "编程": 19,
-    "Agent": 18,
-    "科学": 26,
-    "文档": 18,
-    "中文写作": 8,
-    "开源": 1,
-    "调用量": 1
-   },
-   "hot": {
-    "rank": 1,
-    "score": 87.16,
-    "as_of": "20261113",
-    "change": 54.5,
-    "days": 58
-   },
-   "open": {
-    "open": true,
-    "license": "MIT"
+    "中文写作": 3
    },
    "power": 87
   },
@@ -181,8 +180,8 @@
     "chinese": 96,
     "multimodal": 90,
     "longtext": 86,
-    "cost": 67,
-    "speed": 79,
+    "cost": 72,
+    "speed": 78,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 88
@@ -204,7 +203,7 @@
     "ctx": 1048576
    },
    "boards": {
-    "综合": 4,
+    "综合": 3,
     "纯能力": 4,
     "编程": 4,
     "Agent": 2,
@@ -222,8 +221,8 @@
     "chinese": 87,
     "multimodal": 100,
     "longtext": 86,
-    "cost": 67,
-    "speed": 81,
+    "cost": 72,
+    "speed": 80,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 82
@@ -306,13 +305,13 @@
     "multimodal": 94,
     "longtext": 91,
     "cost": 72,
-    "speed": 72,
+    "speed": 71,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 84
    },
    "agent": 82,
-   "brief": "FrontierMath T4 100.0 全场第一，LMArena Code 1743.0 全场第一",
+   "brief": "FrontierMath T4 100.0 全场第一，LMArena Code 1743.3 全场第一",
    "updated_at": "2026-10-06",
    "tier": {
     "key": "openai",
@@ -393,6 +392,40 @@
     "as_of": "20261113",
     "change": 290.1,
     "days": 38
+   },
+   "power": 85
+  },
+  {
+   "name": "Muse Wonder",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 80,
+    "coding": 84,
+    "chinese": 87,
+    "multimodal": 89,
+    "longtext": 88,
+    "cost": 67,
+    "speed": 88,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 82
+   },
+   "agent": 80,
+   "brief": "DeepSWE 78.8 前三，Legal Research 50.5",
+   "updated_at": "2026-10-13",
+   "price": {
+    "in": 4.0,
+    "out": 20.0,
+    "blended": 8.0,
+    "ctx": 1048576
+   },
+   "boards": {
+    "综合": 14,
+    "纯能力": 13,
+    "编程": 15,
+    "Agent": 11,
+    "科学": 15,
+    "中文写作": 16
    },
    "power": 85
   },
@@ -490,7 +523,7 @@
     "multimodal": 92,
     "longtext": 87,
     "cost": 94,
-    "speed": 70,
+    "speed": 69,
     "privacy": 86,
     "ecosystem": 87,
     "creative": 93
@@ -512,11 +545,11 @@
     "ctx": 1048576
    },
    "boards": {
-    "综合": 30,
+    "综合": 29,
     "Agent": 22,
     "中文写作": 2,
     "开源": 7,
-    "调用量": 4
+    "调用量": 2
    },
    "hot": {
     "rank": 2,
@@ -541,7 +574,7 @@
     "multimodal": 90,
     "longtext": 92,
     "cost": 72,
-    "speed": 87,
+    "speed": 86,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 81
@@ -609,40 +642,6 @@
    "power": 84
   },
   {
-   "name": "Muse Wonder",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 80,
-    "coding": 84,
-    "chinese": 87,
-    "multimodal": 89,
-    "longtext": 88,
-    "cost": 67,
-    "speed": 86,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 82
-   },
-   "agent": 80,
-   "brief": "DeepSWE 78.8 前三，Legal Research 50.5",
-   "updated_at": "2026-10-13",
-   "price": {
-    "in": 4.0,
-    "out": 20.0,
-    "blended": 8.0,
-    "ctx": 1048576
-   },
-   "boards": {
-    "综合": 14,
-    "纯能力": 13,
-    "编程": 15,
-    "Agent": 11,
-    "科学": 15,
-    "中文写作": 16
-   },
-   "power": 84
-  },
-  {
    "name": "Kimi K3",
    "vendor": "国产",
    "score": {
@@ -652,7 +651,7 @@
     "multimodal": 90,
     "longtext": 98,
     "cost": 69,
-    "speed": 68,
+    "speed": 70,
     "privacy": 82,
     "ecosystem": 83,
     "creative": 82
@@ -681,7 +680,7 @@
     "文档": 1,
     "中文写作": 22,
     "开源": 2,
-    "调用量": 14
+    "调用量": 13
    },
    "hot": {
     "rank": 13,
@@ -706,7 +705,7 @@
     "multimodal": 90,
     "longtext": 86,
     "cost": 77,
-    "speed": 77,
+    "speed": 78,
     "privacy": 84,
     "ecosystem": 80,
     "creative": 83
@@ -734,7 +733,7 @@
     "Agent": 16,
     "中文写作": 4,
     "开源": 3,
-    "调用量": 3
+    "调用量": 4
    },
    "hot": {
     "rank": 4,
@@ -821,62 +820,19 @@
     "ctx": 1048576
    },
    "boards": {
-    "综合": 20,
+    "综合": 19,
     "纯能力": 22,
     "Agent": 26,
     "科学": 22,
     "文档": 29,
     "中文写作": 9,
-    "调用量": 16
+    "调用量": 15
    },
    "hot": {
     "rank": 15,
     "score": 3.01,
     "as_of": "20261113",
     "change": -31.7,
-    "days": 58
-   },
-   "power": 83
-  },
-  {
-   "name": "Muse Spark 1.3",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 76,
-    "coding": 82,
-    "chinese": 83,
-    "multimodal": 92,
-    "longtext": 91,
-    "cost": 77,
-    "speed": 91,
-    "privacy": 72,
-    "ecosystem": 77,
-    "creative": 80
-   },
-   "agent": 71,
-   "brief": "Legal Research 55.3，DeepSWE 75.4",
-   "updated_at": "2026-09-03",
-   "price": {
-    "in": 1.25,
-    "out": 4.25,
-    "blended": 2.0,
-    "ctx": 1048576
-   },
-   "boards": {
-    "综合": 18,
-    "纯能力": 17,
-    "编程": 18,
-    "Agent": 30,
-    "科学": 20,
-    "文档": 13,
-    "中文写作": 18,
-    "调用量": 21
-   },
-   "hot": {
-    "rank": 21,
-    "score": 1.26,
-    "as_of": "20261113",
-    "change": -54.2,
     "days": 58
    },
    "power": 83
@@ -891,7 +847,7 @@
     "multimodal": 78,
     "longtext": 91,
     "cost": 95,
-    "speed": 86,
+    "speed": 85,
     "privacy": 83,
     "ecosystem": 83,
     "creative": 86
@@ -917,7 +873,7 @@
     "编程": 28,
     "文档": 11,
     "中文写作": 7,
-    "调用量": 2
+    "调用量": 3
    },
    "hot": {
     "rank": 3,
@@ -1002,11 +958,54 @@
     "ctx": 1000000
    },
    "boards": {
-    "综合": 29,
+    "综合": 28,
     "纯能力": 24,
     "Agent": 19,
     "科学": 30,
     "中文写作": 21
+   },
+   "power": 82
+  },
+  {
+   "name": "Muse Spark 1.3",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 76,
+    "coding": 82,
+    "chinese": 83,
+    "multimodal": 92,
+    "longtext": 91,
+    "cost": 77,
+    "speed": 87,
+    "privacy": 72,
+    "ecosystem": 77,
+    "creative": 80
+   },
+   "agent": 71,
+   "brief": "Legal Research 55.3，DeepSWE 75.4",
+   "updated_at": "2026-09-03",
+   "price": {
+    "in": 1.25,
+    "out": 4.25,
+    "blended": 2.0,
+    "ctx": 1048576
+   },
+   "boards": {
+    "综合": 18,
+    "纯能力": 17,
+    "编程": 18,
+    "Agent": 30,
+    "科学": 20,
+    "文档": 13,
+    "中文写作": 18,
+    "调用量": 21
+   },
+   "hot": {
+    "rank": 21,
+    "score": 1.26,
+    "as_of": "20261113",
+    "change": -54.2,
+    "days": 58
    },
    "power": 82
   },
@@ -1020,7 +1019,7 @@
     "multimodal": 88,
     "longtext": 87,
     "cost": 80,
-    "speed": 92,
+    "speed": 93,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1075,7 +1074,7 @@
     "ctx": 1050000
    },
    "boards": {
-    "综合": 19,
+    "综合": 20,
     "纯能力": 20,
     "编程": 21,
     "Agent": 28,
@@ -1095,7 +1094,7 @@
     "multimodal": 87,
     "longtext": 84,
     "cost": 77,
-    "speed": 98,
+    "speed": 100,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1136,7 +1135,7 @@
     "ctx": 1048576
    },
    "boards": {
-    "综合": 28,
+    "综合": 30,
     "纯能力": 26,
     "编程": 25,
     "科学": 25,
@@ -1210,7 +1209,7 @@
     "creative": 82
    },
    "agent": 82,
-   "brief": "TB4.0 63.6 前三，LMArena Code 1687.7",
+   "brief": "TB4.0 63.6 前三，LMArena Code 1687.2",
    "updated_at": "2026-10-24",
    "tier": {
     "key": "moonshot",
@@ -1233,7 +1232,7 @@
     "科学": 12,
     "文档": 4,
     "中文写作": 15,
-    "调用量": 12
+    "调用量": 14
    },
    "hot": {
     "rank": 14,
@@ -1295,7 +1294,7 @@
     "multimodal": 91,
     "longtext": 84,
     "cost": 74,
-    "speed": 64,
+    "speed": 65,
     "privacy": 86,
     "ecosystem": 80,
     "creative": 79
@@ -1360,7 +1359,7 @@
     "ctx": 1048576
    },
    "boards": {
-    "开源": 9
+    "开源": 10
    },
    "open": {
     "open": true,
@@ -1400,7 +1399,7 @@
     "ctx": 1000000
    },
    "boards": {
-    "开源": 10
+    "开源": 11
    },
    "open": {
     "open": true,
@@ -1418,7 +1417,7 @@
     "multimodal": 69,
     "longtext": 98,
     "cost": 80,
-    "speed": 89,
+    "speed": 85,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 79
@@ -1433,7 +1432,7 @@
     "ctx": 1000000
    },
    "boards": {
-    "综合": 25,
+    "综合": 27,
     "纯能力": 30,
     "Agent": 27,
     "文档": 2,
@@ -1455,35 +1454,41 @@
    "power": 81
   },
   {
-   "name": "Muse Spark Open",
-   "vendor": "海外",
+   "name": "MiniMax-M3.1-Flash",
+   "vendor": "国产",
    "score": {
-    "reasoning": 70,
-    "coding": 77,
-    "chinese": 80,
-    "multimodal": 81,
-    "longtext": 84,
-    "cost": 77,
-    "speed": 93,
+    "reasoning": 77,
+    "coding": 79,
+    "chinese": 78,
+    "multimodal": 76,
+    "longtext": 86,
+    "cost": 93,
+    "speed": 89,
     "privacy": 83,
     "ecosystem": 80,
-    "creative": 78
+    "creative": 77
    },
-   "agent": 64,
-   "brief": "SciCode 58.4，HLE 43.9",
-   "updated_at": "2026-10-16",
+   "agent": 70,
+   "brief": "DeepSWE 73.7，HLE 48.0",
+   "updated_at": "2026-10-20",
    "price": {
-    "in": 1.25,
-    "out": 4.25,
-    "blended": 2.0,
+    "in": 0.15,
+    "out": 0.6,
+    "blended": 0.2625,
     "ctx": 1048576
    },
    "boards": {
-    "开源": 14
+    "综合": 25,
+    "科学": 16,
+    "中文写作": 29,
+    "调用量": 19
    },
-   "open": {
-    "open": true,
-    "license": "Muse Model License"
+   "hot": {
+    "rank": 19,
+    "score": 1.61,
+    "as_of": "20261113",
+    "change": -85.9,
+    "days": 23
    },
    "power": 81
   },
@@ -1497,7 +1502,7 @@
     "multimodal": 65,
     "longtext": 88,
     "cost": 86,
-    "speed": 88,
+    "speed": 89,
     "privacy": 84,
     "ecosystem": 83,
     "creative": 83
@@ -1514,7 +1519,7 @@
    },
    "boards": {
     "文档": 28,
-    "开源": 13
+    "开源": 14
    },
    "open": {
     "open": true,
@@ -1579,7 +1584,7 @@
    "brief": "AutomationBench 37.2，FrontierCode 2.0 11.8",
    "updated_at": "2026-09-18",
    "boards": {
-    "开源": 20
+    "开源": 21
    },
    "open": {
     "open": true,
@@ -1627,117 +1632,69 @@
    "power": 80
   },
   {
-   "name": "Grok 4.7",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 71,
-    "coding": 82,
-    "chinese": 86,
-    "multimodal": 74,
-    "longtext": 82,
-    "cost": 74,
-    "speed": 76,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 82
-   },
-   "agent": 74,
-   "brief": "LMArena Code 1641.0，AutomationBench 65.6",
-   "updated_at": "2026-09-18",
-   "tier": {
-    "key": "xai",
-    "label": "推理档位",
-    "how": "推理强度可以调",
-    "advice": "默认档够用，难题再往上调",
-    "why": "推理强度越高，响应越慢、消耗越大"
-   },
-   "price": {
-    "in": 2.0,
-    "out": 6.0,
-    "blended": 3.0,
-    "ctx": 500000
-   },
-   "boards": {
-    "纯能力": 27,
-    "编程": 20,
-    "Agent": 20,
-    "调用量": 15
-   },
-   "hot": {
-    "rank": 17,
-    "score": 1.96,
-    "as_of": "20261113",
-    "change": 790.9,
-    "days": 41
-   },
-   "power": 80
-  },
-  {
-   "name": "Mistral Large 4",
-   "vendor": "海外",
+   "name": "Ling 3.1 Flash",
+   "vendor": "国产",
    "score": {
     "reasoning": 72,
-    "coding": 76,
+    "coding": 77,
     "chinese": 80,
     "multimodal": 75,
-    "longtext": 88,
-    "cost": 82,
-    "speed": 85,
+    "longtext": 91,
+    "cost": 89,
+    "speed": 80,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
    },
-   "agent": 71,
-   "brief": "AutomationBench 59.9，HLE-Diamond 17.3",
-   "updated_at": "2026-10-07",
+   "agent": 63,
+   "brief": "tb21 81.2，SciCode 54.1",
+   "updated_at": "2026-10-06",
    "price": {
-    "in": 2.0,
-    "out": 6.0,
-    "blended": 3.0,
-    "ctx": 128000
+    "in": 0.045,
+    "out": 0.135,
+    "blended": 0.0675,
+    "ctx": 1000000
    },
    "boards": {
-    "Agent": 29,
-    "文档": 30
+    "文档": 16,
+    "开源": 12
+   },
+   "open": {
+    "open": true,
+    "license": "MIT"
    },
    "power": 80
   },
   {
-   "name": "MiniMax-M3.1-Flash",
-   "vendor": "国产",
+   "name": "Muse Spark Open",
+   "vendor": "海外",
    "score": {
-    "reasoning": 77,
-    "coding": 79,
-    "chinese": 78,
-    "multimodal": 76,
-    "longtext": 86,
-    "cost": 93,
-    "speed": 87,
+    "reasoning": 70,
+    "coding": 77,
+    "chinese": 80,
+    "multimodal": 81,
+    "longtext": 84,
+    "cost": 77,
+    "speed": 91,
     "privacy": 83,
     "ecosystem": 80,
-    "creative": 77
+    "creative": 78
    },
-   "agent": 70,
-   "brief": "DeepSWE 73.7，HLE 48.0",
-   "updated_at": "2026-10-20",
+   "agent": 64,
+   "brief": "SciCode 58.4，HLE 43.9",
+   "updated_at": "2026-10-16",
    "price": {
-    "in": 0.15,
-    "out": 0.6,
-    "blended": 0.2625,
+    "in": 1.25,
+    "out": 4.25,
+    "blended": 2.0,
     "ctx": 1048576
    },
    "boards": {
-    "综合": 27,
-    "科学": 16,
-    "中文写作": 29,
-    "调用量": 19
+    "开源": 15
    },
-   "hot": {
-    "rank": 19,
-    "score": 1.61,
-    "as_of": "20261113",
-    "change": -85.9,
-    "days": 23
+   "open": {
+    "open": true,
+    "license": "Muse Model License"
    },
    "power": 80
   },
@@ -1793,7 +1750,7 @@
     "creative": 78
    },
    "agent": 68,
-   "brief": "LMArena Code 1646.2，HLE-Diamond 28.7",
+   "brief": "LMArena Code 1647.1，HLE-Diamond 28.7",
    "updated_at": "2026-09-18",
    "price": {
     "in": 0.3,
@@ -1817,7 +1774,7 @@
     "multimodal": 90,
     "longtext": 85,
     "cost": 77,
-    "speed": 100,
+    "speed": 98,
     "privacy": 72,
     "ecosystem": 75,
     "creative": 70
@@ -1854,36 +1811,48 @@
    "power": 79
   },
   {
-   "name": "Ling 3.1 Flash",
-   "vendor": "国产",
+   "name": "Grok 4.7",
+   "vendor": "海外",
    "score": {
-    "reasoning": 72,
-    "coding": 77,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 91,
-    "cost": 89,
-    "speed": 79,
+    "reasoning": 71,
+    "coding": 82,
+    "chinese": 86,
+    "multimodal": 74,
+    "longtext": 82,
+    "cost": 74,
+    "speed": 72,
     "privacy": 83,
     "ecosystem": 80,
-    "creative": 78
+    "creative": 82
    },
-   "agent": 63,
-   "brief": "tb21 81.2，SciCode 54.1",
-   "updated_at": "2026-10-06",
+   "agent": 74,
+   "brief": "LMArena Code 1640.7，AutomationBench 65.6",
+   "updated_at": "2026-09-18",
+   "tier": {
+    "key": "xai",
+    "label": "推理档位",
+    "how": "推理强度可以调",
+    "advice": "默认档够用，难题再往上调",
+    "why": "推理强度越高，响应越慢、消耗越大"
+   },
    "price": {
-    "in": 0.045,
-    "out": 0.135,
-    "blended": 0.0675,
-    "ctx": 1000000
+    "in": 2.0,
+    "out": 6.0,
+    "blended": 3.0,
+    "ctx": 500000
    },
    "boards": {
-    "文档": 16,
-    "开源": 11
+    "纯能力": 27,
+    "编程": 20,
+    "Agent": 20,
+    "调用量": 17
    },
-   "open": {
-    "open": true,
-    "license": "MIT"
+   "hot": {
+    "rank": 17,
+    "score": 1.96,
+    "as_of": "20261113",
+    "change": 790.9,
+    "days": 41
    },
    "power": 79
   },
@@ -1897,7 +1866,7 @@
     "multimodal": 75,
     "longtext": 91,
     "cost": 96,
-    "speed": 79,
+    "speed": 78,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1939,6 +1908,36 @@
     "out": 0.063,
     "blended": 0.0315,
     "ctx": 262144
+   },
+   "power": 79
+  },
+  {
+   "name": "Mistral Large 4",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 72,
+    "coding": 76,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 88,
+    "cost": 82,
+    "speed": 83,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "agent": 71,
+   "brief": "AutomationBench 59.9，HLE-Diamond 17.3",
+   "updated_at": "2026-10-07",
+   "price": {
+    "in": 2.0,
+    "out": 6.0,
+    "blended": 3.0,
+    "ctx": 128000
+   },
+   "boards": {
+    "Agent": 29,
+    "文档": 30
    },
    "power": 79
   },
@@ -2030,7 +2029,7 @@
     "multimodal": 60,
     "longtext": 86,
     "cost": 96,
-    "speed": 83,
+    "speed": 84,
     "privacy": 84,
     "ecosystem": 81,
     "creative": 80
@@ -2052,7 +2051,7 @@
     "ctx": 1048576
    },
    "boards": {
-    "开源": 15
+    "开源": 16
    },
    "open": {
     "open": true,
@@ -2070,7 +2069,7 @@
     "multimodal": 85,
     "longtext": 89,
     "cost": 71,
-    "speed": 86,
+    "speed": 87,
     "privacy": 74,
     "ecosystem": 78,
     "creative": 72
@@ -2106,7 +2105,7 @@
     "multimodal": 69,
     "longtext": 89,
     "cost": 82,
-    "speed": 63,
+    "speed": 64,
     "privacy": 85,
     "ecosystem": 84,
     "creative": 82
@@ -2129,7 +2128,7 @@
    },
    "boards": {
     "文档": 25,
-    "开源": 16
+    "开源": 17
    },
    "open": {
     "open": true,
@@ -2147,7 +2146,7 @@
     "multimodal": 79,
     "longtext": 89,
     "cost": 72,
-    "speed": 77,
+    "speed": 75,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 73
@@ -2270,7 +2269,7 @@
     "multimodal": 75,
     "longtext": 86,
     "cost": 79,
-    "speed": 73,
+    "speed": 72,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 82
@@ -2292,41 +2291,11 @@
     "ctx": 262144
    },
    "boards": {
-    "开源": 23
+    "开源": 24
    },
    "open": {
     "open": true,
     "license": "修改版 MIT（营收门槛）"
-   },
-   "power": 78
-  },
-  {
-   "name": "Ling 3.0 Flash",
-   "vendor": "国产",
-   "score": {
-    "reasoning": 58,
-    "coding": 75,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 77,
-    "cost": 99,
-    "speed": 94,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "agent": 35,
-   "brief": "GPQA 85.5，tb21 55.4",
-   "updated_at": "2026-09-18",
-   "price": {
-    "in": 0.021,
-    "out": 0.063,
-    "blended": 0.0315,
-    "ctx": 262144
-   },
-   "open": {
-    "open": true,
-    "license": "MIT"
    },
    "power": 78
   },
@@ -2412,7 +2381,7 @@
    "brief": "GPQA 89.2，tb21 67.8",
    "updated_at": "2026-09-18",
    "boards": {
-    "开源": 21
+    "开源": 22
    },
    "open": {
     "open": true,
@@ -2538,7 +2507,8 @@
    "brief": "tb21 88.4，DeepSWE 64.6",
    "updated_at": "2026-09-18",
    "boards": {
-    "Agent": 21
+    "Agent": 21,
+    "开源": 9
    },
    "open": {
     "open": true,
@@ -2578,7 +2548,7 @@
     "ctx": 1048576
    },
    "boards": {
-    "开源": 12
+    "开源": 13
    },
    "open": {
     "open": true,
@@ -2596,7 +2566,7 @@
     "multimodal": 73,
     "longtext": 87,
     "cost": 74,
-    "speed": 76,
+    "speed": 77,
     "privacy": 71,
     "ecosystem": 78,
     "creative": 78
@@ -2635,7 +2605,7 @@
     "multimodal": 75,
     "longtext": 84,
     "cost": 77,
-    "speed": 78,
+    "speed": 76,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 75
@@ -2657,7 +2627,7 @@
     "ctx": 1048576
    },
    "boards": {
-    "开源": 17
+    "开源": 18
    },
    "open": {
     "open": true,
@@ -2666,35 +2636,98 @@
    "power": 77
   },
   {
-   "name": "Muse Glimmer",
+   "name": "Inkling",
    "vendor": "海外",
    "score": {
-    "reasoning": 55,
-    "coding": 76,
+    "reasoning": 64,
+    "coding": 71,
     "chinese": 80,
-    "multimodal": 64,
-    "longtext": 91,
-    "cost": 88,
-    "speed": 82,
+    "multimodal": 61,
+    "longtext": 83,
+    "cost": 78,
+    "speed": 89,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
    },
-   "agent": 42,
-   "brief": "AutomationBench 6.8，GPQA 83.5",
+   "agent": 60,
+   "brief": "AutomationBench 5.0，FrontierMath T4 4.9",
    "updated_at": "2026-09-18",
    "price": {
-    "in": 0.3,
-    "out": 1.2,
-    "blended": 0.525,
-    "ctx": 131072
+    "in": 1.0,
+    "out": 4.05,
+    "blended": 1.7625,
+    "ctx": 524288
    },
    "boards": {
-    "开源": 28
+    "开源": 25
    },
    "open": {
     "open": true,
     "license": "Apache-2.0"
+   },
+   "power": 77
+  },
+  {
+   "name": "Inkling Small",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 64,
+    "coding": 71,
+    "chinese": 80,
+    "multimodal": 63,
+    "longtext": 81,
+    "cost": 88,
+    "speed": 91,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "agent": 60,
+   "brief": "ProgramBench 0.5，FrontierMath T4 17.1",
+   "updated_at": "2026-09-18",
+   "price": {
+    "in": 0.45,
+    "out": 1.2,
+    "blended": 0.6375,
+    "ctx": 524288
+   },
+   "boards": {
+    "开源": 23
+   },
+   "open": {
+    "open": true,
+    "license": "Apache-2.0"
+   },
+   "power": 77
+  },
+  {
+   "name": "Ling 3.0 Flash",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 58,
+    "coding": 75,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 77,
+    "cost": 99,
+    "speed": 83,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "agent": 35,
+   "brief": "GPQA 85.5，tb21 55.4",
+   "updated_at": "2026-09-18",
+   "price": {
+    "in": 0.021,
+    "out": 0.063,
+    "blended": 0.0315,
+    "ctx": 262144
+   },
+   "open": {
+    "open": true,
+    "license": "MIT"
    },
    "power": 77
   },
@@ -2723,7 +2756,7 @@
     "ctx": 262144
    },
    "boards": {
-    "开源": 25
+    "开源": 26
    },
    "open": {
     "open": true,
@@ -2789,7 +2822,7 @@
     "ctx": 1048576
    },
    "boards": {
-    "开源": 19
+    "开源": 20
    },
    "open": {
     "open": true,
@@ -2798,64 +2831,31 @@
    "power": 77
   },
   {
-   "name": "Inkling",
+   "name": "Muse Glimmer",
    "vendor": "海外",
    "score": {
-    "reasoning": 64,
-    "coding": 71,
+    "reasoning": 55,
+    "coding": 76,
     "chinese": 80,
-    "multimodal": 61,
-    "longtext": 83,
-    "cost": 78,
-    "speed": 88,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "agent": 60,
-   "brief": "AutomationBench 5.0，FrontierMath T4 4.9",
-   "updated_at": "2026-09-18",
-   "price": {
-    "in": 1.0,
-    "out": 4.05,
-    "blended": 1.7625,
-    "ctx": 524288
-   },
-   "boards": {
-    "开源": 24
-   },
-   "open": {
-    "open": true,
-    "license": "Apache-2.0"
-   },
-   "power": 76
-  },
-  {
-   "name": "Inkling Small",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 64,
-    "coding": 71,
-    "chinese": 80,
-    "multimodal": 63,
-    "longtext": 81,
+    "multimodal": 64,
+    "longtext": 91,
     "cost": 88,
-    "speed": 82,
+    "speed": 81,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
    },
-   "agent": 60,
-   "brief": "ProgramBench 0.5，FrontierMath T4 17.1",
+   "agent": 42,
+   "brief": "AutomationBench 6.8，GPQA 83.5",
    "updated_at": "2026-09-18",
    "price": {
-    "in": 0.45,
+    "in": 0.3,
     "out": 1.2,
-    "blended": 0.6375,
-    "ctx": 524288
+    "blended": 0.525,
+    "ctx": 131072
    },
    "boards": {
-    "开源": 22
+    "开源": 29
    },
    "open": {
     "open": true,
@@ -2927,7 +2927,7 @@
     "multimodal": 60,
     "longtext": 79,
     "cost": 96,
-    "speed": 63,
+    "speed": 62,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 80
@@ -2983,7 +2983,7 @@
     "ctx": 1048756
    },
    "boards": {
-    "开源": 27
+    "开源": 28
    },
    "open": {
     "open": true,
@@ -3083,9 +3083,6 @@
     "blended": 0.15,
     "ctx": 1048576
    },
-   "boards": {
-    "开源": 30
-   },
    "open": {
     "open": true,
     "license": "Apache 2.0"
@@ -3102,7 +3099,7 @@
     "multimodal": 68,
     "longtext": 85,
     "cost": 93,
-    "speed": 73,
+    "speed": 74,
     "privacy": 87,
     "ecosystem": 79,
     "creative": 72
@@ -3124,7 +3121,7 @@
     "ctx": 262144
    },
    "boards": {
-    "开源": 26,
+    "开源": 27,
     "调用量": 23
    },
    "hot": {
@@ -3165,7 +3162,7 @@
     "ctx": 1048576
    },
    "boards": {
-    "开源": 18
+    "开源": 19
    },
    "open": {
     "open": true,
@@ -3183,7 +3180,7 @@
     "multimodal": 75,
     "longtext": 60,
     "cost": 100,
-    "speed": 98,
+    "speed": 99,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -3369,7 +3366,7 @@
     "ctx": 1000000
    },
    "boards": {
-    "开源": 29
+    "开源": 30
    },
    "open": {
     "open": true,
@@ -3485,7 +3482,7 @@
     "multimodal": 75,
     "longtext": 60,
     "cost": 100,
-    "speed": 85,
+    "speed": 84,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
