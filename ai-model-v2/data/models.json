@@ -140,7 +140,7 @@
     "multimodal": 97,
     "longtext": 88,
     "cost": 60,
-    "speed": 66,
+    "speed": 70,
     "privacy": 77,
     "ecosystem": 92,
     "creative": 92
@@ -167,7 +167,8 @@
     "编程": 5,
     "Agent": 5,
     "科学": 3,
-    "中文写作": 3
+    "中文写作": 3,
+    "调用量": 24
    },
    "hot": {
     "rank": 24,
@@ -341,7 +342,7 @@
     "科学": 4,
     "文档": 17,
     "中文写作": 6,
-    "调用量": 11
+    "调用量": 9
    },
    "hot": {
     "rank": 9,
@@ -552,7 +553,7 @@
     "ctx": 1048576
    },
    "boards": {
-    "综合": 29,
+    "综合": 30,
     "Agent": 22,
     "中文写作": 2,
     "开源": 7,
@@ -581,7 +582,7 @@
     "multimodal": 90,
     "longtext": 92,
     "cost": 72,
-    "speed": 86,
+    "speed": 87,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 81
@@ -687,7 +688,7 @@
     "文档": 1,
     "中文写作": 22,
     "开源": 2,
-    "调用量": 13
+    "调用量": 12
    },
    "hot": {
     "rank": 12,
@@ -712,7 +713,7 @@
     "multimodal": 90,
     "longtext": 86,
     "cost": 77,
-    "speed": 78,
+    "speed": 79,
     "privacy": 84,
     "ecosystem": 80,
     "creative": 83
@@ -832,8 +833,7 @@
     "Agent": 26,
     "科学": 22,
     "文档": 29,
-    "中文写作": 9,
-    "调用量": 15
+    "中文写作": 9
    },
    "power": 83
   },
@@ -998,7 +998,7 @@
     "科学": 20,
     "文档": 13,
     "中文写作": 18,
-    "调用量": 21
+    "调用量": 20
    },
    "hot": {
     "rank": 20,
@@ -1135,7 +1135,7 @@
     "ctx": 1048576
    },
    "boards": {
-    "综合": 30,
+    "综合": 29,
     "纯能力": 26,
     "编程": 25,
     "科学": 25,
@@ -1182,7 +1182,7 @@
     "科学": 18,
     "文档": 20,
     "中文写作": 30,
-    "调用量": 8
+    "调用量": 6
    },
    "hot": {
     "rank": 6,
@@ -1232,7 +1232,7 @@
     "科学": 12,
     "文档": 4,
     "中文写作": 15,
-    "调用量": 14
+    "调用量": 16
    },
    "hot": {
     "rank": 16,
@@ -1294,7 +1294,7 @@
     "multimodal": 91,
     "longtext": 84,
     "cost": 74,
-    "speed": 65,
+    "speed": 64,
     "privacy": 86,
     "ecosystem": 80,
     "creative": 79
@@ -1377,7 +1377,7 @@
     "multimodal": 75,
     "longtext": 86,
     "cost": 94,
-    "speed": 72,
+    "speed": 73,
     "privacy": 89,
     "ecosystem": 85,
     "creative": 87
@@ -1417,7 +1417,7 @@
     "multimodal": 69,
     "longtext": 98,
     "cost": 80,
-    "speed": 85,
+    "speed": 84,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 79
@@ -1438,7 +1438,7 @@
     "文档": 2,
     "中文写作": 27,
     "开源": 6,
-    "调用量": 24
+    "调用量": 23
    },
    "hot": {
     "rank": 23,
@@ -1481,7 +1481,7 @@
     "综合": 25,
     "科学": 16,
     "中文写作": 29,
-    "调用量": 19
+    "调用量": 15
    },
    "hot": {
     "rank": 15,
@@ -1502,7 +1502,7 @@
     "multimodal": 65,
     "longtext": 88,
     "cost": 86,
-    "speed": 89,
+    "speed": 90,
     "privacy": 84,
     "ecosystem": 83,
     "creative": 83
@@ -1537,7 +1537,7 @@
     "multimodal": 71,
     "longtext": 92,
     "cost": 89,
-    "speed": 84,
+    "speed": 85,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1602,7 +1602,7 @@
     "multimodal": 76,
     "longtext": 95,
     "cost": 87,
-    "speed": 73,
+    "speed": 72,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 79
@@ -1666,6 +1666,35 @@
    "power": 80
   },
   {
+   "name": "Solar Mini 4",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 69,
+    "coding": 77,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 91,
+    "cost": 96,
+    "speed": 83,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "agent": 63,
+   "brief": "SciCode 47.6，HLE 25.8",
+   "updated_at": "2026-10-06",
+   "price": {
+    "in": 0.05,
+    "out": 0.2,
+    "blended": 0.0875,
+    "ctx": 524288
+   },
+   "boards": {
+    "文档": 12
+   },
+   "power": 80
+  },
+  {
    "name": "Muse Spark Open",
    "vendor": "海外",
    "score": {
@@ -1723,7 +1752,7 @@
     "ctx": 1048576
    },
    "boards": {
-    "调用量": 6
+    "调用量": 19
    },
    "hot": {
     "rank": 19,
@@ -1857,35 +1886,6 @@
    "power": 79
   },
   {
-   "name": "Solar Mini 4",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 69,
-    "coding": 77,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 91,
-    "cost": 96,
-    "speed": 78,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "agent": 63,
-   "brief": "SciCode 47.6，HLE 25.8",
-   "updated_at": "2026-10-06",
-   "price": {
-    "in": 0.05,
-    "out": 0.2,
-    "blended": 0.0875,
-    "ctx": 524288
-   },
-   "boards": {
-    "文档": 12
-   },
-   "power": 79
-  },
-  {
    "name": "Ling-3.0-flash-Fin",
    "vendor": "国产",
    "score": {
@@ -1921,7 +1921,7 @@
     "multimodal": 75,
     "longtext": 88,
     "cost": 82,
-    "speed": 83,
+    "speed": 82,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -2029,7 +2029,7 @@
     "multimodal": 60,
     "longtext": 86,
     "cost": 96,
-    "speed": 84,
+    "speed": 86,
     "privacy": 84,
     "ecosystem": 81,
     "creative": 80
@@ -2105,7 +2105,7 @@
     "multimodal": 69,
     "longtext": 89,
     "cost": 82,
-    "speed": 64,
+    "speed": 65,
     "privacy": 85,
     "ecosystem": 84,
     "creative": 82
@@ -2146,7 +2146,7 @@
     "multimodal": 79,
     "longtext": 89,
     "cost": 72,
-    "speed": 75,
+    "speed": 77,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 73
@@ -2216,7 +2216,7 @@
     "multimodal": 85,
     "longtext": 86,
     "cost": 74,
-    "speed": 71,
+    "speed": 70,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 75
@@ -2526,7 +2526,7 @@
     "multimodal": 65,
     "longtext": 87,
     "cost": 78,
-    "speed": 76,
+    "speed": 79,
     "privacy": 84,
     "ecosystem": 77,
     "creative": 76
@@ -2566,7 +2566,7 @@
     "multimodal": 73,
     "longtext": 87,
     "cost": 74,
-    "speed": 77,
+    "speed": 76,
     "privacy": 71,
     "ecosystem": 78,
     "creative": 78
@@ -2678,7 +2678,7 @@
     "multimodal": 63,
     "longtext": 81,
     "cost": 88,
-    "speed": 91,
+    "speed": 92,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -2839,8 +2839,8 @@
     "chinese": 80,
     "multimodal": 64,
     "longtext": 91,
-    "cost": 88,
-    "speed": 81,
+    "cost": 87,
+    "speed": 80,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -2943,7 +2943,7 @@
    },
    "boards": {
     "开源": 8,
-    "调用量": 18
+    "调用量": 13
    },
    "hot": {
     "rank": 13,
@@ -3122,7 +3122,7 @@
    },
    "boards": {
     "开源": 27,
-    "调用量": 23
+    "调用量": 22
    },
    "hot": {
     "rank": 22,
@@ -3210,7 +3210,7 @@
     "multimodal": 75,
     "longtext": 60,
     "cost": 76,
-    "speed": 90,
+    "speed": 89,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -3473,36 +3473,6 @@
    "power": 73
   },
   {
-   "name": "Granite 4.2 8B",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 38,
-    "coding": 72,
-    "chinese": 80,
-    "multimodal": 75,
-    "longtext": 60,
-    "cost": 100,
-    "speed": 84,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 78
-   },
-   "agent": 0,
-   "brief": "GPQA 63.1，tb21 18.4",
-   "updated_at": "2026-09-18",
-   "price": {
-    "in": 0.06,
-    "out": 0.25,
-    "blended": 0.1075,
-    "ctx": 131072
-   },
-   "open": {
-    "open": true,
-    "license": "Apache-2.0"
-   },
-   "power": 72
-  },
-  {
    "name": "K2 Horizon 3.7B",
    "vendor": "海外",
    "score": {
@@ -3564,6 +3534,36 @@
    "agent": 3,
    "brief": "GPQA 75.3，tb21 27.3",
    "updated_at": "2026-09-18",
+   "open": {
+    "open": true,
+    "license": "Apache-2.0"
+   },
+   "power": 71
+  },
+  {
+   "name": "Granite 4.2 8B",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 38,
+    "coding": 72,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 60,
+    "cost": 100,
+    "speed": 70,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "agent": 0,
+   "brief": "GPQA 63.1，tb21 18.4",
+   "updated_at": "2026-09-18",
+   "price": {
+    "in": 0.06,
+    "out": 0.25,
+    "blended": 0.1075,
+    "ctx": 131072
+   },
    "open": {
     "open": true,
     "license": "Apache-2.0"
