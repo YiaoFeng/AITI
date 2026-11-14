@@ -4,7 +4,7 @@
  "source": "data/rankings/benchmarks.json + pricing.json + board_history.json + usage_history/ + open_models.json",
  "meta": {
   "price_source": "OpenRouter 公开标价（$/百万 token，blended=3:1 输入:输出）",
-  "usage_as_of": "20261113",
+  "usage_as_of": "20261114",
   "boards_as_of": "20261115"
  },
  "dims": [
@@ -51,9 +51,9 @@
     "why": "Flash 便宜且快得多，拿 Pro 干简单活是最常见的浪费"
    },
    "price": {
-    "in": 0.3,
-    "out": 1.2,
-    "blended": 0.525,
+    "in": 0.0507,
+    "out": 0.2028,
+    "blended": 0.0887,
     "ctx": 1048576
    },
    "boards": {
@@ -69,10 +69,10 @@
    },
    "hot": {
     "rank": 1,
-    "score": 87.16,
-    "as_of": "20261113",
-    "change": 54.5,
-    "days": 58
+    "score": 90.95,
+    "as_of": "20261114",
+    "change": 61.2,
+    "days": 59
    },
    "open": {
     "open": true,
@@ -123,10 +123,10 @@
    },
    "hot": {
     "rank": 5,
-    "score": 21.37,
-    "as_of": "20261113",
-    "change": 290.0,
-    "days": 50
+    "score": 21.29,
+    "as_of": "20261114",
+    "change": 288.5,
+    "days": 51
    },
    "power": 88
   },
@@ -168,6 +168,13 @@
     "Agent": 5,
     "科学": 3,
     "中文写作": 3
+   },
+   "hot": {
+    "rank": 24,
+    "score": 0.48,
+    "as_of": "20261114",
+    "change": -91.3,
+    "days": 59
    },
    "power": 87
   },
@@ -337,11 +344,11 @@
     "调用量": 11
    },
    "hot": {
-    "rank": 11,
-    "score": 5.21,
-    "as_of": "20261113",
-    "change": -11.4,
-    "days": 38
+    "rank": 9,
+    "score": 7.44,
+    "as_of": "20261114",
+    "change": 26.5,
+    "days": 39
    },
    "power": 85
   },
@@ -388,10 +395,10 @@
    },
    "hot": {
     "rank": 10,
-    "score": 9.09,
-    "as_of": "20261113",
-    "change": 290.1,
-    "days": 38
+    "score": 6.7,
+    "as_of": "20261114",
+    "change": 187.6,
+    "days": 39
    },
    "power": 85
   },
@@ -553,10 +560,10 @@
    },
    "hot": {
     "rank": 2,
-    "score": 38.97,
-    "as_of": "20261113",
-    "change": -8.0,
-    "days": 50
+    "score": 29.04,
+    "as_of": "20261114",
+    "change": -31.5,
+    "days": 51
    },
    "open": {
     "open": true,
@@ -683,11 +690,11 @@
     "调用量": 13
    },
    "hot": {
-    "rank": 13,
-    "score": 4.61,
-    "as_of": "20261113",
-    "change": -10.5,
-    "days": 58
+    "rank": 12,
+    "score": 4.48,
+    "as_of": "20261114",
+    "change": -13.0,
+    "days": 59
    },
    "open": {
     "open": true,
@@ -737,10 +744,10 @@
    },
    "hot": {
     "rank": 4,
-    "score": 34.15,
-    "as_of": "20261113",
-    "change": 901.5,
-    "days": 50
+    "score": 24.16,
+    "as_of": "20261114",
+    "change": 608.5,
+    "days": 51
    },
    "open": {
     "open": true,
@@ -828,13 +835,6 @@
     "中文写作": 9,
     "调用量": 15
    },
-   "hot": {
-    "rank": 15,
-    "score": 3.01,
-    "as_of": "20261113",
-    "change": -31.7,
-    "days": 58
-   },
    "power": 83
   },
   {
@@ -877,10 +877,10 @@
    },
    "hot": {
     "rank": 3,
-    "score": 34.39,
-    "as_of": "20261113",
-    "change": 421.9,
-    "days": 50
+    "score": 28.97,
+    "as_of": "20261114",
+    "change": 339.6,
+    "days": 51
    },
    "power": 83
   },
@@ -910,9 +910,9 @@
     "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
    },
    "price": {
-    "in": 4.4,
-    "out": 22.0,
-    "blended": 8.8,
+    "in": 4.0,
+    "out": 20.0,
+    "blended": 8.0,
     "ctx": 1050000
    },
    "boards": {
@@ -1001,11 +1001,11 @@
     "调用量": 21
    },
    "hot": {
-    "rank": 21,
-    "score": 1.26,
-    "as_of": "20261113",
-    "change": -54.2,
-    "days": 58
+    "rank": 20,
+    "score": 1.23,
+    "as_of": "20261114",
+    "change": -55.3,
+    "days": 59
    },
    "power": 82
   },
@@ -1185,11 +1185,11 @@
     "调用量": 8
    },
    "hot": {
-    "rank": 8,
-    "score": 15.65,
-    "as_of": "20261113",
-    "change": 144.1,
-    "days": 29
+    "rank": 6,
+    "score": 12.78,
+    "as_of": "20261114",
+    "change": 99.4,
+    "days": 30
    },
    "power": 82
   },
@@ -1235,11 +1235,11 @@
     "调用量": 14
    },
    "hot": {
-    "rank": 14,
-    "score": 3.62,
-    "as_of": "20261113",
-    "change": -20.6,
-    "days": 15
+    "rank": 16,
+    "score": 1.52,
+    "as_of": "20261114",
+    "change": -66.7,
+    "days": 16
    },
    "power": 82
   },
@@ -1441,11 +1441,11 @@
     "调用量": 24
    },
    "hot": {
-    "rank": 24,
-    "score": 0.93,
-    "as_of": "20261113",
-    "change": -24.4,
-    "days": 34
+    "rank": 23,
+    "score": 0.9,
+    "as_of": "20261114",
+    "change": -26.8,
+    "days": 35
    },
    "open": {
     "open": true,
@@ -1484,11 +1484,11 @@
     "调用量": 19
    },
    "hot": {
-    "rank": 19,
-    "score": 1.61,
-    "as_of": "20261113",
-    "change": -85.9,
-    "days": 23
+    "rank": 15,
+    "score": 1.56,
+    "as_of": "20261114",
+    "change": -86.4,
+    "days": 24
    },
    "power": 81
   },
@@ -1726,11 +1726,11 @@
     "调用量": 6
    },
    "hot": {
-    "rank": 6,
-    "score": 18.0,
-    "as_of": "20261113",
-    "change": 466.0,
-    "days": 26
+    "rank": 19,
+    "score": 1.36,
+    "as_of": "20261114",
+    "change": -57.2,
+    "days": 27
    },
    "power": 80
   },
@@ -1849,10 +1849,10 @@
    },
    "hot": {
     "rank": 17,
-    "score": 1.96,
-    "as_of": "20261113",
-    "change": 790.9,
-    "days": 41
+    "score": 1.5,
+    "as_of": "20261114",
+    "change": 581.8,
+    "days": 42
    },
    "power": 79
   },
@@ -2124,7 +2124,7 @@
     "in": 0.15,
     "out": 1.875,
     "blended": 0.5813,
-    "ctx": 1048575
+    "ctx": 1024000
    },
    "boards": {
     "文档": 25,
@@ -2946,11 +2946,11 @@
     "调用量": 18
    },
    "hot": {
-    "rank": 18,
-    "score": 1.94,
-    "as_of": "20261113",
-    "change": -43.9,
-    "days": 48
+    "rank": 13,
+    "score": 1.99,
+    "as_of": "20261114",
+    "change": -42.5,
+    "days": 49
    },
    "open": {
     "open": true,
@@ -3125,11 +3125,11 @@
     "调用量": 23
    },
    "hot": {
-    "rank": 23,
+    "rank": 22,
     "score": 0.94,
-    "as_of": "20261113",
+    "as_of": "20261114",
     "change": -82.7,
-    "days": 50
+    "days": 51
    },
    "open": {
     "open": true,
@@ -3588,12 +3588,6 @@
    "agent": 0,
    "brief": "GPQA 55.8，tb21 4.5",
    "updated_at": "2026-09-18",
-   "price": {
-    "in": 0.35,
-    "out": 0.5,
-    "blended": 0.3875,
-    "ctx": 128000
-   },
    "open": {
     "open": true,
     "license": "LFM Open License（营收门槛）"
