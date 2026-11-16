@@ -1,2 +1,2 @@
 /* 后端地址配置 —— 由 start_all.py 自动写入，不要手改 */
-window.QUIZ_API = 'https://cumulative-threaded-regardless-ridge.trycloudflare.com';
+window.QUIZ_API = 'https://somewhat-postal-download-embassy.trycloudflare.com';
