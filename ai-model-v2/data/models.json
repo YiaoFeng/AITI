@@ -1,10 +1,10 @@
 {
  "version": "1.1",
- "generated_at": "2026-11-20",
+ "generated_at": "2026-11-21",
  "source": "data/rankings/benchmarks.json + pricing.json + board_history.json + usage_history/ + open_models.json",
  "meta": {
   "price_source": "OpenRouter 公开标价（$/百万 token，blended=3:1 输入:输出）",
-  "usage_as_of": "20261120",
+  "usage_as_of": "20261121",
   "boards_as_of": "20261121"
  },
  "dims": [
@@ -51,9 +51,9 @@
     "why": "Flash 便宜且快得多，拿 Pro 干简单活是最常见的浪费"
    },
    "price": {
-    "in": 0.051,
-    "out": 0.567,
-    "blended": 0.18,
+    "in": 0.0498,
+    "out": 0.1992,
+    "blended": 0.0872,
     "ctx": 1048576
    },
    "boards": {
@@ -68,10 +68,10 @@
    },
    "hot": {
     "rank": 1,
-    "score": 82.24,
-    "as_of": "20261120",
-    "change": 45.7,
-    "days": 65
+    "score": 86.03,
+    "as_of": "20261121",
+    "change": 52.5,
+    "days": 66
    },
    "open": {
     "open": true,
@@ -121,11 +121,11 @@
     "调用量": 5
    },
    "hot": {
-    "rank": 5,
-    "score": 21.11,
-    "as_of": "20261120",
-    "change": 285.2,
-    "days": 57
+    "rank": 7,
+    "score": 16.15,
+    "as_of": "20261121",
+    "change": 194.7,
+    "days": 58
    },
    "power": 88
   },
@@ -167,6 +167,11 @@
     "Agent": 2,
     "科学": 4,
     "中文写作": 1
+   },
+   "hot": {
+    "rank": 23,
+    "score": 0.77,
+    "as_of": "20261121"
    },
    "power": 88
   },
@@ -211,11 +216,11 @@
     "调用量": 19
    },
    "hot": {
-    "rank": 19,
-    "score": 1.56,
-    "as_of": "20261120",
-    "change": -71.7,
-    "days": 65
+    "rank": 20,
+    "score": 1.1,
+    "as_of": "20261121",
+    "change": -80.1,
+    "days": 66
    },
    "power": 87
   },
@@ -276,7 +281,7 @@
     "creative": 87
    },
    "agent": 82,
-   "brief": "ProofBench 100.0 全场第一，tb21 91.4 全场第一",
+   "brief": "ProofBench 100.0 全场第一，TB2.1 官方 91.4 全场第一",
    "updated_at": "2026-09-02",
    "tier": {
     "key": "anthropic",
@@ -344,11 +349,11 @@
     "调用量": 9
    },
    "hot": {
-    "rank": 9,
-    "score": 14.04,
-    "as_of": "20261120",
-    "change": 138.8,
-    "days": 45
+    "rank": 13,
+    "score": 5.39,
+    "as_of": "20261121",
+    "change": -8.3,
+    "days": 46
    },
    "power": 86
   },
@@ -377,6 +382,12 @@
     "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
     "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
    },
+   "price": {
+    "in": 2.0,
+    "out": 10.0,
+    "blended": 4.0,
+    "ctx": 1050000
+   },
    "boards": {
     "综合": 7,
     "纯能力": 5,
@@ -403,7 +414,7 @@
     "creative": 83
    },
    "agent": 87,
-   "brief": "arena_agent 27.4 全场第一，HLE-Diamond 80.2 全场第一",
+   "brief": "LMArena Agent 27.4 全场第一，HLE-Diamond 80.2 全场第一",
    "updated_at": "2026-11-20",
    "tier": {
     "key": "anthropic",
@@ -411,6 +422,12 @@
     "how": "能给思考过程设一个 token 上限，也能整个关掉",
     "advice": "闲聊和简单问答关掉思考，写代码、读长文再打开",
     "why": "开着思考回复会明显变慢，token 消耗也跟着翻上去"
+   },
+   "price": {
+    "in": 8.0,
+    "out": 40.0,
+    "blended": 16.0,
+    "ctx": 1000000
    },
    "boards": {
     "综合": 2,
@@ -422,11 +439,11 @@
     "调用量": 16
    },
    "hot": {
-    "rank": 16,
-    "score": 2.29,
-    "as_of": "20261120",
-    "change": 27.9,
-    "days": 9
+    "rank": 14,
+    "score": 1.95,
+    "as_of": "20261121",
+    "change": 8.9,
+    "days": 10
    },
    "power": 86
   },
@@ -455,6 +472,12 @@
     "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
     "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
    },
+   "price": {
+    "in": 8.0,
+    "out": 40.0,
+    "blended": 16.0,
+    "ctx": 1050000
+   },
    "boards": {
     "综合": 4,
     "纯能力": 3,
@@ -465,9 +488,11 @@
     "调用量": 14
    },
    "hot": {
-    "rank": 14,
-    "score": 4.07,
-    "as_of": "20261120"
+    "rank": 25,
+    "score": 0.26,
+    "as_of": "20261121",
+    "change": -93.6,
+    "days": 1
    },
    "power": 86
   },
@@ -571,7 +596,7 @@
     "creative": 83
    },
    "agent": 83,
-   "brief": "DeepSWE 79.0 全场第一，TB4.0 58.1 全场第一",
+   "brief": "DeepSWE 79.0 全场第一，HLE 53.6",
    "updated_at": "2026-10-13",
    "price": {
     "in": 4.0,
@@ -691,6 +716,12 @@
     "advice": "批量跑的小任务关掉，需要多步推理的再开",
     "why": "思考档位越高延迟越明显，价格随推理 token 一起上涨"
    },
+   "price": {
+    "in": 1.5,
+    "out": 7.5,
+    "blended": 3.0,
+    "ctx": 1048576
+   },
    "boards": {
     "综合": 11,
     "纯能力": 7,
@@ -725,6 +756,12 @@
     "how": "thinking budget 可以调，也能设成 0 直接关掉",
     "advice": "批量跑的小任务关掉，需要多步推理的再开",
     "why": "思考档位越高延迟越明显，价格随推理 token 一起上涨"
+   },
+   "price": {
+    "in": 3.0,
+    "out": 15.0,
+    "blended": 6.0,
+    "ctx": 1048576
    },
    "boards": {
     "综合": 14,
@@ -772,10 +809,10 @@
    },
    "hot": {
     "rank": 3,
-    "score": 36.89,
-    "as_of": "20261120",
-    "change": -12.9,
-    "days": 57
+    "score": 28.5,
+    "as_of": "20261121",
+    "change": -32.7,
+    "days": 58
    },
    "open": {
     "open": true,
@@ -826,10 +863,10 @@
    },
    "hot": {
     "rank": 8,
-    "score": 14.84,
-    "as_of": "20261120",
-    "change": 536.9,
-    "days": 45
+    "score": 13.64,
+    "as_of": "20261121",
+    "change": 485.4,
+    "days": 46
    },
    "power": 84
   },
@@ -849,7 +886,7 @@
     "creative": 81
    },
    "agent": 78,
-   "brief": "TB4.0 37.9 前三，IOI 91.2",
+   "brief": "IOI 91.2，FrontierMath T4 82.9",
    "updated_at": "2026-08-23",
    "tier": {
     "key": "openai",
@@ -891,7 +928,7 @@
     "creative": 82
    },
    "agent": 73,
-   "brief": "SciCode 59.5，tb21 88.3",
+   "brief": "SciCode 59.5，TB2.1 官方 88.3",
    "updated_at": "2026-08-24",
    "tier": {
     "key": "moonshot",
@@ -916,11 +953,11 @@
     "调用量": 11
    },
    "hot": {
-    "rank": 11,
-    "score": 11.74,
-    "as_of": "20261120",
-    "change": 128.0,
-    "days": 65
+    "rank": 4,
+    "score": 22.74,
+    "as_of": "20261121",
+    "change": 341.6,
+    "days": 66
    },
    "open": {
     "open": true,
@@ -968,11 +1005,11 @@
     "调用量": 4
    },
    "hot": {
-    "rank": 4,
-    "score": 24.12,
-    "as_of": "20261120",
-    "change": 607.3,
-    "days": 57
+    "rank": 5,
+    "score": 22.5,
+    "as_of": "20261121",
+    "change": 559.8,
+    "days": 58
    },
    "open": {
     "open": true,
@@ -996,7 +1033,7 @@
     "creative": 79
    },
    "agent": 72,
-   "brief": "GPQA 94.5，TB4.0 12.1",
+   "brief": "GPQA 94.5，IOI 67.8",
    "updated_at": "2026-08-28",
    "tier": {
     "key": "google",
@@ -1035,7 +1072,7 @@
     "creative": 84
    },
    "agent": 74,
-   "brief": "tb21 89.4，GPQA 95.3",
+   "brief": "TB2.1 官方 89.4，GPQA 95.3",
    "updated_at": "2026-09-03",
    "tier": {
     "key": "google",
@@ -1075,7 +1112,7 @@
     "creative": 83
    },
    "agent": 74,
-   "brief": "IOI 87.6，TB4.0 22.7",
+   "brief": "IOI 87.6，FrontierMath T4 70.7",
    "updated_at": "2026-09-18",
    "tier": {
     "key": "openai",
@@ -1116,7 +1153,7 @@
     "creative": 86
    },
    "agent": 72,
-   "brief": "TB4.0 13.6，FrontierMath T4 56.1",
+   "brief": "FrontierMath T4 56.1，FrontierCode 2.0 25.2",
    "updated_at": "2026-09-18",
    "tier": {
     "key": "openai",
@@ -1139,10 +1176,10 @@
    },
    "hot": {
     "rank": 2,
-    "score": 37.58,
-    "as_of": "20261120",
-    "change": 470.3,
-    "days": 57
+    "score": 35.72,
+    "as_of": "20261121",
+    "change": 442.0,
+    "days": 58
    },
    "power": 83
   },
@@ -1162,7 +1199,7 @@
     "creative": 83
    },
    "agent": 79,
-   "brief": "TB4.0 48.5 前三，DeepSWE 75.7",
+   "brief": "DeepSWE 75.7，HLE-Diamond 44.9",
    "updated_at": "2026-11-20",
    "tier": {
     "key": "qwen",
@@ -1170,6 +1207,12 @@
     "how": "深度思考模式可以开关",
     "advice": "客服、摘要这类关掉，解题和写代码再开",
     "why": "开着更准，但更慢更贵，简单任务上纯属浪费"
+   },
+   "price": {
+    "in": 1.425,
+    "out": 4.275,
+    "blended": 2.1375,
+    "ctx": 1000000
    },
    "boards": {
     "综合": 20,
@@ -1197,7 +1240,7 @@
     "creative": 85
    },
    "agent": 74,
-   "brief": "TB4.0 34.3，FrontierMath T4 46.3",
+   "brief": "FrontierMath T4 46.3，DeepSWE 69.3",
    "updated_at": "2026-09-02",
    "tier": {
     "key": "qwen",
@@ -1249,11 +1292,11 @@
     "调用量": 22
    },
    "hot": {
-    "rank": 22,
-    "score": 1.22,
-    "as_of": "20261120",
-    "change": -55.6,
-    "days": 65
+    "rank": 19,
+    "score": 1.28,
+    "as_of": "20261121",
+    "change": -53.5,
+    "days": 66
    },
    "power": 82
   },
@@ -1332,7 +1375,7 @@
     "creative": 79
    },
    "agent": 71,
-   "brief": "TB4.0 31.8，SciCode 58.9",
+   "brief": "SciCode 58.9，GPQA 93.5",
    "updated_at": "2026-09-18",
    "price": {
     "in": 1.0,
@@ -1346,11 +1389,11 @@
     "调用量": 25
    },
    "hot": {
-    "rank": 25,
-    "score": 0.77,
-    "as_of": "20261120",
-    "change": -37.4,
-    "days": 41
+    "rank": 24,
+    "score": 0.66,
+    "as_of": "20261121",
+    "change": -46.3,
+    "days": 42
    },
    "open": {
     "open": true,
@@ -1400,10 +1443,10 @@
    },
    "hot": {
     "rank": 10,
-    "score": 12.5,
-    "as_of": "20261120",
-    "change": 95.0,
-    "days": 36
+    "score": 12.13,
+    "as_of": "20261121",
+    "change": 89.2,
+    "days": 37
    },
    "power": 82
   },
@@ -1433,9 +1476,9 @@
     "why": "思考模式更慢更贵，长文本场景未必用得上"
    },
    "price": {
-    "in": 0.2403,
-    "out": 8.4023,
-    "blended": 2.2808,
+    "in": 0.253,
+    "out": 8.8,
+    "blended": 2.3898,
     "ctx": 1048576
    },
    "boards": {
@@ -1449,11 +1492,11 @@
     "调用量": 20
    },
    "hot": {
-    "rank": 20,
-    "score": 1.38,
-    "as_of": "20261120",
-    "change": -69.7,
-    "days": 22
+    "rank": 18,
+    "score": 1.29,
+    "as_of": "20261121",
+    "change": -71.7,
+    "days": 23
    },
    "power": 82
   },
@@ -1514,7 +1557,7 @@
     "creative": 79
    },
    "agent": 76,
-   "brief": "TB4.0 34.3，APEX-SWE 52.3",
+   "brief": "APEX-SWE 52.3，MysteryMechanism 23.9",
    "updated_at": "2026-08-24",
    "tier": {
     "key": "qwen",
@@ -1555,7 +1598,7 @@
     "creative": 90
    },
    "agent": 68,
-   "brief": "tb21 85.4，GPQA 92.3",
+   "brief": "TB2.1 官方 85.4，GPQA 92.3",
    "updated_at": "2026-08-29",
    "tier": {
     "key": "tencent",
@@ -1595,7 +1638,7 @@
     "creative": 87
    },
    "agent": 66,
-   "brief": "tb21 83.3，GPQA 91.7",
+   "brief": "TB2.1 官方 83.3，GPQA 91.7",
    "updated_at": "2026-09-07",
    "tier": {
     "key": "qwen",
@@ -1635,7 +1678,7 @@
     "creative": 78
    },
    "agent": 67,
-   "brief": "SciCode 58.4，TB4.0 6.6",
+   "brief": "SciCode 58.4，HLE 43.9",
    "updated_at": "2026-10-16",
    "price": {
     "in": 1.25,
@@ -1668,7 +1711,7 @@
     "creative": 83
    },
    "agent": 66,
-   "brief": "tb21 83.9，GPQA 91.3",
+   "brief": "TB2.1 官方 83.9，GPQA 91.3",
    "updated_at": "2026-08-24",
    "tier": {
     "key": "deepseek",
@@ -1703,7 +1746,7 @@
     "creative": 78
    },
    "agent": 68,
-   "brief": "FrontierMath T4 61.0，TB4.0 11.6",
+   "brief": "FrontierMath T4 61.0，IOI 61.8",
    "updated_at": "2026-09-18",
    "tier": {
     "key": "openai",
@@ -1766,13 +1809,13 @@
     "creative": 79
    },
    "agent": 75,
-   "brief": "tb21 89.9 前三，SciCode 60.9",
+   "brief": "TB2.1 官方 89.9 前三，SciCode 60.9",
    "updated_at": "2026-09-18",
    "price": {
     "in": 0.435,
     "out": 0.87,
     "blended": 0.5437,
-    "ctx": 1050000
+    "ctx": 1048576
    },
    "boards": {
     "Agent": 29,
@@ -1801,12 +1844,12 @@
     "creative": 78
    },
    "agent": 63,
-   "brief": "tb21 81.2，SciCode 54.1",
+   "brief": "TB2.1 官方 81.2，SciCode 54.1",
    "updated_at": "2026-10-06",
    "price": {
-    "in": 0.045,
-    "out": 0.135,
-    "blended": 0.0675,
+    "in": 0.06,
+    "out": 0.18,
+    "blended": 0.09,
     "ctx": 1000000
    },
    "boards": {
@@ -1864,7 +1907,7 @@
     "creative": 77
    },
    "agent": 72,
-   "brief": "TB4.0 25.2，HLE 48.0",
+   "brief": "HLE 48.0，DeepSWE 73.7",
    "updated_at": "2026-10-20",
    "price": {
     "in": 0.15,
@@ -1877,11 +1920,11 @@
     "调用量": 18
    },
    "hot": {
-    "rank": 18,
-    "score": 1.85,
-    "as_of": "20261120",
-    "change": -83.8,
-    "days": 30
+    "rank": 15,
+    "score": 1.91,
+    "as_of": "20261121",
+    "change": -83.3,
+    "days": 31
    },
    "power": 80
   },
@@ -1904,20 +1947,20 @@
    "brief": "MysteryMechanism 22.1，FrontierCode 2.0 5.5",
    "updated_at": "2026-10-28",
    "price": {
-    "in": 0.3,
+    "in": 0.25,
     "out": 1.0,
-    "blended": 0.475,
+    "blended": 0.4375,
     "ctx": 1048576
    },
    "boards": {
     "调用量": 7
    },
    "hot": {
-    "rank": 7,
+    "rank": 6,
     "score": 18.0,
-    "as_of": "20261120",
+    "as_of": "20261121",
     "change": 466.0,
-    "days": 33
+    "days": 34
    },
    "power": 80
   },
@@ -1937,7 +1980,7 @@
     "creative": 78
    },
    "agent": 77,
-   "brief": "LMArena Code 1643.6，TB4.0 12.6",
+   "brief": "LMArena Code 1643.6，HLE-Diamond 28.7",
    "updated_at": "2026-09-18",
    "price": {
     "in": 0.3,
@@ -1968,7 +2011,7 @@
     "creative": 70
    },
    "agent": 71,
-   "brief": "ProgramBench 0.5，TB4.0 6.1",
+   "brief": "ProgramBench 0.5，HLE 45.5",
    "updated_at": "2026-09-01",
    "price": {
     "in": 1.25,
@@ -1994,7 +2037,7 @@
     "creative": 78
    },
    "agent": 50,
-   "brief": "tb21 69.7，GPQA 86.4",
+   "brief": "TB2.1 官方 69.7，GPQA 86.4",
    "updated_at": "2026-09-18",
    "power": 79
   },
@@ -2035,11 +2078,11 @@
     "调用量": 13
    },
    "hot": {
-    "rank": 13,
-    "score": 6.89,
-    "as_of": "20261120",
-    "change": 3031.8,
-    "days": 48
+    "rank": 9,
+    "score": 13.16,
+    "as_of": "20261121",
+    "change": 5881.8,
+    "days": 49
    },
    "power": 79
   },
@@ -2059,7 +2102,7 @@
     "creative": 78
    },
    "agent": 42,
-   "brief": "tb21 62.5，SciCode 42.4",
+   "brief": "TB2.1 官方 62.5，SciCode 42.4",
    "updated_at": "2026-10-06",
    "price": {
     "in": 0.021,
@@ -2143,9 +2186,9 @@
    "brief": "HLE-Diamond 17.2，SciCode 56.8",
    "updated_at": "2026-10-23",
    "price": {
-    "in": 0.045,
-    "out": 0.135,
-    "blended": 0.0675,
+    "in": 0.06,
+    "out": 0.18,
+    "blended": 0.09,
     "ctx": 1000000
    },
    "boards": {
@@ -2169,7 +2212,7 @@
     "creative": 78
    },
    "agent": 63,
-   "brief": "DeepSWE 65.5，tb21 80.9",
+   "brief": "DeepSWE 65.5，TB2.1 官方 80.9",
    "updated_at": "2026-09-18",
    "power": 79
   },
@@ -2189,7 +2232,7 @@
     "creative": 78
    },
    "agent": 67,
-   "brief": "DeepSWE 73.2，tb21 84.6",
+   "brief": "DeepSWE 73.2，TB2.1 官方 84.6",
    "updated_at": "2026-09-18",
    "boards": {
     "编程": 28
@@ -2212,7 +2255,7 @@
     "creative": 78
    },
    "agent": 78,
-   "brief": "DeepSWE 74.9，arena_agent 6.1",
+   "brief": "DeepSWE 74.9，LMArena Agent 6.1",
    "updated_at": "2026-11-20",
    "tier": {
     "key": "tencent",
@@ -2221,17 +2264,16 @@
     "advice": "日常对话关掉，复杂任务再开",
     "why": "思考模式消耗更高，简单场景没必要"
    },
+   "price": {
+    "in": 0.417,
+    "out": 1.2505,
+    "blended": 0.6254,
+    "ctx": 1048576
+   },
    "boards": {
     "编程": 17,
     "Agent": 20,
     "调用量": 15
-   },
-   "hot": {
-    "rank": 15,
-    "score": 2.98,
-    "as_of": "20261120",
-    "change": 192.2,
-    "days": 14
    },
    "power": 79
   },
@@ -2253,6 +2295,12 @@
    "agent": 75,
    "brief": "TB Science (AA) 20.0，FrontierCode 2.0 27.2",
    "updated_at": "2026-11-20",
+   "price": {
+    "in": 0.1,
+    "out": 0.5,
+    "blended": 0.2,
+    "ctx": 1048576
+   },
    "boards": {
     "编程": 27,
     "Agent": 30
@@ -2275,7 +2323,7 @@
     "creative": 80
    },
    "agent": 65,
-   "brief": "TB4.0 18.7，GPQA 90.8",
+   "brief": "GPQA 90.8，SciCode 50.3",
    "updated_at": "2026-08-24",
    "tier": {
     "key": "deepseek",
@@ -2362,8 +2410,8 @@
    },
    "price": {
     "in": 0.06,
-    "out": 2.2,
-    "blended": 0.595,
+    "out": 1.96,
+    "blended": 0.535,
     "ctx": 1024000
    },
    "boards": {
@@ -2392,7 +2440,7 @@
     "creative": 73
    },
    "agent": 73,
-   "brief": "ProofBench 77.0，TB4.0 10.6",
+   "brief": "ProofBench 77.0，APEX-SWE 46.4",
    "updated_at": "2026-09-18",
    "tier": {
     "key": "anthropic",
@@ -2524,9 +2572,9 @@
     "why": "思考模式更慢更贵，长文本场景未必用得上"
    },
    "price": {
-    "in": 0.8125,
-    "out": 3.75,
-    "blended": 1.5469,
+    "in": 0.6,
+    "out": 3.0,
+    "blended": 1.2,
     "ctx": 262144
    },
    "boards": {
@@ -2554,7 +2602,7 @@
     "creative": 78
    },
    "agent": 64,
-   "brief": "GPQA 93.5，tb21 82.0",
+   "brief": "GPQA 93.5，TB2.1 官方 82.0",
    "updated_at": "2026-09-18",
    "tier": {
     "key": "qwen",
@@ -2614,7 +2662,7 @@
     "creative": 78
    },
    "agent": 48,
-   "brief": "GPQA 89.2，tb21 67.8",
+   "brief": "GPQA 89.2，TB2.1 官方 67.8",
    "updated_at": "2026-09-18",
    "boards": {
     "开源": 23
@@ -2641,7 +2689,7 @@
     "creative": 78
    },
    "agent": 58,
-   "brief": "TB4.0 0.0，IOI 2.4",
+   "brief": "IOI 2.4，ProofBench 3.0",
    "updated_at": "2026-10-06",
    "power": 78
   },
@@ -2723,7 +2771,7 @@
     "creative": 78
    },
    "agent": 69,
-   "brief": "tb21 86.1，DeepSWE 65.6",
+   "brief": "TB2.1 官方 86.1，DeepSWE 65.6",
    "updated_at": "2026-09-18",
    "price": {
     "in": 0.075,
@@ -2749,7 +2797,7 @@
     "creative": 78
    },
    "agent": 66,
-   "brief": "tb21 83.2，DeepSWE 61.5",
+   "brief": "TB2.1 官方 83.2，DeepSWE 61.5",
    "updated_at": "2026-09-18",
    "power": 78
   },
@@ -2769,7 +2817,7 @@
     "creative": 78
    },
    "agent": 74,
-   "brief": "tb21 88.4，DeepSWE 64.6",
+   "brief": "TB2.1 官方 88.4，DeepSWE 64.6",
    "updated_at": "2026-09-18",
    "boards": {
     "开源": 10
@@ -2796,7 +2844,7 @@
     "creative": 78
    },
    "agent": 60,
-   "brief": "tb21 78.3，DeepSWE 59.9",
+   "brief": "TB2.1 官方 78.3，DeepSWE 59.9",
    "updated_at": "2026-09-18",
    "power": 78
   },
@@ -2825,6 +2873,12 @@
     "advice": "日常对话关掉，复杂任务再开",
     "why": "思考模式消耗更高，简单场景没必要"
    },
+   "price": {
+    "in": 0.035,
+    "out": 0.1405,
+    "blended": 0.0614,
+    "ctx": 1048576
+   },
    "power": 78
   },
   {
@@ -2843,7 +2897,7 @@
     "creative": 76
    },
    "agent": 65,
-   "brief": "tb21 87.9，GPQA 92.4",
+   "brief": "TB2.1 官方 87.9，GPQA 92.4",
    "updated_at": "2026-08-24",
    "tier": {
     "key": "deepseek",
@@ -2931,9 +2985,9 @@
     "why": "开着思考会拉长响应时间，简单任务上不划算"
    },
    "price": {
-    "in": 0.007,
-    "out": 6.8,
-    "blended": 1.7052,
+    "in": 0.62,
+    "out": 2.42,
+    "blended": 1.07,
     "ctx": 1048576
    },
    "boards": {
@@ -2961,7 +3015,7 @@
     "creative": 78
    },
    "agent": 35,
-   "brief": "GPQA 85.5，tb21 55.4",
+   "brief": "GPQA 85.5，TB2.1 官方 55.4",
    "updated_at": "2026-09-18",
    "price": {
     "in": 0.021,
@@ -2991,7 +3045,7 @@
     "creative": 78
    },
    "agent": 56,
-   "brief": "tb21 74.9，HLE 37.0",
+   "brief": "TB2.1 官方 74.9，HLE 37.0",
    "updated_at": "2026-09-18",
    "price": {
     "in": 0.3,
@@ -3024,7 +3078,7 @@
     "creative": 78
    },
    "agent": 50,
-   "brief": "tb21 69.3，SciCode 48.1",
+   "brief": "TB2.1 官方 69.3，SciCode 48.1",
    "updated_at": "2026-09-18",
    "tier": {
     "key": "zhipu",
@@ -3060,9 +3114,9 @@
    "brief": "APEX-SWE 41.6，GPQA 90.6",
    "updated_at": "2026-10-08",
    "price": {
-    "in": 0.3,
+    "in": 0.25,
     "out": 1.0,
-    "blended": 0.475,
+    "blended": 0.4375,
     "ctx": 1048576
    },
    "boards": {
@@ -3210,24 +3264,24 @@
     "creative": 80
    },
    "agent": 71,
-   "brief": "tb21 87.6，ProofBench 63.0",
+   "brief": "TB2.1 官方 87.6，ProofBench 63.0",
    "updated_at": "2026-09-18",
    "price": {
     "in": 0.14,
     "out": 0.28,
     "blended": 0.175,
-    "ctx": 1050000
+    "ctx": 1048576
    },
    "boards": {
     "开源": 9,
     "调用量": 17
    },
    "hot": {
-    "rank": 17,
-    "score": 1.91,
-    "as_of": "20261120",
-    "change": -44.8,
-    "days": 55
+    "rank": 16,
+    "score": 1.89,
+    "as_of": "20261121",
+    "change": -45.4,
+    "days": 56
    },
    "open": {
     "open": true,
@@ -3251,7 +3305,7 @@
     "creative": 72
    },
    "agent": 52,
-   "brief": "GPQA 90.9，tb21 70.8",
+   "brief": "GPQA 90.9，TB2.1 官方 70.8",
    "updated_at": "2026-08-24",
    "tier": {
     "key": "tencent",
@@ -3291,14 +3345,8 @@
     "creative": 78
    },
    "agent": 52,
-   "brief": "tb21 70.8，GPQA 88.9",
+   "brief": "TB2.1 官方 70.8，GPQA 88.9",
    "updated_at": "2026-09-18",
-   "price": {
-    "in": 0.3,
-    "out": 1.2,
-    "blended": 0.525,
-    "ctx": 1048756
-   },
    "boards": {
     "开源": 28
    },
@@ -3381,7 +3429,7 @@
     "creative": 78
    },
    "agent": 36,
-   "brief": "tb21 56.6，GPQA 82.2",
+   "brief": "TB2.1 官方 56.6，GPQA 82.2",
    "updated_at": "2026-09-18",
    "open": {
     "open": true,
@@ -3405,7 +3453,7 @@
     "creative": 78
    },
    "agent": 30,
-   "brief": "GPQA 86.4，tb21 51.0",
+   "brief": "GPQA 86.4，TB2.1 官方 51.0",
    "updated_at": "2026-10-16",
    "power": 75
   },
@@ -3425,7 +3473,7 @@
     "creative": 78
    },
    "agent": 62,
-   "brief": "tb21 80.5，DeepSWE 44.3",
+   "brief": "TB2.1 官方 80.5，DeepSWE 44.3",
    "updated_at": "2026-09-18",
    "price": {
     "in": 0.1,
@@ -3518,7 +3566,7 @@
     "creative": 78
    },
    "agent": 13,
-   "brief": "GPQA 75.7，tb21 35.6",
+   "brief": "GPQA 75.7，TB2.1 官方 35.6",
    "updated_at": "2026-09-18",
    "open": {
     "open": true,
@@ -3575,7 +3623,7 @@
     "creative": 78
    },
    "agent": 22,
-   "brief": "tb21 44.2，GPQA 75.3",
+   "brief": "TB2.1 官方 44.2，GPQA 75.3",
    "updated_at": "2026-09-18",
    "open": {
     "open": true,
@@ -3599,7 +3647,7 @@
     "creative": 78
    },
    "agent": 0,
-   "brief": "GPQA 63.1，tb21 11.2",
+   "brief": "GPQA 63.1，TB2.1 官方 11.2",
    "updated_at": "2026-09-18",
    "power": 74
   },
@@ -3619,7 +3667,7 @@
     "creative": 78
    },
    "agent": 4,
-   "brief": "GPQA 84.3，tb21 27.7",
+   "brief": "GPQA 84.3，TB2.1 官方 27.7",
    "updated_at": "2026-09-18",
    "power": 74
   },
@@ -3639,7 +3687,7 @@
     "creative": 78
    },
    "agent": 30,
-   "brief": "GPQA 83.8，tb21 51.7",
+   "brief": "GPQA 83.8，TB2.1 官方 51.7",
    "updated_at": "2026-10-28",
    "power": 74
   },
@@ -3716,7 +3764,7 @@
     "creative": 78
    },
    "agent": 4,
-   "brief": "GPQA 73.4，tb21 27.7",
+   "brief": "GPQA 73.4，TB2.1 官方 27.7",
    "updated_at": "2026-09-18",
    "price": {
     "in": 0.015,
@@ -3746,7 +3794,7 @@
     "creative": 78
    },
    "agent": 9,
-   "brief": "GPQA 80.5，tb21 32.6",
+   "brief": "GPQA 80.5，TB2.1 官方 32.6",
    "updated_at": "2026-09-18",
    "open": {
     "open": true,
@@ -3770,7 +3818,7 @@
     "creative": 78
    },
    "agent": 37,
-   "brief": "tb21 57.5，GPQA 69.7",
+   "brief": "TB2.1 官方 57.5，GPQA 69.7",
    "updated_at": "2026-09-18",
    "power": 73
   },
@@ -3790,7 +3838,7 @@
     "creative": 78
    },
    "agent": 14,
-   "brief": "GPQA 82.3，tb21 36.6",
+   "brief": "GPQA 82.3，TB2.1 官方 36.6",
    "updated_at": "2026-09-18",
    "power": 73
   },
@@ -3840,7 +3888,7 @@
     "creative": 78
    },
    "agent": 4,
-   "brief": "tb21 28.1，GPQA 69.2",
+   "brief": "TB2.1 官方 28.1，GPQA 69.2",
    "updated_at": "2026-09-18",
    "open": {
     "open": true,
@@ -3864,7 +3912,7 @@
     "creative": 78
    },
    "agent": 18,
-   "brief": "GPQA 77.4，tb21 40.5",
+   "brief": "GPQA 77.4，TB2.1 官方 40.5",
    "updated_at": "2026-09-18",
    "power": 72
   },
@@ -3884,7 +3932,7 @@
     "creative": 78
    },
    "agent": 3,
-   "brief": "GPQA 75.3，tb21 27.3",
+   "brief": "GPQA 75.3，TB2.1 官方 27.3",
    "updated_at": "2026-09-18",
    "open": {
     "open": true,
@@ -3980,7 +4028,7 @@
     "creative": 78
    },
    "agent": 0,
-   "brief": "GPQA 43.8，tb21 6.0",
+   "brief": "GPQA 43.8，TB2.1 官方 6.0",
    "updated_at": "2026-09-18",
    "open": {
     "open": true,
@@ -4028,7 +4076,7 @@
     "creative": 78
    },
    "agent": 0,
-   "brief": "GPQA 55.9，tb21 13.9",
+   "brief": "GPQA 55.9，TB2.1 官方 13.9",
    "updated_at": "2026-09-18",
    "open": {
     "open": true,
@@ -4052,7 +4100,7 @@
     "creative": 78
    },
    "agent": 0,
-   "brief": "GPQA 66.9，tb21 12.4",
+   "brief": "GPQA 66.9，TB2.1 官方 12.4",
    "updated_at": "2026-09-18",
    "open": {
     "open": true,
