@@ -1,6 +1,6 @@
 {
  "version": "1.1",
- "generated_at": "2026-11-23",
+ "generated_at": "2026-11-24",
  "source": "data/rankings/benchmarks.json + pricing.json + board_history.json + usage_history/ + open_models.json",
  "meta": {
   "price_source": "OpenRouter 公开标价（$/百万 token，blended=3:1 输入:输出）",
@@ -4199,6 +4199,20 @@
       "why": "网易有道的真流式语音识别，官方称最低延迟 80 毫秒，适合做实时字幕"
      },
      {
+      "name": "腾讯 Gander",
+      "vendor": "国产",
+      "why": "9/21 上线，多模态模型，支持后台任务执行与前台实时对话并行，未公布任何标准基准，全双工语音交互 agent（Full-Duplex-Bench 类评测）",
+      "auto": true,
+      "added_at": "2026-11-24"
+     },
+     {
+      "name": "Qwen3.8-LiveTranslate",
+      "vendor": "国产",
+      "why": "9/19千问发布同声传译大模型，Interleave架构+Hybrid MoE的Thinker-Talker双模块，字均延迟LAAL从2.8秒降至2.3秒，支持60种语言、FL…",
+      "auto": true,
+      "added_at": "2026-11-24"
+     },
+     {
       "name": "Realtime-Venus",
       "vendor": "国产",
       "why": "蚂蚁开源的 9B 全双工交互模型，Apache-2.0 权重公开",
@@ -4213,23 +4227,6 @@
       "name": "Gemini 3.8 Flash-Lite TTS",
       "vendor": "海外",
       "why": "同日发布的轻量档，面向大容量配音和语音代理，音色管理与逐行表演控制跟 Flash 档一致"
-     },
-     {
-      "name": "Suno Speech",
-      "vendor": "海外",
-      "why": "Suno 推出的语音合成，走的是它做音乐那套声音质感",
-      "caveat": "刚出 beta，接口和配额还在变"
-     },
-     {
-      "name": "讯飞 SparkAudio 1.0",
-      "vendor": "国产",
-      "why": "科大讯飞的语音基座模型，10/22 随星火 X2.6 正式发布，从训练到推理全程跑在国产算力上"
-     },
-     {
-      "name": "Grok Voice 3.0",
-      "vendor": "海外",
-      "why": "xAI 10 月发布的语音模型，专做语音对话",
-      "caveat": "刚上线，公开的接口和配额信息还很少"
      }
     ]
    },
@@ -4265,6 +4262,20 @@
       "why": "阿里云栖大会更新的图像生成线，中文提示词理解好"
      },
      {
+      "name": "OpenAI Images 2.6",
+      "vendor": "海外",
+      "why": "11/5-11/8 上线，图像生成/编辑模型，新增 GIF 动画、逐帧编辑、SVG 导出，生成速度约提升 50%",
+      "auto": true,
+      "added_at": "2026-11-24"
+     },
+     {
+      "name": "SenseNova U1.5",
+      "vendor": "国产",
+      "why": "9/19商汤发布8B参数Mixture-of-Transformers原生统一视觉模型，无需外部视觉编码器/VAE，支持最高4K生成，开源SFT/RL/蒸馏训练代码与技术报告",
+      "auto": true,
+      "added_at": "2026-11-24"
+     },
+     {
       "name": "Qwen-Image-2.1",
       "vendor": "国产",
       "why": "70 亿参数轻量版，消费级显卡就能跑",
@@ -4281,12 +4292,6 @@
       "vendor": "海外",
       "why": "Canva 首个自研图像生成模型，直接在做设计的编辑器里出图",
       "caveat": "在 Canva 平台内使用，不单独提供接口"
-     },
-     {
-      "name": "Fibo 2.0",
-      "vendor": "海外",
-      "why": "Bria 的 8B 图像生成与编辑统一模型，出图和改图用同一款",
-      "caveat": "参数规模 8B，适合批量出图，复杂画面不是它的强项"
      }
     ]
    },
@@ -4316,6 +4321,13 @@
       "vendor": "海外",
       "why": "xAI 视频生成线 10 月新出的轻量档，适合先批量试效果",
       "caveat": "刚上线，公开的时长与分辨率参数还少"
+     },
+     {
+      "name": "Gemini Omni 1.2 Flash",
+      "vendor": "海外",
+      "why": "11/6 视频生成模型，原生 15 秒生成与编辑，720p $0.07/秒",
+      "auto": true,
+      "added_at": "2026-11-24"
      }
     ]
    },
@@ -4350,6 +4362,20 @@
       "name": "Youtu-Parsing-Omni",
       "vendor": "国产",
       "why": "腾讯优图的全模态解析模型，把文档、图片、音视频里的内容统一抽成结构化数据，适合做批量录入"
+     },
+     {
+      "name": "nemotron-3.5-super-vl-120b-a12b",
+      "vendor": "未知",
+      "why": "视觉语言模型",
+      "auto": true,
+      "added_at": "2026-11-24"
+     },
+     {
+      "name": "ZDTaichu5.0-9B",
+      "vendor": "国产",
+      "why": "9/15 紫东太初开源，9B 通用多模态，面向物理世界，同步开放空间多模态数据生产管线，端侧 9B 通用多模态，按 kind 规则",
+      "auto": true,
+      "added_at": "2026-11-24"
      },
      {
       "name": "MiniCPM-V 4.7",
