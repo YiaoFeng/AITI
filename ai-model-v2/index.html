@@ -934,6 +934,36 @@ function rankAll(w, override){
     .sort((a,b)=>b.match-a.match);
 }
 
+/* 并列带内轮换（2026-11-24 用户要求）。
+   改之前：2000 组随机画像里，首选 76% 落在 Haiku / DeepSeek / GLM 三款上，
+   另外 77 款从头到尾没当过第一。而 3 分以内的分差是测不准的（见 docs/v2误差测试.json，
+   分差 3-5 分时方向都不稳），让同一款把这块吃满，实际是在用噪声排座次。
+   做法：取前 6 名里落在并列带内的那几款，按「答案指纹」做一次确定性挑选。
+   同一份答案永远得到同一个结果（读者刷新、存图都稳定），不同画像会轮到不同款；
+   代价是首选最多比最高分低一个 DIVERSIFY_BAND。 */
+function answerSeed(){
+  const a = S.answers || {};
+  return Object.keys(a).sort((x,y)=>Number(x)-Number(y))
+    .map(k=>k+':'+JSON.stringify(a[k])).join('|');
+}
+function hashStr(s){
+  let h = 2166136261;
+  for(let i=0;i<s.length;i++){ h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); }
+  return h >>> 0;
+}
+/* 轮换带宽 5 分：实测 2000 组画像，带宽 3 分时前三款仍占 59%，5 分时降到 54%
+   且首选平均只低 1.45 分；放到 7 分以上就要推差 7 分的款，不值得。
+   3 分是「不分高下」的文案口径（TIE_BAND），5 分是这里的轮换口径，两者别混。 */
+const DIVERSIFY_BAND = 5.0;
+function diversifiedAll(all, w){
+  if(all.length < 2) return all;
+  const band = all.slice(0, Math.min(6, all.length))
+                  .filter(m=>all[0].match - m.match <= DIVERSIFY_BAND);
+  if(band.length < 2) return all;
+  const pick = band[hashStr(answerSeed() + '|' + JSON.stringify(w)) % band.length];
+  return [pick].concat(all.filter(m=>m !== pick));
+}
+
 /* ── 流程 ── */
 /* 只有一档（29 题），need 恒为 full。 */
 $('#go-full').onclick  = ()=>{ S.need='full'; paintCodePage(); show('s-code'); };
@@ -2182,7 +2212,7 @@ function buildDeep(top, all, w, need){
 function finish(){
   resolveFloors();
   const w = weights();
-  const all = rankAll(w);
+  const all = diversifiedAll(rankAll(w), w);
   const top = all[0];
 
   // 需求画像（正权重降序）
