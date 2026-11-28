@@ -5,7 +5,7 @@
  "meta": {
   "price_source": "OpenRouter 公开标价（$/百万 token，blended=3:1 输入:输出）",
   "usage_as_of": "20261128",
-  "boards_as_of": "20261128"
+  "boards_as_of": "20261129"
  },
  "dims": [
   "reasoning",
@@ -23,7 +23,7 @@
   "privacy": "由 本土化 70% + API稳定性 30% 推算（榜单无独立隐私维度）",
   "creative": "由 中文能力 45% + 实际调用 30% + 趋势热度 25% 推算（榜单无独立创意维度）"
  },
- "count": 123,
+ "count": 125,
  "models": [
   {
    "name": "DeepSeek V4.1 Flash",
@@ -62,7 +62,7 @@
     "编程": 25,
     "Agent": 14,
     "文档": 19,
-    "中文写作": 11,
+    "中文写作": 16,
     "开源": 1,
     "调用量": 1
    },
@@ -117,7 +117,7 @@
     "Agent": 2,
     "科学": 6,
     "文档": 6,
-    "中文写作": 8,
+    "中文写作": 9,
     "调用量": 4
    },
    "hot": {
@@ -139,7 +139,7 @@
     "multimodal": 100,
     "longtext": 86,
     "cost": 67,
-    "speed": 77,
+    "speed": 76,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 88
@@ -166,8 +166,7 @@
     "编程": 6,
     "Agent": 4,
     "科学": 3,
-    "中文写作": 1,
-    "调用量": 26
+    "中文写作": 2
    },
    "power": 88
   },
@@ -181,7 +180,7 @@
     "multimodal": 97,
     "longtext": 88,
     "cost": 60,
-    "speed": 71,
+    "speed": 73,
     "privacy": 77,
     "ecosystem": 92,
     "creative": 92
@@ -208,7 +207,7 @@
     "编程": 12,
     "Agent": 6,
     "科学": 7,
-    "中文写作": 7
+    "中文写作": 8
    },
    "power": 87
   },
@@ -222,7 +221,7 @@
     "multimodal": 92,
     "longtext": 86,
     "cost": 67,
-    "speed": 81,
+    "speed": 80,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 88
@@ -249,7 +248,7 @@
     "编程": 8,
     "Agent": 13,
     "科学": 12,
-    "中文写作": 3
+    "中文写作": 4
    },
    "power": 87
   },
@@ -290,7 +289,56 @@
     "编程": 3,
     "Agent": 7,
     "科学": 1,
-    "中文写作": 4
+    "中文写作": 5
+   },
+   "power": 87
+  },
+  {
+   "name": "Gemini 4 Neon",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 92,
+    "coding": 93,
+    "chinese": 96,
+    "multimodal": 92,
+    "longtext": 85,
+    "cost": 77,
+    "speed": 75,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 88
+   },
+   "agent": 91,
+   "brief": "HLE-Diamond 71.3 前三，LMArena Agent 18.3 前三",
+   "updated_at": "2026-11-20",
+   "tier": {
+    "key": "google",
+    "label": "思考预算",
+    "how": "thinking budget 可以调，也能设成 0 直接关掉",
+    "advice": "批量跑的小任务关掉，需要多步推理的再开",
+    "why": "思考档位越高延迟越明显，价格随推理 token 一起上涨"
+   },
+   "price": {
+    "in": 3.0,
+    "out": 15.0,
+    "blended": 6.0,
+    "ctx": 1048576
+   },
+   "boards": {
+    "综合": 3,
+    "纯能力": 3,
+    "编程": 4,
+    "Agent": 3,
+    "科学": 2,
+    "中文写作": 1,
+    "调用量": 25
+   },
+   "hot": {
+    "rank": 25,
+    "score": 0.48,
+    "as_of": "20261128",
+    "change": -67.3,
+    "days": 2
    },
    "power": 87
   },
@@ -300,11 +348,11 @@
    "score": {
     "reasoning": 88,
     "coding": 91,
-    "chinese": 83,
+    "chinese": 84,
     "multimodal": 93,
     "longtext": 94,
     "cost": 60,
-    "speed": 75,
+    "speed": 74,
     "privacy": 73,
     "ecosystem": 89,
     "creative": 88
@@ -332,7 +380,7 @@
     "Agent": 9,
     "科学": 11,
     "文档": 5,
-    "中文写作": 13
+    "中文写作": 12
    },
    "power": 86
   },
@@ -346,7 +394,7 @@
     "multimodal": 94,
     "longtext": 91,
     "cost": 72,
-    "speed": 77,
+    "speed": 74,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 84
@@ -374,8 +422,8 @@
     "Agent": 11,
     "科学": 9,
     "文档": 18,
-    "中文写作": 9,
-    "调用量": 12
+    "中文写作": 10,
+    "调用量": 13
    },
    "hot": {
     "rank": 13,
@@ -423,7 +471,7 @@
     "编程": 5,
     "Agent": 10,
     "科学": 5,
-    "中文写作": 6,
+    "中文写作": 7,
     "调用量": 22
    },
    "hot": {
@@ -473,7 +521,7 @@
     "Agent": 1,
     "科学": 4,
     "中文写作": 24,
-    "调用量": 19
+    "调用量": 20
    },
    "hot": {
     "rank": 20,
@@ -521,56 +569,7 @@
     "编程": 10,
     "Agent": 8,
     "科学": 8,
-    "中文写作": 2
-   },
-   "power": 86
-  },
-  {
-   "name": "Gemini 4 Neon",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 92,
-    "coding": 93,
-    "chinese": 88,
-    "multimodal": 92,
-    "longtext": 85,
-    "cost": 77,
-    "speed": 75,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 83
-   },
-   "agent": 91,
-   "brief": "HLE-Diamond 71.3 前三，LMArena Agent 18.3 前三",
-   "updated_at": "2026-11-20",
-   "tier": {
-    "key": "google",
-    "label": "思考预算",
-    "how": "thinking budget 可以调，也能设成 0 直接关掉",
-    "advice": "批量跑的小任务关掉，需要多步推理的再开",
-    "why": "思考档位越高延迟越明显，价格随推理 token 一起上涨"
-   },
-   "price": {
-    "in": 3.0,
-    "out": 15.0,
-    "blended": 6.0,
-    "ctx": 1048576
-   },
-   "boards": {
-    "综合": 3,
-    "纯能力": 3,
-    "编程": 4,
-    "Agent": 3,
-    "科学": 2,
-    "中文写作": 12,
-    "调用量": 27
-   },
-   "hot": {
-    "rank": 25,
-    "score": 0.48,
-    "as_of": "20261128",
-    "change": -67.3,
-    "days": 2
+    "中文写作": 3
    },
    "power": 86
   },
@@ -580,11 +579,11 @@
    "score": {
     "reasoning": 85,
     "coding": 89,
-    "chinese": 83,
+    "chinese": 84,
     "multimodal": 93,
     "longtext": 90,
     "cost": 60,
-    "speed": 75,
+    "speed": 74,
     "privacy": 73,
     "ecosystem": 88,
     "creative": 87
@@ -612,7 +611,7 @@
     "Agent": 18,
     "科学": 13,
     "文档": 23,
-    "中文写作": 15
+    "中文写作": 14
    },
    "power": 85
   },
@@ -626,7 +625,7 @@
     "multimodal": 92,
     "longtext": 92,
     "cost": 72,
-    "speed": 90,
+    "speed": 89,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 81
@@ -664,7 +663,7 @@
    "score": {
     "reasoning": 84,
     "coding": 87,
-    "chinese": 88,
+    "chinese": 89,
     "multimodal": 92,
     "longtext": 92,
     "cost": 77,
@@ -689,7 +688,7 @@
     "Agent": 15,
     "科学": 16,
     "文档": 10,
-    "中文写作": 14
+    "中文写作": 13
    },
    "power": 85
   },
@@ -703,7 +702,7 @@
     "multimodal": 91,
     "longtext": 90,
     "cost": 77,
-    "speed": 76,
+    "speed": 78,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 82
@@ -784,6 +783,53 @@
    "power": 84
   },
   {
+   "name": "GPT-6 Luna",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 73,
+    "coding": 80,
+    "chinese": 89,
+    "multimodal": 78,
+    "longtext": 91,
+    "cost": 95,
+    "speed": 90,
+    "privacy": 83,
+    "ecosystem": 83,
+    "creative": 86
+   },
+   "agent": 76,
+   "brief": "FrontierMath T4 56.1，FrontierCode 2.0 25.2",
+   "updated_at": "2026-09-18",
+   "tier": {
+    "key": "openai",
+    "label": "推理档位",
+    "how": "reasoning_effort 有 low / medium / high 三档",
+    "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
+    "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
+   },
+   "price": {
+    "in": 0.1,
+    "out": 0.5,
+    "blended": 0.2,
+    "ctx": 1050000
+   },
+   "boards": {
+    "综合": 28,
+    "纯能力": 29,
+    "文档": 11,
+    "中文写作": 11,
+    "调用量": 3
+   },
+   "hot": {
+    "rank": 3,
+    "score": 30.11,
+    "as_of": "20261128",
+    "change": 356.9,
+    "days": 65
+   },
+   "power": 84
+  },
+  {
    "name": "Claude Sonnet 5.5",
    "vendor": "海外",
    "score": {
@@ -822,7 +868,7 @@
     "科学": 10,
     "文档": 20,
     "中文写作": 29,
-    "调用量": 8
+    "调用量": 10
    },
    "hot": {
     "rank": 10,
@@ -839,11 +885,11 @@
    "score": {
     "reasoning": 80,
     "coding": 84,
-    "chinese": 88,
+    "chinese": 89,
     "multimodal": 89,
     "longtext": 88,
     "cost": 67,
-    "speed": 81,
+    "speed": 79,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 83
@@ -902,7 +948,7 @@
     "纯能力": 25,
     "编程": 17,
     "Agent": 19,
-    "中文写作": 5
+    "中文写作": 6
    },
    "power": 84
   },
@@ -916,7 +962,7 @@
     "multimodal": 78,
     "longtext": 92,
     "cost": 67,
-    "speed": 87,
+    "speed": 86,
     "privacy": 75,
     "ecosystem": 83,
     "creative": 82
@@ -944,7 +990,7 @@
     "Agent": 22,
     "科学": 19,
     "文档": 7,
-    "中文写作": 16
+    "中文写作": 15
    },
    "power": 83
   },
@@ -986,7 +1032,7 @@
     "文档": 1,
     "中文写作": 23,
     "开源": 2,
-    "调用量": 17
+    "调用量": 15
    },
    "hot": {
     "rank": 15,
@@ -1050,7 +1096,7 @@
     "multimodal": 94,
     "longtext": 88,
     "cost": 80,
-    "speed": 86,
+    "speed": 84,
     "privacy": 74,
     "ecosystem": 81,
     "creative": 84
@@ -1077,7 +1123,8 @@
     "Agent": 25,
     "科学": 28,
     "文档": 30,
-    "中文写作": 20
+    "中文写作": 20,
+    "调用量": 14
    },
    "hot": {
     "rank": 14,
@@ -1094,7 +1141,7 @@
    "score": {
     "reasoning": 77,
     "coding": 82,
-    "chinese": 88,
+    "chinese": 89,
     "multimodal": 78,
     "longtext": 91,
     "cost": 71,
@@ -1120,7 +1167,7 @@
     "ctx": 1050000
    },
    "boards": {
-    "综合": 28,
+    "综合": 29,
     "纯能力": 28,
     "编程": 29,
     "科学": 23,
@@ -1130,49 +1177,51 @@
    "power": 83
   },
   {
-   "name": "GPT-6 Luna",
+   "name": "Claude Haiku 5.5",
    "vendor": "海外",
    "score": {
-    "reasoning": 73,
-    "coding": 80,
-    "chinese": 89,
-    "multimodal": 78,
-    "longtext": 91,
+    "reasoning": 78,
+    "coding": 85,
+    "chinese": 68,
+    "multimodal": 92,
+    "longtext": 90,
     "cost": 95,
-    "speed": 88,
+    "speed": 96,
     "privacy": 83,
-    "ecosystem": 83,
-    "creative": 86
+    "ecosystem": 80,
+    "creative": 71
    },
    "agent": 76,
-   "brief": "FrontierMath T4 56.1，FrontierCode 2.0 25.2",
-   "updated_at": "2026-09-18",
+   "brief": "Vibe Code 90.4，ProofBench 89.0",
+   "updated_at": "2026-10-08",
    "tier": {
-    "key": "openai",
-    "label": "推理档位",
-    "how": "reasoning_effort 有 low / medium / high 三档",
-    "advice": "日常挂 medium，只有反复卡壳的难题才升到 high",
-    "why": "档位越高，模型在内部推理上烧的 token 越多，账单也跟着涨"
+    "key": "anthropic",
+    "label": "思考预算",
+    "how": "能给思考过程设一个 token 上限，也能整个关掉",
+    "advice": "闲聊和简单问答关掉思考，写代码、读长文再打开",
+    "why": "开着思考回复会明显变慢，token 消耗也跟着翻上去"
    },
    "price": {
     "in": 0.1,
     "out": 0.5,
     "blended": 0.2,
-    "ctx": 1050000
+    "ctx": 1000000
    },
    "boards": {
-    "综合": 29,
-    "纯能力": 29,
-    "文档": 11,
-    "中文写作": 10,
-    "调用量": 3
+    "综合": 22,
+    "纯能力": 26,
+    "编程": 18,
+    "科学": 24,
+    "文档": 21,
+    "中文写作": 30,
+    "调用量": 6
    },
    "hot": {
-    "rank": 3,
-    "score": 30.11,
+    "rank": 6,
+    "score": 10.53,
     "as_of": "20261128",
-    "change": 356.9,
-    "days": 65
+    "change": 64.3,
+    "days": 44
    },
    "power": 83
   },
@@ -1208,7 +1257,7 @@
     "ctx": 1000000
    },
    "boards": {
-    "综合": 21,
+    "综合": 20,
     "纯能力": 20,
     "编程": 27,
     "Agent": 24,
@@ -1216,47 +1265,6 @@
     "中文写作": 25
    },
    "power": 83
-  },
-  {
-   "name": "Claude Opus 5",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 85,
-    "coding": 90,
-    "chinese": 80,
-    "multimodal": 93,
-    "longtext": 86,
-    "cost": 65,
-    "speed": 71,
-    "privacy": 76,
-    "ecosystem": 80,
-    "creative": 73
-   },
-   "agent": 81,
-   "brief": "APEX-SWE 63.7 前三，ProofBench 99.0",
-   "updated_at": "2026-09-01",
-   "tier": {
-    "key": "anthropic",
-    "label": "思考预算",
-    "how": "能给思考过程设一个 token 上限，也能整个关掉",
-    "advice": "闲聊和简单问答关掉思考，写代码、读长文再打开",
-    "why": "开着思考回复会明显变慢，token 消耗也跟着翻上去"
-   },
-   "price": {
-    "in": 5.0,
-    "out": 25.0,
-    "blended": 10.0,
-    "ctx": 1000000
-   },
-   "boards": {
-    "综合": 18,
-    "纯能力": 16,
-    "编程": 16,
-    "Agent": 17,
-    "科学": 14,
-    "中文写作": 28
-   },
-   "power": 82
   },
   {
    "name": "Qwen3.8-Max-0902",
@@ -1268,7 +1276,7 @@
     "multimodal": 86,
     "longtext": 87,
     "cost": 74,
-    "speed": 65,
+    "speed": 66,
     "privacy": 87,
     "ecosystem": 84,
     "creative": 85
@@ -1301,11 +1309,11 @@
    "score": {
     "reasoning": 77,
     "coding": 82,
-    "chinese": 84,
+    "chinese": 85,
     "multimodal": 93,
     "longtext": 91,
     "cost": 77,
-    "speed": 85,
+    "speed": 84,
     "privacy": 72,
     "ecosystem": 77,
     "creative": 81
@@ -1327,7 +1335,7 @@
     "科学": 26,
     "文档": 14,
     "中文写作": 18,
-    "调用量": 23
+    "调用量": 21
    },
    "hot": {
     "rank": 21,
@@ -1348,7 +1356,7 @@
     "multimodal": 75,
     "longtext": 86,
     "cost": 94,
-    "speed": 79,
+    "speed": 78,
     "privacy": 89,
     "ecosystem": 85,
     "creative": 87
@@ -1388,7 +1396,7 @@
     "multimodal": 88,
     "longtext": 87,
     "cost": 80,
-    "speed": 93,
+    "speed": 92,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1438,55 +1446,6 @@
    "power": 82
   },
   {
-   "name": "Claude Haiku 5.5",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 78,
-    "coding": 85,
-    "chinese": 68,
-    "multimodal": 92,
-    "longtext": 90,
-    "cost": 95,
-    "speed": 95,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 71
-   },
-   "agent": 76,
-   "brief": "Vibe Code 90.4，ProofBench 89.0",
-   "updated_at": "2026-10-08",
-   "tier": {
-    "key": "anthropic",
-    "label": "思考预算",
-    "how": "能给思考过程设一个 token 上限，也能整个关掉",
-    "advice": "闲聊和简单问答关掉思考，写代码、读长文再打开",
-    "why": "开着思考回复会明显变慢，token 消耗也跟着翻上去"
-   },
-   "price": {
-    "in": 0.1,
-    "out": 0.5,
-    "blended": 0.2,
-    "ctx": 1000000
-   },
-   "boards": {
-    "综合": 22,
-    "纯能力": 26,
-    "编程": 18,
-    "科学": 24,
-    "文档": 21,
-    "中文写作": 30,
-    "调用量": 6
-   },
-   "hot": {
-    "rank": 6,
-    "score": 10.53,
-    "as_of": "20261128",
-    "change": 64.3,
-    "days": 44
-   },
-   "power": 82
-  },
-  {
    "name": "Kimi K3.1 Pro",
    "vendor": "国产",
    "score": {
@@ -1496,7 +1455,7 @@
     "multimodal": 89,
     "longtext": 95,
     "cost": 72,
-    "speed": 62,
+    "speed": 61,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 82
@@ -1518,7 +1477,7 @@
     "ctx": 1048576
    },
    "boards": {
-    "综合": 20,
+    "综合": 21,
     "纯能力": 18,
     "编程": 22,
     "Agent": 21,
@@ -1535,6 +1494,47 @@
     "days": 30
    },
    "power": 82
+  },
+  {
+   "name": "Claude Opus 5",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 85,
+    "coding": 90,
+    "chinese": 80,
+    "multimodal": 93,
+    "longtext": 86,
+    "cost": 65,
+    "speed": 70,
+    "privacy": 76,
+    "ecosystem": 80,
+    "creative": 73
+   },
+   "agent": 81,
+   "brief": "APEX-SWE 63.7 前三，ProofBench 99.0",
+   "updated_at": "2026-09-01",
+   "tier": {
+    "key": "anthropic",
+    "label": "思考预算",
+    "how": "能给思考过程设一个 token 上限，也能整个关掉",
+    "advice": "闲聊和简单问答关掉思考，写代码、读长文再打开",
+    "why": "开着思考回复会明显变慢，token 消耗也跟着翻上去"
+   },
+   "price": {
+    "in": 5.0,
+    "out": 25.0,
+    "blended": 10.0,
+    "ctx": 1000000
+   },
+   "boards": {
+    "综合": 18,
+    "纯能力": 16,
+    "编程": 16,
+    "Agent": 17,
+    "科学": 14,
+    "中文写作": 28
+   },
+   "power": 81
   },
   {
    "name": "GLM-5.3",
@@ -1569,7 +1569,7 @@
    },
    "boards": {
     "开源": 4,
-    "调用量": 10
+    "调用量": 7
    },
    "hot": {
     "rank": 7,
@@ -1665,6 +1665,40 @@
    "power": 81
   },
   {
+   "name": "Step 5 Preview",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 73,
+    "coding": 78,
+    "chinese": 82,
+    "multimodal": 69,
+    "longtext": 98,
+    "cost": 80,
+    "speed": 83,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 79
+   },
+   "agent": 72,
+   "brief": "SciCode 58.9，GPQA 93.5",
+   "updated_at": "2026-09-18",
+   "price": {
+    "in": 1.0,
+    "out": 2.7,
+    "blended": 1.425,
+    "ctx": 1000000
+   },
+   "boards": {
+    "文档": 2,
+    "开源": 6
+   },
+   "open": {
+    "open": true,
+    "license": "StepFun Model License 1.0"
+   },
+   "power": 81
+  },
+  {
    "name": "Muse Spark Open",
    "vendor": "海外",
    "score": {
@@ -1674,7 +1708,7 @@
     "multimodal": 81,
     "longtext": 84,
     "cost": 77,
-    "speed": 94,
+    "speed": 95,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1742,7 +1776,7 @@
     "multimodal": 71,
     "longtext": 92,
     "cost": 89,
-    "speed": 85,
+    "speed": 84,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -1796,40 +1830,6 @@
    "power": 80
   },
   {
-   "name": "Step 5 Preview",
-   "vendor": "国产",
-   "score": {
-    "reasoning": 73,
-    "coding": 78,
-    "chinese": 82,
-    "multimodal": 69,
-    "longtext": 98,
-    "cost": 80,
-    "speed": 82,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 79
-   },
-   "agent": 72,
-   "brief": "SciCode 58.9，GPQA 93.5",
-   "updated_at": "2026-09-18",
-   "price": {
-    "in": 1.0,
-    "out": 2.7,
-    "blended": 1.425,
-    "ctx": 1000000
-   },
-   "boards": {
-    "文档": 2,
-    "开源": 6
-   },
-   "open": {
-    "open": true,
-    "license": "StepFun Model License 1.0"
-   },
-   "power": 80
-  },
-  {
    "name": "Grok 4.7",
    "vendor": "海外",
    "score": {
@@ -1839,7 +1839,7 @@
     "multimodal": 74,
     "longtext": 82,
     "cost": 74,
-    "speed": 80,
+    "speed": 79,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 82
@@ -1862,7 +1862,8 @@
    },
    "boards": {
     "编程": 26,
-    "Agent": 29
+    "Agent": 29,
+    "调用量": 26
    },
    "hot": {
     "rank": 26,
@@ -1962,7 +1963,7 @@
    },
    "boards": {
     "科学": 22,
-    "调用量": 16
+    "调用量": 17
    },
    "hot": {
     "rank": 17,
@@ -1998,7 +1999,7 @@
     "ctx": 1048576
    },
    "boards": {
-    "调用量": 11
+    "调用量": 9
    },
    "hot": {
     "rank": 9,
@@ -2049,7 +2050,7 @@
     "multimodal": 90,
     "longtext": 85,
     "cost": 77,
-    "speed": 100,
+    "speed": 98,
     "privacy": 72,
     "ecosystem": 75,
     "creative": 70
@@ -2075,7 +2076,7 @@
     "multimodal": 69,
     "longtext": 89,
     "cost": 82,
-    "speed": 70,
+    "speed": 71,
     "privacy": 85,
     "ecosystem": 84,
     "creative": 82
@@ -2103,42 +2104,6 @@
    "open": {
     "open": true,
     "license": "Apache-2.0"
-   },
-   "power": 79
-  },
-  {
-   "name": "Claude Sonnet 5",
-   "vendor": "海外",
-   "score": {
-    "reasoning": 74,
-    "coding": 80,
-    "chinese": 71,
-    "multimodal": 79,
-    "longtext": 89,
-    "cost": 72,
-    "speed": 78,
-    "privacy": 83,
-    "ecosystem": 80,
-    "creative": 73
-   },
-   "agent": 76,
-   "brief": "ProofBench 77.0，Code Migration 44.4",
-   "updated_at": "2026-09-18",
-   "tier": {
-    "key": "anthropic",
-    "label": "思考预算",
-    "how": "能给思考过程设一个 token 上限，也能整个关掉",
-    "advice": "闲聊和简单问答关掉思考，写代码、读长文再打开",
-    "why": "开着思考回复会明显变慢，token 消耗也跟着翻上去"
-   },
-   "price": {
-    "in": 2.0,
-    "out": 10.0,
-    "blended": 4.0,
-    "ctx": 1000000
-   },
-   "boards": {
-    "文档": 27
    },
    "power": 79
   },
@@ -2185,7 +2150,7 @@
     "multimodal": 85,
     "longtext": 86,
     "cost": 74,
-    "speed": 75,
+    "speed": 74,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 75
@@ -2238,7 +2203,7 @@
     "multimodal": 75,
     "longtext": 86,
     "cost": 79,
-    "speed": 76,
+    "speed": 77,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 82
@@ -2411,7 +2376,7 @@
     "multimodal": 75,
     "longtext": 88,
     "cost": 82,
-    "speed": 80,
+    "speed": 79,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -2578,7 +2543,7 @@
     "multimodal": 85,
     "longtext": 89,
     "cost": 71,
-    "speed": 89,
+    "speed": 88,
     "privacy": 74,
     "ecosystem": 78,
     "creative": 72
@@ -2605,6 +2570,42 @@
    "power": 78
   },
   {
+   "name": "Claude Sonnet 5",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 74,
+    "coding": 80,
+    "chinese": 71,
+    "multimodal": 79,
+    "longtext": 89,
+    "cost": 72,
+    "speed": 76,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 73
+   },
+   "agent": 76,
+   "brief": "ProofBench 77.0，Code Migration 44.4",
+   "updated_at": "2026-09-18",
+   "tier": {
+    "key": "anthropic",
+    "label": "思考预算",
+    "how": "能给思考过程设一个 token 上限，也能整个关掉",
+    "advice": "闲聊和简单问答关掉思考，写代码、读长文再打开",
+    "why": "开着思考回复会明显变慢，token 消耗也跟着翻上去"
+   },
+   "price": {
+    "in": 2.0,
+    "out": 10.0,
+    "blended": 4.0,
+    "ctx": 1000000
+   },
+   "boards": {
+    "文档": 27
+   },
+   "power": 78
+  },
+  {
    "name": "Ling 3.0 Flash",
    "vendor": "国产",
    "score": {
@@ -2614,7 +2615,7 @@
     "multimodal": 75,
     "longtext": 77,
     "cost": 99,
-    "speed": 92,
+    "speed": 94,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -2644,7 +2645,7 @@
     "multimodal": 75,
     "longtext": 87,
     "cost": 74,
-    "speed": 65,
+    "speed": 66,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -2975,7 +2976,7 @@
     "multimodal": 73,
     "longtext": 87,
     "cost": 74,
-    "speed": 78,
+    "speed": 77,
     "privacy": 71,
     "ecosystem": 78,
     "creative": 78
@@ -3011,7 +3012,7 @@
     "multimodal": 75,
     "longtext": 84,
     "cost": 77,
-    "speed": 76,
+    "speed": 75,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 75
@@ -3051,7 +3052,7 @@
     "multimodal": 61,
     "longtext": 83,
     "cost": 78,
-    "speed": 90,
+    "speed": 89,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -3084,7 +3085,7 @@
     "multimodal": 63,
     "longtext": 81,
     "cost": 88,
-    "speed": 88,
+    "speed": 91,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -3209,7 +3210,7 @@
     "multimodal": 64,
     "longtext": 91,
     "cost": 88,
-    "speed": 81,
+    "speed": 80,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -3311,8 +3312,7 @@
     "ctx": 1048576
    },
    "boards": {
-    "开源": 10,
-    "调用量": 21
+    "开源": 10
    },
    "open": {
     "open": true,
@@ -3386,7 +3386,7 @@
     "multimodal": 68,
     "longtext": 85,
     "cost": 93,
-    "speed": 73,
+    "speed": 75,
     "privacy": 87,
     "ecosystem": 79,
     "creative": 72
@@ -3522,6 +3522,39 @@
    "power": 75
   },
   {
+   "name": "Qwen3.7 Plus",
+   "vendor": "国产",
+   "score": {
+    "reasoning": 69,
+    "coding": 71,
+    "chinese": 70,
+    "multimodal": 80,
+    "longtext": 77,
+    "cost": 85,
+    "speed": 71,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 72
+   },
+   "agent": 69,
+   "brief": "GPQA 90.0，Code Migration 12.9",
+   "updated_at": "2026-09-18",
+   "tier": {
+    "key": "qwen",
+    "label": "思考开关",
+    "how": "深度思考模式可以开关",
+    "advice": "客服、摘要这类关掉，解题和写代码再开",
+    "why": "开着更准，但更慢更贵，简单任务上纯属浪费"
+   },
+   "price": {
+    "in": 0.32,
+    "out": 1.28,
+    "blended": 0.56,
+    "ctx": 1000000
+   },
+   "power": 75
+  },
+  {
    "name": "K2 Horizon MoVA 36B A4B",
    "vendor": "海外",
    "score": {
@@ -3595,7 +3628,7 @@
     "multimodal": 75,
     "longtext": 91,
     "cost": 88,
-    "speed": 80,
+    "speed": 81,
     "privacy": 79,
     "ecosystem": 68,
     "creative": 65
@@ -3656,7 +3689,7 @@
     "multimodal": 75,
     "longtext": 60,
     "cost": 76,
-    "speed": 92,
+    "speed": 93,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
@@ -3738,6 +3771,26 @@
    "agent": 10,
    "brief": "TB2.1 官方 27.7，GPQA 84.3",
    "updated_at": "2026-09-18",
+   "power": 74
+  },
+  {
+   "name": "GigaChat 4 708B-A41B",
+   "vendor": "海外",
+   "score": {
+    "reasoning": 44,
+    "coding": 68,
+    "chinese": 80,
+    "multimodal": 75,
+    "longtext": 85,
+    "cost": 77,
+    "speed": 75,
+    "privacy": 83,
+    "ecosystem": 80,
+    "creative": 78
+   },
+   "agent": 56,
+   "brief": "TB2.1 官方 69.7，DeepSWE 35.4",
+   "updated_at": "2026-11-27",
    "power": 74
   },
   {
@@ -3838,7 +3891,7 @@
     "multimodal": 75,
     "longtext": 60,
     "cost": 100,
-    "speed": 80,
+    "speed": 81,
     "privacy": 83,
     "ecosystem": 80,
     "creative": 78
